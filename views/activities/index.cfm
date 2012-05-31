@@ -1,3 +1,4 @@
+	<h1>Activities</h1>
 <table class="table">
 	<thead>
 		<tr>

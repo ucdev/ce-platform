@@ -44,9 +44,9 @@
 				<a class="brand" href="##">#application.config.name#</a>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li class="active"><a href="/">Dashboard</a></li>
-						<li><a href="/activities/">Activities</a></li>
-						<li><a href="/people/">People</a></li>
+						<li<cfif params.controller EQ "main"> class="active"</cfif>><a href="/">Dashboard</a></li>
+						<li<cfif params.controller EQ "activities"> class="active"</cfif>><a href="/activities/">Activities</a></li>
+						<li<cfif params.controller EQ "people"> class="active"</cfif>><a href="/people/">People</a></li>
 					</ul>
 				</div><!--/.nav-collapse -->
 			</div>

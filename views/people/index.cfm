@@ -1,3 +1,4 @@
+	<h1>People</h1>
 <table class="table">
   <tr>
 		<th>ID</th>
