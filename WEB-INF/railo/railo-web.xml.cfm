@@ -34,7 +34,7 @@ Path placeholders:
 
 	<data-sources>
 	
-  <data-source allow="511" blob="false" class="net.sourceforge.jtds.jdbc.Driver" clob="false" connectionTimeout="1" custom="" database="ccpd_dev" dsn="jdbc:jtds:sqlserver://{host}:{port}/{database}" host="ccpd-sql1" metaCacheTimeout="60000" name="ccpd_dev" password="encrypted:6dd67f15f49d535cb86cfe669bcd61e8391aef041d0777fe6a3276d3649ae802" port="1433" storage="false" username="sa" validate="false"/>
+  <data-source allow="511" blob="false" class="net.sourceforge.jtds.jdbc.Driver" clob="false" connectionLimit="-1" connectionTimeout="1" custom="" database="ccpd_dev" dsn="jdbc:jtds:sqlserver://{host}:{port}/{database}" host="ccpd-sql1" metaCacheTimeout="60000" name="ccpd_dev" password="encrypted:bebb4e99a40517e64f1f2372ff64ca5b8a865632fd7ff36f3b87d0bb06856c84" port="1433" storage="false" username="ccpdDevUser" validate="false"/>
   </data-sources>
 	
 	<resources>
