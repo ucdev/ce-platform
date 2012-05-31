@@ -1,0 +1,6 @@
+<cfcomponent extends="Model">
+    <cffunction name="init">
+        <cfset table("%tablename%")>
+        <cfset property(name="id", column="%primarykey%") />
+    </cffunction>
+</cfcomponent>

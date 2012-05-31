@@ -1,0 +1,1 @@
+<cfset this.mappings["/com"] = "S:\ccpd_live\_com\" />
