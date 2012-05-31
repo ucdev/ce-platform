@@ -3,7 +3,7 @@
 <head>
 	<cfoutput>
 	<meta charset="utf-8">
-	<title></title>
+	<title>#application.config.name#</title>
 	<!---<meta name="viewport" content="width=device-width, initial-scale=1.0">--->
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -41,12 +41,15 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="##">#application.config.name#</a>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li<cfif params.controller EQ "main"> class="active"</cfif>><a href="/">Dashboard</a></li>
+						<li<cfif params.controller EQ "main"> class="active"</cfif>><a href="/">Home</a></li>
 						<li<cfif params.controller EQ "activities"> class="active"</cfif>><a href="/activities/">Activities</a></li>
 						<li<cfif params.controller EQ "people"> class="active"</cfif>><a href="/people/">People</a></li>
+					</ul>
+					<ul class="nav pull-right">
+						<li><a href="/login">Log In</a></li>
+						<li><a href="/signup">Sign Up</a></li>
 					</ul>
 				</div><!--/.nav-collapse -->
 			</div>
@@ -55,7 +58,8 @@
 
 	<div class="container">
 		#includeContent()#
-	</div> <!-- /container -->
+		</div> 
+	<!-- /container -->
 </cfoutput>
 </body>
 </html>
