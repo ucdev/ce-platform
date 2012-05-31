@@ -1,1 +1,1 @@
-<cfdump var="#model("person").findAll(limit=10)#" />
+<h1>Dashboard</h1>
