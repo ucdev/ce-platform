@@ -1,1 +1,1 @@
-<cfdump var="#$dbinfo(type="version",datasource=application.wheels.dataSourceName,username=application.wheels.dataSourceUserName,password=application.wheels.dataSourcePassword)#" />
+<cfdump var="#model("person").findAll(limit=10)#" />
