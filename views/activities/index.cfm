@@ -1,6 +1,34 @@
 <cfoutput>
 <h1>Activities</h1>
-<div class="pull-left span7">
+<div class="pull-left span8">
+    <table class="table-striped span8">
+        <tbody>
+            <tr>
+                <td valign="top"><i class="icon-thumbs-up"></i></td>
+                <td>
+                	<a href="/activities/13660">Truth About Diagnostic Tests</a>
+                    <i class="icon-book"></i>
+                    <div>Created on 09/22/2009 by William Fant</div>
+                    <div>Updated on 09/22/2009 by System Admin</div>
+                    <div>
+                    	<h5>Start Date: 5/12/2020 | Activity Type: Enduring Material | Grouping: Internet Activity Enduring Material</h5>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top"><i class="icon-thumbs-up"></i></td>
+                <td>
+                	<a href="/activities/13660">Truth About Diagnostic Tests</a>
+                    <i class="icon-book"></i>
+                    <div>Created on 09/22/2009 by William Fant</div>
+                    <div>Updated on 09/22/2009 by System Admin</div>
+                    <div>
+                    	<h5>Start Date: 5/12/2020 | Activity Type: Enduring Material | Grouping: Internet Activity Enduring Material</h5>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 <div class="well pull-right span3">
     <h4>Find an activity</h4>
