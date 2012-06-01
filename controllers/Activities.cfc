@@ -9,4 +9,8 @@
 	<cffunction name="edit">
 		<cfset activity = model("activity").findByKey(params.key) />
 	</cffunction>
+	
+	<cffunction name="show">
+		<cfset activity = model("activity").findByKey(params.key) />
+	</cffunction>
 </cfcomponent>
