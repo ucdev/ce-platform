@@ -3,7 +3,7 @@
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
 
 	<cffunction name="index">
-		<cfset People = model("Person").findAll(limit=100)>
+		<cfset People = model("Person").findAll(maxRows=100)>
 	</cffunction>
 
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
