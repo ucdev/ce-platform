@@ -1,7 +1,7 @@
 <cfcomponent extends="plugins.dbmigrate.Migration" hint="INITIAL DB 6">
   <cffunction name="up">
     <cfscript>
-    announce("Object:  View [ceschema].[View_PreferredPif]    Script Date: 05/31/2012 10:19:08");
+   /* announce("Object:  View [ceschema].[View_PreferredPif]    Script Date: 05/31/2012 10:19:08");
 	execute("SET ANSI_NULLS ON");
 	
 	execute("SET QUOTED_IDENTIFIER ON");
@@ -709,7 +709,7 @@
 	
 	execute("IF NOT EXISTS (SELECT * FROM ::fn_listextendedproperty(N'MS_DiagramPaneCount' , N'SCHEMA',N'ceschema', N'VIEW',N'View_PersonEmailHostStats', NULL,NULL))
 	EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'ceschema', @level1type=N'VIEW',@level1name=N'View_PersonEmailHostStats'");
-	
+	*/
     </cfscript>
   </cffunction>
   <cffunction name="down">

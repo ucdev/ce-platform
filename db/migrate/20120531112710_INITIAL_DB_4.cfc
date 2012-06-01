@@ -2,7 +2,7 @@
   <cffunction name="up">
     <cfscript>
     
-	announce("Object:  Table [ceschema].[ce_sys_stat_log_type]    Script Date: 05/31/2012 10:19:07");
+	/*announce("Object:  Table [ceschema].[ce_sys_stat_log_type]    Script Date: 05/31/2012 10:19:07");
 	execute("SET ANSI_NULLS ON");
 	
 	execute("SET QUOTED_IDENTIFIER ON");
@@ -1778,7 +1778,7 @@
 	[ProfCId] ASC
 	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY]
-	END");
+	END");*/
 	
     </cfscript>
   </cffunction>

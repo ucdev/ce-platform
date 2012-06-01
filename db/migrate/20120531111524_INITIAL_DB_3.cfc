@@ -1,7 +1,7 @@
 <cfcomponent extends="plugins.dbmigrate.Migration" hint="INITIAL DB 3">
   <cffunction name="up">
     <cfscript>
-	announce("Object:  UserDefinedFunction [ceschema].[mergeToContent]    Script Date: 05/31/2012 10:19:08");
+	/*announce("Object:  UserDefinedFunction [ceschema].[mergeToContent]    Script Date: 05/31/2012 10:19:08");
 	execute("SET ANSI_NULLS ON");
 	
 	execute("SET QUOTED_IDENTIFIER ON");
@@ -1320,7 +1320,7 @@
 	[AuthorityID] ASC
 	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY]
-	END");
+	END");*/
 	    </cfscript>
   </cffunction>
   <cffunction name="down">

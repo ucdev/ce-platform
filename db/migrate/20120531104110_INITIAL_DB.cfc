@@ -1,7 +1,7 @@
 <cfcomponent extends="plugins.dbmigrate.Migration" hint="INITIAL DB">
   <cffunction name="up">
     <cfscript>
-    execute("IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = N'ceschema')
+    /*execute("IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = N'ceschema')
 			EXEC sys.sp_executesql N'CREATE SCHEMA [ceschema] AUTHORIZATION [ccpdDevUser]'");
 	
 	execute("EXEC sp_fulltext_database 'enable'");
@@ -1666,7 +1666,7 @@ execute("SET ANSI_NULLS ON");
 		[entitytype_id] ASC
 	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY]
-	END");
+	END");*/
     </cfscript>
   </cffunction>
   <cffunction name="down">

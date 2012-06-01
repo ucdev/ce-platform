@@ -53,6 +53,9 @@
 						<li><a href="/signup">Sign Up</a></li>
 					</ul>
 				</div><!--/.nav-collapse -->
+				<form class="navbar-search pull-left">
+					<input type="text" class="search-query" placeholder="Search">
+				</form>
 			</div>
 		</div>
 	</div>

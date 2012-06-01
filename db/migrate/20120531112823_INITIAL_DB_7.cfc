@@ -1,14 +1,14 @@
 <cfcomponent extends="plugins.dbmigrate.Migration" hint="INITIAL DB 7">
   <cffunction name="up">
     <cfscript>
-    
+    /*
 	announce("Object:  View [ceschema].[View_PreferredPifFull]    Script Date: 05/31/2012 10:19:08");
 	execute("SET ANSI_NULLS ON");
 	
 	execute("SET QUOTED_IDENTIFIER ON");
 	
 	execute("IF NOT EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[ceschema].[View_PreferredPifFull]'))
-	EXEC dbo.sp_executesql @statement = N'/****** Script for SelectTopNRows command from SSMS  ******/
+	EXEC dbo.sp_executesql @statement = N'
 	CREATE VIEW [ceschema].[View_PreferredPifFull]
 	AS
 	WITH CTE_PreferredPif AS (SELECT     MaxPIFid, PersonID, PrinEmpBit, MaxCreated
@@ -1655,7 +1655,7 @@
 	
 	
 	End");
-	
+	*/
     </cfscript>
   </cffunction>
   <cffunction name="down">
