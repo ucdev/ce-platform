@@ -7,7 +7,7 @@
 	<cffunction name="modelsetup">
 		<cfquery name="tables" datasource="CCPD_DEV">
 			SELECT     
-			 o.name AS tblname, 
+			 replace(o.name,'ce_','') AS tblname, 
 			 o.type, 
 			 c.name AS colName, 
 			 s.name AS colType, 
