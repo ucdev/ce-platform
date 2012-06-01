@@ -2,6 +2,6 @@
     <cffunction name="init">
         <cfset table("Sys_Supporter")>
         <cfset property(name="id", column="ContributorID") />
-        <cfset setPrimaryKey(property="id") />
+        <!---<cfset setPrimaryKey(property="id") />--->
     </cffunction>
 </cfcomponent>

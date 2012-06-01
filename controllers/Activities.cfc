@@ -7,6 +7,7 @@
 	</cffunction>
 	
 	<cffunction name="edit">
+		<cfparam name="params.key" type="integer" />
 		<cfset activity = model("activity").findByKey(params.key) />
 	</cffunction>
 	

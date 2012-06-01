@@ -2,6 +2,6 @@
     <cffunction name="init">
         <cfset table("Sys_FileType")>
         <cfset property(name="id", column="FileTypeID") />
-        <cfset setPrimaryKey(property="id") />
+        <!---<cfset setPrimaryKey(property="id") />--->
     </cffunction>
 </cfcomponent>
