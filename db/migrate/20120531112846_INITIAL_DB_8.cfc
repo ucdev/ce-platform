@@ -1,7 +1,7 @@
 <cfcomponent extends="plugins.dbmigrate.Migration" hint="INITIAL DB 8">
   <cffunction name="up">
     <cfscript>
-	announce("Object:  Default [DF_ce_Test_RandomFlag]    Script Date: 05/31/2012 10:19:07");
+	/*announce("Object:  Default [DF_ce_Test_RandomFlag]    Script Date: 05/31/2012 10:19:07");
 	execute("IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[ceschema].[DF_ce_Test_RandomFlag]') AND parent_object_id = OBJECT_ID(N'[ceschema].[ce_Assessment]'))
 	Begin
 	IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_ce_Test_RandomFlag]') AND type = 'D')
@@ -2099,7 +2099,7 @@
 	ALTER TABLE [ceschema].[ce_AssessSection] CHECK CONSTRAINT [FK_ce_AssessSection_ce_Assessment]");
 	
 
-
+*/
 
     </cfscript>
   </cffunction>

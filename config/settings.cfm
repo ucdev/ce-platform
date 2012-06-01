@@ -13,7 +13,7 @@
 	<cfset set(URLRewriting="Partial")>
 --->
 
-<cfset set(dataSourceName="CCPD_DEV")>
+<cfset set(dataSourceName="CCPD_PROD")>
 <cfset set(functionName="sendEmail", server="", username="", password="")> 
 <cfset set(softDeleteProperty="deleted")>
 <cfset set(tableNamePrefix="ce_")>

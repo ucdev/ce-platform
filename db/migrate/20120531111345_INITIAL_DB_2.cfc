@@ -1,7 +1,7 @@
 <cfcomponent extends="plugins.dbmigrate.Migration" hint="INITIAL DB 2">
   <cffunction name="up">
     <cfscript>
-    
+    /*
 	announce("Object:  Table [ceschema].[ce_Person_Degree]    Script Date: 05/31/2012 10:19:07");
 	execute("SET ANSI_NULLS ON");
 
@@ -385,7 +385,7 @@ execute("SET ANSI_NULLS ON");
 	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY]
 	END");
-
+*/
 	
     </cfscript>
   </cffunction>

@@ -1,7 +1,7 @@
 <cfcomponent extends="plugins.dbmigrate.Migration" hint="INITIAL DB 5">
   <cffunction name="up">
     <cfscript>
-    
+    /*
 	announce("Object:  Table [ceschema].[ce_Activity_Committee]    Script Date: 05/31/2012 10:19:07");
 	execute("SET ANSI_NULLS ON");
 	
@@ -2430,7 +2430,7 @@
 	
 	execute("IF NOT EXISTS (SELECT * FROM ::fn_listextendedproperty(N'MS_DiagramPaneCount' , N'SCHEMA',N'ceschema', N'VIEW',N'View_AttendeePifCount', NULL,NULL))
 	EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'ceschema', @level1type=N'VIEW',@level1name=N'View_AttendeePifCount'");
-	
+	*/
 	
     </cfscript>
   </cffunction>
