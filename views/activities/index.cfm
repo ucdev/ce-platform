@@ -17,7 +17,7 @@
 				<tr>
 					<td valign="top"><i class="icon-thumbs-up"></i></td>
 					<td>
-						<a href="/activities/13660">#activities.title#</a>
+						<a href="/activities/edit/#activities.id#">#activities.title#</a>
 					</td>
 					<td>#activities.statusId#</td>
 					<td>#dateFormat(activities.startDate,'mm/dd/yyyy')#</td>
