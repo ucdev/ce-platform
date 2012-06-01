@@ -16,6 +16,7 @@
 <cfset set(dataSourceName="CCPD_DEV")>
 <cfset set(functionName="sendEmail", server="", username="", password="")> 
 <cfset set(softDeleteProperty="deleted")>
+<cfset set(tableNamePrefix="ce_")>
 
-<cfset set(functionName='selectTag',prependToLabel='<div class="control-group">',appendToLabel='',prepend='<div class="controls">', append='<p class="help-block"></p></div></div>',labelPlacement="before",insertBlank=true)>
-<cfset set(functionName='textFieldTag',prependToLabel='<div class="control-group">',appendToLabel='',prepend='<div class="controls">', append='<p class="help-block"></p></div></div>',labelPlacement="before")>
+<cfset set(functionName='selectTag',prependToLabel='<div class="control-group">',appendToLabel='</div>',prepend='<div class="controls">', append='<p class="help-block"></p></div>',labelPlacement="before",insertBlank=true)>
+<cfset set(functionName='textFieldTag',prependToLabel='<div class="control-group">',appendToLabel='</div>',prepend='<div class="controls">', append='<p class="help-block"></p></div>',labelPlacement="before")>

@@ -1,12 +1,17 @@
 <cfoutput>
 <h1>Activities</h1>
-<div>
-	<h4>Find an activity</h4>
-    #textFieldTag(name="title", value="", label="Title")#
-    #textFieldTag(name="startDate", value="", label="Start Date")#
-    #selectTag(name="activityTypeId", value="", label="Activity Type", options=activityTypes)#
-    #selectTag(name="groupingId", value="", label="Grouping", options=activityGroupings, disabled=true)#
-    #selectTag(name="categoryId", value="", label="Container", options=activityGroupings)#
+<div class="pull-left span7">
+</div>
+<div class="well pull-right span3">
+    <h4>Find an activity</h4>
+	#startFormTag(name="frmSearch")#
+        #textFieldTag(name="title", value="", label="", placeholder="Title")#
+        #textFieldTag(name="startDate", value="", label="", placeholder="Start Date")#
+        #selectTag(name="activityTypeId", value="", label="Activity Type", options=activityTypes)#
+        #selectTag(name="groupingId", value="", label="Grouping", options=activityGroupings, disabled=true)#
+        #selectTag(name="categoryId", value="", label="Container", options=activityCategories)#
+        #submitTag(value="Search", class="pull-right btn")#
+    #endFormTag()#
 </div>
 </cfoutput>
 <table class="table">
