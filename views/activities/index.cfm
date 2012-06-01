@@ -40,13 +40,13 @@
 		</table>
 	</div>
 	<div class="span6">
-		<h3>Find an activity</h3>
 		#startFormTag(name="frmSearch",class=" well well-small",style="margin-top:10px;")#
-			#textFieldTag(name="title", value="",append="",prepend="",label="",class="span5", placeholder="Title")#
-			#textFieldTag(name="startDate", value="",append="",prepend="", label="",class="span5", placeholder="Start Date")#
-			#selectTag(name="activityTypeId", value="",append="",prepend="",class="span5", label="Activity Type", options=activityTypes)#
-			#selectTag(name="groupingId", value="",append="",prepend="", label="Grouping",class="span5", options=activityGroupings, disabled=true)#
-			#selectTag(name="categoryId", value="",append="",prepend="", label="Container",class="span5", options=activityCategories)#
+			<h3>Find an activity</h3>
+			#textFieldTag(name="title", value="", append="", prepend="", label="", class="span5", placeholder="Title")#
+			#textFieldTag(name="startDate", value="", append="", prepend="", label="", class="span5", placeholder="Start Date")#
+			#selectTag(name="activityTypeId", value="", append="", prepend="", class="span5", label="Activity Type", options=activityTypes)#
+			#selectTag(name="groupingId", value="", append="", prepend="", label="Grouping", class="span5", options=activityGroupings, disabled=true)#
+			#selectTag(name="categoryId", value="", append="", prepend="", label="Container", class="span5", options=activityCategories)#
 			
 			#submitTag(value="Search", class="btn btn-primary")#
 		#endFormTag()#
