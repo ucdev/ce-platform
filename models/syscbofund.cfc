@@ -1,7 +1,7 @@
 <cfcomponent extends="Model">
     <cffunction name="init">
-        <cfset table("Sys_CBOFund")>
+        <cfset table("ce_Sys_CBOFund")>
         <cfset property(name="id", column="CBOFundID") />
-        <cfset setPrimaryKey(property="id") />
+        <!---<cfset setPrimaryKey(property="id") />--->
     </cffunction>
 </cfcomponent>
