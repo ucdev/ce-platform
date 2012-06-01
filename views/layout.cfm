@@ -41,6 +41,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
+				<a class="brand" href="/"><img src="/images/logo_ribbon.png" /></a>
 				<div class="nav-collapse">
 					<ul class="nav">
 						<li<cfif params.controller EQ "main"> class="active"</cfif>><a href="/">Home</a></li>

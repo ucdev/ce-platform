@@ -16,7 +16,7 @@
 
 // Gradient is applied to it's own element because overflow visible is not honored by IE when filter is present
 .navbar-inner {
-  min-height: @navbarHeight;
+  height: @navbarHeight;
   padding-left:  20px;
   padding-right: 20px;
   #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);
@@ -52,7 +52,6 @@
     font-weight: 200;
     line-height: 1;
     padding: 0;
-    position: absolute;
   }
   // Plain text in topbar
   .navbar-text {
