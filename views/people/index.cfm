@@ -1,4 +1,19 @@
-	<h1>People</h1>
+<cfoutput>
+<h1>People</h1>
+<div class="pull-left span7">
+</div>
+<div class="well pull-right span3">
+    <h4>Find a person</h4>
+	#startFormTag(name="frmSearch")#
+        #textFieldTag(name="lastName", value="", label="", placeholder="Last Name")#
+        #textFieldTag(name="firstName", value="", label="", placeholder="First Name")#
+        #textFieldTag(name="ssn", value="", label="", placeholder="SSN")#
+        #textFieldTag(name="birthdate", value="", label="", placeholder="Birthdate")#
+        #textFieldTag(name="email", value="", label="", placeholder="Email")#
+        #submitTag(value="Search", class="pull-right btn")#
+    #endFormTag()#
+</div>
+</cfoutput>
 <table class="table">
   <tr>
 		<th>ID</th>
