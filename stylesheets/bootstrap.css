@@ -2194,6 +2194,12 @@ table .span24 {
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
+.well-slim {
+  padding: 2px 0;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
 .fade {
   opacity: 0;
   filter: alpha(opacity=0);
