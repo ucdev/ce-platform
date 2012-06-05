@@ -1,39 +1,44 @@
 <cfoutput>
 <h1>People</h1>
-<div class="pull-left span8">
-    <table class="table-striped span8">
-        <tbody>
-            <tr>
-                <td valign="top"><i class="icon-fire"></i></td>
-                <td>
-                	<h4><a href="/people/slamkajs">Slamka, Justin <span class="label">(Big Pimpin')</span></a></h4>
-                    <div>
-                    	<strong>Email</strong>: <a href="mailto:jslamka5685@gmail.com">jslamka5685@gmail.com</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td valign="top"><i class="icon-fire"></i></td>
-                <td>
-                	<h4><a href="/people/slamkajs">Slamka, Justin <span class="label">(Big Pimpin')</span></a></h4>
-                    <div>
-                    	<strong>Email</strong>: <a href="mailto:jslamka5685@gmail.com">jslamka5685@gmail.com</a>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<div class="well pull-right span3">
-    <h4>Find a person</h4>
-	#startFormTag(name="frmSearch")#
-        #textFieldTag(name="lastName", value="", label="", placeholder="Last Name")#
-        #textFieldTag(name="firstName", value="", label="", placeholder="First Name")#
-        #textFieldTag(name="ssn", value="", label="", placeholder="SSN")#
-        #textFieldTag(name="birthdate", value="", label="", placeholder="Birthdate")#
-        #textFieldTag(name="email", value="", label="", placeholder="Email")#
-        #submitTag(value="Search", class="pull-right btn")#
-    #endFormTag()#
+<div class="row">
+	<div class="span18">
+		<table class="table table-striped table-condensed">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Information</th>
+					<th>Primary Email</th>
+                    <th>SSN</th>
+                    <th>Birthdate</th>
+				</tr>
+			</thead>
+			<tbody>
+				<cfloop query="people">
+				<tr>
+					<td valign="top"><i class="icon-fire"></i></td>
+					<td>
+						<a href="/people/edit/#people.id#">#people.firstName# #people.lastName#</a>
+					</td>
+					<td>#people.email#</td>
+					<td>#people.ssn#</td>
+                    <td>#dateFormat(people.birthDate,'mm/dd/yyyy')#</td>
+				</tr>
+				</cfloop>
+			</tbody>
+        </table>
+    </div>
+	<div class="span6">
+		#startFormTag(name="frmSearch",class=" well well-small",style="margin-top:10px;")#
+        <h4>Find a person</h4>
+            #textFieldTag(name="lastName", value="", label="", placeholder="Last Name", class="span5")#
+            #textFieldTag(name="firstName", value="", label="", placeholder="First Name", class="span5")#
+            #textFieldTag(name="ssn", value="", label="", placeholder="SSN", class="span5")#
+            #textFieldTag(name="birthdate", value="", label="", placeholder="Birthdate", class="span5")#
+            #textFieldTag(name="email", value="", label="", placeholder="Email", class="span5")#
+            
+			#submitTag(value="Search", class="btn btn-primary")#
+        #endFormTag()#
+    </div>
 </div>
 </cfoutput>
   <!---<cfoutput query="users">
