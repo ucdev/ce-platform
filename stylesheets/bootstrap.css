@@ -4326,6 +4326,23 @@ a.badge:hover {
   line-height: 27px;
   color: inherit;
 }
+.profile > .projectBar > .thumbnail {
+  border-width: 1px 0 1px 1px;
+  -webkit-border-radius: 4px 0 0 4px;
+  -moz-border-radius: 4px 0 0 4px;
+  border-radius: 4px 0 0 4px;
+}
+.profile > .contentBar {
+  border-left: 1px solid #DDDDDD;
+  margin-left: 0;
+  padding-left: 17px;
+  width: 622px;
+}
+.viewer > .contentBar .welcome-msg {
+  margin-bottom: 8px;
+  margin-top: 3px;
+  padding-bottom: 14px;
+}
 .pull-right {
   float: right;
 }

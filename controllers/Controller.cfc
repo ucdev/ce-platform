@@ -1,7 +1,8 @@
-<!---
-	This is the parent controller file that all your controllers should extend.
-	You can add functions to this file to make them globally available in all your controllers.
-	Do not delete this file.
---->
 <cfcomponent extends="Wheels">
+	<cffunction name="subLayout">
+		<cfargument name="layoutFile" type="string" required="no" default="" />
+		
+
+		<cfset renderText($renderLayout($layout='/layout',$type='template',$content=$renderPage($template="",$controller=params.controller,$action=params.action,$layout="/layout_#arguments.layoutFile#"))) />
+	</cffunction>
 </cfcomponent>

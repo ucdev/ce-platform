@@ -7,7 +7,6 @@
 				<tr>
 					<th></th>
 					<th>Information</th>
-					<th>Status</th>
 					<th>Start</th>
                     <th>End</th>
 				</tr>
@@ -15,27 +14,14 @@
 			<tbody>
 				<cfloop query="activities">
 				<tr>
-					<td valign="top"><i class="icon-thumbs-up"></i></td>
+					<td><img src="/images/icons/Status#activities.statusId#.png" /></td>
 					<td>
 						<a href="/activities/edit/#activities.id#">#activities.title#</a>
 					</td>
-					<td>#activities.statusId#</td>
 					<td>#dateFormat(activities.startDate,'mm/dd/yyyy')#</td>
                     <td>#dateFormat(activities.endDate,'mm/dd/yyyy')#</td>
 				</tr>
 				</cfloop>
-				<tr>
-					<td valign="top"><i class="icon-thumbs-up"></i></td>
-					<td>
-						<a href="/activities/13660">Truth About Diagnostic Tests</a>
-						<i class="icon-book"></i>
-						<div>Created on 09/22/2009 by William Fant</div>
-						<div>Updated on 09/22/2009 by System Admin</div>
-						<div>
-							<h5>Start Date: 5/12/2020 | Activity Type: Enduring Material | Grouping: Internet Activity Enduring Material</h5>
-						</div>
-					</td>
-				</tr>
 			</tbody>
 		</table>
 	</div>
