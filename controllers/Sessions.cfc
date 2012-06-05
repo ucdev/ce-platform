@@ -42,12 +42,18 @@
 		<cfargument name="login" type="any" required="true" />
 		<cfargument name="password" type="any" required="true" />
 		
-		<cfset authUser = model("user").findOneByUsername(arguments.login)>
-			
-		<cfif isboolean(authUser) and Not authUser>
+		<cfset authEmail = model("personemail").findOneByEmail_Address(arguments.login)>
+        
+		<cfif isboolean(authEmail) and Not authEmail and authEmail.isLogginable()>
 			<cfset $failedLogin()>
 		</cfif>
-
+        
+        <cfset authUser = model("person").findByKey(authEmail.person_id)>
+        
+		<cfif isboolean(authUser) and Not authUser>
+			<cfset $failedLogin()>
+        </cfif>
+        
 		<cfif authUser.isPassword(arguments.password) AND authUser.isActive()>
 			<cfset $successfulLogin(authUser)>
 		<cfelse>
