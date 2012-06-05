@@ -1,3 +1,4 @@
+<cfoutput>
 <div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
@@ -13,10 +14,24 @@
 						<li<cfif params.controller EQ "activities"> class="active"</cfif>><a href="/activities/">Activities</a></li>
 						<li<cfif params.controller EQ "people"> class="active"</cfif>><a href="/people/">People</a></li>
 					</ul>
+					<cfif NOT isLoggedIn()>
 					<ul class="nav pull-right">
 						<li><a href="/login">Log In</a></li>
 						<li><a href="/signup">Sign Up</a></li>
 					</ul>
+					<cfelse>
+					<ul class="nav pull-right">
+						<li class="divider-vertical"></li>
+						<li class="dropdown">
+							<a href="##" class="dropdown-toggle" data-toggle="dropdown">#session.currentuser.displayname# <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="/people/edit/#session.currentuser.id#">Edit Profile</a></li>
+								<li class="divider"></li>
+								<li><a href="/logout">Logout</a></li>
+							</ul>
+						</li>
+					</ul>
+					</cfif>
 				</div><!--/.nav-collapse -->
 				<form class="navbar-search pull-left">
 					<input type="text" class="search-query" placeholder="Search">
@@ -26,3 +41,4 @@
 	</div>
 
 	<div class="container">
+</cfoutput>
