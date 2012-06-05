@@ -1,5 +1,5 @@
 <cfoutput>
-<h4>Participants</h4>
+<!--<h4>Participants</h4>-->
 <div class="btn-toolbar">
 	<div class="btn-group pull-left">
 		<a href="##" class="btn"><i class="icon-plus-sign"></i> Add</a>
