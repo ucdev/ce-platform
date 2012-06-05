@@ -2049,6 +2049,2014 @@ table .span24 {
 .icon-fullscreen {
   background-position: -456px -144px;
 }
+[class^="fugue-"],
+[class*=" fugue-"] {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  *margin-right: .3em;
+  line-height: 16px;
+  vertical-align: text-top;
+  background-image: url("/images/fugue-sprite.png");
+  background-position: 16px 16px;
+  background-repeat: no-repeat;
+}
+[class^="fugue-"]:last-child,
+[class*=" fugue-"]:last-child {
+  *margin-left: 0;
+}
+.fugue-address-book-blue {
+  background-position: 0 0;
+}
+.fugue-address-book {
+  background-position: -33px 0;
+}
+.fugue-arrow-000-medium {
+  background-position: -66px 0;
+}
+.fugue-arrow-000-small {
+  background-position: -99px 0;
+}
+.fugue-arrow-045-medium {
+  background-position: -132px 0;
+}
+.fugue-arrow-045-small {
+  background-position: -165px 0;
+}
+.fugue-arrow-045 {
+  background-position: -198px 0;
+}
+.fugue-arrow-090-medium {
+  background-position: -231px 0;
+}
+.fugue-arrow-090-small {
+  background-position: -264px 0;
+}
+.fugue-arrow-090 {
+  background-position: -297px 0;
+}
+.fugue-arrow-135-medium {
+  background-position: -330px 0;
+}
+.fugue-arrow-135-small {
+  background-position: -363px 0;
+}
+.fugue-arrow-135 {
+  background-position: -396px 0;
+}
+.fugue-arrow-180-medium {
+  background-position: -429px 0;
+}
+.fugue-arrow-180-small {
+  background-position: -462px 0;
+}
+.fugue-arrow-180 {
+  background-position: -495px 0;
+}
+.fugue-arrow-225-medium {
+  background-position: -528px 0;
+}
+.fugue-arrow-225-small {
+  background-position: -561px 0;
+}
+.fugue-arrow-225 {
+  background-position: -594px 0;
+}
+.fugue-arrow-270-medium {
+  background-position: -627px 0;
+}
+.fugue-arrow-270-small {
+  background-position: -660px 0;
+}
+.fugue-arrow-270 {
+  background-position: -693px 0;
+}
+.fugue-arrow-315-medium {
+  background-position: -726px 0;
+}
+.fugue-arrow-315-small {
+  background-position: -759px 0;
+}
+.fugue-arrow-315 {
+  background-position: -792px 0;
+}
+.fugue-arrow-branch-000-left {
+  background-position: -825px 0;
+}
+.fugue-arrow-branch-090-left {
+  background-position: -858px 0;
+}
+.fugue-arrow-branch-090 {
+  background-position: -891px 0;
+}
+.fugue-arrow-branch-180-left {
+  background-position: -924px 0;
+}
+.fugue-arrow-branch-180 {
+  background-position: -957px 0;
+}
+.fugue-arrow-branch-270-left {
+  background-position: -990px 0;
+}
+.fugue-arrow-branch-270 {
+  background-position: -1023px 0;
+}
+.fugue-arrow-branch {
+  background-position: -1056px 0;
+}
+.fugue-arrow-circle-045-left {
+  background-position: -1089px 0;
+}
+.fugue-arrow-circle-135-left {
+  background-position: -1122px 0;
+}
+.fugue-arrow-circle-135 {
+  background-position: -1155px 0;
+}
+.fugue-arrow-circle-225-left {
+  background-position: -1188px 0;
+}
+.fugue-arrow-circle-225 {
+  background-position: -1221px 0;
+}
+.fugue-arrow-circle-315-left {
+  background-position: -1254px 0;
+}
+.fugue-arrow-circle-315 {
+  background-position: -1287px 0;
+}
+.fugue-arrow-circle-double-135 {
+  background-position: -1320px 0;
+}
+.fugue-arrow-circle-double {
+  background-position: -1353px 0;
+}
+.fugue-arrow-circle {
+  background-position: -1386px 0;
+}
+.fugue-arrow-continue-000-top {
+  background-position: -1419px 0;
+}
+.fugue-arrow-continue-090-left {
+  background-position: -1452px 0;
+}
+.fugue-arrow-continue-090 {
+  background-position: -1485px 0;
+}
+.fugue-arrow-continue-180-top {
+  background-position: -1518px 0;
+}
+.fugue-arrow-continue-180 {
+  background-position: -1551px 0;
+}
+.fugue-arrow-continue-270-left {
+  background-position: -1584px 0;
+}
+.fugue-arrow-continue-270 {
+  background-position: -1617px 0;
+}
+.fugue-arrow-continue {
+  background-position: -1650px 0;
+}
+.fugue-arrow-curve-000-double {
+  background-position: -1683px 0;
+}
+.fugue-arrow-curve-000-left {
+  background-position: -1716px 0;
+}
+.fugue-arrow-curve-090-left {
+  background-position: -1749px 0;
+}
+.fugue-arrow-curve-090 {
+  background-position: -1782px 0;
+}
+.fugue-arrow-curve-180-double {
+  background-position: -1815px 0;
+}
+.fugue-arrow-curve-180-left {
+  background-position: -1848px 0;
+}
+.fugue-arrow-curve-180 {
+  background-position: -1881px 0;
+}
+.fugue-arrow-curve-270-left {
+  background-position: -1914px 0;
+}
+.fugue-arrow-curve-270 {
+  background-position: -1947px 0;
+}
+.fugue-arrow-curve {
+  background-position: -1980px 0;
+}
+.fugue-arrow-in-out {
+  background-position: 0 -33px;
+}
+.fugue-arrow-in {
+  background-position: -33px -33px;
+}
+.fugue-arrow-join-090 {
+  background-position: -66px -33px;
+}
+.fugue-arrow-join-180 {
+  background-position: -99px -33px;
+}
+.fugue-arrow-join-270 {
+  background-position: -132px -33px;
+}
+.fugue-arrow-join {
+  background-position: -165px -33px;
+}
+.fugue-arrow-merge-000-left {
+  background-position: -198px -33px;
+}
+.fugue-arrow-merge-090-left {
+  background-position: -231px -33px;
+}
+.fugue-arrow-merge-090 {
+  background-position: -264px -33px;
+}
+.fugue-arrow-merge-180-left {
+  background-position: -297px -33px;
+}
+.fugue-arrow-merge-180 {
+  background-position: -330px -33px;
+}
+.fugue-arrow-merge-270-left {
+  background-position: -363px -33px;
+}
+.fugue-arrow-merge-270 {
+  background-position: -396px -33px;
+}
+.fugue-arrow-merge {
+  background-position: -429px -33px;
+}
+.fugue-arrow-move {
+  background-position: -462px -33px;
+}
+.fugue-arrow-out {
+  background-position: -495px -33px;
+}
+.fugue-arrow-repeat-once {
+  background-position: -528px -33px;
+}
+.fugue-arrow-repeat {
+  background-position: -561px -33px;
+}
+.fugue-arrow-resize-045 {
+  background-position: -594px -33px;
+}
+.fugue-arrow-resize-090 {
+  background-position: -627px -33px;
+}
+.fugue-arrow-resize-135 {
+  background-position: -660px -33px;
+}
+.fugue-arrow-resize {
+  background-position: -693px -33px;
+}
+.fugue-arrow-return-000-left {
+  background-position: -726px -33px;
+}
+.fugue-arrow-return-090-left {
+  background-position: -759px -33px;
+}
+.fugue-arrow-return-090 {
+  background-position: -792px -33px;
+}
+.fugue-arrow-return-180-left {
+  background-position: -825px -33px;
+}
+.fugue-arrow-return-180 {
+  background-position: -858px -33px;
+}
+.fugue-arrow-return-270-left {
+  background-position: -891px -33px;
+}
+.fugue-arrow-return-270 {
+  background-position: -924px -33px;
+}
+.fugue-arrow-return {
+  background-position: -957px -33px;
+}
+.fugue-arrow-retweet {
+  background-position: -990px -33px;
+}
+.fugue-arrow-skip-090 {
+  background-position: -1023px -33px;
+}
+.fugue-arrow-skip-180 {
+  background-position: -1056px -33px;
+}
+.fugue-arrow-skip-270 {
+  background-position: -1089px -33px;
+}
+.fugue-arrow-skip {
+  background-position: -1122px -33px;
+}
+.fugue-arrow-split-090 {
+  background-position: -1155px -33px;
+}
+.fugue-arrow-split-180 {
+  background-position: -1188px -33px;
+}
+.fugue-arrow-split-270 {
+  background-position: -1221px -33px;
+}
+.fugue-arrow-split {
+  background-position: -1254px -33px;
+}
+.fugue-arrow-step-out {
+  background-position: -1287px -33px;
+}
+.fugue-arrow-step-over {
+  background-position: -1320px -33px;
+}
+.fugue-arrow-step {
+  background-position: -1353px -33px;
+}
+.fugue-arrow-stop-090 {
+  background-position: -1386px -33px;
+}
+.fugue-arrow-stop-180 {
+  background-position: -1419px -33px;
+}
+.fugue-arrow-stop-270 {
+  background-position: -1452px -33px;
+}
+.fugue-arrow-stop {
+  background-position: -1485px -33px;
+}
+.fugue-arrow-switch-090 {
+  background-position: -1518px -33px;
+}
+.fugue-arrow-switch-180 {
+  background-position: -1551px -33px;
+}
+.fugue-arrow-switch-270 {
+  background-position: -1584px -33px;
+}
+.fugue-arrow-switch {
+  background-position: -1617px -33px;
+}
+.fugue-arrow-transition-090 {
+  background-position: -1650px -33px;
+}
+.fugue-arrow-transition-180 {
+  background-position: -1683px -33px;
+}
+.fugue-arrow-transition-270 {
+  background-position: -1716px -33px;
+}
+.fugue-arrow-transition {
+  background-position: -1749px -33px;
+}
+.fugue-arrow-turn-000-left {
+  background-position: -1782px -33px;
+}
+.fugue-arrow-turn-090-left {
+  background-position: -1815px -33px;
+}
+.fugue-arrow-turn-090 {
+  background-position: -1848px -33px;
+}
+.fugue-arrow-turn-180-left {
+  background-position: -1881px -33px;
+}
+.fugue-arrow-turn-180 {
+  background-position: -1914px -33px;
+}
+.fugue-arrow-turn-270-left {
+  background-position: -1947px -33px;
+}
+.fugue-arrow-turn-270 {
+  background-position: -1980px -33px;
+}
+.fugue-arrow-turn {
+  background-position: 0 -66px;
+}
+.fugue-arrow {
+  background-position: -33px -66px;
+}
+.fugue-balloon--arrow {
+  background-position: -66px -66px;
+}
+.fugue-balloon--exclamation {
+  background-position: -99px -66px;
+}
+.fugue-balloon--minus {
+  background-position: -132px -66px;
+}
+.fugue-balloon--pencil {
+  background-position: -165px -66px;
+}
+.fugue-balloon--plus {
+  background-position: -198px -66px;
+}
+.fugue-balloon-box-left {
+  background-position: -231px -66px;
+}
+.fugue-balloon-box {
+  background-position: -264px -66px;
+}
+.fugue-balloon-buzz-left {
+  background-position: -297px -66px;
+}
+.fugue-balloon-buzz {
+  background-position: -330px -66px;
+}
+.fugue-balloon-ellipsis {
+  background-position: -363px -66px;
+}
+.fugue-balloon-facebook-left {
+  background-position: -396px -66px;
+}
+.fugue-balloon-facebook {
+  background-position: -429px -66px;
+}
+.fugue-balloon-left {
+  background-position: -462px -66px;
+}
+.fugue-balloon-prohibition {
+  background-position: -495px -66px;
+}
+.fugue-balloon-quotation {
+  background-position: -528px -66px;
+}
+.fugue-balloon-small-left {
+  background-position: -561px -66px;
+}
+.fugue-balloon-small {
+  background-position: -594px -66px;
+}
+.fugue-balloon-smiley-sad {
+  background-position: -627px -66px;
+}
+.fugue-balloon-smiley {
+  background-position: -660px -66px;
+}
+.fugue-balloon-sound {
+  background-position: -693px -66px;
+}
+.fugue-balloon-twitter-left {
+  background-position: -726px -66px;
+}
+.fugue-balloon-twitter-retweet {
+  background-position: -759px -66px;
+}
+.fugue-balloon-twitter {
+  background-position: -792px -66px;
+}
+.fugue-balloon-white-left {
+  background-position: -825px -66px;
+}
+.fugue-balloon-white {
+  background-position: -858px -66px;
+}
+.fugue-balloon {
+  background-position: -891px -66px;
+}
+.fugue-balloons-box {
+  background-position: -924px -66px;
+}
+.fugue-balloons-facebook-box {
+  background-position: -957px -66px;
+}
+.fugue-balloons-facebook {
+  background-position: -990px -66px;
+}
+.fugue-balloons-twitter-box {
+  background-position: -1023px -66px;
+}
+.fugue-balloons-twitter {
+  background-position: -1056px -66px;
+}
+.fugue-balloons-white {
+  background-position: -1089px -66px;
+}
+.fugue-balloons {
+  background-position: -1122px -66px;
+}
+.fugue-book--arrow {
+  background-position: -1155px -66px;
+}
+.fugue-book--exclamation {
+  background-position: -1188px -66px;
+}
+.fugue-book--minus {
+  background-position: -1221px -66px;
+}
+.fugue-book--pencil {
+  background-position: -1254px -66px;
+}
+.fugue-book--plus {
+  background-position: -1287px -66px;
+}
+.fugue-book-bookmark {
+  background-position: -1320px -66px;
+}
+.fugue-book-brown {
+  background-position: -1353px -66px;
+}
+.fugue-book-open-bookmark {
+  background-position: -1386px -66px;
+}
+.fugue-book-open-list {
+  background-position: -1419px -66px;
+}
+.fugue-book-open-next {
+  background-position: -1452px -66px;
+}
+.fugue-book-open-previous {
+  background-position: -1485px -66px;
+}
+.fugue-book-open-text-image {
+  background-position: -1518px -66px;
+}
+.fugue-book-open-text {
+  background-position: -1551px -66px;
+}
+.fugue-book-open {
+  background-position: -1584px -66px;
+}
+.fugue-book-question {
+  background-position: -1617px -66px;
+}
+.fugue-book-small-brown {
+  background-position: -1650px -66px;
+}
+.fugue-book-small {
+  background-position: -1683px -66px;
+}
+.fugue-book {
+  background-position: -1716px -66px;
+}
+.fugue-books-brown {
+  background-position: -1749px -66px;
+}
+.fugue-books-stack {
+  background-position: -1782px -66px;
+}
+.fugue-books {
+  background-position: -1815px -66px;
+}
+.fugue-box--arrow {
+  background-position: -1848px -66px;
+}
+.fugue-box--exclamation {
+  background-position: -1881px -66px;
+}
+.fugue-box--minus {
+  background-position: -1914px -66px;
+}
+.fugue-box--pencil {
+  background-position: -1947px -66px;
+}
+.fugue-box--plus {
+  background-position: -1980px -66px;
+}
+.fugue-box-document {
+  background-position: 0 -99px;
+}
+.fugue-box-label {
+  background-position: -33px -99px;
+}
+.fugue-box-medium {
+  background-position: -66px -99px;
+}
+.fugue-box-resize-actual {
+  background-position: -99px -99px;
+}
+.fugue-box-resize {
+  background-position: -132px -99px;
+}
+.fugue-box-search-result {
+  background-position: -165px -99px;
+}
+.fugue-box-share {
+  background-position: -198px -99px;
+}
+.fugue-box-small {
+  background-position: -231px -99px;
+}
+.fugue-box-zipper {
+  background-position: -264px -99px;
+}
+.fugue-box {
+  background-position: -297px -99px;
+}
+.fugue-briefcase--arrow {
+  background-position: -330px -99px;
+}
+.fugue-briefcase--exclamation {
+  background-position: -363px -99px;
+}
+.fugue-briefcase--minus {
+  background-position: -396px -99px;
+}
+.fugue-briefcase--pencil {
+  background-position: -429px -99px;
+}
+.fugue-briefcase--plus {
+  background-position: -462px -99px;
+}
+.fugue-briefcase-small {
+  background-position: -495px -99px;
+}
+.fugue-briefcase {
+  background-position: -528px -99px;
+}
+.fugue-bug--arrow {
+  background-position: -561px -99px;
+}
+.fugue-bug--exclamation {
+  background-position: -594px -99px;
+}
+.fugue-bug--minus {
+  background-position: -627px -99px;
+}
+.fugue-bug--pencil {
+  background-position: -660px -99px;
+}
+.fugue-bug--plus {
+  background-position: -693px -99px;
+}
+.fugue-bug {
+  background-position: -726px -99px;
+}
+.fugue-calendar--arrow {
+  background-position: -759px -99px;
+}
+.fugue-calendar--exclamation {
+  background-position: -792px -99px;
+}
+.fugue-calendar--minus {
+  background-position: -825px -99px;
+}
+.fugue-calendar--pencil {
+  background-position: -858px -99px;
+}
+.fugue-calendar--plus {
+  background-position: -891px -99px;
+}
+.fugue-calendar-blue {
+  background-position: -924px -99px;
+}
+.fugue-calendar-day {
+  background-position: -957px -99px;
+}
+.fugue-calendar-delete {
+  background-position: -990px -99px;
+}
+.fugue-calendar-empty {
+  background-position: -1023px -99px;
+}
+.fugue-calendar-export {
+  background-position: -1056px -99px;
+}
+.fugue-calendar-import {
+  background-position: -1089px -99px;
+}
+.fugue-calendar-insert {
+  background-position: -1122px -99px;
+}
+.fugue-calendar-list {
+  background-position: -1155px -99px;
+}
+.fugue-calendar-medium {
+  background-position: -1188px -99px;
+}
+.fugue-calendar-month {
+  background-position: -1221px -99px;
+}
+.fugue-calendar-next {
+  background-position: -1254px -99px;
+}
+.fugue-calendar-previous {
+  background-position: -1287px -99px;
+}
+.fugue-calendar-relation {
+  background-position: -1320px -99px;
+}
+.fugue-calendar-search-result {
+  background-position: -1353px -99px;
+}
+.fugue-calendar-select-days-span {
+  background-position: -1386px -99px;
+}
+.fugue-calendar-select-days {
+  background-position: -1419px -99px;
+}
+.fugue-calendar-select-month {
+  background-position: -1452px -99px;
+}
+.fugue-calendar-select-week {
+  background-position: -1485px -99px;
+}
+.fugue-calendar-select {
+  background-position: -1518px -99px;
+}
+.fugue-calendar-share {
+  background-position: -1551px -99px;
+}
+.fugue-calendar-small-month {
+  background-position: -1584px -99px;
+}
+.fugue-calendar-small {
+  background-position: -1617px -99px;
+}
+.fugue-calendar-task {
+  background-position: -1650px -99px;
+}
+.fugue-calendar {
+  background-position: -1683px -99px;
+}
+.fugue-card-address {
+  background-position: -1716px -99px;
+}
+.fugue-certificate {
+  background-position: -1749px -99px;
+}
+.fugue-chair--arrow {
+  background-position: -1782px -99px;
+}
+.fugue-chair--exclamation {
+  background-position: -1815px -99px;
+}
+.fugue-chair--minus {
+  background-position: -1848px -99px;
+}
+.fugue-chair--pencil {
+  background-position: -1881px -99px;
+}
+.fugue-chair--plus {
+  background-position: -1914px -99px;
+}
+.fugue-chair {
+  background-position: -1947px -99px;
+}
+.fugue-chalkboard-text {
+  background-position: -1980px -99px;
+}
+.fugue-chalkboard {
+  background-position: 0 -132px;
+}
+.fugue-chart--arrow {
+  background-position: -33px -132px;
+}
+.fugue-chart--exclamation {
+  background-position: -66px -132px;
+}
+.fugue-chart--minus {
+  background-position: -99px -132px;
+}
+.fugue-chart--pencil {
+  background-position: -132px -132px;
+}
+.fugue-chart--plus {
+  background-position: -165px -132px;
+}
+.fugue-chart-down-color {
+  background-position: -198px -132px;
+}
+.fugue-chart-down {
+  background-position: -231px -132px;
+}
+.fugue-chart-pie-separate {
+  background-position: -264px -132px;
+}
+.fugue-chart-pie {
+  background-position: -297px -132px;
+}
+.fugue-chart-up-color {
+  background-position: -330px -132px;
+}
+.fugue-chart-up {
+  background-position: -363px -132px;
+}
+.fugue-chart {
+  background-position: -396px -132px;
+}
+.fugue-clock--arrow {
+  background-position: -429px -132px;
+}
+.fugue-clock--exclamation {
+  background-position: -462px -132px;
+}
+.fugue-clock--minus {
+  background-position: -495px -132px;
+}
+.fugue-clock--pencil {
+  background-position: -528px -132px;
+}
+.fugue-clock--plus {
+  background-position: -561px -132px;
+}
+.fugue-clock-frame {
+  background-position: -594px -132px;
+}
+.fugue-clock-history-frame {
+  background-position: -627px -132px;
+}
+.fugue-clock-history {
+  background-position: -660px -132px;
+}
+.fugue-clock-moon-phase {
+  background-position: -693px -132px;
+}
+.fugue-clock-network {
+  background-position: -726px -132px;
+}
+.fugue-clock-select-remain {
+  background-position: -759px -132px;
+}
+.fugue-clock-select {
+  background-position: -792px -132px;
+}
+.fugue-clock-small {
+  background-position: -825px -132px;
+}
+.fugue-clock {
+  background-position: -858px -132px;
+}
+.fugue-credit-card--arrow {
+  background-position: -891px -132px;
+}
+.fugue-credit-card--exclamation {
+  background-position: -924px -132px;
+}
+.fugue-credit-card--minus {
+  background-position: -957px -132px;
+}
+.fugue-credit-card--pencil {
+  background-position: -990px -132px;
+}
+.fugue-credit-card--plus {
+  background-position: -1023px -132px;
+}
+.fugue-credit-card-green {
+  background-position: -1056px -132px;
+}
+.fugue-credit-card-medium {
+  background-position: -1089px -132px;
+}
+.fugue-credit-card {
+  background-position: -1122px -132px;
+}
+.fugue-credit-cards {
+  background-position: -1155px -132px;
+}
+.fugue-direction--arrow {
+  background-position: -1188px -132px;
+}
+.fugue-direction--exclamation {
+  background-position: -1221px -132px;
+}
+.fugue-direction--minus {
+  background-position: -1254px -132px;
+}
+.fugue-direction--pencil {
+  background-position: -1287px -132px;
+}
+.fugue-direction--plus {
+  background-position: -1320px -132px;
+}
+.fugue-direction {
+  background-position: -1353px -132px;
+}
+.fugue-drawer--arrow {
+  background-position: -1386px -132px;
+}
+.fugue-drawer--exclamation {
+  background-position: -1419px -132px;
+}
+.fugue-drawer--minus {
+  background-position: -1452px -132px;
+}
+.fugue-drawer--pencil {
+  background-position: -1485px -132px;
+}
+.fugue-drawer--plus {
+  background-position: -1518px -132px;
+}
+.fugue-drawer-open {
+  background-position: -1551px -132px;
+}
+.fugue-drawer {
+  background-position: -1584px -132px;
+}
+.fugue-envelope--arrow {
+  background-position: -1617px -132px;
+}
+.fugue-envelope--exclamation {
+  background-position: -1650px -132px;
+}
+.fugue-envelope--minus {
+  background-position: -1683px -132px;
+}
+.fugue-envelope--pencil {
+  background-position: -1716px -132px;
+}
+.fugue-envelope--plus {
+  background-position: -1749px -132px;
+}
+.fugue-envelope-at-sign {
+  background-position: -1782px -132px;
+}
+.fugue-envelope-label {
+  background-position: -1815px -132px;
+}
+.fugue-envelope-share {
+  background-position: -1848px -132px;
+}
+.fugue-envelope-string {
+  background-position: -1881px -132px;
+}
+.fugue-envelope {
+  background-position: -1914px -132px;
+}
+.fugue-flag--arrow {
+  background-position: -1947px -132px;
+}
+.fugue-flag--exclamation {
+  background-position: -1980px -132px;
+}
+.fugue-flag--minus {
+  background-position: 0 -165px;
+}
+.fugue-flag--pencil {
+  background-position: -33px -165px;
+}
+.fugue-flag--plus {
+  background-position: -66px -165px;
+}
+.fugue-flag-black {
+  background-position: -99px -165px;
+}
+.fugue-flag-blue {
+  background-position: -132px -165px;
+}
+.fugue-flag-gray {
+  background-position: -165px -165px;
+}
+.fugue-flag-green {
+  background-position: -198px -165px;
+}
+.fugue-flag-pink {
+  background-position: -231px -165px;
+}
+.fugue-flag-purple {
+  background-position: -264px -165px;
+}
+.fugue-flag-small {
+  background-position: -297px -165px;
+}
+.fugue-flag-white {
+  background-position: -330px -165px;
+}
+.fugue-flag-yellow {
+  background-position: -363px -165px;
+}
+.fugue-flag {
+  background-position: -396px -165px;
+}
+.fugue-folding-fan {
+  background-position: -429px -165px;
+}
+.fugue-footprint {
+  background-position: -462px -165px;
+}
+.fugue-footprints {
+  background-position: -495px -165px;
+}
+.fugue-fruit-apple-half {
+  background-position: -528px -165px;
+}
+.fugue-fruit-grape {
+  background-position: -561px -165px;
+}
+.fugue-fruit-lime {
+  background-position: -594px -165px;
+}
+.fugue-fruit-orange {
+  background-position: -627px -165px;
+}
+.fugue-fruit {
+  background-position: -660px -165px;
+}
+.fugue-globe--arrow {
+  background-position: -693px -165px;
+}
+.fugue-globe--exclamation {
+  background-position: -726px -165px;
+}
+.fugue-globe--minus {
+  background-position: -759px -165px;
+}
+.fugue-globe--pencil {
+  background-position: -792px -165px;
+}
+.fugue-globe--plus {
+  background-position: -825px -165px;
+}
+.fugue-globe-green {
+  background-position: -858px -165px;
+}
+.fugue-globe-medium-green {
+  background-position: -891px -165px;
+}
+.fugue-globe-medium {
+  background-position: -924px -165px;
+}
+.fugue-globe-model {
+  background-position: -957px -165px;
+}
+.fugue-globe-network-ethernet {
+  background-position: -990px -165px;
+}
+.fugue-globe-network {
+  background-position: -1023px -165px;
+}
+.fugue-globe-place {
+  background-position: -1056px -165px;
+}
+.fugue-globe-share {
+  background-position: -1089px -165px;
+}
+.fugue-globe-small-green {
+  background-position: -1122px -165px;
+}
+.fugue-globe-small {
+  background-position: -1155px -165px;
+}
+.fugue-globe {
+  background-position: -1188px -165px;
+}
+.fugue-graduation-hat {
+  background-position: -1221px -165px;
+}
+.fugue-headphone--arrow {
+  background-position: -1254px -165px;
+}
+.fugue-headphone--exclamation {
+  background-position: -1287px -165px;
+}
+.fugue-headphone--minus {
+  background-position: -1320px -165px;
+}
+.fugue-headphone--pencil {
+  background-position: -1353px -165px;
+}
+.fugue-headphone--plus {
+  background-position: -1386px -165px;
+}
+.fugue-headphone-microphone {
+  background-position: -1419px -165px;
+}
+.fugue-headphone {
+  background-position: -1452px -165px;
+}
+.fugue-heart--arrow {
+  background-position: -1485px -165px;
+}
+.fugue-heart--exclamation {
+  background-position: -1518px -165px;
+}
+.fugue-heart--minus {
+  background-position: -1551px -165px;
+}
+.fugue-heart--pencil {
+  background-position: -1584px -165px;
+}
+.fugue-heart--plus {
+  background-position: -1617px -165px;
+}
+.fugue-heart-break {
+  background-position: -1650px -165px;
+}
+.fugue-heart-empty {
+  background-position: -1683px -165px;
+}
+.fugue-heart-half {
+  background-position: -1716px -165px;
+}
+.fugue-heart-small-empty {
+  background-position: -1749px -165px;
+}
+.fugue-heart-small-half {
+  background-position: -1782px -165px;
+}
+.fugue-heart-small {
+  background-position: -1815px -165px;
+}
+.fugue-heart {
+  background-position: -1848px -165px;
+}
+.fugue-image--arrow {
+  background-position: -1881px -165px;
+}
+.fugue-image--exclamation {
+  background-position: -1914px -165px;
+}
+.fugue-image--minus {
+  background-position: -1947px -165px;
+}
+.fugue-image--pencil {
+  background-position: -1980px -165px;
+}
+.fugue-image--plus {
+  background-position: 0 -198px;
+}
+.fugue-image-balloon {
+  background-position: -33px -198px;
+}
+.fugue-image-blur {
+  background-position: -66px -198px;
+}
+.fugue-image-cast {
+  background-position: -99px -198px;
+}
+.fugue-image-crop {
+  background-position: -132px -198px;
+}
+.fugue-image-empty {
+  background-position: -165px -198px;
+}
+.fugue-image-export {
+  background-position: -198px -198px;
+}
+.fugue-image-import {
+  background-position: -231px -198px;
+}
+.fugue-image-medium {
+  background-position: -264px -198px;
+}
+.fugue-image-reflection {
+  background-position: -297px -198px;
+}
+.fugue-image-resize-actual {
+  background-position: -330px -198px;
+}
+.fugue-image-resize {
+  background-position: -363px -198px;
+}
+.fugue-image-saturation-up {
+  background-position: -396px -198px;
+}
+.fugue-image-saturation {
+  background-position: -429px -198px;
+}
+.fugue-image-select {
+  background-position: -462px -198px;
+}
+.fugue-image-share {
+  background-position: -495px -198px;
+}
+.fugue-image-sharpen {
+  background-position: -528px -198px;
+}
+.fugue-image-small-sunset {
+  background-position: -561px -198px;
+}
+.fugue-image-small {
+  background-position: -594px -198px;
+}
+.fugue-image-sunset {
+  background-position: -627px -198px;
+}
+.fugue-image-vertical-sunset {
+  background-position: -660px -198px;
+}
+.fugue-image-vertical {
+  background-position: -693px -198px;
+}
+.fugue-image {
+  background-position: -726px -198px;
+}
+.fugue-images-flickr {
+  background-position: -759px -198px;
+}
+.fugue-images-stack {
+  background-position: -792px -198px;
+}
+.fugue-images {
+  background-position: -825px -198px;
+}
+.fugue-inbox--arrow {
+  background-position: -858px -198px;
+}
+.fugue-inbox--exclamation {
+  background-position: -891px -198px;
+}
+.fugue-inbox--minus {
+  background-position: -924px -198px;
+}
+.fugue-inbox--pencil {
+  background-position: -957px -198px;
+}
+.fugue-inbox--plus {
+  background-position: -990px -198px;
+}
+.fugue-inbox-document-music-playlist {
+  background-position: -1023px -198px;
+}
+.fugue-inbox-document-music {
+  background-position: -1056px -198px;
+}
+.fugue-inbox-document-text {
+  background-position: -1089px -198px;
+}
+.fugue-inbox-document {
+  background-position: -1122px -198px;
+}
+.fugue-inbox-download {
+  background-position: -1155px -198px;
+}
+.fugue-inbox-film {
+  background-position: -1188px -198px;
+}
+.fugue-inbox-image {
+  background-position: -1221px -198px;
+}
+.fugue-inbox-slide {
+  background-position: -1254px -198px;
+}
+.fugue-inbox-table {
+  background-position: -1287px -198px;
+}
+.fugue-inbox-upload {
+  background-position: -1320px -198px;
+}
+.fugue-inbox {
+  background-position: -1353px -198px;
+}
+.fugue-key--exclamation {
+  background-position: -1386px -198px;
+}
+.fugue-key--minus {
+  background-position: -1419px -198px;
+}
+.fugue-key--pencil {
+  background-position: -1452px -198px;
+}
+.fugue-key--plus {
+  background-position: -1485px -198px;
+}
+.fugue-key-solid {
+  background-position: -1518px -198px;
+}
+.fugue-key {
+  background-position: -1551px -198px;
+}
+.fugue-leaf--arrow {
+  background-position: -1584px -198px;
+}
+.fugue-leaf--exclamation {
+  background-position: -1617px -198px;
+}
+.fugue-leaf--minus {
+  background-position: -1650px -198px;
+}
+.fugue-leaf--pencil {
+  background-position: -1683px -198px;
+}
+.fugue-leaf--plus {
+  background-position: -1716px -198px;
+}
+.fugue-leaf-plant {
+  background-position: -1749px -198px;
+}
+.fugue-leaf-red {
+  background-position: -1782px -198px;
+}
+.fugue-leaf-wormhole {
+  background-position: -1815px -198px;
+}
+.fugue-leaf-yellow {
+  background-position: -1848px -198px;
+}
+.fugue-leaf {
+  background-position: -1881px -198px;
+}
+.fugue-lifebuoy--arrow {
+  background-position: -1914px -198px;
+}
+.fugue-lifebuoy--exclamation {
+  background-position: -1947px -198px;
+}
+.fugue-lifebuoy--minus {
+  background-position: -1980px -198px;
+}
+.fugue-lifebuoy--pencil {
+  background-position: 0 -231px;
+}
+.fugue-lifebuoy--plus {
+  background-position: -33px -231px;
+}
+.fugue-lifebuoy {
+  background-position: -66px -231px;
+}
+.fugue-lock--arrow {
+  background-position: -99px -231px;
+}
+.fugue-lock--exclamation {
+  background-position: -132px -231px;
+}
+.fugue-lock--minus {
+  background-position: -165px -231px;
+}
+.fugue-lock--pencil {
+  background-position: -198px -231px;
+}
+.fugue-lock--plus {
+  background-position: -231px -231px;
+}
+.fugue-lock-small {
+  background-position: -264px -231px;
+}
+.fugue-lock-ssl {
+  background-position: -297px -231px;
+}
+.fugue-lock-unlock {
+  background-position: -330px -231px;
+}
+.fugue-lock-warning {
+  background-position: -363px -231px;
+}
+.fugue-lock {
+  background-position: -396px -231px;
+}
+.fugue-mail--arrow {
+  background-position: -429px -231px;
+}
+.fugue-mail--exclamation {
+  background-position: -462px -231px;
+}
+.fugue-mail--minus {
+  background-position: -495px -231px;
+}
+.fugue-mail--pencil {
+  background-position: -528px -231px;
+}
+.fugue-mail--plus {
+  background-position: -561px -231px;
+}
+.fugue-mail-air {
+  background-position: -594px -231px;
+}
+.fugue-mail-at-sign {
+  background-position: -627px -231px;
+}
+.fugue-mail-forward-all {
+  background-position: -660px -231px;
+}
+.fugue-mail-forward {
+  background-position: -693px -231px;
+}
+.fugue-mail-medium {
+  background-position: -726px -231px;
+}
+.fugue-mail-open-document-music-playlist {
+  background-position: -759px -231px;
+}
+.fugue-mail-open-document-music {
+  background-position: -792px -231px;
+}
+.fugue-mail-open-document-text {
+  background-position: -825px -231px;
+}
+.fugue-mail-open-document {
+  background-position: -858px -231px;
+}
+.fugue-mail-open-film {
+  background-position: -891px -231px;
+}
+.fugue-mail-open-image {
+  background-position: -924px -231px;
+}
+.fugue-mail-open-table {
+  background-position: -957px -231px;
+}
+.fugue-mail-open {
+  background-position: -990px -231px;
+}
+.fugue-mail-receive {
+  background-position: -1023px -231px;
+}
+.fugue-mail-reply-all {
+  background-position: -1056px -231px;
+}
+.fugue-mail-reply {
+  background-position: -1089px -231px;
+}
+.fugue-mail-send-receive {
+  background-position: -1122px -231px;
+}
+.fugue-mail-send {
+  background-position: -1155px -231px;
+}
+.fugue-mail-share {
+  background-position: -1188px -231px;
+}
+.fugue-mail-small {
+  background-position: -1221px -231px;
+}
+.fugue-mail {
+  background-position: -1254px -231px;
+}
+.fugue-mails-stack {
+  background-position: -1287px -231px;
+}
+.fugue-mails {
+  background-position: -1320px -231px;
+}
+.fugue-map--arrow {
+  background-position: -1353px -231px;
+}
+.fugue-map--exclamation {
+  background-position: -1386px -231px;
+}
+.fugue-map--minus {
+  background-position: -1419px -231px;
+}
+.fugue-map--pencil {
+  background-position: -1452px -231px;
+}
+.fugue-map--plus {
+  background-position: -1485px -231px;
+}
+.fugue-map-medium {
+  background-position: -1518px -231px;
+}
+.fugue-map-pin {
+  background-position: -1551px -231px;
+}
+.fugue-map-resize-actual {
+  background-position: -1584px -231px;
+}
+.fugue-map-resize {
+  background-position: -1617px -231px;
+}
+.fugue-map-share {
+  background-position: -1650px -231px;
+}
+.fugue-map {
+  background-position: -1683px -231px;
+}
+.fugue-maps-stack {
+  background-position: -1716px -231px;
+}
+.fugue-maps {
+  background-position: -1749px -231px;
+}
+.fugue-marker--arrow {
+  background-position: -1782px -231px;
+}
+.fugue-marker--exclamation {
+  background-position: -1815px -231px;
+}
+.fugue-marker--minus {
+  background-position: -1848px -231px;
+}
+.fugue-marker--pencil {
+  background-position: -1881px -231px;
+}
+.fugue-marker--plus {
+  background-position: -1914px -231px;
+}
+.fugue-marker-small {
+  background-position: -1947px -231px;
+}
+.fugue-marker {
+  background-position: -1980px -231px;
+}
+.fugue-medal--arrow {
+  background-position: 0 -264px;
+}
+.fugue-medal--exclamation {
+  background-position: -33px -264px;
+}
+.fugue-medal--minus {
+  background-position: -66px -264px;
+}
+.fugue-medal--pencil {
+  background-position: -99px -264px;
+}
+.fugue-medal--plus {
+  background-position: -132px -264px;
+}
+.fugue-medal-bronze-red {
+  background-position: -165px -264px;
+}
+.fugue-medal-bronze {
+  background-position: -198px -264px;
+}
+.fugue-medal-red {
+  background-position: -231px -264px;
+}
+.fugue-medal-silver-red {
+  background-position: -264px -264px;
+}
+.fugue-medal-silver {
+  background-position: -297px -264px;
+}
+.fugue-medal {
+  background-position: -330px -264px;
+}
+.fugue-microphone--arrow {
+  background-position: -363px -264px;
+}
+.fugue-microphone--exclamation {
+  background-position: -396px -264px;
+}
+.fugue-microphone--minus {
+  background-position: -429px -264px;
+}
+.fugue-microphone--pencil {
+  background-position: -462px -264px;
+}
+.fugue-microphone--plus {
+  background-position: -495px -264px;
+}
+.fugue-microphone {
+  background-position: -528px -264px;
+}
+.fugue-paper-clip-prohibition {
+  background-position: -561px -264px;
+}
+.fugue-paper-clip {
+  background-position: -594px -264px;
+}
+.fugue-paper-plane--arrow {
+  background-position: -627px -264px;
+}
+.fugue-paper-plane--exclamation {
+  background-position: -660px -264px;
+}
+.fugue-paper-plane--minus {
+  background-position: -693px -264px;
+}
+.fugue-paper-plane--pencil {
+  background-position: -726px -264px;
+}
+.fugue-paper-plane--plus {
+  background-position: -759px -264px;
+}
+.fugue-paper-plane-return {
+  background-position: -792px -264px;
+}
+.fugue-paper-plane {
+  background-position: -825px -264px;
+}
+.fugue-picture--arrow {
+  background-position: -858px -264px;
+}
+.fugue-picture--exclamation {
+  background-position: -891px -264px;
+}
+.fugue-picture--minus {
+  background-position: -924px -264px;
+}
+.fugue-picture--pencil {
+  background-position: -957px -264px;
+}
+.fugue-picture--plus {
+  background-position: -990px -264px;
+}
+.fugue-picture-medium {
+  background-position: -1023px -264px;
+}
+.fugue-picture-small-sunset {
+  background-position: -1056px -264px;
+}
+.fugue-picture-small {
+  background-position: -1089px -264px;
+}
+.fugue-picture-sunset {
+  background-position: -1122px -264px;
+}
+.fugue-picture {
+  background-position: -1155px -264px;
+}
+.fugue-pictures-stack {
+  background-position: -1188px -264px;
+}
+.fugue-pictures {
+  background-position: -1221px -264px;
+}
+.fugue-plate-cutlery {
+  background-position: -1254px -264px;
+}
+.fugue-plate {
+  background-position: -1287px -264px;
+}
+.fugue-plates {
+  background-position: -1320px -264px;
+}
+.fugue-projection-screen-presentation {
+  background-position: -1353px -264px;
+}
+.fugue-projection-screen {
+  background-position: -1386px -264px;
+}
+.fugue-puzzle {
+  background-position: -1419px -264px;
+}
+.fugue-receipt {
+  background-position: -1452px -264px;
+}
+.fugue-report-excel {
+  background-position: -1485px -264px;
+}
+.fugue-report {
+  background-position: -1518px -264px;
+}
+.fugue-reports {
+  background-position: -1551px -264px;
+}
+.fugue-slide--arrow {
+  background-position: -1584px -264px;
+}
+.fugue-slide--exclamation {
+  background-position: -1617px -264px;
+}
+.fugue-slide--minus {
+  background-position: -1650px -264px;
+}
+.fugue-slide--pencil {
+  background-position: -1683px -264px;
+}
+.fugue-slide--plus {
+  background-position: -1716px -264px;
+}
+.fugue-slide-medium {
+  background-position: -1749px -264px;
+}
+.fugue-slide-powerpoint {
+  background-position: -1782px -264px;
+}
+.fugue-slide-resize-actual {
+  background-position: -1815px -264px;
+}
+.fugue-slide-resize {
+  background-position: -1848px -264px;
+}
+.fugue-slide {
+  background-position: -1881px -264px;
+}
+.fugue-slides-stack {
+  background-position: -1914px -264px;
+}
+.fugue-slides {
+  background-position: -1947px -264px;
+}
+.fugue-sofa--arrow {
+  background-position: -1980px -264px;
+}
+.fugue-sofa--exclamation {
+  background-position: 0 -297px;
+}
+.fugue-sofa--minus {
+  background-position: -33px -297px;
+}
+.fugue-sofa--pencil {
+  background-position: -66px -297px;
+}
+.fugue-sofa--plus {
+  background-position: -99px -297px;
+}
+.fugue-sofa {
+  background-position: -132px -297px;
+}
+.fugue-speaker-volume-control-mute {
+  background-position: -165px -297px;
+}
+.fugue-speaker-volume-control-up {
+  background-position: -198px -297px;
+}
+.fugue-speaker-volume-control {
+  background-position: -231px -297px;
+}
+.fugue-speaker-volume-low {
+  background-position: -264px -297px;
+}
+.fugue-speaker-volume-none {
+  background-position: -297px -297px;
+}
+.fugue-speaker-volume {
+  background-position: -330px -297px;
+}
+.fugue-spectacle-3d {
+  background-position: -363px -297px;
+}
+.fugue-spectacle-small {
+  background-position: -396px -297px;
+}
+.fugue-spectacle-sunglass {
+  background-position: -429px -297px;
+}
+.fugue-spectacle {
+  background-position: -462px -297px;
+}
+.fugue-star {
+  background-position: -495px -297px;
+}
+.fugue-status-away {
+  background-position: -528px -297px;
+}
+.fugue-status-busy {
+  background-position: -561px -297px;
+}
+.fugue-status-offline {
+  background-position: -594px -297px;
+}
+.fugue-status {
+  background-position: -627px -297px;
+}
+.fugue-sticky-note--arrow {
+  background-position: -660px -297px;
+}
+.fugue-sticky-note--exclamation {
+  background-position: -693px -297px;
+}
+.fugue-sticky-note--minus {
+  background-position: -726px -297px;
+}
+.fugue-sticky-note--pencil {
+  background-position: -759px -297px;
+}
+.fugue-sticky-note--plus {
+  background-position: -792px -297px;
+}
+.fugue-sticky-note-medium {
+  background-position: -825px -297px;
+}
+.fugue-sticky-note-pin {
+  background-position: -858px -297px;
+}
+.fugue-sticky-note-shred {
+  background-position: -891px -297px;
+}
+.fugue-sticky-note-small-pin {
+  background-position: -924px -297px;
+}
+.fugue-sticky-note-small {
+  background-position: -957px -297px;
+}
+.fugue-sticky-note-text {
+  background-position: -990px -297px;
+}
+.fugue-sticky-note {
+  background-position: -1023px -297px;
+}
+.fugue-sticky-notes-pin {
+  background-position: -1056px -297px;
+}
+.fugue-sticky-notes-stack {
+  background-position: -1089px -297px;
+}
+.fugue-sticky-notes-text {
+  background-position: -1122px -297px;
+}
+.fugue-sticky-notes {
+  background-position: -1155px -297px;
+}
+.fugue-trophy--arrow {
+  background-position: -1188px -297px;
+}
+.fugue-trophy--exclamation {
+  background-position: -1221px -297px;
+}
+.fugue-trophy--minus {
+  background-position: -1254px -297px;
+}
+.fugue-trophy--pencil {
+  background-position: -1287px -297px;
+}
+.fugue-trophy--plus {
+  background-position: -1320px -297px;
+}
+.fugue-trophy-bronze {
+  background-position: -1353px -297px;
+}
+.fugue-trophy-silver {
+  background-position: -1386px -297px;
+}
+.fugue-trophy {
+  background-position: -1419px -297px;
+}
+.fugue-user--arrow {
+  background-position: -1452px -297px;
+}
+.fugue-user--exclamation {
+  background-position: -1485px -297px;
+}
+.fugue-user--minus {
+  background-position: -1518px -297px;
+}
+.fugue-user--pencil {
+  background-position: -1551px -297px;
+}
+.fugue-user--plus {
+  background-position: -1584px -297px;
+}
+.fugue-user-black-female {
+  background-position: -1617px -297px;
+}
+.fugue-user-black {
+  background-position: -1650px -297px;
+}
+.fugue-user-business-boss {
+  background-position: -1683px -297px;
+}
+.fugue-user-business-gray-boss {
+  background-position: -1716px -297px;
+}
+.fugue-user-business-gray {
+  background-position: -1749px -297px;
+}
+.fugue-user-business {
+  background-position: -1782px -297px;
+}
+.fugue-user-detective-gray {
+  background-position: -1815px -297px;
+}
+.fugue-user-detective {
+  background-position: -1848px -297px;
+}
+.fugue-user-female {
+  background-position: -1881px -297px;
+}
+.fugue-user-gray-female {
+  background-position: -1914px -297px;
+}
+.fugue-user-gray {
+  background-position: -1947px -297px;
+}
+.fugue-user-green-female {
+  background-position: -1980px -297px;
+}
+.fugue-user-green {
+  background-position: 0 -330px;
+}
+.fugue-user-medical-female {
+  background-position: -33px -330px;
+}
+.fugue-user-medical {
+  background-position: -66px -330px;
+}
+.fugue-user-medium-female {
+  background-position: -99px -330px;
+}
+.fugue-user-medium {
+  background-position: -132px -330px;
+}
+.fugue-user-nude-female {
+  background-position: -165px -330px;
+}
+.fugue-user-nude {
+  background-position: -198px -330px;
+}
+.fugue-user-red-female {
+  background-position: -231px -330px;
+}
+.fugue-user-red {
+  background-position: -264px -330px;
+}
+.fugue-user-share {
+  background-position: -297px -330px;
+}
+.fugue-user-silhouette-question {
+  background-position: -330px -330px;
+}
+.fugue-user-silhouette {
+  background-position: -363px -330px;
+}
+.fugue-user-small-female {
+  background-position: -396px -330px;
+}
+.fugue-user-small {
+  background-position: -429px -330px;
+}
+.fugue-user-thief-baldie {
+  background-position: -462px -330px;
+}
+.fugue-user-thief-female {
+  background-position: -495px -330px;
+}
+.fugue-user-thief {
+  background-position: -528px -330px;
+}
+.fugue-user-white-female {
+  background-position: -561px -330px;
+}
+.fugue-user-white {
+  background-position: -594px -330px;
+}
+.fugue-user-worker-boss {
+  background-position: -627px -330px;
+}
+.fugue-user-worker {
+  background-position: -660px -330px;
+}
+.fugue-user-yellow-female {
+  background-position: -693px -330px;
+}
+.fugue-user-yellow {
+  background-position: -726px -330px;
+}
+.fugue-user {
+  background-position: -759px -330px;
+}
+.fugue-users {
+  background-position: -792px -330px;
+}
+.fugue-weather-cloud-small {
+  background-position: -825px -330px;
+}
+.fugue-weather-cloud {
+  background-position: -858px -330px;
+}
+.fugue-weather-clouds {
+  background-position: -891px -330px;
+}
+.fugue-weather-cloudy {
+  background-position: -924px -330px;
+}
+.fugue-weather-fog {
+  background-position: -957px -330px;
+}
+.fugue-weather-lightning {
+  background-position: -990px -330px;
+}
+.fugue-weather-moon-clouds {
+  background-position: -1023px -330px;
+}
+.fugue-weather-moon-fog {
+  background-position: -1056px -330px;
+}
+.fugue-weather-moon-half {
+  background-position: -1089px -330px;
+}
+.fugue-weather-moon {
+  background-position: -1122px -330px;
+}
+.fugue-weather-rain-little {
+  background-position: -1155px -330px;
+}
+.fugue-weather-rain {
+  background-position: -1188px -330px;
+}
+.fugue-weather-snow-little {
+  background-position: -1221px -330px;
+}
+.fugue-weather-snow {
+  background-position: -1254px -330px;
+}
+.fugue-weather-tornado {
+  background-position: -1287px -330px;
+}
+.fugue-weather-wind {
+  background-position: -1320px -330px;
+}
+.fugue-weather {
+  background-position: -1353px -330px;
+}
+.fugue-webcam--arrow {
+  background-position: -1386px -330px;
+}
+.fugue-webcam--exclamation {
+  background-position: -1419px -330px;
+}
+.fugue-webcam--minus {
+  background-position: -1452px -330px;
+}
+.fugue-webcam-medium {
+  background-position: -1485px -330px;
+}
+.fugue-webcam {
+  background-position: -1518px -330px;
+}
+.fugue-wooden-box--arrow {
+  background-position: -1551px -330px;
+}
+.fugue-wooden-box--exclamation {
+  background-position: -1584px -330px;
+}
+.fugue-wooden-box--minus {
+  background-position: -1617px -330px;
+}
+.fugue-wooden-box--pencil {
+  background-position: -1650px -330px;
+}
+.fugue-wooden-box--plus {
+  background-position: -1683px -330px;
+}
+.fugue-wooden-box-label {
+  background-position: -1716px -330px;
+}
+.fugue-wooden-box {
+  background-position: -1749px -330px;
+}
 .dropup,
 .dropdown {
   position: relative;
@@ -4325,6 +6333,19 @@ a.badge:hover {
   font-weight: 200;
   line-height: 27px;
   color: inherit;
+}
+.profile > .projectBar .nav li {
+  position: relative;
+}
+.profile > .projectBar .nav li a {
+  font-size: 11px;
+  line-height: 15px;
+  padding-left: 26px;
+}
+.profile > .projectBar .nav li a i {
+  left: -9px;
+  position: absolute;
+  top: 2px;
 }
 .profile > .projectBar > .thumbnail {
   border-width: 1px 0 1px 1px;

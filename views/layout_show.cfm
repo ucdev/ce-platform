@@ -5,7 +5,7 @@
 		#includePartial(partial="sublayout/view_tabs")#
 	</div>
 	<div class="contentBar span16">
-		<h3>#activity.title#</h3>
+		<h3>#includeContent("pageTitle")#</h3>
 		#includeContent()#
 	</div>
 	<div class="infoBar span4">
