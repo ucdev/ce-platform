@@ -23,7 +23,7 @@
 					<ul class="nav pull-right">
 						<li class="divider-vertical"></li>
 						<li class="dropdown">
-							<a href="##" class="dropdown-toggle" data-toggle="dropdown">#session.currentuser.displayname# <b class="caret"></b></a>
+							<a href="##" class="dropdown-toggle" data-toggle="dropdown"><i class="fugue-#session.currentuser.id#" style="background-image:url('http://www.gravatar.com/avatar/#lcase(HASH(session.currentuser.email,'MD5'))#?d=identicon&s=16');background-position:0 0; margin-right:2px;"></i> #session.currentuser.displayname# <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="/people/edit/#session.currentuser.id#">Edit Profile</a></li>
 								<li class="divider"></li>
