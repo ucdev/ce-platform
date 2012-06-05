@@ -9,5 +9,12 @@
 	<cffunction name="edit">
 		<cfparam name="params.key" type="integer" />
 		<cfset activity = model("activity").findByKey(params.key) />
+		<cfset subLayout('edit') />
+	</cffunction>
+	
+	<cffunction name="show">
+		<cfparam name="params.key" type="integer" />
+		<cfset activity = model("activity").findByKey(params.key) />
+		<cfset subLayout('show') />
 	</cffunction>
 </cfcomponent>

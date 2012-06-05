@@ -4,7 +4,6 @@
 	<cfoutput>
 	<meta charset="utf-8">
 	<title>#application.config.name#</title>
-	<!---<meta name="viewport" content="width=device-width, initial-scale=1.0">--->
 	<meta name="description" content="">
 	<meta name="author" content="">
 	
@@ -34,7 +33,7 @@
 <body>
 <cfoutput>
 	#includePartial(partial="/header")#
-		#includeContent()#
+	#includeContent()#
 	#includePartial(partial="/footer")#
 </cfoutput>
 </body>
