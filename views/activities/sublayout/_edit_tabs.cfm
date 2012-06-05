@@ -2,8 +2,8 @@
 <cfset tabs = [
 	{ 'icon':'card-address', 'label': 'Info', 'action':'edit' },
 	{ 'icon':'trophy', 'label': 'Credits', 'action':'edit_credit' },
-	{ 'icon':'users', 'label': 'Participants', 'action':'edit_faculty' },
-	{ 'icon':'user-business', 'label': 'Faculty', 'action':'edit_participants' },
+	{ 'icon':'users', 'label': 'Participants', 'action':'edit_participants' },
+	{ 'icon':'user-business', 'label': 'Faculty', 'action':'edit_faculty' },
 	{ 'icon':'user-female', 'label': 'Committee', 'action':'edit_committee' },
 	{ 'icon':'chart-up-color', 'label': 'Finances', 'action':'edit_finances' },
 	{ 'icon':'inbox-document', 'label': 'Documents', 'action':'edit_documents' },
