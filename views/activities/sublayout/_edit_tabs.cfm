@@ -1,17 +1,20 @@
-
 <cfoutput>
 <cfset tabs = [
 	{ 'icon':'card-address', 'label': 'Info', 'action':'edit' },
-	{ 'icon':'card-address', 'label': 'Credits', 'action':'edit_credit' },
-	{ 'icon':'card-address', 'label': 'Participants', 'action':'edit_faculty' },
-	{ 'icon':'card-address', 'label': 'Faculty', 'action':'edit_participants' },
-	{ 'icon':'card-address', 'label': 'Committee', 'action':'edit' },
-	{ 'icon':'card-address', 'label': 'Finances', 'action':'edit' },
-	{ 'icon':'card-address', 'label': 'Documents', 'action':'edit' },
-	{ 'icon':'card-address', 'label': 'Other', 'action':'edit' },
-	{ 'icon':'card-address', 'label': 'Publish', 'action':'edit' },
-	{ 'icon':'card-address', 'label': 'Reports', 'action':'edit' },
-	{ 'icon':'card-address', 'label': 'History', 'action':'edit' }
+	{ 'icon':'trophy', 'label': 'Credits', 'action':'edit_credit' },
+	{ 'icon':'users', 'label': 'Participants', 'action':'edit_faculty' },
+	{ 'icon':'user-business', 'label': 'Faculty', 'action':'edit_participants' },
+	{ 'icon':'user-female', 'label': 'Committee', 'action':'edit_committee' },
+	{ 'icon':'chart-up-color', 'label': 'Finances', 'action':'edit_finances' },
+	{ 'icon':'inbox-document', 'label': 'Documents', 'action':'edit_documents' },
+	{ 'icon':'sticky-note-pin', 'label': 'Notes', 'action':'edit_notes' },
+	{ 'icon':'calendar', 'label': 'Schedule', 'action':'edit_agenda' },
+	{ 'icon':'envelope', 'label': 'Application', 'action':'edit_app' },
+	{ 'icon':'bug', 'label': 'CDC', 'action':'edit_cdc' },
+	{ 'icon':'accme', 'label': 'ACCME', 'action':'edit_accme' },
+	{ 'icon':'globe-green', 'label': 'Publish', 'action':'edit_publish' },
+	{ 'icon':'report', 'label': 'Reports', 'action':'edit_reports' },
+	{ 'icon':'clock-history', 'label': 'History', 'action':'edit_history' }
 ] />
 <p>
 <ul class="nav nav-list">

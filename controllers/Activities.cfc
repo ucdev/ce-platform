@@ -30,6 +30,104 @@
 		<cfset subLayout('edit') />
 	</cffunction>
 	
+	<cffunction name="edit_participants">
+		<cfparam name="params.key" type="integer" />
+		<cfset activity = model("activity").findByKey(params.key) />
+		<cfset pageTitle("#activity.title#") />
+		<cfset subLayout('edit') />
+	</cffunction>
+	
+	<cffunction name="edit_faculty">
+		<cfparam name="params.key" type="integer" />
+		<cfset activity = model("activity").findByKey(params.key) />
+		<cfset pageTitle("#activity.title#") />
+		<cfset subLayout('edit') />
+	</cffunction>
+	
+	<cffunction name="edit_committee">
+		<cfparam name="params.key" type="integer" />
+		<cfset activity = model("activity").findByKey(params.key) />
+		<cfset pageTitle("#activity.title#") />
+		<cfset subLayout('edit') />
+	</cffunction>
+	
+	<cffunction name="edit_finances">
+		<cfparam name="params.key" type="integer" />
+		<cfset activity = model("activity").findByKey(params.key) />
+		<cfset pageTitle("#activity.title#") />
+		<cfset subLayout('edit') />
+	</cffunction>
+	
+	<cffunction name="edit_documents">
+		<cfparam name="params.key" type="integer" />
+		<cfset activity = model("activity").findByKey(params.key) />
+		<cfset pageTitle("#activity.title#") />
+		<cfset subLayout('edit') />
+	</cffunction>
+	
+	<cffunction name="edit_other">
+		<cfparam name="params.key" type="integer" />
+		<cfset activity = model("activity").findByKey(params.key) />
+		<cfset pageTitle("#activity.title#") />
+		<cfset subLayout('edit') />
+	</cffunction>
+	
+	<cffunction name="edit_publish">
+		<cfparam name="params.key" type="integer" />
+		<cfset activity = model("activity").findByKey(params.key) />
+		<cfset pageTitle("#activity.title#") />
+		<cfset subLayout('edit') />
+	</cffunction>
+	
+	<cffunction name="edit_reports">
+		<cfparam name="params.key" type="integer" />
+		<cfset activity = model("activity").findByKey(params.key) />
+		<cfset pageTitle("#activity.title#") />
+		<cfset subLayout('edit') />
+	</cffunction>
+	
+	<cffunction name="edit_history">
+		<cfparam name="params.key" type="integer" />
+		<cfset activity = model("activity").findByKey(params.key) />
+		<cfset pageTitle("#activity.title#") />
+		<cfset subLayout('edit') />
+	</cffunction>
+	
+	<cffunction name="edit_notes">
+		<cfparam name="params.key" type="integer" />
+		<cfset activity = model("activity").findByKey(params.key) />
+		<cfset pageTitle("#activity.title#") />
+		<cfset subLayout('edit') />
+	</cffunction>
+	
+	<cffunction name="edit_accme">
+		<cfparam name="params.key" type="integer" />
+		<cfset activity = model("activity").findByKey(params.key) />
+		<cfset pageTitle("#activity.title#") />
+		<cfset subLayout('edit') />
+	</cffunction>
+	
+	<cffunction name="edit_cdc">
+		<cfparam name="params.key" type="integer" />
+		<cfset activity = model("activity").findByKey(params.key) />
+		<cfset pageTitle("#activity.title#") />
+		<cfset subLayout('edit') />
+	</cffunction>
+	
+	<cffunction name="edit_agenda">
+		<cfparam name="params.key" type="integer" />
+		<cfset activity = model("activity").findByKey(params.key) />
+		<cfset pageTitle("#activity.title#") />
+		<cfset subLayout('edit') />
+	</cffunction>
+	
+	<cffunction name="edit_app">
+		<cfparam name="params.key" type="integer" />
+		<cfset activity = model("activity").findByKey(params.key) />
+		<cfset pageTitle("#activity.title#") />
+		<cfset subLayout('edit') />
+	</cffunction>
+	
 	<cffunction name="show">
 		<cfparam name="params.key" type="integer" />
 		<cfset activity = model("activity").findByKey(params.key) />

@@ -10,9 +10,7 @@
 		#includeContent()#
 	</div>
 	<div class="infoBar span4">
-		<div class="well well-small">
-		
-		</div>
+		#includePartial(partial="sublayout/edit_infobar")#
 	</div>
 </div>
 </cfoutput>

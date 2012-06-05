@@ -1,3 +1,4 @@
-<h3>General</h3>
 <cfoutput>
+<h4>Participants</h4>
+
 </cfoutput>

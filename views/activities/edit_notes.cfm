@@ -1,4 +1,4 @@
 <cfoutput>
-<h4>Faculty</h4>
+<h4>Notes</h4>
 
 </cfoutput>
