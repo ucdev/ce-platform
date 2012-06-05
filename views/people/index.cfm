@@ -8,15 +8,15 @@
 					<th></th>
 					<th>Information</th>
 					<th>Primary Email</th>
-                    <th>SSN</th>
+                    <th>SSN (last 4)</th>
                     <th>Birthdate</th>
 				</tr>
 			</thead>
 			<tbody>
 				<cfloop query="people">
 				<tr>
-					<td valign="top"><i class="icon-fire"></i></td>
-					<td>
+					<td class="span2"><img src="#avatar(people.email,people.gender,'i','#people.id#@dev.ccpd.uc.edu')#" /></td>
+					<td class="span4">
 						<a href="/people/edit/#people.id#">#people.firstName# #people.lastName#</a>
 					</td>
 					<td>#people.email#</td>

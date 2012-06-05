@@ -28,3 +28,35 @@ function isEmpty(varName) {
 	return false;
 }
 </cfscript>
+
+<cffunction name="avatar">
+	<cfargument name="email" required="no" default="">
+	<cfargument name="gender" required="no" default="m">
+	<cfargument name="size" required="no" default="i">
+	<cfargument name="alt_email" required="no" default="">
+	
+	<cfset var dimensions = 50 />
+	<cfif isEmpty(arguments.gender)>
+		<cfset arguments.gender = "m" />
+	</cfif>
+	<cfswitch expression="#arguments.size#">
+		<cfcase value="i">
+			<cfset dimensions = "50" />
+		</cfcase>
+		<cfcase value="p">
+			<cfset dimensions = "180" />
+		</cfcase>
+		<cfcase value="p">
+			<cfset dimensions = "50" />
+		</cfcase>
+	</cfswitch>
+	
+	<cfif isEmpty(arguments.email)>
+		<cfset arguments.email = arguments.alt_email />
+	</cfif>
+	
+	<cfset avatarUrl = "/images/no-photo/person_#arguments.gender#_#arguments.size#.png" />
+	<!---<cfset avatarUrl = "http://www.gravatar.com/avatar/#lcase(HASH(arguments.email,'MD5'))#?s=#dimensions#&d=identicon" />--->
+	
+	<cfreturn avatarUrl />
+</cffunction>
