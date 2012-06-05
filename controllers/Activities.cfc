@@ -12,6 +12,12 @@
 		<cfset subLayout('edit') />
 	</cffunction>
 	
+	<cffunction name="edit_credits">
+		<cfparam name="params.key" type="integer" />
+		<cfset activity = model("activity").findByKey(params.key) />
+		<cfset subLayout('edit') />
+	</cffunction>
+	
 	<cffunction name="show">
 		<cfparam name="params.key" type="integer" />
 		<cfset activity = model("activity").findByKey(params.key) />
