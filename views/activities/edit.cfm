@@ -6,8 +6,8 @@
 #select(objectName="activity", property="sessionType", append="", prepend="", label="Session Info", class="span5", options={"m":"Multi-session","S":"Stand-alone"}, disabled=true)#
 <fieldset>
 	<legend>Sponsorship</legend>
-    #radioButton(objectName="activity", property="sponsorship", append="", prepend="", label="Directly", tagValue="D", class="span5")#
-    #radioButton(objectName="activity", property="sponsorship", append="", prepend="", label="Jointly", tagValue="J", class="span5")#
+    #radioButton(objectName="activity", property="sponsorship", append="", prepend="", label="Directly", tagValue="D")#
+    #radioButton(objectName="activity", property="sponsorship", append="", prepend="", label="Jointly", tagValue="J")#
 </fieldset>
 #textField(objectName="activity", property="startDate", append="", prepend="", label="Start Date", class="span5", placeholder="Start Date")#
 #textField(objectName="activity", property="endDate", append="", prepend="", label="End Date", class="span5", placeholder="End Date")#
