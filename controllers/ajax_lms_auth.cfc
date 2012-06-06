@@ -55,7 +55,6 @@
         <cfparam name="params.Password2" type="string" >
         <cfparam name="params.geonameId" type="string"  default="0">
         
-        <cfdump var="#application.settings#"><cfabort>
         <cfset Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
 		<cfcontent type="text/javascript" />

@@ -34,29 +34,28 @@ function validate() {
 			geonameId: $("#person-geonameid").val(), 
 			returnFormat: "plain"},
 		dataType: 'json',
+		beforeSend: function() {
+			// REMOVE ERROR CLASSES
+			$('label').removeClass("control-group error");
+			
+			// REMOVE ERROR MESSAGES
+			$('p.help-block').html('');
+		},
 		success: function(data) {
 			if(data.STATUS) {
+				// SUBMIT FORM
 				$("#frmRegister").submit();
 			} else {
-				var sErrorList = "<ul>";
-				
-				// REMOVE ERROR CLASS
-				$("label").removeClass("FieldInputErr");
-				
+				// ADD ERROR MESSAGES
 				$.each(data.ERRORS, function(i,item){
-					sErrorList = sErrorList + "<li>" + item.MESSAGE + "</li>";
-					
-					// TEST IF THE ERROR IS TIED TO TWO FIELDS
-					if(!($.Find(":", item.FIELDNAME))) {
-						$("#" + item.FIELDNAME + "-label").addClass("FieldInputErr");
-					} else {
-						$("#" + $.ListGetAt(item.FIELDNAME, 1, ":") + "-label").addClass("FieldInputErr");
-						$("#" + $.ListGetAt(item.FIELDNAME, 2, ":") + "-label").addClass("FieldInputErr");
-					}
+					$.each(item.FIELDNAME.split(':'), function(i, fieldName) {
+						$("label[for='person-" + fieldName + "']").addClass("control-group error");
+						$("label[for='person-" + fieldName + "']").children('p.help-block').html(item.MESSAGE);
+					});
 				});
 				
-				sErrorList = sErrorList + "</ul>";
-				$(".error_list").html(sErrorList);
+				// PROVIDE FIELD FOCUS
+				$('label.error').first().focus();
 				
 				return false;
 			}
@@ -67,8 +66,10 @@ function validate() {
 $(document).ready(function() {
 	updateDisplayName();
 	
-	$("#frmRegister").click(function() {
+	$("#btnRegister").click(function(e) {
 		validate();
+		
+		e.preventDefault();
 	});
 	
 	$("#person-firstName, #person-middleName, #person-lastName, #person-suffix").keyup(function() {
@@ -121,22 +122,22 @@ $(document).ready(function() {
 <h2>Sign up</h2>
 #errorMessagesFor("person")#
 #startFormTag(action="register", id="frmRegister")#
-#textField(objectName='person', property='firstName', append="", prepend="", label="First Name*", class="span5", placeholder="First Name")#
-#textField(objectName='person', property='middleName', append="", prepend="", label="Middle Name", class="span5", placeholder="Middle Name")#
-#textField(objectName='person', property='lastName', append="", prepend="", label="Last Name*", class="span5", placeholder="Last Name")#
-#textField(objectName='person', property='suffix', append="", prepend="", label="Suffix", class="span5", placeholder="Suffix")#
-#textField(objectName='person', property='geonameid', append="", prepend="", label="City / Town*", class="span5")#
-#textField(objectName='person', property='email', append="", prepend="", label="Email Address*", class="span5", placeholder="Email Address")#
-#textField(objectName='person', property='emailConfirm', append="", prepend="", label="Confirm Address*", class="span5", placeholder="Retype Email")#
-#passwordField(objectName='person', property='password', append="", prepend="", label="Password", class="span5", placeholder="Password")#
-#passwordField(objectName='person', property='passwordConfirmation', append="", prepend="", label="Retype Password", class="span5", placeholder="Retype Password")#
-#select(objectName="person", property="gender", append="", prepend="", class="span5", label="Gender", options={"F":"Female","M":"Male"}, includeBlank=true)#
+#textField(objectName='person', property='firstName', append="<p class='help-block'></p>", prepend="", label="First Name*", class="span5", placeholder="First Name")#
+#textField(objectName='person', property='middleName', append="<p class='help-block'></p>", prepend="", label="Middle Name", class="span5", placeholder="Middle Name")#
+#textField(objectName='person', property='lastName', append="<p class='help-block'></p>", prepend="", label="Last Name*", class="span5", placeholder="Last Name")#
+#textField(objectName='person', property='suffix', append="<p class='help-block'></p>", prepend="", label="Suffix", class="span5", placeholder="Suffix")#
+#textField(objectName='person', property='geonameid', append="<p class='help-block'></p>", prepend="", label="City / Town*", class="span5")#
+#textField(objectName='person', property='email', append="<p class='help-block'></p>", prepend="", label="Email Address*", class="span5", placeholder="Email Address")#
+#textField(objectName='person', property='emailConfirm', append="<p class='help-block'></p>", prepend="", label="Confirm Address*", class="span5", placeholder="Retype Email")#
+#passwordField(objectName='person', property='password', append="<p class='help-block'></p>", prepend="", label="Password", class="span5", placeholder="Password")#
+#passwordField(objectName='person', property='passwordConfirmation', append="<p class='help-block'></p>", prepend="", label="Retype Password", class="span5", placeholder="Retype Password")#
+#select(objectName="person", property="gender", append="<p class='help-block'></p>", prepend="", class="span5", label="Gender", options={"F":"Female","M":"Male"}, includeBlank=true)#
 
 <p>Display Name* (used on certificates and transcripts)</p>
 <div class="displayname-container">
 	#textField(objectName='person', property='displayName', append="", prepend="", label="", class="span5", placeholder="Display Name")#
 </div>
-#submitTag()#
+#submitTag(id="btnRegister")#
 #endFormTag()#
 </cfoutput>
 

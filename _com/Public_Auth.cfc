@@ -406,30 +406,30 @@
         </cfif>
 		
         <cfif Trim(Arguments.FirstName) EQ "">
-        	<cfset status.addError("firstname", "You must enter your First Name.")>
+        	<cfset status.addError("firstName", "You must enter your First Name.")>
         </cfif>
         
         <cfif Trim(Arguments.LastName) EQ "">
-        	<cfset status.addError("lastname", "You must enter your Last Name.")>
+        	<cfset status.addError("lastName", "You must enter your Last Name.")>
         </cfif>
         
         <cfif Trim(Arguments.Email1) EQ "" OR Trim(arguments.Email1) NEQ "" AND NOT isEmail(Trim(arguments.Email1))>
-        	<cfset status.addError("email1", "You must enter a valid Email Address.")>
+        	<cfset status.addError("email", "You must enter a valid Email Address.")>
         </cfif>
         
         <cfif Trim(arguments.Email1) NEQ Trim(arguments.Email2)>
-        	<cfset status.addError("email1:email2", "Your Email Address and Retyped Email Address do not match.")>
+        	<cfset status.addError("email:emailConfirm", "Your Email Address and Retyped Email Address do not match.")>
         </cfif>
         
         <cfif Trim(arguments.Email1) EQ Trim(arguments.Email2) AND Trim(arguments.Email1) NEQ "" AND this.emailExists(Trim(arguments.Email1))>
-        	<cfset status.addError("email1:email2", "Your Email Address already exists in our database.")>
+        	<cfset status.addError("email:emailConfirm", "Your Email Address already exists in our database.")>
         </cfif>
         
         <cfif Trim(arguments.Password1) NEQ "">
 			<cfif Len(Trim(arguments.Password1)) LT 6>
-        		<cfset status.addError("password1", "Your Password must be at least 6 characters in length.")>
+        		<cfset status.addError("password", "Your Password must be at least 6 characters in length.")>
 			<cfelseif Compare(Trim(arguments.Password1),Trim(arguments.Password2)) NEQ 0>		
-				<cfset status.addError("password1:password2", "Your Password and Retyped Password do not match.")>
+				<cfset status.addError("password:passwordConfirmation", "Your Password and Retyped Password do not match.")>
 			</cfif>
 		</cfif>
         
