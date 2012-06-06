@@ -1,5 +1,5 @@
 <cfcomponent>
-	<cfinclude template="#Application.Settings.ComPath#/_UDF/isEmail.cfm" />
+	<cfinclude template="/_com/_UDF/isEmail.cfm" />
     
 	<cffunction name="init" access="public" output="no" returntype="_com.Public_Auth">
 		<cfreturn this />
@@ -108,11 +108,11 @@
         <cfset Session.Account = Application.Com.AccountDAO.Read(Session.Account)>
         <cfset Session.Person.setPersonID(Arguments.PersonID)>
         <cfset Session.Person = Application.Com.PersonDAO.Read(Session.Person)>
-        <cfset Session.PersonID = Session.Person.getPersonID()>
+        <cfset session.currentuser.id = session.currentuser.id>
         <cfset Session.AccountID = Session.Account.getAccountID()>
         
-        <cfcookie name="Person.FirstName" value="#Session.Person.getFirstName()#">
-        <cfcookie name="Account.UserName" value="#Session.Person.getEmail()#">
+        <cfcookie name="Person.FirstName" value="#session.currentuser.FirstName#">
+        <cfcookie name="Account.UserName" value="#session.currentuser.Email#">
     </cffunction>
     
     <cffunction name="doLogin" access="Public" output="false">

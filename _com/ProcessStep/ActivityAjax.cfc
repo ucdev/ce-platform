@@ -58,7 +58,7 @@
 				<cfset PSABean.setAssignedToID(nAssignedTo)>
 				<cfset PSABean.setDueDate(dtDueDate)>
 				<cfset PSABean.setStepStatusID(2)>
-				<cfset PSABean.setCreatedBy(Session.Person.getPersonID())>
+				<cfset PSABean.setCreatedBy(session.currentuser.id)>
 				
 				<!--- ACTION UPDATER --->
 				<cfset ActionBean = CreateObject("component","#Application.Settings.Com#Action.Action").init()>
@@ -72,14 +72,14 @@
 					<cfset ActionBean.setPersonID(PersonBean.getPersonID())>
 					<cfset ActionBean.setLongName(ActionBean.getLongName() & " and assigned it to '<a href=""#myself#Person.Detail?PersonID=#PersonBean.getPersonID()#"">#PersonBean.getFirstName()# #PersonBean.getLastName()#</a>'")>
 				</cfif>
-				<cfset ActionBean.setCreatedBy(Session.Person.getPersonID())>
+				<cfset ActionBean.setCreatedBy(session.currentuser.id)>
 				<cfset Application.Com.ActionDAO.Create(ActionBean)>
 				<cfset Application.Com.ProcessStepActivityDAO.Create(PSABean)>
 			<cfelse>
 				<cfset PSABean.setStep_ActivityID(qCheck.Step_ActivityID)>
 				<cfset PSABean = Application.Com.ProcessStepActivityDAO.read(PSABean)>
 				<cfset PSABean.setAssignedToID(nAssignedTo)>
-				<cfset PSABean.setUpdatedBy(Session.Person.getPersonID())>
+				<cfset PSABean.setUpdatedBy(session.currentuser.id)>
 				
 				<!--- ACTION UPDATER --->
 				<cfset ActionBean = CreateObject("component","#Application.Settings.Com#Action.Action").init()>
@@ -93,7 +93,7 @@
 					<cfset ActionBean.setPersonID(PersonBean.getPersonID())>
 					<cfset ActionBean.setLongName(ActionBean.getLongName() & " and assigned it to '<a href=""#myself#Person.Detail?PersonID=#PersonBean.getPersonID()#"">#PersonBean.getFirstName()# #PersonBean.getLastName()#</a>'")>
 				</cfif>
-				<cfset ActionBean.setCreatedBy(Session.Person.getPersonID())>
+				<cfset ActionBean.setCreatedBy(session.currentuser.id)>
 				<cfset Application.Com.ActionDAO.Create(ActionBean)>
 				<cfset Application.Com.ProcessStepActivityDAO.Update(PSABean)>
 			</cfif>

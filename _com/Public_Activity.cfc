@@ -1,6 +1,6 @@
 <cfcomponent>
 	<!--- INCLUDE isMD UDF FUNCTION --->
-    <cfinclude template="#Application.Settings.ComPath#/_UDF/isMD.cfm" />
+    <cfinclude template="/_com/_UDF/isMD.cfm" />
     
 	<cffunction name="init" access="public" output="no" returntype="_com.Public_Activity">
 		<cfreturn this />
@@ -118,7 +118,7 @@
 				<cfset NewActivity.setTitle(Arguments.NewActivityTitle)>
 				<cfset NewActivity.setActivityID(0)>
 				<cfset NewActivity.setParentActivityID("")>
-				<cfset NewActivity.setCreatedBy(Session.Person.getPersonID())>
+				<cfset NewActivity.setCreatedBy(session.currentuser.id)>
                 <cfset NewActivity.setStatAddlAttendees(0)>
                 <cfset NewActivity.setStatMaxRegistrants(0)>
 				<cfset NewActivity.setStatAttendees(0)>
@@ -141,7 +141,7 @@
                 <cfset OutputVar = "Activity of origin: <a href=""%WebPath%Activity.Detail?ActivityID=" & ActivityBean.getActivityID() & ">" & ActivityBean.getTitle() & "</a>">
                 <cfset Application.History.Add(
                             HistoryStyleID=22,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToActivityID=NewActivityID,
 							ToContent=OutputVar)>
 				
@@ -157,7 +157,7 @@
 						
 						<cfset SessionBean.setTitle("Copy of " & SessionBean.getTitle())>
 						<cfset SessionBean.setParentActivityID(NewActivityID)>
-						<cfset SessionBean.setCreatedBy(Session.Person.getPersonID())>
+						<cfset SessionBean.setCreatedBy(session.currentuser.id)>
 						<cfset SessionBean.setStatAttendees(0)>
 						<cfset SessionBean.setStatMD(0)>
 						<cfset SessionBean.setStatNonMD(0)>
@@ -208,14 +208,14 @@
 				<cfset NewActivity.setStatNonMD(0)>
 				<cfset NewActivity.setStatSupporters(0)>
 				<cfset NewActivity.setStatSuppAmount(0)>
-				<cfset NewActivity.setCreatedBy(Session.Person.getPersonID())>
+				<cfset NewActivity.setCreatedBy(session.currentuser.id)>
 				<cfset NewActivityID = Application.Com.ActivityDAO.Create(NewActivity)>
 				
 				<!--- ADD HISTORY ITEM --->
                 <cfset OutputVar = "Activity of origin: <a href=""%WebPath%Activity.Detail?ActivityID=" & ActivityBean.getActivityID() & ">" & ActivityBean.getTitle & "</a>">
                 <cfset Application.History.Add(
                             HistoryStyleID=22,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToActivityID=NewActivityID,
 							ToContent=OutputVar)>
 				
@@ -244,7 +244,7 @@
 				<cfset FacultyBean = CreateObject("component","#Application.Settings.Com#ActivityFaculty.ActivityFaculty").init(ActivityID=qFaculty.ActivityID,PersonID=qFaculty.PersonID)>
 				<cfset FacultyBean = Application.Com.ActivityFacultyDAO.read(FacultyBean)>
 				<cfset FacultyBean.setActivityID(Arguments.ActivityID)>
-				<cfset FacultyBean.setCreatedBy(Session.Person.getPersonID())>
+				<cfset FacultyBean.setCreatedBy(session.currentuser.id)>
 				<cfset Application.Com.ActivityFacultyDAO.Create(FacultyBean)>
 			</cfloop>--->
 		</cfif>
@@ -263,7 +263,7 @@
 				<cfset CreditBean = CreateObject("component","#Application.Settings.Com#ActivityCredit.ActivityCredit").init(ActivityID=qCredits.ActivityID,CreditID=qCredits.CreditID)>
 				<cfset CreditBean = Application.Com.ActivityCreditDAO.read(CreditBean)>
 				<cfset CreditBean.setActivityID(Arguments.ActivityID)>
-				<cfset CreditBean.setCreatedBy(Session.Person.getPersonID())>
+				<cfset CreditBean.setCreatedBy(session.currentuser.id)>
 				<cfset Application.Com.ActivityCreditDAO.Create(CreditBean)>
 			</cfloop>
 		</cfif>
@@ -288,7 +288,7 @@
 					<cfset FileBean = CreateObject("component","#Application.Settings.Com#File.File").init(FileID=qFiles.FileID)>
 					<cfset FileBean = Application.Com.FileDAO.read(FileBean)>
 					<cfset FileBean.setActivityID(Arguments.ActivityID)>
-					<cfset FileBean.setCreatedBy(Session.Person.getPersonID())>
+					<cfset FileBean.setCreatedBy(session.currentuser.id)>
 					<cfset Application.Com.FileDAO.Create(FileBean)>
 				</cfif>
 			</cfloop>
@@ -299,7 +299,7 @@
 				<cfset CatBean = CreateObject("component","#Application.Settings.Com#ActivityCategory.ActivityCategory").init(Activity_CategoryID=qCats.Activity_CategoryID)>
 				<cfset CatBean = Application.Com.ActivityCategoryDAO.read(CatBean)>
 				<cfset CatBean.setActivityID(Arguments.ActivityID)>
-				<cfset CatBean.setCreatedBy(Session.Person.getPersonID())>
+				<cfset CatBean.setCreatedBy(session.currentuser.id)>
 				<cfset Application.Com.ActivityCategoryDAO.Create(CatBean)>
 			</cfloop>
 		</cfif>
@@ -309,7 +309,7 @@
             	<cfset AgendaBean = CreateObject("component","#Application.Settings.Com#Agenda.Agenda").Init(AgendaID=qAgenda.AgendaID)>
                 <cfset AgendaBean = Application.Com.AgendaDAO.Read(AgendaBean)>
 				<cfset AgendaBean.setActivityID(Arguments.ActivityID)>
-				<cfset AgendaBean.setCreatedBy(Session.Person.getPersonID())>
+				<cfset AgendaBean.setCreatedBy(session.currentuser.id)>
                 <cfset AgendaBean.setDeletedFlag("N")>
                 <cfset Application.Com.AgendaDAO.Create(AgendaBean)>
             </cfloop>
@@ -333,7 +333,7 @@
 		<cfif qCheck.RecordCount EQ 0>
 			<cfset CatBean = CreateObject("component","#Application.Settings.Com#Category.Category").init()>
 			<cfset CatBean.setName(Arguments.Name)>
-			<cfset CatBean.setCreatedBy(Session.Person.getPersonID())>
+			<cfset CatBean.setCreatedBy(session.currentuser.id)>
 			<cfset CatBean.setActivityCount(0)>
 			<cfset NewCategoryID = Application.Com.CategoryDAO.create(CatBean)>
             
@@ -377,7 +377,7 @@
                 
             	<cfset Application.History.Add(
 							HistoryStyleID=105,
-							FromPersonID=Session.PersonID,
+							FromPersonID=session.currentuser.id,
 							ToActivityID=Arguments.ActivityID,
                             ToContent=OutputContent)>
 				
@@ -410,7 +410,7 @@
             <!--- ACTION UPDATER --->
             <cfset Application.History.Add(
 						HistoryStyleID=4,
-						FromPersonID=Session.PersonID,
+						FromPersonID=session.currentuser.id,
 						ToActivityID=AgendaBean.getActivityID())>
             
 			<cfset status.setStatus(true)>
@@ -444,14 +444,14 @@
 			<cfquery name="qRemove" datasource="#Application.Settings.DSN#">
 				UPDATE ce_Activity_Category
 				SET DeletedFlag = <cfqueryparam value="Y" cfsqltype="cf_sql_char" />,Deleted=#CreateODBCDateTime(now())#,
-					UpdatedBy = <cfqueryparam value="#Session.Person.getPersonID()#" cfsqltype="cf_sql_char" />
+					UpdatedBy = <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_char" />
 				WHERE CategoryID = <cfqueryparam value="#CategoryID#" CFSQLType="cf_sql_integer" /> AND ActivityID = <cfqueryparam value="#Arguments.ActivityID#" CFSQLType="cf_sql_integer" />
 			</cfquery>
 			
 			<!--- ADD HISTORY ITEM --->
             <cfset Application.History.Add(
                         HistoryStyleID=23,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToActivityID=Arguments.ActivityID,
                         ToContainerID=Arguments.CategoryID)>
 			
@@ -491,7 +491,7 @@
                 UPDATE ce_Activity_Note
                 SET DeletedFlag = <cfqueryparam value="Y" cfsqltype="cf_sql_char">,
                     Deleted = <cfqueryparam value="#Attributes.Deleted#" cfsqltype="cf_sql_timestamp">,
-                    UpdatedBy = <cfqueryparam value="#Session.Person.getPersonID()#" cfsqltype="cf_sql_integer">
+                    UpdatedBy = <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_integer">
                 WHERE NoteID = <cfqueryparam value="#Arguments.NoteID#" cfsqltype="cf_sql_integer">
             </cfquery>
             
@@ -502,7 +502,7 @@
             <!--- ADD HISTORY ITEM --->
             <cfset Application.History.Add(
                         HistoryStyleID=49,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToActivityID=NoteBean.getActivityID())>
             
 			<cfset status.setStatus(true)>
@@ -854,7 +854,7 @@
         <cfset Status = "">
         
         <!--- CHECK IF ALL ASSESSMENTS ARE COMPLETE --->
-        <cfset AllAssessComplete = Application.Assessment.areAssessComplete(ActivityID=Arguments.ActivityID,PersonID=Session.PersonID)>
+        <cfset AllAssessComplete = Application.Assessment.areAssessComplete(ActivityID=Arguments.ActivityID,PersonID=session.currentuser.id)>
         
         <!--- CHECK IF ANY ERRORS WERE FOUND --->
         <cfif AllAssessComplete>
@@ -866,7 +866,7 @@
             <cfset AttendeeBean.setStatusID(1)>
             <cfset AttendeeBean.setCompleteDate(Now())>
             <cfset AttendeeBean.setUpdated(Now())>
-            <cfset AttendeeBean.setUpdatedBy(Session.PersonID)>
+            <cfset AttendeeBean.setUpdatedBy(session.currentuser.id)>
             <cfset Status = Application.Com.AttendeeDAO.Save(AttendeeBean)>
 			
 			<cftry>
@@ -919,7 +919,7 @@
 		<!--- ADD HISTORY ITEM --->
         <cfset Application.History.Add(
                     HistoryStyleID=47,
-                    FromPersonID=Session.PersonID,
+                    FromPersonID=session.currentuser.id,
                     FromActivityID=Arguments.FromActivityID,
                     ToActivityID=Arguments.ToActivityID)>
 		
@@ -1025,7 +1025,7 @@
 		<cfset ActivityBean.setCountry(Arguments.Country)>
 		
 		<cfset ActivityBean.setUpdated(now())>
-		<cfset ActivityBean.setUpdatedBy(Session.Person.getPersonID())>
+		<cfset ActivityBean.setUpdatedBy(session.currentuser.id)>
 		
 		<!--- Validate Bean --->
 		<cfset aErrors = ActivityBean.Validate()>
@@ -1047,7 +1047,7 @@
                 
                 <cfset Application.History.Add(
                     HistoryStyleID=8,
-                    FromPersonID=Session.PersonID,
+                    FromPersonID=session.currentuser.id,
                     ToActivityID=Arguments.ActivityID,
                     ToContent=ChangedOutput
                 )>
@@ -1083,7 +1083,7 @@
 			<cfset AgendaBean.setEventDate(Arguments.EventDate)>
 			<cfset AgendaBean.setStartTime(Arguments.StartTime)>
 			<cfset AgendaBean.setEndTime(Arguments.EndTime)>
-			<cfset AgendaBean.setCreatedBy(Session.Person.getPersonID())>
+			<cfset AgendaBean.setCreatedBy(session.currentuser.id)>
             <cfset AgendaBean.setDeletedFlag("N")>
 			
 			<cfset Application.Com.AgendaDAO.Save(AgendaBean)>
@@ -1101,7 +1101,7 @@
 			<!--- ACTION UPDATER --->
 			<cfset Application.History.Add(
 						HistoryStyleID=3,
-						FromPersonID=Session.PersonID,
+						FromPersonID=session.currentuser.id,
 						ToActivityID=Arguments.ActivityID,
 						ToContent=OutputVar)>
 			
@@ -1149,7 +1149,7 @@
 							(
 							<cfqueryparam value="#Arguments.ActivityID#" CFSQLType="cf_sql_integer" />,
 							<cfqueryparam value="#Arguments.CategoryID#" CFSQLType="cf_sql_integer" />,
-							<cfqueryparam value="#Session.Person.getPersonID()#" CFSQLType="cf_sql_integer" />
+							<cfqueryparam value="#session.currentuser.id#" CFSQLType="cf_sql_integer" />
 							)
 					</cfquery>
 					
@@ -1163,7 +1163,7 @@
                     <!--- ADD HISTORY ITEM --->
 					<cfset Application.History.Add(
                                 HistoryStyleID=13,
-                                FromPersonID=Session.PersonID,
+                                FromPersonID=session.currentuser.id,
                                 ToActivityID=Arguments.ActivityID,
 								ToContainerID=Arguments.CategoryID)>
 					
@@ -1179,14 +1179,14 @@
 						<cfquery name="qUpdateDeletedFlag" datasource="#Application.Settings.DSN#">
 							UPDATE ce_Activity_Category
 							SET DeletedFlag = <cfqueryparam value="N" cfsqltype="cf_sql_char" />,
-								UpdatedBy = <cfqueryparam value="#Session.Person.getPersonID()#" cfsqltype="cf_sql_integer" />
+								UpdatedBy = <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_integer" />
 							WHERE CategoryID = <cfqueryparam value="#CategoryID#" CFSQLType="cf_sql_integer" /> AND ActivityID = <cfqueryparam value="#Arguments.ActivityID#" CFSQLType="cf_sql_integer" />
 						</cfquery>
                         
 						<!--- ADD HISTORY ITEM --->
                         <cfset Application.History.Add(
                                     HistoryStyleID=13,
-                                    FromPersonID=Session.PersonID,
+                                    FromPersonID=session.currentuser.id,
                                     ToActivityID=Arguments.ActivityID,
                                     ToContainerID=Arguments.CategoryID)>
 						
@@ -1227,7 +1227,7 @@
 		<cfset ActivityBean = CreateObject("component","#Application.Settings.Com#Activity.Activity").init(ActivityID=Arguments.ActivityID)>
 		<cfset ActivityBean = Application.Com.ActivityDAO.read(ActivityBean)>
 		
-		<cfset ActivityNoteBean = CreateObject("component","#Application.Settings.Com#ActivityNote.ActivityNote").Init(NoteID=Arguments.NoteID,ActivityID=Arguments.ActivityID,Body=Arguments.NoteBody,CreatedBy=Session.Person.getPersonID())>
+		<cfset ActivityNoteBean = CreateObject("component","#Application.Settings.Com#ActivityNote.ActivityNote").Init(NoteID=Arguments.NoteID,ActivityID=Arguments.ActivityID,Body=Arguments.NoteBody,CreatedBy=session.currentuser.id)>
         
         <cfset aErrors = ActivityNoteBean.Validate()>
         
@@ -1242,7 +1242,7 @@
                 <!--- ADD HISTORY ITEM --->
                 <cfset Application.History.Add(
                             HistoryStyleID=48,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToActivityID=Arguments.ActivityID,
                             ToContent=Arguments.NoteBody)>
                 
@@ -1359,7 +1359,7 @@
             <cfset CurrAttendeeID = AttendeeBean.getAttendeeID()>
             <cfset AttendeeBean.setDeletedFlag("N")>
             <cfset AttendeeBean.setUpdated(Now())>
-            <cfset AttendeeBean.setUpdatedBy(session.person.getPersonID())>
+            <cfset AttendeeBean.setUpdatedBy(session.currentuser.id)>
             
             <!--- CHECK IF ATTENDEE ACCEPTED TERMS --->
             <cfif AttendeeBean.getTermsFlag() EQ "N">
@@ -1583,7 +1583,7 @@
 			<!--- ADD HISTORY ITEM --->
             <cfset Application.History.Add(
                         HistoryStyleID=92,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToActivityID=Arguments.ActivityID,
 						ToContent="Additional Attendees:" & Arguments.AddlAttendees)>
         </cfif>
@@ -1619,7 +1619,7 @@
 					
 					<cfset Application.History.Add(
 								HistoryStyleID=5,
-								FromPersonID=Session.PersonID,
+								FromPersonID=session.currentuser.id,
 								ToActivityID=Arguments.ActivityID)>
 				<cfelse>
 					<cfquery name="qSet" datasource="#Application.Settings.DSN#">
@@ -1631,7 +1631,7 @@
 					
 					<cfset Application.History.Add(
 								HistoryStyleID=5,
-								FromPersonID=Session.PersonID,
+								FromPersonID=session.currentuser.id,
 								ToActivityID=Arguments.ActivityID)>
 				</cfif>
 				
@@ -1672,7 +1672,7 @@
 			<!--- ADD HISTORY ITEM --->
             <cfset Application.History.Add(
                         HistoryStyleID=94,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToActivityID=Arguments.ActivityID,
 						ToContent="Additional Attendees:" & Arguments.AddlAttendees)>
         </cfif>
@@ -1694,28 +1694,28 @@
 				<!--- ADD HISTORY ITEM // ACTIVE --->
                 <cfset Application.History.Add(
                             HistoryStyleID=56,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToActivityID=Arguments.ActivityID)>
             </cfcase>
         	<cfcase value="2">
 				<!--- ADD HISTORY ITEM // PENDING --->
                 <cfset Application.History.Add(
                             HistoryStyleID=57,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToActivityID=Arguments.ActivityID)>
             </cfcase>
         	<cfcase value="3">
 				<!--- ADD HISTORY ITEM // ENDED --->
                 <cfset Application.History.Add(
                             HistoryStyleID=58,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToActivityID=Arguments.ActivityID)>
             </cfcase>
         	<cfcase value="4">
 				<!--- ADD HISTORY ITEM // CANCELED --->
                 <cfset Application.History.Add(
                             HistoryStyleID=59,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToActivityID=Arguments.ActivityID)>
             </cfcase>
         </cfswitch>

@@ -1,5 +1,5 @@
 <cfcomponent extends="controller">
-	<cffunction name="hideWelcome"  returntype="string">
+	<cffunction name="hideWelcome" >
     	<cfset application.sys.hideWelcome()>
 		
 		<cfreturn "success" />

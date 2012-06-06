@@ -31,7 +31,7 @@ function csvToQuery(csvString){
         queryAddRow(newQuery);
         for(j=1; j le arrayLen(arrayCol); j=j+1) {
             if(listLen(listGetAt(csvString,i,rowDelim),colDelim) ge j) {
-                querySetCell(newQuery, arrayCol[j],listGetAt(listGetAt(csvString,i,rowDelim),j,colDelim), i-1);
+                querySetCell(newQuery, trim(arrayCol[trim(j)]),listGetAt(listGetAt(csvString,i,rowDelim),j,colDelim), i-1);
             }
         }
     }

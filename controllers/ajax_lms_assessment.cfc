@@ -1,19 +1,19 @@
 <cfcomponent extends="controller">
-	<cffunction name="getResult"  output="true" returntype="string">
-		<cfparam name="params.AssessmentID" type="string" required="yes">
-		<cfparam name="params.PersonID" type="string" required="yes">
-		<cfparam name="params.EvalType" type="string" required="yes">
+	<cffunction name="getResult"  output="true">
+		<cfparam name="params.AssessmentID" type="string" >
+		<cfparam name="params.PersonID" type="string" >
+		<cfparam name="params.EvalType" type="string" >
         
-        <cfset var Status = Application.Assessment.getResult(Arguments.AssessmentID,Arguments.PersonID,Arguments.EvalType)>
+        <cfset var Status = Application.Assessment.getResult(params.AssessmentID,params.PersonID,params.EvalType)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
     
-    <cffunction name="markComplete"  output="no" returntype="string">
-		<cfparam name="params.AssessmentID" type="string" required="yes">
-		<cfparam name="params.PersonID" type="string" required="yes">
-        <cfparam name="params.ActivityID" type="string" required="yes">
-		<cfparam name="params.ResultID" type="string" required="yes">
+    <cffunction name="markComplete"  output="no">
+		<cfparam name="params.AssessmentID" type="string" >
+		<cfparam name="params.PersonID" type="string" >
+        <cfparam name="params.ActivityID" type="string" >
+		<cfparam name="params.ResultID" type="string" >
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -22,27 +22,27 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access the functionality to complete this assessment.")>
         
-        <cfset status = Application.Assessment.markComplete(Arguments.AssessmentID,Arguments.PersonID,Arguments.ActivityID,Arguments.ResultID)>
+        <cfset status = Application.Assessment.markComplete(params.AssessmentID,params.PersonID,params.ActivityID,params.ResultID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
                  
-	<cffunction name="saveAnswer"  output="true" returntype="string">
-		<cfparam name="params.QuestionID" type="string" required="yes">
-		<cfparam name="params.AssessmentID" type="string" required="yes">
-		<cfparam name="params.ResultID" type="string" required="yes">
-		<cfparam name="params.Answer" type="string" required="yes">
-		<cfparam name="params.FieldType" type="string" required="yes">
+	<cffunction name="saveAnswer"  output="true">
+		<cfparam name="params.QuestionID" type="string" >
+		<cfparam name="params.AssessmentID" type="string" >
+		<cfparam name="params.ResultID" type="string" >
+		<cfparam name="params.Answer" type="string" >
+		<cfparam name="params.FieldType" type="string" >
         
         <cfset var Status = "false">
         
         <cfset Status = Application.Assessment.saveAnswer(
-														QuestionID=Arguments.QuestionID,
-														AssessmentID=Arguments.AssessmentID,
-														ResultID=Arguments.ResultID,
-														Answer=Arguments.Answer,
-														FieldType=Arguments.FieldType)>
+														QuestionID=params.QuestionID,
+														AssessmentID=params.AssessmentID,
+														ResultID=params.ResultID,
+														Answer=params.Answer,
+														FieldType=params.FieldType)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
 </cfcomponent>

@@ -1,5 +1,5 @@
 <cfcomponent displayname="Person">
-	<cfinclude template="#Application.Settings.ComPath#/_UDF/isEmail.cfm" />
+	<cfinclude template="/_com/_UDF/isEmail.cfm" />
     
 	<cffunction name="init" access="public" output="no" returntype="_com.Public_Person">
 		<cfreturn this />
@@ -79,7 +79,7 @@
                 
                 <cfset Application.History.Add(
                             HistoryStyleID=77,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToPersonID=Arguments.PersonID)>
             <cfelse>
                 <cfset status.setStatusMsg("Provided address does not exist.")>
@@ -170,7 +170,7 @@
                 UPDATE ce_Person_Note
                 SET DeletedFlag = <cfqueryparam value="Y" cfsqltype="cf_sql_char">,
                     Deleted = <cfqueryparam value="#Attributes.Deleted#" cfsqltype="cf_sql_timestamp">,
-                    UpdatedBy = <cfqueryparam value="#Session.PersonID#" cfsqltype="cf_sql_integer">
+                    UpdatedBy = <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_integer">
                 WHERE NoteID = <cfqueryparam value="#Arguments.NoteID#" cfsqltype="cf_sql_integer">
             </cfquery>
             
@@ -180,7 +180,7 @@
             
             <cfset Application.History.Add(
                         HistoryStyleID=71,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToPersonID=NoteBean.getPersonID())>
             
         	<cfset status.setStatus(true)>
@@ -215,7 +215,7 @@
                 <!--- UPDATE PERSON INFORMATION --->
                 <cfset PersonBean.setDeletedFlag("Y")>
                 <cfset PersonBean.setDeleted(Now())>
-                <cfset PersonBean.setDeletedBy(Session.person.getPersonID())>
+                <cfset PersonBean.setDeletedBy(session.currentuser.id)>
                 
                 <!--- SAVE PERSON INFORMATION --->
                 <cfset PersonSaved = Application.Com.PersonDAO.Save(PersonBean)>
@@ -241,13 +241,13 @@
                 
 						<cfset Application.History.Add(
                                     HistoryStyleID=91,
-                                    FromPersonID=Session.PersonID,
+                                    FromPersonID=session.currentuser.id,
                                     ToPersonID=Arguments.PersonID,
                                     ToContent=OutputContent)>
                     <cfelse>
 						<cfset Application.History.Add(
                                     HistoryStyleID=91,
-                                    FromPersonID=Session.PersonID,
+                                    FromPersonID=session.currentuser.id,
                                     ToPersonID=Arguments.PersonID)>
                     </cfif>
                 </cfif>
@@ -419,13 +419,13 @@
         
         <cfset Application.History.Add(
 					HistoryStyleID=80,
-					FromPersonID=Session.PersonID,
+					FromPersonID=session.currentuser.id,
 					ToPersonID=Arguments.MoveFromPersonID,
 					ToContent=MovedFromContent)>
         
         <cfset Application.History.Add(
 					HistoryStyleID=82,
-					FromPersonID=Session.PersonID,
+					FromPersonID=session.currentuser.id,
 					ToPersonID=Arguments.MoveToPersonID,
 					ToContent=MovedToContent)>
         
@@ -523,11 +523,11 @@
             
             <!--- FILL UPDATED INFO --->
 			<cfset PersonAddressBean.setUpdated(Now())>
-            <cfset PersonAddressBean.setUpdatedBy(Session.PersonID)>
+            <cfset PersonAddressBean.setUpdatedBy(session.currentuser.id)>
         <cfelse>
         	<!--- FILL CREATED INFO --->
 			<cfset PersonAddressBean.setCreated(Now())>
-            <cfset PersonAddressBean.setCreatedBy(Session.PersonID)>
+            <cfset PersonAddressBean.setCreatedBy(session.currentuser.id)>
         </cfif>
         
         <!--- UPDATE BEAN INFORMATION --->
@@ -569,14 +569,14 @@
                 
 			<cfset Application.History.Add(
                         HistoryStyleID=78,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToPersonID=Arguments.PersonID)>
         <cfelse>
         	<cfset CurrentAddressID = Arguments.AddressID>
                 
 			<cfset Application.History.Add(
                         HistoryStyleID=79,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToPersonID=Arguments.PersonID)>
         </cfif>
         
@@ -594,20 +594,20 @@
                 <!--- UDPATE PRIMARY ADDRESS --->
 	            <cfset PersonBean.setPrimaryAddressID(CurrentAddressID)>
                 <cfset PersonBean.setUpdated(Now())>
-                <cfset PersonBean.setUpdatedBy(Session.PersonID)>
+                <cfset PersonBean.setUpdatedBy(session.currentuser.id)>
                 
                 <!--- SAVE PERSON INFORMATION --->
                 <cfset PersonSaved = Application.Com.PersonDAO.Update(PersonBean)>
                 <cfif PersonSaved>
-                	<cfif Session.PersonID NEQ Arguments.PersonID>
+                	<cfif session.currentuser.id NEQ Arguments.PersonID>
 						<cfset Application.History.Add(
                                     HistoryStyleID=84,
-                                    FromPersonID=Session.PersonID,
+                                    FromPersonID=session.currentuser.id,
                                     ToPersonID=Arguments.PersonID)>
               		<cfelse>
 						<cfset Application.History.Add(
                                     HistoryStyleID=90,
-                                    FromPersonID=Session.PersonID,
+                                    FromPersonID=session.currentuser.id,
                                     ToPersonID=Arguments.PersonID)>
                 	</cfif>
             	</cfif>
@@ -619,7 +619,7 @@
                 	<!--- UDPATE PRIMARY ADDRESS --->
 					<cfset PersonBean.setPrimaryAddressID("")>
                     <cfset PersonBean.setUpdated(Now())>
-                    <cfset PersonBean.setUpdatedBy(Session.PersonID)>
+                    <cfset PersonBean.setUpdatedBy(session.currentuser.id)>
 					
 					<!--- SAVE PERSON INFORMATION --->
                     <cfset PersonSaved = Application.Com.PersonDAO.Update(PersonBean)>
@@ -674,7 +674,7 @@
                 
                 <!--- UPDATE PERSON BEAN --->
                 <cfset PersonBean.setUpdated(Now())>
-                <cfset PersonBean.setUpdatedBy(Session.PersonID)>
+                <cfset PersonBean.setUpdatedBy(session.currentuser.id)>
                 
                 <!--- SAVE PERSON INFORMATION --->
                 <cfset PersonSaved = Application.Com.PersonDAO.Update(PersonBean)>
@@ -684,15 +684,15 @@
                 	<cfset Status.setStatus(true)>
                     <cfset status.setStatusMsg("Credentials have been updated.")>
                     
-                    <cfif Session.PersonID NEQ Arguments.PersonID>
+                    <cfif session.currentuser.id NEQ Arguments.PersonID>
 						<cfset Application.History.Add(
                                     HistoryStyleID=83,
-                                    FromPersonID=Session.PersonID,
+                                    FromPersonID=session.currentuser.id,
                                     ToPersonID=Arguments.PersonID)>
                 	<cfelse>
 						<cfset Application.History.Add(
                                     HistoryStyleID=85,
-                                    FromPersonID=Session.PersonID,
+                                    FromPersonID=session.currentuser.id,
                                     ToPersonID=Arguments.PersonID)>
                 	</cfif>
                 </cfif>
@@ -745,16 +745,16 @@
             
             <cfset ContentOutput = "<strong>Degree:</strong> " & CurrentDegree.Name>
             
-			<cfif Session.PersonID NEQ Arguments.PersonID>
+			<cfif session.currentuser.id NEQ Arguments.PersonID>
                 <cfset Application.History.Add(
                             HistoryStyleID=66,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToPersonID=Arguments.PersonID,
 							ToContent=ContentOutput)>
             <cfelse>
                 <cfset Application.History.Add(
                             HistoryStyleID=86,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToPersonID=Arguments.PersonID,
 							ToContent=ContentOutput)>
             </cfif>
@@ -847,7 +847,7 @@
 		<cfset PersonBean = CreateObject("component","#Application.Settings.Com#Person.Person").init(PersonID=Arguments.PersonID)>
 		<cfset PersonBean = Application.Com.PersonDAO.read(PersonBean)>
 		
-		<cfset PersonNoteBean = CreateObject("component","#Application.Settings.Com#PersonNote.PersonNote").Init(NoteID=Arguments.NoteID,PersonID=Arguments.PersonID,Body=Arguments.NoteBody,CreatedBy=Session.PersonID)>
+		<cfset PersonNoteBean = CreateObject("component","#Application.Settings.Com#PersonNote.PersonNote").Init(NoteID=Arguments.NoteID,PersonID=Arguments.PersonID,Body=Arguments.NoteBody,CreatedBy=session.currentuser.id)>
         
         <cfset aErrors = PersonNoteBean.Validate()>
         <!--- Fill Request.Status.Errors --->
@@ -861,7 +861,7 @@
                 
                 <cfset Application.History.Add(
                             HistoryStyleID=70,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToPersonID=Arguments.PersonID,
                             ToContent=Arguments.NoteBody)>
                 
@@ -1007,10 +1007,10 @@
             </cfif>
             
         	<cfset PersonBean.setCreated(Now())>
-            <cfset PersonBean.setCreatedBy(Session.PersonID)>
+            <cfset PersonBean.setCreatedBy(session.currentuser.id)>
         <cfelse>
         	<cfset PersonBean.setUpdated(Now())>
-            <cfset PersonBean.setUpdatedBy(Session.PersonID)>
+            <cfset PersonBean.setUpdatedBy(session.currentuser.id)>
         </cfif>
         
         <!--- Validate Bean --->
@@ -1054,7 +1054,7 @@
                     
 					<cfset Application.History.Add(
                         HistoryStyleID=51,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToPersonID=CurrentPersonID
                     )>
                     
@@ -1068,16 +1068,16 @@
                         <cfset ChangedOutput = Replace(ChangedOutput,"|","<br>","ALL")>
                     </cfif>
                     
-                	<cfif Session.PersonID NEQ Arguments.PersonID>
+                	<cfif session.currentuser.id NEQ Arguments.PersonID>
 						<cfset Application.History.Add(
 									HistoryStyleID=62,
-									FromPersonID=Session.PersonID,
+									FromPersonID=session.currentuser.id,
 									ToPersonID=CurrentPersonID,
 									ToContent=ChangedOutput)>
                     <cfelse>
 						<cfset Application.History.Add(
 									HistoryStyleID=63,
-									FromPersonID=Session.PersonID,
+									FromPersonID=session.currentuser.id,
 									ToPersonID=CurrentPersonID)>
                     </cfif>
                     
@@ -1285,19 +1285,19 @@
         	<cfcase value="1">
 						<cfset Application.History.Add(
 									HistoryStyleID=87,
-									FromPersonID=Session.PersonID,
+									FromPersonID=session.currentuser.id,
 									ToPersonID=Arguments.PersonID)>
             </cfcase>
         	<cfcase value="2">
 						<cfset Application.History.Add(
 									HistoryStyleID=88,
-									FromPersonID=Session.PersonID,
+									FromPersonID=session.currentuser.id,
 									ToPersonID=Arguments.PersonID)>
             </cfcase>
         	<cfcase value="3">
 						<cfset Application.History.Add(
 									HistoryStyleID=89,
-									FromPersonID=Session.PersonID,
+									FromPersonID=session.currentuser.id,
 									ToPersonID=Arguments.PersonID)>
             </cfcase>
         </cfswitch>
@@ -1316,7 +1316,7 @@
         <cfquery name="qUpdateDisplayName" datasource="#application.settings.dsn#">
         	UPDATE ce_Person
             SET certName = <cfqueryparam value="#arguments.certName#" cfsqltype="cf_sql_varchar" />
-            WHERE personId = <cfqueryparam value="#session.personId#" cfsqltype="cf_sql_integer" />
+            WHERE personId = <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_integer" />
         </cfquery>
         
         <cfset session.Person.setCertName(arguments.certName)>

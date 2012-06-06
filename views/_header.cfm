@@ -13,6 +13,9 @@
 						<li<cfif params.controller EQ "main"> class="active"</cfif>><a href="/">Home</a></li>
 						<li<cfif params.controller EQ "activities"> class="active"</cfif>><a href="/activities/">Activities</a></li>
 						<li<cfif params.controller EQ "people"> class="active"</cfif>><a href="/people/">People</a></li>
+						<cfif isAdmin()>
+						<li<cfif params.controller EQ "admin"> class="active"</cfif>><a href="/admin/">Admin</a></li>
+						</cfif>
 					</ul>
 					<cfif NOT isLoggedIn()>
 					<ul class="nav pull-right">

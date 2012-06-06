@@ -15,9 +15,9 @@
             <cfquery name="qUpdateComment" datasource="#Application.Settings.DSN#">
                 UPDATE ce_Comment
                 SET	ApproveFlag = <cfqueryparam value="Y" cfsqltype="cf_sql_char" />,
-                    ApprovedBy = <cfqueryparam value="#Session.PersonID#" cfsqltype="cf_sql_integer" />,
+                    ApprovedBy = <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_integer" />,
                     DeletedFlag = <cfqueryparam value="N" cfsqltype="cf_sql_char" />,
-                    UpdatedBy = <cfqueryparam value="#Session.PersonID#" cfsqltype="cf_sql_integer" />
+                    UpdatedBy = <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_integer" />
                 WHERE CommentID = <cfqueryparam value="#Arguments.CommentID#" cfsqltype="cf_sql_integer" />
             </cfquery>
             
@@ -28,7 +28,7 @@
             <!--- CREATE ACTION --->
             <cfset Application.History.Add(
                         HistoryStyleID=7,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToActivityID=CommentBean.getActivityID(),
                         ToContent=CommentBean.getComment())>
             
@@ -72,7 +72,7 @@
                 SET	ApproveFlag = <cfqueryparam value="N" cfsqltype="cf_sql_char" />,
                     DeletedFlag = <cfqueryparam value="Y" cfsqltype="cf_sql_char" />,
                     ApprovedBy = <cfqueryparam NULL />,
-                    UpdatedBy = <cfqueryparam value="#Session.PersonID#" cfsqltype="cf_sql_integer" />
+                    UpdatedBy = <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_integer" />
                 WHERE CommentID = <cfqueryparam value="#Arguments.CommentID#" cfsqltype="cf_sql_integer" />
             </cfquery>
             
@@ -83,7 +83,7 @@
             <!--- CREATE ACTION --->
             <cfset Application.History.Add(
                         HistoryStyleID=6,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToActivityID=CommentBean.getActivityID(),
                         ToContent=CommentBean.getComment())>
             
@@ -147,7 +147,7 @@
 				
 			<cfset Application.History.Add(
                         HistoryStyleID=55,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToActivityID=Arguments.ActivityID)>
         <cfelse>
             <cfset status.setStatusMsg("An error has occured.")>
@@ -190,7 +190,7 @@
                 (
                 	<cfqueryparam value="#Arguments.ActivityID#" cfsqltype="cf_sql_integer" />,
                 	<cfqueryparam value="#Arguments.SiteID#" cfsqltype="cf_sql_integer" />,
-                	<cfqueryparam value="#Session.Person.getPersonID()#" cfsqltype="cf_sql_integer" />
+                	<cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_integer" />
                 )
             </cfquery>
         </cfif>
@@ -225,7 +225,7 @@
                 <cfset PubComponentBean.setFileID(Arguments.FileID)>
                 <cfset PubComponentBean.setDisplayName(Arguments.FileName)>
                 <cfset PubComponentBean.setComponentID(Arguments.ComponentID)>
-                <cfset PubComponentBean.setCreatedBy(Session.Person.getPersonID())>
+                <cfset PubComponentBean.setCreatedBy(session.currentuser.id)>
                 
                 <Cfset PubComponentSaved = Application.Com.ActivityPubComponentDAO.Create(PubComponentBean)>
                 
@@ -280,13 +280,13 @@
         
         	<!--- CREATE RECORDS FOR SELECTED CATEGORIES --->
         	<cfloop list="#Arguments.Site#" index="CurrCategoryID">
-            	<cfset CategoryBean = CreateObject("component","#Application.Settings.Com#ActivityCategoryLMS.ActivityCategoryLMS").Init(ActivityID=Arguments.ActivityID,CategoryID=CurrCategoryID,CreatedBy=Session.Person.getPersonID(),Created=Now())>
+            	<cfset CategoryBean = CreateObject("component","#Application.Settings.Com#ActivityCategoryLMS.ActivityCategoryLMS").Init(ActivityID=Arguments.ActivityID,CategoryID=CurrCategoryID,CreatedBy=session.currentuser.id,Created=Now())>
                 <cfset CategoryBean = Application.Com.ActivityCategoryLMSDAO.Create(CategoryBean)>
             </cfloop>
             
 			<cfset Application.History.Add(
                         HistoryStyleID=72,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToActivityID=Arguments.ActivityID)>
         
             <cfset ResponseText = "success">
@@ -462,7 +462,7 @@
             
 			<cfset Application.History.Add(
                         HistoryStyleID=98,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToActivityID=Arguments.ActivityID)>
                         
         	<cfset status.setStatus(true)>
@@ -502,7 +502,7 @@
                         <cfqueryparam value="#Arguments.ActivityID#" cfsqltype="cf_sql_integer" />,
                         <cfqueryparam value="#CurrSpecialtyID#" cfsqltype="cf_sql_integer" />,
                         <cfqueryparam value="#Now()#" cfsqltype="cf_sql_timestamp" />,
-                        <cfqueryparam value="#Session.Person.getPersonID()#" cfsqltype="cf_sql_integer" />,
+                        <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_integer" />,
                         'N'
                     )
                 </cfquery>
@@ -514,7 +514,7 @@
             
             <cfset Application.History.Add(
                         HistoryStyleID=73,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToActivityID=Arguments.ActivityID)>
         
             <cfset status.setStatus(true)>

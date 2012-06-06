@@ -1,4 +1,9 @@
 <cfcomponent extends="controller">
+	<cffunction name="init">
+		<cfset filters(through="ajaxLoginRequired")>
+		<cfset filters(through="ajaxAdminRequired")>
+	</cffunction>
+	
 	<cffunction name="fixAttendees" hint="Used to fix activity dates for attendees." >
     	<cfquery name="qAttendees" datasource="#application.settings.dsn#">
         	SELECT *
@@ -34,16 +39,16 @@
     </cffunction>
     
 	<cffunction name="updateAttendeeDates" >
-    	<cfquery name="qGetAttendees" datasource="#application.settings.dsn#">
+    	<!---<cfquery name="qGetAttendees" datasource="#application.settings.dsn#">
         	SELECT AttendeeId, CheckIn
             FROM ce_attendee
             WHERE RegisterDate IS NULL
-        </cfquery>
+        </cfquery>--->
         
         <cfdump var="#qGetAttendees#"><cfabort>
     </cffunction>
     
-	<cffunction name="approveComment"  returntype="string">
+	<cffunction name="approveComment" >
 		<cfparam name="params.CommentID" type="string">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
@@ -53,12 +58,12 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access comment approval functionality.")>
         
-        <cfset status = Application.ActivityPublish.approveComment(Arguments.CommentID)>
+        <cfset status = Application.ActivityPublish.approveComment(params.CommentID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
 
-	<cffunction name="approveFacultyFile"  output="false" returntype="String">
+	<cffunction name="approveFacultyFile"  output="false">
 		<cfparam name="params.PersonID" type="string">
 		<cfparam name="params.ActivityID" type="string">
         <cfparam name="params.FileType" type="string">
@@ -71,21 +76,21 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access file approval functionality for activity faculty.")>
         
-        <cfset status = Application.ActivityPeople.approveFacultyFile(Arguments.PersonID,Arguments.ActivityID,Arguments.FileType,Arguments.Mode)>
+        <cfset status = Application.ActivityPeople.approveFacultyFile(params.PersonID,params.ActivityID,params.FileType,params.Mode)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
         
-	<cffunction name="AutoComplete"  output="no" returntype="string">
-		<cfparam name="params.q" type="string" required="yes">
-		<cfparam name="params.limit" type="string" required="yes">
+	<cffunction name="AutoComplete"  output="no">
+		<cfparam name="params.q" type="string" >
+		<cfparam name="params.limit" type="string" >
         
-        <cfset var Status = Application.Activity.AutoComplete(Arguments.Q,Arguments.Limit)>
+        <cfset var Status = Application.Activity.AutoComplete(params.Q,params.Limit)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
 
-	<cffunction name="changeCommitteeRoles"  output="false" returntype="string">
+	<cffunction name="changeCommitteeRoles"  output="false">
 		<cfparam name="params.PersonList" type="string">
 		<cfparam name="params.ActivityID" type="string">
 		<cfparam name="params.RoleID" type="string">
@@ -97,12 +102,12 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access role changing functionality for committee members.")>
         
-        <cfset status = Application.ActivityPeople.changeCommitteeRoles(Arguments.PersonList,Arguments.ActivityID,Arguments.RoleID)>
+        <cfset status = Application.ActivityPeople.changeCommitteeRoles(params.PersonList,params.ActivityID,params.RoleID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
 
-	<cffunction name="changeFacultyRoles"  output="false" returntype="string">
+	<cffunction name="changeFacultyRoles"  output="false">
 		<cfparam name="params.PersonList" type="string">
 		<cfparam name="params.ActivityID" type="string">
 		<cfparam name="params.RoleID" type="string">
@@ -114,17 +119,17 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access role changing functionality for faculty.")>
       	
-        <cfset status = Application.ActivityPeople.changeFacultyRoles(Arguments.PersonList,Arguments.ActivityID,Arguments.RoleID)>
+        <cfset status = Application.ActivityPeople.changeFacultyRoles(params.PersonList,params.ActivityID,params.RoleID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-	<cffunction name="CopyPaste" displayname="Copy and Paste Activity"  output="no" returntype="string">
-		<cfparam name="params.Mode" type="numeric" required="yes">
-		<cfparam name="params.ActivityID" type="numeric" required="yes">
-        <cfparam name="params.NewActivityTitle" type="string" required="yes">
-        <cfparam name="params.NewActivityTypeID" type="numeric" required="yes">
-        <cfparam name="params.NewGroupingID" type="numeric" required="yes">
+	<cffunction name="CopyPaste" displayname="Copy and Paste Activity"  output="no">
+		<cfparam name="params.Mode" type="numeric" >
+		<cfparam name="params.ActivityID" type="numeric" >
+        <cfparam name="params.NewActivityTitle" type="string" >
+        <cfparam name="params.NewActivityTypeID" type="numeric" >
+        <cfparam name="params.NewGroupingID" type="numeric" >
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -134,17 +139,17 @@
         <cfset status.setStatusMsg("Cannot access activity copy functionality.")>
         
         <cfset Status = Application.Activity.CopyPaste(
-							Arguments.Mode,
-							Arguments.ActivityID,
-							Arguments.NewActivityTitle,
-							Arguments.NewActivityTypeID,
-							Arguments.NewGroupingID)>
+							params.Mode,
+							params.ActivityID,
+							params.NewActivityTitle,
+							params.NewActivityTypeID,
+							params.NewGroupingID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-	<cffunction name="createCategory"  output="false" returntype="string">
-		<cfparam name="params.Name" required="yes" type="string">
+	<cffunction name="createCategory"  output="false">
+		<cfparam name="params.Name"  type="string">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -153,12 +158,12 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access category create functionality for activities.")>
         
-        <cfset status = Application.Activity.createCategory(Arguments.Name)>
+        <cfset status = Application.Activity.createCategory(params.Name)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-	<cffunction name="deleteActivity"  output="false" returntype="string">
+	<cffunction name="deleteActivity"  output="false">
 		<cfparam name="params.ActivityID" type="numeric">
         <cfparam name="params.Reason" type="string">
         
@@ -169,13 +174,13 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access delete function for activities.")>
         
-        <cfset status = Application.Activity.deleteActivity(Arguments.ActivityID,Arguments.Reason)>
+        <cfset status = Application.Activity.deleteActivity(params.ActivityID,params.Reason)>
     
-    	<cfreturn status.getJSON() />
+    	<cfset renderText(status.getJSON()) />
     </cffunction>
 	
-	<cffunction name="deleteAgendaItem"  output="false" returntype="string">
-		<cfparam name="params.AgendaID" required="yes" type="string">
+	<cffunction name="deleteAgendaItem"  output="false">
+		<cfparam name="params.AgendaID"  type="string">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -184,12 +189,12 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access agenda delete functionality.")>
         
-        <cfset status = Application.Activity.deleteAgendaItem(Arguments.AgendaID)>
+        <cfset status = Application.Activity.deleteAgendaItem(params.AgendaID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-	<cffunction name="deleteBudget"  output="false" returntype="string">
+	<cffunction name="deleteBudget"  output="false">
 	<cfparam name="params.ActivityID" type="numeric">
 	<cfparam name="params.BudgetID" type="numeric">
         
@@ -200,12 +205,12 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access budget delete functionality for activity finances.")>
         
-        <cfset status = Application.ActivityFinance.deleteBudget(Arguments.ActivityID,Arguments.BudgetID)>
+        <cfset status = Application.ActivityFinance.deleteBudget(params.ActivityID,params.BudgetID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
 
-	<cffunction name="deleteCategory"  output="false" returntype="string">
+	<cffunction name="deleteCategory"  output="false">
 		<cfparam name="params.ActivityID" type="numeric">
 		<cfparam name="params.CategoryID" type="numeric">
         
@@ -216,12 +221,12 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access category delete functionality for activities.")>
         
-        <cfset Status = Application.Activity.deleteCategory(Arguments.ActivityID,Arguments.CategoryID)>
+        <cfset Status = Application.Activity.deleteCategory(params.ActivityID,params.CategoryID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-	<cffunction name="denyComment"  returntype="string">
+	<cffunction name="denyComment" >
 		<cfparam name="params.CommentID" type="string">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
@@ -231,12 +236,12 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access comment denial functionality.")>
         
-        <cfset status = Application.ActivityPublish.denyComment(Arguments.CommentID)>
+        <cfset status = Application.ActivityPublish.denyComment(params.CommentID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-	<cffunction name="deleteFee"  output="false" returntype="string">
+	<cffunction name="deleteFee"  output="false">
         <cfparam name="params.ActivityID" type="String">
         <cfparam name="params.FeeID" type="String">
         
@@ -247,12 +252,12 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access fee delete functionality for activity finances.")>
         
-        <cfset status = Application.ActivityFinance.deleteFee(Arguments.ActivityID,Arguments.FeeID)>
+        <cfset status = Application.ActivityFinance.deleteFee(params.ActivityID,params.FeeID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
 
-	<cffunction name="deleteLedger"  output="false" returntype="string">
+	<cffunction name="deleteLedger"  output="false">
 	<cfparam name="params.ActivityID" type="String">
 	<cfparam name="params.EntryID" type="String">
         
@@ -263,12 +268,12 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access ledger delete functionality for activity finances.")>
         
-        <cfset status = Application.ActivityFinance.deleteLedger(Arguments.ActivityID,Arguments.EntryID)>
+        <cfset status = Application.ActivityFinance.deleteLedger(params.ActivityID,params.EntryID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
 
-	<cffunction name="deleteNote"  output="false" returntype="string">
+	<cffunction name="deleteNote"  output="false">
 		<cfparam name="params.NoteID" type="numeric">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
@@ -278,12 +283,12 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access note delete functionality for activities.")>
         
-        <cfset status = Application.Activity.deleteNote(Arguments.NoteID)>
+        <cfset status = Application.Activity.deleteNote(params.NoteID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
 
-	<cffunction name="deleteSupport"  output="false" returntype="string">
+	<cffunction name="deleteSupport"  output="false">
         <cfparam name="params.ActivityID" type="String">
         <cfparam name="params.SupportID" type="String">
         
@@ -294,16 +299,16 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access support delete functionality for activity finances.")>
         
-        <cfset Status = Application.ActivityFinance.deleteSupport(Arguments.ActivityID,Arguments.SupportID)>
+        <cfset Status = Application.ActivityFinance.deleteSupport(params.ActivityID,params.SupportID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-    <cffunction name="emailCertificate"  output="false" returntype="string" returnFormat="plain">
-        <cfparam name="params.activityId" type="numeric" required="yes">
-    	<cfparam name="params.personId" type="numeric" required="yes">
-        <cfparam name="params.subject" type="string" required="yes">
-        <cfparam name="params.body" type="string" required="yes">
+    <cffunction name="emailCertificate"  output="false" returnFormat="plain">
+        <cfparam name="params.activityId" type="numeric" >
+    	<cfparam name="params.personId" type="numeric" >
+        <cfparam name="params.subject" type="string" >
+        <cfparam name="params.body" type="string" >
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -313,17 +318,17 @@
         <cfset status.setStatusMsg("Cannot access email certificate functionality.")>
         
         <Cfset status = application.activity.emailCertificate(
-															activityId=arguments.activityId,
-															personId=arguments.personId,
-															subject=arguments.subject,
-															body=arguments.body)>
+															activityId=params.activityId,
+															personId=params.personId,
+															subject=params.subject,
+															body=params.body)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-	<cffunction name="fixStats" output="no"  returntype="string" returnformat="plain">
-		<cfparam name="params.RunDate" type="string" required="no" default="#DateFormat(DateAdd('d',-100,now()),'mm/dd/yyyy')#" />
-		<cfparam name="params.ActivityID" type="numeric" required="no" default="0" />
+	<cffunction name="fixStats" output="no"  returnformat="plain">
+		<cfparam name="params.RunDate" type="string"  default="#DateFormat(DateAdd('d',-100,now()),'mm/dd/yyyy')#" />
+		<cfparam name="params.ActivityID" type="numeric"  default="0" />
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -333,16 +338,16 @@
         <cfset status.setStatusMsg("Cannot access statistics update functionality for activities.")>
         
 		<!--- UPDATE STATS --->
-        <cfset createObject("component", "admin._com.scripts.statFixer").run(activityId=arguments.activityId,mode='manual')>
+        <cfset createObject("component", "admin._com.scripts.statFixer").run(activityId=params.activityId,mode='manual')>
                     
         <cfset status.setStatus(true)>
         <cfset status.setStatusMsg("Stats have been updated.")>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-    <cffunction name="getActivitySpecialties"  output="false" returntype="string">
-    	<cfparam name="params.activityId" type="numeric" required="yes">
+    <cffunction name="getActivitySpecialties"  output="false">
+    	<cfparam name="params.activityId" type="numeric" >
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -351,41 +356,41 @@
         <cfset status.setStatus(true)>
         <cfset status.setStatusMsg("Specialties okay.")>
         
-        <cfset status.setData(application.activity.getActivitySpecialties(activityId=arguments.activityId))>
+        <cfset status.setData(application.activity.getActivitySpecialties(activityId=params.activityId))>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-    <cffunction name="getAttendeeDate" hint="Returns requested date information for provided attendee."  output="false" returntype="string">
-    	<cfparam name="params.attendeeId" type="numeric" required="no" default="0">
-    	<cfparam name="params.PersonID" type="numeric" required="no" default="0">
-        <cfparam name="params.ActivityID" type="numeric" required="no" default="0">
-        <cfparam name="params.Type" type="numeric" required="yes">
+    <cffunction name="getAttendeeDate" hint="Returns requested date information for provided attendee."  output="false">
+    	<cfparam name="params.attendeeId" type="numeric"  default="0">
+    	<cfparam name="params.PersonID" type="numeric"  default="0">
+        <cfparam name="params.ActivityID" type="numeric"  default="0">
+        <cfparam name="params.Type" type="numeric" >
         
         <cfset var Status = "">
         
-        <cfset Status = Application.ActivityAttendee.getAttendeeDate(arguments.attendeeId,Arguments.PersonID,Arguments.ActivityID,Arguments.Type)>
+        <cfset Status = Application.ActivityAttendee.getAttendeeDate(params.attendeeId,params.PersonID,params.ActivityID,params.Type)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
     
-    <cffunction name="getGroupings" hint="Returns JSON data for groupings."  output="false" returntype="string">
-    	<cfparam name="params.ATID" type="numeric" required="yes">
+    <cffunction name="getGroupings" hint="Returns JSON data for groupings."  output="false">
+    	<cfparam name="params.ATID" type="numeric" >
         
-        <cfset Status = Application.Activity.getGroupings(Arguments.ATID)>
+        <cfset Status = Application.Activity.getGroupings(params.ATID)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
     
-    <cffunction name="getNoteCount" hint="Returns the total number of notes for provided activity."  output="false" returntype="numeric">
-    	<cfparam name="params.ActivityID" type="numeric" required="yes">
+    <cffunction name="getNoteCount" hint="Returns the total number of notes for provided activity."  output="false">
+    	<cfparam name="params.ActivityID" type="numeric" >
         
-        <cfset Status = Application.Activity.getNoteCount(Arguments.ActivityID)>
+        <cfset Status = Application.Activity.getNoteCount(params.ActivityID)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
     
-    <cffunction name="getSpecialties"  output="false" returntype="string">
+    <cffunction name="getSpecialties"  output="false">
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
         <cfcontent type="text/javascript" />
@@ -395,38 +400,38 @@
         
         <cfset status.setData(application.activityPublish.getSpecialties())>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-	<cffunction name="JointlyAutoComplete"  output="no" returntype="string">
-		<cfparam name="params.q" type="string" required="yes">
-		<cfparam name="params.limit" type="string" required="yes">
+	<cffunction name="JointlyAutoComplete"  output="no">
+		<cfparam name="params.q" type="string" >
+		<cfparam name="params.limit" type="string" >
         
-        <cfset var Status = Application.Activity.JointlyAutoComplete(Arguments.Q,Arguments.Limit)>
+        <cfset var Status = Application.Activity.JointlyAutoComplete(params.Q,params.Limit)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
     
-    <cffunction name="markComplete"  output="false" returntype="string">
-		<cfparam name="params.PersonID" type="string" required="yes">
-        <cfparam name="params.ActivityID" type="string" required="yes">
+    <cffunction name="markComplete"  output="false">
+		<cfparam name="params.PersonID" type="string" >
+        <cfparam name="params.ActivityID" type="string" >
         
         <cfset var Status = "false|Cannot access functionality to mark activity complete.">
 		
-		<cfset Status = Application.ActivityAttendee.markComplete(Arguments.PersonID,Arguments.ActivityID)>
+		<cfset Status = Application.ActivityAttendee.markComplete(params.PersonID,params.ActivityID)>
      	
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
 	
 	<cffunction name="Move" displayname="Move Activity"  output="no">
-		<cfparam name="params.FromActivityID" type="numeric" required="yes">
-		<cfparam name="params.ToActivityID" type="numeric" required="yes">
+		<cfparam name="params.FromActivityID" type="numeric" >
+		<cfparam name="params.ToActivityID" type="numeric" >
         
-        <cfset Application.Activity.Move(Arguments.FromActivityID,Arguments.ToActivityID)>
+        <cfset Application.Activity.Move(params.FromActivityID,params.ToActivityID)>
         
     </cffunction>
 	
-    <cffunction name="publishActivity" hint="Publishes Activity to the web"  output="false" returntype="string">
+    <cffunction name="publishActivity" hint="Publishes Activity to the web"  output="false">
     	<cfparam name="params.ActivityID" type="string" />
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
@@ -436,12 +441,12 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access publish function for activities.")>
         
-        <cfset status = Application.ActivityPublish.publishActivity(Arguments.ActivityID)>
+        <cfset status = Application.ActivityPublish.publishActivity(params.ActivityID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-    <cffunction name="publishActivityToSite" hint="Either Adds or Deletes a record for the Site Publishing"  output="false" returntype="string">
+    <cffunction name="publishActivityToSite" hint="Either Adds or Deletes a record for the Site Publishing"  output="false">
     	<cfparam name="params.ActivityID" type="string" />
         <cfparam name="params.SiteID" type="string" />
         
@@ -452,16 +457,16 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access publish function for activities.")>
         
-        <cfset status = Application.ActivityPublish.publishActivityToSite(Arguments.ActivityID,Arguments.SiteID)>
+        <cfset status = Application.ActivityPublish.publishActivityToSite(params.ActivityID,params.SiteID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-	<cffunction name="publishFile" hint="Adds a publishing component for current file as a file download."  output="false" returntype="string">
-    	<cfparam name="params.ActivityID" type="numeric" required="yes">
-        <cfparam name="params.FileID" type="numeric" required="yes">
-        <cfparam name="params.FileName" type="string" required="yes">
-        <cfparam name="params.ComponentID" type="numeric" required="yes">
+	<cffunction name="publishFile" hint="Adds a publishing component for current file as a file download."  output="false">
+    	<cfparam name="params.ActivityID" type="numeric" >
+        <cfparam name="params.FileID" type="numeric" >
+        <cfparam name="params.FileName" type="string" >
+        <cfparam name="params.ComponentID" type="numeric" >
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -470,12 +475,12 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot publish function for activity documents.")>
         
-        <cfset status = Application.ActivityPublish.publishFile(Arguments.ActivityID,Arguments.FileID,Arguments.FileName,Arguments.ComponentID)>
+        <cfset status = Application.ActivityPublish.publishFile(params.ActivityID,params.FileID,params.FileName,params.ComponentID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
 
-	<cffunction name="removeAllAttendees"  output="false" returntype="string">
+	<cffunction name="removeAllAttendees"  output="false">
 		<cfparam name="params.ActivityID" type="numeric">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
@@ -485,12 +490,12 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access remove functionality for attendees.")>
 		
-		<cfset status = Application.ActivityAttendee.removeAll(Arguments.ActivityID)>
+		<cfset status = Application.ActivityAttendee.removeAll(params.ActivityID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
 
-	<cffunction name="removeAllCommittee"  output="false" returntype="string">
+	<cffunction name="removeAllCommittee"  output="false">
 		<cfparam name="params.ActivityID" type="numeric">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
@@ -500,12 +505,12 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access remove functionality for committee members.")>
 		
-		<cfset status = Application.ActivityPeople.removeAllCommittee(Arguments.ActivityID)>
+		<cfset status = Application.ActivityPeople.removeAllCommittee(params.ActivityID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
 
-	<cffunction name="removeAllFaculty"  output="false" returntype="string">
+	<cffunction name="removeAllFaculty"  output="false">
 		<cfparam name="params.ActivityID" type="numeric">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
@@ -515,12 +520,12 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access remove functionality for faculty.")>
 		
-		<cfset status = Application.ActivityPeople.removeAllFaculty(Arguments.ActivityID)>
+		<cfset status = Application.ActivityPeople.removeAllFaculty(params.ActivityID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
 	
-	<cffunction name="removeAttendeeByID"  output="false" returntype="string" returnformat="plain">
+	<cffunction name="removeAttendeeByID"  output="false" returnformat="plain">
 		<cfparam name="params.attendeeId" type="string">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
@@ -533,7 +538,7 @@
 		<cftry>
 			<cfquery name="qDeleteByID" datasource="#application.settings.dsn#">
 				DELETE ce_attendee
-				WHERE attendeeid=<cfqueryparam value="#arguments.attendeeId#" cfsqltype="cf_sql_integer" />
+				WHERE attendeeid=<cfqueryparam value="#params.attendeeId#" cfsqltype="cf_sql_integer" />
 			</cfquery>
 			
 			<cfcatch>
@@ -544,11 +549,11 @@
 		<cfset status.setStatus(true) />
 		<cfset status.setStatusMsg('successful') />
 		
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
 	
-	<cffunction name="removeCheckedAttendees"  output="false" returntype="string">
-		<cfparam name="params.AttendeeList" required="false" type="string" default="">
+	<cffunction name="removeCheckedAttendees"  output="false">
+		<cfparam name="params.AttendeeList"  type="string" default="">
 		<cfparam name="params.ActivityID" type="numeric">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
@@ -558,12 +563,12 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access remove functionality for attendees.")>
 		
-		<cfset status = Application.ActivityAttendee.removeChecked(Arguments.AttendeeList,Arguments.ActivityID)>
+		<cfset status = Application.ActivityAttendee.removeChecked(params.AttendeeList,params.ActivityID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
 
-	<cffunction name="removeCheckedCommittee"  output="false" returntype="string">
+	<cffunction name="removeCheckedCommittee"  output="false">
 		<cfparam name="params.PersonList" type="string">
 		<cfparam name="params.ActivityID" type="numeric">
         
@@ -574,12 +579,12 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access remove functionality for committee members.")>
 		
-		<cfset status = Application.ActivityPeople.removeCheckedCommittee(Arguments.PersonList,Arguments.ActivityID)>
+		<cfset status = Application.ActivityPeople.removeCheckedCommittee(params.PersonList,params.ActivityID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
 
-	<cffunction name="removeCheckedFaculty"  output="false" returntype="string">
+	<cffunction name="removeCheckedFaculty"  output="false">
 		<cfparam name="params.PersonList" type="string">
 		<cfparam name="params.ActivityID" type="numeric">
         
@@ -590,14 +595,14 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access remove functionality for faculty")>
 		
-		<cfset status = Application.ActivityPeople.removeCheckedFaculty(Arguments.PersonList,Arguments.ActivityID)>
+		<cfset status = Application.ActivityPeople.removeCheckedFaculty(params.PersonList,params.ActivityID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-    <cffunction name="resetAttendee"  output="false" returntype="string">
-        <cfparam name="params.attendeeId" type="numeric" required="false" default="0">
-        <cfparam name="params.PaymentFlag" type="string" required="yes">
+    <cffunction name="resetAttendee"  output="false">
+        <cfparam name="params.attendeeId" type="numeric"  default="0">
+        <cfparam name="params.PaymentFlag" type="string" >
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -606,19 +611,19 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access attendee reset functionality.")>
         
-        <cfset status = Application.ActivityAttendee.resetAttendee(arguments.attendeeId,Arguments.PaymentFlag)>
+        <cfset status = Application.ActivityAttendee.resetAttendee(params.attendeeId,params.PaymentFlag)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-    <cffunction name="saveACCMEInfo"  output="false" returntype="string">
-    	<cfparam name="params.ActivityID" type="numeric" required="yes">
-		<cfparam name="params.competenceDesign" type="numeric" required="no" default="0">
-		<cfparam name="params.performanceDesign" type="numeric" required="no" default="0">
-		<cfparam name="params.outcomesDesign" type="numeric" required="no" default="0">
-		<cfparam name="params.competenceEval" type="numeric" required="no" default="0">
-		<cfparam name="params.performanceEval" type="numeric" required="no" default="0">
-		<cfparam name="params.outcomesEval" type="numeric" required="no" default="0">
+    <cffunction name="saveACCMEInfo"  output="false">
+    	<cfparam name="params.ActivityID" type="numeric" >
+		<cfparam name="params.competenceDesign" type="numeric"  default="0">
+		<cfparam name="params.performanceDesign" type="numeric"  default="0">
+		<cfparam name="params.outcomesDesign" type="numeric"  default="0">
+		<cfparam name="params.competenceEval" type="numeric"  default="0">
+		<cfparam name="params.performanceEval" type="numeric"  default="0">
+		<cfparam name="params.outcomesEval" type="numeric"  default="0">
         
 		<cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -628,21 +633,21 @@
         <cfset status.setStatusMsg("Cannot access save functionality for ACCME information.")>
         
         <cfset status = application.activity.saveACCMEInfo(
-														activityId = arguments.activityId,
-														competenceDesign = arguments.competenceDesign,
-														performanceDesign = arguments.performanceDesign,
-														outcomesDesign = arguments.outcomesDesign,
-														competenceEval = arguments.competenceEval,
-														performanceEval = arguments.performanceEval,
-														outcomesEval = arguments.outcomesEval
+														activityId = params.activityId,
+														competenceDesign = params.competenceDesign,
+														performanceDesign = params.performanceDesign,
+														outcomesDesign = params.outcomesDesign,
+														competenceEval = params.competenceEval,
+														performanceEval = params.performanceEval,
+														outcomesEval = params.outcomesEval
 														)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-	<cffunction name="saveActivity"  output="no" returntype="string">
-		<cfparam name="params.ActivityID" default="" type="string" required="yes">
-		<cfparam name="params.Title" default="" type="string" required="yes">
+	<cffunction name="saveActivity"  output="no">
+		<cfparam name="params.ActivityID" default="" type="string" >
+		<cfparam name="params.Title" default="" type="string" >
 		<cfparam name="params.StartDate" default="" type="string">
 		<cfparam name="params.EndDate" default="" type="string">
 		<cfparam name="params.Description" default="" type="string">
@@ -658,8 +663,8 @@
 		<cfparam name="params.Sponsor" default="" type="string">
 		<cfparam name="params.ExternalID" default="" type="string">
 		<cfparam name="params.ReleaseDate" type="string" default="#Now()#">
-		<cfparam name="params.ChangedFields" type="string" required="no" default="" />
-		<cfparam name="params.ChangedValues" type="string" required="no" default="" />
+		<cfparam name="params.ChangedFields" type="string"  default="" />
+		<cfparam name="params.ChangedValues" type="string"  default="" />
         
         <cfset var Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -669,123 +674,123 @@
         <cfset status.setStatusMsg("Cannot access activity save functionality.")>
         
         <cfset Status = Application.Activity.saveActivity(
-							activityId=Arguments.ActivityID,
-							title=Arguments.Title,
-							startDate=Arguments.StartDate,
-							endDate=Arguments.EndDate,
-							description=Arguments.Description,
-							location=Arguments.Location,
-							address1=Arguments.Address1,
-							address2=Arguments.Address2,
-							city=Arguments.City,
-							state=Trim(Arguments.State),
-							province=Arguments.Province,
-							country=Arguments.Country,
-							postalcode=Arguments.PostalCode,
-							sponsorship=Arguments.Sponsorship,
-							sponsor=Arguments.Sponsor,
-							externalid=Arguments.ExternalID,
-							releasedate=Arguments.ReleaseDate,
-							changedfields=Arguments.ChangedFields,
-							changedvalues=Arguments.ChangedValues)>
+							activityId=params.ActivityID,
+							title=params.Title,
+							startDate=params.StartDate,
+							endDate=params.EndDate,
+							description=params.Description,
+							location=params.Location,
+							address1=params.Address1,
+							address2=params.Address2,
+							city=params.City,
+							state=Trim(params.State),
+							province=params.Province,
+							country=params.Country,
+							postalcode=params.PostalCode,
+							sponsorship=params.Sponsorship,
+							sponsor=params.Sponsor,
+							externalid=params.ExternalID,
+							releasedate=params.ReleaseDate,
+							changedfields=params.ChangedFields,
+							changedvalues=params.ChangedValues)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-	<cffunction name="saveAgendaItem"  output="false" returntype="string">
-		<cfparam name="params.ActivityID" required="yes" type="string">
-		<cfparam name="params.AgendaID" required="no" type="string" default="">
-		<cfparam name="params.Description" required="yes" type="string" default="">
-		<cfparam name="params.EventDate" required="yes" type="string" default="">
-		<cfparam name="params.StartTime" required="yes" type="string" default="">
-		<cfparam name="params.EndTime" required="yes" type="string" default="">
+	<cffunction name="saveAgendaItem"  output="false">
+		<cfparam name="params.ActivityID"  type="string">
+		<cfparam name="params.AgendaID"  type="string" default="">
+		<cfparam name="params.Description"  type="string" default="">
+		<cfparam name="params.EventDate"  type="string" default="">
+		<cfparam name="params.StartTime"  type="string" default="">
+		<cfparam name="params.EndTime"  type="string" default="">
         
         <cfset var Status = "Fail|Cannot access agenda save functionality.">
         
         <cfset Status = Application.Activity.saveAgendaItem(
-							Arguments.ActivityID,
-							Arguments.AgendaID,
-							Arguments.Description,
-							Arguments.EventDate,
-							Arguments.StartTime,
-							Arguments.EndTime)>
+							params.ActivityID,
+							params.AgendaID,
+							params.Description,
+							params.EventDate,
+							params.StartTime,
+							params.EndTime)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
 	
-    <cffunction name="saveAttendee"  output="false" returntype="string">
-		<cfparam name="params.ActivityID" required="yes" type="string">
-		<cfparam name="params.PersonID" required="yes" type="string">
-		<cfparam name="params.MDFlag" required="no" type="string" default="N" />
+    <cffunction name="saveAttendee"  output="false">
+		<cfparam name="params.ActivityID"  type="string">
+		<cfparam name="params.PersonID"  type="string">
+		<cfparam name="params.MDFlag"  type="string" default="N" />
         
         <cfset var Status = "Fail|Cannot access attendee save functionality.">
         
-        <cfset Status = Application.ActivityAttendee.saveAttendee(Arguments.ActivityID,Arguments.PersonID,Arguments.MDFlag)>
+        <cfset Status = Application.ActivityAttendee.saveAttendee(params.ActivityID,params.PersonID,params.MDFlag)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
 	
-    <cffunction name="saveAttendeeCDC"  output="false" returntype="string" returnFormat="plain">
-    	<cfparam name="params.AttendeeID" type="numeric" required="yes">
-        <cfparam name="params.Ethnicity" type="numeric" required="yes">
-        <cfparam name="params.OMBEthnicity" type="numeric" required="yes">
-        <cfparam name="params.CBAFundID" type="string" required="yes">
-        <cfparam name="params.CBACDC" type="string" required="yes">
-        <cfparam name="params.CBAOth" type="string" required="yes">
-        <cfparam name="params.CBOFundID" type="string" required="yes">
-        <cfparam name="params.CBOCDC" type="string" required="yes">
-        <cfparam name="params.CBOOth" type="string" required="yes">
-        <cfparam name="params.ProfCId" type="numeric" required="yes">
-        <cfparam name="params.ProfCOther" type="string" required="yes">
-        <cfparam name="params.ProfNId" type="numeric" required="yes">
-        <cfparam name="params.ProfNOther" type="string" required="yes">
-        <cfparam name="params.FunRCId" type="numeric" required="yes">
-        <cfparam name="params.FunRCOther" type="string" required="yes">
-        <cfparam name="params.FunRNId" type="numeric" required="yes">
-        <cfparam name="params.FunRNOther" type="string" required="yes">
-        <cfparam name="params.OccClassID" type="numeric" required="yes">
-        <cfparam name="params.OrgTypeID" type="numeric" required="no" default="">
-        <cfparam name="params.OrgTypeOther" type="string" required="yes">
-        <cfparam name="params.PrinEmpID" type="numeric" required="yes">
-        <cfparam name="params.PrinEmpOther" type="string" required="yes">
-        <cfparam name="params.WorkState" type="string" required="yes">
-        <cfparam name="params.WorkZip" type="numeric" required="yes">
-        <cfparam name="params.Focus1" type="string" required="no" default="">
-        <cfparam name="params.Focus2" type="string" required="no" default="">
-        <cfparam name="params.Focus3" type="string" required="no" default="">
-        <cfparam name="params.Focus4" type="string" required="no" default="">
-        <cfparam name="params.Focus5" type="string" required="no" default="">
-        <cfparam name="params.Focus6" type="string" required="no" default="">
-        <cfparam name="params.Focus7" type="string" required="no" default="">
-        <cfparam name="params.Focus8" type="string" required="no" default="">
-        <cfparam name="params.Focus9" type="string" required="no" default="">
-        <cfparam name="params.Focus10" type="string" required="no" default="">
-        <cfparam name="params.FocusOther" type="string" required="no" default="">
-        <cfparam name="params.SpecialPop1" type="string" required="no" default="">
-        <cfparam name="params.SpecialPop2" type="string" required="no" default="">
-        <cfparam name="params.SpecialPop3" type="string" required="no" default="">
-        <cfparam name="params.SpecialPop4" type="string" required="no" default="">
-        <cfparam name="params.SpecialPop5" type="string" required="no" default="">
-        <cfparam name="params.SpecialPop6" type="string" required="no" default="">
-        <cfparam name="params.SpecialPop7" type="string" required="no" default="">
-        <cfparam name="params.SpecialPop8" type="string" required="no" default="">
-        <cfparam name="params.SpecialPop9" type="string" required="no" default="">
-        <cfparam name="params.SpecialPop10" type="string" required="no" default="">
-        <cfparam name="params.SpecialPop11" type="string" required="no" default="">
-        <cfparam name="params.SpecialPop12" type="string" required="no" default="">
-        <cfparam name="params.SpecialPop13" type="string" required="no" default="">
-        <cfparam name="params.SpecialPop14" type="string" required="no" default="">
-        <cfparam name="params.SpecialPop15" type="string" required="no" default="">
-        <cfparam name="params.SpecialPop16" type="string" required="no" default="">
-        <cfparam name="params.SpecialPop17" type="string" required="no" default="">
-        <cfparam name="params.SpecialPop18" type="string" required="no" default="">
-        <cfparam name="params.SpecialPopOther" type="string" required="no" default="">
-        <cfparam name="params.MarketID" type="string" required="yes">
-        <cfparam name="params.MarketOther" type="string" required="yes">
-        <cfparam name="params.ContactUpdates" type="string" required="yes">
-        <cfparam name="params.ContactEval" type="string" required="yes">
-        <cfparam name="params.PTCAlert" type="string" required="yes">
-        <cfparam name="params.CurrentlyEnrolled" type="string" required="yes">
+    <cffunction name="saveAttendeeCDC"  output="false" returnFormat="plain">
+    	<cfparam name="params.AttendeeID" type="numeric" >
+        <cfparam name="params.Ethnicity" type="numeric" >
+        <cfparam name="params.OMBEthnicity" type="numeric" >
+        <cfparam name="params.CBAFundID" type="string" >
+        <cfparam name="params.CBACDC" type="string" >
+        <cfparam name="params.CBAOth" type="string" >
+        <cfparam name="params.CBOFundID" type="string" >
+        <cfparam name="params.CBOCDC" type="string" >
+        <cfparam name="params.CBOOth" type="string" >
+        <cfparam name="params.ProfCId" type="numeric" >
+        <cfparam name="params.ProfCOther" type="string" >
+        <cfparam name="params.ProfNId" type="numeric" >
+        <cfparam name="params.ProfNOther" type="string" >
+        <cfparam name="params.FunRCId" type="numeric" >
+        <cfparam name="params.FunRCOther" type="string" >
+        <cfparam name="params.FunRNId" type="numeric" >
+        <cfparam name="params.FunRNOther" type="string" >
+        <cfparam name="params.OccClassID" type="numeric" >
+        <cfparam name="params.OrgTypeID" type="numeric"  default="">
+        <cfparam name="params.OrgTypeOther" type="string" >
+        <cfparam name="params.PrinEmpID" type="numeric" >
+        <cfparam name="params.PrinEmpOther" type="string" >
+        <cfparam name="params.WorkState" type="string" >
+        <cfparam name="params.WorkZip" type="numeric" >
+        <cfparam name="params.Focus1" type="string"  default="">
+        <cfparam name="params.Focus2" type="string"  default="">
+        <cfparam name="params.Focus3" type="string"  default="">
+        <cfparam name="params.Focus4" type="string"  default="">
+        <cfparam name="params.Focus5" type="string"  default="">
+        <cfparam name="params.Focus6" type="string"  default="">
+        <cfparam name="params.Focus7" type="string"  default="">
+        <cfparam name="params.Focus8" type="string"  default="">
+        <cfparam name="params.Focus9" type="string"  default="">
+        <cfparam name="params.Focus10" type="string"  default="">
+        <cfparam name="params.FocusOther" type="string"  default="">
+        <cfparam name="params.SpecialPop1" type="string"  default="">
+        <cfparam name="params.SpecialPop2" type="string"  default="">
+        <cfparam name="params.SpecialPop3" type="string"  default="">
+        <cfparam name="params.SpecialPop4" type="string"  default="">
+        <cfparam name="params.SpecialPop5" type="string"  default="">
+        <cfparam name="params.SpecialPop6" type="string"  default="">
+        <cfparam name="params.SpecialPop7" type="string"  default="">
+        <cfparam name="params.SpecialPop8" type="string"  default="">
+        <cfparam name="params.SpecialPop9" type="string"  default="">
+        <cfparam name="params.SpecialPop10" type="string"  default="">
+        <cfparam name="params.SpecialPop11" type="string"  default="">
+        <cfparam name="params.SpecialPop12" type="string"  default="">
+        <cfparam name="params.SpecialPop13" type="string"  default="">
+        <cfparam name="params.SpecialPop14" type="string"  default="">
+        <cfparam name="params.SpecialPop15" type="string"  default="">
+        <cfparam name="params.SpecialPop16" type="string"  default="">
+        <cfparam name="params.SpecialPop17" type="string"  default="">
+        <cfparam name="params.SpecialPop18" type="string"  default="">
+        <cfparam name="params.SpecialPopOther" type="string"  default="">
+        <cfparam name="params.MarketID" type="string" >
+        <cfparam name="params.MarketOther" type="string" >
+        <cfparam name="params.ContactUpdates" type="string" >
+        <cfparam name="params.ContactEval" type="string" >
+        <cfparam name="params.PTCAlert" type="string" >
+        <cfparam name="params.CurrentlyEnrolled" type="string" >
         
         <cfset var status = createObject("component","#application.settings.com#returnData.buildStruct").init()>
         
@@ -795,92 +800,92 @@
         <cfset status.setStatusMsg("Cannot PIF information due to unknown reasons.")>
         
         <cfset status = application.activityAttendee.saveAttendeeCDC(
-														AttendeeId = Arguments.AttendeeID,
-														EthnicityId = Arguments.Ethnicity,
-														OMBEthnicityId = Arguments.OMBEthnicity,
-														CBAFundID = Arguments.CBAFundID,
-														CBACDC = Arguments.CBACDC,
-														CBAOth = Arguments.CBAOth,
-														CBOFundID = Arguments.CBOFundID,
-														CBOCDC = Arguments.CBOCDC,
-														CBOOth = Arguments.CBOOth,
-														ProfCId = Arguments.ProfCId,
-														ProfCOther = Arguments.ProfCOther,
-														ProfNId = Arguments.ProfNId,
-														ProfNOther = Arguments.ProfNOther,
-														FunRCId = Arguments.FunRCId,
-														FunRCOther = Arguments.FunRCOther,
-														FunRNId = Arguments.FunRNId,
-														OccClassID = Arguments.OccClassID,
-														OrgTypeID = Arguments.OrgTypeID,
-														FunRNOther = Arguments.FunRNOther,
-														OccClassID = Arguments.OccClassID,
-														OccClassID = Arguments.OccClassID,
-														OrgTypeOther = Arguments.OrgTypeOther,
-														PrinEmpID = Arguments.PrinEmpID,
-														PrinEmpOther = Arguments.PrinEmpOther,
-														WorkState = Arguments.WorkState,
-														WorkZip = Arguments.WorkZip,
-														Focus1 = Arguments.Focus1,
-														Focus2 = Arguments.Focus2,
-														Focus3 = Arguments.Focus3,
-														Focus4 = Arguments.Focus4,
-														Focus5 = Arguments.Focus5,
-														Focus6 = Arguments.Focus6,
-														Focus7 = Arguments.Focus7,
-														Focus8 = Arguments.Focus8,
-														Focus9 = Arguments.Focus9,
-														Focus10 = Arguments.Focus10,
-														FocusOther = Arguments.FocusOther,
-														SpecialPop1 = Arguments.SpecialPop1,
-														SpecialPop2 = Arguments.SpecialPop2,
-														SpecialPop3 = Arguments.SpecialPop3,
-														SpecialPop4 = Arguments.SpecialPop4,
-														SpecialPop5 = Arguments.SpecialPop5,
-														SpecialPop6 = Arguments.SpecialPop6,
-														SpecialPop7 = Arguments.SpecialPop7,
-														SpecialPop8 = Arguments.SpecialPop8,
-														SpecialPop9 = Arguments.SpecialPop9,
-														SpecialPop10 = Arguments.SpecialPop10,
-														SpecialPop11 = Arguments.SpecialPop11,
-														SpecialPop12 = Arguments.SpecialPop12,
-														SpecialPop13 = Arguments.SpecialPop13,
-														SpecialPop14 = Arguments.SpecialPop14,
-														SpecialPop15 = Arguments.SpecialPop15,
-														SpecialPop16 = Arguments.SpecialPop16,
-														SpecialPop17 = Arguments.SpecialPop17,
-														SpecialPop18 = Arguments.SpecialPop18,
-														SpecialPopOther = Arguments.SpecialPopOther,
-														MarketID = Arguments.MarketID,
-														MarketOther = Arguments.MarketOther,
-														ContactUpdates = Arguments.ContactUpdates,
-														ContactEval = Arguments.ContactEval,
-														PTCAlert = Arguments.PTCAlert,
-														PTCTraining = Arguments.PTCTraining,
-														CurrentlyEnrolled = Arguments.CurrentlyEnrolled,
-														PrimaryMotivation = Arguments.PrimaryMotivation)>
+														AttendeeId = params.AttendeeID,
+														EthnicityId = params.Ethnicity,
+														OMBEthnicityId = params.OMBEthnicity,
+														CBAFundID = params.CBAFundID,
+														CBACDC = params.CBACDC,
+														CBAOth = params.CBAOth,
+														CBOFundID = params.CBOFundID,
+														CBOCDC = params.CBOCDC,
+														CBOOth = params.CBOOth,
+														ProfCId = params.ProfCId,
+														ProfCOther = params.ProfCOther,
+														ProfNId = params.ProfNId,
+														ProfNOther = params.ProfNOther,
+														FunRCId = params.FunRCId,
+														FunRCOther = params.FunRCOther,
+														FunRNId = params.FunRNId,
+														OccClassID = params.OccClassID,
+														OrgTypeID = params.OrgTypeID,
+														FunRNOther = params.FunRNOther,
+														OccClassID = params.OccClassID,
+														OccClassID = params.OccClassID,
+														OrgTypeOther = params.OrgTypeOther,
+														PrinEmpID = params.PrinEmpID,
+														PrinEmpOther = params.PrinEmpOther,
+														WorkState = params.WorkState,
+														WorkZip = params.WorkZip,
+														Focus1 = params.Focus1,
+														Focus2 = params.Focus2,
+														Focus3 = params.Focus3,
+														Focus4 = params.Focus4,
+														Focus5 = params.Focus5,
+														Focus6 = params.Focus6,
+														Focus7 = params.Focus7,
+														Focus8 = params.Focus8,
+														Focus9 = params.Focus9,
+														Focus10 = params.Focus10,
+														FocusOther = params.FocusOther,
+														SpecialPop1 = params.SpecialPop1,
+														SpecialPop2 = params.SpecialPop2,
+														SpecialPop3 = params.SpecialPop3,
+														SpecialPop4 = params.SpecialPop4,
+														SpecialPop5 = params.SpecialPop5,
+														SpecialPop6 = params.SpecialPop6,
+														SpecialPop7 = params.SpecialPop7,
+														SpecialPop8 = params.SpecialPop8,
+														SpecialPop9 = params.SpecialPop9,
+														SpecialPop10 = params.SpecialPop10,
+														SpecialPop11 = params.SpecialPop11,
+														SpecialPop12 = params.SpecialPop12,
+														SpecialPop13 = params.SpecialPop13,
+														SpecialPop14 = params.SpecialPop14,
+														SpecialPop15 = params.SpecialPop15,
+														SpecialPop16 = params.SpecialPop16,
+														SpecialPop17 = params.SpecialPop17,
+														SpecialPop18 = params.SpecialPop18,
+														SpecialPopOther = params.SpecialPopOther,
+														MarketID = params.MarketID,
+														MarketOther = params.MarketOther,
+														ContactUpdates = params.ContactUpdates,
+														ContactEval = params.ContactEval,
+														PTCAlert = params.PTCAlert,
+														PTCTraining = params.PTCTraining,
+														CurrentlyEnrolled = params.CurrentlyEnrolled,
+														PrimaryMotivation = params.PrimaryMotivation)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-    <cffunction name="saveAttendeeDate" hint="Saves date info for attendee to provided attendee db field."  returntype="string">
-    	<cfparam name="params.AttendeeID" type="numeric" required="yes">
-        <cfparam name="params.DateValue" type="string" required="yes">
-        <cfparam name="params.Type" type="numeric" required="yes">
+    <cffunction name="saveAttendeeDate" hint="Saves date info for attendee to provided attendee db field." >
+    	<cfparam name="params.AttendeeID" type="numeric" >
+        <cfparam name="params.DateValue" type="string" >
+        <cfparam name="params.Type" type="numeric" >
         
         <cfset var Status = "Fail|Cannot access update function for attendee dates.">
         
-        <cfset Status = Application.ActivityAttendee.saveAttendeeDate(Arguments.AttendeeID,Arguments.DateValue,Arguments.Type)>
+        <cfset Status = Application.ActivityAttendee.saveAttendeeDate(params.AttendeeID,params.DateValue,params.Type)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
     
-    <cffunction name="saveBudget" hint="Saves provided information as a budget entry."  output="false" returntype="string">
-    	<cfparam name="params.ActivityID" type="numeric" required="yes">
-    	<cfparam name="params.BudgetID" type="numeric" required="yes">
-        <cfparam name="params.Description" type="string" required="yes">
-        <cfparam name="params.EntryType" type="numeric" required="yes">
-        <cfparam name="params.Amount" type="numeric" required="yes">
+    <cffunction name="saveBudget" hint="Saves provided information as a budget entry."  output="false">
+    	<cfparam name="params.ActivityID" type="numeric" >
+    	<cfparam name="params.BudgetID" type="numeric" >
+        <cfparam name="params.Description" type="string" >
+        <cfparam name="params.EntryType" type="numeric" >
+        <cfparam name="params.Amount" type="numeric" >
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -889,107 +894,107 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access budget save functionality for activity finances.")>
         
-        <cfset status = Application.ActivityFinance.saveBudget(Arguments.ActivityID,Arguments.BudgetID,Arguments.Description,Arguments.EntryType,Arguments.Amount)>
+        <cfset status = Application.ActivityFinance.saveBudget(params.ActivityID,params.BudgetID,params.Description,params.EntryType,params.Amount)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-	<cffunction name="saveCategory"  output="false" returntype="string">
-		<cfparam name="params.ActivityID" required="yes" type="string">
-		<cfparam name="params.CategoryID" required="yes" type="string">
+	<cffunction name="saveCategory"  output="false">
+		<cfparam name="params.ActivityID"  type="string">
+		<cfparam name="params.CategoryID"  type="string">
       	
         <cfset var Status = "Fail|Cannot access category save functionality for activities.">
         
-        <cfset Status = Application.Activity.saveCategory(Arguments.ActivityID,Arguments.CategoryID)>
+        <cfset Status = Application.Activity.saveCategory(params.ActivityID,params.CategoryID)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
     
-	<cffunction name="saveCategoriesLMS"  output="false" returntype="string">
-		<cfparam name="params.ActivityID" default="" type="string" required="yes">
-        <cfparam name="params.Site" default="" type="string" required="yes">
+	<cffunction name="saveCategoriesLMS"  output="false">
+		<cfparam name="params.ActivityID" default="" type="string" >
+        <cfparam name="params.Site" default="" type="string" >
       	
         <cfset var Status = "fail">
         
-        <cfset Status = Application.ActivityPublish.saveCategoriesLMS(Arguments.ActivityID,Arguments.Site)>
+        <cfset Status = Application.ActivityPublish.saveCategoriesLMS(params.ActivityID,params.Site)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
     
-	<cffunction name="saveCommitteeMember"  output="false" returntype="string">
-		<cfparam name="params.ActivityID" required="yes" type="string">
-		<cfparam name="params.PersonID" required="yes" type="string">
+	<cffunction name="saveCommitteeMember"  output="false">
+		<cfparam name="params.ActivityID"  type="string">
+		<cfparam name="params.PersonID"  type="string">
       	
         <cfset var Status = "Fail|Cannot access faculty saving functionality.">
         
-        <cfset Status = Application.ActivityPeople.saveCommitteeMember(Arguments.ActivityID,Arguments.PersonID)>
+        <cfset Status = Application.ActivityPeople.saveCommitteeMember(params.ActivityID,params.PersonID)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
     
-	<cffunction name="saveFacultyMember"  output="false" returntype="string">
-		<cfparam name="params.ActivityID" required="yes" type="string">
-		<cfparam name="params.PersonID" required="yes" type="string">
+	<cffunction name="saveFacultyMember"  output="false">
+		<cfparam name="params.ActivityID"  type="string">
+		<cfparam name="params.PersonID"  type="string">
       	
         <cfset var Status = "Fail|Cannot access faculty saving functionality.">
         
-        <cfset Status = Application.ActivityPeople.saveFacultyMember(Arguments.ActivityID,Arguments.PersonID)>
+        <cfset Status = Application.ActivityPeople.saveFacultyMember(params.ActivityID,params.PersonID)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
 
-	<cffunction name="saveFee"  ouput="true" returntype="string">
-    	<cfparam name="params.FeeID" required="yes" default="0">
-    	<cfparam name="params.ActivityID" required="yes">
-        <cfparam name="params.Name" required="yes">
-        <cfparam name="params.StartDate" required="yes">
-        <cfparam name="params.StartTime" required="yes">
-        <cfparam name="params.EndDate" required="yes">
-        <cfparam name="params.EndTime" required="yes">
-        <cfparam name="params.Amount" required="yes">
+	<cffunction name="saveFee"  ouput="true">
+    	<cfparam name="params.FeeID"  default="0">
+    	<cfparam name="params.ActivityID" >
+        <cfparam name="params.Name" >
+        <cfparam name="params.StartDate" >
+        <cfparam name="params.StartTime" >
+        <cfparam name="params.EndDate" >
+        <cfparam name="params.EndTime" >
+        <cfparam name="params.Amount" >
       	
         <cfset var Status = "Fail|Cannot access fee saving functionality for activity finances.">
         
         <cfset Status = Application.ActivityFinance.saveFee(
-							Arguments.FeeID,
-							Arguments.ActivityID,
-							Arguments.Name,
-							Arguments.StartDate,
-							Arguments.StartTime,
-							Arguments.EndDate,
-							Arguments.EndTime,
-							Arguments.Amount)>
+							params.FeeID,
+							params.ActivityID,
+							params.Name,
+							params.StartDate,
+							params.StartTime,
+							params.EndDate,
+							params.EndTime,
+							params.Amount)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
     
-    <cffunction name="saveLedger" hint="Saves ledger information."  output="false" returntype="string">
-    	<cfparam name="params.ActivityID" type="numeric" required="yes">
-        <cfparam name="params.EntryID" type="numeric" required="yes">
-        <cfparam name="params.Description" type="string" required="yes">
-        <cfparam name="params.Memo" type="string" required="yes">
-        <cfparam name="params.EntryDate" type="date" required="yes">
-        <cfparam name="params.EntryType" type="numeric" required="yes">
-        <cfparam name="params.Amount" type="numeric" required="yes">
+    <cffunction name="saveLedger" hint="Saves ledger information."  output="false">
+    	<cfparam name="params.ActivityID" type="numeric" >
+        <cfparam name="params.EntryID" type="numeric" >
+        <cfparam name="params.Description" type="string" >
+        <cfparam name="params.Memo" type="string" >
+        <cfparam name="params.EntryDate" type="date" >
+        <cfparam name="params.EntryType" type="numeric" >
+        <cfparam name="params.Amount" type="numeric" >
       	
         <cfset var Status = "Fail|Cannot access fee saving functionality for activity finances.">
         
         <cfset Status = Application.ActivityFinance.saveLedger(
-							Arguments.ActivityID,
-							Arguments.EntryID,
-							Arguments.Description,
-							Arguments.Memo,
-							Arguments.EntryDate,
-							Arguments.EntryType,
-							Arguments.Amount)>
+							params.ActivityID,
+							params.EntryID,
+							params.Description,
+							params.Memo,
+							params.EntryDate,
+							params.EntryType,
+							params.Amount)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
 
-	<cffunction name="saveNote"  output="false" returntype="string">
+	<cffunction name="saveNote"  output="false">
 		<cfparam name="params.ActivityID" type="string">
 		<cfparam name="params.NoteBody" type="string">
-		<cfparam name="params.NoteID" required="false" default="0">
+		<cfparam name="params.NoteID"  default="0">
       	
         <cfset var Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -998,29 +1003,29 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access note saving functionality for activities.")>
         
-        <cfset status = Application.Activity.saveNote(Arguments.ActivityID,Arguments.NoteBody,Arguments.NoteID)>
+        <cfset status = Application.Activity.saveNote(params.ActivityID,params.NoteBody,params.NoteID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
 	<cffunction name="savePubGeneral" displayname="Save Form"  output="no">
-		<cfparam name="params.ActivityID" type="string" required="yes" />
-		<cfparam name="params.Overview" type="string" required="no" />
-		<cfparam name="params.Objectives" type="string" required="no" />
-		<cfparam name="params.Keywords" type="string" required="no" />
-		<cfparam name="params.PublishDate" type="string" required="no" />
-		<cfparam name="params.RemoveDate" type="string" required="no" />
-		<cfparam name="params.PaymentFlag" type="string" required="no" />
-		<cfparam name="params.PaymentFee" type="string" required="no" />
-		<cfparam name="params.FeaturedFlag" type="string" required="no" default="N" />
-		<cfparam name="params.ExtHostFlag" type="string" required="no" default="N" />
-		<cfparam name="params.ExtHostLink" type="string" required="no" default="" />
-		<cfparam name="params.AllowCommentFlag" type="string" required="no" />
-		<cfparam name="params.CommentApproveFlag" type="string" required="no" />
-		<cfparam name="params.NotifyEmails" type="string" required="no" />
-		<cfparam name="params.TermsFlag" type="string" required="no" />
-		<cfparam name="params.TermsText" type="string" required="no" />
-		<cfparam name="params.RestrictedFlag" type="string" required="no" />
+		<cfparam name="params.ActivityID" type="string"  />
+		<cfparam name="params.Overview" type="string"  />
+		<cfparam name="params.Objectives" type="string"  />
+		<cfparam name="params.Keywords" type="string"  />
+		<cfparam name="params.PublishDate" type="string"  />
+		<cfparam name="params.RemoveDate" type="string"  />
+		<cfparam name="params.PaymentFlag" type="string"  />
+		<cfparam name="params.PaymentFee" type="string"  />
+		<cfparam name="params.FeaturedFlag" type="string"  default="N" />
+		<cfparam name="params.ExtHostFlag" type="string"  default="N" />
+		<cfparam name="params.ExtHostLink" type="string"  default="" />
+		<cfparam name="params.AllowCommentFlag" type="string"  />
+		<cfparam name="params.CommentApproveFlag" type="string"  />
+		<cfparam name="params.NotifyEmails" type="string"  />
+		<cfparam name="params.TermsFlag" type="string"  />
+		<cfparam name="params.TermsText" type="string"  />
+		<cfparam name="params.RestrictedFlag" type="string"  />
       	
         <cfset var Status = createObject("component", "#application.settings.com#returnData.buildStruct").init()>
         
@@ -1030,30 +1035,30 @@
         <cfset status.setStatusMsg("Cannot access general publish save functionality currently.  Please contact technical support and try again later.")>
         
         <cfset status = Application.ActivityPublish.savePubGeneral(
-							Arguments.ActivityID,
-							Arguments.Overview,
-							Arguments.Objectives,
-							Arguments.Keywords,
-							Arguments.PublishDate,
-							Arguments.RemoveDate,
-							Arguments.PaymentFlag,
-							Arguments.PaymentFee,
-							Arguments.FeaturedFlag,
-							Arguments.ExtHostFlag,
-							Arguments.ExtHostLink,
-							Arguments.AllowCommentFlag,
-							Arguments.CommentApproveFlag,
-							Arguments.NotifyEmails,
-							Arguments.TermsFlag,
-							Arguments.TermsText,
-							Arguments.RestrictedFlag)>
+							params.ActivityID,
+							params.Overview,
+							params.Objectives,
+							params.Keywords,
+							params.PublishDate,
+							params.RemoveDate,
+							params.PaymentFlag,
+							params.PaymentFee,
+							params.FeaturedFlag,
+							params.ExtHostFlag,
+							params.ExtHostLink,
+							params.AllowCommentFlag,
+							params.CommentApproveFlag,
+							params.NotifyEmails,
+							params.TermsFlag,
+							params.TermsText,
+							params.RestrictedFlag)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-	<cffunction name="saveSpecialties"  output="false" returntype="string">
-		<cfparam name="params.ActivityID" default="" type="string" required="yes">
-        <cfparam name="params.Specialties" default="" type="string" required="yes">
+	<cffunction name="saveSpecialties"  output="false">
+		<cfparam name="params.ActivityID" default="" type="string" >
+        <cfparam name="params.Specialties" default="" type="string" >
       	
         <cfset var Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -1062,23 +1067,23 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access specialty saving functionality for activities.")>
         
-        <cfset Status = Application.ActivityPublish.saveSpecialties(Arguments.ActivityID,Arguments.Specialties)>
+        <cfset Status = Application.ActivityPublish.saveSpecialties(params.ActivityID,params.Specialties)>
         
-        <cfreturn Status.getJSON() />
+        <cfset renderText(Status.getJSON()) />
     </cffunction>
     
-	<cffunction name="saveSupport"  output="false" returntype="string">
-    	<cfparam name="params.SupportID" required="false" default="-1" type="string">
+	<cffunction name="saveSupport"  output="false">
+    	<cfparam name="params.SupportID"  default="-1" type="string">
 		<cfparam name="params.ActivityID" type="string">
 		<cfparam name="params.Supporter" type="string">
 		<cfparam name="params.SupportType" type="string">
 		<cfparam name="params.Amount" type="string">
-		<cfparam name="params.ContractNum" required="false" type="string" default="">
-		<cfparam name="params.BudgetRequested" required="false" type="string" default="">
-		<cfparam name="params.BudgetDueDate" required="false" type="string" default="">
-		<cfparam name="params.BudgetSentDate" required="false" type="string" default="">
-		<cfparam name="params.SentDate" required="false" type="string" default="">
-		<cfparam name="params.FundsReturned" required="false" type="string" default="">
+		<cfparam name="params.ContractNum"  type="string" default="">
+		<cfparam name="params.BudgetRequested"  type="string" default="">
+		<cfparam name="params.BudgetDueDate"  type="string" default="">
+		<cfparam name="params.BudgetSentDate"  type="string" default="">
+		<cfparam name="params.SentDate"  type="string" default="">
+		<cfparam name="params.FundsReturned"  type="string" default="">
       	
         <cfset var Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -1088,25 +1093,25 @@
         <cfset status.setStatusMsg("Cannot access the save function for activity finances.")>
         
         <cfset Status = Application.ActivityFinance.saveSupport(
-							Arguments.SupportID,
-							Arguments.ActivityID,
-							Arguments.Supporter,
-							Arguments.SupportType,
-							Arguments.Amount,
-							Arguments.ContractNum,
-							Arguments.BudgetRequested,
-							Arguments.BudgetDueDate,
-							Arguments.BudgetSentDate,
-							Arguments.SentDate,
-							Arguments.FundsReturned)>
+							params.SupportID,
+							params.ActivityID,
+							params.Supporter,
+							params.SupportType,
+							params.Amount,
+							params.ContractNum,
+							params.BudgetRequested,
+							params.BudgetDueDate,
+							params.BudgetSentDate,
+							params.SentDate,
+							params.FundsReturned)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-    <cffunction name="sendCertificate" hint="Sends a copy of the attendee's certificate to the person attached to the attendee."  output="false" returntype="string">
-        <cfparam name="params.activityId" type="numeric" required="no" default="0">
-    	<cfparam name="params.personId" type="numeric" required="no" default="0">
-        <cfparam name="params.creditid" type="numeric" required="no" default="1">
+    <cffunction name="sendcertificate" hint="Sends a copy of the attendee's certificate to the person attached to the attendee."  output="false">
+        <cfparam name="params.activityId" type="numeric"  default="0">
+    	<cfparam name="params.personId" type="numeric"  default="0">
+        <cfparam name="params.creditid" type="numeric"  default="1">
       	
         <cfset var Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -1116,60 +1121,60 @@
         <cfset status.setStatusMsg("Cannot access the send certificate function.")>
 		
         <cfset status = application.activityAttendee.sendCertificate(
-							activityId=arguments.activityId,
-							personId=arguments.personId,
-							creditId=arguments.creditId)>
+							activityId=params.activityId,
+							personId=params.personId,
+							creditId=params.creditId)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-    <cffunction name="UnpublishFile" hint="Unpublishes provided file."  output="false" returntype="string">
-    	<cfparam name="params.ActivityID" type="numeric" required="yes">
-        <cfparam name="params.FileID" type="numeric" required="yes">
+    <cffunction name="UnpublishFile" hint="Unpublishes provided file."  output="false">
+    	<cfparam name="params.ActivityID" type="numeric" >
+        <cfparam name="params.FileID" type="numeric" >
         
         <cfset Status = "Fail|Cannot access the unpublish function for activity documents.">
         
-        <cfset Status = Application.ActivityPublish.UnpublishFile(Arguments.ActivityID,Arguments.FileID)>
+        <cfset Status = Application.ActivityPublish.UnpublishFile(params.ActivityID,params.FileID)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
 	
 	<cffunction name="updateActivityStatus"  output="no" displayname="Set Activity Status">
-		<cfparam name="params.ActivityID" type="numeric" required="yes" />
-		<cfparam name="params.StatusID" type="numeric" required="yes" />
+		<cfparam name="params.ActivityID" type="numeric"  />
+		<cfparam name="params.StatusID" type="numeric"  />
         
         <cfset Status = "Fail">
         
-        <cfset Status = Application.Activity.updateStatus(Arguments.ActivityID,Arguments.StatusID)>
+        <cfset Status = Application.Activity.updateStatus(params.ActivityID,params.StatusID)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
     
-    <cffunction name="updateAddlAttendees"  output="false" returntype="any">
+    <cffunction name="updateAddlAttendees"  output="false">
     	<cfparam name="params.ActivityID" type="string" />
         <cfparam name="params.AddlAttendees" type="string" />
         
         <cfset var Status = "Fail|Cannot access the update function for additional attendees.">
         
-        <cfset Status = Application.Activity.updateAddlAttendees(Arguments.ActivityID,Arguments.AddlAttendees)>
+        <cfset Status = Application.Activity.updateAddlAttendees(params.ActivityID,params.AddlAttendees)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
     
-	<cffunction name="updateApplicationValue"  output="false" returntype="string">
-		<cfparam name="params.ActivityID" required="yes" type="string">
-		<cfparam name="params.Field" required="yes" type="string"> <!--- "Received, Sent, Approved, etc." --->
-		<cfparam name="params.Flag" required="yes" type="string">
-		<cfparam name="params.AppDate" required="yes" type="string">
+	<cffunction name="updateApplicationValue"  output="false">
+		<cfparam name="params.ActivityID"  type="string">
+		<cfparam name="params.Field"  type="string"> <!--- "Received, Sent, Approved, etc." --->
+		<cfparam name="params.Flag"  type="string">
+		<cfparam name="params.AppDate"  type="string">
 		
 		<cfset var Status = "Fail|Cannot access update functionality for activity applications.">
         
-        <cfset Status = Application.Activity.updateApplicationValue(Arguments.ActivityID,Arguments.Field,Arguments.Flag,Arguments.AppDate)>
+        <cfset Status = Application.Activity.updateApplicationValue(params.ActivityID,params.Field,params.Flag,params.AppDate)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
 
-	<cffunction name="updateAttendeeStatuses"  output="false" returntype="string">
+	<cffunction name="updateAttendeeStatuses"  output="false">
 		<cfparam name="params.AttendeeList" type="string">
 		<cfparam name="params.ActivityID" type="string">
 		<cfparam name="params.StatusID" type="string">
@@ -1181,31 +1186,31 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access the status update functionality for attendees.")>
         
-        <cfset status = Application.ActivityAttendee.updateStatuses(Arguments.AttendeeList,Arguments.ActivityID,Arguments.StatusID)>
+        <cfset status = Application.ActivityAttendee.updateStatuses(params.AttendeeList,params.ActivityID,params.StatusID)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-    <cffunction name="updateMaxRegistrants"  output="false" returntype="any">
+    <cffunction name="updateMaxRegistrants"  output="false">
     	<cfparam name="params.ActivityID" type="string" />
         <cfparam name="params.MaxRegistrants" type="string" />
         
         <cfset var Status = "Fail|Cannot access the update function for max registrants.">
         
-        <cfset Status = Application.Activity.updateMaxRegistrants(Arguments.ActivityID,Arguments.MaxRegistrants)>
+        <cfset Status = Application.Activity.updateMaxRegistrants(params.ActivityID,params.MaxRegistrants)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
     
-    <cffunction name="updateMDStatus"  output="false" returntype="string">
+    <cffunction name="updateMDStatus"  output="false">
 		<cfparam name="params.ActivityID" type="string">
 		<cfparam name="params.PersonID" type="string">
 		<cfparam name="params.MDNonMD" type="string">
         
         <cfset var Status = "Fail|Cannot access the update function for attendee MD status.">
         
-        <cfset Status = Application.ActivityAttendee.updateMDStatus(Arguments.ActivityID,Arguments.PersonID,Arguments.MDNonMD)>
+        <cfset Status = Application.ActivityAttendee.updateMDStatus(params.ActivityID,params.PersonID,params.MDNonMD)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
 </cfcomponent>

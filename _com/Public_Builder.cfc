@@ -128,13 +128,13 @@
             <cfquery name="TemplateInfo" datasource="#Application.Settings.DSN#">
             	SELECT AssessTmplID, Name
                 FROM ce_AssessTmpl
-                WHERE AssessmentID = <cfqueryparam value="#PubComponentBean.getAssessmentID()#" cfsqltype="cf_sql_integer"> AND CreatedBy = <cfqueryparam value="#Session.Person.getPersonID()#" cfsqltype="cf_sql_integer" />
+                WHERE AssessmentID = <cfqueryparam value="#PubComponentBean.getAssessmentID()#" cfsqltype="cf_sql_integer"> AND CreatedBy = <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_integer" />
             </cfquery>
             
             <cfif TemplateInfo.RecordCount GT 0>
             	<cfquery name="DeleteTemplate" datasource="#Application.Settings.DSN#">
                     DELETE FROM ce_AssessTmpl
-                    WHERE AssessmentID = <cfqueryparam value="#PubComponentBean.getAssessmentID()#" cfsqltype="cf_sql_integer"> AND CreatedBy = <cfqueryparam value="#Session.Person.getPersonID()#" cfsqltype="cf_sql_integer" />
+                    WHERE AssessmentID = <cfqueryparam value="#PubComponentBean.getAssessmentID()#" cfsqltype="cf_sql_integer"> AND CreatedBy = <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_integer" />
                 </cfquery>
                 
                 <cfset Status = "Success|Template '" & TemplateInfo.Name & "' has been deleted.">
@@ -246,7 +246,7 @@
                 <cfset AssessTmplBean.setAssessmentID(AssessmentBean.getAssessmentID())>
                 <cfset AssessTmplBean.setAssessTypeID(AssessmentBean.getAssessTypeID())>
                 <cfset AssessTmplBean.setName(Arguments.Name)>
-                <cfset AssessTmplBean.setCreatedBy(Session.Person.getPersonID())>
+                <cfset AssessTmplBean.setCreatedBy(session.currentuser.id)>
                 
                 <cfset AssessTmplID = Application.Com.AssessTmplDAO.Create(AssessTmplBean)>
                 
@@ -415,9 +415,9 @@
 		</cfswitch>
         
 		<cfif PubComponent.getCreatedBy() EQ "">
-			<cfset PubComponent.setCreatedBy(Session.Person.getPersonID())>
+			<cfset PubComponent.setCreatedBy(session.currentuser.id)>
 		<cfelse>
-			<cfset PubComponent.setUpdatedBy(Session.Person.getPersonID())>
+			<cfset PubComponent.setUpdatedBy(session.currentuser.id)>
 			<cfset PubComponent.setUpdated(now())>
 		</cfif>
         
@@ -428,13 +428,13 @@
 		<cfif Arguments.PubComponentID GT 0>
         	<cfset Application.History.Add(
 						HistoryStyleID=12,
-						FromPersonID=Session.PersonID,
+						FromPersonID=session.currentuser.id,
 						ToActivityID=Arguments.ActivityID,
 						ToContent=OutputVar)>
 		<cfelse>
         	<cfset Application.History.Add(
 						HistoryStyleID=11,
-						FromPersonID=Session.PersonID,
+						FromPersonID=session.currentuser.id,
 						ToActivityID=Arguments.ActivityID,
 						ToContent=OutputVar)>
 		</cfif>

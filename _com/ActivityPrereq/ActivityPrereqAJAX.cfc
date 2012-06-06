@@ -38,7 +38,7 @@
                 <cfset PrereqBean = CreateObject("component","#Application.Settings.Com#ActivityPrereq.ActivityPrereq").Init(ActivityPrereqID=0)>
                 <cfset PrereqBean.setActivityID(Arguments.ActivityID)>
                 <cfset PrereqBean.setPrereqID(PrereqInfo.ActivityID)>
-                <cfset PrereqBean.setCreatedBy(Session.Person.getPersonID())>
+                <cfset PrereqBean.setCreatedBy(session.currentuser.id)>
                 <cfset PrereqSaved = Application.Com.ActivityPrereqDAO.Create(PrereqBean)>
                 
                 <cfif isNumeric(PrereqSaved)>

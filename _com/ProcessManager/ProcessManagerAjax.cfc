@@ -57,7 +57,7 @@
 		<cfelse>
 			<cfquery name="qInsert" datasource="#Application.Settings.DSN#">
 				INSERT INTO ce_ProcessManager (PersonID,ProcessID,CreatedBy)
-				VALUES (<cfqueryparam value="#Arguments.PersonID#" cfsqltype="cf_sql_integer" />,<cfqueryparam value="#Arguments.ProcessID#" cfsqltype="cf_sql_integer" />,#Session.Person.getPersonID()#)
+				VALUES (<cfqueryparam value="#Arguments.PersonID#" cfsqltype="cf_sql_integer" />,<cfqueryparam value="#Arguments.ProcessID#" cfsqltype="cf_sql_integer" />,#session.currentuser.id#)
 			</cfquery>
 			<cfset Status = "success|Person successfully added to process.">
 		</cfif>

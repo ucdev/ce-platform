@@ -1,47 +1,47 @@
 <cfcomponent extends="controller">
-    <cffunction name="deleteCategoryLMS" hint="deletes categories from system"  output="true" returntype="string">
-		<cfparam name="params.CategoryID" type="numeric" required="no" default="0">
-		<cfparam name="params.CategoryName" type="string" required="no" default="">
+    <cffunction name="deleteCategoryLMS" hint="deletes categories from system"  output="true">
+		<cfparam name="params.CategoryID" type="numeric"  default="0">
+		<cfparam name="params.CategoryName" type="string"  default="">
         
         <cfset var Status = "Fail|Cannot access delete functionality for system preferences.">
         
-        <cfset Status = Application.System.deleteCategoryLMS(CategoryID=Arguments.CategoryID,CategoryName=Arguments.CategoryName)>
+        <cfset Status = Application.System.deleteCategoryLMS(CategoryID=params.CategoryID,CategoryName=params.CategoryName)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
         
-	<cffunction name="deleteSpecialty" hint="deletes specialties to system"  output="true" returntype="string">
-		<cfparam name="params.SpecialtyID" type="numeric" required="no" default="0">
-		<cfparam name="params.SpecialtyName" type="string" required="no" default="">
+	<cffunction name="deleteSpecialty" hint="deletes specialties to system"  output="true">
+		<cfparam name="params.SpecialtyID" type="numeric"  default="0">
+		<cfparam name="params.SpecialtyName" type="string"  default="">
         
         <cfset var Status = "Fail|Cannot access delete functionality for system preferences.">
         
-        <cfset Status = Application.System.deleteSpecialty(SpecialtyID=Arguments.SpecialtyID,SpecialtyName=Arguments.SpecialtyName)>
+        <cfset Status = Application.System.deleteSpecialty(SpecialtyID=params.SpecialtyID,SpecialtyName=params.SpecialtyName)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
     
-	<cffunction name="saveCategoryLMS" hint="adds new categories to system"  output="true" returntype="string">
-		<cfparam name="params.CategoryName" type="string" required="yes">
+	<cffunction name="saveCategoryLMS" hint="adds new categories to system"  output="true">
+		<cfparam name="params.CategoryName" type="string" >
         
         <cfset var Status = "Fail|Cannot access save functionality for system preferences.">
         
-        <cfset Status = Application.System.saveCategoryLMS(Arguments.CategoryName)>
+        <cfset Status = Application.System.saveCategoryLMS(params.CategoryName)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
     
-	<cffunction name="saveSpecialty" hint="adds new specialties to system"  output="true" returntype="string">
-		<cfparam name="params.SpecialtyName" type="string" required="yes">
+	<cffunction name="saveSpecialty" hint="adds new specialties to system"  output="true">
+		<cfparam name="params.SpecialtyName" type="string" >
         
         <cfset var Status = "Fail|Cannot access save functionality for system preferences.">
         
-        <cfset Status = Application.System.saveSpecialty(Arguments.SpecialtyName)>
+        <cfset Status = Application.System.saveSpecialty(params.SpecialtyName)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
     
-	<cffunction name="saveSupporter"  output="true" returntype="string">
+	<cffunction name="saveSupporter"  output="true">
 		<cfparam name="params.ActivityID" type="string">
 		<cfparam name="params.NewSupporterName" type="string">
 		<cfparam name="params.NewSupporterDescrip" type="string">
@@ -54,32 +54,32 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access save functionality for system preferences.")>
         
-        <cfset status = Application.System.saveSupporter(Arguments.ActivityID,Arguments.NewSupporterName,Arguments.NewSupporterDescrip,arguments.original_name)>
+        <cfset status = Application.System.saveSupporter(params.ActivityID,params.NewSupporterName,params.NewSupporterDescrip,params.original_name)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-	<cffunction name="updateCategoryLMS" hint="updates categories to system"  output="true" returntype="string">
-		<cfparam name="params.CategoryID" type="string" required="yes">
-		<cfparam name="params.CategoryName" type="string" required="yes">
-		<cfparam name="params.UpdatedCategoryName" type="string" required="yes">
+	<cffunction name="updateCategoryLMS" hint="updates categories to system"  output="true">
+		<cfparam name="params.CategoryID" type="string" >
+		<cfparam name="params.CategoryName" type="string" >
+		<cfparam name="params.UpdatedCategoryName" type="string" >
         
         <cfset var Status = "Fail|Cannot access update functionality for system preferences.">
         
-        <cfset Status = Application.System.updateCategoryLMS(Arguments.CategoryID,Arguments.CategoryName,Arguments.UpdatedCategoryName)>
+        <cfset Status = Application.System.updateCategoryLMS(params.CategoryID,params.CategoryName,params.UpdatedCategoryName)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
     
-	<cffunction name="updateSpecialty" hint="updates specialties to system"  output="true" returntype="string">
-		<cfparam name="params.SpecialtyID" type="string" required="yes">
-		<cfparam name="params.SpecialtyName" type="string" required="yes">
-		<cfparam name="params.UpdatedSpecialtyName" type="string" required="yes">
+	<cffunction name="updateSpecialty" hint="updates specialties to system"  output="true">
+		<cfparam name="params.SpecialtyID" type="string" >
+		<cfparam name="params.SpecialtyName" type="string" >
+		<cfparam name="params.UpdatedSpecialtyName" type="string" >
         
         <cfset var Status = "Fail|Cannot access update functionality for system preferences.">
         
-        <cfset Status = Application.System.updateSpecialty(Arguments.SpecialtyID,Arguments.SpecialtyName,Arguments.UpdatedSpecialtyName)>
+        <cfset Status = Application.System.updateSpecialty(params.SpecialtyID,params.SpecialtyName,params.UpdatedSpecialtyName)>
         
-        <cfreturn Status />
+        <cfset renderText(Status) />
     </cffunction>
 </cfcomponent>

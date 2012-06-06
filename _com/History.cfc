@@ -177,7 +177,7 @@
 		<cfreturn qQuery />
 	</cffunction>
 	
-	<cfinclude template="#Application.Settings.ComPath#/_UDF/HowLongAgo.cfm" />
+	<cfinclude template="/_com/_UDF/HowLongAgo.cfm" />
 	
 	<cffunction name="RenderHTML" output="no" access="public">
 		<cfargument name="QueryRow" type="struct" required="yes" />

@@ -6,7 +6,7 @@
 		
 		<cfquery name="qSetStatus" datasource="#Application.Settings.DSN#">
 			UPDATE ce_ProcessStep_Activity
-			SET StepStatusID=<cfqueryparam value="#Arguments.StepStatusID#" cfsqltype="cf_sql_integer" />,Updated=#CreateODBCDateTime(now())#,UpdatedBy=<cfqueryparam value="#Session.Person.getPersonID()#" cfsqltype="cf_sql_integer" />
+			SET StepStatusID=<cfqueryparam value="#Arguments.StepStatusID#" cfsqltype="cf_sql_integer" />,Updated=#CreateODBCDateTime(now())#,UpdatedBy=<cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_integer" />
 			WHERE
 				StepID=<cfqueryparam value="#Arguments.StepID#" cfsqltype="cf_sql_integer" /> AND 
 				ActivityID=<cfqueryparam value="#Arguments.ActivityID#" cfsqltype="cf_sql_integer" />
@@ -22,7 +22,7 @@
 		
 		<cfquery name="qSetStatus" datasource="#Application.Settings.DSN#">
 			UPDATE ce_ProcessStep_Activity
-			SET DueDate=<cfqueryparam value="#Arguments.DueDate#" cfsqltype="cf_sql_timestamp" />,Updated=#CreateODBCDateTime(now())#,UpdatedBy=<cfqueryparam value="#Session.Person.getPersonID()#" cfsqltype="cf_sql_integer" />
+			SET DueDate=<cfqueryparam value="#Arguments.DueDate#" cfsqltype="cf_sql_timestamp" />,Updated=#CreateODBCDateTime(now())#,UpdatedBy=<cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_integer" />
 			WHERE
 				StepID=<cfqueryparam value="#Arguments.StepID#" cfsqltype="cf_sql_integer" /> AND 
 				ActivityID=<cfqueryparam value="#Arguments.ActivityID#" cfsqltype="cf_sql_integer" />
@@ -38,7 +38,7 @@
 		
 		<cfquery name="qSetStatus" datasource="#Application.Settings.DSN#">
 			UPDATE ce_ProcessStep_Activity
-			SET AssignedToID=<cfqueryparam value="#Arguments.AssignedToID#" cfsqltype="cf_sql_integer" />,Updated=#CreateODBCDateTime(now())#,UpdatedBy=<cfqueryparam value="#Session.Person.getPersonID()#" cfsqltype="cf_sql_integer" />
+			SET AssignedToID=<cfqueryparam value="#Arguments.AssignedToID#" cfsqltype="cf_sql_integer" />,Updated=#CreateODBCDateTime(now())#,UpdatedBy=<cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_integer" />
 			WHERE
 				StepID=<cfqueryparam value="#Arguments.StepID#" cfsqltype="cf_sql_integer" /> AND 
 				ActivityID=<cfqueryparam value="#Arguments.ActivityID#" cfsqltype="cf_sql_integer" />

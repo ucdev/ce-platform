@@ -66,7 +66,8 @@
 	<cffunction name="$successfulLogin">
 	 <cfargument name="user" type="any">
 
-		<cfset session.currentUser = arguments.user>
+		<cfset session['currentUser'] = arguments.user>
+		<cfset session['account'] = model("account").findOneByPersonid(arguments.user.id)>
 
 		<cfif structKeyExists(params,"rememberMe")>
 			<cfcookie name="app.rememberme" value="true" expires="14" />

@@ -1,10 +1,11 @@
 <cfcomponent extends="Model">
     <cffunction name="init">
-        <cfset table("Person")>
-        <cfset property(name="id", column="PersonID") />
-        <!---<cfset setPrimaryKey(property="id") />--->
-        
-        <cfset hasMany("person_email")>
+		<cfset table("Person")>
+		<cfset property(name="id", column="PersonID") />
+		<!---<cfset setPrimaryKey(property="id") />--->
+		
+		<cfset hasMany("person_email")>
+		<cfset hasOne("account") />
     </cffunction>
 
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->

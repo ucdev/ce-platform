@@ -123,6 +123,18 @@
 			<td valign="top"><strong>Execution Time:</strong></td>
 			<td>#request.wheels.execution.total#ms<cfif request.wheels.execution.total GT 0> (<cfset loc.keys = StructSort(request.wheels.execution, "numeric", "desc")><cfset loc.firstDone = false><cfloop from="1" to="#arrayLen(loc.keys)#" index="loc.i"><cfset loc.key = loc.keys[loc.i]><cfif loc.key IS NOT "total" AND request.wheels.execution[loc.key] GT 0><cfif loc.firstDone>, </cfif>#LCase(loc.key)# ~#request.wheels.execution[loc.key]#ms<cfset loc.firstDone = true></cfif></cfloop>)</cfif></td>
 		</tr>
+		<!---<cfif structKeyExists(session,'currentUser')>
+		<tr>
+			<td><strong>Current User</strong></td>
+			<td><cfdump var="#session.currentUser#"></td>
+		</tr>
+		<cfif structKeyExists(session,'account')>
+		<tr>
+			<td><strong>User Account</strong></td>
+			<td><cfdump var="#session.account#"></td>
+		</tr>
+		</cfif>
+		</cfif>--->
 	</table>
 </div>
 

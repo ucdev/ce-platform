@@ -24,7 +24,7 @@
                         <cfquery name="qRemoveChecked" datasource="#Application.Settings.DSN#">
                             UPDATE ce_File
                             SET DeletedFlag = <cfqueryparam value="Y" cfsqltype="cf_sql_char" />,
-                                UpdatedBy = <cfqueryparam value="#Session.Person.getPersonID()#" cfsqltype="cf_sql_char" />
+                                UpdatedBy = <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_char" />
                             WHERE FileID = <cfqueryparam value="#FileID#" CFSQLType="cf_sql_integer" /> AND ActivityID = <cfqueryparam value="#Arguments.ActivityID#" CFSQLType="cf_sql_integer" />
                         </cfquery>
                         
@@ -40,7 +40,7 @@
                         <cfset ActionBean.setCode("FIR")>
                         <cfset ActionBean.setShortName("Deleted a file.")>
                         <cfset ActionBean.setLongName("Deleted file '#FileBean.getFileName()#' from activity '<a href=""/index.cfm/event/Activity.Detail?ActivityID=#ActivityBean.getActivityID()#"">#ActivityBean.getTitle()#</a>'")>
-                        <cfset ActionBean.setCreatedBy(Session.Person.getPersonID())>
+                        <cfset ActionBean.setCreatedBy(session.currentuser.id)>
                         <cfset Application.Com.ActionDAO.Create(ActionBean)>
                     </cfloop>
                     
@@ -74,7 +74,7 @@
                         <cfquery name="qRemoveChecked" datasource="#Application.Settings.DSN#">
                             UPDATE ce_File
                             SET DeletedFlag = <cfqueryparam value="Y" cfsqltype="cf_sql_char" />,
-                                UpdatedBy = <cfqueryparam value="#Session.Person.getPersonID()#" cfsqltype="cf_sql_char" />
+                                UpdatedBy = <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_char" />
                             WHERE FileID = <cfqueryparam value="#FileID#" CFSQLType="cf_sql_integer" /> AND PersonID = <cfqueryparam value="#Arguments.PersonID#" CFSQLType="cf_sql_integer" />
                         </cfquery>
                         
@@ -90,7 +90,7 @@
                         <cfset ActionBean.setCode("FIR")>
                         <cfset ActionBean.setShortName("Deleted a file.")>
                         <cfset ActionBean.setLongName("Deleted file '#FileBean.getFileName()#' from person '<a href=""/index.cfm/event/Person.Detail?PresonID=#PersonBean.getPersonID()#"">#PersonBean.getFirstName()# #PersonBean.getLastName()#</a>'")>
-                        <cfset ActionBean.setCreatedBy(Session.Person.getPersonID())>
+                        <cfset ActionBean.setCreatedBy(session.currentuser.id)>
                         <cfset Application.Com.ActionDAO.Create(ActionBean)>
                     </cfloop>
                     
@@ -131,7 +131,7 @@
                     <cfquery name="qRemoveAll" datasource="#Application.Settings.DSN#">
                         UPDATE ce_File
                         SET DeletedFlag = <cfqueryparam value="Y" cfsqltype="cf_sql_char" />,
-                            UpdatedBy = <cfqueryparam value="#Session.Person.getPersonID()#" cfsqltype="cf_sql_char" />
+                            UpdatedBy = <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_char" />
                         WHERE ActivityID = <cfqueryparam value="#Arguments.ActivityID#" CFSQLType="cf_sql_integer" />
                     </cfquery>
                     
@@ -140,7 +140,7 @@
                     <cfset ActionBean.setCode("FIR")>
                     <cfset ActionBean.setShortName("Deleted all files.")>
                     <cfset ActionBean.setLongName("Deleted all files from activity '<a href=""/index.cfm/event/Activity.Detail?ActivityID=#ActivityBean.getActivityID()#"">#ActivityBean.getTitle()#</a>'")>
-                    <cfset ActionBean.setCreatedBy(Session.Person.getPersonID())>
+                    <cfset ActionBean.setCreatedBy(session.currentuser.id)>
                     <cfset Application.Com.ActionDAO.Create(ActionBean)>
                     
                     <cfset Status = "Success|All files have been removed.">
@@ -164,7 +164,7 @@
                     <cfquery name="qRemoveAll" datasource="#Application.Settings.DSN#">
                         UPDATE ce_File
                         SET DeletedFlag = <cfqueryparam value="Y" cfsqltype="cf_sql_char" />,
-                            UpdatedBy = <cfqueryparam value="#Session.Person.getPersonID()#" cfsqltype="cf_sql_char" />
+                            UpdatedBy = <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_char" />
                         WHERE PersonID = <cfqueryparam value="#Arguments.PersonID#" CFSQLType="cf_sql_integer" />
                     </cfquery>
                     
@@ -173,7 +173,7 @@
                     <cfset ActionBean.setCode("FIR")>
                     <cfset ActionBean.setShortName("Deleted all files.")>
                     <cfset ActionBean.setLongName("Deleted all files from Person '<a href=""/index.cfm/event/Person.Detail?PersonID=#PersonBean.getPersonID()#"">#PersonBean.getFirstName()# #PersonBean.getLastName()#</a>'")>
-                    <cfset ActionBean.setCreatedBy(Session.Person.getPersonID())>
+                    <cfset ActionBean.setCreatedBy(session.currentuser.id)>
                     <cfset Application.Com.ActionDAO.Create(ActionBean)>
                     
                     <cfset Status = "Success|All files have been removed.">

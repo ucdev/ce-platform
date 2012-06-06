@@ -37,7 +37,7 @@
             <!--- Save the action for the Budget Delete --->
             <cfset Application.History.Add(
                         HistoryStyleID=10,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToActivityID=Arguments.ActivityID)>
             
             <cfcatch type="any">
@@ -86,7 +86,7 @@
             <!--- Save the action for the Budget Entry Save --->
             <cfset Application.History.Add(
                         HistoryStyleID=39,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToActivityID=Arguments.ActivityID)>
             
             <cfset status.setStatus(true)>
@@ -150,7 +150,7 @@
             <!--- Save the action for the Ledger Entry Save --->
             <cfset Application.History.Add(
                         HistoryStyleID=40,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToActivityID=Arguments.ActivityID)>
             
             <cfcatch type="any">
@@ -227,7 +227,7 @@
             <cfset ActionBean.setShortName("Deleted a support entry.")>
             <cfset ActionBean.setCode("SUPR")>
             <cfset ActionBean.setLongName("Deleted a support entry for #qActivitySupport.SupporterName# (#qActivitySupport.SupportTypeName#) to activity '<a href=""/index.cfm/event/Activity.Detail?ActivityID=#Arguments.ActivityID#"">#ActivityTitle#</a>' for the amount of #qActivitySupport.Amount#.")>
-            <cfset ActionBean.setCreatedBy(Session.Person.getPersonID())>
+            <cfset ActionBean.setCreatedBy(session.currentuser.id)>
             <cfset Application.Com.ActionDAO.Create(ActionBean)>
             
 			<cfset status.setStatus(true)>
@@ -293,9 +293,9 @@
         
         <!--- Determines if it is a new Ledger or an edited ledger --->
         <cfif Arguments.BudgetID EQ 0>
-            <cfset ActivityBudgetBean.setCreatedBy(Session.Person.getPersonID())>
+            <cfset ActivityBudgetBean.setCreatedBy(session.currentuser.id)>
         <cfelse>
-            <cfset ActivityBudgetBean.setUpdatedBy(Session.Person.getPersonID())>
+            <cfset ActivityBudgetBean.setUpdatedBy(session.currentuser.id)>
         </cfif>
         
         <!--- Validate Bean --->
@@ -320,7 +320,7 @@
                 <!--- Save the action for the Ledger Entry Save --->
                 <cfset Application.History.Add(
 							HistoryStyleID=9,
-							FromPersonID=Session.PersonID,
+							FromPersonID=session.currentuser.id,
 							ToActivityID=Arguments.ActivityID)>
                 
 				<cfset status.setStatus(true)>
@@ -362,10 +362,10 @@
 			<cfset ActivityFeeExists = Application.Com.ActivityFeeDAO.Exists(ActivityFeeBean)>
             <cfif ActivityFeeExists>
 				<cfset ActivityFeeBean = Application.Com.ActivityFeeDAO.Read(ActivityFeeBean)>
-                    <cfset ActivityFeeBean.setUpdatedBy(Session.PersonID)>
+                    <cfset ActivityFeeBean.setUpdatedBy(session.currentuser.id)>
                     <cfset ActivityFeeBean.setUpdated(Now())>
             <cfelse>
-                    <cfset ActivityFeeBean.setCreatedBy(Session.PersonID)>
+                    <cfset ActivityFeeBean.setCreatedBy(session.currentuser.id)>
                     <cfset ActivityFeeBean.setCreated(Now())>
             </cfif>
             
@@ -412,7 +412,7 @@
             <!--- Sets the Amount in the bean --->
             <cfset ActivityFeeBean.setAmount(Arguments.Amount)>
             <!--- Determines if it is a new Ledger or an edited ledger --->
-            <cfset ActivityFeeBean.setCreatedBy(Session.Person.getPersonID())>
+            <cfset ActivityFeeBean.setCreatedBy(session.currentuser.id)>
             
             <!--- Validate Bean --->
             <cfset aErrors = ActivityFeeBean.Validate()>
@@ -435,7 +435,7 @@
                     <!--- Save the action for the Ledger Entry Save --->
                     <cfset Application.History.Add(
 								HistoryStyleID=38,
-								FromPersonID=Session.PersonID,
+								FromPersonID=session.currentuser.id,
 								ToActivityID=Arguments.ActivityID)>
                     
                     <cfset Status = "Success|Fee has been added.">
@@ -507,9 +507,9 @@
         
         <!--- Determines if it is a new Ledger or an edited ledger --->
         <cfif Arguments.EntryID EQ 0>
-            <cfset ActivityLedgerBean.setCreatedBy(Session.Person.getPersonID())>
+            <cfset ActivityLedgerBean.setCreatedBy(session.currentuser.id)>
         <cfelse>
-            <cfset ActivityLedgerBean.setUpdatedBy(Session.Person.getPersonID())>
+            <cfset ActivityLedgerBean.setUpdatedBy(session.currentuser.id)>
         </cfif>
         
         <!--- Validate Bean --->
@@ -536,13 +536,13 @@
 					<!--- Save the action for the Ledger Entry Save --->
                     <cfset Application.History.Add(
                                 HistoryStyleID=37,
-                                FromPersonID=Session.PersonID,
+                                FromPersonID=session.currentuser.id,
                                 ToActivityID=Arguments.ActivityID)>
                 <cfelse>
 					<!--- Save the action for the Ledger Entry Save --->
                     <cfset Application.History.Add(
                                 HistoryStyleID=104,
-                                FromPersonID=Session.PersonID,
+                                FromPersonID=session.currentuser.id,
                                 ToActivityID=Arguments.ActivityID)>
                 </cfif>
                 
@@ -601,7 +601,7 @@
         <cfset ActivitySupportBean.setBudgetSentDate(Arguments.BudgetSentDate)>
         <cfset ActivitySupportBean.setSentDate(Arguments.SentDate)>
         <cfset ActivitySupportBean.setFundsReturned(Arguments.FundsReturned)>
-        <cfset ActivitySupportBean.setCreatedBy(Session.Person.getPersonID())>
+        <cfset ActivitySupportBean.setCreatedBy(session.currentuser.id)>
         
         <!--- Validate Bean --->
         <cfset aErrors = ActivitySupportBean.Validate()>
@@ -643,7 +643,7 @@
                 <cfset ActionBean.setShortName("Added a support entry.")>
                 <cfset ActionBean.setCode("SUPA")>
                 <cfset ActionBean.setLongName("Added a support entry for #qActivitySupport.SupporterName# (#qActivitySupport.SupportTypeName#) to activity '<a href=""/index.cfm/event/Activity.Detail?ActivityID=#ActivityBean.getActivityID()#"">#ActivityBean.getTitle()#</a>' for the amount of #qActivitySupport.Amount#.")>
-                <cfset ActionBean.setCreatedBy(Session.Person.getPersonID())>
+                <cfset ActionBean.setCreatedBy(session.currentuser.id)>
                 <cfset Application.Com.ActionDAO.Create(ActionBean)>
                 
 				<!--- REFRESH BIT --->

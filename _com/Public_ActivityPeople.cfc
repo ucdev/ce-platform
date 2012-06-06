@@ -132,7 +132,7 @@
                 
                 <cfset Application.History.Add(
                             HistoryStyleID=33,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToPersonID=Arguments.PersonList,
                             ToActivityID=Arguments.ActivityID,
                             ToContent=RoleName)>
@@ -155,7 +155,7 @@
                 
                 <cfset Application.History.Add(
                             HistoryStyleID=34,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToActivityID=Arguments.ActivityID,
                             ToContent=OutputVar)>
             </cfif>
@@ -225,7 +225,7 @@
                 
                 <cfset Application.History.Add(
                             HistoryStyleID=27,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToPersonID=PersonID,
                             ToActivityID=Arguments.ActivityID,
                             ToContent=RoleName)>
@@ -241,7 +241,7 @@
                 
                 <cfset Application.History.Add(
                             HistoryStyleID=25,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToPersonID=Arguments.PersonList,
                             ToActivityID=Arguments.ActivityID,
                             ToContent=RoleName)>
@@ -264,7 +264,7 @@
                 
                 <cfset Application.History.Add(
                             HistoryStyleID=26,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToActivityID=Arguments.ActivityID,
                             ToContent=OutputVar)>
             </cfif>
@@ -383,7 +383,7 @@
             <!--- ACTION UPDATER --->
             <cfset Application.History.Add(
                         HistoryStyleID=68,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToActivityID=Arguments.ActivityID)>
             
 			<cfset status.setStatus(true)>
@@ -415,7 +415,7 @@
             <cfquery name="qRemoveAll" datasource="#Application.Settings.DSN#">
                 UPDATE ce_Activity_Faculty
                 SET DeletedFlag = <cfqueryparam value="Y" cfsqltype="cf_sql_char" />,
-                    UpdatedBy = <cfqueryparam value="#Session.Person.getPersonID()#" cfsqltype="cf_sql_char" />
+                    UpdatedBy = <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_char" />
                 WHERE ActivityID = <cfqueryparam value="#Arguments.ActivityID#" CFSQLType="cf_sql_integer" />
             </cfquery>
             
@@ -429,7 +429,7 @@
             <!--- ACTION UPDATER --->
             <cfset Application.History.Add(
                         HistoryStyleID=65,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToActivityID=Arguments.ActivityID)>
             
             <cfcatch type="any">
@@ -488,7 +488,7 @@
                 
                 <cfset Application.History.Add(
                             HistoryStyleID=16,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToPersonID=Arguments.PersonList,
                             ToActivityID=Arguments.ActivityID)>
             <cfelse>
@@ -508,7 +508,7 @@
                 
                 <cfset Application.History.Add(
                             HistoryStyleID=15,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToActivityID=Arguments.ActivityID,
                             ToContent=OutputVar)>
             </cfif>
@@ -549,7 +549,7 @@
                 <cfquery name="qRemoveChecked" datasource="#Application.Settings.DSN#">
                     UPDATE ce_Activity_Faculty
                     SET DeletedFlag = <cfqueryparam value="Y" cfsqltype="cf_sql_char" />,
-                        UpdatedBy = <cfqueryparam value="#Session.Person.getPersonID()#" cfsqltype="cf_sql_char" />
+                        UpdatedBy = <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_char" />
                     WHERE PersonID = <cfqueryparam value="#PersonID#" CFSQLType="cf_sql_integer" /> AND ActivityID = <cfqueryparam value="#Arguments.ActivityID#" CFSQLType="cf_sql_integer" />
                 </cfquery>
                 
@@ -571,7 +571,7 @@
                 
                 <cfset Application.History.Add(
                             HistoryStyleID=44,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToPersonID=Arguments.PersonList,
                             ToActivityID=Arguments.ActivityID)>
             <cfelse>
@@ -591,7 +591,7 @@
                 
                 <cfset Application.History.Add(
                             HistoryStyleID=64,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToActivityID=Arguments.ActivityID,
                             ToContent=OutputVar)>
             </cfif>
@@ -645,7 +645,7 @@
 					<!--- ACTION UPDATER --->
                     <cfset Application.History.Add(
 								HistoryStyleID=14,
-								FromPersonID=Session.PersonID,
+								FromPersonID=session.currentuser.id,
 								ToPersonID=Arguments.PersonID,
 								ToActivityID=Arguments.ActivityID)>
 					
@@ -662,7 +662,7 @@
 							<!--- ACTION UPDATER --->
 							<cfset Application.History.Add(
                                         HistoryStyleID=14,
-                                        FromPersonID=Session.PersonID,
+                                        FromPersonID=session.currentuser.id,
                                         ToPersonID=Arguments.PersonID,
                                         ToActivityID=Arguments.ActivityID)>
 							
@@ -745,7 +745,7 @@
                             <cfif qGetDisclosureFile.RecordCount GT 0>
                             	<cfqueryparam value="#qGetDisclosureFile.FileID#" CFSQLType="cf_sql_integer" />,
                             </cfif>
-							<cfqueryparam value="#Session.Person.getPersonID()#" CFSQLType="cf_sql_integer" />,
+							<cfqueryparam value="#session.currentuser.id#" CFSQLType="cf_sql_integer" />,
 							<cfqueryparam value="N" CFSQLType="cf_sql_char" />
 							)
 					</cfquery>
@@ -758,7 +758,7 @@
 								ToActivityID=Arguments.ActivityID)>
 					<cfset Application.History.Add(
 								HistoryStyleID=35,
-								FromPersonID=Session.PersonID,
+								FromPersonID=session.currentuser.id,
 								ToPersonID=Arguments.PersonID,
 								ToActivityID=Arguments.ActivityID)>
 					
@@ -829,7 +829,7 @@
                                 </cfif>
                             	DisclosureApproveFlag = <cfqueryparam value="#DisclosureApproveFlag#" CFSQLType="cf_sql_char" />,
                             	DeletedFlag = <cfqueryparam value="N" cfsqltype="cf_sql_char" />,
-								UpdatedBy = <cfqueryparam value="#Session.Person.getPersonID()#" cfsqltype="cf_sql_integer" />
+								UpdatedBy = <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_integer" />
 							WHERE PersonID = <cfqueryparam value="#Arguments.PersonID#" CFSQLType="cf_sql_integer" /> AND ActivityID = <cfqueryparam value="#Arguments.ActivityID#" CFSQLType="cf_sql_integer" />
 						</cfquery>
 					
@@ -841,7 +841,7 @@
                                     ToActivityID=Arguments.ActivityID)>
                         <cfset Application.History.Add(
                                     HistoryStyleID=35,
-                                    FromPersonID=Session.PersonID,
+                                    FromPersonID=session.currentuser.id,
                                     ToPersonID=Arguments.PersonID,
                                     ToActivityID=Arguments.ActivityID)>
 						

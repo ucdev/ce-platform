@@ -1,7 +1,7 @@
 <cfcomponent extends="controller">
 	<cffunction name="deleteEmail"  output="false" returnFormat="plain">
-    	<cfparam name="params.email_id" type="numeric" required="yes">
-        <cfparam name="params.person_id" type="numeric" required="yes">
+    	<cfparam name="params.email_id" type="numeric" >
+        <cfparam name="params.person_id" type="numeric" >
         
         <cfset var Status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -10,23 +10,23 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot delete email address for unknown reasons.")>
         
-        <cfset status = Application.Person.deleteEmail(Arguments.email_id,Arguments.person_id)>
+        <cfset status = Application.Person.deleteEmail(params.email_id,params.person_id)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-    <cffunction name="emailExists" hint="Determines if a provided email exists in the database."  output="false" returntype="string">
-    	<cfparam name="params.email_address" type="string" required="yes">
+    <cffunction name="emailExists" hint="Determines if a provided email exists in the database."  output="false">
+    	<cfparam name="params.email_address" type="string" >
         
-        <cfset var status = application.person.emailExists(arguments.email_address)>
+        <cfset var status = application.person.emailExists(params.email_address)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
-	<cffunction name="requestPassword"  returntype="string">
-    	<cfparam name="params.Email" type="string" required="yes">
+	<cffunction name="requestPassword" >
+    	<cfparam name="params.Email" type="string" >
         
-        <cfset var status = Application.Person.requestPassword(Arguments.Email)>
+        <cfset var status = Application.Person.requestPassword(params.Email)>
         
         <cfif status.getStatus()>
         	<cflocation url="#Request.Myself#Main.ForgotPW?Message=#status.getStatusMsg()#" addtoken="no">
@@ -35,8 +35,8 @@
         </cfif>
     </cffunction>
     
-    <cffunction name="sendVerificationEmail" hint="Sends an email to verify email address."  output="false" returntype="string">
-    	<cfparam name="params.email_id" type="numeric" required="yes">
+    <cffunction name="sendVerificationEmail" hint="Sends an email to verify email address."  output="false">
+    	<cfparam name="params.email_id" type="numeric" >
         
         <cfset var status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -45,8 +45,8 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access send verification email function.")>
         
-        <cfset Status = Application.Person.sendVerificationEmail(Arguments.email_id)>
+        <cfset Status = Application.Person.sendVerificationEmail(params.email_id)>
         
-        <cfreturn status.getJSON() />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
 </cfcomponent>

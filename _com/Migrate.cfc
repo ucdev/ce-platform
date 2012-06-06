@@ -86,7 +86,7 @@ WHERE     ((SELECT     COUNT(CourseSectionId) AS Expr1
 				<cfset ActivitySupportBean.setAmount(qCourseContrib.Amount)>
 				<cfset ActivitySupportBean.setSupporterID(SupporterID)>
 				<cfset ActivitySupportBean.setSupportTypeID(SupportTypeID)>
-				<cfset ActivitySupportBean.setCreatedBy(Session.Person.getPersonID())>
+				<cfset ActivitySupportBean.setCreatedBy(session.currentuser.id)>
 				<cfset Application.Com.ActivitySupportDAO.Create(ActivitySupportBean)>
 				
 				

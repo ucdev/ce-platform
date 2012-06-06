@@ -9,6 +9,22 @@
 
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
 
+	<cffunction name="ajaxLoginRequired">
+		<cfif NOT structKeyExists(session,"currentUser")>
+			<cfset renderText(createObject("component","lib.buildStruct").init(status=false,statusMsg="Login is required to perform this action.").getJson()) />
+		</cfif>
+	</cffunction>
+	
+	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
+
+	<cffunction name="ajaxAdminRequired">
+		<cfif structKeyExists(session,"currentuser") AND NOT session.account.isAdmin()>
+			<cfset renderText(createObject("component","lib.buildStruct").init(status=false,statusMsg="You have insufficient priviledges to perform this action.").getJson()) />
+		</cfif>
+	</cffunction>
+	
+	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
+
   <cffunction name="loginRequired">
 		<cfif Not structKeyExists(session,"currentUser")>
 			<cfset flashInsert(error="You do not have permissions to do that!")>
@@ -19,30 +35,31 @@
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
 	
 	<cffunction name="loginProhibited">
-		<cfif structKeyExists(session,"currentUser")>
+		<cfif structKeyExists(session,"currentUser")><!---
 			<cfset flashInsert(error="You are logged in, you cant do that!")>
-			<cfset redirectTo(route="home")>
+			<cfset redirectTo(route="home")>--->
 		</cfif>
 	</cffunction>
 
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
 	
 	<cffunction name="isLoggedIn">
-    <cfif structKeyExists(session, "currentUser")>
-      <cfreturn true>
-    <cfelse>
-      <cfreturn false>
-    </cfif>
-  </cffunction>
+		<cfif structKeyExists(session, "currentUser")>
+			<cfreturn true>
+		<cfelse>
+			<cfreturn false>
+		</cfif>
+	</cffunction>
 
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
   
-  <cffunction name="isAdmin">
-    <cfif structKeyExists(session, "currentUser") and NOT session.currentUser.isAdmin>
-      <cfset flashInsert(error="You do not have permissions to do that!")>
-  		<cfset redirectTo(route="home")>
-    </cfif>
-  </cffunction>
+	<cffunction name="isAdmin">
+		<cfif structKeyExists(session, "account") and session.account.isAdmin()>
+			<cfreturn true>
+		<cfelse>
+			<cfreturn false>
+		</cfif>
+	</cffunction>
 
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
 	

@@ -59,7 +59,7 @@
 			<cfhttpparam type="formfield" name="Accountnumber" value="#Arguments.CardNumber#">
 			
 			<!--- shipping info 
-			<cfhttpparam type="formfield" name="Shiptoname" value="#Session.Person.getFirstName()# #Session.Person.getLastName()#">
+			<cfhttpparam type="formfield" name="Shiptoname" value="#session.currentuser.FirstName# #session.currentuser.LastName#">
 			<cfhttpparam type="formfield" name="Shiptostreetaddress" value="#Arguments.Address1#">
 			<cfhttpparam type="formfield" name="Shiptostreetaddress2" value="#Arguments.Address2#">
 			<cfhttpparam type="formfield" name="Shiptocity" value="#Arguments.City#">
@@ -67,7 +67,7 @@
 			<cfhttpparam type="formfield" name="Shiptocountry" value="#Arguments.Country#">
 			<cfhttpparam type="formfield" name="Shiptozipcode" value="#Arguments.ZipCode#">--->
 			<cfhttpparam type="formfield" name="Shiptophone" value="#Arguments.Phone#">
-			<cfhttpparam type="formfield" name="Email" value="#Session.Person.getEmail()#">
+			<cfhttpparam type="formfield" name="Email" value="#session.currentuser.Email#">
 			
 			<!--- skip jack --->
 			<cfhttpparam type="formfield" name="Serialnumber" value="#SerialNumber#">

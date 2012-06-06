@@ -1,17 +1,22 @@
 <cfcomponent extends="controller">
-	<cffunction name="previewEmail"  output="no" returntype="boolean">
-		<cfparam name="params.style_id" type="numeric" required="yes" />
+	<cffunction name="init">
+		<cfset filters(through="ajaxLoginRequired")>
+		<cfset filters(through="ajaxAdminRequired")>
+	</cffunction>
+	
+	<cffunction name="previewemail"  output="no">
+		<cfparam name="params.style_id" type="numeric"  />
 		
 		<cfset request.email = createObject("component","_com.email").init() />
 		<cfset request.myself = "" />
 		<cfset request.email.Send(
-						EmailStyleID=arguments.style_id,
-						ToPersonID=session.personId,
+						EmailStyleID=params.style_id,
+						ToPersonID=169841,
 						ToActivityID=12290,
 						ToCreditID=1
 						) />
 						
 		
-		<cfreturn true />
+		<cfset renderText(true) />
 	</cffunction>
 </cfcomponent>

@@ -13,24 +13,24 @@
 		   passwd="#arguments.pword#"
 		   institutionid="1"
 		   returnVariable = "ReturnVar">
-		<cfset Session.PersonID = ReturnVar[2]>
+		<cfset session.currentuser.id = ReturnVar[2]>
 		
-		<cfif Session.PersonID NEQ "">
+		<cfif session.currentuser.id NEQ "">
 			<cfset Session.LoggedIn = true>
-			<cfset Session.Person = CreateObject("component","#Application.Settings.Com#Person.Person").init(PersonID=Session.PersonID)>
+			<cfset Session.Person = CreateObject("component","#Application.Settings.Com#Person.Person").init(PersonID=session.currentuser.id)>
 			<cfset Session.Person = Application.Com.PersonDAO.Read(Session.Person)>
 			
 			<!--- GET ADDRESS --->
 			<cfquery name="qAddress" datasource="#Application.Settings.DSN#">
 				SELECT     Phone1, streetline1, streetline2, city, stateid, postalcode, countryid
 				FROM         dbo.ce_address
-				WHERE     (personid = #Session.PersonID#) AND (addresstypeid = 2)
+				WHERE     (personid = #session.currentuser.id#) AND (addresstypeid = 2)
 				ORDER BY LastUpdate DESC
 			</cfquery>
 			
-			<cfsavecontent variable="ReturnOutput"><cfoutput>success|#Session.PersonID#|#Session.Person.getFirstName()#|#Session.Person.getMiddleName()#|#Session.Person.getLastName()#|#DateFormat(Session.Person.getBirthdate(),'mm/dd/yyyy')#|#Session.Person.getSSN()#|#Session.Person.getEmail1()#|#qAddress.Phone1#|#qAddress.streetline1#|#qAddress.streetline2#|#qAddress.city#|#qAddress.stateid#|#qAddress.PostalCode#|#qAddress.CountryID#</cfoutput></cfsavecontent>
+			<cfsavecontent variable="ReturnOutput"><cfoutput>success|#session.currentuser.id#|#session.currentuser.FirstName#|#session.currentuser.MiddleName#|#session.currentuser.LastName#|#DateFormat(session.currentuser.Birthdate,'mm/dd/yyyy')#|#session.currentuser.SSN#|#session.currentuser.Email1#|#qAddress.Phone1#|#qAddress.streetline1#|#qAddress.streetline2#|#qAddress.city#|#qAddress.stateid#|#qAddress.PostalCode#|#qAddress.CountryID#</cfoutput></cfsavecontent>
 			
-			<cfcookie name="Person.FirstName" value="#Session.Person.getFirstName()#">
+			<cfcookie name="Person.FirstName" value="#session.currentuser.FirstName#">
 
 		<cfelse>
 			<cfsavecontent variable="ReturnOutput">fail|</cfsavecontent>

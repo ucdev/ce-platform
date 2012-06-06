@@ -461,9 +461,9 @@
 			</cfif>
 			
 			<cfif PubComponent.getCreatedBy() EQ "">
-				<cfset PubComponent.setCreatedBy(Session.Person.getPersonID())>
+				<cfset PubComponent.setCreatedBy(session.currentuser.id)>
 			<cfelse>
-				<cfset PubComponent.setUpdatedBy(Session.Person.getPersonID())>
+				<cfset PubComponent.setUpdatedBy(session.currentuser.id)>
 				<cfset PubComponent.setUpdated(now())>
 			</cfif>
 			
@@ -768,7 +768,7 @@
 						
 						<!--- FINISH COMPONENT --->
 						<cfset PubComponent.setAssessmentID(NewAssessID)>
-						<cfset PubComponent.setCreatedBy(Session.Person.getPersonID())>
+						<cfset PubComponent.setCreatedBy(session.currentuser.id)>
 						<cfset Application.Com.ActivityPubComponentDAO.Create(PubComponent)>
 						
 						<cfquery name="qQuestions" datasource="#OldDSN#">
@@ -889,7 +889,7 @@
 				
 				<!--- FINISH COMPONENT --->
 				<cfset PubComponent.setAssessmentID(Assessment.getAssessmentID())>
-				<cfset PubComponent.setCreatedBy(Session.Person.getPersonID())>
+				<cfset PubComponent.setCreatedBy(session.currentuser.id)>
 				<cfset Application.Com.ActivityPubComponentDAO.Create(PubComponent)>
 				
 				<cfoutput>

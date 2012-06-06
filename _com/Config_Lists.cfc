@@ -2,12 +2,12 @@
 	<cffunction name="getAuthLevels" access="public" output="false" returntype="query">
 		<cfset var qAuthLevels = queryNew("AuthID,Name,Description","cf_sql_integer,cf_sql_varchar,cf_sql_varchar")>
 		<cfset var authlevelsCSV = "">
-		<cfsavecontent variable="authlevelsCSV">
-    	AuthID,Name,Description
-        1,Contributor,Can only edit activities they are attached to
-        2,Admin,Can edit all activities under current site
-        3,Super Admin,Can edit privileges of users as well as edit all activities under current site
-		</cfsavecontent>
+<cfsavecontent variable="authlevelsCSV">
+AuthID,Name,Description
+1,Contributor,Can only edit activities they are attached to
+2,Admin,Can edit all activities under current site
+3,Super Admin,Can edit privileges of users as well as edit all activities under current site
+</cfsavecontent>
 		
 		<cfset qAuthLevels = CSVtoQuery(authlevelsCSV)>
 		

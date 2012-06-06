@@ -1,5 +1,5 @@
 <cfcomponent hint="Attendee Functions [Faculty/Committee functions are kept in ActivityPeople.CFC]">
-	<cfinclude template="#Application.Settings.ComPath#/_UDF/isMD.cfm" />
+	<cfinclude template="/_com/_UDF/isMD.cfm" />
     
 	<cffunction name="init" access="public" output="no" returntype="_com.Public_ActivityAttendee">
 		<cfreturn this />
@@ -388,7 +388,7 @@
             
             <cfset Application.History.Add(
                         HistoryStyleID=67,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToActivityID=Arguments.ActivityID)>
             
         	<cfset status.setStatus(true)>
@@ -461,7 +461,7 @@
             <!--- ADD HISTORY ITEM --->
             <cfset Application.History.Add(
                         HistoryStyleID=50,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToPersonID=PersonList,
                         ToActivityID=Arguments.ActivityID)>
         <cfelseif AddCount GT 1>
@@ -482,7 +482,7 @@
             <!--- ADD HISTORY ITEM --->
             <cfset Application.History.Add(
                         HistoryStyleID=54,
-                        FromPersonID=Session.PersonID,
+                        FromPersonID=session.currentuser.id,
                         ToActivityID=Arguments.ActivityID,
                         ToContent=OutputVar)>
         </cfif>
@@ -573,7 +573,7 @@
             <cfset AttendeeBean.setTermDate("")>
             <cfset AttendeeBean.setTermsFlag("N")>
             <cfset AttendeeBean.setUpdated(Now())>
-            <cfset AttendeeBean.setUpdatedBy(Session.PersonID)>
+            <cfset AttendeeBean.setUpdatedBy(session.currentuser.id)>
             
             <!--- CHECK IF PAYMENT INFO NEEDS RESET --->
             <cfif Arguments.PaymentFlag EQ "Y">
@@ -717,7 +717,7 @@
 				<cfset AttendeeBean.setCompleteDate(arguments.completeDate)>
 				</cfif>
 				
-                <cfset AttendeeBean.setCreatedBy(Session.Person.getPersonID())>
+                <cfset AttendeeBean.setCreatedBy(session.currentuser.id)>
                 
                 <!--- CHECK IF NUMERIC --->
                 <cfset AttendeeSaved = Application.Com.AttendeeDAO.Save(AttendeeBean)>
@@ -748,7 +748,7 @@
 						AttendeeID=AttendeeBean.getAttendeeID(),
 						CreditID=ActivityCreditBean.getCreditID(),
 						Amount=creditAmount,
-						ReferenceNo=ActivityCreditBean.getReferenceNo(),CreatedBy=Session.Person.getPersonID())>
+						ReferenceNo=ActivityCreditBean.getReferenceNo(),CreatedBy=session.currentuser.id)>
                     <cfset AttendeeCreditBean = Application.Com.AttendeeCreditDAO.Create(AttendeeCreditBean)>
                 </cfloop>
                 
@@ -771,7 +771,7 @@
 				
 				<cfset Application.History.Add(
                             HistoryStyleID=1,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToPersonID=Arguments.PersonID,
                             ToActivityID=Arguments.ActivityID)>
 							
@@ -931,9 +931,9 @@
             
         <!--- Set who updated the info --->
         <cfif NOT Application.Com.AttendeeCDCDAO.exists(CDCBean)>
-            <cfset CDCBean.setCreatedBy(Session.PersonID)>
+            <cfset CDCBean.setCreatedBy(session.currentuser.id)>
         <cfelse>
-            <cfset CDCBean.setUpdatedBy(Session.PersonID)>
+            <cfset CDCBean.setUpdatedBy(session.currentuser.id)>
         </cfif>
         
         <cfset aErrors = CDCBean.validate()>
@@ -977,7 +977,7 @@
                 	ce_Attendee AS ATT ON ATT.ActivityId = ACT.ActivityId
                 WHERE 
                 	ATT.AttendeeId <> <cfqueryparam value="#arguments.AttendeeId#" cfsqltype="cf_sql_integer" /> AND
-                	ATT.PersonId = <cfqueryparam value="#session.personId#" cfsqltype="cf_sql_integer" /> AND
+                	ATT.PersonId = <cfqueryparam value="#session.currentuser.id#" cfsqltype="cf_sql_integer" /> AND
                     AC.CategoryId IN (31,162,196) AND
                     ACT.StatusId IN (1,2,3) AND
                     (SELECT COUNT(ACDC.AttendeeCDCId)
@@ -1084,7 +1084,7 @@
         
         <cfif arrayLen(status.getErrors()) EQ 0>
         	<cftry>
-				<cfset application.email.send(EmailStyleID=5,ToActivityID=arguments.activityId,ToPersonID=arguments.personId,ToCreditID=arguments.creditId,fromEmail=session.person.getEmail()) />
+				<cfset application.email.send(EmailStyleID=5,ToActivityID=arguments.activityId,ToPersonID=arguments.personId,ToCreditID=arguments.creditId,fromEmail=session.currentuser.Email) />
                 
                 <cfset status.setStatus(true)>
                 <cfset status.setStatusMsg("Email has been sent.")>
@@ -1198,7 +1198,7 @@
 				
                 <cfset Application.History.Add(
                             HistoryStyleID=69,
-                            FromPersonID=Session.PersonID,
+                            FromPersonID=session.currentuser.id,
                             ToPersonID=Arguments.PersonID,
                             ToActivityID=Arguments.ActivityID)>
 				
@@ -1329,7 +1329,7 @@
 				
 					<cfset Application.History.Add(
                                 HistoryStyleID=28,
-                                FromPersonID=Session.PersonID,
+                                FromPersonID=session.currentuser.id,
                                 ToPersonID=PersonList,
                                 ToActivityID=Arguments.ActivityID,
 								ToContent=OutputVar)>
@@ -1354,7 +1354,7 @@
 				
 					<cfset Application.History.Add(
                                 HistoryStyleID=30,
-                                FromPersonID=Session.PersonID,
+                                FromPersonID=session.currentuser.id,
                                 ToActivityID=Arguments.ActivityID,
 								ToContent=OutputVar)>
 				</cfif>

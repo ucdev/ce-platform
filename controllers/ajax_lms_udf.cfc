@@ -1,9 +1,9 @@
 <cfcomponent extends="controller">
-	<cffunction name="getRandomString"  returntype="string">
-		<cfparam name="params.Format" type="string" required="no" default="Numeric">
-        <cfparam name="params.Length" type="numeric" required="no" default="3">
+	<cffunction name="getRandomString" >
+		<cfparam name="params.Format" type="string"  default="Numeric">
+        <cfparam name="params.Length" type="numeric"  default="3">
         
-        <cfset var Status = Application.UDF.getRandomString(Format=Arguments.Format,Length=Arguments.Length)>
-		<cfreturn Status />
+        <cfset var Status = Application.UDF.getRandomString(Format=params.Format,Length=params.Length)>
+		<cfset renderText(Status) />
 	</cffunction>
 </cfcomponent>
