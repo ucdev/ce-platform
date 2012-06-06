@@ -15,7 +15,13 @@
 			bootstrap-button,
 			bootstrap-collapse,
 			bootstrap-carousel,
-			bootstrap-typeahead") />
+			bootstrap-typeahead,
+			jquery-ui-1.6rc6.min,
+			jquery.autocomplete.pack,
+			jquery.tokenInput") />
 
 <cfset application['config'] = {} />
 <cfset application.config['name'] = "CCPD" />
+
+<!--- COM OBJECTS --->
+<cfset Application.Settings.Com = "_com." />

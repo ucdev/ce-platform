@@ -3,6 +3,8 @@
         <cfset table("Person")>
         <cfset property(name="id", column="PersonID") />
         <!---<cfset setPrimaryKey(property="id") />--->
+        
+        <cfset hasMany("person_email")>
     </cffunction>
 
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
