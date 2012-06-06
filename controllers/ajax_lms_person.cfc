@@ -1,4 +1,4 @@
-<cfcomponent>
+<cfcomponent extends="controller">
 	<cffunction name="deleteEmail" access="remote" output="false" returnFormat="plain">
     	<cfargument name="email_id" type="numeric" required="yes">
         <cfargument name="person_id" type="numeric" required="yes">

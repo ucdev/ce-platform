@@ -1,4 +1,4 @@
-<cfcomponent>
+<cfcomponent extends="controller">
 	<cffunction name="previewEmail" access="remote" output="no" returntype="boolean">
 		<cfargument name="style_id" type="numeric" required="yes" />
 		

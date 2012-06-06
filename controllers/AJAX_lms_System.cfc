@@ -1,4 +1,4 @@
-<cfcomponent>
+<cfcomponent extends="controller">
 	<cffunction name="hideWelcome" access="remote" returntype="string">
     	<cfset application.sys.hideWelcome()>
 		

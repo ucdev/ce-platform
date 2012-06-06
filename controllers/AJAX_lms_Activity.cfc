@@ -1,4 +1,4 @@
-<cfcomponent>
+<cfcomponent extends="controller">
 	<cffunction name="AutoComplete" access="Remote" output="no" returntype="string">
 		<cfargument name="q" type="string" required="yes">
 		<cfargument name="limit" type="string" required="yes">

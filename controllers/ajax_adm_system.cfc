@@ -1,4 +1,4 @@
-<cfcomponent>
+<cfcomponent extends="controller">
     <cffunction name="deleteCategoryLMS" hint="deletes categories from system" access="Remote" output="true" returntype="string">
 		<cfargument name="CategoryID" type="numeric" required="no" default="0">
 		<cfargument name="CategoryName" type="string" required="no" default="">

@@ -1,4 +1,4 @@
-<cfcomponent>
+<cfcomponent extends="controller">
 	<cffunction name="fixAttendees" hint="Used to fix activity dates for attendees." access="remote">
     	<cfquery name="qAttendees" datasource="#application.settings.dsn#">
         	SELECT *

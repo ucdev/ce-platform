@@ -1,4 +1,4 @@
-<cfcomponent>
+<cfcomponent extends="controller">
 	<cffunction name="createPerson" access="Remote" output="false" returntype="string">
 		<cfargument name="PersonID" type="numeric" required="yes">
         <cfargument name="Birthdate" type="string" required="no">

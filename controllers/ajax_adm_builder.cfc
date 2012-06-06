@@ -1,4 +1,4 @@
-<cfcomponent>
+<cfcomponent extends="controller">
         
 	<cffunction name="copyAssessTmpl" hint="Creates a copy of an assessment from a provided template." access="Remote" returntype="string">
         <cfargument name="ActivityID" type="numeric" required="yes">

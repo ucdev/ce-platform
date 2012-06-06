@@ -1,4 +1,4 @@
-<cfcomponent>
+<cfcomponent extends="controller">
 	<cffunction name="getResult" access="Remote" output="true" returntype="string">
 		<cfargument name="AssessmentID" type="string" required="yes">
 		<cfargument name="PersonID" type="string" required="yes">

@@ -1,4 +1,4 @@
-<cfcomponent>
+<cfcomponent extends="controller">
     <cffunction name="isAssessFailed" hint="Determine if the user passed or failed the assessment" access="Remote" output="true" returntype="string">
 		<cfargument name="AssessmentID" type="string" required="yes">
 		<cfargument name="PersonID" type="string" required="yes">

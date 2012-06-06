@@ -1,5 +1,5 @@
 <!--- THIS IS FOR JUSTINS WEBSITE PROJECT // PLEASE IGNORE FILE --->
-<cfcomponent>
+<cfcomponent extends="controller">
 	<cffunction name="send" access="remote" returntype="string">
 		<cfargument name="name" type="string" required="yes">
 		<cfargument name="email" type="string" required="yes">
