@@ -1,16 +1,16 @@
 <cfcomponent extends="controller">
-	<cffunction name="AutoComplete" access="Remote" output="no" returntype="string">
-		<cfargument name="q" type="string" required="yes">
-		<cfargument name="limit" type="string" required="yes">
+	<cffunction name="AutoComplete"  output="no" returntype="string">
+		<cfparam name="params.q" type="string" required="yes">
+		<cfparam name="params.limit" type="string" required="yes">
         
         <cfset var Status = Application.Activity.AutoCompleteLMS(Arguments.Q,Arguments.Limit)>
         
         <cfreturn Status />
     </cffunction>
     
-    <cffunction name="cancelActivity" hint="Removes Attendee Record from Activity" access="Remote" output="true" returntype="string">
-    	<cfargument name="ActivityID" required="true" type="string" />
-    	<cfargument name="PersonID" required="true" type="string" />
+    <cffunction name="cancelActivity" hint="Removes Attendee Record from Activity"  output="true" returntype="string">
+    	<cfparam name="params.ActivityID" type="string" />
+    	<cfparam name="params.PersonID" type="string" />
         
         <cfset var Status = "False|Cannot access the cancel function for activities.">
         
@@ -19,8 +19,8 @@
         <cfreturn Status />
     </cffunction>
     
-    <cffunction name="deleteComment" hint="LMS Function // Deletes comment by provided CommentID." access="Remote" output="false" returntype="string">
-    	<cfargument name="CommentID" type="numeric" required="yes">
+    <cffunction name="deleteComment" hint="LMS Function // Deletes comment by provided CommentID."  output="false" returntype="string">
+    	<cfparam name="params.CommentID" type="numeric" required="yes">
         
         <cfset var Status = "Fail|Cannot access delete functionality for comments.">
         
@@ -29,9 +29,9 @@
         <cfreturn Status />
     </cffunction>
     
-    <cffunction name="markComplete" access="remote" output="true" returntype="string">
-		<cfargument name="PersonID" type="string" required="yes">
-        <cfargument name="ActivityID" type="string" required="yes">
+    <cffunction name="markComplete"  output="true" returntype="string">
+		<cfparam name="params.PersonID" type="string" required="yes">
+        <cfparam name="params.ActivityID" type="string" required="yes">
         
         <cfset var status = createObject("component", "#application.settings.com#returnData.buildStruct").init()>
         
@@ -43,10 +43,10 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-    <cffunction name="saveComment" hint="LMS Function // Deletes comment by provided CommentID." access="Remote" output="false" returntype="string">
-		<cfargument name="ActivityID" type="string" required="true">
-		<cfargument name="PersonID" type="string" required="true">
-		<cfargument name="CommentBody" type="string" required="true">
+    <cffunction name="saveComment" hint="LMS Function // Deletes comment by provided CommentID."  output="false" returntype="string">
+		<cfparam name="params.ActivityID" type="string">
+		<cfparam name="params.PersonID" type="string">
+		<cfparam name="params.CommentBody" type="string">
         
         <cfset var Status = "Fail|Cannot access save functionality for comments.">
         
@@ -55,22 +55,22 @@
         <cfreturn Status />
     </cffunction>
     
-    <cffunction name="startActivity" hint="Creates Attendee Record in Activity" access="Remote" output="true" returntype="string">
-    	<cfargument name="ActivityID" type="string" required="true" />
-    	<cfargument name="PersonID" type="string" required="true" />
-		<cfargument name="Mode" type="string" required="false" default="" />      
-		<cfargument name="DegreeID" type="string" required="false" default="" /> 
-		<cfargument name="BillPhone" type="string" required="false" default="" />
-		<cfargument name="BillAddr1" type="string" required="false" default="" />
-		<cfargument name="BillAddr2" type="string" required="false" default="" />
-		<cfargument name="BillCity" type="string" required="false" default="" />
-		<cfargument name="BillState" type="string" required="false" default="" />
-		<cfargument name="BillZipCode" type="string" required="false" default="" />
-		<cfargument name="CardName" type="string" required="false" default="" />
-		<cfargument name="CardNumber" type="string" required="false" default="" />
-		<cfargument name="CardType" type="string" required="false" default="" />
-		<cfargument name="CardExpireMonth" type="string" required="false" default="" />
-		<cfargument name="CardExpireYear" type="string" required="false" default="" />
+    <cffunction name="startActivity" hint="Creates Attendee Record in Activity"  output="true" returntype="string">
+    	<cfparam name="params.ActivityID" type="string" />
+    	<cfparam name="params.PersonID" type="string" />
+		<cfparam name="params.Mode" type="string" required="false" default="" />      
+		<cfparam name="params.DegreeID" type="string" required="false" default="" /> 
+		<cfparam name="params.BillPhone" type="string" required="false" default="" />
+		<cfparam name="params.BillAddr1" type="string" required="false" default="" />
+		<cfparam name="params.BillAddr2" type="string" required="false" default="" />
+		<cfparam name="params.BillCity" type="string" required="false" default="" />
+		<cfparam name="params.BillState" type="string" required="false" default="" />
+		<cfparam name="params.BillZipCode" type="string" required="false" default="" />
+		<cfparam name="params.CardName" type="string" required="false" default="" />
+		<cfparam name="params.CardNumber" type="string" required="false" default="" />
+		<cfparam name="params.CardType" type="string" required="false" default="" />
+		<cfparam name="params.CardExpireMonth" type="string" required="false" default="" />
+		<cfparam name="params.CardExpireYear" type="string" required="false" default="" />
         
         <cfset var Status = "Fail|Cannot access the start activity function.">
         

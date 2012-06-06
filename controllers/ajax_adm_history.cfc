@@ -1,13 +1,13 @@
 <cfcomponent displayname="history ajax">
-	<cffunction name="list" access="remote" output="no" returnformat="plain" returntype="string">
-		<cfargument name="personFrom" type="string" required="no" default="0" />
-		<cfargument name="personTo" type="string" required="no" default="0" />
-		<cfargument name="activityTo" type="string" required="no" default="0" />
-		<cfargument name="NotPersonFrom" type="string" required="no" default="0" />
-		<cfargument name="HistoryType" type="string" required="no" default="0" />
-		<cfargument name="maxrows" type="string" required="no" default="0" />
-		<cfargument name="startrow" type="string" required="no" default="0" />
-		<cfargument name="starttime" type="string" required="no" default="0" />
+	<cffunction name="list"  output="no" returnformat="plain" returntype="string">
+		<cfparam name="params.personFrom" type="string" required="no" default="0" />
+		<cfparam name="params.personTo" type="string" required="no" default="0" />
+		<cfparam name="params.activityTo" type="string" required="no" default="0" />
+		<cfparam name="params.NotPersonFrom" type="string" required="no" default="0" />
+		<cfparam name="params.HistoryType" type="string" required="no" default="0" />
+		<cfparam name="params.maxrows" type="string" required="no" default="0" />
+		<cfparam name="params.startrow" type="string" required="no" default="0" />
+		<cfparam name="params.starttime" type="string" required="no" default="0" />
 		
 		<cfset var returnVar = CreateObject("component","_com.returnData.buildStruct").init()>
 		<cfset var history = "">

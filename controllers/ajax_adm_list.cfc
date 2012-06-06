@@ -1,9 +1,9 @@
 <cfcomponent displayname="list ajax">
-	<cffunction name="activities" access="remote" output="no" returnformat="plain" returntype="string">
-		<cfargument name="sortby" type="string" required="no" default="recent" />
-		<cfargument name="person" type="numeric" required="no" default="0" />
-		<cfargument name="q" type="string" required="no" default="" />
-		<cfargument name="startdate" type="string" required="no" default="#DateFormat(now(),'mm/dd/yyyy')#" />
+	<cffunction name="activities"  output="no" returnformat="plain" returntype="string">
+		<cfparam name="params.sortby" type="string" required="no" default="recent" />
+		<cfparam name="params.person" type="numeric" required="no" default="0" />
+		<cfparam name="params.q" type="string" required="no" default="" />
+		<cfparam name="params.startdate" type="string" required="no" default="#DateFormat(now(),'mm/dd/yyyy')#" />
 		
 		<cfset var qList = "">
 		<cfset var aQuery = []>
@@ -75,8 +75,8 @@
 		<cfreturn serializeJSON(aQuery) />
 	</cffunction>
 	
-	<cffunction name="formatSearch" access="remote" output="no" returntype="string">
-		<cfargument name="q" type="string" required="yes" />
+	<cffunction name="formatSearch"  output="no" returntype="string">
+		<cfparam name="params.q" type="string" required="yes" />
 		
 		<cfset var qSearch = "">
 		<cfset var sKeyword = Replace(Trim(Arguments.q),' ','|','ALL')>
@@ -95,8 +95,8 @@
 		<cfreturn string />
 	</cffunction>
 	
-	<cffunction name="activityTypes" access="remote" output="no" returntype="string" returnformat="plain">
-		<cfargument name="selected" type="numeric" required="no" default="0" />
+	<cffunction name="activityTypes"  output="no" returntype="string" returnformat="plain">
+		<cfparam name="params.selected" type="numeric" required="no" default="0" />
 		
 		
 	</cffunction>

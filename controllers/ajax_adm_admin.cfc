@@ -1,6 +1,6 @@
 <cfcomponent extends="controller">
-	<cffunction name="previewEmail" access="remote" output="no" returntype="boolean">
-		<cfargument name="style_id" type="numeric" required="yes" />
+	<cffunction name="previewEmail"  output="no" returntype="boolean">
+		<cfparam name="params.style_id" type="numeric" required="yes" />
 		
 		<cfset request.email = createObject("component","_com.email").init() />
 		<cfset request.myself = "" />

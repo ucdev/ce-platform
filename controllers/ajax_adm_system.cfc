@@ -1,7 +1,7 @@
 <cfcomponent extends="controller">
-    <cffunction name="deleteCategoryLMS" hint="deletes categories from system" access="Remote" output="true" returntype="string">
-		<cfargument name="CategoryID" type="numeric" required="no" default="0">
-		<cfargument name="CategoryName" type="string" required="no" default="">
+    <cffunction name="deleteCategoryLMS" hint="deletes categories from system"  output="true" returntype="string">
+		<cfparam name="params.CategoryID" type="numeric" required="no" default="0">
+		<cfparam name="params.CategoryName" type="string" required="no" default="">
         
         <cfset var Status = "Fail|Cannot access delete functionality for system preferences.">
         
@@ -10,9 +10,9 @@
         <cfreturn Status />
     </cffunction>
         
-	<cffunction name="deleteSpecialty" hint="deletes specialties to system" access="Remote" output="true" returntype="string">
-		<cfargument name="SpecialtyID" type="numeric" required="no" default="0">
-		<cfargument name="SpecialtyName" type="string" required="no" default="">
+	<cffunction name="deleteSpecialty" hint="deletes specialties to system"  output="true" returntype="string">
+		<cfparam name="params.SpecialtyID" type="numeric" required="no" default="0">
+		<cfparam name="params.SpecialtyName" type="string" required="no" default="">
         
         <cfset var Status = "Fail|Cannot access delete functionality for system preferences.">
         
@@ -21,8 +21,8 @@
         <cfreturn Status />
     </cffunction>
     
-	<cffunction name="saveCategoryLMS" hint="adds new categories to system" access="Remote" output="true" returntype="string">
-		<cfargument name="CategoryName" type="string" required="yes">
+	<cffunction name="saveCategoryLMS" hint="adds new categories to system"  output="true" returntype="string">
+		<cfparam name="params.CategoryName" type="string" required="yes">
         
         <cfset var Status = "Fail|Cannot access save functionality for system preferences.">
         
@@ -31,8 +31,8 @@
         <cfreturn Status />
     </cffunction>
     
-	<cffunction name="saveSpecialty" hint="adds new specialties to system" access="Remote" output="true" returntype="string">
-		<cfargument name="SpecialtyName" type="string" required="yes">
+	<cffunction name="saveSpecialty" hint="adds new specialties to system"  output="true" returntype="string">
+		<cfparam name="params.SpecialtyName" type="string" required="yes">
         
         <cfset var Status = "Fail|Cannot access save functionality for system preferences.">
         
@@ -41,11 +41,11 @@
         <cfreturn Status />
     </cffunction>
     
-	<cffunction name="saveSupporter" access="Remote" output="true" returntype="string">
-		<cfargument name="ActivityID" type="string" required="true">
-		<cfargument name="NewSupporterName" type="string" required="true">
-		<cfargument name="NewSupporterDescrip" type="string" required="true">
-        <cfargument name="original_name" type="string" required="true">
+	<cffunction name="saveSupporter"  output="true" returntype="string">
+		<cfparam name="params.ActivityID" type="string">
+		<cfparam name="params.NewSupporterName" type="string">
+		<cfparam name="params.NewSupporterDescrip" type="string">
+        <cfparam name="params.original_name" type="string">
       	
         <cfset var Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -59,10 +59,10 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="updateCategoryLMS" hint="updates categories to system" access="Remote" output="true" returntype="string">
-		<cfargument name="CategoryID" type="string" required="yes">
-		<cfargument name="CategoryName" type="string" required="yes">
-		<cfargument name="UpdatedCategoryName" type="string" required="yes">
+	<cffunction name="updateCategoryLMS" hint="updates categories to system"  output="true" returntype="string">
+		<cfparam name="params.CategoryID" type="string" required="yes">
+		<cfparam name="params.CategoryName" type="string" required="yes">
+		<cfparam name="params.UpdatedCategoryName" type="string" required="yes">
         
         <cfset var Status = "Fail|Cannot access update functionality for system preferences.">
         
@@ -71,10 +71,10 @@
         <cfreturn Status />
     </cffunction>
     
-	<cffunction name="updateSpecialty" hint="updates specialties to system" access="Remote" output="true" returntype="string">
-		<cfargument name="SpecialtyID" type="string" required="yes">
-		<cfargument name="SpecialtyName" type="string" required="yes">
-		<cfargument name="UpdatedSpecialtyName" type="string" required="yes">
+	<cffunction name="updateSpecialty" hint="updates specialties to system"  output="true" returntype="string">
+		<cfparam name="params.SpecialtyID" type="string" required="yes">
+		<cfparam name="params.SpecialtyName" type="string" required="yes">
+		<cfparam name="params.UpdatedSpecialtyName" type="string" required="yes">
         
         <cfset var Status = "Fail|Cannot access update functionality for system preferences.">
         

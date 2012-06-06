@@ -1,16 +1,16 @@
 <cfcomponent extends="controller">
         
-	<cffunction name="copyAssessTmpl" hint="Creates a copy of an assessment from a provided template." access="Remote" returntype="string">
-        <cfargument name="ActivityID" type="numeric" required="yes">
-		<cfargument name="AssessTmplID" type="numeric" required="yes">
+	<cffunction name="copyAssessTmpl" hint="Creates a copy of an assessment from a provided template."  returntype="string">
+        <cfparam name="params.ActivityID" type="numeric" required="yes">
+		<cfparam name="params.AssessTmplID" type="numeric" required="yes">
         
         <cfset var Status = Application.Builder.copyAssessTmpl(Arguments.ActivityID,Arguments.AssessTmplID)>
         
         <cfreturn Status />
     </cffunction>
         
-    <cffunction name="deleteAssessTmpl" hint="Deletes template for provided component." access="Remote" returntype="string">
-		<cfargument name="PubComponentID" type="numeric" required="yes">
+    <cffunction name="deleteAssessTmpl" hint="Deletes template for provided component."  returntype="string">
+		<cfparam name="params.PubComponentID" type="numeric" required="yes">
       	
         <cfset var Status = "Fail|Cannot access assessment template delete functionality.">
         
@@ -19,8 +19,8 @@
         <cfreturn Status />
     </cffunction>
 	
-	<cffunction name="removeComponent" displayname="Remove Component" access="Remote" output="no">
-		<cfargument name="PubComponentID" type="string" required="no" default="0" />
+	<cffunction name="removeComponent" displayname="Remove Component"  output="no">
+		<cfparam name="params.PubComponentID" type="string" required="no" default="0" />
         
         <cfset var Status = "failed">
         
@@ -29,8 +29,8 @@
         <cfreturn Status />
     </cffunction>
 	
-	<cffunction name="removeQuestion" displayname="Remove Question" access="remote" output="no">
-		<cfargument name="QuestionID" type="string" required="yes" />
+	<cffunction name="removeQuestion" displayname="Remove Question"  output="no">
+		<cfparam name="params.QuestionID" type="string" required="yes" />
         
         <cfset var Status = "failed">
         
@@ -39,9 +39,9 @@
         <cfreturn Status />
     </cffunction>
         
-	<cffunction name="saveAssessTmpl" hint="Creates a template of a provided assessment." access="Remote" returntype="string">
-		<cfargument name="PubComponentID" type="numeric" required="yes">
-        <cfargument name="Name" type="string" required="yes">
+	<cffunction name="saveAssessTmpl" hint="Creates a template of a provided assessment."  returntype="string">
+		<cfparam name="params.PubComponentID" type="numeric" required="yes">
+        <cfparam name="params.Name" type="string" required="yes">
       	
         <cfset var Status = "Fail|Cannot access assessment template save functionality.">
         
@@ -50,19 +50,19 @@
         <cfreturn Status />
     </cffunction>
     
-	<cffunction name="saveComponent" displayname="Save Component" access="Remote" output="no">
-		<cfargument name="PubComponentID" type="string" required="no" default="0" />
-		<cfargument name="ComponentID" type="string" required="yes" />
-		<cfargument name="ActivityID" type="string" required="yes" />
-		<cfargument name="DisplayName" type="string" required="yeS" />
-		<cfargument name="Description" type="string" required="no" default="" />
-		<cfargument name="ExternalURL" type="string" required="no" default="" />
-		<cfargument name="AssessmentID" type="string" required="no" default="0" />
-		<cfargument name="RequiredFlag" type="string" required="no" default="N" />
-		<cfargument name="PassingScore" type="string" required="no" default="0" />
-		<cfargument name="MaxAttempts" type="string" required="no" default="0" />
-		<cfargument name="FileID" type="string" required="no" default="0" />
-        <cfargument name="AssessTmplID" type="numeric" required="no" default="0" />
+	<cffunction name="saveComponent" displayname="Save Component"  output="no">
+		<cfparam name="params.PubComponentID" type="string" required="no" default="0" />
+		<cfparam name="params.ComponentID" type="string" required="yes" />
+		<cfparam name="params.ActivityID" type="string" required="yes" />
+		<cfparam name="params.DisplayName" type="string" required="yeS" />
+		<cfparam name="params.Description" type="string" required="no" default="" />
+		<cfparam name="params.ExternalURL" type="string" required="no" default="" />
+		<cfparam name="params.AssessmentID" type="string" required="no" default="0" />
+		<cfparam name="params.RequiredFlag" type="string" required="no" default="N" />
+		<cfparam name="params.PassingScore" type="string" required="no" default="0" />
+		<cfparam name="params.MaxAttempts" type="string" required="no" default="0" />
+		<cfparam name="params.FileID" type="string" required="no" default="0" />
+        <cfparam name="params.AssessTmplID" type="numeric" required="no" default="0" />
 		
 		<cfset var Status = "failed|Cannot access component save functionality." />
         
@@ -83,26 +83,26 @@
         <cfreturn Status />
     </cffunction>
 	
-	<cffunction name="saveQuestion" displayname="Save Question" access="remote" output="no">
-		<cfargument name="AssessmentID" type="string" required="yes" />
-		<cfargument name="QuestionID" type="string" required="yes" />
-		<cfargument name="QuestionTypeID" required="yes" default="0" />
-		<cfargument name="LabelText" required="yes" type="string" default="" />
-		<cfargument name="DetailText" type="string" default="" />
-		<cfargument name="VC1" type="string" default="" />
-		<cfargument name="VC2" type="string" default="" />
-		<cfargument name="VC3" type="string" default="" />
-		<cfargument name="VC4" type="string" default="" />
-		<cfargument name="VC5" type="string" default="" />
-		<cfargument name="VC6" type="string" default="" />
-		<cfargument name="VC7" type="string" default="" />
-		<cfargument name="VC8" type="string" default="" />
-		<cfargument name="VC9" type="string" default="" />
-		<cfargument name="VC10" type="string" default="" />
-		<cfargument name="RequiredFlag" type="string" default="N" />
-		<cfargument name="CorrectField" type="string" default="" />
-        <cfargument name="insertFlag" type="string" required="no" default="N" />
-        <cfargument name="sort" type="string" required="no" default="0" />
+	<cffunction name="saveQuestion" displayname="Save Question"  output="no">
+		<cfparam name="params.AssessmentID" type="string" required="yes" />
+		<cfparam name="params.QuestionID" type="string" required="yes" />
+		<cfparam name="params.QuestionTypeID" required="yes" default="0" />
+		<cfparam name="params.LabelText" required="yes" type="string" default="" />
+		<cfparam name="params.DetailText" type="string" default="" />
+		<cfparam name="params.VC1" type="string" default="" />
+		<cfparam name="params.VC2" type="string" default="" />
+		<cfparam name="params.VC3" type="string" default="" />
+		<cfparam name="params.VC4" type="string" default="" />
+		<cfparam name="params.VC5" type="string" default="" />
+		<cfparam name="params.VC6" type="string" default="" />
+		<cfparam name="params.VC7" type="string" default="" />
+		<cfparam name="params.VC8" type="string" default="" />
+		<cfparam name="params.VC9" type="string" default="" />
+		<cfparam name="params.VC10" type="string" default="" />
+		<cfparam name="params.RequiredFlag" type="string" default="N" />
+		<cfparam name="params.CorrectField" type="string" default="" />
+        <cfparam name="params.insertFlag" type="string" required="no" default="N" />
+        <cfparam name="params.sort" type="string" required="no" default="0" />
         
         <cfset var Status = "failed">
         
@@ -130,8 +130,8 @@
 		<cfreturn Status />
     </cffunction>
 	
-	<cffunction name="saveComponentSort" displayname="Sort Components" access="Remote" output="no">
-    	<cfargument name="Comp" required="yes">
+	<cffunction name="saveComponentSort" displayname="Sort Components"  output="no">
+    	<cfparam name="params.Comp" required="yes">
         
         <cfset var Status = "failed">
         
@@ -140,8 +140,8 @@
         <cfreturn Status />
     </cffunction>
 	
-	<cffunction name="saveQuestionSort" displayname="Sort Components" access="Remote" output="no">
-    	<cfargument name="Questions" required="yes">
+	<cffunction name="saveQuestionSort" displayname="Sort Components"  output="no">
+    	<cfparam name="params.Questions" required="yes">
         
         <cfset var Status = "failed">
         

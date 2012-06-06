@@ -1,7 +1,7 @@
 <cfcomponent extends="controller">
-	<cffunction name="deleteEmail" access="remote" output="false" returnFormat="plain">
-    	<cfargument name="email_id" type="numeric" required="yes">
-        <cfargument name="person_id" type="numeric" required="yes">
+	<cffunction name="deleteEmail"  output="false" returnFormat="plain">
+    	<cfparam name="params.email_id" type="numeric" required="yes">
+        <cfparam name="params.person_id" type="numeric" required="yes">
         
         <cfset var Status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -15,16 +15,16 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-    <cffunction name="emailExists" hint="Determines if a provided email exists in the database." access="remote" output="false" returntype="string">
-    	<cfargument name="email_address" type="string" required="yes">
+    <cffunction name="emailExists" hint="Determines if a provided email exists in the database."  output="false" returntype="string">
+    	<cfparam name="params.email_address" type="string" required="yes">
         
         <cfset var status = application.person.emailExists(arguments.email_address)>
         
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="requestPassword" access="remote" returntype="string">
-    	<cfargument name="Email" type="string" required="yes">
+	<cffunction name="requestPassword"  returntype="string">
+    	<cfparam name="params.Email" type="string" required="yes">
         
         <cfset var status = Application.Person.requestPassword(Arguments.Email)>
         
@@ -35,8 +35,8 @@
         </cfif>
     </cffunction>
     
-    <cffunction name="sendVerificationEmail" hint="Sends an email to verify email address." access="remote" output="false" returntype="string">
-    	<cfargument name="email_id" type="numeric" required="yes">
+    <cffunction name="sendVerificationEmail" hint="Sends an email to verify email address."  output="false" returntype="string">
+    	<cfparam name="params.email_id" type="numeric" required="yes">
         
         <cfset var status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         

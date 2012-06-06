@@ -1,22 +1,22 @@
 <cfcomponent extends="controller">
-	<cffunction name="createPerson" access="Remote" output="false" returntype="string">
-		<cfargument name="PersonID" type="numeric" required="yes">
-        <cfargument name="Birthdate" type="string" required="no">
-        <cfargument name="FirstName" type="string" required="yes">
-        <cfargument name="MiddleName" type="string" required="no" default="">
-        <cfargument name="LastName" type="string" required="yes">
-        <cfargument name="CertName" type="string" required="no" default="#Arguments.FirstName# #Arguments.LastName#">
-        <cfargument name="CertNameCustom" type="string" required="no" default="">
-        <cfargument name="DisplayName" type="string" required="no" default="#Arguments.FirstName# #Arguments.LastName#">
-        <cfargument name="Suffix" type="string" required="no" default="">
-        <cfargument name="Email" type="string" required="yes">
-        <cfargument name="Gender" type="string" required="no" default="">
-        <cfargument name="SSN" type="string" required="yes">
-        <cfargument name="Password" type="string" required="yes">
-        <cfargument name="DegreeID" type="numeric" required="yes">
-        <cfargument name="SkipDuplicates" type="string" required="no" default="N">
-        <cfargument name="ChangedFields" type="string" required="no" default="">
-        <cfargument name="ChangedValues" type="string" required="no" default="">
+	<cffunction name="createPerson"  output="false" returntype="string">
+		<cfparam name="params.PersonID" type="numeric" required="yes">
+        <cfparam name="params.Birthdate" type="string" required="no">
+        <cfparam name="params.FirstName" type="string" required="yes">
+        <cfparam name="params.MiddleName" type="string" required="no" default="">
+        <cfparam name="params.LastName" type="string" required="yes">
+        <cfparam name="params.CertName" type="string" required="no" default="#Arguments.FirstName# #Arguments.LastName#">
+        <cfparam name="params.CertNameCustom" type="string" required="no" default="">
+        <cfparam name="params.DisplayName" type="string" required="no" default="#Arguments.FirstName# #Arguments.LastName#">
+        <cfparam name="params.Suffix" type="string" required="no" default="">
+        <cfparam name="params.Email" type="string" required="yes">
+        <cfparam name="params.Gender" type="string" required="no" default="">
+        <cfparam name="params.SSN" type="string" required="yes">
+        <cfparam name="params.Password" type="string" required="yes">
+        <cfparam name="params.DegreeID" type="numeric" required="yes">
+        <cfparam name="params.SkipDuplicates" type="string" required="no" default="N">
+        <cfparam name="params.ChangedFields" type="string" required="no" default="">
+        <cfparam name="params.ChangedValues" type="string" required="no" default="">
         
         <cfset var Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         <cfcontent type="text/javascript" />
@@ -49,9 +49,9 @@
         <cfreturn Status.getJSON() />
     </cffunction>
     
-	<cffunction name="deleteAddress" access="remote" output="false" returnFormat="plain">
-    	<cfargument name="AddressID" type="numeric" required="yes">
-        <cfargument name="PersonID" type="numeric" required="yes">
+	<cffunction name="deleteAddress"  output="false" returnFormat="plain">
+    	<cfparam name="params.AddressID" type="numeric" required="yes">
+        <cfparam name="params.PersonID" type="numeric" required="yes">
         
         <cfset var Status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -65,9 +65,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="deleteEmail" access="remote" output="false" returnFormat="plain">
-    	<cfargument name="email_id" type="numeric" required="yes">
-        <cfargument name="person_id" type="numeric" required="yes">
+	<cffunction name="deleteEmail"  output="false" returnFormat="plain">
+    	<cfparam name="params.email_id" type="numeric" required="yes">
+        <cfparam name="params.person_id" type="numeric" required="yes">
         
         <cfset var Status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -81,8 +81,8 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="deleteNote" access="remote" output="true" returnFormat="plain">
-		<cfargument name="NoteID" type="numeric" required="true">
+	<cffunction name="deleteNote"  output="true" returnFormat="plain">
+		<cfparam name="params.NoteID" type="numeric">
     	
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -96,9 +96,9 @@
     	<cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="deletePerson" access="remote" output="true" returntype="string">
-		<cfargument name="PersonID" type="numeric" required="true">
-        <cfargument name="Reason" type="string" required="true">
+	<cffunction name="deletePerson"  output="true" returntype="string">
+		<cfparam name="params.PersonID" type="numeric">
+        <cfparam name="params.Reason" type="string">
     	
         <cfset var status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
 
@@ -112,8 +112,8 @@
     	<cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="getNameByID" access="remote" output="no" returntype="string">
-		<cfargument name="PersonID" type="numeric" required="yes">
+	<cffunction name="getNameByID"  output="no" returntype="string">
+		<cfparam name="params.PersonID" type="numeric" required="yes">
         
         <cfset var status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         <cfset var fullName = "">
@@ -134,8 +134,8 @@
         <cfreturn Status.getJSON() />
     </cffunction>
     
-    <cffunction name="getPersonSpecialties" access="remote" output="no" returntype="string">
-    	<cfargument name="personId" type="numeric" required="yes">
+    <cffunction name="getPersonSpecialties"  output="no" returntype="string">
+    	<cfparam name="params.personId" type="numeric" required="yes">
         
     	<cfset var status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -153,11 +153,11 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-    <cffunction name="moveActivities" access="remote" output="no" returntype="string">
-    	<cfargument name="MoveFromPersonID" type="numeric" required="true" />
-    	<cfargument name="MoveFromName" type="string" required="true" />
-        <cfargument name="MoveToPersonID" type="numeric" required="true" />
-    	<cfargument name="MoveToName" type="string" required="true" />
+    <cffunction name="moveActivities"  output="no" returntype="string">
+    	<cfparam name="params.MoveFromPersonID" type="numeric" />
+    	<cfparam name="params.MoveFromName" type="string" />
+        <cfparam name="params.MoveToPersonID" type="numeric" />
+    	<cfparam name="params.MoveToName" type="string" />
         
         <cfset var status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -171,8 +171,8 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="requestPassword" access="remote" returntype="string">
-    	<cfargument name="Email" type="string" required="yes">
+	<cffunction name="requestPassword"  returntype="string">
+    	<cfparam name="params.Email" type="string" required="yes">
         
         <cfset var status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -186,24 +186,24 @@
         <cfreturn status.getJSON() />
     </cffunction>
         
-	<cffunction name="saveAddress" access="remote" output="false" returnFormat="plain">
-		<cfargument name="AddressID" type="numeric" required="yes">
-        <cfargument name="PersonID" type="numeric" required="yes">
-        <cfargument name="AddressTypeID" type="numeric" required="yes">
-        <cfargument name="PrimaryFlag" type="string" required="yes">
-        <cfargument name="Address1" type="string" required="yes">
-        <cfargument name="Address2" type="string" required="yes">
-        <cfargument name="City" type="string" required="yes">
-        <cfargument name="State" type="string" required="yes">
-        <cfargument name="Province" type="string" required="yes">
-        <cfargument name="Country" type="string" required="yes">
-        <cfargument name="Zipcode" type="string" required="yes">
-        <cfargument name="Phone1" type="string" required="yes">
-        <cfargument name="Phone1ext" type="string" required="yes">
-        <cfargument name="Phone2" type="string" required="yes">
-        <cfargument name="Phone2ext" type="string" required="yes">
-        <cfargument name="Phone3" type="string" required="yes">
-        <cfargument name="Phone3ext" type="string" required="yes">
+	<cffunction name="saveAddress"  output="false" returnFormat="plain">
+		<cfparam name="params.AddressID" type="numeric" required="yes">
+        <cfparam name="params.PersonID" type="numeric" required="yes">
+        <cfparam name="params.AddressTypeID" type="numeric" required="yes">
+        <cfparam name="params.PrimaryFlag" type="string" required="yes">
+        <cfparam name="params.Address1" type="string" required="yes">
+        <cfparam name="params.Address2" type="string" required="yes">
+        <cfparam name="params.City" type="string" required="yes">
+        <cfparam name="params.State" type="string" required="yes">
+        <cfparam name="params.Province" type="string" required="yes">
+        <cfparam name="params.Country" type="string" required="yes">
+        <cfparam name="params.Zipcode" type="string" required="yes">
+        <cfparam name="params.Phone1" type="string" required="yes">
+        <cfparam name="params.Phone1ext" type="string" required="yes">
+        <cfparam name="params.Phone2" type="string" required="yes">
+        <cfparam name="params.Phone2ext" type="string" required="yes">
+        <cfparam name="params.Phone3" type="string" required="yes">
+        <cfparam name="params.Phone3ext" type="string" required="yes">
         
         <cfset var Status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -234,10 +234,10 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-    <cffunction name="saveCredentials" hint="" access="remote" output="false" returnFormat="plain">
-    	<cfargument name="PersonID" type="numeric" required="yes">
-        <cfargument name="Pass" type="string" required="yes">
-        <cfargument name="ConPass" type="string" required="yes">
+    <cffunction name="saveCredentials" hint=""  output="false" returnFormat="plain">
+    	<cfparam name="params.PersonID" type="numeric" required="yes">
+        <cfparam name="params.Pass" type="string" required="yes">
+        <cfparam name="params.ConPass" type="string" required="yes">
         
         <cfset var Status = createObject("component", "#Application.settings.com#returnData.buildStruct").init()>
         
@@ -251,9 +251,9 @@
     	<cfreturn Status.getJSON() />
     </cffunction>
     
-    <cffunction name="saveDegree" hint="New Person Degree Info - saves using new degree information." access="remote" output="false" returntype="string">
-    	<cfargument name="PersonID" type="numeric" required="yes">
-        <cfargument name="DegreeID" type="numeric" required="yes">
+    <cffunction name="saveDegree" hint="New Person Degree Info - saves using new degree information."  output="false" returntype="string">
+    	<cfparam name="params.PersonID" type="numeric" required="yes">
+        <cfparam name="params.DegreeID" type="numeric" required="yes">
         
         <cfset var Status = createObject("component", "#Application.settings.com#returnData.buildStruct").init()>
         
@@ -267,13 +267,13 @@
     	<cfreturn status.getJSON() />
     </cffunction>
     
-    <cffunction name="saveEmail" access="remote" output="false" returntype="string">
-    	<cfargument name="email_id" type="numeric" required="yes">
-    	<cfargument name="person_id" type="numeric" required="yes">
-    	<cfargument name="allow_login" type="numeric" required="yes">
-    	<cfargument name="email_address" type="string" required="yes">
-    	<cfargument name="is_primary" type="numeric" required="yes">
-    	<cfargument name="is_verified" type="numeric" required="yes">
+    <cffunction name="saveEmail"  output="false" returntype="string">
+    	<cfparam name="params.email_id" type="numeric" required="yes">
+    	<cfparam name="params.person_id" type="numeric" required="yes">
+    	<cfparam name="params.allow_login" type="numeric" required="yes">
+    	<cfparam name="params.email_address" type="string" required="yes">
+    	<cfparam name="params.is_primary" type="numeric" required="yes">
+    	<cfparam name="params.is_verified" type="numeric" required="yes">
         
         <cfset var status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -293,10 +293,10 @@
         <cfreturn status.getJSON() />
     </cffunction>
 
-	<cffunction name="saveNote" access="remote" output="no" returnFormat="plain">
-		<cfargument name="PersonID" type="numeric" required="true">
-		<cfargument name="NoteBody" type="string" required="true">
-		<cfargument name="NoteID" type="numeric" required="false" default="0">
+	<cffunction name="saveNote"  output="no" returnFormat="plain">
+		<cfparam name="params.PersonID" type="numeric">
+		<cfparam name="params.NoteBody" type="string">
+		<cfparam name="params.NoteID" type="numeric" required="false" default="0">
         
         <cfset var status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -310,23 +310,23 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="savePerson" access="Remote" output="false" returnformat="plain">
-		<cfargument name="PersonID" type="numeric" required="yes">
-        <cfargument name="Birthdate" type="string" required="no">
-        <cfargument name="FirstName" type="string" required="yes">
-        <cfargument name="MiddleName" type="string" required="no" default="">
-        <cfargument name="LastName" type="string" required="yes">
-        <cfargument name="CertName" type="string" required="no" default="#Arguments.FirstName# #Arguments.LastName#">
-        <cfargument name="CertNameCustom" type="string" required="no" default="">
-        <cfargument name="DisplayName" type="string" required="no" default="#Arguments.FirstName# #Arguments.LastName#">
-        <cfargument name="Suffix" type="string" required="no" default="">
-        <cfargument name="Email" type="string" required="yes">
-        <cfargument name="Gender" type="string" required="no" default="">
-        <cfargument name="SSN" type="string" required="yes">
-        <cfargument name="Password" type="string" required="yes">
-        <cfargument name="SkipDuplicates" type="string" required="no" default="N">
-        <cfargument name="ChangedFields" type="string" required="no" default="">
-        <cfargument name="ChangedValues" type="string" required="no" default="">
+	<cffunction name="savePerson"  output="false" returnformat="plain">
+		<cfparam name="params.PersonID" type="numeric" required="yes">
+        <cfparam name="params.Birthdate" type="string" required="no">
+        <cfparam name="params.FirstName" type="string" required="yes">
+        <cfparam name="params.MiddleName" type="string" required="no" default="">
+        <cfparam name="params.LastName" type="string" required="yes">
+        <cfparam name="params.CertName" type="string" required="no" default="#Arguments.FirstName# #Arguments.LastName#">
+        <cfparam name="params.CertNameCustom" type="string" required="no" default="">
+        <cfparam name="params.DisplayName" type="string" required="no" default="#Arguments.FirstName# #Arguments.LastName#">
+        <cfparam name="params.Suffix" type="string" required="no" default="">
+        <cfparam name="params.Email" type="string" required="yes">
+        <cfparam name="params.Gender" type="string" required="no" default="">
+        <cfparam name="params.SSN" type="string" required="yes">
+        <cfparam name="params.Password" type="string" required="yes">
+        <cfparam name="params.SkipDuplicates" type="string" required="no" default="N">
+        <cfparam name="params.ChangedFields" type="string" required="no" default="">
+        <cfparam name="params.ChangedValues" type="string" required="no" default="">
         
         <cfset var status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -356,9 +356,9 @@
         <cfreturn Status.getJSON() />
     </cffunction>
     
-    <cffunction name="savePersonSpecialties" access="remote" output="false" description="Saves specialties for provided person." returnFormat="plain">
-    	<cfargument name="PersonID" type="numeric" required="yes">
-        <cfargument name="Specialties" type="string" required="yes">
+    <cffunction name="savePersonSpecialties"  output="false" description="Saves specialties for provided person." returnFormat="plain">
+    	<cfparam name="params.PersonID" type="numeric" required="yes">
+        <cfparam name="params.Specialties" type="string" required="yes">
         
         <cfset var Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -372,8 +372,8 @@
         <cfreturn Status.getJSON() />
     </cffunction>
     
-    <cffunction name="sendVerificationEmail" hint="Sends an email to verify email address." access="remote" output="false" returntype="string">
-    	<cfargument name="email_id" type="numeric" required="yes">
+    <cffunction name="sendVerificationEmail" hint="Sends an email to verify email address."  output="false" returntype="string">
+    	<cfparam name="params.email_id" type="numeric" required="yes">
         
         <cfset var status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -387,9 +387,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
 	
-    <cffunction name="setAuthLevel" access="remote" output="false" description="Set Authority Level" returntype="string">
-    	<cfargument name="AccountID" type="numeric" required="yes" />
-        <cfargument name="AuthorityID" type="numeric" required="yes" />
+    <cffunction name="setAuthLevel"  output="false" description="Set Authority Level" returntype="string">
+    	<cfparam name="params.AccountID" type="numeric" required="yes" />
+        <cfparam name="params.AuthorityID" type="numeric" required="yes" />
         
         <cfset var Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -403,9 +403,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
 	
-    <cffunction name="setPrimaryEmail" access="remote" output="false" description="Set Authority Level" returntype="string">
-    	<cfargument name="email_id" type="numeric" required="yes" />
-    	<cfargument name="person_id" type="numeric" required="yes" />
+    <cffunction name="setPrimaryEmail"  output="false" description="Set Authority Level" returntype="string">
+    	<cfparam name="params.email_id" type="numeric" required="yes" />
+    	<cfparam name="params.person_id" type="numeric" required="yes" />
         
         <cfset var Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -419,9 +419,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
 	
-	<cffunction name="setStatus" access="remote" output="no" displayname="Set Activity Status" returntype="string">
-		<cfargument name="PersonID" type="numeric" required="yes" />
-		<cfargument name="StatusID" type="numeric" required="yes" />
+	<cffunction name="setStatus"  output="no" displayname="Set Activity Status" returntype="string">
+		<cfparam name="params.PersonID" type="numeric" required="yes" />
+		<cfparam name="params.StatusID" type="numeric" required="yes" />
         
         <cfset var Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         

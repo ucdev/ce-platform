@@ -1,5 +1,5 @@
 <cfcomponent extends="controller">
-	<cffunction name="fixAttendees" hint="Used to fix activity dates for attendees." access="remote">
+	<cffunction name="fixAttendees" hint="Used to fix activity dates for attendees." >
     	<cfquery name="qAttendees" datasource="#application.settings.dsn#">
         	SELECT *
             FROM
@@ -33,7 +33,7 @@
         </cfloop>
     </cffunction>
     
-	<cffunction name="updateAttendeeDates" access="remote">
+	<cffunction name="updateAttendeeDates" >
     	<cfquery name="qGetAttendees" datasource="#application.settings.dsn#">
         	SELECT AttendeeId, CheckIn
             FROM ce_attendee
@@ -43,8 +43,8 @@
         <cfdump var="#qGetAttendees#"><cfabort>
     </cffunction>
     
-	<cffunction name="approveComment" access="Remote" returntype="string">
-		<cfargument name="CommentID" type="string" required="true">
+	<cffunction name="approveComment"  returntype="string">
+		<cfparam name="params.CommentID" type="string">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -58,11 +58,11 @@
         <cfreturn status.getJSON() />
     </cffunction>
 
-	<cffunction name="approveFacultyFile" access="Remote" output="false" returntype="String">
-		<cfargument name="PersonID" required="true" type="string">
-		<cfargument name="ActivityID" required="true" type="string">
-        <cfargument name="FileType" required="true" type="string">
-        <cfargument name="Mode" required="true" type="string">
+	<cffunction name="approveFacultyFile"  output="false" returntype="String">
+		<cfparam name="params.PersonID" type="string">
+		<cfparam name="params.ActivityID" type="string">
+        <cfparam name="params.FileType" type="string">
+        <cfparam name="params.Mode" type="string">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -76,19 +76,19 @@
         <cfreturn status.getJSON() />
     </cffunction>
         
-	<cffunction name="AutoComplete" access="Remote" output="no" returntype="string">
-		<cfargument name="q" type="string" required="yes">
-		<cfargument name="limit" type="string" required="yes">
+	<cffunction name="AutoComplete"  output="no" returntype="string">
+		<cfparam name="params.q" type="string" required="yes">
+		<cfparam name="params.limit" type="string" required="yes">
         
         <cfset var Status = Application.Activity.AutoComplete(Arguments.Q,Arguments.Limit)>
         
         <cfreturn Status />
     </cffunction>
 
-	<cffunction name="changeCommitteeRoles" access="Remote" output="false" returntype="string">
-		<cfargument name="PersonList" required="true" type="string">
-		<cfargument name="ActivityID" required="true" type="string">
-		<cfargument name="RoleID" required="true" type="string">
+	<cffunction name="changeCommitteeRoles"  output="false" returntype="string">
+		<cfparam name="params.PersonList" type="string">
+		<cfparam name="params.ActivityID" type="string">
+		<cfparam name="params.RoleID" type="string">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -102,10 +102,10 @@
         <cfreturn status.getJSON() />
     </cffunction>
 
-	<cffunction name="changeFacultyRoles" access="Remote" output="false" returntype="string">
-		<cfargument name="PersonList" required="true" type="string">
-		<cfargument name="ActivityID" required="true" type="string">
-		<cfargument name="RoleID" required="true" type="string">
+	<cffunction name="changeFacultyRoles"  output="false" returntype="string">
+		<cfparam name="params.PersonList" type="string">
+		<cfparam name="params.ActivityID" type="string">
+		<cfparam name="params.RoleID" type="string">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -119,12 +119,12 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="CopyPaste" displayname="Copy and Paste Activity" access="Remote" output="no" returntype="string">
-		<cfargument name="Mode" type="numeric" required="yes">
-		<cfargument name="ActivityID" type="numeric" required="yes">
-        <cfargument name="NewActivityTitle" type="string" required="yes">
-        <cfargument name="NewActivityTypeID" type="numeric" required="yes">
-        <cfargument name="NewGroupingID" type="numeric" required="yes">
+	<cffunction name="CopyPaste" displayname="Copy and Paste Activity"  output="no" returntype="string">
+		<cfparam name="params.Mode" type="numeric" required="yes">
+		<cfparam name="params.ActivityID" type="numeric" required="yes">
+        <cfparam name="params.NewActivityTitle" type="string" required="yes">
+        <cfparam name="params.NewActivityTypeID" type="numeric" required="yes">
+        <cfparam name="params.NewGroupingID" type="numeric" required="yes">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -143,8 +143,8 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="createCategory" access="Remote" output="false" returntype="string">
-		<cfargument name="Name" required="yes" type="string">
+	<cffunction name="createCategory"  output="false" returntype="string">
+		<cfparam name="params.Name" required="yes" type="string">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -158,9 +158,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="deleteActivity" access="remote" output="false" returntype="string">
-		<cfargument name="ActivityID" type="numeric" required="true">
-        <cfargument name="Reason" type="string" required="true">
+	<cffunction name="deleteActivity"  output="false" returntype="string">
+		<cfparam name="params.ActivityID" type="numeric">
+        <cfparam name="params.Reason" type="string">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -174,8 +174,8 @@
     	<cfreturn status.getJSON() />
     </cffunction>
 	
-	<cffunction name="deleteAgendaItem" access="Remote" output="false" returntype="string">
-		<cfargument name="AgendaID" required="yes" type="string">
+	<cffunction name="deleteAgendaItem"  output="false" returntype="string">
+		<cfparam name="params.AgendaID" required="yes" type="string">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -189,9 +189,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="deleteBudget" access="Remote" output="false" returntype="string">
-	<cfargument name="ActivityID" type="numeric" required="true">
-	<cfargument name="BudgetID" type="numeric" required="true">
+	<cffunction name="deleteBudget"  output="false" returntype="string">
+	<cfparam name="params.ActivityID" type="numeric">
+	<cfparam name="params.BudgetID" type="numeric">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -205,9 +205,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
 
-	<cffunction name="deleteCategory" access="Remote" output="false" returntype="string">
-		<cfargument name="ActivityID" required="true" type="numeric">
-		<cfargument name="CategoryID" required="true" type="numeric">
+	<cffunction name="deleteCategory"  output="false" returntype="string">
+		<cfparam name="params.ActivityID" type="numeric">
+		<cfparam name="params.CategoryID" type="numeric">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -221,8 +221,8 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="denyComment" access="Remote" returntype="string">
-		<cfargument name="CommentID" type="string" required="true">
+	<cffunction name="denyComment"  returntype="string">
+		<cfparam name="params.CommentID" type="string">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -236,9 +236,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="deleteFee" access="Remote" output="false" returntype="string">
-        <cfargument name="ActivityID" type="String" required="true">
-        <cfargument name="FeeID" type="String" required="true">
+	<cffunction name="deleteFee"  output="false" returntype="string">
+        <cfparam name="params.ActivityID" type="String">
+        <cfparam name="params.FeeID" type="String">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -252,9 +252,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
 
-	<cffunction name="deleteLedger" access="remote" output="false" returntype="string">
-	<cfargument name="ActivityID" type="String" required="true">
-	<cfargument name="EntryID" type="String" required="true">
+	<cffunction name="deleteLedger"  output="false" returntype="string">
+	<cfparam name="params.ActivityID" type="String">
+	<cfparam name="params.EntryID" type="String">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -268,8 +268,8 @@
         <cfreturn status.getJSON() />
     </cffunction>
 
-	<cffunction name="deleteNote" access="Remote" output="false" returntype="string">
-		<cfargument name="NoteID" required="true" type="numeric">
+	<cffunction name="deleteNote"  output="false" returntype="string">
+		<cfparam name="params.NoteID" type="numeric">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -283,9 +283,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
 
-	<cffunction name="deleteSupport" access="remote" output="false" returntype="string">
-        <cfargument name="ActivityID" type="String" required="true">
-        <cfargument name="SupportID" type="String" required="true">
+	<cffunction name="deleteSupport"  output="false" returntype="string">
+        <cfparam name="params.ActivityID" type="String">
+        <cfparam name="params.SupportID" type="String">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -299,11 +299,11 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-    <cffunction name="emailCertificate" access="remote" output="false" returntype="string" returnFormat="plain">
-        <cfargument name="activityId" type="numeric" required="yes">
-    	<cfargument name="personId" type="numeric" required="yes">
-        <cfargument name="subject" type="string" required="yes">
-        <cfargument name="body" type="string" required="yes">
+    <cffunction name="emailCertificate"  output="false" returntype="string" returnFormat="plain">
+        <cfparam name="params.activityId" type="numeric" required="yes">
+    	<cfparam name="params.personId" type="numeric" required="yes">
+        <cfparam name="params.subject" type="string" required="yes">
+        <cfparam name="params.body" type="string" required="yes">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -321,9 +321,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="fixStats" output="no" access="Remote" returntype="string" returnformat="plain">
-		<cfargument name="RunDate" type="string" required="no" default="#DateFormat(DateAdd('d',-100,now()),'mm/dd/yyyy')#" />
-		<cfargument name="ActivityID" type="numeric" required="no" default="0" />
+	<cffunction name="fixStats" output="no"  returntype="string" returnformat="plain">
+		<cfparam name="params.RunDate" type="string" required="no" default="#DateFormat(DateAdd('d',-100,now()),'mm/dd/yyyy')#" />
+		<cfparam name="params.ActivityID" type="numeric" required="no" default="0" />
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -341,8 +341,8 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-    <cffunction name="getActivitySpecialties" access="remote" output="false" returntype="string">
-    	<cfargument name="activityId" type="numeric" required="yes">
+    <cffunction name="getActivitySpecialties"  output="false" returntype="string">
+    	<cfparam name="params.activityId" type="numeric" required="yes">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -356,11 +356,11 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-    <cffunction name="getAttendeeDate" hint="Returns requested date information for provided attendee." access="Remote" output="false" returntype="string">
-    	<cfargument name="attendeeId" type="numeric" required="no" default="0">
-    	<cfargument name="PersonID" type="numeric" required="no" default="0">
-        <cfargument name="ActivityID" type="numeric" required="no" default="0">
-        <cfargument name="Type" type="numeric" required="yes">
+    <cffunction name="getAttendeeDate" hint="Returns requested date information for provided attendee."  output="false" returntype="string">
+    	<cfparam name="params.attendeeId" type="numeric" required="no" default="0">
+    	<cfparam name="params.PersonID" type="numeric" required="no" default="0">
+        <cfparam name="params.ActivityID" type="numeric" required="no" default="0">
+        <cfparam name="params.Type" type="numeric" required="yes">
         
         <cfset var Status = "">
         
@@ -369,23 +369,23 @@
         <cfreturn Status />
     </cffunction>
     
-    <cffunction name="getGroupings" hint="Returns JSON data for groupings." access="Remote" output="false" returntype="string">
-    	<cfargument name="ATID" type="numeric" required="yes">
+    <cffunction name="getGroupings" hint="Returns JSON data for groupings."  output="false" returntype="string">
+    	<cfparam name="params.ATID" type="numeric" required="yes">
         
         <cfset Status = Application.Activity.getGroupings(Arguments.ATID)>
         
         <cfreturn Status />
     </cffunction>
     
-    <cffunction name="getNoteCount" hint="Returns the total number of notes for provided activity." access="Remote" output="false" returntype="numeric">
-    	<cfargument name="ActivityID" type="numeric" required="yes">
+    <cffunction name="getNoteCount" hint="Returns the total number of notes for provided activity."  output="false" returntype="numeric">
+    	<cfparam name="params.ActivityID" type="numeric" required="yes">
         
         <cfset Status = Application.Activity.getNoteCount(Arguments.ActivityID)>
         
         <cfreturn Status />
     </cffunction>
     
-    <cffunction name="getSpecialties" access="remote" output="false" returntype="string">
+    <cffunction name="getSpecialties"  output="false" returntype="string">
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
         <cfcontent type="text/javascript" />
@@ -398,18 +398,18 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="JointlyAutoComplete" access="Remote" output="no" returntype="string">
-		<cfargument name="q" type="string" required="yes">
-		<cfargument name="limit" type="string" required="yes">
+	<cffunction name="JointlyAutoComplete"  output="no" returntype="string">
+		<cfparam name="params.q" type="string" required="yes">
+		<cfparam name="params.limit" type="string" required="yes">
         
         <cfset var Status = Application.Activity.JointlyAutoComplete(Arguments.Q,Arguments.Limit)>
         
         <cfreturn Status />
     </cffunction>
     
-    <cffunction name="markComplete" access="Remote" output="false" returntype="string">
-		<cfargument name="PersonID" type="string" required="yes">
-        <cfargument name="ActivityID" type="string" required="yes">
+    <cffunction name="markComplete"  output="false" returntype="string">
+		<cfparam name="params.PersonID" type="string" required="yes">
+        <cfparam name="params.ActivityID" type="string" required="yes">
         
         <cfset var Status = "false|Cannot access functionality to mark activity complete.">
 		
@@ -418,16 +418,16 @@
         <cfreturn Status />
     </cffunction>
 	
-	<cffunction name="Move" displayname="Move Activity" access="Remote" output="no">
-		<cfargument name="FromActivityID" type="numeric" required="yes">
-		<cfargument name="ToActivityID" type="numeric" required="yes">
+	<cffunction name="Move" displayname="Move Activity"  output="no">
+		<cfparam name="params.FromActivityID" type="numeric" required="yes">
+		<cfparam name="params.ToActivityID" type="numeric" required="yes">
         
         <cfset Application.Activity.Move(Arguments.FromActivityID,Arguments.ToActivityID)>
         
     </cffunction>
 	
-    <cffunction name="publishActivity" hint="Publishes Activity to the web" access="Remote" output="false" returntype="string">
-    	<cfargument name="ActivityID" type="string" required="true" />
+    <cffunction name="publishActivity" hint="Publishes Activity to the web"  output="false" returntype="string">
+    	<cfparam name="params.ActivityID" type="string" />
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -441,9 +441,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-    <cffunction name="publishActivityToSite" hint="Either Adds or Deletes a record for the Site Publishing" access="Remote" output="false" returntype="string">
-    	<cfargument name="ActivityID" type="string" required="true" />
-        <cfargument name="SiteID" type="string" required="true" />
+    <cffunction name="publishActivityToSite" hint="Either Adds or Deletes a record for the Site Publishing"  output="false" returntype="string">
+    	<cfparam name="params.ActivityID" type="string" />
+        <cfparam name="params.SiteID" type="string" />
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -457,11 +457,11 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="publishFile" hint="Adds a publishing component for current file as a file download." access="Remote" output="false" returntype="string">
-    	<cfargument name="ActivityID" type="numeric" required="yes">
-        <cfargument name="FileID" type="numeric" required="yes">
-        <cfargument name="FileName" type="string" required="yes">
-        <cfargument name="ComponentID" type="numeric" required="yes">
+	<cffunction name="publishFile" hint="Adds a publishing component for current file as a file download."  output="false" returntype="string">
+    	<cfparam name="params.ActivityID" type="numeric" required="yes">
+        <cfparam name="params.FileID" type="numeric" required="yes">
+        <cfparam name="params.FileName" type="string" required="yes">
+        <cfparam name="params.ComponentID" type="numeric" required="yes">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -475,8 +475,8 @@
         <cfreturn status.getJSON() />
     </cffunction>
 
-	<cffunction name="removeAllAttendees" access="Remote" output="false" returntype="string">
-		<cfargument name="ActivityID" required="true" type="numeric">
+	<cffunction name="removeAllAttendees"  output="false" returntype="string">
+		<cfparam name="params.ActivityID" type="numeric">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -490,8 +490,8 @@
         <cfreturn status.getJSON() />
     </cffunction>
 
-	<cffunction name="removeAllCommittee" access="Remote" output="false" returntype="string">
-		<cfargument name="ActivityID" required="true" type="numeric">
+	<cffunction name="removeAllCommittee"  output="false" returntype="string">
+		<cfparam name="params.ActivityID" type="numeric">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -505,8 +505,8 @@
         <cfreturn status.getJSON() />
     </cffunction>
 
-	<cffunction name="removeAllFaculty" access="Remote" output="false" returntype="string">
-		<cfargument name="ActivityID" required="true" type="numeric">
+	<cffunction name="removeAllFaculty"  output="false" returntype="string">
+		<cfparam name="params.ActivityID" type="numeric">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -520,8 +520,8 @@
         <cfreturn status.getJSON() />
     </cffunction>
 	
-	<cffunction name="removeAttendeeByID" access="Remote" output="false" returntype="string" returnformat="plain">
-		<cfargument name="attendeeId" required="true" type="string">
+	<cffunction name="removeAttendeeByID"  output="false" returntype="string" returnformat="plain">
+		<cfparam name="params.attendeeId" type="string">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -547,9 +547,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
 	
-	<cffunction name="removeCheckedAttendees" access="Remote" output="false" returntype="string">
-		<cfargument name="AttendeeList" required="false" type="string" default="">
-		<cfargument name="ActivityID" required="true" type="numeric">
+	<cffunction name="removeCheckedAttendees"  output="false" returntype="string">
+		<cfparam name="params.AttendeeList" required="false" type="string" default="">
+		<cfparam name="params.ActivityID" type="numeric">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
 		
@@ -563,9 +563,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
 
-	<cffunction name="removeCheckedCommittee" access="Remote" output="false" returntype="string">
-		<cfargument name="PersonList" required="true" type="string">
-		<cfargument name="ActivityID" required="true" type="numeric">
+	<cffunction name="removeCheckedCommittee"  output="false" returntype="string">
+		<cfparam name="params.PersonList" type="string">
+		<cfparam name="params.ActivityID" type="numeric">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -579,9 +579,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
 
-	<cffunction name="removeCheckedFaculty" access="Remote" output="false" returntype="string">
-		<cfargument name="PersonList" required="true" type="string">
-		<cfargument name="ActivityID" required="true" type="numeric">
+	<cffunction name="removeCheckedFaculty"  output="false" returntype="string">
+		<cfparam name="params.PersonList" type="string">
+		<cfparam name="params.ActivityID" type="numeric">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -595,9 +595,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-    <cffunction name="resetAttendee" access="Remote" output="false" returntype="string">
-        <cfargument name="attendeeId" type="numeric" required="false" default="0">
-        <cfargument name="PaymentFlag" type="string" required="yes">
+    <cffunction name="resetAttendee"  output="false" returntype="string">
+        <cfparam name="params.attendeeId" type="numeric" required="false" default="0">
+        <cfparam name="params.PaymentFlag" type="string" required="yes">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -611,14 +611,14 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-    <cffunction name="saveACCMEInfo" access="remote" output="false" returntype="string">
-    	<cfargument name="ActivityID" type="numeric" required="yes">
-		<cfargument name="competenceDesign" type="numeric" required="no" default="0">
-		<cfargument name="performanceDesign" type="numeric" required="no" default="0">
-		<cfargument name="outcomesDesign" type="numeric" required="no" default="0">
-		<cfargument name="competenceEval" type="numeric" required="no" default="0">
-		<cfargument name="performanceEval" type="numeric" required="no" default="0">
-		<cfargument name="outcomesEval" type="numeric" required="no" default="0">
+    <cffunction name="saveACCMEInfo"  output="false" returntype="string">
+    	<cfparam name="params.ActivityID" type="numeric" required="yes">
+		<cfparam name="params.competenceDesign" type="numeric" required="no" default="0">
+		<cfparam name="params.performanceDesign" type="numeric" required="no" default="0">
+		<cfparam name="params.outcomesDesign" type="numeric" required="no" default="0">
+		<cfparam name="params.competenceEval" type="numeric" required="no" default="0">
+		<cfparam name="params.performanceEval" type="numeric" required="no" default="0">
+		<cfparam name="params.outcomesEval" type="numeric" required="no" default="0">
         
 		<cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -640,26 +640,26 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="saveActivity" access="Remote" output="no" returntype="string">
-		<cfargument name="ActivityID" default="" type="string" required="yes">
-		<cfargument name="Title" default="" type="string" required="yes">
-		<cfargument name="StartDate" default="" type="string">
-		<cfargument name="EndDate" default="" type="string">
-		<cfargument name="Description" default="" type="string">
-		<cfargument name="Location" default="" type="string">
-		<cfargument name="Address1" default="" type="string">
-		<cfargument name="Address2" default="" type="string">
-		<cfargument name="City" default="" type="string">
-		<cfargument name="State" default="" type="string">
-		<cfargument name="Province" default="" type="string">
-		<cfargument name="Country" default="" type="string">
-		<cfargument name="PostalCode" default="" type="string">
-		<cfargument name="Sponsorship" default="" type="string">
-		<cfargument name="Sponsor" default="" type="string">
-		<cfargument name="ExternalID" default="" type="string">
-		<cfargument name="ReleaseDate" type="string" default="#Now()#">
-		<cfargument name="ChangedFields" type="string" required="no" default="" />
-		<cfargument name="ChangedValues" type="string" required="no" default="" />
+	<cffunction name="saveActivity"  output="no" returntype="string">
+		<cfparam name="params.ActivityID" default="" type="string" required="yes">
+		<cfparam name="params.Title" default="" type="string" required="yes">
+		<cfparam name="params.StartDate" default="" type="string">
+		<cfparam name="params.EndDate" default="" type="string">
+		<cfparam name="params.Description" default="" type="string">
+		<cfparam name="params.Location" default="" type="string">
+		<cfparam name="params.Address1" default="" type="string">
+		<cfparam name="params.Address2" default="" type="string">
+		<cfparam name="params.City" default="" type="string">
+		<cfparam name="params.State" default="" type="string">
+		<cfparam name="params.Province" default="" type="string">
+		<cfparam name="params.Country" default="" type="string">
+		<cfparam name="params.PostalCode" default="" type="string">
+		<cfparam name="params.Sponsorship" default="" type="string">
+		<cfparam name="params.Sponsor" default="" type="string">
+		<cfparam name="params.ExternalID" default="" type="string">
+		<cfparam name="params.ReleaseDate" type="string" default="#Now()#">
+		<cfparam name="params.ChangedFields" type="string" required="no" default="" />
+		<cfparam name="params.ChangedValues" type="string" required="no" default="" />
         
         <cfset var Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -692,13 +692,13 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="saveAgendaItem" access="Remote" output="false" returntype="string">
-		<cfargument name="ActivityID" required="yes" type="string">
-		<cfargument name="AgendaID" required="no" type="string" default="">
-		<cfargument name="Description" required="yes" type="string" default="">
-		<cfargument name="EventDate" required="yes" type="string" default="">
-		<cfargument name="StartTime" required="yes" type="string" default="">
-		<cfargument name="EndTime" required="yes" type="string" default="">
+	<cffunction name="saveAgendaItem"  output="false" returntype="string">
+		<cfparam name="params.ActivityID" required="yes" type="string">
+		<cfparam name="params.AgendaID" required="no" type="string" default="">
+		<cfparam name="params.Description" required="yes" type="string" default="">
+		<cfparam name="params.EventDate" required="yes" type="string" default="">
+		<cfparam name="params.StartTime" required="yes" type="string" default="">
+		<cfparam name="params.EndTime" required="yes" type="string" default="">
         
         <cfset var Status = "Fail|Cannot access agenda save functionality.">
         
@@ -713,10 +713,10 @@
         <cfreturn Status />
     </cffunction>
 	
-    <cffunction name="saveAttendee" access="Remote" output="false" returntype="string">
-		<cfargument name="ActivityID" required="yes" type="string">
-		<cfargument name="PersonID" required="yes" type="string">
-		<cfargument name="MDFlag" required="no" type="string" default="N" />
+    <cffunction name="saveAttendee"  output="false" returntype="string">
+		<cfparam name="params.ActivityID" required="yes" type="string">
+		<cfparam name="params.PersonID" required="yes" type="string">
+		<cfparam name="params.MDFlag" required="no" type="string" default="N" />
         
         <cfset var Status = "Fail|Cannot access attendee save functionality.">
         
@@ -725,67 +725,67 @@
         <cfreturn Status />
     </cffunction>
 	
-    <cffunction name="saveAttendeeCDC" access="Remote" output="false" returntype="string" returnFormat="plain">
-    	<cfargument name="AttendeeID" type="numeric" required="yes">
-        <cfargument name="Ethnicity" type="numeric" required="yes">
-        <cfargument name="OMBEthnicity" type="numeric" required="yes">
-        <cfargument name="CBAFundID" type="string" required="yes">
-        <cfargument name="CBACDC" type="string" required="yes">
-        <cfargument name="CBAOth" type="string" required="yes">
-        <cfargument name="CBOFundID" type="string" required="yes">
-        <cfargument name="CBOCDC" type="string" required="yes">
-        <cfargument name="CBOOth" type="string" required="yes">
-        <cfargument name="ProfCId" type="numeric" required="yes">
-        <cfargument name="ProfCOther" type="string" required="yes">
-        <cfargument name="ProfNId" type="numeric" required="yes">
-        <cfargument name="ProfNOther" type="string" required="yes">
-        <cfargument name="FunRCId" type="numeric" required="yes">
-        <cfargument name="FunRCOther" type="string" required="yes">
-        <cfargument name="FunRNId" type="numeric" required="yes">
-        <cfargument name="FunRNOther" type="string" required="yes">
-        <cfargument name="OccClassID" type="numeric" required="yes">
-        <cfargument name="OrgTypeID" type="numeric" required="no" default="">
-        <cfargument name="OrgTypeOther" type="string" required="yes">
-        <cfargument name="PrinEmpID" type="numeric" required="yes">
-        <cfargument name="PrinEmpOther" type="string" required="yes">
-        <cfargument name="WorkState" type="string" required="yes">
-        <cfargument name="WorkZip" type="numeric" required="yes">
-        <cfargument name="Focus1" type="string" required="no" default="">
-        <cfargument name="Focus2" type="string" required="no" default="">
-        <cfargument name="Focus3" type="string" required="no" default="">
-        <cfargument name="Focus4" type="string" required="no" default="">
-        <cfargument name="Focus5" type="string" required="no" default="">
-        <cfargument name="Focus6" type="string" required="no" default="">
-        <cfargument name="Focus7" type="string" required="no" default="">
-        <cfargument name="Focus8" type="string" required="no" default="">
-        <cfargument name="Focus9" type="string" required="no" default="">
-        <cfargument name="Focus10" type="string" required="no" default="">
-        <cfargument name="FocusOther" type="string" required="no" default="">
-        <cfargument name="SpecialPop1" type="string" required="no" default="">
-        <cfargument name="SpecialPop2" type="string" required="no" default="">
-        <cfargument name="SpecialPop3" type="string" required="no" default="">
-        <cfargument name="SpecialPop4" type="string" required="no" default="">
-        <cfargument name="SpecialPop5" type="string" required="no" default="">
-        <cfargument name="SpecialPop6" type="string" required="no" default="">
-        <cfargument name="SpecialPop7" type="string" required="no" default="">
-        <cfargument name="SpecialPop8" type="string" required="no" default="">
-        <cfargument name="SpecialPop9" type="string" required="no" default="">
-        <cfargument name="SpecialPop10" type="string" required="no" default="">
-        <cfargument name="SpecialPop11" type="string" required="no" default="">
-        <cfargument name="SpecialPop12" type="string" required="no" default="">
-        <cfargument name="SpecialPop13" type="string" required="no" default="">
-        <cfargument name="SpecialPop14" type="string" required="no" default="">
-        <cfargument name="SpecialPop15" type="string" required="no" default="">
-        <cfargument name="SpecialPop16" type="string" required="no" default="">
-        <cfargument name="SpecialPop17" type="string" required="no" default="">
-        <cfargument name="SpecialPop18" type="string" required="no" default="">
-        <cfargument name="SpecialPopOther" type="string" required="no" default="">
-        <cfargument name="MarketID" type="string" required="yes">
-        <cfargument name="MarketOther" type="string" required="yes">
-        <cfargument name="ContactUpdates" type="string" required="yes">
-        <cfargument name="ContactEval" type="string" required="yes">
-        <cfargument name="PTCAlert" type="string" required="yes">
-        <cfargument name="CurrentlyEnrolled" type="string" required="yes">
+    <cffunction name="saveAttendeeCDC"  output="false" returntype="string" returnFormat="plain">
+    	<cfparam name="params.AttendeeID" type="numeric" required="yes">
+        <cfparam name="params.Ethnicity" type="numeric" required="yes">
+        <cfparam name="params.OMBEthnicity" type="numeric" required="yes">
+        <cfparam name="params.CBAFundID" type="string" required="yes">
+        <cfparam name="params.CBACDC" type="string" required="yes">
+        <cfparam name="params.CBAOth" type="string" required="yes">
+        <cfparam name="params.CBOFundID" type="string" required="yes">
+        <cfparam name="params.CBOCDC" type="string" required="yes">
+        <cfparam name="params.CBOOth" type="string" required="yes">
+        <cfparam name="params.ProfCId" type="numeric" required="yes">
+        <cfparam name="params.ProfCOther" type="string" required="yes">
+        <cfparam name="params.ProfNId" type="numeric" required="yes">
+        <cfparam name="params.ProfNOther" type="string" required="yes">
+        <cfparam name="params.FunRCId" type="numeric" required="yes">
+        <cfparam name="params.FunRCOther" type="string" required="yes">
+        <cfparam name="params.FunRNId" type="numeric" required="yes">
+        <cfparam name="params.FunRNOther" type="string" required="yes">
+        <cfparam name="params.OccClassID" type="numeric" required="yes">
+        <cfparam name="params.OrgTypeID" type="numeric" required="no" default="">
+        <cfparam name="params.OrgTypeOther" type="string" required="yes">
+        <cfparam name="params.PrinEmpID" type="numeric" required="yes">
+        <cfparam name="params.PrinEmpOther" type="string" required="yes">
+        <cfparam name="params.WorkState" type="string" required="yes">
+        <cfparam name="params.WorkZip" type="numeric" required="yes">
+        <cfparam name="params.Focus1" type="string" required="no" default="">
+        <cfparam name="params.Focus2" type="string" required="no" default="">
+        <cfparam name="params.Focus3" type="string" required="no" default="">
+        <cfparam name="params.Focus4" type="string" required="no" default="">
+        <cfparam name="params.Focus5" type="string" required="no" default="">
+        <cfparam name="params.Focus6" type="string" required="no" default="">
+        <cfparam name="params.Focus7" type="string" required="no" default="">
+        <cfparam name="params.Focus8" type="string" required="no" default="">
+        <cfparam name="params.Focus9" type="string" required="no" default="">
+        <cfparam name="params.Focus10" type="string" required="no" default="">
+        <cfparam name="params.FocusOther" type="string" required="no" default="">
+        <cfparam name="params.SpecialPop1" type="string" required="no" default="">
+        <cfparam name="params.SpecialPop2" type="string" required="no" default="">
+        <cfparam name="params.SpecialPop3" type="string" required="no" default="">
+        <cfparam name="params.SpecialPop4" type="string" required="no" default="">
+        <cfparam name="params.SpecialPop5" type="string" required="no" default="">
+        <cfparam name="params.SpecialPop6" type="string" required="no" default="">
+        <cfparam name="params.SpecialPop7" type="string" required="no" default="">
+        <cfparam name="params.SpecialPop8" type="string" required="no" default="">
+        <cfparam name="params.SpecialPop9" type="string" required="no" default="">
+        <cfparam name="params.SpecialPop10" type="string" required="no" default="">
+        <cfparam name="params.SpecialPop11" type="string" required="no" default="">
+        <cfparam name="params.SpecialPop12" type="string" required="no" default="">
+        <cfparam name="params.SpecialPop13" type="string" required="no" default="">
+        <cfparam name="params.SpecialPop14" type="string" required="no" default="">
+        <cfparam name="params.SpecialPop15" type="string" required="no" default="">
+        <cfparam name="params.SpecialPop16" type="string" required="no" default="">
+        <cfparam name="params.SpecialPop17" type="string" required="no" default="">
+        <cfparam name="params.SpecialPop18" type="string" required="no" default="">
+        <cfparam name="params.SpecialPopOther" type="string" required="no" default="">
+        <cfparam name="params.MarketID" type="string" required="yes">
+        <cfparam name="params.MarketOther" type="string" required="yes">
+        <cfparam name="params.ContactUpdates" type="string" required="yes">
+        <cfparam name="params.ContactEval" type="string" required="yes">
+        <cfparam name="params.PTCAlert" type="string" required="yes">
+        <cfparam name="params.CurrentlyEnrolled" type="string" required="yes">
         
         <cfset var status = createObject("component","#application.settings.com#returnData.buildStruct").init()>
         
@@ -863,10 +863,10 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-    <cffunction name="saveAttendeeDate" hint="Saves date info for attendee to provided attendee db field." access="Remote" returntype="string">
-    	<cfargument name="AttendeeID" type="numeric" required="yes">
-        <cfargument name="DateValue" type="string" required="yes">
-        <cfargument name="Type" type="numeric" required="yes">
+    <cffunction name="saveAttendeeDate" hint="Saves date info for attendee to provided attendee db field."  returntype="string">
+    	<cfparam name="params.AttendeeID" type="numeric" required="yes">
+        <cfparam name="params.DateValue" type="string" required="yes">
+        <cfparam name="params.Type" type="numeric" required="yes">
         
         <cfset var Status = "Fail|Cannot access update function for attendee dates.">
         
@@ -875,12 +875,12 @@
         <cfreturn Status />
     </cffunction>
     
-    <cffunction name="saveBudget" hint="Saves provided information as a budget entry." access="remote" output="false" returntype="string">
-    	<cfargument name="ActivityID" type="numeric" required="yes">
-    	<cfargument name="BudgetID" type="numeric" required="yes">
-        <cfargument name="Description" type="string" required="yes">
-        <cfargument name="EntryType" type="numeric" required="yes">
-        <cfargument name="Amount" type="numeric" required="yes">
+    <cffunction name="saveBudget" hint="Saves provided information as a budget entry."  output="false" returntype="string">
+    	<cfparam name="params.ActivityID" type="numeric" required="yes">
+    	<cfparam name="params.BudgetID" type="numeric" required="yes">
+        <cfparam name="params.Description" type="string" required="yes">
+        <cfparam name="params.EntryType" type="numeric" required="yes">
+        <cfparam name="params.Amount" type="numeric" required="yes">
         
         <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -894,9 +894,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="saveCategory" access="Remote" output="false" returntype="string">
-		<cfargument name="ActivityID" required="yes" type="string">
-		<cfargument name="CategoryID" required="yes" type="string">
+	<cffunction name="saveCategory"  output="false" returntype="string">
+		<cfparam name="params.ActivityID" required="yes" type="string">
+		<cfparam name="params.CategoryID" required="yes" type="string">
       	
         <cfset var Status = "Fail|Cannot access category save functionality for activities.">
         
@@ -905,9 +905,9 @@
         <cfreturn Status />
     </cffunction>
     
-	<cffunction name="saveCategoriesLMS" access="Remote" output="false" returntype="string">
-		<cfargument name="ActivityID" default="" type="string" required="yes">
-        <cfargument name="Site" default="" type="string" required="yes">
+	<cffunction name="saveCategoriesLMS"  output="false" returntype="string">
+		<cfparam name="params.ActivityID" default="" type="string" required="yes">
+        <cfparam name="params.Site" default="" type="string" required="yes">
       	
         <cfset var Status = "fail">
         
@@ -916,9 +916,9 @@
         <cfreturn Status />
     </cffunction>
     
-	<cffunction name="saveCommitteeMember" access="Remote" output="false" returntype="string">
-		<cfargument name="ActivityID" required="yes" type="string">
-		<cfargument name="PersonID" required="yes" type="string">
+	<cffunction name="saveCommitteeMember"  output="false" returntype="string">
+		<cfparam name="params.ActivityID" required="yes" type="string">
+		<cfparam name="params.PersonID" required="yes" type="string">
       	
         <cfset var Status = "Fail|Cannot access faculty saving functionality.">
         
@@ -927,9 +927,9 @@
         <cfreturn Status />
     </cffunction>
     
-	<cffunction name="saveFacultyMember" access="Remote" output="false" returntype="string">
-		<cfargument name="ActivityID" required="yes" type="string">
-		<cfargument name="PersonID" required="yes" type="string">
+	<cffunction name="saveFacultyMember"  output="false" returntype="string">
+		<cfparam name="params.ActivityID" required="yes" type="string">
+		<cfparam name="params.PersonID" required="yes" type="string">
       	
         <cfset var Status = "Fail|Cannot access faculty saving functionality.">
         
@@ -938,15 +938,15 @@
         <cfreturn Status />
     </cffunction>
 
-	<cffunction name="saveFee" access="Remote" ouput="true" returntype="string">
-    	<cfargument name="FeeID" required="yes" default="0">
-    	<cfargument name="ActivityID" required="yes">
-        <cfargument name="Name" required="yes">
-        <cfargument name="StartDate" required="yes">
-        <cfargument name="StartTime" required="yes">
-        <cfargument name="EndDate" required="yes">
-        <cfargument name="EndTime" required="yes">
-        <cfargument name="Amount" required="yes">
+	<cffunction name="saveFee"  ouput="true" returntype="string">
+    	<cfparam name="params.FeeID" required="yes" default="0">
+    	<cfparam name="params.ActivityID" required="yes">
+        <cfparam name="params.Name" required="yes">
+        <cfparam name="params.StartDate" required="yes">
+        <cfparam name="params.StartTime" required="yes">
+        <cfparam name="params.EndDate" required="yes">
+        <cfparam name="params.EndTime" required="yes">
+        <cfparam name="params.Amount" required="yes">
       	
         <cfset var Status = "Fail|Cannot access fee saving functionality for activity finances.">
         
@@ -963,14 +963,14 @@
         <cfreturn Status />
     </cffunction>
     
-    <cffunction name="saveLedger" hint="Saves ledger information." access="Remote" output="false" returntype="string">
-    	<cfargument name="ActivityID" type="numeric" required="yes">
-        <cfargument name="EntryID" type="numeric" required="yes">
-        <cfargument name="Description" type="string" required="yes">
-        <cfargument name="Memo" type="string" required="yes">
-        <cfargument name="EntryDate" type="date" required="yes">
-        <cfargument name="EntryType" type="numeric" required="yes">
-        <cfargument name="Amount" type="numeric" required="yes">
+    <cffunction name="saveLedger" hint="Saves ledger information."  output="false" returntype="string">
+    	<cfparam name="params.ActivityID" type="numeric" required="yes">
+        <cfparam name="params.EntryID" type="numeric" required="yes">
+        <cfparam name="params.Description" type="string" required="yes">
+        <cfparam name="params.Memo" type="string" required="yes">
+        <cfparam name="params.EntryDate" type="date" required="yes">
+        <cfparam name="params.EntryType" type="numeric" required="yes">
+        <cfparam name="params.Amount" type="numeric" required="yes">
       	
         <cfset var Status = "Fail|Cannot access fee saving functionality for activity finances.">
         
@@ -986,10 +986,10 @@
         <cfreturn status.getJSON() />
     </cffunction>
 
-	<cffunction name="saveNote" access="Remote" output="false" returntype="string">
-		<cfargument name="ActivityID" required="true" type="string">
-		<cfargument name="NoteBody" required="true" type="string">
-		<cfargument name="NoteID" required="false" default="0">
+	<cffunction name="saveNote"  output="false" returntype="string">
+		<cfparam name="params.ActivityID" type="string">
+		<cfparam name="params.NoteBody" type="string">
+		<cfparam name="params.NoteID" required="false" default="0">
       	
         <cfset var Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -1003,24 +1003,24 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="savePubGeneral" displayname="Save Form" access="Remote" output="no">
-		<cfargument name="ActivityID" type="string" required="yes" />
-		<cfargument name="Overview" type="string" required="no" />
-		<cfargument name="Objectives" type="string" required="no" />
-		<cfargument name="Keywords" type="string" required="no" />
-		<cfargument name="PublishDate" type="string" required="no" />
-		<cfargument name="RemoveDate" type="string" required="no" />
-		<cfargument name="PaymentFlag" type="string" required="no" />
-		<cfargument name="PaymentFee" type="string" required="no" />
-		<cfargument name="FeaturedFlag" type="string" required="no" default="N" />
-		<cfargument name="ExtHostFlag" type="string" required="no" default="N" />
-		<cfargument name="ExtHostLink" type="string" required="no" default="" />
-		<cfargument name="AllowCommentFlag" type="string" required="no" />
-		<cfargument name="CommentApproveFlag" type="string" required="no" />
-		<cfargument name="NotifyEmails" type="string" required="no" />
-		<cfargument name="TermsFlag" type="string" required="no" />
-		<cfargument name="TermsText" type="string" required="no" />
-		<cfargument name="RestrictedFlag" type="string" required="no" />
+	<cffunction name="savePubGeneral" displayname="Save Form"  output="no">
+		<cfparam name="params.ActivityID" type="string" required="yes" />
+		<cfparam name="params.Overview" type="string" required="no" />
+		<cfparam name="params.Objectives" type="string" required="no" />
+		<cfparam name="params.Keywords" type="string" required="no" />
+		<cfparam name="params.PublishDate" type="string" required="no" />
+		<cfparam name="params.RemoveDate" type="string" required="no" />
+		<cfparam name="params.PaymentFlag" type="string" required="no" />
+		<cfparam name="params.PaymentFee" type="string" required="no" />
+		<cfparam name="params.FeaturedFlag" type="string" required="no" default="N" />
+		<cfparam name="params.ExtHostFlag" type="string" required="no" default="N" />
+		<cfparam name="params.ExtHostLink" type="string" required="no" default="" />
+		<cfparam name="params.AllowCommentFlag" type="string" required="no" />
+		<cfparam name="params.CommentApproveFlag" type="string" required="no" />
+		<cfparam name="params.NotifyEmails" type="string" required="no" />
+		<cfparam name="params.TermsFlag" type="string" required="no" />
+		<cfparam name="params.TermsText" type="string" required="no" />
+		<cfparam name="params.RestrictedFlag" type="string" required="no" />
       	
         <cfset var Status = createObject("component", "#application.settings.com#returnData.buildStruct").init()>
         
@@ -1051,9 +1051,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-	<cffunction name="saveSpecialties" access="Remote" output="false" returntype="string">
-		<cfargument name="ActivityID" default="" type="string" required="yes">
-        <cfargument name="Specialties" default="" type="string" required="yes">
+	<cffunction name="saveSpecialties"  output="false" returntype="string">
+		<cfparam name="params.ActivityID" default="" type="string" required="yes">
+        <cfparam name="params.Specialties" default="" type="string" required="yes">
       	
         <cfset var Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -1067,18 +1067,18 @@
         <cfreturn Status.getJSON() />
     </cffunction>
     
-	<cffunction name="saveSupport" access="Remote" output="false" returntype="string">
-    	<cfargument name="SupportID" required="false" default="-1" type="string">
-		<cfargument name="ActivityID" required="true" type="string">
-		<cfargument name="Supporter" required="true" type="string">
-		<cfargument name="SupportType" required="true" type="string">
-		<cfargument name="Amount" required="true" type="string">
-		<cfargument name="ContractNum" required="false" type="string" default="">
-		<cfargument name="BudgetRequested" required="false" type="string" default="">
-		<cfargument name="BudgetDueDate" required="false" type="string" default="">
-		<cfargument name="BudgetSentDate" required="false" type="string" default="">
-		<cfargument name="SentDate" required="false" type="string" default="">
-		<cfargument name="FundsReturned" required="false" type="string" default="">
+	<cffunction name="saveSupport"  output="false" returntype="string">
+    	<cfparam name="params.SupportID" required="false" default="-1" type="string">
+		<cfparam name="params.ActivityID" type="string">
+		<cfparam name="params.Supporter" type="string">
+		<cfparam name="params.SupportType" type="string">
+		<cfparam name="params.Amount" type="string">
+		<cfparam name="params.ContractNum" required="false" type="string" default="">
+		<cfparam name="params.BudgetRequested" required="false" type="string" default="">
+		<cfparam name="params.BudgetDueDate" required="false" type="string" default="">
+		<cfparam name="params.BudgetSentDate" required="false" type="string" default="">
+		<cfparam name="params.SentDate" required="false" type="string" default="">
+		<cfparam name="params.FundsReturned" required="false" type="string" default="">
       	
         <cfset var Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -1103,10 +1103,10 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-    <cffunction name="sendCertificate" hint="Sends a copy of the attendee's certificate to the person attached to the attendee." access="remote" output="false" returntype="string">
-        <cfargument name="activityId" type="numeric" required="no" default="0">
-    	<cfargument name="personId" type="numeric" required="no" default="0">
-        <cfargument name="creditid" type="numeric" required="no" default="1">
+    <cffunction name="sendCertificate" hint="Sends a copy of the attendee's certificate to the person attached to the attendee."  output="false" returntype="string">
+        <cfparam name="params.activityId" type="numeric" required="no" default="0">
+    	<cfparam name="params.personId" type="numeric" required="no" default="0">
+        <cfparam name="params.creditid" type="numeric" required="no" default="1">
       	
         <cfset var Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
@@ -1123,9 +1123,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-    <cffunction name="UnpublishFile" hint="Unpublishes provided file." access="Remote" output="false" returntype="string">
-    	<cfargument name="ActivityID" type="numeric" required="yes">
-        <cfargument name="FileID" type="numeric" required="yes">
+    <cffunction name="UnpublishFile" hint="Unpublishes provided file."  output="false" returntype="string">
+    	<cfparam name="params.ActivityID" type="numeric" required="yes">
+        <cfparam name="params.FileID" type="numeric" required="yes">
         
         <cfset Status = "Fail|Cannot access the unpublish function for activity documents.">
         
@@ -1134,9 +1134,9 @@
         <cfreturn Status />
     </cffunction>
 	
-	<cffunction name="updateActivityStatus" access="Remote" output="no" displayname="Set Activity Status">
-		<cfargument name="ActivityID" type="numeric" required="yes" />
-		<cfargument name="StatusID" type="numeric" required="yes" />
+	<cffunction name="updateActivityStatus"  output="no" displayname="Set Activity Status">
+		<cfparam name="params.ActivityID" type="numeric" required="yes" />
+		<cfparam name="params.StatusID" type="numeric" required="yes" />
         
         <cfset Status = "Fail">
         
@@ -1145,9 +1145,9 @@
         <cfreturn Status />
     </cffunction>
     
-    <cffunction name="updateAddlAttendees" access="Remote" output="false" returntype="any">
-    	<cfargument name="ActivityID" type="string" required="true" />
-        <cfargument name="AddlAttendees" type="string" required="true" />
+    <cffunction name="updateAddlAttendees"  output="false" returntype="any">
+    	<cfparam name="params.ActivityID" type="string" />
+        <cfparam name="params.AddlAttendees" type="string" />
         
         <cfset var Status = "Fail|Cannot access the update function for additional attendees.">
         
@@ -1156,11 +1156,11 @@
         <cfreturn Status />
     </cffunction>
     
-	<cffunction name="updateApplicationValue" access="Remote" output="false" returntype="string">
-		<cfargument name="ActivityID" required="yes" type="string">
-		<cfargument name="Field" required="yes" type="string"> <!--- "Received, Sent, Approved, etc." --->
-		<cfargument name="Flag" required="yes" type="string">
-		<cfargument name="AppDate" required="yes" type="string">
+	<cffunction name="updateApplicationValue"  output="false" returntype="string">
+		<cfparam name="params.ActivityID" required="yes" type="string">
+		<cfparam name="params.Field" required="yes" type="string"> <!--- "Received, Sent, Approved, etc." --->
+		<cfparam name="params.Flag" required="yes" type="string">
+		<cfparam name="params.AppDate" required="yes" type="string">
 		
 		<cfset var Status = "Fail|Cannot access update functionality for activity applications.">
         
@@ -1169,10 +1169,10 @@
         <cfreturn Status />
     </cffunction>
 
-	<cffunction name="updateAttendeeStatuses" access="Remote" output="false" returntype="string">
-		<cfargument name="AttendeeList" required="true" type="string">
-		<cfargument name="ActivityID" required="true" type="string">
-		<cfargument name="StatusID" required="true" type="string">
+	<cffunction name="updateAttendeeStatuses"  output="false" returntype="string">
+		<cfparam name="params.AttendeeList" type="string">
+		<cfparam name="params.ActivityID" type="string">
+		<cfparam name="params.StatusID" type="string">
         
         <cfset var status = createObject("component","#application.settings.com#returnData.buildStruct").init()>
         
@@ -1186,9 +1186,9 @@
         <cfreturn status.getJSON() />
     </cffunction>
     
-    <cffunction name="updateMaxRegistrants" access="Remote" output="false" returntype="any">
-    	<cfargument name="ActivityID" type="string" required="true" />
-        <cfargument name="MaxRegistrants" type="string" required="true" />
+    <cffunction name="updateMaxRegistrants"  output="false" returntype="any">
+    	<cfparam name="params.ActivityID" type="string" />
+        <cfparam name="params.MaxRegistrants" type="string" />
         
         <cfset var Status = "Fail|Cannot access the update function for max registrants.">
         
@@ -1197,10 +1197,10 @@
         <cfreturn Status />
     </cffunction>
     
-    <cffunction name="updateMDStatus" access="Remote" output="false" returntype="string">
-		<cfargument name="ActivityID" required="true" type="string">
-		<cfargument name="PersonID" required="true" type="string">
-		<cfargument name="MDNonMD" required="true" type="string">
+    <cffunction name="updateMDStatus"  output="false" returntype="string">
+		<cfparam name="params.ActivityID" type="string">
+		<cfparam name="params.PersonID" type="string">
+		<cfparam name="params.MDNonMD" type="string">
         
         <cfset var Status = "Fail|Cannot access the update function for attendee MD status.">
         

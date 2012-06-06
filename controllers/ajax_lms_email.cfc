@@ -1,11 +1,11 @@
 <!--- THIS IS FOR JUSTINS WEBSITE PROJECT // PLEASE IGNORE FILE --->
 <cfcomponent extends="controller">
-	<cffunction name="send" access="remote" returntype="string">
-		<cfargument name="name" type="string" required="yes">
-		<cfargument name="email" type="string" required="yes">
-		<cfargument name="reason" type="string" required="yes">
-		<cfargument name="comments" type="string" required="yes">
-        <cfargument name="callback" type="string" required="yes">
+	<cffunction name="send"  returntype="string">
+		<cfparam name="params.name" type="string" required="yes">
+		<cfparam name="params.email" type="string" required="yes">
+		<cfparam name="params.reason" type="string" required="yes">
+		<cfparam name="params.comments" type="string" required="yes">
+        <cfparam name="params.callback" type="string" required="yes">
         
         <cfset var status = createObject("component", "#application.settings.com#returnData.buildStruct").init()>
         

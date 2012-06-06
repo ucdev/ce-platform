@@ -39,8 +39,8 @@
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
 
 	<cffunction name="$passwordAuthentication">
-		<cfargument name="login" type="any" required="true" />
-		<cfargument name="password" type="any" required="true" />
+		<cfargument name="login" type="any" />
+		<cfargument name="password" type="any" />
 		
 		<cfset authEmail = model("personemail").findOneByEmail_Address(arguments.login)>
         
@@ -64,7 +64,7 @@
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
 
 	<cffunction name="$successfulLogin">
-	 <cfargument name="user" type="any" required="true">
+	 <cfargument name="user" type="any">
 
 		<cfset session.currentUser = arguments.user>
 

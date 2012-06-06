@@ -1,17 +1,17 @@
 <cfcomponent extends="Controller">
-	<cffunction name="Register" access="Remote" output="false" returntype="string">
-		<cfargument name="PersonID" type="numeric" required="no" default="0">
-        <cfargument name="FirstName" type="string" required="yes">
-        <cfargument name="MiddleName" type="string" required="no" default="">
-        <cfargument name="LastName" type="string" required="yes">
-        <cfargument name="DisplayName" type="string" required="no" default="#Arguments.FirstName# #Arguments.LastName#">
-        <cfargument name="Suffix" type="string" required="no" default="">
-        <cfargument name="Email1" type="string" required="yes">
-        <cfargument name="Email2" type="string" required="yes">
-        <cfargument name="Gender" type="string" required="yes">
-        <cfargument name="Password1" type="string" required="yes">
-        <cfargument name="Password2" type="string" required="yes">
-        <cfargument name="geonameId" type="string" required="no" default="0">
+	<cffunction name="Register"  output="false" returntype="string">
+		<cfparam name="params.PersonID" type="numeric" required="no" default="0">
+        <cfparam name="params.FirstName" type="string" required="yes">
+        <cfparam name="params.MiddleName" type="string" required="no" default="">
+        <cfparam name="params.LastName" type="string" required="yes">
+        <cfparam name="params.DisplayName" type="string" required="no" default="#Arguments.FirstName# #Arguments.LastName#">
+        <cfparam name="params.Suffix" type="string" required="no" default="">
+        <cfparam name="params.Email1" type="string" required="yes">
+        <cfparam name="params.Email2" type="string" required="yes">
+        <cfparam name="params.Gender" type="string" required="yes">
+        <cfparam name="params.Password1" type="string" required="yes">
+        <cfparam name="params.Password2" type="string" required="yes">
+        <cfparam name="params.geonameId" type="string" required="no" default="0">
         
         <cfset var Status = "Fail|Cannot access register function for authentication information.">
         
@@ -41,19 +41,19 @@
         <cfreturn Status />
     </cffunction>
     
-	<cffunction name="Validate" access="Remote" output="false" returntype="string">
-		<cfargument name="PersonID" type="numeric" required="no" default="0">
-        <cfargument name="FirstName" type="string" required="yes">
-        <cfargument name="MiddleName" type="string" required="no" default="">
-        <cfargument name="LastName" type="string" required="yes">
-        <cfargument name="DisplayName" type="string" required="no" default="#Arguments.FirstName# #Arguments.LastName#">
-        <cfargument name="Suffix" type="string" required="no" default="">
-        <cfargument name="Email1" type="string" required="yes">
-        <cfargument name="Email2" type="string" required="yes">
-        <cfargument name="Gender" type="string" required="yes">
-        <cfargument name="Password1" type="string" required="yes">
-        <cfargument name="Password2" type="string" required="yes">
-        <cfargument name="geonameId" type="string" required="no" default="0">
+	<cffunction name="Validate"  output="false" returntype="string">
+		<cfparam name="params.PersonID" type="numeric" required="no" default="0">
+        <cfparam name="params.FirstName" type="string" required="yes">
+        <cfparam name="params.MiddleName" type="string" required="no" default="">
+        <cfparam name="params.LastName" type="string" required="yes">
+        <cfparam name="params.DisplayName" type="string" required="no" default="#Arguments.FirstName# #Arguments.LastName#">
+        <cfparam name="params.Suffix" type="string" required="no" default="">
+        <cfparam name="params.Email1" type="string" required="yes">
+        <cfparam name="params.Email2" type="string" required="yes">
+        <cfparam name="params.Gender" type="string" required="yes">
+        <cfparam name="params.Password1" type="string" required="yes">
+        <cfparam name="params.Password2" type="string" required="yes">
+        <cfparam name="params.geonameId" type="string" required="no" default="0">
         
         <cfdump var="#application.settings#"><cfabort>
         <cfset Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
@@ -79,9 +79,9 @@
     	<cfreturn Status.getJSON() />
 	</cffunction>
     
-    <cffunction name="verifyEmail" access="Remote" output="false" returntype="string">
-    	<cfargument name="v" type="string" required="yes">
-        <cfargument name="k" type="string" required="yes">
+    <cffunction name="verifyEmail"  output="false" returntype="string">
+    	<cfparam name="params.v" type="string" required="yes">
+        <cfparam name="params.k" type="string" required="yes">
         
         <cfset var Status = createObject("component","#Application.Settings.Com#returnData.buildStruct").init()>
         
