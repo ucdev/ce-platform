@@ -1,4 +1,8 @@
 <cfcomponent displayname="list ajax">
+<cffunction name="init">
+		<cfset filters(through="ajaxLoginRequired")>
+		<cfset filters(through="ajaxAdminRequired")>
+	</cffunction>
 	<cffunction name="activities"  output="no" returnformat="plain">
 		<cfparam name="params.sortby" type="string"  default="recent" />
 		<cfparam name="params.person" type="numeric"  default="0" />

@@ -1,4 +1,9 @@
 <cfcomponent extends="controller">
+
+<cffunction name="init">
+		<cfset filters(through="ajaxLoginRequired")>
+		<cfset filters(through="ajaxAdminRequired")>
+	</cffunction>
         
 	<cffunction name="copyAssessTmpl" hint="Creates a copy of an assessment from a provided template." >
         <cfparam name="params.ActivityID" type="numeric" >
