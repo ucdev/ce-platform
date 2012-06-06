@@ -44,8 +44,17 @@
             FROM ce_attendee
             WHERE RegisterDate IS NULL
         </cfquery>--->
-        
-        <cfdump var="#qGetAttendees#"><cfabort>
+        <!---
+        <cfdump var="#qGetAttendees#"><cfabort>--->
+		
+		<cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
+		
+		<cfcontent type="text/javascript" />
+		
+		<cfset status.setStatus(true)>
+		<cfset status.setStatusMsg("Successfully updated shit.")>
+		
+		<cfset renderText(status.getJSON()) />
     </cffunction>
     
 	<cffunction name="approveComment" >
