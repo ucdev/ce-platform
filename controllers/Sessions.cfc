@@ -27,6 +27,7 @@
 	<cffunction name="destroy">
 		<!--- todo: need to check for the remember me flag here and delete cookie if needed --->
 		<cfset structDelete(session, 'currentUser') />
+		<cfset structDelete(session, 'account') />
 		<cfset flashInsert(success='You have been logged out') />
 		<cfset redirectTo(route="home") />
 	</cffunction>

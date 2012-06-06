@@ -1,4 +1,8 @@
 <cfcomponent extends="controller">
+<cffunction name="init">
+		<cfset filters(through="ajaxLoginRequired")>
+		<cfset filters(through="ajaxAdminRequired")>
+	</cffunction>
     <cffunction name="isAssessFailed" hint="Determine if the user passed or failed the assessment"  output="true">
 		<cfparam name="params.AssessmentID" type="string" >
 		<cfparam name="params.PersonID" type="string" >

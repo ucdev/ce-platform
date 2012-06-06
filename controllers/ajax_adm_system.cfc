@@ -1,4 +1,8 @@
 <cfcomponent extends="controller">
+<cffunction name="init">
+		<cfset filters(through="ajaxLoginRequired")>
+		<cfset filters(through="ajaxAdminRequired")>
+	</cffunction>
     <cffunction name="deleteCategoryLMS" hint="deletes categories from system"  output="true">
 		<cfparam name="params.CategoryID" type="numeric"  default="0">
 		<cfparam name="params.CategoryName" type="string"  default="">

@@ -1,4 +1,8 @@
 <cfcomponent extends="controller">
+<cffunction name="init">
+		<cfset filters(through="ajaxLoginRequired")>
+		<cfset filters(through="ajaxAdminRequired")>
+	</cffunction>
 	<cffunction name="createPerson"  output="false">
 		<cfparam name="params.PersonID" type="numeric" >
         <cfparam name="params.Birthdate" type="string" >

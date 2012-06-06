@@ -1,4 +1,8 @@
 <cfcomponent displayname="history ajax">
+<cffunction name="init">
+		<cfset filters(through="ajaxLoginRequired")>
+		<cfset filters(through="ajaxAdminRequired")>
+	</cffunction>
 	<cffunction name="list"  output="no" returnformat="plain">
 		<cfparam name="params.personFrom" type="string"  default="0" />
 		<cfparam name="params.personTo" type="string"  default="0" />
