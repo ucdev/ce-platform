@@ -11,4 +11,10 @@
 		
 		<cfset contentFor(pageTitle=arguments.titleText) />
 	</cffunction>
+	
+	<cffunction name="pageSubTitle">
+		<cfargument name="titleText" type="string" required="no" default="" />
+		
+		<cfset contentFor(pageSubTitle=arguments.titleText) />
+	</cffunction>
 </cfcomponent>

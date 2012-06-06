@@ -1,7 +1,9 @@
 <cfcomponent extends="Controller">
 
 	<cffunction name="home">
-		
+		<cfif isLoggedIn()>
+			<cfset renderText($renderLayout($layout='/layout',$type='template',$content=$renderPage($template="",$controller='users',$action='home',$layout="/layout_user"))) />
+		</cfif>
 	</cffunction>
 	
 	<cffunction name="modelsetup">

@@ -20,7 +20,7 @@
 <ul class="nav nav-list">
 	<cfloop from="1" to="#arrayLen(tabs)#" index="i">
 		<cfset tab = tabs[i] />
-	<li<cfif params.action EQ tab.action> class="active"</cfif>><a href="#urlFor(action=tab.action,key=params.key)#"><i class="fugue-#tab.icon#"></i> #tab.label#</a></li>
+	<li<cfif params.action EQ tab.action> class="active"</cfif>><a href="#urlFor(action=tab.action,key=params.key)#"><i class="icon16-#tab.icon#"></i> #tab.label#</a></li>
 	</cfloop>
 </ul>
 </p>

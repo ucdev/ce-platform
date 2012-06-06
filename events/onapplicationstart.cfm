@@ -1,4 +1,7 @@
-<cfset generateBundle(type="css", bundle="ccpd", compress=true, sources="bootstrap") />
+<cfset application.javaloader = javaLoader() /><!---
+<cfset doLessGeneration = LessEngine(['bootstrap.less']) />--->
+
+<cfset generateBundle(type="css", bundle="ccpd", compress=true, sources="bootstrap,ccpd") />
 <cfset generateBundle(type="js", bundle="ccpd", compress=true, 
 	sources="jquery,
 			bootstrap-transition,
