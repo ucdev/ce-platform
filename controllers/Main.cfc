@@ -38,7 +38,7 @@
 		
 		<cfloop query="tables">
 			<cfset filename = replace(tables.tblname,'ce_','') />
-			<cfset filename = lcase(replace(filename,'_','','ALL')) />
+			<cfset filename = lcase(filename) />
 			<cfset filename = filename & ".cfc" />
 			
 			<cfset fileOutput = replace(tmpl,'%primarykey%',tables.colName,'All') />
