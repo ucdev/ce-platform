@@ -103,7 +103,7 @@
 	    		<cfset loc.file = $replacePlaceHolders(loc.file, arguments.name)> --->
 	            
 	            <!--- Write the file in the corresponding folder --->
-	            <cffile action="write" file="#loc.destinationFolderPath#/#capitalize(arguments.name)#.cfc" output="#loc.file#" mode="777"> 
+	            <cffile action="write" file="#loc.destinationFolderPath#/#lcase(arguments.name)#.cfc" output="#loc.file#" mode="777"> 
 	        </cfcase>
 	        
 	        <cfcase value="View">
@@ -171,7 +171,7 @@
 	    		<cfset loc.file = $replacePlaceHolders(loc.file, arguments.name)>
 	            
 	            <!--- Write the file in the corresponding folder --->
-	            <cffile action="write" file="#loc.destinationFolderPath#/#capitalize(pluralize(arguments.name))#.cfc" output="#loc.file#" mode="777"> 
+	            <cffile action="write" file="#loc.destinationFolderPath#/#lcase(pluralize(arguments.name))#.cfc" output="#loc.file#" mode="777"> 
 	        </cfcase>
 	        
 	        <cfdefaultcase>
