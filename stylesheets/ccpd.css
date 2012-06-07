@@ -31,7 +31,7 @@
 .profile > .projectBar > .nav li.active > a {
   color: #333333;
   font-weight: bold;
-  background-color: #808080;
+  background-color: #DDD;
 }
 .profile > .projectBar > .nav li.hasIcon > a {
   padding-left: 26px;

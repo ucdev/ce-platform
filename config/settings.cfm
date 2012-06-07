@@ -14,6 +14,7 @@
 --->
 
 <cfset set(dataSourceName="CCPD_PROD")>
+<cfset set(reloadPassword="05125586") />
 <cfset set(functionName="sendEmail", server="", username="", password="")> 
 <cfset set(softDeleteProperty="deleted")>
 <cfset set(tableNamePrefix="ce_")>

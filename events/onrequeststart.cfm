@@ -5,3 +5,4 @@
 <cfparam name="params.action" default="" />
 <cfparam name="params.controller" default="" />
 <cfset request['myself'] = urlFor(controller=params.controller,action=params.action,key=params.key) />
+<cfset myself = request.myself />
