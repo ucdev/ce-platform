@@ -1,8 +1,8 @@
 <cfcomponent extends="Controller">
 	<cffunction name="index">
-		<cfset activityTypes = model("sysActivityType").findAll(maxRows=5)>
+		<cfset activityTypes = model("sys_activityType").findAll(maxRows=5)>
         <cfset activityCategories = model("Category").findAll(order="name")>
-        <cfset activityGroupings = model("sysGrouping").findAll(maxRows=5)>
+        <cfset activityGroupings = model("sys_grouping").findAll(maxRows=5)>
 		<cfset activities = model("activity").findAll(maxRows=100) />
 		
 		<cfset pageTitle("Activities") />
@@ -25,17 +25,27 @@
 			<cfset redirectTo(action="index")>
         </cfif>
         
-		<cfset activityTypes = model("sysActivityType").findAll(maxRows=5)>
+		<cfset activityTypes = model("sys_activityType").findAll(maxRows=5)>
         <cfset activityCategories = model("Category").findAll(order="name")>
-        <cfset activityGroupings = model("sysGrouping").findAll(maxRows=5)>
+        <cfset activityGroupings = model("sys_grouping").findAll(maxRows=5)>
         
 		<cfset subLayout('edit') />
 	</cffunction>
 	
 	<cffunction name="adm_credit">
 		<cfparam name="params.key" type="integer" />
+		<cfparam name="params.credits" default="" />
 		
 		<cfset $setActivity() />
+        
+        <cfset credits = model("Sys_credit").findAll()>
+		<cfset activityCredits = model("Activity_credit").findAll(where="activityID=" & Attributes.ActivityID)>
+		
+		<cfloop query="activityCredits">
+			<cfset params.Credits = ListAppend(params.Credits,activityCredits.CreditID,",")>
+			<cfset "params.CreditAmount#activityCredits.CreditID#" = activityCredits.Amount>
+			<cfset "params.ReferenceNo#activityCredits.CreditID#" = activityCredits.ReferenceNo>
+		</cfloop>
 		
 		<cfset pageTitle("#activity.title#") />
 		<cfset subLayout('edit') />
@@ -320,6 +330,8 @@
 	</cffunction>
 	
 	<cffunction name="$setActivity" access="private">
+    	<cfparam name="params.submitted" type="integer" default="0" />
+        
 		<cfset activity = model("activity").findByKey(params.key) />
 		<cfset pageTitle("#activity.title#") />
 		

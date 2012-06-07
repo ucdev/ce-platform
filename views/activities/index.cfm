@@ -23,7 +23,7 @@
 		<tr>
 			<td><img src="/images/no-photo/activity_i.png" /></td>
 			<td>
-				<a href="/activities/edit/#activities.id#">#activities.title#</a>
+				<a href="/activities/adm_general/#activities.id#">#activities.title#</a>
 			</td>
 			<td>#dateFormat(activities.startDate,'mm/dd/yyyy')#</td>
 			<td>#dateFormat(activities.endDate,'mm/dd/yyyy')#</td>

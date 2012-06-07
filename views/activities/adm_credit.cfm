@@ -27,7 +27,8 @@ $(document).ready(function() {
 });
 </script>
 <cfoutput>
-<form name="frmAddCredits" method="post" action="#myself#Activity.Credits?ActivityID=#Attributes.ActivityID#&Submitted=1">
+<form name="frmAddCredits" method="post" action="/activities/adm_credit/#Attributes.ActivityID#">
+	<input type="hidden" name="Submitted" value="1" />
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ViewSectionGrid">
 		<thead>
 			<tr>
@@ -38,12 +39,12 @@ $(document).ready(function() {
 			</tr>
 		</thead>
 		<tbody>
-			<cfloop query="qCredits">
+			<cfloop query="credits">
                 <tr>
-                    <td style="width:10px;"><input type="checkbox" class="CreditBox" name="Credits" id="Credits#qCredits.CreditID#" value="#qCredits.CreditID#"<cfif ListFind(Attributes.Credits,qCredits.CreditID,",")> checked</cfif> /></td>
-                    <td width="100"><label for="Credits#qCredits.CreditID#">#qCredits.Name#</label></td>
-                    <td width="40"><input type="text" name="CreditAmount#qCredits.CreditID#" id="CreditAmount#qCredits.CreditID#" value="#Evaluate('Attributes.CreditAmount#qCredits.CreditID#')#" style="width:34px;" /></td>
-                    <td><cfif qCredits.ReferenceFlag EQ "Y"><input type="text" name="ReferenceNo#qCredits.CreditID#" id="ReferenceNo#qCredits.CreditID#" value="#Evaluate('Attributes.ReferenceNo#qCredits.CreditID#')#" /><cfelse>&nbsp;</cfif></td>
+                    <td style="width:10px;"><input type="checkbox" class="CreditBox" name="Credits" id="Credits#credits.id#" value="#credits.id#"<cfif ListFind(params.Credits,credits.id,",")> checked</cfif> /></td>
+                    <td width="100"><label for="Credits#credits.id#">#credits.Name#</label></td>
+                    <td width="40"><input type="text" name="CreditAmount#credits.id#" id="CreditAmount#credits.id#" value="#Evaluate('params.CreditAmount#credits.id#')#" style="width:34px;" /></td>
+                    <td><cfif credits.ReferenceFlag EQ "Y"><input type="text" name="ReferenceNo#credits.id#" id="ReferenceNo#credits.id#" value="#Evaluate('params.ReferenceNo#credits.id#')#" /><cfelse>&nbsp;</cfif></td>
                 </tr>
 			</cfloop>
 		</tbody>
