@@ -36,17 +36,28 @@
 		<cfparam name="params.key" type="integer" />
 		<cfparam name="params.credits" default="" />
 		
+		<cfset attributes.credits = params.credits />
 		<cfset $setActivity() />
-        
-		<cfset qActivityCredits = Application.Com.ActivityCreditGateway.getByViewAttributes(ActivityID=attributes.activityid)>
-        <cfset qCredits = Application.Com.CreditGateway.getByAttributes()>
+		<!---Creates the List of Existing Credits for the Activity --->
+		<cfset qActivityCredits = Application.Com.ActivityCreditGateway.getByViewAttributes(ActivityID=Attributes.ActivityID)>
+		<cfset qCredits = Application.Com.CreditGateway.getByAttributes()>
 		
+		<cfloop query="qCredits">
+			<cfparam name="params.CreditAmount#qCredits.CreditID#" default="0" />
+			<cfparam name="params.Credits#qCredits.CreditID#" default="0" />
+			<cfparam name="params.ReferenceFlag#qCredits.CreditID#" default="N" />
+			<cfparam name="params.ReferenceNo#qCredits.CreditID#" default="" />
+		</cfloop>
+		
+		<cfloop query="qCredits">
+			<cfset params.Credits = ListAppend(params.Credits,Evaluate("params.Credits#qCredits.CreditID#"),",")>
+		</cfloop>
+				
 		<cfloop query="qActivityCredits">
 			<cfset params.Credits = ListAppend(params.Credits,qActivityCredits.CreditID,",")>
 			<cfset "params.CreditAmount#qActivityCredits.CreditID#" = qActivityCredits.Amount>
 			<cfset "params.ReferenceNo#qActivityCredits.CreditID#" = qActivityCredits.ReferenceNo>
-		</cfloop>
-		
+		</cfloop>		
 		<cfset subLayout('edit') />
 	</cffunction>
 	
