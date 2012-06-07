@@ -41,6 +41,7 @@
 	<cfselect name="typeOfScaffold" required="true" message="A Type is required">
 		<option value="everything" selected="selected">Model, Views and Controller</option>
 		<option value="model_controller" selected="selected">Model and Controller</option>
+		<option value="view_controller" selected="selected">View and Controller</option>
 		<option value="controller">Controller</option>
 		<option value="view">View</option>
 		<option value="model">Model</option>
