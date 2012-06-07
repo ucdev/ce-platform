@@ -87,7 +87,7 @@
                 )
         </cfquery>
         
-        <cfreturn CreateResult.IDENTITYCOL />
+        <cfreturn CreateResult.ID />
     </cffunction>
     
     <cffunction name="createSessions" access="Public" output="false">

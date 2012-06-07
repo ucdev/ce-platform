@@ -46,7 +46,7 @@
 				<cfreturn false />
 			</cfcatch>
 		</cftry>
-		<cfreturn CreateResult.IDENTITYCOL />
+		<cfreturn CreateResult.ID />
 	</cffunction>
 
 	<cffunction name="read" access="public" output="false" returntype="_com.ActivityFinance.Support">

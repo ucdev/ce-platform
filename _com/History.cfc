@@ -49,7 +49,7 @@
 				)
 		</cfquery>
 
-		<cfreturn CreateResult.IDENTITYCOL />
+		<cfreturn CreateResult.ID />
 	</cffunction>
 	
 	<cffunction name="List" access="public" output="no">

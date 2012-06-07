@@ -523,11 +523,19 @@
             
             <!--- FILL UPDATED INFO --->
 			<cfset PersonAddressBean.setUpdated(Now())>
-            <cfset PersonAddressBean.setUpdatedBy(session.currentuser.id)>
+            <cfif structKeyExists(session, "currentUser")>
+	            <cfset PersonAddressBean.setUpdatedBy(session.currentuser.id)>
+            <cfelse>
+	            <cfset PersonAddressBean.setUpdatedBy(arguments.personId)>
+            </cfif>
         <cfelse>
         	<!--- FILL CREATED INFO --->
 			<cfset PersonAddressBean.setCreated(Now())>
+            <cfif structKeyExists(session, "currentUser")>
             <cfset PersonAddressBean.setCreatedBy(session.currentuser.id)>
+            <cfelse>
+	            <cfset PersonAddressBean.setUpdatedBy(arguments.personId)>
+            </cfif>
         </cfif>
         
         <!--- UPDATE BEAN INFORMATION --->
@@ -566,18 +574,31 @@
         
         <cfif isNumeric(PersonAddressSaved)>
         	<cfset CurrentAddressID = PersonAddressSaved>
-                
-			<cfset Application.History.Add(
-                        HistoryStyleID=78,
-                        FromPersonID=session.currentuser.id,
-                        ToPersonID=Arguments.PersonID)>
+            <cfif structKeyExists(session, "currentUser")>
+				<cfset Application.History.Add(
+                            HistoryStyleID=78,
+                            FromPersonID=session.currentuser.id,
+                            ToPersonID=Arguments.PersonID)>
+            <cfelse>
+				<cfset Application.History.Add(
+                            HistoryStyleID=78,
+                            FromPersonID=Arguments.PersonID,
+                            ToPersonID=Arguments.PersonID)>
+            </cfif>
         <cfelse>
         	<cfset CurrentAddressID = Arguments.AddressID>
-                
-			<cfset Application.History.Add(
-                        HistoryStyleID=79,
-                        FromPersonID=session.currentuser.id,
-                        ToPersonID=Arguments.PersonID)>
+            
+            <cfif structKeyExists(session, "currentUser")>
+				<cfset Application.History.Add(
+                            HistoryStyleID=79,
+                            FromPersonID=session.currentuser.id,
+                            ToPersonID=Arguments.PersonID)>
+            <cfelse>
+				<cfset Application.History.Add(
+                            HistoryStyleID=79,
+                            FromPersonID=Arguments.PersonID,
+                            ToPersonID=Arguments.PersonID)>
+            </cfif>
         </cfif>
         
         <!--- CHECK IF ADDRESS PROPERLY SAVED --->
@@ -594,22 +615,34 @@
                 <!--- UDPATE PRIMARY ADDRESS --->
 	            <cfset PersonBean.setPrimaryAddressID(CurrentAddressID)>
                 <cfset PersonBean.setUpdated(Now())>
-                <cfset PersonBean.setUpdatedBy(session.currentuser.id)>
+                
+                <cfif structKeyExists(session, "currentUser")>
+	                <cfset PersonBean.setUpdatedBy(session.currentuser.id)>
+                <cfelse>
+	                <cfset PersonBean.setUpdatedBy(arguments.personId)>
+                </cfif>
                 
                 <!--- SAVE PERSON INFORMATION --->
                 <cfset PersonSaved = Application.Com.PersonDAO.Update(PersonBean)>
                 <cfif PersonSaved>
-                	<cfif session.currentuser.id NEQ Arguments.PersonID>
-						<cfset Application.History.Add(
-                                    HistoryStyleID=84,
-                                    FromPersonID=session.currentuser.id,
-                                    ToPersonID=Arguments.PersonID)>
-              		<cfelse>
-						<cfset Application.History.Add(
-                                    HistoryStyleID=90,
-                                    FromPersonID=session.currentuser.id,
-                                    ToPersonID=Arguments.PersonID)>
-                	</cfif>
+                	<cfif structKeyExists(session, "currentuser")>
+                    	<cfif session.currentuser.id NEQ Arguments.PersonID>
+							<cfset Application.History.Add(
+                                        HistoryStyleID=84,
+                                        FromPersonID=session.currentuser.id,
+                                        ToPersonID=Arguments.PersonID)>
+                        <cfelse>
+                            <cfset Application.History.Add(
+                                        HistoryStyleID=90,
+                                        FromPersonID=session.currentuser.id,
+                                        ToPersonID=Arguments.PersonID)>
+                        </cfif>
+                   	<cfelse>
+                            <cfset Application.History.Add(
+                                        HistoryStyleID=90,
+                                        FromPersonID=Arguments.PersonID,
+                                        ToPersonID=Arguments.PersonID)>
+                    </cfif>
             	</cfif>
             <cfelseif Arguments.PrimaryFlag EQ "N" AND Arguments.AddressID GT 0>
             	<cfset PersonBean = CreateObject("component","#Application.Settings.Com#Person.Person").Init(PersonID=Arguments.PersonID)>

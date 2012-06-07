@@ -18,7 +18,7 @@ function updateDisplayName() {
 
 function validate() {
 	$.ajax({
-		url: "/AJAX_lms_Auth/validate",
+		url: "/ajax_lms_auth/validate",
 		type: 'post',
 		data: { 
 			FirstName: $("#person-firstName").val(), 
@@ -121,7 +121,7 @@ $(document).ready(function() {
 <cfoutput>
 <h2>Sign up</h2>
 #errorMessagesFor("person")#
-#startFormTag(action="register", id="frmRegister")#
+#startFormTag(controller="ajax_lms_auth",action="register", id="frmRegister")#
 #textField(objectName='person', property='firstName', append="<p class='help-block'></p>", prepend="", label="First Name*", class="span5", placeholder="First Name")#
 #textField(objectName='person', property='middleName', append="<p class='help-block'></p>", prepend="", label="Middle Name", class="span5", placeholder="Middle Name")#
 #textField(objectName='person', property='lastName', append="<p class='help-block'></p>", prepend="", label="Last Name*", class="span5", placeholder="Last Name")#
