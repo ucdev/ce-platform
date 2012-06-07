@@ -115,29 +115,7 @@
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
 	
 	<cffunction name="register">
-    	<cfif NOT structKeyExists(params, "person")>
-			<cfset Person = model("Person").new()>
-        <cfelse>
-			<cfset Person = model("Person").new(params.Person)>
-
-			<!---
-            TODO  remove the auto population of params here for security reasons
-            --->
-    
-            <!--- Verify that the Person creates successfully --->
-            <cfif Person.save()>
-            <!---
-                TODO would like to move this method somewhere else, but sendEmail is only available to the controller i believe
-                --->
-                <cfset sendEmail(to=Person.email, from="#request.signup_from_email_address#", subject="Online account activation", template="email_template_new_Person_activation", Person=Person) />
-    
-                <cfset flashInsert(success="Thanks for signing up! You cannot login yet however. We have sent you an email with a link to verify your email address.")>
-                <cfset redirectTo(route="login")>
-            <cfelse>
-                <cfset flashInsert(error="There was an error creating the Person.")>
-                <cfset renderPage(action="register")>
-            </cfif>
-        </cfif>
+		<cfset Person = model("Person").new()>
     </cffunction>
 	
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
