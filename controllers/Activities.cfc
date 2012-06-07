@@ -38,8 +38,8 @@
 		
 		<cfset $setActivity() />
         
-        <cfset credits = model("Sys_credit").findAll()>
-		<cfset activityCredits = model("Activity_credit").findAll(where="activityID=" & Attributes.ActivityID)>
+		<cfset qActivityCredits = Application.Com.ActivityCreditGateway.getByViewAttributes(ActivityID=params.key)>
+        <cfset qCredits = Application.Com.CreditGateway.getByAttributes()>
 		
 		<cfloop query="activityCredits">
 			<cfset params.Credits = ListAppend(params.Credits,activityCredits.CreditID,",")>
