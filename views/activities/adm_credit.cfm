@@ -39,12 +39,12 @@ $(document).ready(function() {
 			</tr>
 		</thead>
 		<tbody>
-			<cfloop query="credits">
+			<cfloop query="qCredits">
                 <tr>
-                    <td style="width:10px;"><input type="checkbox" class="CreditBox" name="Credits" id="Credits#credits.id#" value="#credits.id#"<cfif ListFind(params.Credits,credits.id,",")> checked</cfif> /></td>
-                    <td width="100"><label for="Credits#credits.id#">#credits.Name#</label></td>
-                    <td width="40"><input type="text" name="CreditAmount#credits.id#" id="CreditAmount#credits.id#" value="#Evaluate('params.CreditAmount#credits.id#')#" style="width:34px;" /></td>
-                    <td><cfif credits.ReferenceFlag EQ "Y"><input type="text" name="ReferenceNo#credits.id#" id="ReferenceNo#credits.id#" value="#Evaluate('params.ReferenceNo#credits.id#')#" /><cfelse>&nbsp;</cfif></td>
+                    <td style="width:10px;"><input type="checkbox" class="CreditBox" name="Credits" id="Credits#qCredits.id#" value="#credits.id#"<cfif ListFind(params.Credits,qCredits.id,",")> checked</cfif> /></td>
+                    <td width="100"><label for="Credits#qCredits.id#">#qCredits.Name#</label></td>
+                    <td width="40"><input type="text" name="CreditAmount#qCredits.id#" id="CreditAmount#qCredits.id#" value="#Evaluate('params.CreditAmount#qCredits.id#')#" style="width:34px;" /></td>
+                    <td><cfif qCredits.ReferenceFlag EQ "Y"><input type="text" name="ReferenceNo#qCredits.id#" id="ReferenceNo#qCredits.id#" value="#Evaluate('params.ReferenceNo#qCredits.id#')#" /><cfelse>&nbsp;</cfif></td>
                 </tr>
 			</cfloop>
 		</tbody>

@@ -38,16 +38,15 @@
 		
 		<cfset $setActivity() />
         
-		<cfset qActivityCredits = Application.Com.ActivityCreditGateway.getByViewAttributes(ActivityID=params.key)>
+		<cfset qActivityCredits = Application.Com.ActivityCreditGateway.getByViewAttributes(ActivityID=attributes.activityid)>
         <cfset qCredits = Application.Com.CreditGateway.getByAttributes()>
 		
-		<cfloop query="activityCredits">
-			<cfset params.Credits = ListAppend(params.Credits,activityCredits.CreditID,",")>
-			<cfset "params.CreditAmount#activityCredits.CreditID#" = activityCredits.Amount>
-			<cfset "params.ReferenceNo#activityCredits.CreditID#" = activityCredits.ReferenceNo>
+		<cfloop query="qActivityCredits">
+			<cfset params.Credits = ListAppend(params.Credits,qActivityCredits.CreditID,",")>
+			<cfset "params.CreditAmount#qActivityCredits.CreditID#" = qActivityCredits.Amount>
+			<cfset "params.ReferenceNo#qActivityCredits.CreditID#" = qActivityCredits.ReferenceNo>
 		</cfloop>
 		
-		<cfset pageTitle("#activity.title#") />
 		<cfset subLayout('edit') />
 	</cffunction>
 	
