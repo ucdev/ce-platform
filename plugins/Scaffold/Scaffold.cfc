@@ -127,6 +127,7 @@
 	            <!--- Generate the forms and listing for the views --->
 	            <cfset loc.entryForm = $generateEntryFormFromModel(arguments.name)>
 	            <cfset loc.editForm = $generateEditFormFromModel(arguments.name)>
+	            <cfset loc.indexHeadings = $generateHeadingsListingViewFromModel(arguments.name)>
 	            <cfset loc.indexListing = $generateListingViewFromModel(arguments.name)>
 	            <cfset loc.showListing = $generateShowViewFromModel(arguments.name)>
 	            
@@ -139,7 +140,10 @@
 	            <!--- Replace the placeholder forms --->
 	            <cfset loc.fileNew = ReplaceNoCase(loc.fileNew, "ENTRYFORM", loc.entryForm)>
 	            <cfset loc.fileEdit = ReplaceNoCase(loc.fileEdit, "EDITFORM", loc.editForm)>
-	                      
+	            
+				 <!--- Replace the placeholder listing --->
+	            <cfset loc.fileIndex = ReplaceNoCase(loc.fileIndex, "LISTINGHEADINGS", loc.indexHeadings)>
+	                   
 	            <!--- Replace the placeholder listing --->
 	            <cfset loc.fileIndex = ReplaceNoCase(loc.fileIndex, "LISTINGCOLUMNS", loc.indexListing)>
 	            
@@ -210,7 +214,7 @@
 		
 		<!--- Introspect the table to find the column names and types --->		
 		<cfset loc.columns = model(loc.nameInSingularLowercase).$classData()>
-		<cfset loc.columnsInOrder = loc.columns.columnList>
+		<cfset loc.columnsInOrder = loc.columns.PROPERTYLIST>
 
 		<cfprocessingdirective suppressWhiteSpace="true">
 		<cfsavecontent variable="loc.form">
@@ -256,7 +260,7 @@
 		
 		<!--- Introspect the table to find the column names and types --->		
 		<cfset loc.columns = model(loc.nameInSingularLowercase).$classData()>
-		<cfset loc.columnsInOrder = loc.columns.columnList>
+		<cfset loc.columnsInOrder = loc.columns.PROPERTYLIST>
 		
 		<cfprocessingdirective suppressWhiteSpace="true">
 		<cfsavecontent variable="loc.form">
@@ -330,6 +334,31 @@
 		<cfreturn loc.fieldTag>
 	</cffunction>
 	
+	<cffunction name="$generateHeadingsListingViewFromModel" access="public" returnType="string" hint="Generates a listing View from a Model by reading the table schema" output="false">
+		<cfargument name="name" type="string" required="true" hint="Name of the model to generator the listing for">
+		
+		<cfset var loc = {}>
+		
+		<!--- Define the name of the object returned from the controller --->
+		<cfset loc.nameInSingularLowercase = LCase(arguments.name)>
+		<cfset loc.nameInPluralLowercase = LCase(pluralize(arguments.name))>
+		<cfset loc.nameInPluralUppercase = capitalize(pluralize(arguments.name))>
+		
+		<!--- Introspect the table to find the column names --->
+		<cfset loc.columns = model(loc.nameInSingularLowercase).$classData().PROPERTYLIST>
+		
+		<cfprocessingdirective suppressWhiteSpace="true">
+		<cfsavecontent variable="loc.form"><cfoutput><cfloop list="#loc.columns#" index="loc.column"><th>#humanize(loc.column)#</th>
+		</cfloop></cfoutput></cfsavecontent>
+		</cfprocessingdirective>
+		
+		<!--- Replace the brackets with ColdFusion tag brackets --->
+		<cfset loc.form = Replace(loc.form, "[", "<", "All")>
+		<cfset loc.form = Replace(loc.form, "]", ">", "All")>
+		
+		<cfreturn loc.form>
+	</cffunction>
+	
 	<cffunction name="$generateListingViewFromModel" access="public" returnType="string" hint="Generates a listing View from a Model by reading the table schema" output="false">
 		<cfargument name="name" type="string" required="true" hint="Name of the model to generator the listing for">
 		
@@ -341,16 +370,11 @@
 		<cfset loc.nameInPluralUppercase = capitalize(pluralize(arguments.name))>
 		
 		<!--- Introspect the table to find the column names --->
-		<cfset loc.columns = model(loc.nameInSingularLowercase).$classData().columnList>
+		<cfset loc.columns = model(loc.nameInSingularLowercase).$classData().PROPERTYLIST>
 		
 		<cfprocessingdirective suppressWhiteSpace="true">
-		<cfsavecontent variable="loc.form">
-			<cfoutput>
-				<cfloop list="#loc.columns#" index="loc.column">
-					[cfcol header="#humanize(loc.column)#" text="###loc.column###" /]
-				</cfloop>
-			</cfoutput>
-		</cfsavecontent>
+		<cfsavecontent variable="loc.form"><cfoutput><cfloop list="#loc.columns#" index="loc.column"><td>###loc.column###</td>
+		</cfloop></cfoutput></cfsavecontent>
 		</cfprocessingdirective>
 		
 		<!--- Replace the brackets with ColdFusion tag brackets --->
@@ -371,7 +395,7 @@
 		<cfset loc.nameInPluralUppercase = capitalize(pluralize(arguments.name))>
 		
 		<!--- Introspect the table to find the column names --->
-		<cfset loc.columns = model(loc.nameInSingularLowercase).$classData().columnList>
+		<cfset loc.columns = model(loc.nameInSingularLowercase).$classData().PROPERTYLIST>
 		
 		<cfprocessingdirective suppressWhiteSpace="true">
 		<cfsavecontent variable="loc.form">

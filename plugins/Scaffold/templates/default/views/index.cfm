@@ -3,12 +3,19 @@
 <cfoutput>#includePartial("showFlash")#</cfoutput>
 
 <cfoutput>
-	<p>#linkTo(text="New [NameSingularLowercase]", action="new")#</p>
+<p>#linkTo(text="New [NameSingularLowercase]", action="new")#</p>
 </cfoutput>
-
-<cftable query="[NamePluralLowercase]" colHeaders="true" HTMLTable="true">
-	LISTINGCOLUMNS
-	<cfcol header="" text="#linkTo(text='Show', action='show', key=[PrimaryKey])#" />
-	<cfcol header="" text="#linkTo(text='Edit', action='edit', key=[PrimaryKey])#" />
-	<cfcol header="" text="#linkTo(text='Delete', action='delete', key=[PrimaryKey], confirm='Are you sure?')#" />
-</cftable>
+<cfoutput>
+<table class="table table-striped table-condensed">
+	<thead>
+		LISTINGHEADINGS
+	</thead>
+	<tbody>
+		<cfloop query="[NamePluralLowercase]">
+		<tr>
+			LISTINGCOLUMNS
+		</tr>
+		</cfloop>
+	</tbody>
+</table>
+</cfoutput>
