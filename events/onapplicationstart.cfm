@@ -1,4 +1,4 @@
-<cfset application.javaloader = javaLoader() /><!---
+<!---<cfset application.javaloader = javaLoader() />
 <cfset doLessGeneration = LessEngine(['bootstrap.less']) />--->
 
 <cfset generateBundle(type="css", bundle="ccpd", compress=true, sources="bootstrap,ccpd") />
@@ -18,6 +18,7 @@
 			bootstrap-typeahead,
 			jquery-ui-1.6rc6.min,
 			jquery.cfjs.packed.js,
+			jquery.form.js,
 			jquery.autocomplete.pack,
 			jquery.tokenInput") />
 

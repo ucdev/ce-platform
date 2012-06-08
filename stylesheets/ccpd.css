@@ -25,6 +25,9 @@
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+.profile > .projectBar .subnav {
+  display: none;
+}
 .profile > .projectBar > .nav li {
   position: relative;
 }
@@ -32,6 +35,9 @@
   color: #333333;
   font-weight: bold;
   background-color: #DDD;
+}
+.profile > .projectBar > .nav li.open > .subnav {
+  display: block;
 }
 .profile > .projectBar > .nav li.hasIcon > a {
   padding-left: 26px;

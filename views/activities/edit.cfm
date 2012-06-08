@@ -148,11 +148,10 @@ $(document).ready(function(){
 <div class="ViewContainer">
 <div class="ViewSection">
 <h3>General Information</h3>
-	<form action="/_com/AJAX_Activity.cfc" method="post" name="frmEditActivity" id="EditForm">
+	<form action="/ajax_adm_activity/saveActivity" method="post" name="frmEditActivity" id="EditForm">
 		<fieldset class="common-form">
     	<cfinclude template="/lib/SaveInfo.cfm" />
 		<!--- ADDED Attributes.SessionType HIDDEN FIELD FOR SAVING PURPOSES [Attributes.SessionType must be passed to save StartDate/EndDate] --->
-        <input type="hidden" value="saveActivity" name="Method" />
         <input type="hidden" value="plain" name="returnFormat" />
         <input type="hidden" value="#Attributes.ActivityID#" name="ActivityID" />
     	<input type="hidden" value="#Attributes.SessionType#" name="SessionType" />

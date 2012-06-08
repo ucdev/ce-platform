@@ -1,6 +1,4 @@
 <cfparam name="Attributes.Credits" default="">
-<div class="ViewSection">
-<h3>Credits</h3>
 <script>
 $(document).ready(function() {
 	$(".CreditBox").each(function() {
@@ -28,6 +26,17 @@ $(document).ready(function() {
 </script>
 <cfoutput>
 <form name="frmAddCredits" method="post" action="#urlFor(action='save')#">
+	<div class="btn-toolbar well well-small clearfix">
+		<div class="btn-group pull-left">
+		<input type="submit" value="Save Now" name="btnSave" id="btnSave" class="btn btn-primary" />
+		</div>
+		<div class="btn-group pull-left">
+		<input style="display:none;" type="reset" value="Discard" name="btnDiscard" id="btnDiscard" class="btn" />
+		</div>
+		<div class="btn-group pull-left">
+		<span class="SaveInfo" id="SaveInfo"></span>
+		</div>
+	</div>
 	<input type="hidden" name="Submitted" value="1" />
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ViewSectionGrid">
 		<thead>
@@ -51,4 +60,3 @@ $(document).ready(function() {
 	</table>
 </form>
 </cfoutput>
-</div>

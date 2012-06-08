@@ -1,5 +1,8 @@
 .profile {
 	> .projectBar {
+		.subnav {
+			display:none;
+		}
 		> .nav {
 			li {
 				position:relative;
@@ -10,6 +13,12 @@
 						font-weight:bold;
 						background-color:#DDD;
  						
+					}
+				}
+				
+				&.open {
+					>.subnav {
+						display:block;
 					}
 				}
 				
