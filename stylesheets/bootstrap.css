@@ -4938,7 +4938,7 @@ input[type="submit"].btn.btn-mini {
 .nav-list > .active > a,
 .nav-list > .active > a:hover {
   color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+  text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.6);
   background-color: #e00122;
 }
 .nav-list [class^="icon-"] {
@@ -4998,7 +4998,7 @@ input[type="submit"].btn.btn-mini {
 .subnav-list > .active > a,
 .subnav-list > .active > a:hover {
   color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+  text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.6);
   background-color: #e00122;
 }
 .subnav-list [class^="icon-"] {
