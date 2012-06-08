@@ -61,7 +61,7 @@
 			</cfloop>
 			<cfset tab.subTabsHtml &= '</ul>' />
 		</cfif>
-	<li<cfif (params.controller EQ tab.controller AND params.action EQ tab.action) OR (params.controller EQ tab.activeSubController AND params.action EQ tab.activeSubAction)> class="active"</cfif>>
+	<li class="<cfif (params.controller EQ tab.controller AND params.action EQ tab.action)>active open</cfif><cfif (params.controller EQ tab.activeSubController AND params.action EQ tab.activeSubAction)> open</cfif>">
 		<a href="#urlFor(controller=tab.controller,action=tab.action,key=params.activityId)#"><i class="icon16-#tab.icon#"></i> #tab.label#</a>
 		#tab.subTabsHtml#
 	</li>
