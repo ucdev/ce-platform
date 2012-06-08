@@ -48,8 +48,6 @@
 		<cfset contentFor(pageSubTitle=arguments.titleText) />
 	</cffunction>
 	
-	
-	
 	<cffunction name="$setActivity" access="public">
     	<cfparam name="params.submitted" type="integer" default="0" />
         <cfparam name="params.key" type="integer" default="0" />
@@ -64,7 +62,6 @@
 		
 		<cfset activity = model("activity").findByKey(params.activityId) />
 		<cfset pageTitle("#activity.title#") />
-		
 	</cffunction>
 	
 	<cffunction name="$setPerson" access="public">
