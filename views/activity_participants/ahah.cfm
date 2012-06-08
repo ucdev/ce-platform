@@ -18,11 +18,17 @@ function cancelButton() {
 
 function updateStatusDate(nAttendee, nType) {
 	if(nType != "") {
-		$.post("/AJAX_adm_Activity/getAttendeeDate", { AttendeeId: nAttendee, type: nType, returnFormat: "plain" },
-			function(data) {
+		$.ajax({
+			url: "/AJAX_adm_Activity/getAttendeeDate", 
+			type: 'post',
+			data: { AttendeeId: nAttendee, type: nType, returnFormat: "plain" },
+			success: function(data) {
 				var cleanData = $.Trim(data);
+				
+				$('#current-attendee-status-' + nAttendee).val(nType);
 				$("#datefill-" + nAttendee).html(cleanData);
 				$("#editdatelink-" + nAttendee).show();
+			}
 		});
 	} else {
 		$("#datefill-" + $Attendee).html("");
@@ -180,11 +186,11 @@ $(document).ready(function() {
 		$("#CheckinEdit" + nPersonID).show();
 	});
 	
-	$(".AttendeeStatusID").change(function() {
-		var $Attendee = $.ListGetAt(this.id, 2, "-");
-		var $Type = $(this).val();
+	$(".AttendeeStatusID").click(function() {
+		var nAttendee = this.id.split('-')[1];
+		var nType = this.id.split('-')[2];
 		
-		updateStatusDate($Attendee,$Type);
+		updateStatusDate(nAttendee,nType);
 	});
 	
 	$(".EditStatusDate").bind("click", this, function() {
@@ -203,9 +209,8 @@ $(document).ready(function() {
 		$("#CurrStatusDate-" + nAttendee).val(dtCurrDate);
 		$("#EditDateField-" + nAttendee).val(dtCurrDate);
 		
-		$("#editdatelink-" + nAttendee).hide();
-		$("#datefill-" + nAttendee).hide();
-		$("#editdatecontainer-" + nAttendee).show();
+		$("#view-attendee-date-" + nAttendee).hide();
+		$("#edit-attendee-date-" + nAttendee).show();
 	});
 	
 	$(".EditDateField").keydown(function() {
@@ -217,7 +222,7 @@ $(document).ready(function() {
 	$(".SaveDateEdit").bind("click", this, function() {
 		var CurrID = this.id;
 		var nAttendee = $.ListGetAt(this.id, 2, "-");
-		var nType = $("#AttendeeStatus-" + nAttendee).val();
+		var nType = $("#current-attendee-status-" + nAttendee).val();
 		var dtDate = $("#EditDateField-" + nAttendee).val();
 		
 		if(nType != "" && $.Len(dtDate) > 0) {
@@ -232,11 +237,11 @@ $(document).ready(function() {
 					
 					if(Status == "Success") {
 						addMessage(statusMsg,250,6000,4000);
-						updateRegistrants(nId);
+						updateRegistrants(nId, nStatus);
 					} else {
 						addError(statusMsg,250,6000,4000);
 						$("#editdatecontainer-" + nAttendee).hide();
-						$("#datefill-" + nAttendee).show();
+						$("#datefill-" + nAttendee).text(dtDate).show();
 						$("#editdatelink-" + nAttendee).show();
 					}
 				}
@@ -251,7 +256,6 @@ $(document).ready(function() {
 </script>
 
 <cfoutput>
-<h3>Registrants</h3>
 <div style="display: none;" id="prototypes">
 	<div style="display: none;" id="action_menu">
 		<ul class="dropdown-menu" id="menuActions-{personid}">
@@ -286,8 +290,9 @@ $(document).ready(function() {
         <thead>
             <tr>
                 <th class="span1"><input type="checkbox" name="CheckAll" id="CheckAll" /></th>
+                <th class="span1"></th>
                 <th class="span3">Name</th>
-                <th class="span5">Status</th>
+                <th class="span7">Status</th>
                 <th>Is MD?</th>
                 <th>&nbsp;</th>
             </tr>
@@ -300,6 +305,7 @@ $(document).ready(function() {
 						<input type="hidden" class="attendeeId" value="#attendeeId#" />
 						<input type="hidden" class="personId" value="#qAttendees.personId#" />
 					</td>
+                    <td><img src="/images/no-photo/person_i.png"></td>
                     <td valign="top" nowrap="nowrap">
 						<cfif personId GT 0>
 							<a href="/person/detail?personId=#PersonID#" class="PersonLink" id="PERSON|#PersonID#|#LastName#, #FirstName#">#qAttendees.FullName#</a>
@@ -309,58 +315,49 @@ $(document).ready(function() {
 						
 						<!---<cfif NOT qAttendees.personDeleted><a href="#myself#Person.Detail?PersonID=#PersonID#" class="PersonLink" id="PERSON|#PersonID#|#LastName#, #FirstName#">#LastName#, #FirstName# <cfif MiddleName NEQ "">#Left(MiddleName, 1)#.</cfif></a><cfelse>#LastName#, #FirstName# <cfif MiddleName NEQ "">#Left(MiddleName, 1)#.</cfif> **deleted</cfif>---></td>
                     <td class="StatusDate" id="StatusDate-#qAttendees.AttendeeId#">
-                        <span id="editdatelink-#qAttendees.attendeeId#" style="position:relative;"><input type="hidden" id="CurrStatusDate-#qAttendees.attendeeId#" value="" /><i class="EditStatusDate icon-pencil" id="editstatusdate-#qAttendees.attendeeId#"></i></span>
-                    	<span id="datefill-#qAttendees.AttendeeId#">
-                            <div class="btn-group pull-right">
-                                <button class="btn" data-toggle="dropdown">Filter By:</button>
-								<cfif personID GT 0>
-                                	<button id="editdatecontainer-#qAttendees.attendeeId#" class="btn attendee-status-title" data-toggle="dropdown">All</button>
-                                </cfif>
-                                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                    	<input type="hidden" name="currentAttendeeStatus" id="current-attendee-status-#qAttendees.attendeeid#" value="#qAttendees.statusId#" />
+                    	<span id="view-attendee-date-#qAttendees.AttendeeId#">
+                            <div class="btn-group">
+                                <button class="btn span5" id="datefill-#qAttendees.attendeeid#">
+                                	<cfswitch expression="#qAttendees.StatusID#">
+                                        <cfcase value="1">
+                                            #DateFormat(qAttendees.CompleteDate, "MM/DD/YYYY") & " " & TimeFormat(qAttendees.CompleteDate, "h:mmTT")#
+                                        </cfcase>
+                                        <cfcase value="2">
+                                            #DateFormat(qAttendees.RegisterDate, "MM/DD/YYYY") & " " & TimeFormat(qAttendees.RegisterDate, "h:mmTT")#
+                                        </cfcase>
+                                        <cfcase value="3">
+                                            #DateFormat(qAttendees.RegisterDate, "MM/DD/YYYY") & " " & TimeFormat(qAttendees.RegisterDate, "h:mmTT")#
+                                        </cfcase>
+                                        <cfcase value="4">
+                                            #DateFormat(qAttendees.TermDate, "MM/DD/YYYY") & " " & TimeFormat(qAttendees.TermDate, "h:mmTT")#
+                                        </cfcase>
+                                    </cfswitch>
+                                </button>
+                                <button id="editstatusdate-#qAttendees.attendeeId#" class="btn EditStatusDate span2">
+                                    <span style="position:relative;"><input type="hidden" id="CurrStatusDate-#qAttendees.attendeeId#" value="" />Edit</span>
+                                </button>
+                                <button class="btn dropdown-toggle span1" data-toggle="dropdown">
                                     <span class="caret"></span>
                                 </button>
-                                <ul class="dropdown-menu attendees-filter">
-                                    <li class="attendee-status" id="status0"><a href="##"> All <span></span></a></li>
-                                    <li class="divider"></li>
-                                    <li class="attendee-status" id="status1"><a href="##">Complete <span></span></a></li>
-                                    <li class="attendee-status" id="status4"><a href="##">Failed <span></span></a></li>
-                                    <li class="attendee-status" id="status2"><a href="##">In Progress <span></span></a></li>
-                                    <li class="attendee-status" id="status3"><a href="##">Registered <span></span></a></li>
+                                <ul class="dropdown-menu pull-right">
+	                                <cfif qAttendees.CompleteDate NEQ "" OR qAttendees.StatusID EQ 1>
+                                	<li><a href="javascript://" class="AttendeeStatusID" id="AttendeeStatus-#qAttendees.attendeeid#-1">Complete (#dateFormat(qAttendees.completeDate, "MM/DD/YYYY") & " " & timeFormat(qAttendees.completeDate, "hh:mmTT")#)</a></li>
+                                    </cfif>
+                                    <cfif qAttendees.StatusID EQ 2>
+                                    <li><a href="javascript://" class="AttendeeStatusID" id="AttendeeStatus-#qAttendees.attendeeid#-2">In Progress</a></li>
+                                    </cfif>
+                                    <cfif qAttendees.RegisterDate NEQ "" OR qAttendees.StatusID EQ 3>
+                                    <li><a href="javascript://" class="AttendeeStatusID" id="AttendeeStatus-#qAttendees.attendeeid#-3">Registered (#dateFormat(qAttendees.registerDate, "MM/DD/YYYY") & " " & timeFormat(qAttendees.registerDate, "hh:mmTT")#)</a></li>
+                                    </cfif>
+                                    <cfif qAttendees.TermDate NEQ "" OR qAttendees.StatusID EQ 4>
+                                    <li><a href="javascript://" class="AttendeeStatusID" id="AttendeeStatus-#qAttendees.attendeeid#-4">Terminated (#dateFormat(qAttendees.termDate, "MM/DD/YYYY") & " " & timeFormat(qAttendees.termDate, "hh:mmTT")#)</a></li>
+                                    </cfif>
                                 </ul>
-                            </div><span style="display:none;position:relative;"><input type="text" class="EditDateField span4" id="EditDateField-#qAttendees.attendeeId#" /><i class="SaveDateEdit icon-ok" id="SaveDate-#qAttendees.attendeeId#"></i></span>
-						<cfswitch expression="#qAttendees.StatusID#">
-                        	<cfcase value="1">
-                            	#DateFormat(qAttendees.CompleteDate, "MM/DD/YYYY") & " " & TimeFormat(qAttendees.CompleteDate, "h:mmTT")#
-                            </cfcase>
-                            <cfcase value="2">
-                            	#DateFormat(qAttendees.RegisterDate, "MM/DD/YYYY") & " " & TimeFormat(qAttendees.RegisterDate, "h:mmTT")#
-                            </cfcase>
-                            <cfcase value="3">
-                            	#DateFormat(qAttendees.RegisterDate, "MM/DD/YYYY") & " " & TimeFormat(qAttendees.RegisterDate, "h:mmTT")#
-                            </cfcase>
-                            <cfcase value="4">
-                            	#DateFormat(qAttendees.TermDate, "MM/DD/YYYY") & " " & TimeFormat(qAttendees.TermDate, "h:mmTT")#
-                            </cfcase>
-                        </cfswitch>
-                        </span>
+                            </div>
+                        </span>                        
+                        <span id="edit-attendee-date-#qAttendees.AttendeeId#" style="display:none;position:relative;"><input type="text" class="EditDateField span4" id="EditDateField-#qAttendees.attendeeId#" /><i class="SaveDateEdit icon-ok" id="SaveDate-#qAttendees.attendeeId#"></i></span>
                     </td>
-                    <!---<td valign="top">
-                    <select name="AttendeeStatusID" class="AttendeeStatusID" id="AttendeeStatus-#qAttendees.attendeeId#"<cfif personId EQ 0> disabled="true"</cfif>>
-                    	<option value="">Select one...</option>
-                        <cfif qAttendees.CompleteDate NEQ "" OR qAttendees.StatusID EQ 1>
-                    		<option value="1"<cfif qAttendees.StatusID EQ 1> SELECTED</cfif>>Complete</option>
-						</cfif>
-                        <cfif qAttendees.StatusID EQ 2>
-                    		<option value="2"<cfif qAttendees.StatusID EQ 2> SELECTED</cfif>>In progress</option>
-						</cfif>
-                        <cfif qAttendees.RegisterDate NEQ "" OR qAttendees.StatusID EQ 3>
-                    		<option value="3"<cfif qAttendees.StatusID EQ 3> SELECTED</cfif>>Registered</option>
-						</cfif>
-                        <cfif qAttendees.TermDate NEQ "" OR qAttendees.StatusID EQ 4>
-                    		<option value="4"<cfif qAttendees.StatusID EQ 4> SELECTED</cfif>>Terminated</option>
-						</cfif>
-                    </select>
-                    </td>--->
                     <td valign="top"><span class="MDNonMD" id="MDNonMD#qAttendees.attendeeId#"><cfif qAttendees.MDFlag EQ "Y">Yes<cfelse>No</cfif></span></td>
                     <td valign="top" class="user-actions-outer">
 						<cfif personID GT 0>

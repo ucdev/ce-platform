@@ -1,6 +1,6 @@
 <cfoutput>
 <!--<h4>Participants</h4>-->
-<div class="btn-toolbar">
+<div class="btn-toolbar clearfix">
 	<div class="btn-group pull-left">
 		<a href="##" class="btn"><i class="icon-plus-sign"></i> Add</a>
 		<a href="##" class="btn"><i class="icon-hdd"></i> Import</a>
@@ -418,7 +418,7 @@
 		/* PRINT SELECTED ONLY END */
 });
 </script>
-<div class="ViewSection">
+<div>
 	<div id="RegistrantsContainer"></div>
 	<div id="RegistrantsLoading" class="Loading"><img src="/admin/_images/ajax-loader.gif" />
 	<div>Please Wait</div></div>
