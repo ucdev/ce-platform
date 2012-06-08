@@ -2,27 +2,24 @@
 <div class="ViewSection">
 <h3>Credits</h3>
 <script>
+function updateCreditRow(elem) {
+	var nCreditID = $(elem).attr('id').split('Credits')[1];
+	if($(elem).attr("checked")) {
+		$("#CreditAmount" + nCreditID).attr("disabled",false);
+		$("#ReferenceNo" + nCreditID).attr("disabled",false);
+	} else {
+		$("#CreditAmount" + nCreditID).attr("disabled",true);
+		$("#ReferenceNo" + nCreditID).attr("disabled",true);
+	}
+}
+
 $(document).ready(function() {
 	$(".CreditBox").each(function() {
-		var nCreditID = $.Replace(this.id,"Credits","","ALL");
-		if($(this).attr("checked")) {
-			$("#CreditAmount" + nCreditID).attr("disabled",false);
-			$("#ReferenceNo" + nCreditID).attr("disabled",false);
-		} else {
-			$("#CreditAmount" + nCreditID).attr("disabled",true);
-			$("#ReferenceNo" + nCreditID).attr("disabled",true);
-		}
+		updateCreditRow(this);
 	});
 	
 	$(".CreditBox").click(function() {
-		var nCreditID = $.Replace(this.id,"Credits","","ALL");
-		if($(this).attr("checked")) {
-			$("#CreditAmount" + nCreditID).attr("disabled",false);
-			$("#ReferenceNo" + nCreditID).attr("disabled",false);
-		} else {
-			$("#CreditAmount" + nCreditID).attr("disabled",true);
-			$("#ReferenceNo" + nCreditID).attr("disabled",true);
-		}
+		updateCreditRow(this);
 	});
 });
 </script>

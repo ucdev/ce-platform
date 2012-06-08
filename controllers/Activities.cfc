@@ -99,7 +99,7 @@
 			</cfswitch>
 		</cfloop>
 		
-		<cfif attributes.status EQ 0 AND getToken(cookie.USER_AttendeeStatus,1,"|") EQ attributes.activityid>
+		<cfif attributes.status EQ 0 AND structKeyExists(cookie, "user_attendeeStatus") AND getToken(cookie.USER_AttendeeStatus,1,"|") EQ attributes.activityid>
 			<cfset attributes.status = getToken(cookie.USER_AttendeeStatus,2,"|")>
 		</cfif>
 		
@@ -115,13 +115,19 @@
 		
 		<cfset AttendeePager = CreateObject("component","#Application.Settings.Com#Pagination").init()>
 		<cfset AttendeePager.setQueryToPaginate(qAttendees)>
-		<cfset AttendeePager.setBaseLink("#myself#Activity.Attendees?ActivityID=#Attributes.ActivityID#&status=#attributes.status#") />
+		<cfset AttendeePager.setBaseLink("/activities/adm_participants?ActivityID=#Attributes.ActivityID#&status=#attributes.status#") />
 		<cfset AttendeePager.setItemsPerPage(15) />
 		<cfset AttendeePager.setUrlPageIndicator("page") />
 		<cfset AttendeePager.setShowNumericLinks(true) />
 		<cfset AttendeePager.setClassName("green") />
 		<cfset subLayout('edit') />
 	</cffunction>
+    
+	<cffunction name="adm_participants_ahah">
+		<cfset qAttendees = Application.activityAttendee.getAttendees(ActivityID=Attributes.ActivityID,DeletedFlag="N")>
+        
+    	<cfset renderText(template="ahah/adm_participants", layout=false) />
+    </cffunction>
 	
 	<cffunction name="adm_faculty">
 		<cfparam name="params.key" type="integer" />

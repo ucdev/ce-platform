@@ -39,6 +39,7 @@
 
 <script>
 	<cfoutput>
+	var nActivity = #params.key#;
 	var nId = #Attributes.Page#;
 	var nStatus = #attributes.status#;
 	var SelectedMembers = '';
@@ -50,7 +51,7 @@
 	
 	function updateRegistrants(nPage, nStatus) {
 		$("#RegistrantsLoading").show();
-		$.get(sMyself + "Activity.AttendeesAHAH", { ActivityID: nActivity, status: nStatus, page: nPage }, 
+		$.get("/activity/adm_participants_ahah", { ActivityID: nActivity, status: nStatus, page: nPage }, 
 			function(data) {
 				$("#RegistrantsContainer").html(data);
 				$("#RegistrantsLoading").hide();
@@ -162,7 +163,7 @@
 	}
 	
 	$(document).ready(function() {
-		<cfif GetToken(Cookie.USER_AttendeePage,1,"|") EQ Attributes.ActivityID>
+		<cfif structKeyExists(cookie, "user_attendee_page") AND GetToken(Cookie.USER_AttendeePage,1,"|") EQ Attributes.ActivityID>
 			<cfif getToken(cookie.user_attendeeStatus, 1, "|") EQ Attributes.ActivityId>
 				updateRegistrants(<cfoutput>#getToken(Cookie.USER_AttendeePage,2,"|")#, #getToken(Cookie.USER_AttendeeStatus,2,"|")#</cfoutput>);
 			<cfelse>
