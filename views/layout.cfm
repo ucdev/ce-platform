@@ -10,6 +10,7 @@
 	<!-- Le styles -->
 	#stylesheetLinkTag(bundle="ccpd")#
 	#javaScriptIncludeTag(bundle="ccpd")#
+    #javaScriptIncludeTag(bundle="ccpd-legacy")#
 	#javaScriptIncludeTag(sources="less")#
 	<style>
 	body {
