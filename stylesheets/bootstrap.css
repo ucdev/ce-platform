@@ -4226,7 +4226,7 @@ table .span24 {
 .dropdown-menu li > a:hover i,
 .dropdown-menu .active > a i,
 .dropdown-menu .active > a:hover i {
-  background-image: url("/images/glyphicons-halflings.png");
+  background-image: url("/images/glyphicons-halflings-white.png");
 }
 .open {
   *z-index: 1000;
@@ -4429,7 +4429,7 @@ button.close {
 }
 .btn.active i,
 .btn:active i {
-  background-image: url("/images/glyphicons-halflings.png");
+  background-image: url("/images/glyphicons-halflings-white.png");
 }
 .btn.disabled,
 .btn[disabled] {
