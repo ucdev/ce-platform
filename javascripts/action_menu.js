@@ -1,7 +1,7 @@
 $.fn.isPerson = function () {
     return this.each(function () {
         var oPersonRow = $(this);
-        var oPersonActionMenu = oPersonRow.find(".user-actions .action-menu button").isPersonActionMenu();
+        var oPersonActionMenu = oPersonRow.find(".action-menu button").isPersonActionMenu();
     })
 };
 
@@ -13,7 +13,7 @@ function defineVars(oRecord) {
 	oPerson.nAttendee = oPerson.oPersonRow.find('.personId').val();
 	oPerson.nPerson = oPerson.oPersonRow.find('.personId').val();
 	oPerson.nAttendee = oPerson.oPersonRow.find('.attendeeId').val();
-	oPerson.sAction = oPerson.oLink.parent("li, span").attr("class").replace("-action", "");
+	//oPerson.sAction = oPerson.oLink.parent("li, span").attr("class").replace("-action", "");
 	sPersonNameTemp = oPerson.oPersonRow.find(".PersonLink").html();
 	oPerson.sPersonName = $.Trim($.ListGetAt(sPersonNameTemp, 2, ",")) + " " + $.Trim($.ListGetAt(sPersonNameTemp, 1, ","));
 	
@@ -271,7 +271,7 @@ $.fn.isPersonActionLink = function () {
 };
 $.fn.isPersonActionMenu = function () {
     $actionMenu = $("#action_menu");
-    return this.one("click", function () {
+    return this.one("mouseover", function () {
 		var oPerson = defineVars(this);
 		var sMenuHTML = $actionMenu.html();
 		
@@ -279,13 +279,9 @@ $.fn.isPersonActionMenu = function () {
 		sMenuHTML = $.Replace(sMenuHTML,'{personid}',oPerson.nPerson,'ALL'); //PersonID
 		sMenuHTML = $.Replace(sMenuHTML,'{activityid}',nActivity,'ALL'); //ActivityID
 		
-        $("body").click();
         oPerson.oLink.addClass("clicked").after(sMenuHTML);
         oPerson.oLink.siblings("ul").find("a").find("span").html(oPerson.sPersonName).end().isPersonActionLink();
-        $("html").one("click", function () {
-            oPerson.oLink.removeClass("clicked").blur().siblings("ul").remove().end().isPersonActionMenu();
-            return false
-        });
+		
         return false
     })
 };

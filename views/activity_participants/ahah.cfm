@@ -254,7 +254,7 @@ $(document).ready(function() {
 <h3>Registrants</h3>
 <div style="display: none;" id="prototypes">
 	<div style="display: none;" id="action_menu">
-		<ul style="display: block;" class="round" id="menuActions-{personid}">
+		<ul class="dropdown-menu" id="menuActions-{personid}">
         	<cfloop query="qActivityCredits">
                 <cfswitch expression="#qActivityCredits.CreditName#">
                     <cfcase value="CME">
@@ -282,13 +282,12 @@ $(document).ready(function() {
 
 <cfif isDefined("qAttendees") AND qAttendees.RecordCount GT 0>
 	<cfif AttendeePager.getTotalNumberOfPages() GT 1><div style="clear:both;"><cfoutput>#AttendeePager.getRenderedHTML()#</cfoutput></div></cfif>
-    <table border="0" width="620" cellpadding="0" cellspacing="0" class="ViewSectionGrid">
+    <table border="0" width="620" cellpadding="0" cellspacing="0" class="table table-striped">
         <thead>
             <tr>
-                <th width="15"><input type="checkbox" name="CheckAll" id="CheckAll" /></th>
-                <th width="200">Name</th>
-                <th width="150">Status Date</th>
-                <th>Status</th>
+                <th class="span1"><input type="checkbox" name="CheckAll" id="CheckAll" /></th>
+                <th class="span3">Name</th>
+                <th class="span5">Status</th>
                 <th>Is MD?</th>
                 <th>&nbsp;</th>
             </tr>
@@ -310,7 +309,25 @@ $(document).ready(function() {
 						
 						<!---<cfif NOT qAttendees.personDeleted><a href="#myself#Person.Detail?PersonID=#PersonID#" class="PersonLink" id="PERSON|#PersonID#|#LastName#, #FirstName#">#LastName#, #FirstName# <cfif MiddleName NEQ "">#Left(MiddleName, 1)#.</cfif></a><cfelse>#LastName#, #FirstName# <cfif MiddleName NEQ "">#Left(MiddleName, 1)#.</cfif> **deleted</cfif>---></td>
                     <td class="StatusDate" id="StatusDate-#qAttendees.AttendeeId#">
+                        <span id="editdatelink-#qAttendees.attendeeId#" style="position:relative;"><input type="hidden" id="CurrStatusDate-#qAttendees.attendeeId#" value="" /><i class="EditStatusDate icon-pencil" id="editstatusdate-#qAttendees.attendeeId#"></i></span>
                     	<span id="datefill-#qAttendees.AttendeeId#">
+                            <div class="btn-group pull-right">
+                                <button class="btn" data-toggle="dropdown">Filter By:</button>
+								<cfif personID GT 0>
+                                	<button id="editdatecontainer-#qAttendees.attendeeId#" class="btn attendee-status-title" data-toggle="dropdown">All</button>
+                                </cfif>
+                                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu attendees-filter">
+                                    <li class="attendee-status" id="status0"><a href="##"> All <span></span></a></li>
+                                    <li class="divider"></li>
+                                    <li class="attendee-status" id="status1"><a href="##">Complete <span></span></a></li>
+                                    <li class="attendee-status" id="status4"><a href="##">Failed <span></span></a></li>
+                                    <li class="attendee-status" id="status2"><a href="##">In Progress <span></span></a></li>
+                                    <li class="attendee-status" id="status3"><a href="##">Registered <span></span></a></li>
+                                </ul>
+                            </div><span style="display:none;position:relative;"><input type="text" class="EditDateField span4" id="EditDateField-#qAttendees.attendeeId#" /><i class="SaveDateEdit icon-ok" id="SaveDate-#qAttendees.attendeeId#"></i></span>
 						<cfswitch expression="#qAttendees.StatusID#">
                         	<cfcase value="1">
                             	#DateFormat(qAttendees.CompleteDate, "MM/DD/YYYY") & " " & TimeFormat(qAttendees.CompleteDate, "h:mmTT")#
@@ -326,12 +343,8 @@ $(document).ready(function() {
                             </cfcase>
                         </cfswitch>
                         </span>
-						<cfif personID GT 0>
-                        <div id="editdatecontainer-#qAttendees.attendeeId#" style="display:none;position:relative;"><input type="text" class="EditDateField" id="EditDateField-#qAttendees.attendeeId#" /><i class="SaveDateEdit icon-ok" id="SaveDate-#qAttendees.attendeeId#"></i></div>
-                        <div id="editdatelink-#qAttendees.attendeeId#" style="position:relative;"><input type="hidden" id="CurrStatusDate-#qAttendees.attendeeId#" value="" /><i class="EditStatusDate icon-pencil" id="editstatusdate-#qAttendees.attendeeId#"></i></div>
-						</cfif>
                     </td>
-                    <td valign="top">
+                    <!---<td valign="top">
                     <select name="AttendeeStatusID" class="AttendeeStatusID" id="AttendeeStatus-#qAttendees.attendeeId#"<cfif personId EQ 0> disabled="true"</cfif>>
                     	<option value="">Select one...</option>
                         <cfif qAttendees.CompleteDate NEQ "" OR qAttendees.StatusID EQ 1>
@@ -347,16 +360,20 @@ $(document).ready(function() {
                     		<option value="4"<cfif qAttendees.StatusID EQ 4> SELECTED</cfif>>Terminated</option>
 						</cfif>
                     </select>
-                    </td>
+                    </td>--->
                     <td valign="top"><span class="MDNonMD" id="MDNonMD#qAttendees.attendeeId#"><cfif qAttendees.MDFlag EQ "Y">Yes<cfelse>No</cfif></span></td>
                     <td valign="top" class="user-actions-outer">
 						<cfif personID GT 0>
-						<ul class="user-actions">
+						<!---<ul class="user-actions">
 							<li class="action-menu menu">
 								<button value="Actions" class="btn" id="btnActions-#PersonID#"><i class="icon-cog"></i></button>
-								
 							</li>
-						</ul>
+						</ul>--->
+                        <div class="btn-group user-actions action-menu">
+                            <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-cog"></i><span class="caret"></span>
+                            </button>
+                        </div>
 						<cfelse>
 							<a href="javascript:;" class="deleteLink">Delete</a>
 						</cfif>

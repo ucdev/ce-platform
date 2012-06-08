@@ -632,7 +632,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 		<cfsavecontent variable="renderedOutput">
 			<cfoutput>
-				<div class="pagination #getClassName()#">
+				<div class="#getClassName()#">
 				<cfif getCurrentPage() GT 1 and getShowFirstLastHTML()>
 					<a href="#getFirstPageLink()#" class="first">#getFirstLinkHTML()#</a>
 				<cfelseif getShowFirstLastDisabledHTML()>

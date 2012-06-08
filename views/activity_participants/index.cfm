@@ -35,7 +35,7 @@
 	</div>
 </div>
 </cfoutput>
-<cfparam name="Attributes.Page" type="numeric" default="1" />
+<cfparam name="params.Page" type="numeric" default="1" />
 
 <script>
 	<cfoutput>
@@ -53,16 +53,15 @@
 		$("#RegistrantsLoading").show();
 		$.ajax({
 			url: '/activity_participants/ahah', 
-			type: 'post',
+			type: 'get',
 			data: { activityId: nActivity, status: nStatus, page: nPage },
-			headers: { ahah: true },
 			success: function(data) {
 				$("#RegistrantsContainer").html(data);
 				$("#RegistrantsLoading").hide();
 				
 				$(".AllAttendees").unbind();
 				$(".AllAttendees").isPerson();
-			
+				
 				// PLACE CHECKMARK BY ACTIVE STATUS
 				$('.active-status').remove();
 				$('#status' + nStatus).find('a').prepend('<i class="icon-ok active-status"></i> ');
@@ -175,8 +174,8 @@
 	}
 	
 	$(document).ready(function() {
-		<cfif structKeyExists(cookie, "user_attendee_page") AND GetToken(Cookie.USER_AttendeePage,1,"|") EQ Attributes.ActivityID>
-			<cfif getToken(cookie.user_attendeeStatus, 1, "|") EQ Attributes.ActivityId>
+		<cfif structKeyExists(cookie, "user_attendee_page") AND GetToken(Cookie.USER_AttendeePage,1,"|") EQ params.ActivityID>
+			<cfif getToken(cookie.user_attendeeStatus, 1, "|") EQ params.ActivityId>
 				updateRegistrants(<cfoutput>#getToken(Cookie.USER_AttendeePage,2,"|")#, #getToken(Cookie.USER_AttendeeStatus,2,"|")#</cfoutput>);
 			<cfelse>
 				updateRegistrants(<cfoutput>#getToken(Cookie.USER_AttendeePage,2,"|")#</cfoutput>, nStatus);
