@@ -1,9 +1,9 @@
-<h1>Listing attendees</h1>
+<h1>Listing activity_participants</h1>
 
 <cfoutput>#includePartial("showFlash")#</cfoutput>
 
 <cfoutput>
-<p>#linkTo(text="New attendee", action="new")#</p>
+<p>#linkTo(text="New activity_participant", action="new")#</p>
 </cfoutput>
 <cfoutput>
 <table class="table table-striped table-condensed">
@@ -54,7 +54,7 @@
 		
 	</thead>
 	<tbody>
-		<cfloop query="attendees">
+		<cfloop query="activity_participants">
 		<tr>
 			<td>#id#</td>
 		<td>#ActivityID#</td>

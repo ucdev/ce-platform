@@ -2,7 +2,7 @@
 	
 	<!--- activity_sites/index --->
 	<cffunction name="index">
-		<cfset activity_sites = model("Activity_site").findAll()>
+		<cfset activity_sites = model("Activity_site").findAllByActivityId(value=params.key)>
 	</cffunction>
 	
 	<!--- activity_sites/show/key --->

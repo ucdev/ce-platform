@@ -2,7 +2,7 @@
 	
 	<!--- activity_categorylms/index --->
 	<cffunction name="index">
-		<cfset activity_categorylms = model("Activity_categorylms").findAll()>
+		<cfset activity_categorylms = model("Activity_categorylms").findAllByActivityId(value=params.key)>
 	</cffunction>
 	
 	<!--- activity_categorylms/show/key --->

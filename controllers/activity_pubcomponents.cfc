@@ -2,7 +2,7 @@
 	
 	<!--- activity_pubcomponents/index --->
 	<cffunction name="index">
-		<cfset activity_pubcomponents = model("Activity_pubcomponent").findAll()>
+		<cfset activity_pubcomponents = model("Activity_pubcomponent").findAllByActivityId(value=params.key)>
 	</cffunction>
 	
 	<!--- activity_pubcomponents/show/key --->

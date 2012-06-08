@@ -2,7 +2,7 @@
 	
 	<!--- activity_applications/index --->
 	<cffunction name="index">
-		<cfset activity_applications = model("Activity_application").findAll()>
+		<cfset activity_applications = model("Activity_application").findAllByActivityId(value=params.key)>
 	</cffunction>
 	
 	<!--- activity_applications/show/key --->

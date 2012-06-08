@@ -2,7 +2,7 @@
 	
 	<!--- activity_notes/index --->
 	<cffunction name="index">
-		<cfset activity_notes = model("Activity_note").findAll()>
+		<cfset activity_notes = model("Activity_note").findAllByActivityId(value=params.key)>
 	</cffunction>
 	
 	<!--- activity_notes/show/key --->

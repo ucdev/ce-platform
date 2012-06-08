@@ -2,7 +2,7 @@
 	
 	<!--- activity_specialtylms/index --->
 	<cffunction name="index">
-		<cfset activity_specialtylms = model("Activity_specialtylms").findAll()>
+		<cfset activity_specialtylms = model("Activity_specialtylms").findAllByActivityId(value=params.key)>
 	</cffunction>
 	
 	<!--- activity_specialtylms/show/key --->

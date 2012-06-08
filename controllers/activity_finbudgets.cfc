@@ -2,7 +2,7 @@
 	
 	<!--- activity_finbudgets/index --->
 	<cffunction name="index">
-		<cfset activity_finbudgets = model("Activity_finbudget").findAll()>
+		<cfset activity_finbudgets = model("Activity_finbudget").findAllByActivityId(value=params.key)>
 	</cffunction>
 	
 	<!--- activity_finbudgets/show/key --->
