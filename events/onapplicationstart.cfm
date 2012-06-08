@@ -17,6 +17,7 @@
 			bootstrap-carousel,
 			bootstrap-typeahead,
 			jquery-ui-1.6rc6.min,
+			jquery.cfjs.packed.js,
 			jquery.autocomplete.pack,
 			jquery.tokenInput") />
 
