@@ -1,8 +1,10 @@
 <cfcomponent extends="Controller" output="false">
-	
+	<cffunction name="init">
+		<cfset super.init() />
+	</cffunction>
 	<!--- activity_credits/index --->
 	<cffunction name="index">
-		<cfset activity_credits = model("Activity_credit").findAll()>
+		<cfset activity_credits = model("Activity_credit").findAllByActivityId(value=params.key)>
 	</cffunction>
 	
 	<!--- activity_credits/show/key --->
@@ -26,16 +28,29 @@
 	
 	<!--- activity_credits/edit/key --->
 	<cffunction name="edit">
-	
-		<!--- Find the record --->
-    	<cfset activity_credit = model("Activity_credit").findByKey(params.key)>
-    	
-    	<!--- Check if the record exists --->
-	    <cfif NOT IsObject(activity_credit)>
-	        <cfset flashInsert(error="Activity_credit #params.key# was not found")>
-			<cfset redirectTo(action="index")>
-	    </cfif>
+		<cfparam name="params.key" type="integer" />
+		<cfparam name="params.credits" default="" />
 		
+		<cfset attributes.credits = params.credits />
+		<cfset qActivityCredits = application.com.activityCreditGateway.getByViewAttributes(activityId=attributes.activityId)>
+		<cfset qCredits = application.com.creditGateway.getByAttributes()>
+		
+		<cfloop query="qCredits">
+			<cfparam name="params.creditAmount#qCredits.CreditID#" default="0" />
+			<cfparam name="params.credits#qCredits.CreditID#" default="0" />
+			<cfparam name="params.referenceFlag#qCredits.CreditID#" default="N" />
+			<cfparam name="params.referenceNo#qCredits.CreditID#" default="" />
+		</cfloop>
+		
+		<cfloop query="qCredits">
+			<cfset params.credits = ListAppend(params.Credits,Evaluate("params.Credits#qCredits.CreditID#"),",")>
+		</cfloop>
+				
+		<cfloop query="qActivityCredits">
+			<cfset params.credits = ListAppend(params.Credits,qActivityCredits.CreditID,",")>
+			<cfset "params.CreditAmount#qActivityCredits.CreditID#" = qActivityCredits.Amount>
+			<cfset "params.ReferenceNo#qActivityCredits.CreditID#" = qActivityCredits.ReferenceNo>
+		</cfloop>	
 	</cffunction>
 	
 	<!--- activity_credits/create --->

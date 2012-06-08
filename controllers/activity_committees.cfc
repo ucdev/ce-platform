@@ -2,7 +2,7 @@
 	
 	<!--- activity_committees/index --->
 	<cffunction name="index">
-		<cfset activity_committees = model("Activity_committee").findAll()>
+		<cfset activity_committees = model("Activity_committee").findAllByActivityId(value=params.key)>
 	</cffunction>
 	
 	<!--- activity_committees/show/key --->

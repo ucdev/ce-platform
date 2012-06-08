@@ -3,7 +3,7 @@
 		<cfset activityTypes = model("sys_activityType").findAll(maxRows=5)>
         <cfset activityCategories = model("Category").findAll(order="name")>
         <cfset activityGroupings = model("sys_grouping").findAll(maxRows=5)>
-		<cfset activities = model("activity").findAll(maxRows=100) />
+		<cfset activities = model("activity").findAll(maxRows=100,order="created DESC") />
 		
 		<cfset pageTitle("Activities") />
 		<cfset pageSubTitle("Browse or search activities.") />
@@ -14,8 +14,8 @@
 			<cfset subLayout("guest") />
 		</cfif>
 	</cffunction>
-	
-	<cffunction name="adm_general">
+	<!---
+	<cffunction name="edit">
 		<cfparam name="params.key" type="integer" />
         
 		<cfset $setActivity() />
@@ -29,8 +29,8 @@
         <cfset activityCategories = model("Category").findAll(order="name")>
         <cfset activityGroupings = model("sys_grouping").findAll(maxRows=5)>
         
-		<cfset subLayout('edit') />
-	</cffunction>
+		
+	</cffunction>--->
 	
 	<cffunction name="adm_credit">
 		<cfparam name="params.key" type="integer" />
@@ -58,7 +58,7 @@
 			<cfset "params.CreditAmount#qActivityCredits.CreditID#" = qActivityCredits.Amount>
 			<cfset "params.ReferenceNo#qActivityCredits.CreditID#" = qActivityCredits.ReferenceNo>
 		</cfloop>		
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	
 	<cffunction name="adm_participants">
@@ -120,7 +120,7 @@
 		<cfset AttendeePager.setUrlPageIndicator("page") />
 		<cfset AttendeePager.setShowNumericLinks(true) />
 		<cfset AttendeePager.setClassName("green") />
-		<cfset subLayout('edit') />
+		
 	</cffunction>
     
 	<cffunction name="adm_participants_ahah">
@@ -134,44 +134,44 @@
 		<cfset $setActivity() />
 		<cfset qActivityFacultyList = Application.Com.ActivityFacultyGateway.getByViewAttributes(ActivityID=activity.id,DeletedFlag='N',OrderBy="sr.RoleID DESC, p1.LastName,p1.FirstName")>
 		
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	
 	<cffunction name="adm_committee">
 		<cfparam name="params.key" type="integer" />
 		<cfset $setActivity() />
 		<cfset qCommittee = Application.Com.ActivityCommitteeGateway.getByAttributes(ActivityID=Attributes.ActivityID)>
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	
 	<cffunction name="adm_finances">
 		<cfparam name="params.key" type="integer" />
 		<cfset $setActivity() />
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	<cffunction name="adm_finances_budget">
 		<cfparam name="params.key" type="integer" />
 		<cfset $setActivity() />
 		<cfset qFinBudgetList = Application.Com.ActivityBudgetGateway.getByViewAttributes(ActivityID=Attributes.ActivityID,DeletedFlag='N',OrderBy='et.Name')>
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	<cffunction name="adm_finances_ledger">
 		<cfparam name="params.key" type="integer" />
 		<cfset $setActivity() />
 		<cfset qFinLedgerList = Application.Com.ActivityLedgerGateway.getByViewAttributes(ActivityID=Attributes.ActivityID,DeletedFlag='N',OrderBy='EntryDate DESC')>
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	<cffunction name="adm_finances_fees">
 		<cfparam name="params.key" type="integer" />
 		<cfset $setActivity() />
 		<cfset qFinFeeList = Application.Com.ActivityFeeGateway.getByViewAttributes(ActivityID=Attributes.ActivityID,DeletedFlag='N')>
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	<cffunction name="adm_finances_support">
 		<cfparam name="params.key" type="integer" />
 		<cfset $setActivity() />
 		<cfset qSupporterList = Application.Com.SupporterGateway.getByAttributes(DeletedFlag='N',OrderBy='Name')>
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	
 	<cffunction name="adm_documents">
@@ -179,13 +179,13 @@
 		<cfset $setActivity() />
 		<cfset qFileList = Application.Com.FileGateway.getByViewAttributes(ActivityID=Attributes.ActivityID,DeletedFlag='N',OrderBy='FileTypeID')>
 
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	
 	<cffunction name="adm_">
 		<cfparam name="params.key" type="integer" />
 		<cfset $setActivity() />
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	
 	<cffunction name="adm_publish">
@@ -223,7 +223,7 @@
 				<cfset Attributes.RestrictedFlag = ActivityPubGeneral.getRestrictedFlag()>
 			</cfif>
 		</cfif>
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	
 	<cffunction name="adm_publish_specialties">
@@ -240,7 +240,7 @@
 			<cfset Attributes.ThisUpdated = qActivitySpecialties.Created>
 		</cfloop>
 		
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	
 	<cffunction name="adm_publish_categories">
@@ -259,32 +259,32 @@
 			<cfset Attributes.ThisUpdated = qActivityCategories.Created>
 		</cfloop>
 		
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	
 	<cffunction name="adm_reports">
 		<cfparam name="params.key" type="integer" />
 		<cfset $setActivity() />
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	
 	<cffunction name="adm_history">
 		<cfparam name="params.key" type="integer" />
 		<cfset $setActivity() />
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	
 	<cffunction name="adm_notes">
 		<cfparam name="params.key" type="integer" />
 		<cfset $setActivity() />
 		<cfset qActivityNotes = Application.Com.ActivityNoteGateway.getByViewAttributes(ActivityID=#Attributes.ActivityID#,DeletedFlag='N',OrderBy='an.Created DESC')>
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	
 	<cffunction name="adm_accme">
 		<cfparam name="params.key" type="integer" />
 		<cfset $setActivity() />
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	
 	<cffunction name="adm_cdc">
@@ -308,13 +308,13 @@
 				<cfset Attributes.SecClinSiteFlag = ActivityOtherBean.getSecClinSiteFlag()>
 			</cfif>
 		</cfif>
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	
 	<cffunction name="adm_agenda">
 		<cfparam name="params.key" type="integer" />
 		<cfset $setActivity() />
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	
 	<cffunction name="adm_app">
@@ -329,7 +329,7 @@
 			<cfset Application.Com.ActivityApplicationDAO.Create(ActivityApp)>
 		</cfif>
 		
-		<cfset subLayout('edit') />
+		
 	</cffunction>
 	<!---
 	
@@ -343,17 +343,5 @@
 	
 	<cffunction name="show">
 		<cfset activity = model("activity").findByKey(key=params.key, include="activityType,grouping, status", returnAs="query") />
-	</cffunction>
-	
-	<cffunction name="$setActivity" access="private">
-    	<cfparam name="params.submitted" type="integer" default="0" />
-        
-		<cfset activity = model("activity").findByKey(params.key) />
-		<cfset pageTitle("#activity.title#") />
-		
-		<!--- LEGACY FIX --->
-		<cfset attributes = {} />
-		<cfset attributes['activityid'] = params.key />
-		<cfset attributes['submitted'] = params.submitted />
 	</cffunction>
 </cfcomponent>

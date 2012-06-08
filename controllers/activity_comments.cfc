@@ -2,7 +2,7 @@
 	
 	<!--- activity_comments/index --->
 	<cffunction name="index">
-		<cfset activity_comments = model("Activity_comment").findAll()>
+		<cfset activity_comments = model("Activity_comment").findAllByActivityId(value=params.key)>
 	</cffunction>
 	
 	<!--- activity_comments/show/key --->

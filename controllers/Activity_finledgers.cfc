@@ -2,7 +2,7 @@
 	
 	<!--- activity_finledgers/index --->
 	<cffunction name="index">
-		<cfset activity_finledgers = model("Activity_finledger").findAll()>
+		<cfset activity_finledgers = model("Activity_finledger").findAllByActivityId(value=params.key)>
 	</cffunction>
 	
 	<!--- activity_finledgers/show/key --->

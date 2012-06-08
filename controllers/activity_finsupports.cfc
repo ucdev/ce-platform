@@ -2,7 +2,7 @@
 	
 	<!--- activity_finsupports/index --->
 	<cffunction name="index">
-		<cfset activity_finsupports = model("Activity_finsupport").findAll()>
+		<cfset activity_finsupports = model("Activity_finsupport").findAllByActivityId(value=params.key)>
 	</cffunction>
 	
 	<!--- activity_finsupports/show/key --->

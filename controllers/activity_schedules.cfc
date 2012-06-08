@@ -2,7 +2,7 @@
 	
 	<!--- agendas/index --->
 	<cffunction name="index">
-		<cfset agendas = model("Agenda").findAll()>
+		<cfset agendas = model("Agenda").findAllByActivityId(value=params.key)>
 	</cffunction>
 	
 	<!--- agendas/show/key --->
