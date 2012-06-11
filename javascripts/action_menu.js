@@ -13,7 +13,7 @@ function defineVars(oRecord) {
 	oPerson.nAttendee = oPerson.oPersonRow.find('.personId').val();
 	oPerson.nPerson = oPerson.oPersonRow.find('.personId').val();
 	oPerson.nAttendee = oPerson.oPersonRow.find('.attendeeId').val();
-	//oPerson.sAction = oPerson.oLink.parent("li, span").attr("class").replace("-action", "");
+	oPerson.sAction = oPerson.oLink.parent().attr('class');
 	sPersonNameTemp = oPerson.oPersonRow.find(".PersonLink").html();
 	oPerson.sPersonName = $.Trim($.ListGetAt(sPersonNameTemp, 2, ",")) + " " + $.Trim($.ListGetAt(sPersonNameTemp, 1, ","));
 	
@@ -23,7 +23,9 @@ function defineVars(oRecord) {
 $.fn.isPersonActionLink = function () {
     return this.each(function () {
         $(this).click(function (J) {
+								
 			var oPerson = defineVars(this);
+			
 			
             switch (oPerson.sAction) {
             case "assess":
@@ -185,32 +187,32 @@ $.fn.isPersonActionLink = function () {
 					$("#CreditsDialog").dialog("open");
 				break;
 			case "togglemd":
-					if($("#MDNonMD" + oPerson.nAttendee).html() == "Yes") {
+					if($("#md-status-" + oPerson.nAttendee).text() == "Yes") {
 						Result = "N";
-					} else if($("#MDNonMD" + oPerson.nAttendee).html() == "No") {
+					} else if($("#md-status-" + oPerson.nAttendee).text() == "No") {
 						Result = "Y";
 					};
 					
-					$.post("/AJAX_adm_Activity/updateMDStatus", { PersonID: oPerson.nPerson, AttendeeID:oPerson.nAttendee, ActivityID: nActivity, MDNonMD: Result, returnFormat: "plain" },
-						function(returnData) {
-							cleanData = $.trim(returnData);
-							status = $.ListGetAt(cleanData,1,"|");
-							statusMsg = $.ListGetAt(cleanData,2,"|");
-							
-							if(status == 'Success') {
-								addMessage(statusMsg,250,6000,4000);
-								updateActions();
+					$.ajax({
+						url: "/AJAX_adm_Activity/updateMDStatus", 
+						type: 'post',
+						data: { AttendeeID:oPerson.nAttendee, MDNonMD: Result },
+						dataType: 'json',
+						success: function(data) {
+							if(data.STATUS) {
+								addMessage(data.STATUSMSG,250,6000,4000);
 								updateStats();
+								
+								if(Result == "Y") {
+									$("#md-status-" + oPerson.nAttendee).text("Yes");
+								} else if(Result == "N") {
+									$("#md-status-" + oPerson.nAttendee).text("No");
+								};
 							} else {
-								addError(statusMsg,250,6000,4000);
+								addError(data.STATUSMSG,250,6000,4000);
 							}
+						}
 					});
-					
-					if($("#MDNonMD" + oPerson.nAttendee).html() == "Yes") {
-						$("#MDNonMD" + oPerson.nAttendee).html("No");
-					} else if($("#MDNonMD" + oPerson.nAttendee).html() == "No") {
-						$("#MDNonMD" + oPerson.nAttendee).html("Yes");
-					};
 				break;
 			case "sendCertificate":
 					if(confirm("Are you sure you want to send " + oPerson.sPersonName + " a copy of their ceritificate?")) {

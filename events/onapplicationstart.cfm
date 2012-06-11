@@ -16,7 +16,8 @@
 			bootstrap-collapse,
 			bootstrap-carousel,
 			bootstrap-typeahead,
-			global") />
+			global,
+			activity") />
             
 <cfset generateBundle(type="js", bundle="ccpd-legacy", compress=true, 
 	sources="jquery-ui-1.6rc6.min,

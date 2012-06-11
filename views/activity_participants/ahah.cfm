@@ -16,6 +16,35 @@ function cancelButton() {
 	$("#CreditsDialog").dialog("close");
 }
 
+function checkmarkMember(params) {
+	/*if(settings.person && settings.person > 0) {
+		if($.ListFind(SelectedMembers, settings.person, ",")) {
+			$("#Checked" + settings.person).attr("checked",true);
+			$("#PersonRow" + settings.person).css("background-color","#FFD");
+		}
+	}*/
+	
+	if(settings.attendee && settings.attendee > 0) {
+		if($.ListFind(SelectedAttendees, settings.attendee, ",")) {
+			$("#Checked-" + settings.attendee).attr("checked",true);
+			$("#attendeeRow-" + settings.attendee).css("background-color","#FFD");
+		}
+	}
+}
+
+function resetAttendee(nA,nP,sP) {
+	$.getJSON("/AJAX_adm_Activity/resetAttendee", { attendeeId: nP, ActivityID: nA, PaymentFlag: sP, returnFormat: "plain" },
+		function(data) {
+			if(data.STATUS) {				
+				addMessage(data.STATUSMSG,250,6000,4000);
+				updateStats();
+				updateRegistrants();
+			} else {
+				addError(data.STATUSMSG,250,6000,4000);
+			}
+		});
+}
+
 function updateStatusDate(nAttendee, nType) {
 	if(nType != "") {
 		$.ajax({
@@ -33,35 +62,6 @@ function updateStatusDate(nAttendee, nType) {
 	} else {
 		$("#datefill-" + $Attendee).html("");
 		$("#editdatelink-" + $Attendee).hide();
-	}
-}
-
-function resetAttendee(nA,nP,sP) {
-	$.getJSON("/AJAX_adm_Activity/resetAttendee", { attendeeId: nP, ActivityID: nA, PaymentFlag: sP, returnFormat: "plain" },
-		function(data) {
-			if(data.STATUS) {				
-				addMessage(data.STATUSMSG,250,6000,4000);
-				updateStats();
-				updateRegistrants();
-			} else {
-				addError(data.STATUSMSG,250,6000,4000);
-			}
-		});
-}
-
-function checkmarkMember(params) {
-	/*if(settings.person && settings.person > 0) {
-		if($.ListFind(SelectedMembers, settings.person, ",")) {
-			$("#Checked" + settings.person).attr("checked",true);
-			$("#PersonRow" + settings.person).css("background-color","#FFD");
-		}
-	}*/
-	
-	if(settings.attendee && settings.attendee > 0) {
-		if($.ListFind(SelectedAttendees, settings.attendee, ",")) {
-			$("#Checked-" + settings.attendee).attr("checked",true);
-			$("#attendeeRow-" + settings.attendee).css("background-color","#FFD");
-		}
 	}
 }
 
@@ -252,6 +252,27 @@ $(document).ready(function() {
 			$("#EditDateField-" + nAttendee).val(dtStatusMask);
 		}
 	});
+	
+	$('.toggle-md').click(function() {
+		var attendeeId = this.id.split('-')[3];
+		var mdStatus = (this.id.split('-')[2]).toUpperCase();
+		
+		$.ajax({
+			url: "/AJAX_adm_Activity/updateMDStatus",
+			type: 'post',
+			data: { attendeeId: attendeeId, MDNonMD: mdStatus },
+			dataType: 'json',
+			success: function(data) {
+				if(data.STATUS) {
+					if(mdStatus == 'Y') {
+						$('#md-status-' + attendeeId).text('Yes');
+					} else {
+						$('#md-status-' + attendeeId).text('No');
+					}
+				}
+			}
+		});
+	});
 });
 </script>
 
@@ -308,7 +329,7 @@ $(document).ready(function() {
                     <td><img src="/images/no-photo/person_i.png"></td>
                     <td valign="top" nowrap="nowrap">
 						<cfif personId GT 0>
-							<a href="/person/detail?personId=#PersonID#" class="PersonLink" id="PERSON|#PersonID#|#LastName#, #FirstName#">#qAttendees.FullName#</a>
+							<a href="/people/edit/#PersonID#" class="PersonLink" id="PERSON|#PersonID#|#LastName#, #FirstName#">#qAttendees.FullName#</a>
 						<cfelse>
 							#qAttendees.FullName#
 						</cfif>
@@ -355,10 +376,21 @@ $(document).ready(function() {
                                     </cfif>
                                 </ul>
                             </div>
-                        </span>                        
+                        </span>                       
                         <span id="edit-attendee-date-#qAttendees.AttendeeId#" style="display:none;position:relative;"><input type="text" class="EditDateField span4" id="EditDateField-#qAttendees.attendeeId#" /><i class="SaveDateEdit icon-ok" id="SaveDate-#qAttendees.attendeeId#"></i></span>
                     </td>
-                    <td valign="top"><span class="MDNonMD" id="MDNonMD#qAttendees.attendeeId#"><cfif qAttendees.MDFlag EQ "Y">Yes<cfelse>No</cfif></span></td>
+					<td valign="top">
+                    	<div class="btn-group">
+                            <button class="btn md-status" id="md-status-#qAttendees.attendeeId#"><cfif qAttendees.mdFlag EQ "Y">Yes<cfelse>No</cfif></button>
+                            <button class="btn dropdown-toggle span1" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                            	<li><a href="javascript://" class="toggle-md" id="toggle-md-y-#qAttendees.attendeeId#">Yes</a></li>
+                            	<li><a href="javascript://" class="toggle-md" id="toggle-md-n-#qAttendees.attendeeId#">No</a></li>
+                            </ul>
+                        </div>
+                    </td>
                     <td valign="top" class="user-actions-outer">
 						<cfif personID GT 0>
 						<!---<ul class="user-actions">

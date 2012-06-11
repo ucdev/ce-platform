@@ -1,3 +1,9 @@
+<script>
+$(document).ready(function() {
+	$('#login').focus();
+});
+</script>
+
 <cfoutput>
 
 <h2>Login</h2>

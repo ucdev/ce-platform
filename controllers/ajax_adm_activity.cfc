@@ -1212,14 +1212,17 @@
     </cffunction>
     
     <cffunction name="updateMDStatus"  output="false">
-		<cfparam name="params.ActivityID" type="string">
-		<cfparam name="params.PersonID" type="string">
+		<cfparam name="params.attendeeId" type="string">
 		<cfparam name="params.MDNonMD" type="string">
         
-        <cfset var Status = "Fail|Cannot access the update function for attendee MD status.">
+        <cfset var status = createObject("component","#application.settings.com#returnData.buildStruct").init()>
         
-        <cfset Status = Application.ActivityAttendee.updateMDStatus(params.ActivityID,params.PersonID,params.MDNonMD)>
+        <!---<cfcontent type="text/javascript" />--->
         
-        <cfset renderText(Status) />
+        <cfset status.setStatus(false)>
+        <cfset status.setStatusMsg("Cannot access the update function for attendee MD status.")>
+        <cfset status = Application.ActivityAttendee.updateMDStatus(params.attendeeId,params.MDNonMD)>
+        
+        <cfset renderText(status.getJSON()) />
     </cffunction>
 </cfcomponent>

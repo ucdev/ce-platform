@@ -1141,78 +1141,74 @@
         <cfreturn Status />
 	</cffunction>
     
-    <cffunction name="updateMDStatus" access="Public" output="true" returntype="string">
-		<cfargument name="ActivityID" required="true" type="string">
-		<cfargument name="PersonID" required="true" type="string">
+    <cffunction name="updateMDStatus" access="Public" output="true" returntype="struct">
+		<cfargument name="attendeeId" required="true" type="string">
 		<cfargument name="MDNonMD" required="true" type="string">
 		
-		<cfset Status = "">
+        <cfset var status = createObject("component","#application.settings.com#returnData.buildStruct").init()>
 		
 		<!--- Check to make sure the Argument var is not blank --->
-		<cfif Arguments.ActivityID EQ "" OR Arguments.PersonID EQ "" OR MDNonMD EQ "">
-			<cfset Status = "Fail|More information is required to adjust this setting.">
+		<cfif Arguments.attendeeId EQ "" OR MDNonMD EQ "">
+			<cfset status.setStatus(false)>
+            <cfset status.setStatusMsg("More information is required to adjust this setting.")>
+            <cfreturn status />
+            <cfabort>
 		</cfif>
 		
-		<cfif Status EQ "">
-				<!--- ACTIVITY DETAIL --->
-				<cfset ActivityBean = CreateObject("component","#Application.Settings.Com#Activity.Activity").init(ActivityID=Arguments.ActivityID)>
-				<cfset ActivityBean = Application.Com.ActivityDAO.read(ActivityBean)>
-				
-                <!--- PERSON DETAIL --->
-                <cfset PersonBean = CreateObject("component","#Application.Settings.Com#Person.Person").Init(PersonID=Arguments.PersonID)>
-                <cfset PersonBean = Application.Com.PersonDAO.Read(PersonBean)>
+		<!--- UPDATE ATTENDEE RECORD --->
+        <cfset attendeeBean = createObject("component","#application.settings.com#attendee.attendee").init(attendeeId=arguments.attendeeId)>
+        <cfset attendeeBean = application.com.attendeeDAO.Read(attendeeBean)>
+        <cfset attendeeBean.setMDFlag(Arguments.MDNonMD)>
+        <cfset attendeeSaved = application.com.attendeeDAO.update(attendeeBean)>
+        
+        <!--- ACTIVITY DETAIL --->
+        <cfset activityBean = createObject("component","#application.settings.com#activity.activity").init(activityId=attendeeBean.getActivityId())>
+        <cfset activityBean = application.com.activityDAO.read(activityBean)>
                 
-				<!--- UPDATE ATTENDEE RECORD --->
-                <cfset AttendeeBean = CreateObject("component","#Application.Settings.Com#Attendee.Attendee").Init(ActivityID=Arguments.ActivityID,PersonID=Arguments.PersonID)>
-                <cfset AttendeeBean = Application.Com.AttendeeDAO.Read(AttendeeBean)>
-                <cfset AttendeeBean.setMDFlag(Arguments.MDNonMD)>
-                <cfset AttendeeBean = Application.Com.AttendeeDAO.Update(AttendeeBean)>
-						
-				<!--- Check if activity is a Parent Activity --->
-				<cfif ActivityBean.getParentActivityID() NEQ "">
-					<!--- Update ParentActivity StatAttendees --->
-					<cfset ParentActivityBean = CreateObject("component","#Application.Settings.Com#Activity.Activity").Init(ActivityID=ActivityBean.getParentActivityID())>
-					<cfset ParentActivityBean = Application.Com.ActivityDAO.Read(ParentActivityBean)>
-					
-                	<cfif MDNonMD EQ "Y">
-						<cfset ParentActivityBean.setStatMD(ParentActivityBean.getStatMD()+1)>
-                        <cfset ParentActivityBean.setStatNonMD(ParentActivityBean.getStatNonMD()-1)>
-                    <cfelse>
-						<cfset ParentActivityBean.setStatMD(ParentActivityBean.getStatMD()-1)>
-                        <cfset ParentActivityBean.setStatNonMD(ParentActivityBean.getStatNonMD()+1)>
-                    </cfif>
-                    
-                    <cfset ParentActivityBean = Application.Com.ActivityDAO.Update(ParentActivityBean)>
-				</cfif>
-                
-				<!--- ACTIVITY STATS --->
-                <cfif MDNonMD EQ "Y">
-					<cfset ActivityBean.setStatMD(ActivityBean.getStatMD()+1)>
-                    <cfset ActivityBean.setStatNonMD(ActivityBean.getStatNonMD()-1)>
-                <cfelse>
-                	<cfset ActivityBean.setStatMD(ActivityBean.getStatMD()-1)>
-                    <cfset ActivityBean.setStatNonMD(ActivityBean.getStatNonMD()+1)>
-                </cfif>
-				
-				<cfset Application.Com.ActivityDAO.Update(ActivityBean)>
-				
-                <cfset Application.History.Add(
-                            HistoryStyleID=69,
-                            FromPersonID=session.currentuser.id,
-                            ToPersonID=Arguments.PersonID,
-                            ToActivityID=Arguments.ActivityID)>
-				
-				<cfset Status = "Success|MD status for #PersonBean.getFirstName()# #PersonBean.getLastName()# has been updated..">
-				
-				<cfset application.activity.refresh(arguments.activityId) />
-			<cftry>
-                <cfcatch type="any">
-					<cfset Status = "Fail|Error: #cfcatch.message#">
-				</cfcatch>
-			</cftry>
-		</cfif>
+        <!--- Check if activity is a Parent Activity --->
+        <cfif activityBean.getParentActivityID() NEQ "">
+            <!--- Update ParentActivity StatAttendees --->
+            <cfset parentActivityBean = createObject("component","#application.settings.com#activity.activity").init(activityID=activityBean.getParentActivityId())>
+            <cfset parentActivityBean = application.com.activityDAO.read(ParentActivityBean)>
+            
+            <cfif MDNonMD EQ "Y">
+                <cfset parentActivityBean.setStatMD(parentActivityBean.getStatMD()+1)>
+                <cfset parentActivityBean.setStatNonMD(parentActivityBean.getStatNonMD()-1)>
+            <cfelse>
+                <cfset parentActivityBean.setStatMD(parentActivityBean.getStatMD()-1)>
+                <cfset parentActivityBean.setStatNonMD(parentActivityBean.getStatNonMD()+1)>
+            </cfif>
+            
+            <cfset parentActivityBean = application.com.activityDAO.update(ParentActivityBean)>
+        </cfif>
+        
+        <!--- ACTIVITY STATS --->
+        <cfif MDNonMD EQ "Y">
+            <cfset activityBean.setStatMD(activityBean.getStatMD()+1)>
+            <cfset activityBean.setStatNonMD(activityBean.getStatNonMD()-1)>
+        <cfelse>
+            <cfset activityBean.setStatMD(activityBean.getStatMD()-1)>
+            <cfset activityBean.setStatNonMD(activityBean.getStatNonMD()+1)>
+        </cfif>
+        
+        <cfset application.com.activityDAO.update(activityBean)>
+        
+        <!--- PERSON DETAIL --->
+        <cfset personBean = createObject("component","#application.settings.com#person.person").init(personId=attendeeBean.getPersonId())>
+        <cfset personBean = application.com.personDAO.read(personBean)>
+        
+        <cfset application.history.add(
+                    historyStyleID=69,
+                    fromPersonID=session.currentuser.id,
+                    toPersonID=attendeeBean.getPersonId(),
+                    toActivityID=attendeeBean.getActivityId())>
+        
+        <cfset status.setStatus(true)>
+        <cfset status.setStatusMsg("MD status for " & personBean.getFirstName() & " " & personBean.getLastName() & " has been updated.")>
+        
+        <cfset application.activity.refresh(attendeebean.getActivityId()) />
 		
-		<cfreturn Status />
+		<cfreturn status />
 	</cffunction>
 
 	<cffunction name="updateStatuses" access="Public" output="true" returntype="struct">
