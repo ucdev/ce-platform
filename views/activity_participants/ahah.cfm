@@ -191,6 +191,10 @@ $(document).ready(function() {
 		var nType = this.id.split('-')[2];
 		
 		updateStatusDate(nAttendee,nType);
+				
+		// PLACE CHECKMARK BY ACTIVE STATUS
+		$(this).parent().parent().children().find('a .active-status').remove();
+		$(this).prepend('<i class="icon-ok active-status"></i> ');
 	});
 	
 	$(".EditStatusDate").bind("click", this, function() {
@@ -217,6 +221,13 @@ $(document).ready(function() {
 		if($.Len($(this).val()) > 0) {
 			dtStatusMask = $(this).val();
 		}
+	});
+	
+	$(".CancelDateEdit").bind("click", this, function() {
+		var nAttendee = this.id.split('-')[1];
+		
+		$("#edit-attendee-date-" + nAttendee).hide();
+		$("#view-attendee-date-" + nAttendee).show();
 	});
 	
 	$(".SaveDateEdit").bind("click", this, function() {
@@ -333,13 +344,13 @@ $(document).ready(function() {
 						<cfelse>
 							#qAttendees.FullName#
 						</cfif>
-						
-						<!---<cfif NOT qAttendees.personDeleted><a href="#myself#Person.Detail?PersonID=#PersonID#" class="PersonLink" id="PERSON|#PersonID#|#LastName#, #FirstName#">#LastName#, #FirstName# <cfif MiddleName NEQ "">#Left(MiddleName, 1)#.</cfif></a><cfelse>#LastName#, #FirstName# <cfif MiddleName NEQ "">#Left(MiddleName, 1)#.</cfif> **deleted</cfif>---></td>
+						<div class="attendee-status" id="attendee-status-#qAttendees.attendeeId#">#StatusName#</div>
+					</td>
                     <td class="StatusDate" id="StatusDate-#qAttendees.AttendeeId#">
                     	<input type="hidden" name="currentAttendeeStatus" id="current-attendee-status-#qAttendees.attendeeid#" value="#qAttendees.statusId#" />
                     	<span id="view-attendee-date-#qAttendees.AttendeeId#">
                             <div class="btn-group">
-                                <button class="btn span5" id="datefill-#qAttendees.attendeeid#">
+                                <button class="btn span5" data-toggle="dropdown" id="datefill-#qAttendees.attendeeid#">
                                 	<cfswitch expression="#qAttendees.StatusID#">
                                         <cfcase value="1">
                                             #DateFormat(qAttendees.CompleteDate, "MM/DD/YYYY") & " " & TimeFormat(qAttendees.CompleteDate, "h:mmTT")#
@@ -377,11 +388,11 @@ $(document).ready(function() {
                                 </ul>
                             </div>
                         </span>                       
-                        <span id="edit-attendee-date-#qAttendees.AttendeeId#" style="display:none;position:relative;"><input type="text" class="EditDateField span4" id="EditDateField-#qAttendees.attendeeId#" /><i class="SaveDateEdit icon-ok" id="SaveDate-#qAttendees.attendeeId#"></i></span>
+                        <span id="edit-attendee-date-#qAttendees.AttendeeId#" style="display:none;position:relative;"><input type="text" class="EditDateField span4" id="EditDateField-#qAttendees.attendeeId#" /><i class="SaveDateEdit icon-ok" id="SaveDate-#qAttendees.attendeeId#"></i><i class="CancelDateEdit icon-remove" id="CancelDate-#qAttendees.attendeeId#"></i></span>
                     </td>
 					<td valign="top">
                     	<div class="btn-group">
-                            <button class="btn md-status" id="md-status-#qAttendees.attendeeId#"><cfif qAttendees.mdFlag EQ "Y">Yes<cfelse>No</cfif></button>
+                            <button class="btn md-status" data-toggle="dropdown" id="md-status-#qAttendees.attendeeId#"><cfif qAttendees.mdFlag EQ "Y">Yes<cfelse>No</cfif></button>
                             <button class="btn dropdown-toggle span1" data-toggle="dropdown">
                                 <span class="caret"></span>
                             </button>
