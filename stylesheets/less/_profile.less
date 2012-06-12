@@ -1,4 +1,28 @@
 .profile {
+	.pager {
+		a {
+			padding: 4px 9px;
+			.border-radius(0);
+		}
+		.previous {
+			padding:3px 9px;
+			background-color: #E6E6E6;
+			background-image: none;
+			.box-shadow(none);
+			cursor: default;
+			.opacity(65);
+			color:#555;
+		}
+		.current {
+			padding:3px 9px;
+			color: @white;
+			text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+			border:1px solid @btnPrimaryBackground;
+			
+			.buttonBackground(@btnPrimaryBackground, @btnPrimaryBackgroundHighlight);
+		}
+	}
+	
 	> .projectBar {
 		.subnav {
 			display:none;
