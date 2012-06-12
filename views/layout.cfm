@@ -38,5 +38,7 @@
 	#includeContent()#
 	#includePartial(partial="/footer")#
 </cfoutput>
+<div class="alert alert-error" style="display:none;"></div>
+<div class="alert alert-success" style="display:none;"></div>
 </body>
 </html>

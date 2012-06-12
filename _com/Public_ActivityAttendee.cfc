@@ -5,7 +5,7 @@
 		<cfreturn this />
 	</cffunction>
     
-    <cffunction name="getAttendeeDate" hint="Returns requested date information for provided attendee." access="Public" output="false" returntype="string">
+    <cffunction name="getAttendeeDate" hint="Returns requested date information for provided attendee." access="Public" output="false">
     	<cfargument name="AttendeeID" type="numeric" required="yes">
     	<cfargument name="PersonID" type="numeric" required="yes">
         <cfargument name="ActivityID" type="numeric" required="yes">
@@ -20,7 +20,12 @@
 		--->
         
         <cfset var DateInfo = "">
-        <cfset AttendeeInfo = "">
+        <cfset var AttendeeInfo = "">
+        <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
+        
+        <cfset status.setStatus(false)>
+        <cfset status.setStatusMsg("Attendee Date does not exist.")>
+        
         
         <cfswitch expression="#Arguments.Type#">
         	<cfcase value="1">
@@ -34,6 +39,8 @@
                     	PersonID = <cfqueryparam value="#Arguments.PersonID#" cfsqltype="cf_sql_integer" /> AND ActivityID = <cfqueryparam value="#Arguments.ActivityID#" cfsqltype="cf_sql_integer" />
                        	</cfif>
                 </cfquery>
+            	<cfset status.setStatusMsg("COMPLETE (" & DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY") & ")")>
+                <cfset status.setData({ 'date': DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY") }) />
             </cfcase>
         	<cfcase value="2">
             	<cfquery name="AttendeeInfo" datasource="#Application.Settings.DSN#">
@@ -46,6 +53,8 @@
                     	PersonID = <cfqueryparam value="#Arguments.PersonID#" cfsqltype="cf_sql_integer" /> AND ActivityID = <cfqueryparam value="#Arguments.ActivityID#" cfsqltype="cf_sql_integer" />
                        	</cfif>
                 </cfquery>
+            	<cfset status.setStatusMsg("IN PROGRESS")>
+                <cfset status.setData({ 'date': DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY") }) />
             </cfcase>
         	<cfcase value="3">
             	<cfquery name="AttendeeInfo" datasource="#Application.Settings.DSN#">
@@ -58,6 +67,8 @@
                     	PersonID = <cfqueryparam value="#Arguments.PersonID#" cfsqltype="cf_sql_integer" /> AND ActivityID = <cfqueryparam value="#Arguments.ActivityID#" cfsqltype="cf_sql_integer" />
                        	</cfif>
                 </cfquery>
+            	<cfset status.setStatusMsg("REGISTERED (" & DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY") & ")")>
+                <cfset status.setData({ 'date': DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY") }) />
             </cfcase>
         	<cfcase value="4">
             	<cfquery name="AttendeeInfo" datasource="#Application.Settings.DSN#">
@@ -70,14 +81,16 @@
                     	PersonID = <cfqueryparam value="#Arguments.PersonID#" cfsqltype="cf_sql_integer" /> AND ActivityID = <cfqueryparam value="#Arguments.ActivityID#" cfsqltype="cf_sql_integer" />
                        	</cfif>
                 </cfquery>
+            	<cfset status.setStatusMsg("TERMINATED (" & DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY") & ")")>
+                <cfset status.setData({ 'date': DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY") }) />
             </cfcase>
         </cfswitch>
         
         <cfif isQuery(AttendeeInfo)>
-        	<cfset DateInfo = DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY") & " " & TimeFormat(AttendeeInfo.RequestedDate, "h:mmTT")>
+        	<cfset status.setStatus(true)>
         </cfif>
         
-        <cfreturn DateInfo />
+        <cfreturn status />
     </cffunction>
     
     <cffunction name="getAttendees" access="public" output="false" returntype="query">
@@ -1011,12 +1024,15 @@
         <cfreturn status />
     </cffunction>
     
-    <cffunction name="saveAttendeeDate" hint="Saves date info for attendee to provided attendee db field." access="Public" returntype="string">
+    <cffunction name="saveAttendeeDate" hint="Saves date info for attendee to provided attendee db field." access="Public">
     	<cfargument name="AttendeeID" type="numeric" required="yes">
         <cfargument name="DateValue" type="string" required="yes">
         <cfargument name="Type" type="numeric" required="yes">
         
-        <cfset var Status = "Fail|Cannot save date information for unknown reasons.">
+        <cfset var status = createObject("component","#application.settings.com#returnData.buildStruct").init()>
+        
+        <cfset status.setStatus(false)>
+        <cfset status.setStatusMsg("Cannot save date information for unknown reasons.")>
         
         <cfswitch expression="#Arguments.Type#">
         	<cfcase value="1">
@@ -1025,8 +1041,6 @@
                     SET CompleteDate = <cfqueryparam value="#Arguments.DateValue#" cfsqltype="cf_sql_timestamp" />
                     WHERE AttendeeID = <cfqueryparam value="#arguments.attendeeId#" cfsqltype="cf_sql_integer" /> AND DeletedFlag = 'N'
                 </cfquery>
-                
-        		<cfset Status = "Success|Status date has been updated.">
             </cfcase>
         	<cfcase value="2">
             	<cfquery name="UpdateAttendee" datasource="#Application.Settings.DSN#">
@@ -1034,8 +1048,6 @@
                     SET RegisterDate = <cfqueryparam value="#Arguments.DateValue#" cfsqltype="cf_sql_timestamp" />
                     WHERE AttendeeID = <cfqueryparam value="#arguments.attendeeId#" cfsqltype="cf_sql_integer" /> AND DeletedFlag = 'N'
                 </cfquery>
-                
-        		<cfset Status = "Success|Status date has been updated.">
             </cfcase>
         	<cfcase value="3">
             	<cfquery name="UpdateAttendee" datasource="#Application.Settings.DSN#">
@@ -1043,8 +1055,6 @@
                     SET RegisterDate = <cfqueryparam value="#Arguments.DateValue#" cfsqltype="cf_sql_timestamp" />
                     WHERE AttendeeID = <cfqueryparam value="#arguments.attendeeId#" cfsqltype="cf_sql_integer" /> AND DeletedFlag = 'N'
                 </cfquery>
-                
-        		<cfset Status = "Success|Status date has been updated.">
             </cfcase>
         	<cfcase value="4">
             	<cfquery name="UpdateAttendee" datasource="#Application.Settings.DSN#">
@@ -1052,12 +1062,18 @@
                     SET TermDate = <cfqueryparam value="#Arguments.DateValue#" cfsqltype="cf_sql_timestamp" />
                     WHERE AttendeeID = <cfqueryparam value="#arguments.attendeeId#" cfsqltype="cf_sql_integer" /> AND DeletedFlag = 'N'
                 </cfquery>
-                
-        		<cfset Status = "Success|Status date has been updated.">
             </cfcase>
+            <cfdefaultcase>
+                <cfset status.setStatusMsg("You must provide valid information to perform this action.")>
+                <cfreturn status />
+                <cfabort>
+            </cfdefaultcase>
         </cfswitch>
+                
+		<cfset status.setStatus(true)>
+        <cfset status.setStatusMsg("Status date has been updated.")>
         
-        <cfreturn Status />
+        <cfreturn status />
     </cffunction>
     
     <cffunction name="sendCertificate" hint="Sends a copy of the attendee's certificate." access="public" output="false" returntype="struct">

@@ -4,13 +4,14 @@
 	<cffunction name="index">
 		<cfparam name="params.key" type="integer" />
 		<cfparam name="params.status" type="numeric" default="0" />
+        <cfparam name="params.page" type="numeric" default="1" />
 		
 		<cfset $setActivity() />
 	</cffunction>
     
     <cffunction name="ahah">
 		<cfparam name="params.status" type="numeric" default="0" />
-        <cfparam name="params.page" type="numeric" default="0" />
+        <cfparam name="params.page" type="numeric" default="1" />
         
 		<cfset qAttendees = Application.activityAttendee.getAttendees(ActivityID=params.activityID,DeletedFlag="N")>
 		<cfset qActivityCredits = Application.Com.ActivityCreditGateway.getByViewAttributes(ActivityID=params.activityId)>
@@ -65,6 +66,9 @@
         <cfset AttendeePager.setPreviousLinkHTML("&larr; Previous") />
         <cfset AttendeePager.setNextLinkHTML("Next &rarr;") />
 		<cfset AttendeePager.setItemsPerPage(15) />
+        <cfset AttendeePager.setNumericDistanceFromCurrentPageVisible(1) />
+        <cfset AttendeePager.setNumericEndBufferCount(2) />
+        <cfset AttendeePager.setMissingNumbersHTML('...') />
 		<cfset AttendeePager.setUrlPageIndicator("page") />
 		<cfset AttendeePager.setShowNumericLinks(true) />
 		<cfset AttendeePager.setClassName("pager") />

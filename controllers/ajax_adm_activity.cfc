@@ -376,11 +376,16 @@
         <cfparam name="params.ActivityID" type="numeric"  default="0">
         <cfparam name="params.Type" type="numeric" >
         
-        <cfset var Status = "">
+        <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
+        
+        <cfcontent type="text/javascript" />
+        
+        <cfset status.setStatus(true)>
+        <cfset status.setStatusMsg("Attendee Date Info.")>
         
         <cfset Status = Application.ActivityAttendee.getAttendeeDate(params.attendeeId,params.PersonID,params.ActivityID,params.Type)>
         
-        <cfset renderText(Status) />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
     <cffunction name="getGroupings" hint="Returns JSON data for groupings."  output="false">
@@ -877,16 +882,21 @@
         <cfset renderText(status.getJSON()) />
     </cffunction>
     
-    <cffunction name="saveAttendeeDate" hint="Saves date info for attendee to provided attendee db field." >
-    	<cfparam name="params.AttendeeID" type="numeric" >
-        <cfparam name="params.DateValue" type="string" >
-        <cfparam name="params.Type" type="numeric" >
+    <cffunction name="saveAttendeeDate" hint="Saves date info for attendee to provided attendee db field.">
+    	<cfparam name="params.AttendeeID" type="numeric">
+        <cfparam name="params.DateValue" type="string">
+        <cfparam name="params.Type" type="numeric">
         
-        <cfset var Status = "Fail|Cannot access update function for attendee dates.">
+        <cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
+        
+        <cfcontent type="text/javascript" />
+        
+        <cfset status.setStatus(false)>
+        <cfset status.setStatusMsg("Cannot access update function for attendee dates.")>
         
         <cfset Status = Application.ActivityAttendee.saveAttendeeDate(params.AttendeeID,params.DateValue,params.Type)>
         
-        <cfset renderText(Status) />
+        <cfset renderText(status.getJSON()) />
     </cffunction>
     
     <cffunction name="saveBudget" hint="Saves provided information as a budget entry."  output="false">

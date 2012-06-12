@@ -1,3 +1,4 @@
+#javaScriptIncludeTag(bundle="ccpd.people")#
 <cfoutput>
 <div class="profile editor row">
 	<div class="projectBar span4">

@@ -16,8 +16,16 @@
 			bootstrap-collapse,
 			bootstrap-carousel,
 			bootstrap-typeahead,
-			global,
-			activity") />
+			global") />
+            
+<cfset generateBundle(type="js", bundle="ccpd.activity", compress=true, 
+	sources="activity") />
+            
+<cfset generateBundle(type="js", bundle="ccpd.activity.participants", compress=true, 
+	sources="activity.participants") />
+            
+<cfset generateBundle(type="js", bundle="ccpd.people", compress=true, 
+	sources="people") />
             
 <cfset generateBundle(type="js", bundle="ccpd-legacy", compress=true, 
 	sources="jquery-ui-1.6rc6.min,
