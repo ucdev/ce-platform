@@ -18,6 +18,7 @@
 			<li><a href="##">Nurse Certificates</a></li>
 		</ul>
 	</div>
+	
 	<div class="btn-group pull-right">
 		<button class="btn" data-toggle="dropdown">Filter By:</button>
 		<button class="btn attendee-status-title" data-toggle="dropdown">All</button>
@@ -32,6 +33,19 @@
 			<li class="attendee-status" id="status2"><a href="##">In Progress <span></span></a></li>
 			<li class="attendee-status" id="status3"><a href="##">Registered <span></span></a></li>
 		</ul>
+	</div>
+	
+	<div class="btn-group pull-right">
+		<a class="btn"><i class="icon-chevron-left"></i></a>
+		<a class="btn dropdown-toggle" data-toggle="dropdown">1 <span class="caret"></span></a>
+		<ul class="dropdown-menu">
+			<li><a href="##" class="page">1</a></li>
+			<li><a href="##" class="page">2</a></li>
+			<li><a href="##" class="page">3</a></li>
+			<li><a href="##" class="page">4</a></li>
+			<li><a href="##" class="page">5</a></li>
+		</ul>
+		<a class="btn"><i class="icon-chevron-right"></i></a>
 	</div>
 </div>
 </cfoutput>
