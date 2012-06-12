@@ -19,13 +19,13 @@
 			global") />
             
 <cfset generateBundle(type="js", bundle="ccpd.activity", compress=true, 
-	sources="activity") />
+	sources="lib/activity") />
             
 <cfset generateBundle(type="js", bundle="ccpd.activity.participants", compress=true, 
-	sources="activity.participants") />
+	sources="lib/activity.participants") />
             
 <cfset generateBundle(type="js", bundle="ccpd.people", compress=true, 
-	sources="people") />
+	sources="lib/people") />
             
 <cfset generateBundle(type="js", bundle="ccpd-legacy", compress=true, 
 	sources="jquery-ui-1.6rc6.min,
