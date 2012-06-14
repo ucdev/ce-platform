@@ -4,8 +4,8 @@
 <!--<h4>Participants</h4>-->
 <div class="btn-toolbar clearfix">
 	<div class="btn-group pull-left">
-		<a href="##" class="btn"><i class="icon-plus-sign"></i> Add</a>
-		<a href="##" class="btn"><i class="icon-hdd"></i> Import</a>
+		<a href="##" class="btn"><i class="icon-plus-sign"></i></a>
+		<a href="##" class="btn"><i class="icon-hdd"></i></a>
 	</div>
 	<div class="btn-group pull-left">
 		<a class="btn dropdown-toggle" data-toggle="dropdown" href="##">
@@ -43,10 +43,19 @@
 			<li id="statusSelected"><a href="##"><span class="attendee-status-name">Selected</span> <span class="attendee-status-count">(0)</span></a></li>
 		</ul>
 	</div>
+<<<<<<< HEAD
+	<form class="form-inline pull-left mll" action="">
+		<input type="text"  class="input-medium" placeholder="filter people" />	
+	</form>
+	<div class="btn-group pull-right">
+		<a class="btn prev" href="1"><i class="icon-chevron-left"></i></a>
+		<a class="btn dropdown-toggle" data-toggle="dropdown"><span id="pageSelector">#params.page#</span> <span class="caret"></span></a>
+=======
 	
 	<div class="btn-group pull-right pager-simple">
 		<a href="/activities/adm_participants?ActivityID=13660&status=0&page=#params.page-1#" class="btn previous prev-page<cfif params.page EQ 1> disabled</cfif>"><i class="icon-chevron-left"></i></a>
 		<a class="btn dropdown-toggle" data-toggle="dropdown"><span class="pageSelector">#params.page#</span> <span class="caret"></span></a>
+>>>>>>> d075e2c903c177826bad42e46cea4dfa0f170a1d
 		<ul class="dropdown-menu pages">
 		</ul>
 		<a href="/activities/adm_participants?ActivityID=13660&status=0&page=#params.page+1#" class="btn next next-page"><i class="icon-chevron-right"></i></a>
