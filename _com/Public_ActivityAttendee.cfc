@@ -81,7 +81,7 @@
                     	PersonID = <cfqueryparam value="#Arguments.PersonID#" cfsqltype="cf_sql_integer" /> AND ActivityID = <cfqueryparam value="#Arguments.ActivityID#" cfsqltype="cf_sql_integer" />
                        	</cfif>
                 </cfquery>
-            	<cfset status.setStatusMsg("TERMINATED (" & DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY") & ")")>
+            	<cfset status.setStatusMsg("FAILED (" & DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY") & ")")>
                 <cfset status.setData({ 'date': DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY") }) />
             </cfcase>
         </cfswitch>
@@ -1330,7 +1330,7 @@
                         <cfset OutputVar = "<strong>Status:</strong> Registered">
                     </cfcase>
                     <cfcase value="5">
-                        <cfset OutputVar = "<strong>Status:</strong> Terminated">
+                        <cfset OutputVar = "<strong>Status:</strong> Failed">
                     </cfcase>
                 </cfswitch>
 				

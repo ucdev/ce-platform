@@ -26,7 +26,7 @@
 			<li><a href="##" id="print-cne" class="print">Nurse Certificates</a></li>
 		</ul>
 	</div>
-	
+	<span class="label">SELECTED: <span id="label-status-selected">0</span></span>
 	<div class="btn-group pull-right">
 		<button class="btn" data-toggle="dropdown">Filter By:</button>
 		<button class="btn attendee-status-title" data-toggle="dropdown">All</button>
@@ -34,12 +34,13 @@
 			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu attendees-filter">
-			<li class="attendee-status" id="status0"><a href="##"> All <span></span></a></li>
+			<li class="attendee-status" id="status0"><a href="##"><span class="attendee-status-name">All</span> <span class="attendee-status-count"></span></a></li>
 			<li class="divider"></li>
-			<li class="attendee-status" id="status1"><a href="##">Complete <span></span></a></li>
-			<li class="attendee-status" id="status4"><a href="##">Failed <span></span></a></li>
-			<li class="attendee-status" id="status2"><a href="##">In Progress <span></span></a></li>
-			<li class="attendee-status" id="status3"><a href="##">Registered <span></span></a></li>
+			<li class="attendee-status" id="status1"><a href="##"><span class="attendee-status-name">Complete</span> <span class="attendee-status-count"></span></a></li>
+			<li class="attendee-status" id="status4"><a href="##"><span class="attendee-status-name">Failed</span> <span class="attendee-status-count"></span></a></li>
+			<li class="attendee-status" id="status2"><a href="##"><span class="attendee-status-name">In Progress</span> <span class="attendee-status-count"></span></a></li>
+			<li class="attendee-status" id="status3"><a href="##"><span class="attendee-status-name">Registered</span> <span class="attendee-status-count"></span></a></li>
+			<li id="statusSelected"><a href="##"><span class="attendee-status-name">Selected</span> <span class="attendee-status-count">(0)</span></a></li>
 		</ul>
 	</div>
 	

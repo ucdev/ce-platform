@@ -20,21 +20,26 @@ function cancelButton() {
 	$("#CreditsDialog").dialog("close");
 }
 
-
-function checkmarkMember(params) {
-	if(settings.attendee && settings.attendee > 0) {
-		if($.ListFind(SelectedAttendees, settings.attendee, ",")) {
-			$("#Checked-" + settings.attendee).attr("checked",true);
-			$("#attendeeRow-" + settings.attendee).css("background-color","#FFD");
-		}
-	}
-}
-
 function clearSelectedMembers() {
 	SelectedAttendees = '';
 	SelectedMembers = '';
 	SelectedCount = 0;
 	$("#CheckedCount").html("(0)");
+}
+
+function removeSelectedPerson(params) {
+	var settings = $.extend({},params);
+	
+	if(settings.person && settings.person > 0) {
+		SelectedMembers = $.ListDeleteAt(SelectedMembers, $.ListFind(SelectedMembers, settings.person));
+	}
+	
+	if(settings.attendee && settings.attendee > 0) {
+		SelectedAttendees = $.ListDeleteAt(SelectedAttendees, $.ListFind(SelectedAttendees, settings.attendee));
+	}
+	
+	
+	updateSelectedCount(-1);
 }
 
 function resetAttendee(nA,nP,sP) {
@@ -83,7 +88,7 @@ function updateAttendeeFilterCounts() {
 		// DETERMINE IF CURRENT LIST ITEM IS A STATUS ROW
 		if($(this).hasClass('attendee-status')) {
 			var status = this.id.split('status')[1];
-			var countContainer = $(this).find('span');
+			var countContainer = $(this).find('span.attendee-status-count');
 			
 			// PROVIDE STATUS COUNT
 			countContainer.html('(' + eval('status' +  status + 'Count') + ')');
@@ -93,21 +98,23 @@ function updateAttendeeFilterCounts() {
 
 function updatePagesDropdown(nPages) {
 	var pagesContainer = $('.pages');
+	var pageSelector = $('.pageSelector');
 	
-	if(!pagesContainer.children('li').length > 0) {
-		for(var i=1; i<=nPages; i++) {
-			var pageLink = $('<a />').addClass('page').attr('href','/activities/adm_participants?ActivityID=' + nActivity + '&status=' + nStatus + '&page=' + i).text(i);
-			var page = $('<li />').append(pageLink).appendTo(pagesContainer);
-		}
+	pagesContainer.children().remove();
+	
+	for(var i=1; i<=nPages; i++) {
+		var pageLink = $('<a />').addClass('page').attr('href','/activities/adm_participants?ActivityID=' + nActivity + '&status=' + nStatus + '&page=' + i).text(i);
+		var page = $('<li />').append(pageLink).appendTo(pagesContainer);
 	}
 }
 
 function updateRegistrants(nPage, nStatus) {
 	$("#RegistrantsLoading").show();
+	
 	$.ajax({
 		url: '/activity_participants/ahah', 
 		type: 'get',
-		data: { activityId: nActivity, status: nStatus, page: nPage },
+		data: { activityId: nActivity, status: nStatus, selectedAttendees: SelectedAttendees, page: nPage },
 		success: function(data) {
 			$("#RegistrantsContainer").html(data);
 			$("#RegistrantsLoading").hide();
@@ -120,7 +127,13 @@ function updateRegistrants(nPage, nStatus) {
 			$('#status' + nStatus).find('a').prepend('<i class="icon-ok active-status"></i> ');
 			
 			// REPLACE ACTIVE STATUS TITLE
-			$('.attendee-status-title').text($('#status' + nStatus).find('a').text());
+			$('.attendee-status-title').text($('#status' + nStatus).find('a span.attendee-status-name').text());
+			
+			// CHECK IF ALL VIEWABLE ATTENDEES ARE SELECTED
+			if($(".AllAttendees").length == TotalAttendeeCount) {
+				// CHECK THE CHECK ALL BOX
+				$('#CheckAll').attr('checked', true);
+			}
 			
 			// CHECK IF ATTENDEE HAS BEEN MARKED AS SELECTED	
 			$(".AllAttendees").each(function() {
@@ -128,10 +141,16 @@ function updateRegistrants(nPage, nStatus) {
 				var $checkBox = $row.find('.MemberCheckbox');
 				var nPerson = $row.find('.personId').val();
 				var nAttendee = $row.find('.attendeeId').val();
-		
+				
+				// DETERMINE IF CURRENT ROW NEEDS CHECKED
+				if($.ListFind(SelectedAttendees, nAttendee)) {
+					$row.addClass('alert alert-info');
+					$checkBox.attr('checked', true);
+				}
+				
 				$checkBox.click(function() {
 					if($(this).attr("checked")) {
-						$("#attendeeRow-" + nAttendee).css("background-color","#FFD");
+						$("#attendeeRow-" + nAttendee).addClass('alert alert-info');
 						
 						// ADD CURRENT MEMBER TO SELECTEDMEMBERS LIST
 						addSelectedAttendee({
@@ -139,7 +158,7 @@ function updateRegistrants(nPage, nStatus) {
 							attendee:nAttendee
 						});
 					} else {
-						$("#attendeeRow-" + nAttendee).css("background-color","#FFF");
+						$("#attendeeRow-" + nAttendee).removeClass('alert alert-info');
 						
 						// REMOVE CURRENT MEMBER FROM SELECTEDMEMBERS LIST
 						removeSelectedPerson({
@@ -148,10 +167,6 @@ function updateRegistrants(nPage, nStatus) {
 						});
 					}
 				});
-				/*checkmarkMember({
-					person:nPerson,
-					attendee:nAttendee
-				});*/
 			});
 		}
 	});
@@ -159,31 +174,36 @@ function updateRegistrants(nPage, nStatus) {
 
 function updateSelectedCount(nAmount) {
 	SelectedCount = SelectedCount + nAmount;
-	$("#CheckedCount").html("(" + SelectedCount + ")");
+	$("#label-status-selected").text(SelectedCount);
+	$("#statusSelected span.attendee-status-count").text("(" + SelectedCount + ")");
+	
 }
 
-function removeSelectedPerson(params) {
-	var settings = $.extend({},params);
-	
-	if(settings.person && settings.person > 0) {
-		SelectedMembers = $.ListDeleteAt(SelectedMembers, $.ListFind(SelectedMembers, settings.person));
-	}
-	
-	if(settings.attendee && settings.attendee > 0) {
-		SelectedAttendees = $.ListDeleteAt(SelectedAttendees, $.ListFind(SelectedAttendees, settings.attendee));
-	}
-	
-	
-	updateSelectedCount(-1);
+function updateStatusDate(nAttendee,nType) {
+	$.ajax({
+		url: "/AJAX_adm_Activity/getAttendeeDate", 
+		type: 'post',
+		data: { AttendeeId: nAttendee, type: nType },
+		dataType: 'json',
+		success: function(data) {
+			$("#datefill-" + nAttendee).html(data.STATUSMSG);
+			$("#editdatelink-" + nAttendee).show();
+		}
+	});
 }
 
 $(document).ready(function() {
 	var $attendeeRemover = $('#remove-attendees');
+	var $attendeeSelectedViewLink = $('#statusSelected');
 	var $attendeeStatusChanger = $('.change-status');
+	var $attendeeStatusViewChange = $('.view-attendee-statusdate');
+	var $checkAll = $("#CheckAll");
 	var $containerDiv = $('#RegistrantsContainer');
+	var $fakeAttendeeRemover = $('.deleteLink');
 	var $loadingDiv = $('#RegistrantsLoading');
 	var $pager = $('a.page,a.first,a.last,a.next,a.previous');
 	var $printer = $('.print');
+	var $statusDateEditor = $(".EditStatusDate");
 	var $statusFilter = $('.attendees-filter li.attendee-status');
 	
 	MaxRegistrants = $("#MaxRegistrants").val();
@@ -192,29 +212,116 @@ $(document).ready(function() {
 	
 	updateRegistrants(nPageNo, nStatus);
 	
-	$pager.live("click",function() {
-		nPageNo = $.Mid(this.href,$.Find('page=',this.href)+5,$.Len(this.href)-$.Find('page=',this.href)+4);
+	$attendeeStatusViewChange.live('click', function() {
+		var nAttendee = this.id.split('-')[1];
+		var nType = this.id.split('-')[2];
 		
-		var pageNext = (parseInt(nPageNo)+1);
-		var pagePrev = (parseInt(nPageNo)-1);
+		updateStatusDate(nAttendee,nType);
+				
+		// PLACE CHECKMARK BY ACTIVE STATUS
+		$('#view-attendee-statuses-' + nAttendee).find('a .active-status').remove();
+		$(this).prepend('<i class="icon-ok active-status"></i> ');
+	});
+	
+	// VIEW SELECTED FILTER LINK
+	$attendeeSelectedViewLink.live('click', function() {
+		var statusName = this.id.split('status')[1];
+		
+		if(SelectedAttendees.length > 0) {
+			updateRegistrants(1, statusName);
+		} else {
+			addError('You must select participants first.',500,6000,4000);
+		}
+	});
+	
+	$checkAll.live('click', function() {
+		var $allAttendees = $(".AllAttendees");
+		var selectAll = $(this).attr("checked");
+		
+		$allAttendees.each(function() {
+			var $row = $(this);
+			var $checkBox = $row.find('.MemberCheckbox');
+			var nPerson = $row.find('.personId').val();
+			var nAttendee = $row.find('.attendeeId').val();
+			var rowChecked = $checkBox.attr("checked");
+			
+			if(selectAll && !rowChecked) {
+				// ADD CURRENT MEMBER TO SELECTEDMEMBERS LIST
+				addSelectedAttendee({
+					person: nPerson,
+					attendee: nAttendee
+				});
+				
+				$checkBox.attr("checked",true);
+				
+				// CHANGE BACKGROUND COLOR OF PERSONROW
+				$row.addClass('alert alert-info');
+			} else if(!selectAll && rowChecked) {
+				if(rowChecked) {
+					// ADD CURRENT MEMBER TO SELECTEDMEMBERS LIST
+					removeSelectedPerson({
+						person: nPerson,
+						attendee: nAttendee
+					});
+					
+					$checkBox.attr("checked",false);
+					
+					// CHANGE BACKGROUND COLOR OF PERSONROW
+					$row.removeClass('alert alert-info');
+				}
+			}
+		});
+	});
+	
+	$fakeAttendeeRemover.live("click",function() {
+		var $row = $(this).parents('.personRow');
+		var attendee = $row.find('.attendeeId').val();
+		
+		$.ajax({
+			type:'post',
+			dataType:'json',
+			url:'/ajax_adm_activity/removeAttendeeByID',
+			data:{
+				'attendeeId':attendee
+			},
+			async:false,
+			success:function(data) {
+				if(data.STATUS) {
+					$row.remove();
+				}
+			}
+		});
+	});
+	
+	$pager.live("click",function() {
+		var $btnNext = $('.pager-simple a.next');
+		var $btnPrev = $('.pager-simple a.previous');
+		var $pageSelector = $('.pageSelector');
+		var pageURL = '/activities/adm_participants?ActivityID=13660&status=0&page=';
+		var pageNext;
+		var pagePrev;
+								 
+		nPageNo = $.Mid(this.href,$.Find('page=',this.href)+5,$.Len(this.href)-$.Find('page=',this.href)+4);
+		pageNext = (parseInt(nPageNo)+1);
+		pagePrev = (parseInt(nPageNo)-1);
 		
 		// UPDATE SIMPLE PAGER PAGE DROPDOWN
-		$('.pageSelector').text(nPageNo);
+		$pageSelector.text(nPageNo);
 		
 		// UPDATE COOKIE FOR CURRENT ACTIVITY PAGE NUMBER
 		$.post("/UserSettings/setAttendeePage", { ActivityID: nActivity, Page: nPageNo });
 		
 		// UPDATE SIMPLE PAGER LINKS
 		if(pageNext <= totalPages) {
-			$('.pager-simple a.next').attr('href','/activities/adm_participants?ActivityID=13660&status=0&page=' + pageNext).removeClass('disabled');
+			$btnNext.attr('href',pageURL + pageNext).removeClass('disabled');
 		} else {
-			$('.pager-simple a.next').addClass('disabled');
+			$btnNext.addClass('disabled');
 		}
 		
 		if(pagePrev >= 1) {
-			$('.pager-simple a.previous').attr('href','/activities/adm_participants?ActivityID=13660&status=0&page=' + pagePrev).removeClass('disabled');
+			$btnPrev.attr('href',pageURL + pagePrev).removeClass('disabled');
 		} else {
-			$('.pager-simple a.previous').addClass('disabled');
+			$btnPrev.addClass('disabled');
 		}
 		
 		// RELOAD DATA
@@ -222,39 +329,95 @@ $(document).ready(function() {
 		return false;
 	});
 	
+	$statusDateEditor.live("click", this, function() {
+		var CurrID = this.id;
+		var nAttendee = this.id.split('-')[1];
+		var dtCurrDate = $.Trim($("#current-attendee-date-" + nAttendee).val());
+		var sDate = dtCurrDate.split(' ')[0];
+		var $cancelEdit = $('#CancelDate-' + nAttendee);
+		var $editStatusDate = $("#edit-attendee-date-" + nAttendee);
+		var $saveEdit = $('#SaveDate-' + nAttendee);
+		var $viewStatusDate = $("#view-attendee-date-" + nAttendee);
+		
+		// SET CURRENT STATUS DATE VALUE IN HTML ELEMENTS
+		$("#CurrStatusDate-" + nAttendee).val(dtCurrDate);
+		$("#EditDateField-" + nAttendee).val(dtCurrDate);
+		
+		$cancelEdit.click(function() {
+			$editStatusDate.hide();
+			$viewStatusDate.show();
+			
+			$cancelEdit.unbind();
+			$editStatusDate.unbind();
+			$saveEdit.unbind();
+			$viewStatusDate.unbind();
+		});
+		
+		$saveEdit.click(function() {
+			var nType = $("#current-attendee-status-" + nAttendee).val();
+			var dtDate = $("#EditDateField-" + nAttendee).val();
+			
+			// DETERMINE THERE IS A STATUS AND A DATE
+			if(nType != "" && dtDate.length > 0) {
+				$.ajax({
+					url: "/AJAX_adm_Activity/saveAttendeeDate", 
+					type: 'post',
+					data: { attendeeId: nAttendee, DateValue: dtDate, Type: nType, returnFormat: "plain" },
+					dataType: 'json',
+					success: function(data) {
+						if(data.STATUS) {
+							addMessage(data.STATUSMSG,250,6000,4000);
+							updateRegistrants(nPageNo, nStatus);
+						} else {
+							addError(data.STATUSMSG,250,6000,4000);
+							
+							$editStatusDate.hide();
+							$viewStatusDate.show();
+						}
+					}
+				});
+			} else {
+				addError("You must provide full date and time.",250,6000,4000);
+				$("#EditDateField-" + nAttendee).focus();
+				$("#EditDateField-" + nAttendee).val(dtStatusMask);
+			}					 
+		});
+		
+		// SHOW EDIT FORM
+		$viewStatusDate.hide();
+		$editStatusDate.show();
+	});
+	
 	$statusFilter.live("click",function() {
 		var statusLink = $(this).find('a');
 		var countContainer = $(this).find('span');
 		
 		// UPDATE THE CURRENT STATUS
-		nStatus = this.id.split('status')[1];
+		nStatus = parseInt(this.id.split('status')[1]);
 		
 		$containerDiv.html("");
 		$loadingDiv.show();
 		
 		// UPDATE THE ATTENDEE STATUS COOKIE FOR CURRENT ACTIVITY
-		$.post("/UserSettings/setAttendeeStatus", { ActivityID: nActivity, status: nStatus },
-			function(data) {
+		$.ajax({
+			url: "/UserSettings/setAttendeeStatus", 
+			type: 'post',
+			data: { ActivityID: nActivity, status: nStatus },
+			success: function(data) {
 				updateRegistrants(1, nStatus);
+			}
 		});
+		
 		return false;
 	});
 	
 	$attendeeStatusChanger.live('click', function() {
-		var result = "";
 		var updateToStatus = this.id.split('-')[2];
-		var nActivityRole = $("#ActivityRoles").val();
-		
-		$.blockUI({ message: "<h1>Updating information...</h1>" });
-		
-		$(".MemberCheckbox:checked").each(function () {
-			result = $.ListAppend(result,$(this).val(),",");
-		});
 		
 		$.ajax({
 			url: "/AJAX_adm_Activity/updateAttendeeStatuses",
 			type: 'post',
-			data: { AttendeeList: result, ActivityID: nActivity, StatusID: updateToStatus },
+			data: { AttendeeList: SelectedAttendees, ActivityID: nActivity, StatusID: updateToStatus },
 			dataType: 'json',
 			success: function(data)  {
 				if(data.STATUS) {
@@ -266,8 +429,6 @@ $(document).ready(function() {
 				} else {
 					addError(data.STATUSMSG,500,6000,4000);
 				}
-				
-				$.unblockUI();
 			}
 		});
 	});
