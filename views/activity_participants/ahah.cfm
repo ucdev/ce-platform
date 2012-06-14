@@ -51,12 +51,15 @@ function updateStatusDate(nAttendee, nType) {
 			url: "/AJAX_adm_Activity/getAttendeeDate", 
 			type: 'post',
 			data: { AttendeeId: nAttendee, type: nType, returnFormat: "plain" },
+			dataType: 'json',
 			success: function(data) {
-				var cleanData = $.Trim(data);
-				
-				$('#current-attendee-status-' + nAttendee).val(nType);
-				$("#datefill-" + nAttendee).html(cleanData);
-				$("#editdatelink-" + nAttendee).show();
+				if(data.STATUS) {
+					$('#current-attendee-status-' + nAttendee).val(nType);
+					$("#datefill-" + nAttendee).html(data.STATUSMSG);
+					$("#editdatelink-" + nAttendee).show();
+				} else {
+					addError(data.STATUSMSG, 500, 6000, 2500);
+				}
 			}
 		});
 	} else {
@@ -68,7 +71,11 @@ function updateStatusDate(nAttendee, nType) {
 $(document).ready(function() {
 	// UPDATED SELECTED MEMBER COUNT
 	$("#CheckedCount").html("(" + SelectedCount + ")");
-	$(".EditDateField").mask("99/99/9999 99:99aa");
+	$(".EditDateField").mask("99/99/9999");
+	
+	<cfoutput>
+	updatePagesDropdown(#attendeePager.getTotalNumberOfPages()#);
+	</cfoutput>
 	
 	// UPDATE ATEENDEE COUNTS
 	$.each($('.attendees-filter').children(), function(i, item) {
@@ -200,19 +207,14 @@ $(document).ready(function() {
 	$(".EditStatusDate").bind("click", this, function() {
 		var CurrID = this.id;
 		var nAttendee = this.id.split('-')[1];
-		var dtCurrDate = $.Trim($("#datefill-" + nAttendee).html());
+		var dtCurrDate = $.Trim($("#current-attendee-date-" + nAttendee).val());
 		var sDate = dtCurrDate.split(' ')[0];
-		var sTime = dtCurrDate.split(' ')[1];
-		var nHour = sTime.split(':')[0];
 		
-		if($.Len(nHour) == 1) {
-			nHour = "0" + nHour;
-			dtCurrDate = sDate + " " + nHour + ":" + $.ListGetAt(sTime, 2, ":");
-		}
-		
+		// SET CURRENT STATUS DATE VALUE IN HTML ELEMENTS
 		$("#CurrStatusDate-" + nAttendee).val(dtCurrDate);
 		$("#EditDateField-" + nAttendee).val(dtCurrDate);
 		
+		// SHOW EDIT FORM
 		$("#view-attendee-date-" + nAttendee).hide();
 		$("#edit-attendee-date-" + nAttendee).show();
 	});
@@ -241,16 +243,14 @@ $(document).ready(function() {
 				url: "/AJAX_adm_Activity/saveAttendeeDate", 
 				type: 'post',
 				data: { attendeeId: nAttendee, DateValue: dtDate, Type: nType, returnFormat: "plain" },
+				dataType: 'json',
 				success: function(data) {
-					var cleanData = $.Trim(data);
-					var Status = $.ListGetAt(cleanData, 1, "|");
-					var statusMsg = $.ListGetAt(cleanData, 2, "|");
-					
-					if(Status == "Success") {
-						addMessage(statusMsg,250,6000,4000);
+					if(data.STATUS) {
+						addMessage(data.STATUSMSG,250,6000,4000);
 						updateRegistrants(nId, nStatus);
 					} else {
-						addError(statusMsg,250,6000,4000);
+						addError(data.STATUSMSG,250,6000,4000);
+						
 						$("#editdatecontainer-" + nAttendee).hide();
 						$("#datefill-" + nAttendee).text(dtDate).show();
 						$("#editdatelink-" + nAttendee).show();
@@ -262,27 +262,6 @@ $(document).ready(function() {
 			$("#EditDateField-" + nAttendee).focus();
 			$("#EditDateField-" + nAttendee).val(dtStatusMask);
 		}
-	});
-	
-	$('.toggle-md').click(function() {
-		var attendeeId = this.id.split('-')[3];
-		var mdStatus = (this.id.split('-')[2]).toUpperCase();
-		
-		$.ajax({
-			url: "/AJAX_adm_Activity/updateMDStatus",
-			type: 'post',
-			data: { attendeeId: attendeeId, MDNonMD: mdStatus },
-			dataType: 'json',
-			success: function(data) {
-				if(data.STATUS) {
-					if(mdStatus == 'Y') {
-						$('#md-status-' + attendeeId).text('Yes');
-					} else {
-						$('#md-status-' + attendeeId).text('No');
-					}
-				}
-			}
-		});
 	});
 });
 </script>
@@ -325,7 +304,6 @@ $(document).ready(function() {
                 <th class="span1"></th>
                 <th class="span3">Name</th>
                 <th class="span7">Status</th>
-                <th>Is MD?</th>
                 <th>&nbsp;</th>
             </tr>
         </thead>
@@ -337,7 +315,8 @@ $(document).ready(function() {
 						<input type="hidden" class="attendeeId" value="#attendeeId#" />
 						<input type="hidden" class="personId" value="#qAttendees.personId#" />
 					</td>
-                    <td><img src="/images/no-photo/person_i.png"></td>
+                    <td><img src="/images/no-photo/person_i.png">
+						<cfif qAttendees.mdFlag EQ "Y"><div><span class="badge badge-important" style="position: relative; left: 30px; top: -55px;">MD</span></div></cfif></td>
                     <td valign="top" nowrap="nowrap">
 						<cfif personId GT 0>
 							<a href="/people/edit/#PersonID#" class="PersonLink" id="PERSON|#PersonID#|#LastName#, #FirstName#">#qAttendees.FullName#</a>
@@ -347,22 +326,38 @@ $(document).ready(function() {
 						<div class="attendee-status" id="attendee-status-#qAttendees.attendeeId#">#StatusName#</div>
 					</td>
                     <td class="StatusDate" id="StatusDate-#qAttendees.AttendeeId#">
+                    	<cfswitch expression="#qAttendees.StatusID#">
+                            <cfcase value="1">
+                            	<cfset currStatusDate = DateFormat(qAttendees.CompleteDate, "MM/DD/YYYY")>
+                            </cfcase>
+                            <cfcase value="2">
+                            	<cfset currStatusDate = DateFormat(qAttendees.RegisterDate, "MM/DD/YYYY")>
+                            </cfcase>
+                            <cfcase value="3">
+                            	<cfset currStatusDate = DateFormat(qAttendees.RegisterDate, "MM/DD/YYYY")>
+                            </cfcase>
+                            <cfcase value="4">
+                            	<cfset currStatusDate = DateFormat(qAttendees.TermDate, "MM/DD/YYYY")>
+                            </cfcase>
+                        </cfswitch>
                     	<input type="hidden" name="currentAttendeeStatus" id="current-attendee-status-#qAttendees.attendeeid#" value="#qAttendees.statusId#" />
+                    	<input type="hidden" name="currentAttendeeDate" id="current-attendee-date-#qAttendees.attendeeid#" value="#currStatusDate#" />
+                        <!--- VIEW ATTENDEE DATE --->
                     	<span id="view-attendee-date-#qAttendees.AttendeeId#">
                             <div class="btn-group">
                                 <button class="btn span5" data-toggle="dropdown" id="datefill-#qAttendees.attendeeid#">
                                 	<cfswitch expression="#qAttendees.StatusID#">
                                         <cfcase value="1">
-                                            #DateFormat(qAttendees.CompleteDate, "MM/DD/YYYY") & " " & TimeFormat(qAttendees.CompleteDate, "h:mmTT")#
+                                            COMPLETE (#currStatusDate#)
                                         </cfcase>
                                         <cfcase value="2">
-                                            #DateFormat(qAttendees.RegisterDate, "MM/DD/YYYY") & " " & TimeFormat(qAttendees.RegisterDate, "h:mmTT")#
+                                            IN PROGRESS
                                         </cfcase>
                                         <cfcase value="3">
-                                            #DateFormat(qAttendees.RegisterDate, "MM/DD/YYYY") & " " & TimeFormat(qAttendees.RegisterDate, "h:mmTT")#
+                                            REGISTERED (#currStatusDate#)
                                         </cfcase>
                                         <cfcase value="4">
-                                            #DateFormat(qAttendees.TermDate, "MM/DD/YYYY") & " " & TimeFormat(qAttendees.TermDate, "h:mmTT")#
+                                            TERMINATED (#currStatusDate#)
                                         </cfcase>
                                     </cfswitch>
                                 </button>
@@ -373,34 +368,28 @@ $(document).ready(function() {
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu pull-right">
-	                                <cfif qAttendees.CompleteDate NEQ "" OR qAttendees.StatusID EQ 1>
-                                	<li><a href="javascript://" class="AttendeeStatusID" id="AttendeeStatus-#qAttendees.attendeeid#-1">Complete (#dateFormat(qAttendees.completeDate, "MM/DD/YYYY") & " " & timeFormat(qAttendees.completeDate, "hh:mmTT")#)</a></li>
+	                                <cfif qAttendees.CompleteDate NEQ "" AND qAttendees.StatusID EQ 1>
+                                	<li><a href="javascript://" class="AttendeeStatusID" id="AttendeeStatus-#qAttendees.attendeeid#-1">COMPLETE (#dateFormat(qAttendees.completeDate, "MM/DD/YYYY")#)</a></li>
                                     </cfif>
                                     <cfif qAttendees.StatusID EQ 2>
-                                    <li><a href="javascript://" class="AttendeeStatusID" id="AttendeeStatus-#qAttendees.attendeeid#-2">In Progress</a></li>
+                                    <li><a href="javascript://" class="AttendeeStatusID" id="AttendeeStatus-#qAttendees.attendeeid#-2">IN PROGRESS</a></li>
                                     </cfif>
                                     <cfif qAttendees.RegisterDate NEQ "" OR qAttendees.StatusID EQ 3>
-                                    <li><a href="javascript://" class="AttendeeStatusID" id="AttendeeStatus-#qAttendees.attendeeid#-3">Registered (#dateFormat(qAttendees.registerDate, "MM/DD/YYYY") & " " & timeFormat(qAttendees.registerDate, "hh:mmTT")#)</a></li>
+                                    <li><a href="javascript://" class="AttendeeStatusID" id="AttendeeStatus-#qAttendees.attendeeid#-3">REGISTERED (#dateFormat(qAttendees.registerDate, "MM/DD/YYYY")#)</a></li>
                                     </cfif>
                                     <cfif qAttendees.TermDate NEQ "" OR qAttendees.StatusID EQ 4>
-                                    <li><a href="javascript://" class="AttendeeStatusID" id="AttendeeStatus-#qAttendees.attendeeid#-4">Terminated (#dateFormat(qAttendees.termDate, "MM/DD/YYYY") & " " & timeFormat(qAttendees.termDate, "hh:mmTT")#)</a></li>
+                                    <li><a href="javascript://" class="AttendeeStatusID" id="AttendeeStatus-#qAttendees.attendeeid#-4">TERMINATED (#dateFormat(qAttendees.termDate, "MM/DD/YYYY")#)</a></li>
                                     </cfif>
                                 </ul>
                             </div>
-                        </span>                       
-                        <span id="edit-attendee-date-#qAttendees.AttendeeId#" style="display:none;position:relative;"><input type="text" class="EditDateField span4" id="EditDateField-#qAttendees.attendeeId#" /><i class="SaveDateEdit icon-ok" id="SaveDate-#qAttendees.attendeeId#"></i><i class="CancelDateEdit icon-remove" id="CancelDate-#qAttendees.attendeeId#"></i></span>
-                    </td>
-					<td valign="top">
-                    	<div class="btn-group">
-                            <button class="btn md-status" data-toggle="dropdown" id="md-status-#qAttendees.attendeeId#"><cfif qAttendees.mdFlag EQ "Y">Yes<cfelse>No</cfif></button>
-                            <button class="btn dropdown-toggle span1" data-toggle="dropdown">
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                            	<li><a href="javascript://" class="toggle-md" id="toggle-md-y-#qAttendees.attendeeId#">Yes</a></li>
-                            	<li><a href="javascript://" class="toggle-md" id="toggle-md-n-#qAttendees.attendeeId#">No</a></li>
-                            </ul>
-                        </div>
+                        </span>
+                        
+                        <!--- EDIT ATTENDEE DATE FORM --->
+                        <span id="edit-attendee-date-#qAttendees.AttendeeId#" style="display:none;position:relative;">
+                        	<input type="text" class="EditDateField span3" id="EditDateField-#qAttendees.attendeeId#" />
+                            <i class="SaveDateEdit icon-ok" id="SaveDate-#qAttendees.attendeeId#"></i>
+                            <i class="CancelDateEdit icon-remove" id="CancelDate-#qAttendees.attendeeId#"></i>
+                        </span>
                     </td>
                     <td valign="top" class="user-actions-outer">
 						<cfif personID GT 0>

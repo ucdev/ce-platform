@@ -38,16 +38,11 @@
 		<input type="text"  class="input-medium" placeholder="filter people" />	
 	</form>
 	<div class="btn-group pull-right">
-		<a class="btn"><i class="icon-chevron-left"></i></a>
-		<a class="btn dropdown-toggle" data-toggle="dropdown">1 <span class="caret"></span></a>
-		<ul class="dropdown-menu">
-			<li><a href="##" class="page">1</a></li>
-			<li><a href="##" class="page">2</a></li>
-			<li><a href="##" class="page">3</a></li>
-			<li><a href="##" class="page">4</a></li>
-			<li><a href="##" class="page">5</a></li>
+		<a class="btn prev" href="1"><i class="icon-chevron-left"></i></a>
+		<a class="btn dropdown-toggle" data-toggle="dropdown"><span id="pageSelector">#params.page#</span> <span class="caret"></span></a>
+		<ul class="dropdown-menu pages">
 		</ul>
-		<a class="btn"><i class="icon-chevron-right"></i></a>
+		<a class="btn next"><i class="icon-chevron-right"></i></a>
 	</div>
 </div>
 </cfoutput>
@@ -64,6 +59,17 @@
 	var TotalAttendeeCount;
 	var TotalAttendeeList;
 	</cfoutput>
+	
+	function updatePagesDropdown(nPages) {
+		var pagesContainer = $('.pages');
+		
+		if(!pagesContainer.children('li').length > 0) {
+			for(var i=1; i<=nPages; i++) {
+				var pageLink = $('<a />').addClass('page').attr('href','/activities/adm_participants?ActivityID=' + nActivity + '&status=' + nStatus + '&page=' + i).text(i);
+				var page = $('<li />').append(pageLink).appendTo(pagesContainer);
+			}
+		}
+	}
 	
 	function updateRegistrants(nPage, nStatus) {
 		$("#RegistrantsLoading").show();
@@ -205,6 +211,7 @@
 		
 		$("a.page,a.first,a.last,a.next,a.previous").live("click",function() {
 			nPageNo = $.Mid(this.href,$.Find('page=',this.href)+5,$.Len(this.href)-$.Find('page=',this.href)+4);
+			$('#pageSelector').text(nPageNo);
 			$.post("/UserSettings/setAttendeePage", { ActivityID: nActivity, Page: nPageNo });
 			updateRegistrants(nPageNo, nStatus);
 			return false;
