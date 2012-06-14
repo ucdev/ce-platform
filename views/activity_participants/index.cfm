@@ -2,8 +2,8 @@
 <!--<h4>Participants</h4>-->
 <div class="btn-toolbar clearfix">
 	<div class="btn-group pull-left">
-		<a href="##" class="btn"><i class="icon-plus-sign"></i> Add</a>
-		<a href="##" class="btn"><i class="icon-hdd"></i> Import</a>
+		<a href="##" class="btn"><i class="icon-plus-sign"></i></a>
+		<a href="##" class="btn"><i class="icon-hdd"></i></a>
 	</div>
 	<div class="btn-group pull-left">
 		<a class="btn dropdown-toggle" data-toggle="dropdown" href="##">
@@ -34,7 +34,9 @@
 			<li class="attendee-status" id="status3"><a href="##">Registered <span></span></a></li>
 		</ul>
 	</div>
-	
+	<form class="form-inline pull-left mll" action="">
+		<input type="text"  class="input-medium" placeholder="filter people" />	
+	</form>
 	<div class="btn-group pull-right">
 		<a class="btn"><i class="icon-chevron-left"></i></a>
 		<a class="btn dropdown-toggle" data-toggle="dropdown">1 <span class="caret"></span></a>

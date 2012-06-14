@@ -1,11 +1,11 @@
-<h1>Showing certificate</h1>
-
+<!---<h1>Showing certificate</h1>--->
+<!---
 <cfoutput>#includePartial("showFlash")#</cfoutput>
-
+--->
 <cfoutput>
 
 			
-				
+				<!---
 					<p><span>Id</span> <br />
 						#certificate.id#</p>
 				
@@ -17,9 +17,9 @@
 				
 					<p><span>Cert Config File</span> <br />
 						#certificate.certConfigFile#</p>
-				
+				--->
 			
-		
+		<!---
 
-#linkTo(text="Return to the listing", action="index")# | #linkTo(text="Edit this certificate", action="edit", key=certificate.id)#
+#linkTo(text="Return to the listing", action="index")# | #linkTo(text="Edit this certificate", action="edit", key=certificate.id)#--->
 </cfoutput>
