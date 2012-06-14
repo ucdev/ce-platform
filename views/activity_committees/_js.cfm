@@ -1,0 +1,1 @@
+#javaScriptIncludeTag(bundle="ccpd.activity.participants")#

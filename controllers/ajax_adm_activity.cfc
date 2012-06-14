@@ -38,15 +38,7 @@
         </cfloop>
     </cffunction>
     
-	<cffunction name="updateAttendeeDates" >
-    	<!---<cfquery name="qGetAttendees" datasource="#application.settings.dsn#">
-        	SELECT AttendeeId, CheckIn
-            FROM ce_attendee
-            WHERE RegisterDate IS NULL
-        </cfquery>--->
-        <!---
-        <cfdump var="#qGetAttendees#"><cfabort>--->
-		
+	<cffunction name="updateAttendeeDates">
 		<cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
 		
 		<cfcontent type="text/javascript" />

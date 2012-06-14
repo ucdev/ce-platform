@@ -31,6 +31,7 @@
 <cfset generateBundle(type="js", bundle="ccpd-legacy", compress=true, 
 	sources="jquery-ui-1.6rc6.min,
 			jquery.autocomplete.pack,
+			jquery.blockUI,
 			jquery.cfjs.packed,
 			jquery.maskedinput-1.1.3.pack,
 			jquery.tokenInput,

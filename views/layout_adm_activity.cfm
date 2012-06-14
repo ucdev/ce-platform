@@ -1,5 +1,6 @@
-#javaScriptIncludeTag(bundle="ccpd.activity")#
 <cfoutput>
+#includePartial(partial="/activities/js")#
+#includePartial(partial="js")#
 <div class="profile editor row">
 	<div class="projectBar span4">
 		#includePartial(partial="/activities/sublayout/edit_photo")#
