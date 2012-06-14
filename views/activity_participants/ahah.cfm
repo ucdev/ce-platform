@@ -2,71 +2,15 @@
 
 <script type="text/javascript">
 <cfoutput>
-var nId = #params.Page#;
-var dtStatusMask = '#DateFormat(Now(), "MM/DD/YYYY")# #TimeFormat(Now(), "hh:mmTT")#';
-var status4Count = #failCount#;
-var status2Count = #progressCount#;
-var status3Count = #registeredCount#;
-var status1Count = #completeCount#;
-var status0Count = #qAttendees.recordCount#;
+status4Count = #failCount#;
+status2Count = #progressCount#;
+status3Count = #registeredCount#;
+status1Count = #completeCount#;
+status0Count = #qAttendees.recordCount#;
 TotalAttendeeCount = #qAttendees.RecordCount#;
 TotalAttendeeList = '#TotalAttendeeList#';
+totalPages = #attendeePager.getTotalNumberOfPages()#;
 </cfoutput>
-function cancelButton() {
-	$("#CreditsDialog").dialog("close");
-}
-
-function checkmarkMember(params) {
-	/*if(settings.person && settings.person > 0) {
-		if($.ListFind(SelectedMembers, settings.person, ",")) {
-			$("#Checked" + settings.person).attr("checked",true);
-			$("#PersonRow" + settings.person).css("background-color","#FFD");
-		}
-	}*/
-	
-	if(settings.attendee && settings.attendee > 0) {
-		if($.ListFind(SelectedAttendees, settings.attendee, ",")) {
-			$("#Checked-" + settings.attendee).attr("checked",true);
-			$("#attendeeRow-" + settings.attendee).css("background-color","#FFD");
-		}
-	}
-}
-
-function resetAttendee(nA,nP,sP) {
-	$.getJSON("/AJAX_adm_Activity/resetAttendee", { attendeeId: nP, ActivityID: nA, PaymentFlag: sP, returnFormat: "plain" },
-		function(data) {
-			if(data.STATUS) {				
-				addMessage(data.STATUSMSG,250,6000,4000);
-				updateStats();
-				updateRegistrants();
-			} else {
-				addError(data.STATUSMSG,250,6000,4000);
-			}
-		});
-}
-
-function updateStatusDate(nAttendee, nType) {
-	if(nType != "") {
-		$.ajax({
-			url: "/AJAX_adm_Activity/getAttendeeDate", 
-			type: 'post',
-			data: { AttendeeId: nAttendee, type: nType, returnFormat: "plain" },
-			dataType: 'json',
-			success: function(data) {
-				if(data.STATUS) {
-					$('#current-attendee-status-' + nAttendee).val(nType);
-					$("#datefill-" + nAttendee).html(data.STATUSMSG);
-					$("#editdatelink-" + nAttendee).show();
-				} else {
-					addError(data.STATUSMSG, 500, 6000, 2500);
-				}
-			}
-		});
-	} else {
-		$("#datefill-" + $Attendee).html("");
-		$("#editdatelink-" + $Attendee).hide();
-	}
-}
 
 $(document).ready(function() {
 	// UPDATED SELECTED MEMBER COUNT
@@ -297,13 +241,13 @@ $(document).ready(function() {
 
 <cfif isDefined("qAttendees") AND qAttendees.RecordCount GT 0>
 	<cfif AttendeePager.getTotalNumberOfPages() GT 1><div style="clear:both;"><cfoutput>#AttendeePager.getRenderedHTML()#</cfoutput></div></cfif>
-    <table border="0" width="620" cellpadding="0" cellspacing="0" class="table table-striped">
+    <table border="0" width="620" cellpadding="0" cellspacing="0" class="table">
         <thead>
             <tr>
                 <th class="span1"><input type="checkbox" name="CheckAll" id="CheckAll" /></th>
-                <th class="span1"></th>
-                <th class="span3">Name</th>
-                <th class="span7">Status</th>
+                <th class="span2"></th>
+                <th class="span4">Name</th>
+                <th class="span8">Status</th>
                 <th>&nbsp;</th>
             </tr>
         </thead>
