@@ -14,8 +14,14 @@
 		</a>
 		<ul class="dropdown-menu">
 			<li><a href="##" id="remove-attendees">Remove</a></li>
-			<li><a href="##">Change Statuses</a></li>
 			<li class="divider"></li>
+			<li class="nav-header">CHANGE STATUSES</li>
+			<li><a href="##" class="change-status" id="change-status-1">Complete</a></li>
+			<li><a href="##" class="change-status" id="change-status-4">Failed</a></li>
+			<li><a href="##" class="change-status" id="change-status-2">In Progress</a></li>
+			<li><a href="##" class="change-status" id="change-status-3">Registered</a></li>
+			<li class="divider"></li>
+			<li class="nav-header">CERTIFICATES</li>
 			<li><a href="##" id="print-cme" class="print">CME Certificates</a></li>
 			<li><a href="##" id="print-cne" class="print">Nurse Certificates</a></li>
 		</ul>
@@ -39,18 +45,25 @@
 	
 	<div class="btn-group pull-right pager-simple">
 		<a href="/activities/adm_participants?ActivityID=13660&status=0&page=#params.page-1#" class="btn previous prev-page<cfif params.page EQ 1> disabled</cfif>"><i class="icon-chevron-left"></i></a>
-		<a class="btn dropdown-toggle" data-toggle="dropdown"><span id="pageSelector">#params.page#</span> <span class="caret"></span></a>
+		<a class="btn dropdown-toggle" data-toggle="dropdown"><span class="pageSelector">#params.page#</span> <span class="caret"></span></a>
 		<ul class="dropdown-menu pages">
 		</ul>
 		<a href="/activities/adm_participants?ActivityID=13660&status=0&page=#params.page+1#" class="btn next next-page"><i class="icon-chevron-right"></i></a>
 	</div>
 </div>
-</cfoutput>
-
-<script>
-</script>
 <div>
 	<div id="RegistrantsContainer"></div>
 	<div id="RegistrantsLoading" class="Loading"><img src="/admin/_images/ajax-loader.gif" />
 	<div>Please Wait</div></div>
 </div>
+<div class="btn-toolbar clearfix">
+    <div class="btn-group pull-right pager-simple">
+            <a href="/activities/adm_participants?ActivityID=13660&status=0&page=#params.page-1#" class="btn previous prev-page<cfif params.page EQ 1> disabled</cfif>"><i class="icon-chevron-left"></i></a>
+            <a class="btn dropdown-toggle" data-toggle="dropdown"><span class="pageSelector">#params.page#</span> <span class="caret"></span></a>
+            <ul class="dropdown-menu pages">
+            </ul>
+            <a href="/activities/adm_participants?ActivityID=13660&status=0&page=#params.page+1#" class="btn next next-page"><i class="icon-chevron-right"></i></a>
+        </div>
+	</div>
+</div>
+</cfoutput>

@@ -312,7 +312,7 @@
 								ToActivityID=Arguments.ActivityID)>
 					
 					<!--- UPDATE STATS --->
-					<cfset createObject("component", "admin._com.scripts.statFixer").run(activityId=arguments.activityId,mode='manual')>
+					<cfset createObject("component", "lib.scripts.statFixer").run(activityId=arguments.activityId,mode='manual')>
 					
 					<!--- UPDATE ATTENDEE --->
 					<cfset Application.Com.AttendeeDAO.Save(AttendeeBean)>
@@ -464,7 +464,7 @@
             <cfset AddCount++>
         </cfloop>
 		
-		<cfset createObject("component", "admin._com.scripts.statFixer").run(activityId=arguments.activityId,mode='manual')>
+		<cfset createObject("component", "lib.scripts.statFixer").run(activityId=arguments.activityId,mode='manual')>
             
 		<!--- ACTIVITY ACTION UPDATER --->
         <cfif AddCount EQ 1>
@@ -1227,7 +1227,7 @@
 		<cfreturn status />
 	</cffunction>
 
-	<cffunction name="updateStatuses" access="Public" output="true" returntype="struct">
+	<cffunction name="updateStatuses" access="Public" returntype="struct">
 		<cfargument name="AttendeeList" required="true" type="string">
 		<cfargument name="ActivityID" required="true" type="string">
 		<cfargument name="StatusID" required="true" type="string">
@@ -1313,7 +1313,7 @@
 					<cfset PersonBean = Application.Com.PersonDAO.read(PersonBean)>
             	</cfloop>
                 
-				<cfset createObject("component", "admin._com.scripts.statFixer").run(activityId=arguments.activityId,mode='manual')>
+				<cfset createObject("component", "lib.scripts.statFixer").run(activityId=arguments.activityId,mode='manual')>
                 
                 <cfset OutputVar = "">
                 <cfswitch expression="#Arguments.StatusID#">

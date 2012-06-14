@@ -21,17 +21,7 @@ $(document).ready(function() {
 	updatePagesDropdown(#attendeePager.getTotalNumberOfPages()#);
 	</cfoutput>
 	
-	// UPDATE ATEENDEE COUNTS
-	$.each($('.attendees-filter').children(), function(i, item) {
-		// DETERMINE IF CURRENT LIST ITEM IS A STATUS ROW
-		if($(this).hasClass('attendee-status')) {
-			var status = this.id.split('status')[1];
-			var countContainer = $(this).find('span');
-			
-			// PROVIDE STATUS COUNT
-			countContainer.html('(' + eval('status' +  status + 'Count') + ')');
-		}
-	});
+	updateAttendeeFilterCounts();
 		
 	/* CHECK/UNCHECK ALL CHECKBOXES */
 	$("#CheckAll").click(function() {
@@ -240,7 +230,6 @@ $(document).ready(function() {
 </style>
 
 <cfif isDefined("qAttendees") AND qAttendees.RecordCount GT 0>
-	<cfif AttendeePager.getTotalNumberOfPages() GT 1><div style="clear:both;"><cfoutput>#AttendeePager.getRenderedHTML()#</cfoutput></div></cfif>
     <table border="0" width="620" cellpadding="0" cellspacing="0" class="table">
         <thead>
             <tr>
@@ -355,7 +344,6 @@ $(document).ready(function() {
             </cfoutput>
         </tbody>
     </table>
-	<cfif AttendeePager.getTotalNumberOfPages() GT 1><div><cfoutput>#AttendeePager.getRenderedHTML()#</cfoutput></div></cfif>
 <cfelse>
 	<cfif params.status GT 0>
         <div style="background-image:url(/admin/_images/Sample_Attendees.jpg); font-size: 18px; text-align: center; height: 250px; width: 620px;">

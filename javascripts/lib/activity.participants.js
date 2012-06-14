@@ -64,7 +64,7 @@ function saveAttendee() {
 			statusMsg = $.ListGetAt(cleanData,2,"|");
 			
 			if(status == 'Success') {
-				updateRegistrants(nId, nStatus);
+				updateRegistrants(nPageNo, nStatus);
 				addMessage(statusMsg,250,6000,4000);
 				$.unblockUI();
 			} else if(status == 'Fail') {
@@ -76,6 +76,19 @@ function saveAttendee() {
 	
 	$("#AttendeeID").val('');
 	$("#AttendeeName").val('Click To Add Attendee');
+}
+
+function updateAttendeeFilterCounts() {
+	$.each($('.attendees-filter').children(), function(i, item) {
+		// DETERMINE IF CURRENT LIST ITEM IS A STATUS ROW
+		if($(this).hasClass('attendee-status')) {
+			var status = this.id.split('status')[1];
+			var countContainer = $(this).find('span');
+			
+			// PROVIDE STATUS COUNT
+			countContainer.html('(' + eval('status' +  status + 'Count') + ')');
+		}
+	});
 }
 
 function updatePagesDropdown(nPages) {
@@ -166,7 +179,7 @@ function removeSelectedPerson(params) {
 
 $(document).ready(function() {
 	var $attendeeRemover = $('#remove-attendees');
-	var $attendeeStatusChanger = $('#btnStatusSubmit');
+	var $attendeeStatusChanger = $('.change-status');
 	var $containerDiv = $('#RegistrantsContainer');
 	var $loadingDiv = $('#RegistrantsLoading');
 	var $pager = $('a.page,a.first,a.last,a.next,a.previous');
@@ -186,32 +199,22 @@ $(document).ready(function() {
 		var pagePrev = (parseInt(nPageNo)-1);
 		
 		// UPDATE SIMPLE PAGER PAGE DROPDOWN
-		$('#pageSelector').text(nPageNo);
+		$('.pageSelector').text(nPageNo);
 		
 		// UPDATE COOKIE FOR CURRENT ACTIVITY PAGE NUMBER
 		$.post("/UserSettings/setAttendeePage", { ActivityID: nActivity, Page: nPageNo });
 		
 		// UPDATE SIMPLE PAGER LINKS
 		if(pageNext <= totalPages) {
-			$('.pager-simple a.next').attr({
-										'href':'/activities/adm_participants?ActivityID=13660&status=0&page=' + pageNext,
-										'disabled':false
-										  });
+			$('.pager-simple a.next').attr('href','/activities/adm_participants?ActivityID=13660&status=0&page=' + pageNext).removeClass('disabled');
 		} else {
-			$('.pager-simple a.next').attr({
-										'disabled': true
-										  });
+			$('.pager-simple a.next').addClass('disabled');
 		}
 		
 		if(pagePrev >= 1) {
-			$('.pager-simple a.previous').attr({
-										'href':'/activities/adm_participants?ActivityID=13660&status=0&page=' + pagePrev,
-										'disabled':false
-										  });
+			$('.pager-simple a.previous').attr('href','/activities/adm_participants?ActivityID=13660&status=0&page=' + pagePrev).removeClass('disabled');
 		} else {
-			$('.pager-simple a.previous').attr({
-										'disabled': true
-										  });
+			$('.pager-simple a.previous').addClass('disabled');
 		}
 		
 		// RELOAD DATA
@@ -219,7 +222,7 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	/*$statusFilter.live("click",function() {
+	$statusFilter.live("click",function() {
 		var statusLink = $(this).find('a');
 		var countContainer = $(this).find('span');
 		
@@ -235,38 +238,36 @@ $(document).ready(function() {
 				updateRegistrants(1, nStatus);
 		});
 		return false;
-	});*/
+	});
 	
-	$attendeeStatusChanger.live("click",function() {
+	$attendeeStatusChanger.live('click', function() {
+		var result = "";
+		var updateToStatus = this.id.split('-')[2];
+		var nActivityRole = $("#ActivityRoles").val();
+		
 		$.blockUI({ message: "<h1>Updating information...</h1>" });
 		
-		var result = "";
-		var cleanData = "";
-		
-		var nActivityRole = $("#ActivityRoles").val();
 		$(".MemberCheckbox:checked").each(function () {
 			result = $.ListAppend(result,$(this).val(),",");
 		});
 		
 		$.ajax({
-			url: "/_com/AJAX_adm_Activity/updateAttendeeStatuses",
+			url: "/AJAX_adm_Activity/updateAttendeeStatuses",
 			type: 'post',
-			data: { AttendeeList: result, ActivityID: nActivity, StatusID:$("#StatusID").val(), returnFormat: "plain" },
+			data: { AttendeeList: result, ActivityID: nActivity, StatusID: updateToStatus },
 			dataType: 'json',
-			success: function(returnData)  {
-				status = returnData.STATUS;
-				statusMsg = returnData.STATUSMSG;
-				
-				if(status) {
-					addMessage(statusMsg,500,6000,4000);
-					$.unblockUI();
+			success: function(data)  {
+				if(data.STATUS) {
+					addMessage(data.STATUSMSG,500,6000,4000);
 					updateStats();
 					clearSelectedMembers();
-					updateRegistrants(nId, nStatus);
+					
+					updateRegistrants(nPageNo, nStatus);
 				} else {
-					addError(statusMsg,500,6000,4000);
-					$.unblockUI();
+					addError(data.STATUSMSG,500,6000,4000);
 				}
+				
+				$.unblockUI();
 			}
 		});
 	});
@@ -312,7 +313,7 @@ $(document).ready(function() {
 		};
 		
 		if(NoChange == 2) {
-			addError("Please adjust the value you want to update and try again.",250,6000,4000);
+			addError('Please adjust the value you want to update and try again.',250,6000,4000);
 			NoChange = 0;
 		} else if(NoChange > 0) {
 			NoChange = 0;
@@ -322,7 +323,7 @@ $(document).ready(function() {
 	/* REGISTRANTS AND ATTENDEE TEXTBOX END */
 	
 	/* REMOVE ONLY CHECKED */
-	$attendeeRemover.bind("click",function() {
+	$attendeeRemover.live('click', function() {
 		var cleanData = "";
 		
 		// DETERMINE IF THERE ARE ATTENDEES SELECTED
@@ -345,36 +346,12 @@ $(document).ready(function() {
 						
 						updateStats();
 						$.unblockUI();
-						updateRegistrants(nId, nStatus);
+						updateRegistrants(nPageNo, nStatus);
 					}
 				});
 			}
 		} else {
-			// DETERMINE IF THE USER MEANS TO REMOVE ALL ATTENDEES
-			if(confirm("WARNING!\nYou are about to remove ALL attendees from this Activity!\nAre you sure you wish to continue?")) {
-				$.blockUI({ message: '<h1>Removing All Attendees...</h1>'});
-				$.ajax({
-					url: '/AJAX_adm_Activity/removeAllAttendees',
-					type: 'post',
-					data: { ActivityID: nActivity, returnFormat: 'plain' },
-					dataType: 'json',
-					success: function(data) {
-						if(data.STATUS) {
-							addMessage(data.STATUSMSG,250,6000,4000);
-							updateStats();
-							$.unblockUI();
-							clearSelectedMembers();
-							updateRegistrants(nId, nStatus);
-						} else {
-							addError(data.STATUSMSG,250,6000,4000);
-							updateStats();
-							$.unblockUI();
-							updateRegistrants();
-						}
-					}
-					
-				});
-			}
+			addError('You must select attendees to remove.',500,3000,2500);
 		}
 	});
 	
