@@ -6,13 +6,15 @@
 		#includePartial(partial="/activities/sublayout/edit_photo")#
 		#includePartial(partial="/activities/sublayout/edit_tabs")#
 	</div>
-	<div class="contentBar span16">
+	<div class="contentBar <cfif params.showInfoBar>span16<cfelse>span20</cfif>">
 		<h3>#includeContent("pageTitle")#</h3>
 		
 		#includeContent()#
 	</div>
+	<cfif params.showInfoBar>
 	<div class="infoBar span4">
 		#includePartial(partial="/activities/sublayout/edit_infobar")#
 	</div>
+	</cfif>
 </div>
 </cfoutput>
