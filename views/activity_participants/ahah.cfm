@@ -17,10 +17,7 @@ $(document).ready(function() {
 	$("#CheckedCount").html("(" + SelectedCount + ")");
 	$(".EditDateField").mask("99/99/9999");
 	
-	<cfoutput>
-	updatePagesDropdown(#attendeePager.getTotalNumberOfPages()#);
-	</cfoutput>
-	
+	updatePagesDropdown();
 	updateAttendeeFilterCounts();
 	
 	$("#PersonDetail").dialog({ 
@@ -51,12 +48,6 @@ $(document).ready(function() {
 
 		$("#PersonDetail").dialog("open");
 		return false;
-	});
-	
-	$(".EditDateField").keydown(function() {
-		if($.Len($(this).val()) > 0) {
-			dtStatusMask = $(this).val();
-		}
 	});
 	
 	
@@ -136,7 +127,7 @@ $(document).ready(function() {
                             	<cfset currStatusDate = DateFormat(qAttendees.TermDate, "MM/DD/YYYY")>
                             </cfcase>
                         </cfswitch>
-                    	<input type="hidden" name="currentAttendeeStatus" id="current-attendee-status-#qAttendees.attendeeid#" value="#qAttendees.statusId#" />
+                    	<input type="hidden" name="currentAttendeeStatus" id="current-attendee-status-#qAttendees.attendeeid#" value="<cfif qAttendees.statusId EQ 2>3<cfelse>#qAttendees.statusId#</cfif>" /><!--- THE 3 IS TO POINT IT TO THE REGISTEREDDATE FOR THE ATTENDEE ON EDIT IF THE REGISTRANT IS IN PROGRESS --->
                     	<input type="hidden" name="currentAttendeeDate" id="current-attendee-date-#qAttendees.attendeeid#" value="#currStatusDate#" />
                         <!--- VIEW ATTENDEE DATE --->
                     	<span id="view-attendee-date-#qAttendees.AttendeeId#">
@@ -168,7 +159,7 @@ $(document).ready(function() {
                                 	<li><a href="javascript://" class="view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-1"><cfif qAttendees.StatusID EQ 1><i class="icon-ok active-status"></i> </cfif>COMPLETE (#dateFormat(qAttendees.completeDate, "MM/DD/YYYY")#)</a></li>
                                     </cfif>
                                     <cfif qAttendees.StatusID EQ 2>
-                                    <li><a href="javascript://" class="view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-2"><i class="icon-ok active-status"></i> IN PROGRESS</a></li>
+                                    <li><a href="javascript://" class="view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-3"><i class="icon-ok active-status"></i> IN PROGRESS</a></li><!--- THE 3 ON THE ID IS TO POINT IT TO THE REGISTEREDDATE FOR THE ATTENDEE ON EDIT --->
                                     </cfif>
                                     <cfif qAttendees.RegisterDate NEQ "" OR qAttendees.StatusID EQ 3>
                                     <li><a href="javascript://" class="view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-3"><cfif qAttendees.StatusID EQ 3><i class="icon-ok active-status"></i> </cfif>REGISTERED (#dateFormat(qAttendees.registerDate, "MM/DD/YYYY")#)</a></li>

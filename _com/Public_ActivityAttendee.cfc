@@ -40,7 +40,6 @@
                        	</cfif>
                 </cfquery>
             	<cfset status.setStatusMsg("COMPLETE (" & DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY") & ")")>
-                <cfset status.setData({ 'date': DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY") }) />
             </cfcase>
         	<cfcase value="2">
             	<cfquery name="AttendeeInfo" datasource="#Application.Settings.DSN#">
@@ -54,7 +53,6 @@
                        	</cfif>
                 </cfquery>
             	<cfset status.setStatusMsg("IN PROGRESS")>
-                <cfset status.setData({ 'date': DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY") }) />
             </cfcase>
         	<cfcase value="3">
             	<cfquery name="AttendeeInfo" datasource="#Application.Settings.DSN#">
@@ -68,7 +66,6 @@
                        	</cfif>
                 </cfquery>
             	<cfset status.setStatusMsg("REGISTERED (" & DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY") & ")")>
-                <cfset status.setData({ 'date': DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY") }) />
             </cfcase>
         	<cfcase value="4">
             	<cfquery name="AttendeeInfo" datasource="#Application.Settings.DSN#">
@@ -82,11 +79,16 @@
                        	</cfif>
                 </cfquery>
             	<cfset status.setStatusMsg("FAILED (" & DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY") & ")")>
-                <cfset status.setData({ 'date': DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY") }) />
             </cfcase>
         </cfswitch>
         
         <cfif isQuery(AttendeeInfo)>
+			<cfset status.setData({ 
+                                'date': DateFormat(AttendeeInfo.RequestedDate, "MM/DD/YYYY"),
+                                'month': numberFormat(month(AttendeeInfo.RequestedDate), "00"),
+                                'day': numberFormat(day(AttendeeInfo.RequestedDate), "00"),
+                                'year':year(AttendeeInfo.RequestedDate)
+                                }) />
         	<cfset status.setStatus(true)>
         </cfif>
         

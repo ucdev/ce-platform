@@ -27,6 +27,19 @@
 		</ul>
 	</div>
 	<span class="label">SELECTED: <span id="label-status-selected">0</span></span>
+
+	<form class="form-inline pull-left mll" action="">
+		<input type="text"  class="input-medium" placeholder="filter people" />	
+	</form>
+
+	<div class="btn-group pull-right pager-simple">
+		<a href="/activities/adm_participants?ActivityID=13660&status=0&page=#params.page-1#" class="btn previous prev-page<cfif params.page EQ 1> disabled</cfif>"><i class="icon-chevron-left"></i></a>
+		<a class="btn dropdown-toggle" data-toggle="dropdown"><span class="pageSelector">#params.page#</span> <span class="caret"></span></a>
+
+		<ul class="dropdown-menu pages">
+		</ul>
+		<a href="/activities/adm_participants?ActivityID=13660&status=0&page=#params.page+1#" class="btn next next-page"><i class="icon-chevron-right"></i></a>
+	</div>
 	<div class="btn-group pull-right">
 		<button class="btn" data-toggle="dropdown">Filter By:</button>
 		<button class="btn attendee-status-title" data-toggle="dropdown">All</button>
@@ -43,19 +56,6 @@
 			<li id="statusSelected"><a href="##"><span class="attendee-status-name">Selected</span> <span class="attendee-status-count">(0)</span></a></li>
 		</ul>
 	</div>
-
-	<form class="form-inline pull-left mll" action="">
-		<input type="text"  class="input-medium" placeholder="filter people" />	
-	</form>
-
-	<div class="btn-group pull-right pager-simple">
-		<a href="/activities/adm_participants?ActivityID=13660&status=0&page=#params.page-1#" class="btn previous prev-page<cfif params.page EQ 1> disabled</cfif>"><i class="icon-chevron-left"></i></a>
-		<a class="btn dropdown-toggle" data-toggle="dropdown"><span class="pageSelector">#params.page#</span> <span class="caret"></span></a>
-
-		<ul class="dropdown-menu pages">
-		</ul>
-		<a href="/activities/adm_participants?ActivityID=13660&status=0&page=#params.page+1#" class="btn next next-page"><i class="icon-chevron-right"></i></a>
-	</div>
 </div>
 <div>
 	<div id="RegistrantsContainer"></div>
@@ -64,7 +64,7 @@
 </div>
 <div class="btn-toolbar clearfix">
     <div class="btn-group pull-right pager-simple">
-            <a href="/activities/adm_participants?ActivityID=13660&status=0&page=#params.page-1#" class="btn previous prev-page<cfif params.page EQ 1> disabled</cfif>"><i class="icon-chevron-left"></i></a>
+            <a href="/activities/adm_participants?ActivityID=13660&status=0&page=#params.page-1#" class="btn previous prev-page"><i class="icon-chevron-left"></i></a>
             <a class="btn dropdown-toggle" data-toggle="dropdown"><span class="pageSelector">#params.page#</span> <span class="caret"></span></a>
             <ul class="dropdown-menu pages">
             </ul>

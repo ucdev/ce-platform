@@ -1,6 +1,5 @@
 <cfoutput>
 <script>
-var dtStatusMask;
 var nPageNo = #params.Page#;
 var nStatus = #params.status#;
 var SelectedMembers = '';
