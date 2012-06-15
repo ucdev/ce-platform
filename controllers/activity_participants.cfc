@@ -10,7 +10,7 @@
 	</cffunction>
     
     <cffunction name="ahah">
-		<cfparam name="params.status" type="numeric" default="0" />
+		<cfparam name="params.status" default="0" />
         <cfparam name="params.page" type="numeric" default="1" />
         
 		<cfset qAttendees = Application.activityAttendee.getAttendees(ActivityID=params.activityID,DeletedFlag="N")>
@@ -50,14 +50,23 @@
 			<cfset attributes.status = getToken(cookie.USER_AttendeeStatus,2,"|")>
 		</cfif>
 		
-		<cfif params.status GT 0>
-			<cfquery name="qTempAttendees" dbtype="query">
-				SELECT *
-				FROM qAttendees
-				WHERE qAttendees.statusId = <cfqueryparam value="#params.status#" cfsqltype="cf_sql_integer" />
-			</cfquery>
-			
-			<cfset qAttendees = qTempAttendees>
+		<cfif len(trim(params.status)) GT 0 AND params.status NEQ 0>
+        	<cfif isNumeric(params.status)>
+                <cfquery name="qTempAttendees" dbtype="query">
+                    SELECT *
+                    FROM qAttendees
+                    WHERE qAttendees.statusId = <cfqueryparam value="#params.status#" cfsqltype="cf_sql_integer" />
+                </cfquery>
+        		<cfset qAttendees = qTempAttendees>
+            <cfelseif params.status EQ 'selected' AND len(trim(params.selectedAttendees)) GT 0>
+                <cfquery name="qTempAttendees" dbtype="query">
+                    SELECT *
+                    FROM qAttendees
+                    WHERE qAttendees.attendeeId IN (#params.selectedAttendees#)
+                </cfquery>
+        		<cfset qAttendees = qTempAttendees>
+            </cfif>
+                
 		</cfif>
         
 		<cfset AttendeePager = CreateObject("component","#Application.Settings.Com#Pagination").init()>

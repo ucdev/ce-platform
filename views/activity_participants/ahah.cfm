@@ -22,88 +22,27 @@ $(document).ready(function() {
 	</cfoutput>
 	
 	updateAttendeeFilterCounts();
-		
-	/* CHECK/UNCHECK ALL CHECKBOXES */
-	$("#CheckAll").click(function() {
-		if($("#CheckAll").attr("checked")) {
-			$(".AllAttendees").each(function() {
-				var $row = $(this);
-				var $checkBox = $row.find('.MemberCheckbox');
-				var nPerson = $row.find('.personId').val();
-				var nAttendee = $row.find('.attendeeId').val();
-				
-				// ADD CURRENT MEMBER TO SELECTEDMEMBERS LIST
-				addSelectedAttendee({
-					person:nPerson,
-					attendee:nAttendee
-				});
-				
-				$checkBox.attr("checked",true);
-				
-				// CHANGE BACKGROUND COLOR OF PERSONROW
-				$row.css("background-color","#FFD");
-			});
-		} else {
-			$(".AllAttendees").each(function() {
-				var $row = $(this);
-				var $checkBox = $row.find('.MemberCheckbox');
-				var nPerson = $row.find('.personId').val();
-				var nAttendee = $row.find('.attendeeId').val();
-				
-				// ADD CURRENT MEMBER TO SELECTEDMEMBERS LIST
-				removeSelectedPerson({
-					person:nPerson,
-					attendee:nAttendee
-				});
-				
-				$checkBox.attr("checked",false);
-				
-				// CHANGE BACKGROUND COLOR OF PERSONROW
-				$row.css("background-color","#FFF");
-			});
-		}
-	}); 
-	
-	$(".deleteLink").one("click",function() {
-		var $row = $(this).parents('.personRow');
-		var attendee = $row.find('.attendeeId').val();
-		
-		$.ajax({
-			type:'post',
-			dataType:'json',
-			url:'/ajax_adm_activity/removeAttendeeByID',
-			data:{
-				'attendeeId':attendee
-			},
-			async:false,
-			success:function(data) {
-				if(data.STATUS) {
-					$row.remove();
-				}
-			}
-		});
-	});
 	
 	$("#PersonDetail").dialog({ 
-			title: "Person Detail",
-			modal: true, 
-			autoOpen: false,
-			height:550,
-			width:855,
-			position:[100,100],
-			resizable: false,
-			dragStop: function(ev,ui) {
-				
-			},
-			open:function() {
-				$("#frameDetail").attr('src',sMyself + 'Person.Detail?PersonID=' + nPersonID + '&Mini=1');
-			},
-			close:function() {
-				
-			},
-			resizeStop:function(ev,ui) {
-			}
-		});
+		title: "Person Detail",
+		modal: true, 
+		autoOpen: false,
+		height:550,
+		width:855,
+		position:[100,100],
+		resizable: false,
+		dragStop: function(ev,ui) {
+			
+		},
+		open:function() {
+			$("#frameDetail").attr('src',sMyself + 'Person.Detail?PersonID=' + nPersonID + '&Mini=1');
+		},
+		close:function() {
+			
+		},
+		resizeStop:function(ev,ui) {
+		}
+	});
 		
 		
 	$(".PersonLink").click(function() {
@@ -114,89 +53,13 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	// EDIT REGISTRATION DATE FIELD
-	$(".EditCheckinLink").bind("click", this, function() {
-		nPersonID = $.Replace(this.id, "Checkin", "");
-		
-		// HIDE ALL EDIT FIELDS
-		$(".CheckinEdit").hide();
-		$(".CheckinOutput").show();
-		
-		// REVEAL CURRENT EDIT FIELD
-		$("#CheckinOutput" + nPersonID).hide();
-		$("#CheckinEdit" + nPersonID).show();
-	});
-	
-	$(".AttendeeStatusID").click(function() {
-		var nAttendee = this.id.split('-')[1];
-		var nType = this.id.split('-')[2];
-		
-		updateStatusDate(nAttendee,nType);
-				
-		// PLACE CHECKMARK BY ACTIVE STATUS
-		$(this).parent().parent().children().find('a .active-status').remove();
-		$(this).prepend('<i class="icon-ok active-status"></i> ');
-	});
-	
-	$(".EditStatusDate").bind("click", this, function() {
-		var CurrID = this.id;
-		var nAttendee = this.id.split('-')[1];
-		var dtCurrDate = $.Trim($("#current-attendee-date-" + nAttendee).val());
-		var sDate = dtCurrDate.split(' ')[0];
-		
-		// SET CURRENT STATUS DATE VALUE IN HTML ELEMENTS
-		$("#CurrStatusDate-" + nAttendee).val(dtCurrDate);
-		$("#EditDateField-" + nAttendee).val(dtCurrDate);
-		
-		// SHOW EDIT FORM
-		$("#view-attendee-date-" + nAttendee).hide();
-		$("#edit-attendee-date-" + nAttendee).show();
-	});
-	
 	$(".EditDateField").keydown(function() {
 		if($.Len($(this).val()) > 0) {
 			dtStatusMask = $(this).val();
 		}
 	});
 	
-	$(".CancelDateEdit").bind("click", this, function() {
-		var nAttendee = this.id.split('-')[1];
-		
-		$("#edit-attendee-date-" + nAttendee).hide();
-		$("#view-attendee-date-" + nAttendee).show();
-	});
 	
-	$(".SaveDateEdit").bind("click", this, function() {
-		var CurrID = this.id;
-		var nAttendee = $.ListGetAt(this.id, 2, "-");
-		var nType = $("#current-attendee-status-" + nAttendee).val();
-		var dtDate = $("#EditDateField-" + nAttendee).val();
-		
-		if(nType != "" && $.Len(dtDate) > 0) {
-			$.ajax({
-				url: "/AJAX_adm_Activity/saveAttendeeDate", 
-				type: 'post',
-				data: { attendeeId: nAttendee, DateValue: dtDate, Type: nType, returnFormat: "plain" },
-				dataType: 'json',
-				success: function(data) {
-					if(data.STATUS) {
-						addMessage(data.STATUSMSG,250,6000,4000);
-						updateRegistrants(nId, nStatus);
-					} else {
-						addError(data.STATUSMSG,250,6000,4000);
-						
-						$("#editdatecontainer-" + nAttendee).hide();
-						$("#datefill-" + nAttendee).text(dtDate).show();
-						$("#editdatelink-" + nAttendee).show();
-					}
-				}
-			});
-		} else {
-			addError("You must provide full date and time.",250,6000,4000);
-			$("#EditDateField-" + nAttendee).focus();
-			$("#EditDateField-" + nAttendee).val(dtStatusMask);
-		}
-	});
 });
 </script>
 
@@ -290,7 +153,7 @@ $(document).ready(function() {
                                             REGISTERED (#currStatusDate#)
                                         </cfcase>
                                         <cfcase value="4">
-                                            TERMINATED (#currStatusDate#)
+                                            FAILED (#currStatusDate#)
                                         </cfcase>
                                     </cfswitch>
                                 </button>
@@ -300,18 +163,18 @@ $(document).ready(function() {
                                 <button class="btn dropdown-toggle span1" data-toggle="dropdown">
                                     <span class="caret"></span>
                                 </button>
-                                <ul class="dropdown-menu pull-right">
+                                <ul class="dropdown-menu pull-right" id="view-attendee-statuses-#qAttendees.attendeeId#">
 	                                <cfif qAttendees.CompleteDate NEQ "" AND qAttendees.StatusID EQ 1>
-                                	<li><a href="javascript://" class="AttendeeStatusID" id="AttendeeStatus-#qAttendees.attendeeid#-1">COMPLETE (#dateFormat(qAttendees.completeDate, "MM/DD/YYYY")#)</a></li>
+                                	<li><a href="javascript://" class="view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-1"><cfif qAttendees.StatusID EQ 1><i class="icon-ok active-status"></i> </cfif>COMPLETE (#dateFormat(qAttendees.completeDate, "MM/DD/YYYY")#)</a></li>
                                     </cfif>
                                     <cfif qAttendees.StatusID EQ 2>
-                                    <li><a href="javascript://" class="AttendeeStatusID" id="AttendeeStatus-#qAttendees.attendeeid#-2">IN PROGRESS</a></li>
+                                    <li><a href="javascript://" class="view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-2"><i class="icon-ok active-status"></i> IN PROGRESS</a></li>
                                     </cfif>
                                     <cfif qAttendees.RegisterDate NEQ "" OR qAttendees.StatusID EQ 3>
-                                    <li><a href="javascript://" class="AttendeeStatusID" id="AttendeeStatus-#qAttendees.attendeeid#-3">REGISTERED (#dateFormat(qAttendees.registerDate, "MM/DD/YYYY")#)</a></li>
+                                    <li><a href="javascript://" class="view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-3"><cfif qAttendees.StatusID EQ 3><i class="icon-ok active-status"></i> </cfif>REGISTERED (#dateFormat(qAttendees.registerDate, "MM/DD/YYYY")#)</a></li>
                                     </cfif>
                                     <cfif qAttendees.TermDate NEQ "" OR qAttendees.StatusID EQ 4>
-                                    <li><a href="javascript://" class="AttendeeStatusID" id="AttendeeStatus-#qAttendees.attendeeid#-4">TERMINATED (#dateFormat(qAttendees.termDate, "MM/DD/YYYY")#)</a></li>
+                                    <li><a href="javascript://" class="view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-4"><cfif qAttendees.StatusID EQ 4><i class="icon-ok active-status"></i> </cfif>FAILED (#dateFormat(qAttendees.termDate, "MM/DD/YYYY")#)</a></li>
                                     </cfif>
                                 </ul>
                             </div>
@@ -325,20 +188,15 @@ $(document).ready(function() {
                         </span>
                     </td>
                     <td valign="top" class="user-actions-outer">
-						<cfif personID GT 0>
-						<!---<ul class="user-actions">
-							<li class="action-menu menu">
-								<button value="Actions" class="btn" id="btnActions-#PersonID#"><i class="icon-cog"></i></button>
-							</li>
-						</ul>--->
+					<cfif personID GT 0>
                         <div class="btn-group user-actions action-menu">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">
                                 <i class="icon-cog"></i><span class="caret"></span>
                             </button>
                         </div>
-						<cfelse>
-							<a href="javascript:;" class="deleteLink">Delete</a>
-						</cfif>
+					<cfelse>
+                        <a href="javascript://" class="deleteLink">Delete</a>
+                    </cfif>
 					</td>
                 </tr>
             </cfoutput>
