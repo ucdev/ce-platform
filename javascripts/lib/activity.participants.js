@@ -296,36 +296,45 @@ $(document).ready(function() {
 	$pager.live("click",function() {
 		var $btnNext = $('.pager-simple a.next');
 		var $btnPrev = $('.pager-simple a.previous');
+		var $elem = $(this);
 		var $pageSelector = $('.pageSelector');
 		var pageURL = '/activities/adm_participants?ActivityID=13660&status=0&page=';
 		var pageNext;
 		var pagePrev;
 								 
-		nPageNo = $.Mid(this.href,$.Find('page=',this.href)+5,$.Len(this.href)-$.Find('page=',this.href)+4);
+		nPageNo = parseInt($.Mid(this.href,$.Find('page=',this.href)+5,$.Len(this.href)-$.Find('page=',this.href)+4));
+		
 		pageNext = (parseInt(nPageNo)+1);
 		pagePrev = (parseInt(nPageNo)-1);
 		
-		// UPDATE SIMPLE PAGER PAGE DROPDOWN
-		$pageSelector.text(nPageNo);
+		if(nPageNo >= 1 && nPageNo <= totalPages) {
+			// UPDATE SIMPLE PAGER LINKS
+			if(pageNext <= totalPages) {
+				$btnNext.attr('href',pageURL + pageNext).removeClass('disabled');
+				passGoCollect$200 = true;
+			} else {
+				$btnNext.attr('href','javascript://');
+				$btnNext.addClass('disabled');
+			}
+			
+			if(pagePrev >= 1) {
+				$btnPrev.attr('href',pageURL + pagePrev).removeClass('disabled');
+				passGoCollect$200 = true;
+			} else {
+				$btnPrev.attr('href','javascript://');
+				$btnPrev.addClass('disabled');
+			}
 		
-		// UPDATE COOKIE FOR CURRENT ACTIVITY PAGE NUMBER
-		$.post("/UserSettings/setAttendeePage", { ActivityID: nActivity, Page: nPageNo });
-		
-		// UPDATE SIMPLE PAGER LINKS
-		if(pageNext <= totalPages) {
-			$btnNext.attr('href',pageURL + pageNext).removeClass('disabled');
-		} else {
-			$btnNext.addClass('disabled');
+			// UPDATE SIMPLE PAGER PAGE DROPDOWN
+			$pageSelector.text(nPageNo);
+			
+			// UPDATE COOKIE FOR CURRENT ACTIVITY PAGE NUMBER
+			$.post("/UserSettings/setAttendeePage", { ActivityID: nActivity, Page: nPageNo });
+			
+			// RELOAD DATA
+			updateRegistrants(nPageNo, nStatus);
 		}
 		
-		if(pagePrev >= 1) {
-			$btnPrev.attr('href',pageURL + pagePrev).removeClass('disabled');
-		} else {
-			$btnPrev.addClass('disabled');
-		}
-		
-		// RELOAD DATA
-		updateRegistrants(nPageNo, nStatus);
 		return false;
 	});
 	

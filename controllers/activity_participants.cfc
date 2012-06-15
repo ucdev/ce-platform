@@ -1,18 +1,4 @@
 <cfcomponent extends="Controller" output="false">
-	
-	<!--- activity_participants/index --->
-	<cffunction name="index">
-		<cfparam name="params.key" type="integer" />
-		<cfparam name="params.status" type="numeric" default="0" />
-        <cfparam name="params.page" type="numeric" default="1" />
-		
-		<cfset $setActivity() />
-		
-		<cfset showInfoBar(false) />
-	</cffunction>
-    
-    <cffunction name="edit">
-    </cffunction>
     
     <cffunction name="ahah">
 		<cfparam name="params.status" default="0" />
@@ -71,7 +57,6 @@
                 </cfquery>
         		<cfset qAttendees = qTempAttendees>
             </cfif>
-                
 		</cfif>
         
 		<cfset AttendeePager = CreateObject("component","#Application.Settings.Com#Pagination").init()>
@@ -90,39 +75,6 @@
         <cfset renderPage(layout=false) />
     </cffunction>
 	
-	<!--- activity_participants/show/key --->
-	<cffunction name="show">
-		
-		<!--- Find the record --->
-    	<cfset activity_participant = model("activity_participant").findByKey(params.key)>
-    	
-    	<!--- Check if the record exists --->
-	    <cfif NOT IsObject(activity_participant)>
-	        <cfset flashInsert(error="activity_participant #params.key# was not found")>
-	        <cfset redirectTo(action="index")>
-	    </cfif>
-			
-	</cffunction>
-	
-	<!--- activity_participants/new --->
-	<cffunction name="new">
-		<cfset activity_participant = model("activity_participant").new()>
-	</cffunction>
-	
-	<!--- activity_participants/edit/key --->
-	<cffunction name="edit">
-	
-		<!--- Find the record --->
-    	<cfset activity_participant = model("activity_participant").findByKey(params.key)>
-    	
-    	<!--- Check if the record exists --->
-	    <cfif NOT IsObject(activity_participant)>
-	        <cfset flashInsert(error="activity_participant #params.key# was not found")>
-			<cfset redirectTo(action="index")>
-	    </cfif>
-		
-	</cffunction>
-	
 	<!--- activity_participants/create --->
 	<cffunction name="create">
 		<cfset activity_participant = model("activity_participant").new(params.activity_participant)>
@@ -135,21 +87,6 @@
 		<cfelse>
 			<cfset flashInsert(error="There was an error creating the activity_participant.")>
 			<cfset renderPage(action="new")>
-		</cfif>
-	</cffunction>
-	
-	<!--- activity_participants/update --->
-	<cffunction name="update">
-		<cfset activity_participant = model("activity_participant").findByKey(params.key)>
-		
-		<!--- Verify that the activity_participant updates successfully --->
-		<cfif activity_participant.update(params.activity_participant)>
-			<cfset flashInsert(success="The activity_participant was updated successfully.")>	
-            <cfset redirectTo(action="index")>
-		<!--- Otherwise --->
-		<cfelse>
-			<cfset flashInsert(error="There was an error updating the activity_participant.")>
-			<cfset renderPage(action="edit")>
 		</cfif>
 	</cffunction>
 	
@@ -168,4 +105,58 @@
 		</cfif>
 	</cffunction>
 	
+	<!--- activity_participants/edit/key --->
+	<cffunction name="edit">
+		<!--- Find the record --->
+    	<cfset activity_participant = model("activity_participant").findByKey(params.key)>
+    	
+    	<!--- Check if the record exists --->
+	    <cfif NOT IsObject(activity_participant)>
+	        <cfset flashInsert(error="activity_participant #params.key# was not found")>
+			<cfset redirectTo(action="index")>
+	    </cfif>
+	</cffunction>
+	
+	<!--- activity_participants/index --->
+	<cffunction name="index">
+		<cfparam name="params.key" type="integer" />
+		<cfparam name="params.status" type="numeric" default="0" />
+        <cfparam name="params.page" type="numeric" default="1" />
+		
+		<cfset $setActivity() />
+		
+		<cfset showInfoBar(false) />
+	</cffunction>
+	
+	<!--- activity_participants/new --->
+	<cffunction name="new">
+		<cfset activity_participant = model("activity_participant").new()>
+	</cffunction>
+	
+	<!--- activity_participants/show/key --->
+	<cffunction name="show">
+		<!--- Find the record --->
+    	<cfset activity_participant = model("activity_participant").findByKey(params.key)>
+    	
+    	<!--- Check if the record exists --->
+	    <cfif NOT IsObject(activity_participant)>
+	        <cfset flashInsert(error="activity_participant #params.key# was not found")>
+	        <cfset redirectTo(action="index")>
+	    </cfif>
+	</cffunction>
+	
+	<!--- activity_participants/update --->
+	<cffunction name="update">
+		<cfset activity_participant = model("activity_participant").findByKey(params.key)>
+		
+		<!--- Verify that the activity_participant updates successfully --->
+		<cfif activity_participant.update(params.activity_participant)>
+			<cfset flashInsert(success="The activity_participant was updated successfully.")>	
+            <cfset redirectTo(action="index")>
+		<!--- Otherwise --->
+		<cfelse>
+			<cfset flashInsert(error="There was an error updating the activity_participant.")>
+			<cfset renderPage(action="edit")>
+		</cfif>
+	</cffunction>
 </cfcomponent>

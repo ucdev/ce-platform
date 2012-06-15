@@ -6,8 +6,8 @@ status4Count = #failCount#;
 status2Count = #progressCount#;
 status3Count = #registeredCount#;
 status1Count = #completeCount#;
-status0Count = #qAttendees.recordCount#;
-TotalAttendeeCount = #qAttendees.RecordCount#;
+status0Count = #totalCount#;
+TotalAttendeeCount = #totalCount#;
 TotalAttendeeList = '#TotalAttendeeList#';
 totalPages = #attendeePager.getTotalNumberOfPages()#;
 </cfoutput>
