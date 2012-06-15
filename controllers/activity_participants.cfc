@@ -7,6 +7,8 @@
         <cfparam name="params.page" type="numeric" default="1" />
 		
 		<cfset $setActivity() />
+		
+		<cfset showInfoBar(false) />
 	</cffunction>
     
     <cffunction name="ahah">

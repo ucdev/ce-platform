@@ -18,6 +18,7 @@
 	
 	<cffunction name="autoLayout">
 		<cfparam name="params.controller" default="" />
+		<cfparam name="params.showInfoBar" default="true" />
 		
 		<cfif params.controller CONTAINS "activity_" AND listFindNoCase("edit,index,new,create,update",params.action,',')>
 			<cfset subLayout('adm_activity') />
@@ -26,6 +27,12 @@
 		<cfelseif params.controller EQ "activities" AND listFindNoCase("edit",params.action)>
 			<cfset subLayout("adm_activity") />
 		</cfif>
+	</cffunction>
+	
+	<cffunction name="showInfoBar">
+		<cfargument name="infoBar" type="boolean" required="no" default="true" />
+		
+		<cfset params.showInfoBar = arguments.infobar />
 	</cffunction>
 	
 	<cffunction name="subLayout">

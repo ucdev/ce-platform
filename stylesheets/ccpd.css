@@ -123,8 +123,14 @@
   border-left: 1px solid #DDDDDD;
   margin-left: 0;
   min-height: 600px;
-  padding-left: 17px;
-  width: 622px;
+  padding-left: 9px;
+}
+.profile > .contentBar .btn-toolbar {
+  margin-bottom: 2.5px;
+  margin-top: 6.5px;
+}
+.profile > .contentBar .btn-toolbar form {
+  margin: 0;
 }
 .profile > .contentBar > .contentHeader > .pageTitle {
   font-size: 16px;
