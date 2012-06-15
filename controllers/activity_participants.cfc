@@ -9,6 +9,9 @@
 		<cfset $setActivity() />
 	</cffunction>
     
+    <cffunction name="edit">
+    </cffunction>
+    
     <cffunction name="ahah">
 		<cfparam name="params.status" default="0" />
         <cfparam name="params.page" type="numeric" default="1" />
