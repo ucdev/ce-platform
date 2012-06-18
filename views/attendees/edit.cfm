@@ -1,52 +1,125 @@
 <cfoutput>
-<h1>Editing Attendee</h1>
 #includePartial("showFlash")#
 #errorMessagesFor("activity_participant")#
-#startFormTag(action="update", key=params.key, params="activityId=" & params.activityId)#
-    #hiddenField(objectName='activity_participant', property='id', label='Attendee ID')#
-    #hiddenField(objectName='activity_participant', property='ActivityID', label='Activity ID')#
-    #hiddenField(objectName='activity_participant', property='PersonID', label='Person ID')#
-    <div class="row">
-        #textField(objectName='activity_participant', property='firstName', label='First Name', class='span5')#
-        #textField(objectName='activity_participant', property='middleName', label='Middle Name', class='span5')#
-        #textField(objectName='activity_participant', property='lastName', label='Last Name', class='span5')#
-        #textField(objectName='activity_participant', property='certName', label='Certificate Name', class='span5')#
-        #textField(objectName='activity_participant', property='email', label='Email', class='span5')#
-    </div>
-    <div class="row">
-        #select(objectName='activity_participant', property='statusId',label='Status', options=statuses)#
-        #select(objectName='activity_participant', property='MDflag', label='Is MD?', options={ 'Y': 'Yes', 'N': 'No' })#
-        #select(objectName='activity_participant', property='TermsFlag', label='Accepted Terms & Conditions?', options={ 'Y': 'Yes', 'N': 'No' })#
-        #select(objectName='activity_participant', property='PaymentFlag', label='has Paid?', options={ 'Y': 'Yes', 'N': 'No' })#
-        #textField(objectName='activity_participant', property='PayAmount', label='Amount Paid')#
-        #textField(objectName='activity_participant', property='PayOrderNo', label='Pay Order ##')#
-        <label for="activity_participant-PaymentDate">
-            Payment Date
-            <input type="text" name="activity_participant[PaymentDate]" id="activity_participant-PaymentDate" value="#dateFormat(activity_participant.PaymentDate, 'MM/DD/YYYY')#" />
-        </label>
-    	#checkBox(objectName='activity_participant', property='emailSentFlag', label='Certificate Email Sent?')#
-    </div>
-    <div class="row">
-        <label for="activity_participant-RegisterDate">
-            Register Date
-            <input type="text" name="activity_participant[RegisterDate]" id="activity_participant-RegisterDate" value="#dateFormat(activity_participant.RegisterDate, 'MM/DD/YYYY')#" />
-        </label>
-        <label for="activity_participant-CompleteDate">
-            Complete Date
-            <input type="text" name="activity_participant[CompleteDate]" id="activity_participant-CompleteDate" value="#dateFormat(activity_participant.CompleteDate, 'MM/DD/YYYY')#" />
-        </label>
-        <label for="activity_participant-TermDate">
-            Failed Date
-            <input type="text" name="activity_participant[TermDate]" id="activity_participant-TermDate" value="#dateFormat(activity_participant.TermDate, 'MM/DD/YYYY')#" />
-        </label>
-    </div>
-    <div class="row">
-       <p> Entry Method: #activity_participant.entryMethod#</p>
-        <p>Created #dateFormat(activity_participant.Created, 'mm/dd/yyyy')# by #activity_participant.CreatedBy#</p>
+#startFormTag(action="update", key=params.key, params="activityId=" & params.activityId, id="EditForm", class="form-horizontal form-ccpd")#
+	<cfinclude template="/lib/saveinfo.cfm" />
+    <fieldset>
+        #hiddenField(objectName='activity_participant', property='id', label='Attendee ID')#
+        #hiddenField(objectName='activity_participant', property='ActivityID', label='Activity ID')#
+        #hiddenField(objectName='activity_participant', property='PersonID', label='Person ID')#
+        <input type="hidden" value="" name="ChangedFields" id="ChangedFields" />
+        <input type="hidden" value="" name="ChangedValues" id="ChangedValues" />
+        <div class="control-group">
+            <label for="activity_participant-firstName" class="control-label">First Name</label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="text" name="activity_participant[firstName]" id="activity_participant-firstName" class="span5" value="#activity_participant.firstName#" />
+                </div>
+            </div>
+            <label for="activity_participant-middleName" class="control-label">Middle Name</label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="text" name="activity_participant[middleName]" id="activity_participant-middleName" class="span5" value="#activity_participant.middleName#" />
+                </div>
+            </div>
+            <label for="activity_participant-lastName" class="control-label">Last Name</label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="text" name="activity_participant[lastName]" id="activity_participant-lastName" class="span5" value="#activity_participant.lastName#" />
+                </div>
+            </div>
+            <label for="activity_participant-certName" class="control-label">Certificate Name</label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="text" name="activity_participant[certName]" id="activity_participant-certName" class="span5" value="#activity_participant.certName#" />
+                </div>
+            </div>
+            <label for="activity_participant-email" class="control-label">Email</label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="text" name="activity_participant[email]" id="activity_participant-email" class="span5" value="#activity_participant.email#" />
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="activity_participant-TermsFlag" class="control-label">Status</label>
+            <div class="controls">
+                <div class="input-append">
+                    <select name="sessiontype" id="SessionType">
+                    	<cfloop query="statuses">
+                        <option value="#statuses.id#"<cfif activity_participant.statusId EQ statuses.id> selected="selected"</cfif>>#statuses.name#</option>
+                        </cfloop>
+                    </select>
+                </div>
+            </div>
+            <label for="activity_participant-TermsFlag" class="control-label">Accepted Terms?</label>
+            <div class="controls">
+                <div class="input-append">
+                    <button class="btn<cfif activity_participant.TermsFlag EQ "Y"> active</cfif>" type="button">Yes</button><button class="btn<cfif activity_participant.TermsFlag EQ "N"> active</cfif>" type="button">No</button>
+                </div>
+            </div>
+            <label for="activity_participant-MDflag" class="control-label">Is MD?</label>
+            <div class="controls">
+                <div class="input-append">
+                    <button class="btn<cfif activity_participant.MDflag EQ "Y"> active</cfif>" type="button">Yes</button><button class="btn<cfif activity_participant.MDflag EQ "N"> active</cfif>" type="button">No</button>
+                </div>
+            </div>
+            <label for="activity_participant-PaymentFlag" class="control-label">Has Paid?</label>
+            <div class="controls">
+                <div class="input-append">
+                    <button class="btn<cfif activity_participant.paymentFlag EQ "Y"> active</cfif>" type="button">Yes</button><button class="btn<cfif activity_participant.paymentFlag EQ "N"> active</cfif>" type="button">No</button>
+                </div>
+            </div>
+            <label for="activity_participant-PayAmount" class="control-label">Amount Paid</label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="text" name="activity_participant[PayAmount]" id="activity_participant-PayAmount" value="#activity_participant.PayAmount#" class="span2" />
+                </div>
+            </div>
+            <label for="activity_participant-PayOrderNo" class="control-label">Pay Order ##</label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="text" name="activity_participant[PayOrderNo]" id="activity_participant-PayOrderNo" value="#activity_participant.PayOrderNo#" class="span2" />
+                </div>
+            </div>
+            <label for="activity_participant-PaymentDate" class="control-label">Payment Date</label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="text" name="activity_participant[PaymentDate]" id="activity_participant-PaymentDate" value="#dateFormat(activity_participant.PaymentDate, 'MM/DD/YYYY')#" class="span2" /><button class="btn" type="button"><i class="icon-calendar"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="activity_participant-emailSentFlag" class="control-label">Cert. Email Sent?</label>
+            <div class="controls">
+                <div class="input-append">
+                    <button class="btn<cfif activity_participant.emailSentFlag EQ 1> active</cfif>" type="button">Yes</button><button class="btn<cfif activity_participant.emailSentFlag EQ 0> active</cfif>" type="button">No</button>
+                </div>
+            </div>
+            <label for="activity_participant-RegisterDate" class="control-label">Registered Date</label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="text" name="activity_participant[RegisterDate]" id="activity_participant-RegisterDate" value="#dateFormat(activity_participant.RegisterDate, 'MM/DD/YYYY')#" class="span2" /><button class="btn" type="button"><i class="icon-calendar"></i></button>
+                </div>
+            </div>
+            <label for="activity_participant-CompleteDate" class="control-label">Completed Date</label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="text" name="activity_participant[CompleteDate]" id="activity_participant-CompleteDate" value="#dateFormat(activity_participant.CompleteDate, 'MM/DD/YYYY')#" class="span2" /><button class="btn" type="button"><i class="icon-calendar"></i></button>
+                </div>
+            </div>
+            <label for="activity_participant-TermDate" class="control-label">Failed Date</label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="text" name="activity_participant[TermDate]" id="activity_participant-TermDate" value="#dateFormat(activity_participant.TermDate, 'MM/DD/YYYY')#" class="span2" /><button class="btn" type="button"><i class="icon-calendar"></i></button>
+                </div>
+            </div>
+        </div>
+       <!---<p> Entry Method: #activity_participant.entryMethod#</p>--->
+        <p>Created By #activity_participant.CreatedBy# (#DateFormat(activity_participant.Created,"mm/dd/yyyy")# #TimeFormat(activity_participant.Created,"hh:mmTT")#)</p>
+        <cfif len(trim(activity_participant.updatedBy)) GT 0>
         <p>Updated #dateFormat(activity_participant.Updated, 'mm/dd/yyyy')# by #activity_participant.UpdatedBy#</p>
-        <p>Deleted #dateFormat(activity_participant.Deleted, 'mm/dd/yyyy')#</p>
-    	#select(objectName='activity_participant', property='DeletedFlag', label='Deleted?', options={ 'Y': 'Yes', 'N': 'No' })#
-    </div>
-	#submitTag()#
+        </cfif>
+    </fieldset>
 #endFormTag()#
 </cfoutput>
