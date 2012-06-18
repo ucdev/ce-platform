@@ -12,6 +12,7 @@
 			#includeContent()#
 		</div>
 		<div class="infoBar span4">
+			#includeContent("otherOptions")#
 			#includePartial(partial="/activities/sublayout/edit_infobar")#
 		</div>
 	</div>

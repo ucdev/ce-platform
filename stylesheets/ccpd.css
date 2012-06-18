@@ -27,6 +27,9 @@
 }
 .profile {
   position: relative;
+  -webkit-box-shadow: 1px 0 #d9d9d9;
+  -moz-box-shadow: 1px 0 #d9d9d9;
+  box-shadow: 1px 0 #d9d9d9;
 }
 .profile .nav-header {
   color: #999999;
@@ -147,6 +150,17 @@
 }
 .profile > .contentBar h1 {
   font-size: 16px;
+}
+.profile > .infoBar > .infoBar_section > .title {
+  margin-bottom: 8px;
+  padding: 3px 6px;
+  background-color: #F2F2F2;
+  border-bottom: 1px solid #D9D9D9;
+  border-top: 1px solid #E5E5E5;
+}
+.profile > .infoBar > .infoBar_section > .title h4 {
+  color: #333333;
+  font-size: 11px;
 }
 .profile .toggle-infobar {
   position: absolute;
