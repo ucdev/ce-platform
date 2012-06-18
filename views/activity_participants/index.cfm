@@ -7,8 +7,9 @@
 		<a href="##" class="btn"><i class="icon-plus-sign"></i></a>
 		<a href="##" class="btn"><i class="icon-hdd"></i></a>
 	</div>
-	<div class="btn-group pull-left">
-		<a class="btn dropdown-toggle" data-toggle="dropdown" href="##">
+	<div class="btn-group pull-left js-partic-actions">
+		<a class="btn dropdown-toggle disabled" data-toggle="dropdown" href="##">SELECTED: <span id="label-status-selected">0</span></a>
+		<a class="btn dropdown-toggle disabled" data-toggle="dropdown" href="##">
 		Actions
 		<span class="caret"></span>
 		</a>
@@ -26,8 +27,7 @@
 			<li><a href="##" id="print-cne" class="print">Nurse Certificates</a></li>
 		</ul>
 	</div>
-	<span class="label">SELECTED: <span id="label-status-selected">0</span></span>
-
+	
 	<form class="form-inline pull-left mll" action="">
 		<input type="text"  class="input-medium" placeholder="filter people" />	
 	</form>
@@ -69,7 +69,6 @@
             <ul class="dropdown-menu pages">
             </ul>
             <a href="/activities/adm_participants?ActivityID=13660&status=0&page=#params.page+1#" class="btn next next-page"><i class="icon-chevron-right"></i></a>
-        </div>
 	</div>
 </div>
 </cfoutput>

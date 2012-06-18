@@ -112,7 +112,7 @@ function updatePagesDropdown() {
 	// UPDATE CURRENT PAGE NUMBER
 	$('.pageSelector').text(nPageNo);
 	
-	console.log(totalPages);
+	//console.log(totalPages);
 	// DETERMINE IF NEXT/PREVIOUS PAGING BUTTONS NEED DISABLED
 	if(nPageNo == 1) $('a.previous').addClass('disabled');
 	if(nPageNo >= totalPages) $('a.next').addClass('disabled');
@@ -184,6 +184,11 @@ function updateRegistrants(nPage, nStatus) {
 
 function updateSelectedCount(nAmount) {
 	SelectedCount = SelectedCount + nAmount;
+	if(SelectedCount > 0) {
+		$(".js-partic-actions .btn").removeClass('disabled');
+	} else {
+		$(".js-partic-actions .btn").addClass('disabled');
+	}
 	$("#label-status-selected").text(SelectedCount);
 	$("#statusSelected span.attendee-status-count").text("(" + SelectedCount + ")");
 	

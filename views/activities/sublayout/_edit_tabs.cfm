@@ -67,5 +67,4 @@
 	</li>
 	</cfloop>
 </ul>
-</p>
 </cfoutput>

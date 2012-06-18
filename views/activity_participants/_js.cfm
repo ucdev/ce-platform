@@ -16,16 +16,16 @@ var MaxRegistrants;
 var AddlAttendees;
 var NoChange = 0;
 var totalPages;
-</script>
 
 <cfif structKeyExists(cookie, "user_attendee_page") AND GetToken(Cookie.USER_AttendeePage,1,"|") EQ params.ActivityID>
-	<cfif getToken(cookie.user_attendeeStatus, 1, "|") EQ params.ActivityId>
-	    nPageNo = #getToken(Cookie.USER_AttendeePage,2,"|")#;
-        nStatus = #getToken(Cookie.USER_AttendeeStatus,2,"|")#;
-    <cfelse>
-        nPageNo = #getToken(Cookie.USER_AttendeePage,2,"|")#;
-    </cfif>
+<cfif getToken(cookie.user_attendeeStatus, 1, "|") EQ params.ActivityId>
+nPageNo = #getToken(Cookie.USER_AttendeePage,2,"|")#;
+nStatus = #getToken(Cookie.USER_AttendeeStatus,2,"|")#;
+<cfelse>
+nPageNo = #getToken(Cookie.USER_AttendeePage,2,"|")#;
 </cfif>
-        
+</cfif> 
+</script>   
+
 #javaScriptIncludeTag(bundle="ccpd.activity.participants")#
 </cfoutput>
