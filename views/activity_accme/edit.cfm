@@ -7,7 +7,7 @@
 			
 			#errorMessagesFor("activity_accme")#
 	
-			#startFormTag(action="update", key=params.key)#
+			#bStartFormTag(action="update", key=params.key)#
 		
 				
 															

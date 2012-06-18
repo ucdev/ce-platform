@@ -202,6 +202,30 @@
   padding: 13px 9px 23px;
   width: 532px;
 }
+.form-ccpd .btn-toolbar {
+  *zoom: 1;
+}
+.form-ccpd .btn-toolbar:before,
+.form-ccpd .btn-toolbar:after {
+  display: table;
+  content: "";
+}
+.form-ccpd .btn-toolbar:after {
+  clear: both;
+}
+.form-ccpd .control-group {
+  border-bottom: 1px solid #D1D1D1;
+  padding-bottom: 10px;
+}
+.form-ccpd .control-label {
+  width: 100px;
+  font-weight: bold;
+  color: #666;
+  padding-right: 10px;
+}
+.form-ccpd .controls {
+  margin-left: 115px;
+}
 .header-title {
   display: inline;
   float: left;
