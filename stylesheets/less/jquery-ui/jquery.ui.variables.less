@@ -1,70 +1,98 @@
-@ui-font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
-@ui-font-weight: bold;
-@ui-font-size: 1.1em;
+@imagesPath:"/images/jquery-ui";
 
-@ui-sub-font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
-@ui-sub-font-weight: normal;
-@ui-sub-font-size: 1em;
+@bgActiveRepeat:repeat-x;
+@bgActiveXPos:0;
+@bgActiveYPos:50%;
 
-@ui-corner-radius: 4px;
+@bgColorActive:#ffffff;
+@bgColorContent:#ffffff;
+@bgColorDefault:#e6e6e6;
+@bgColorError:#fef1ec;
+@bgColorHeader:#cccccc;
+@bgColorHighlight:#fbf9ee;
+@bgColorHover:#dadada;
+@bgColorOverlay:#aaaaaa;
+@bgColorShadow:#aaaaaa;
 
-@ui-images-path: '/images/jquery-ui';
+@bgContentRepeat:repeat-x;
+@bgContentXPos:0;
+@bgContentYPos:0;
 
-@ui-header-bg: #f6a828 url("@{ui-images-path}/ui-bg_gloss-wave_35_f6a828_500x100.png") 50% 50% repeat-x;
-@ui-header-border: 1px solid #e78f08;
-@ui-header-text: #ffffff;
-@ui-header-icon-color: #b81900;
-@ui-header-icon-image: ~`'http://jqueryui.com/themeroller/images/?new=' + "@{ui-header-icon-color}".replace(/#/g, '') + '&w=256&h=240&f=png&fltr[]=rcd|256&fltr[]=mask|icons/icons.png'`;
-@ui-header-font-weight: bold;
+@bgDefaultRepeat:repeat-x;
+@bgDefaultXPos:0;
+@bgDefaultYPos:50%;
 
-@ui-content-bg: #eeeeee url("@{ui-images-path}/ui-bg_highlight-soft_100_eeeeee_1x100.png) 50% top repeat-x;
-@ui-content-border: 1px solid #dddddd;
-@ui-content-text: #333333;
-@ui-content-icon-color: #ffe45c;
-@ui-content-icon-image: ~`'http://jqueryui.com/themeroller/images/?new=' + "@{ui-header-icon-color}".replace(/#/g, '') + '&w=256&h=240&f=png&fltr[]=rcd|256&fltr[]=mask|icons/icons.png'`;
-@ui-content-font-weight: normal;
-    
-@ui-clickable-default-bg: #f6f6f6 url("@{ui-images-path}/ui-bg_glass_100_f6f6f6_1x400.png") 50% 50% repeat-x;
-@ui-clickable-default-border: 1px solid #cccccc;
-@ui-clickable-default-text: #1c94c4;
-@ui-clickable-default-icon-color: #ef8c08;
-@ui-clickable-default-icon-image: ~`'http://jqueryui.com/themeroller/images/?new=' + "@{ui-header-icon-color}".replace(/#/g, '') + '&w=256&h=240&f=png&fltr[]=rcd|256&fltr[]=mask|icons/icons.png'`;
-@ui-clickable-default-font-weight: bold;
+@bgErrorRepeat:repeat-x;
+@bgErrorXPos:0;
+@bgErrorYPos:50%;
 
-@ui-clickable-hover-bg: #fdf5ce url("@{ui-images-path}/ui-bg_glass_100_fdf5ce_1x400.png") 50% 50% repeat-x;
-@ui-clickable-hover-border: 1px solid #fbcb09;
-@ui-clickable-hover-text: #c77405;
-@ui-clickable-hover-icon-color: #ef8c08;
-@ui-clickable-hover-icon-image: ~`'http://jqueryui.com/themeroller/images/?new=' + "@{ui-header-icon-color}".replace(/#/g, '') + '&w=256&h=240&f=png&fltr[]=rcd|256&fltr[]=mask|icons/icons.png'`;
-@ui-clickable-hover-font-weight: bold;
+@bgHeaderRepeat:repeat-x;
+@bgHeaderXPos:0;
+@bgHeaderYPos:50%;
 
-@ui-clickable-active-bg: #ffffff url("@{ui-images-path}/ui-bg_glass_65_ffffff_1x400.png") 50% 50% repeat-x;
-@ui-clickable-active-border: 1px solid #fbd850;
-@ui-clickable-active-text: #eb8f00;
-@ui-clickable-active-icon-color: #ef8c08;
-@ui-clickable-active-icon-image: ~`'http://jqueryui.com/themeroller/images/?new=' + "@{ui-header-icon-color}".replace(/#/g, '') + '&w=256&h=240&f=png&fltr[]=rcd|256&fltr[]=mask|icons/icons.png'`;
-@ui-clickable-active-font-weight: bold;
-    
-@ui-highlight-bg: #ffe45c url("@{ui-images-path}/ui-bg_highlight-soft_75_ffe45c_1x100.png) 50% top repeat-x;
-@ui-highlight-border: 1px solid #fed22f;
-@ui-highlight-text: #363636;
-@ui-highlight-icon-color: #228ef1;
-@ui-highlight-icon-image: ~`'http://jqueryui.com/themeroller/images/?new=' + "@{ui-header-icon-color}".replace(/#/g, '') + '&w=256&h=240&f=png&fltr[]=rcd|256&fltr[]=mask|icons/icons.png'`;
-@ui-highlight-font-weight: normal;
-    
-@ui-error-bg: #b81900 url("@{ui-images-path}/ui-bg_diagonals-thick_18_b81900_40x40.png") 50% 50% repeat;
-@ui-error-border: 1px solid #cd0a0a;
-@ui-error-text: #ffffff;
-@ui-error-icon-color: #ffd27a;
-@ui-error-icon-image: ~`'http://jqueryui.com/themeroller/images/?new=' + "@{ui-header-icon-color}".replace(/#/g, '') + '&w=256&h=240&f=png&fltr[]=rcd|256&fltr[]=mask|icons/icons.png'`;
-@ui-error-font-weight: normal;
+@bgHighlightRepeat:repeat-x;
+@bgHighlightXPos:0;
+@bgHighlightYPos:50%;
 
-@ui-modal-overlay-bg: #666666 url("@{ui-images-path}/ui-bg_diagonals-thick_20_666666_40x40.png") 50% 50% repeat;
-@ui-modal-overlay-opacity: 50;
+@bgHoverRepeat:repeat-x;
+@bgHoverXPos:0;
+@bgHoverYPos:50%;
 
-@ui-drop-shadow-bg: #000000 url("@{ui-images-path}/ui-bg_flat_10_000000_40x100.png") 50% 50% repeat-x;
-@ui-drop-shadow-opacity: 20;
-@ui-drop-shadow-thinkness: 5px;
-@ui-drop-shadow-top-offset: -5px;
-@ui-drop-shadow-left-offset: -5px;
-@ui-drop-shadow-corners: 5px;
+@bgImgUrlActive:"@{imagesPath}/ui-bg_glass_65_ffffff_1x400.png";
+@bgImgUrlContent:"@{imagesPath}/ui-bg_glass_75_ffffff_1x400.png";
+@bgImgUrlDefault:"@{imagesPath}/ui-bg_glass_75_e6e6e6_1x400.png";
+@bgImgUrlError:"@{imagesPath}/ui-bg_inset-soft_95_fef1ec_1x100.png";
+@bgImgUrlHeader:"@{imagesPath}/ui-bg_highlight-soft_75_cccccc_1x100.png";
+@bgImgUrlHighlight:"@{imagesPath}/ui-bg_glass_55_fbf9ee_1x400.png";
+@bgImgUrlHover:"@{imagesPath}/ui-bg_glass_75_dadada_1x400.png";
+@bgImgUrlOverlay:none;
+@bgImgUrlShadow:none;
+
+@bgOverlayRepeat:repeat-x;
+@bgOverlayXPos:0;
+@bgOverlayYPos:0;
+
+@bgShadowRepeat:repeat-x;
+@bgShadowXPos:0;
+@bgShadowYPos:0;
+
+@borderColorActive:#aaaaaa;
+@borderColorContent:#aaaaaa;
+@borderColorDefault:#d3d3d3;
+@borderColorError:#cd0a0a;
+@borderColorHeader:#aaaaaa;
+@borderColorHighlight:#fcefa1;
+@borderColorHover:#999999;
+
+@cornerRadius:4px;
+@cornerRadiusShadow:4px;
+
+@fcActive:#212121;
+@fcContent:#222222;
+@fcDefault:#555555;
+@fcError:#363636;
+@fcError:#cd0a0a;
+@fcHeader:#222222;
+@fcHighlight:#363636;
+@fcHover:#212121;
+
+@ffDefault:"Verdana, Arial, sans-serif";
+@fsDefault:1.1em;
+@fwDefault:normal;
+
+@iconsActive:"@{imagesPath}/ui-icons_454545_256x240.png";
+@iconsContent:"@{imagesPath}/ui-icons_222222_256x240.png";
+@iconsDefault:"@{imagesPath}/ui-icons_888888_256x240.png";
+@iconsError:"@{imagesPath}/ui-icons_cd0a0a_256x240.png";
+@iconsHeader:"@{imagesPath}/ui-icons_222222_256x240.png";
+@iconsHighlight:"@{imagesPath}/ui-icons_2e83ff_256x240.png";
+@iconsHover:"@{imagesPath}/ui-icons_454545_256x240.png";
+
+@offsetLeftShadow:-4px;
+@offsetTopShadow:-4px;
+
+@opacityOverlay:30;
+@opacityShadow:35;
+@opacitySecondary:70;
+
+@thicknessShadow:4px;
