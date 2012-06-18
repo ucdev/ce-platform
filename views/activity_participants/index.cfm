@@ -1,7 +1,6 @@
 <cfparam name="params.Page" type="numeric" default="1" />
 
 <cfoutput>
-<!--<h4>Participants</h4>-->
 <div class="btn-toolbar clearfix">
 	<div class="btn-group pull-left">
 		<a href="##" class="btn"><i class="icon-plus-sign"></i></a>

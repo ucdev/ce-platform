@@ -6,6 +6,7 @@
 <cfset generateBundle(type="js", bundle="ccpd", compress=true, 
 	sources="jquery,
 			jquery.fixtext.js,
+			jquery.form.js,
 			bootstrap-transition,
 			bootstrap-alert,
 			bootstrap-modal,
