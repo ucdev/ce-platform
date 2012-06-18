@@ -10,8 +10,8 @@
 	<div class="btn-group pull-left js-partic-actions">
 		<a class="btn dropdown-toggle disabled" data-toggle="dropdown" href="##">SELECTED: <span id="label-status-selected">0</span></a>
 		<a class="btn dropdown-toggle disabled" data-toggle="dropdown" href="##">
-		Actions
-		<span class="caret"></span>
+			Actions
+			<span class="caret"></span>
 		</a>
 		<ul class="dropdown-menu">
 			<li><a href="##" id="remove-attendees">Remove</a></li>
@@ -41,11 +41,11 @@
 		<a href="/activities/adm_participants?ActivityID=13660&status=0&page=#params.page+1#" class="btn next next-page"><i class="icon-chevron-right"></i></a>
 	</div>
 	<div class="btn-group pull-right">
-		<button class="btn" data-toggle="dropdown">Filter By:</button>
-		<button class="btn attendee-status-title" data-toggle="dropdown">All</button>
-		<button class="btn dropdown-toggle" data-toggle="dropdown">
+		<a class="btn" data-toggle="dropdown">Filter</a>
+		<a class="btn attendee-status-title" data-toggle="dropdown">All</a>
+		<a class="btn dropdown-toggle" data-toggle="dropdown">
 			<span class="caret"></span>
-		</button>
+		</a>
 		<ul class="dropdown-menu attendees-filter">
 			<li class="attendee-status" id="status0"><a href="##"><span class="attendee-status-name">All</span> <span class="attendee-status-count"></span></a></li>
 			<li class="divider"></li>

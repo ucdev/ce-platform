@@ -130,9 +130,9 @@ $(document).ready(function() {
                     	<input type="hidden" name="currentAttendeeStatus" id="current-attendee-status-#qAttendees.attendeeid#" value="<cfif qAttendees.statusId EQ 2>3<cfelse>#qAttendees.statusId#</cfif>" /><!--- THE 3 IS TO POINT IT TO THE REGISTEREDDATE FOR THE ATTENDEE ON EDIT IF THE REGISTRANT IS IN PROGRESS --->
                     	<input type="hidden" name="currentAttendeeDate" id="current-attendee-date-#qAttendees.attendeeid#" value="#currStatusDate#" />
                         <!--- VIEW ATTENDEE DATE --->
-                    	<span id="view-attendee-date-#qAttendees.AttendeeId#">
-                            <div class="btn-group">
-                                <button class="btn span5" data-toggle="dropdown" id="datefill-#qAttendees.attendeeid#">
+                    	<div id="view-attendee-date-#qAttendees.AttendeeId#">
+                            <div class="btn-group pull-left">
+                                <a class="btn" data-toggle="dropdown" id="datefill-#qAttendees.attendeeid#">
                                 	<cfswitch expression="#qAttendees.StatusID#">
                                         <cfcase value="1">
                                             COMPLETE (#currStatusDate#)
@@ -147,13 +147,13 @@ $(document).ready(function() {
                                             FAILED (#currStatusDate#)
                                         </cfcase>
                                     </cfswitch>
-                                </button>
-                                <button id="editstatusdate-#qAttendees.attendeeId#" class="btn EditStatusDate span2">
+                                </a>
+                                <a id="editstatusdate-#qAttendees.attendeeId#" class="btn EditStatusDate">
                                     <span style="position:relative;"><input type="hidden" id="CurrStatusDate-#qAttendees.attendeeId#" value="" />Edit</span>
-                                </button>
-                                <button class="btn dropdown-toggle span1" data-toggle="dropdown">
+                                </a>
+                                <a class="btn dropdown-toggle" data-toggle="dropdown">
                                     <span class="caret"></span>
-                                </button>
+                                </a>
                                 <ul class="dropdown-menu pull-right" id="view-attendee-statuses-#qAttendees.attendeeId#">
 	                                <cfif qAttendees.CompleteDate NEQ "" AND qAttendees.StatusID EQ 1>
                                 	<li><a href="javascript://" class="view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-1"><cfif qAttendees.StatusID EQ 1><i class="icon-ok active-status"></i> </cfif>COMPLETE (#dateFormat(qAttendees.completeDate, "MM/DD/YYYY")#)</a></li>
@@ -169,7 +169,7 @@ $(document).ready(function() {
                                     </cfif>
                                 </ul>
                             </div>
-                        </span>
+                        </div>
                         
                         <!--- EDIT ATTENDEE DATE FORM --->
                         <span id="edit-attendee-date-#qAttendees.AttendeeId#" style="display:none;position:relative;">
@@ -180,7 +180,7 @@ $(document).ready(function() {
                     </td>
                     <td valign="top" class="user-actions-outer">
 					<cfif personID GT 0>
-                        <div class="btn-group user-actions action-menu">
+                        <div class="btn-group user-actions action-menu pull-left">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">
                                 <i class="icon-cog"></i><span class="caret"></span>
                             </button>

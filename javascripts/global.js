@@ -64,3 +64,7 @@ function addError(sStatus,nFadeIn,nFadeTo,nFadeOut) {
 	$("#StatusBar").append("<div style=\"display:none;\" class=\"PageErrors\" id=\"StatusBox" + StatusCount + "\">" + sStatus + "</div>");
 	$("#StatusBox" + StatusCount).show("slide",{direction: "down"},500).fadeTo(nFadeTo,.9).hide("slide",{direction: "down"},nFadeOut);*/
 }
+
+$(document).ready(function() {
+	$(".profile > .contentBar > h3").fitText(2.5);
+});
