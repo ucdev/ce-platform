@@ -239,54 +239,80 @@ $(document).ready(function(){
 		</div>
 	</div>
 	
-	<div class="Location">
-		<label for="Location">Location</label>
-		<input type="text" name="Location" id="Location" value="#Attributes.Location#" />
-	</div>
-	<div class="Location">
-		<label for="Address1">Address 1</label>
-		<input type="text" name="Address1" id="Address1" value="#Attributes.Address1#" />
-	</div>
-	<div class="Location">
-		<label for="Address2">Address 2</label>
-		<input type="text" name="Address2" id="Address2" value="#Attributes.Address2#" />
-	</div>
-	<div class="Location">
-		<label for="City">City</label>
-		<input type="text" name="City" id="City" value="#Attributes.City#" />
-	</div>
-	<div class="Location stateField">
-		<label for="State">State</label>
-		
-		<select id="State" name="State">
-		<option value="0">Select one...</option>
-		<cfloop query="Application.List.States">
-		<option value="#trim(Application.List.States.StateId)#"<cfif Attributes.State EQ trim(Application.List.States.StateId)> Selected</cfif>>#Name#</option>
-		</cfloop>
-		</select>
-	</div>
-	<div class="Location provinceField">
-		<label for="Province">State / Province</label>
-		<input type="text" name="Province" id="Province" value="#Attributes.Province#" />
-	</div>
-	<div class="Location">
-		<label for="Country">Country</label>
-		
-		<select id="Country" name="Country">
-		<option value="0">Select one...</option>
-		<cfloop query="Application.List.Countries">
-		<option value="#trim(Application.List.Countries.CountryID)#"<cfif Attributes.Country EQ trim(Application.List.Countries.CountryID) OR Attributes.Country EQ "" AND trim(Application.List.Countries.Name) EQ "United States of America"> Selected</cfif>>#Name#</option>
-		</cfloop>
-		</select>
-	</div>
-	<div class="Location">
-		<label for="PostalCode">Postal Code</label>
-		<input type="text" name="PostalCode" id="PostalCode" value="#Attributes.PostalCode#" />
+	<div class="Location control-group">
+		<label for="Location" class="control-label">Location Name</label>
+		<div class="controls">
+			<input type="text" name="Location" id="Location" value="#Attributes.Location#" />
+		</div>
 	</div>
 	
-	<label for="ExternalID">External ID</label>
-	<input type="text" name="ExternalID" id="ExternalID" value="#Attributes.ExternalID#" />
+	<div class="Location control-group">
+		<label for="Address1" class="control-label">Address 1</label>
+		<div class="controls">
+			<input type="text" name="Address1" id="Address1" value="#Attributes.Address1#" />
+		</div>
+	</div>
 	
+	<div class="Location control-group">
+		<label for="Address2" class="control-label">Address 2</label>
+		<div class="controls">
+			<input type="text" name="Address2" id="Address2" value="#Attributes.Address2#" />
+		</div>
+	</div>
+	
+	<div class="Location control-group">
+		<label for="City" class="control-label">City</label>
+		<div class="controls">
+			<input type="text" name="City" id="City" value="#Attributes.City#" />
+		</div>
+	</div>
+	
+	<div class="Location stateField control-group">
+		<label for="State" class="control-label">State</label>
+		<div class="controls">
+			<select id="State" name="State">
+			<option value="0">Select one...</option>
+			<cfloop query="Application.List.States">
+			<option value="#trim(Application.List.States.StateId)#"<cfif Attributes.State EQ trim(Application.List.States.StateId)> Selected</cfif>>#Name#</option>
+			</cfloop>
+			</select>
+		</div>
+	</div>
+	
+	<div class="Location provinceField control-group">
+		<label for="Province" class="control-label">State / Province</label>
+		<div class="controls">
+			<input type="text" name="Province" id="Province" value="#Attributes.Province#" />
+		</div>
+	</div>
+	
+	
+	<div class="Location control-group">
+		<label for="Country" class="control-label">Country</label>
+		<div class="controls">
+			<select id="Country" name="Country">
+			<option value="0">Select one...</option>
+			<cfloop query="Application.List.Countries">
+			<option value="#trim(Application.List.Countries.CountryID)#"<cfif Attributes.Country EQ trim(Application.List.Countries.CountryID) OR Attributes.Country EQ "" AND trim(Application.List.Countries.Name) EQ "United States of America"> Selected</cfif>>#Name#</option>
+			</cfloop>
+			</select>
+		</div>
+	</div>
+	
+	<div class="Location control-group">
+		<label for="PostalCode" class="control-label">Postal Code</label>
+		<div class="controls">
+			<input type="text" name="PostalCode" id="PostalCode" value="#Attributes.PostalCode#" />
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label for="ExternalID" class="control-label">ExternalID</label>
+		<div class="controls">
+			<input type="text" name="ExternalID" id="ExternalID" value="#Attributes.ExternalID#" />
+		</div>
+	</div>
+
 	Created By
 	
 	<a href="#request.myself#Person.Detail?PersonID=#qModified.CreatedByID#">#qModified.CreatedByName#</a> (#DateFormat(ActivityBean.getCreated(),"mm/dd/yyyy")# #TimeFormat(ActivityBean.getCreated(),"hh:mmTT")#)
