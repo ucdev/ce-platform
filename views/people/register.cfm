@@ -140,5 +140,3 @@ $(document).ready(function() {
 #submitTag(id="btnRegister")#
 #endFormTag()#
 </cfoutput>
-
-

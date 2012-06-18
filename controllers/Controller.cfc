@@ -19,14 +19,19 @@
 	<cffunction name="autoLayout">
 		<cfparam name="params.controller" default="" />
 		<cfparam name="params.showInfoBar" default="true" />
-		
-		<cfif params.controller CONTAINS "activity_" AND listFindNoCase("edit,index,new,create,update",params.action,',')>
-			<cfset subLayout('adm_activity') />
-		<cfelseif params.controller CONTAINS "person_" AND listFindNoCase("edit,index,new,create,update",params.action,',')>
-			<cfset subLayout('adm_person') />
-		<cfelseif params.controller EQ "activities" AND listFindNoCase("edit",params.action)>
-			<cfset subLayout("adm_activity") />
-		</cfif>
+		<cfparam name="params.layout" default="" />
+        
+        <cfif len(trim(params.layout)) EQ 0>
+			<cfif params.controller CONTAINS "activity_" AND listFindNoCase("edit,index,new,create,update",params.action,',')>
+                <cfset subLayout('adm_activity') />
+            <cfelseif params.controller CONTAINS "person_" AND listFindNoCase("edit,index,new,create,update",params.action,',')>
+                <cfset subLayout('adm_person') />
+            <cfelseif params.controller EQ "activities" AND listFindNoCase("edit",params.action)>
+                <cfset subLayout("adm_activity") />
+            </cfif>
+        <cfelse>
+        	<cfset subLayout("#params.layout#") />
+        </cfif>
 	</cffunction>
 	
 	<cffunction name="showInfoBar">

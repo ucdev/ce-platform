@@ -105,18 +105,6 @@
 		</cfif>
 	</cffunction>
 	
-	<!--- activity_participants/edit/key --->
-	<cffunction name="edit">
-		<!--- Find the record --->
-    	<cfset activity_participant = model("activity_participant").findByKey(params.key)>
-    	
-    	<!--- Check if the record exists --->
-	    <cfif NOT IsObject(activity_participant)>
-	        <cfset flashInsert(error="activity_participant #params.key# was not found")>
-			<cfset redirectTo(action="index")>
-	    </cfif>
-	</cffunction>
-	
 	<!--- activity_participants/index --->
 	<cffunction name="index">
 		<cfparam name="params.key" type="integer" />
