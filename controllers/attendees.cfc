@@ -38,46 +38,64 @@
 	
 	<!--- attendees/update --->
 	<cffunction name="update">
-		<cfset activity_participant = model("attendee").findByKey(params.key)>
+		<cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
+    	<cfset var activity_participant = model("attendee").findByKey(params.key)>
+        
+		<cfset status.setStatus(false)>
+		<cfset status.setStatusMsg("Attendee Update Failed.")>
 		
 		<!--- Verify that the activity_participant updates successfully --->
 		<cfif activity_participant.update(params.activity_participant)>
-			<cfset flashInsert(success="The attendee was updated successfully.")>	
-            <cfset redirectTo(controller="activity_participants",action="index", key=params.activityId)>
+        	<cfset status.setStatus(true)>
+			<cfset status.setStatusMsg("The attendee was updated successfully.")>
 		<!--- Otherwise --->
 		<cfelse>
-			<cfset flashInsert(error="There was an error updating the attendee.")>
-			<cfset renderPage(action="edit", params="activityId=" & params.activityid)>
+			<cfset status.setStatusMsg("There was an error updating the attendee.")>
 		</cfif>
+        
+        <cfset renderText(status.getJSON()) />
 	</cffunction>
 	
 	<!--- attendees/update_address --->
 	<cffunction name="update_address">
-    	<cfset activity_participant = model("attendee_address").findByKey(params.key)>
+		<cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
+    	<cfset var activity_participant = model("attendee_address").findByKey(params.key)>
+		
+		<cfcontent type="text/javascript" />
+		
+		<cfset status.setStatus(false)>
+		<cfset status.setStatusMsg("Attendee Address Update Failed.")>
 		
 		<!--- Verify that the activity_participant updates successfully --->
 		<cfif activity_participant.update(params.activity_participant)>
-			<cfset flashInsert(success="The attendee was updated successfully.")>	
-            <cfset redirectTo(controller="activity_participants",action="index", key=params.activityId)>
+			<cfset flashInsert(success="The attendee was updated successfully.")>
 		<!--- Otherwise --->
 		<cfelse>
 			<cfset flashInsert(error="There was an error updating the attendee.")>
-			<cfset renderPage(action="edit_address", params="activityId=" & params.activityid)>
 		</cfif>
+        
+        <cfset renderText(status.getJSON()) />
 	</cffunction>
 	
 	<!--- attendees/update_phone --->
 	<cffunction name="update_phone">
-    	<cfset activity_participant = model("attendee_phone").findByKey(params.key)>
+		<cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
+    	<cfset var activity_participant = model("attendee_phone").findByKey(params.key)>
+		
+		<cfcontent type="text/javascript" />
+		
+		<cfset status.setStatus(false)>
+		<cfset status.setStatusMsg("Attendee Phone Update Failed.")>
+        
 		
 		<!--- Verify that the activity_participant updates successfully --->
 		<cfif activity_participant.update(params.activity_participant)>
-			<cfset flashInsert(success="The attendee was updated successfully.")>	
-            <cfset redirectTo(controller="activity_participants",action="index", key=params.activityId)>
+			<cfset flashInsert(success="The attendee was updated successfully.")>
 		<!--- Otherwise --->
 		<cfelse>
 			<cfset flashInsert(error="There was an error updating the attendee.")>
-			<cfset renderPage(action="edit_phone", params="activityId=" & params.activityid)>
 		</cfif>
+        
+        <cfset renderText(status.getJSON()) />
 	</cffunction>
 </cfcomponent>

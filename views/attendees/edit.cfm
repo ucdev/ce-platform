@@ -1,12 +1,17 @@
+<cfinclude template="/lib/savejs.cfm" />
 <cfoutput>
 #includePartial("showFlash")#
 #errorMessagesFor("activity_participant")#
 #startFormTag(action="update", key=params.key, params="activityId=" & params.activityId, id="EditForm", class="form-horizontal form-ccpd")#
 	<cfinclude template="/lib/saveinfo.cfm" />
     <fieldset>
-        #hiddenField(objectName='activity_participant', property='id', label='Attendee ID')#
-        #hiddenField(objectName='activity_participant', property='ActivityID', label='Activity ID')#
-        #hiddenField(objectName='activity_participant', property='PersonID', label='Person ID')#
+        #hiddenField(objectName='activity_participant', property='id', class="js-attendee-id")#
+        #hiddenField(objectName='activity_participant', property='ActivityID')#
+        #hiddenField(objectName='activity_participant', property='PersonID')#
+        #hiddenField(objectName='activity_participant', property='termsFlag', class='js-btn-termsFlag')#
+        #hiddenField(objectName='activity_participant', property='paymentFlag', class='js-btn-paymentFlag')#
+        #hiddenField(objectName='activity_participant', property='mdFlag', class='js-btn-mdFlag')#
+        #hiddenField(objectName='activity_participant', property='emailSentFlag', class='js-btn-emailSentFlag')#
         <input type="hidden" value="" name="ChangedFields" id="ChangedFields" />
         <input type="hidden" value="" name="ChangedValues" id="ChangedValues" />
         <div class="control-group">
@@ -42,10 +47,10 @@
             </div>
         </div>
         <div class="control-group">
-            <label for="activity_participant-TermsFlag" class="control-label">Status</label>
+            <label for="activity_participant-statusId" class="control-label">Status</label>
             <div class="controls">
                 <div class="input-append">
-                    <select name="sessiontype" id="SessionType">
+                    <select name="attendee_participant[statusId]" id="attendee_participant-statusId" class="js-status">
                     	<cfloop query="statuses">
                         <option value="#statuses.id#"<cfif activity_participant.statusId EQ statuses.id> selected="selected"</cfif>>#statuses.name#</option>
                         </cfloop>
@@ -55,63 +60,71 @@
             <label for="activity_participant-TermsFlag" class="control-label">Accepted Terms?</label>
             <div class="controls">
                 <div class="input-append">
-                    <button class="btn<cfif activity_participant.TermsFlag EQ "Y"> active</cfif>" type="button">Yes</button><button class="btn<cfif activity_participant.TermsFlag EQ "N"> active</cfif>" type="button">No</button>
+                    <button class="btn js-btn-terms<cfif activity_participant.TermsFlag EQ "Y"> active</cfif>" id="btn-terms-y" type="button">Yes</button><button class="btn js-btn-terms<cfif activity_participant.TermsFlag EQ "N"> active</cfif>" id="btn-terms-n" type="button">No</button>
                 </div>
             </div>
             <label for="activity_participant-MDflag" class="control-label">Is MD?</label>
             <div class="controls">
                 <div class="input-append">
-                    <button class="btn<cfif activity_participant.MDflag EQ "Y"> active</cfif>" type="button">Yes</button><button class="btn<cfif activity_participant.MDflag EQ "N"> active</cfif>" type="button">No</button>
+                    <button class="btn js-btn-md<cfif activity_participant.MDflag EQ "Y"> active</cfif>" id="btn-md-y" type="button">Yes</button><button class="btn js-btn-md<cfif activity_participant.MDflag EQ "N"> active</cfif>" id="btn-md-n" type="button">No</button>
                 </div>
             </div>
             <label for="activity_participant-PaymentFlag" class="control-label">Has Paid?</label>
             <div class="controls">
                 <div class="input-append">
-                    <button class="btn<cfif activity_participant.paymentFlag EQ "Y"> active</cfif>" type="button">Yes</button><button class="btn<cfif activity_participant.paymentFlag EQ "N"> active</cfif>" type="button">No</button>
+                    <button class="btn js-btn-payment<cfif activity_participant.paymentFlag EQ "Y"> active</cfif>" id="btn-payment-y" type="button">Yes</button><button class="btn js-btn-payment<cfif activity_participant.paymentFlag EQ "N"> active</cfif>" id="btn-payment-n" type="button">No</button>
                 </div>
             </div>
-            <label for="activity_participant-PayAmount" class="control-label">Amount Paid</label>
-            <div class="controls">
-                <div class="input-append">
-                    <input type="text" name="activity_participant[PayAmount]" id="activity_participant-PayAmount" value="#activity_participant.PayAmount#" class="span2" />
+            <div class="payment-made" style="display: none;">
+                <label for="activity_participant-PayAmount" class="control-label">Amount Paid</label>
+                <div class="controls">
+                    <div class="input-append">
+                        <input type="text" name="activity_participant[PayAmount]" id="activity_participant-PayAmount" value="#activity_participant.PayAmount#" class="span2" />
+                    </div>
                 </div>
-            </div>
-            <label for="activity_participant-PayOrderNo" class="control-label">Pay Order ##</label>
-            <div class="controls">
-                <div class="input-append">
-                    <input type="text" name="activity_participant[PayOrderNo]" id="activity_participant-PayOrderNo" value="#activity_participant.PayOrderNo#" class="span2" />
+                <label for="activity_participant-PayOrderNo" class="control-label">Pay Order ##</label>
+                <div class="controls">
+                    <div class="input-append">
+                        <input type="text" name="activity_participant[PayOrderNo]" id="activity_participant-PayOrderNo" value="#activity_participant.PayOrderNo#" class="span2" />
+                    </div>
                 </div>
-            </div>
-            <label for="activity_participant-PaymentDate" class="control-label">Payment Date</label>
-            <div class="controls">
-                <div class="input-append">
-                    <input type="text" name="activity_participant[PaymentDate]" id="activity_participant-PaymentDate" value="#dateFormat(activity_participant.PaymentDate, 'MM/DD/YYYY')#" class="span2" /><button class="btn" type="button"><i class="icon-calendar"></i></button>
+                <label for="activity_participant-PaymentDate" class="control-label">Payment Date</label>
+                <div class="controls">
+                    <div class="input-append">
+                        <input type="text" name="activity_participant[PaymentDate]" id="date1" value="#dateFormat(activity_participant.PaymentDate, 'MM/DD/YYYY')#" class="span2 js-date" /><button class="btn" type="button"><i class="icon-calendar"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="control-group">
-            <label for="activity_participant-emailSentFlag" class="control-label">Cert. Email Sent?</label>
-            <div class="controls">
-                <div class="input-append">
-                    <button class="btn<cfif activity_participant.emailSentFlag EQ 1> active</cfif>" type="button">Yes</button><button class="btn<cfif activity_participant.emailSentFlag EQ 0> active</cfif>" type="button">No</button>
+        	<div id="register-date">
+                <label for="activity_participant-RegisterDate" class="control-label">Registered Date</label>
+                <div class="controls">
+                    <div class="input-append">
+                        <input type="text" name="activity_participant[RegisterDate]" id="date2" value="#dateFormat(activity_participant.RegisterDate, 'MM/DD/YYYY')#" class="span2 js-date" /><button class="btn js-datepicker" type="button"><i class="icon-calendar"></i></button>
+                    </div>
                 </div>
             </div>
-            <label for="activity_participant-RegisterDate" class="control-label">Registered Date</label>
-            <div class="controls">
-                <div class="input-append">
-                    <input type="text" name="activity_participant[RegisterDate]" id="activity_participant-RegisterDate" value="#dateFormat(activity_participant.RegisterDate, 'MM/DD/YYYY')#" class="span2" /><button class="btn" type="button"><i class="icon-calendar"></i></button>
+            <div id="complete-date">
+                <label for="activity_participant-CompleteDate" class="control-label">Completed Date</label>
+                <div class="controls">
+                    <div class="input-append">
+                        <input type="text" name="activity_participant[CompleteDate]" id="date3" value="#dateFormat(activity_participant.CompleteDate, 'MM/DD/YYYY')#" class="span2 js-date" /><button class="btn js-datepicker" type="button"><i class="icon-calendar"></i></button>
+                    </div>
+                </div>
+                <label for="activity_participant-emailSentFlag" class="control-label">Cert. Email Sent?</label>
+                <div class="controls">
+                    <div class="input-append">
+                        <button class="btn js-btn-emailSent<cfif activity_participant.emailSentFlag EQ 1> active</cfif>" id="btn-emailSent-1" type="button">Yes</button><button class="btn js-btn-emailSent<cfif activity_participant.emailSentFlag EQ 0> active</cfif>" id="btn-emailSent-0" type="button">No</button>
+                    </div>
                 </div>
             </div>
-            <label for="activity_participant-CompleteDate" class="control-label">Completed Date</label>
-            <div class="controls">
-                <div class="input-append">
-                    <input type="text" name="activity_participant[CompleteDate]" id="activity_participant-CompleteDate" value="#dateFormat(activity_participant.CompleteDate, 'MM/DD/YYYY')#" class="span2" /><button class="btn" type="button"><i class="icon-calendar"></i></button>
-                </div>
-            </div>
-            <label for="activity_participant-TermDate" class="control-label">Failed Date</label>
-            <div class="controls">
-                <div class="input-append">
-                    <input type="text" name="activity_participant[TermDate]" id="activity_participant-TermDate" value="#dateFormat(activity_participant.TermDate, 'MM/DD/YYYY')#" class="span2" /><button class="btn" type="button"><i class="icon-calendar"></i></button>
+            <div id="term-date">
+                <label for="activity_participant-TermDate" class="control-label">Failed Date</label>
+                <div class="controls">
+                    <div class="input-append">
+                        <input type="text" name="activity_participant[TermDate]" id="date4" value="#dateFormat(activity_participant.TermDate, 'MM/DD/YYYY')#" class="span2 js-date" /><button class="btn js-datepicker" type="button"><i class="icon-calendar"></i></button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,3 +1,4 @@
+<cfinclude template="/lib/savejs.cfm" />
 <script>
 	$("#activity_participant-geonameid").tokenInput("http://ws.geonames.org/searchJSON?featureClass=P&style=full&maxRows=12",{
 		queryParam:'name_startsWith',
