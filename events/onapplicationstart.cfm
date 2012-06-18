@@ -2,9 +2,10 @@
 <cfset doLessGeneration = LessEngine(['bootstrap.less']) />--->
 <!---<cfset application.sengrid = createObject("component","lib.sendgrid").init(api_user='joshuairl',api_key='cfr010408') />
 --->
-<cfset generateBundle(type="css", bundle="ccpd", compress=true, sources="bootstrap,ccpd") />
+<cfset generateBundle(type="css", bundle="ccpd", compress=true, sources="bootstrap,jquery.ui,ccpd") />
 <cfset generateBundle(type="js", bundle="ccpd", compress=true, 
 	sources="jquery,
+			jquery-ui-1.8.21.custom.min,
 			jquery.fixtext.js,
 			jquery.form.js,
 			bootstrap-transition,
@@ -31,8 +32,7 @@
 	sources="lib/people") />
             
 <cfset generateBundle(type="js", bundle="ccpd-legacy", compress=true, 
-	sources="jquery-ui-1.6rc6.min,
-			jquery.autocomplete.pack,
+	sources="jquery.autocomplete.pack,
 			jquery.blockUI,
 			jquery.cfjs.packed,
 			jquery.maskedinput-1.1.3.pack,

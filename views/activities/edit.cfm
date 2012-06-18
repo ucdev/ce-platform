@@ -77,14 +77,11 @@ function setActivityType(nActivity) {
 $(document).ready(function(){
 	updateStateProvince($("#Country").val());
 	
-	$("#Country").bind("change", this, function() {
+	$("#Country").on("change", this, function() {
 		updateStateProvince($(this).val());
 	});
 	
-	$(".DatePicker").datepicker({ 
-		showOn: "button", 
-		buttonImage: "/admin/_images/icons/calendar.png", 
-		buttonImageOnly: true,
+	var $startDate = $("#StartDate").datepicker({ 
 		showButtonPanel: true,
 		changeMonth: true,
 		changeYear: true,
@@ -92,17 +89,34 @@ $(document).ready(function(){
 			Unsaved();
 			AddChange($("label[for='" + this.id + "']").html(),$(this).val());
 		}
-
+	});
+	
+	var $endDate = $("#EndDate").datepicker({ 
+		showButtonPanel: true,
+		changeMonth: true,
+		changeYear: true,
+		onSelect: function() {
+			Unsaved();
+			AddChange($("label[for='" + this.id + "']").html(),$(this).val());
+		}
+	});
+	
+	$(".js-datepicker").on("click",function(e) {
+		var $this = $(this);
+		var $inputId = $this.prev().attr('id');
+		$('#' + $inputId).datepicker("show");
+	
+		e.preventDefault();
 	});
 	
 	/*$("#Title").autocomplete(sRootPath + '/ajax_adm_activity/autocomplete&returnformat=plain');
 	$("#Sponsor").autocomplete(sRootPath + '/ajax_adm_activity/jointlyautocomplete&returnformat=plain');
 	*/
-	$("#ActivityType").bind("change", this, function() {
+	$("#ActivityType").on("change", this, function() {
 		setActivityType($(this).val());
 	});
 	
-	$("#SessionType").change(function() {
+	$("#SessionType").on(function() {
 		setSessionType($(this).val());
 	});
 	
@@ -210,7 +224,7 @@ $(document).ready(function(){
 		<label for="StartDate" class="control-label">Start Date</label>
 		<div class="controls">
 			<div class="input-append">
-				<input type="text" name="StartDate" id="StartDate" class="span2" value="#Attributes.StartDate#" /><button class="btn" type="button"><i class="icon-calendar"></i></button>
+				<input type="text" name="StartDate" id="StartDate" class="span2" value="#Attributes.StartDate#" /><button class="btn js-datepicker" type="button"><i class="icon-calendar"></i></button>
 			</div>
 		</div>
 	</div>
@@ -220,7 +234,7 @@ $(document).ready(function(){
 		<label for="EndDate" class="control-label">End Date</label>
 		<div class="controls">
 			<div class="input-append">
-				<input type="text" name="EndDate" id="EndDate" class="span2" value="#Attributes.EndDate#" /><button class="btn" type="button"><i class="icon-calendar"></i></button>
+				<input type="text" name="EndDate" id="EndDate" class="span2" value="#Attributes.EndDate#" /><button class="btn js-datepicker" type="button"><i class="icon-calendar"></i></button>
 			</div>
 		</div>
 	</div>
