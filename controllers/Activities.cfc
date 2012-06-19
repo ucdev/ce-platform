@@ -136,17 +136,9 @@
 		
 	</cffunction>
 	
-	<!---
-	
 	<cffunction name="show">
 		<cfparam name="params.key" type="integer" />
-<cfset $setActivity() />
-		<cfset subLayout('show') />
-	</cffunction>
-	
-	--->
-	
-	<cffunction name="show">
-		<cfset activity = model("activity").findByKey(key=params.key, include="activityType,grouping, status", returnAs="query") />
+		
+		<cfset $setActivity() />
 	</cffunction>
 </cfcomponent>

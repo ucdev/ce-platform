@@ -29,8 +29,8 @@
 			{ name="Multi-session",key="M" }
 		] />
 <cfinclude template="/lib/savejs.cfm" />
-<script>
 
+<script>
 <cfoutput>
 var LiveOptions = <cfloop query="qLiveGroupings">"<option value=\"#qLiveGroupings.GroupingID#\">#qLiveGroupings.Name#</option>"<cfif qLiveGroupings.RecordCount NEQ qLiveGroupings.CurrentRow> + </cfif></cfloop>;
 var EMOptions = <cfloop query="qEMGroupings">"<option value=\"#qEMGroupings.GroupingID#\">#qEMGroupings.Name#</option>"<cfif qEMGroupings.RecordCount NEQ qEMGroupings.CurrentRow> + </cfif></cfloop>;
@@ -186,9 +186,7 @@ $(document).ready(function(){
 	WHERE A.ActivityID=<cfqueryparam value="#Attributes.ActivityID#" cfsqltype="cf_sql_integer" />
 </cfquery>
 <cfoutput>
-<h3>General Information</h3>
 #startFormTag(controller="ajax_adm_activity", action="saveactivity", key=params.key, class="form-horizontal form-ccpd", name="frmEditActivity", id="EditForm")#
-	<cfinclude template="/lib/saveinfo.cfm" />
 	<fieldset>
 	<!--- ADDED Attributes.SessionType HIDDEN FIELD FOR SAVING PURPOSES [Attributes.SessionType must be passed to save StartDate/EndDate] --->
 	<input type="hidden" value="plain" name="returnFormat" />
@@ -196,12 +194,17 @@ $(document).ready(function(){
 	<input type="hidden" value="#attributes.sessiontype#" name="SessionType" />
 	<input type="hidden" value="" name="ChangedFields" id="ChangedFields" />
 	<input type="hidden" value="" name="ChangedValues" id="ChangedValues" />
-
-	#bTextAreaTag(name="title",rows="2",id="Title",label="Title",content="#HTMLSafe(Attributes.Title)#",style="width: 495px; height: 36px;")#
+	
+	#bTextAreaTag(name="title",rows="2",id="Title",label="Title",content="#HTMLSafe(Attributes.Title)#",class="span12",style="height: 36px;")#
 	#bSelectTag(name="activitytypeid",id="ActivityType",disabled="disabled",label="Type",options=qActivityTypeList,selected="#attributes.activitytypeid#")#
 	#bSelectTag(name="grouping",id="Grouping",disabled="disabled",label="Sub Type",options=[],selected="#attributes.groupingId#")#
 	#bSelectTag(name="sessiontype",id="SessionType",textField="name",valueField="key",disabled="disabled",label="Session Type",options=sessionTypes,selected="#attributes.sessionType#")#
 		
+	
+	<div class="divider">
+		<hr />
+	</div>
+	
 	<div style="display: none;">
 	<label for="ReleaseDate">Release Date</label>
 	<input type="text" name="ReleaseDate" id="ReleaseDate" value="#Attributes.ReleaseDate#" class="DatePicker" />
@@ -219,6 +222,9 @@ $(document).ready(function(){
 			<input type="radio" name="Sponsorship" class="Sponsorship hide" id="SponsorshipJ"<cfif Trim(Attributes.Sponsorship) EQ "J"> checked</cfif> value="J" />
 		</div>
 	</div>
+	
+	<div class="divider"><hr /></div>
+	
 	
 	<div class="control-group">
 		<label for="StartDate" class="control-label">Start Date</label>
@@ -238,6 +244,9 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
+	
+	<div class="divider"><hr /></div>
+	
 	
 	<div class="Location control-group">
 		<label for="Location" class="control-label">Location Name</label>
@@ -286,7 +295,6 @@ $(document).ready(function(){
 		</div>
 	</div>
 	
-	
 	<div class="Location control-group">
 		<label for="Country" class="control-label">Country</label>
 		<div class="controls">
@@ -298,7 +306,6 @@ $(document).ready(function(){
 			</select>
 		</div>
 	</div>
-	
 	<div class="Location control-group">
 		<label for="PostalCode" class="control-label">Postal Code</label>
 		<div class="controls">
@@ -306,25 +313,17 @@ $(document).ready(function(){
 		</div>
 	</div>
 	
+	<div class="divider"><hr /></div>
+	
+	
 	<div class="control-group">
 		<label for="ExternalID" class="control-label">ExternalID</label>
 		<div class="controls">
 			<input type="text" name="ExternalID" id="ExternalID" value="#Attributes.ExternalID#" />
 		</div>
 	</div>
-
-	Created By
-	
-	<a href="#request.myself#Person.Detail?PersonID=#qModified.CreatedByID#">#qModified.CreatedByName#</a> (#DateFormat(ActivityBean.getCreated(),"mm/dd/yyyy")# #TimeFormat(ActivityBean.getCreated(),"hh:mmTT")#)
-	
-	<cfif Attributes.UpdatedBy NEQ "">
-	
-	Updated By
-	
-	<a href="#request.myself#Person.Detail?PersonID=#qModified.UpdatedByID#">#qModified.UpdatedByName#</a> (#DateFormat(ActivityBean.getUpdated(),"mm/dd/yyyy")# #TimeFormat(ActivityBean.getUpdated(),"hh:mmTT")#)
-	
-	
-	</cfif>
 	</fieldset>
+	
+	<cfinclude template="/lib/saveinfo.cfm" />
 </form>
 </cfoutput>

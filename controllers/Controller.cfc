@@ -28,6 +28,8 @@
                 <cfset subLayout('adm_person') />
             <cfelseif params.controller EQ "activities" AND listFindNoCase("edit",params.action)>
                 <cfset subLayout("adm_activity") />
+			<cfelseif params.controller EQ "activities" AND listFindNoCase("show",params.action)>
+				<cfset subLayout("pub_activity") />
             </cfif>
         <cfelse>
         	<cfset subLayout("#params.layout#") />

@@ -1,11 +1,4 @@
 <cfoutput>
-<div class="welcome-msg alert alert-info"><h4>Getting Started</h4>
-<p>
-	If you would like to take this online course, press 'Start Activity' to continue.
-</p>
-<a href="##" class="btn btn-primary">Start Activity</a>
-</div>
-
 <h4>Overview</h4>
 <p>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum iaculis pellentesque augue, nec accumsan urna tincidunt eu. Morbi a venenatis quam. Duis eu egestas lacus. Nulla est massa, interdum et fringilla a, condimentum eu erat. Quisque sed erat mauris, at cursus massa. Praesent at est mi, quis dictum risus. Donec congue lectus non odio ultricies non imperdiet nisi hendrerit.

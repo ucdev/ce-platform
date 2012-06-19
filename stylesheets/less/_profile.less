@@ -1,11 +1,7 @@
 .profile {
-	.btn-group {
-		> .btn.active {
-			z-index: 1;
-		}
-	}
+	
 	position:relative;
-	.box-shadow(1px 0 #D9D9D9);
+	
 	.nav-header {
 		color: #999999;
 		display: block;
@@ -16,6 +12,36 @@
 		text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 		text-transform: uppercase;
 	}
+	
+	
+	.profile-bg {
+		border-left: 1px solid #D9D9D9;
+		border-right: 1px solid #D9D9D9;
+		bottom: 0;
+		left: 160px;
+		margin: auto;
+		position: absolute;
+		top: -19px;
+		width: 799px;
+		z-index: -1;
+		
+		.profile-bg-inner {
+			background-color: #F2F2F2;
+			border-top: 1px solid #B3B3B3;
+			bottom: 0;
+			position: absolute;
+			top: 53px;
+			width: 799px;
+		}
+	}
+	
+	.btn-group {
+		> .btn.active {
+			cursor: default;
+			z-index: 1;
+		}
+	}
+	
 	.pager {
 		a {
 			padding: 4px 9px;
@@ -90,10 +116,7 @@
 	}
 	
 	> .contentBar {
-		border-left: 1px solid #DDDDDD;
-		margin-left: 0;
 		min-height: 600px;
-		padding-left: 9px;
 		//width: 622px;
 		
 		.btn-toolbar {
@@ -126,6 +149,10 @@
 	}
 	
 	> .infoBar {
+		position: absolute;
+		right: 0;
+		top: 47px;
+		
 		> .infoBar_section {
 			> .title {
 				h4 {
