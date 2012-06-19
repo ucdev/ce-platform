@@ -10,7 +10,7 @@
 		</div>
 		
 		<div class="titleBar span20">
-			<h3 class="pull-left">#includeContent("pageTitle")#</h3>
+			<h3 class="pull-left mls">#includeContent("pageTitle")#</h3>
 			
 			<cfif isLoggedIn() AND isAdmin()>
 			<div class="pull-right mrm">

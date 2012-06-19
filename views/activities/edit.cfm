@@ -313,17 +313,17 @@ $(document).ready(function(){
 		</div>
 	</div>
 	
-	<div class="divider"><hr /></div>
-	
-	
 	<div class="control-group">
 		<label for="ExternalID" class="control-label">ExternalID</label>
 		<div class="controls">
 			<input type="text" name="ExternalID" id="ExternalID" value="#Attributes.ExternalID#" />
 		</div>
 	</div>
-	</fieldset>
+	
+	<div class="divider"><hr /></div>
 	
 	<cfinclude template="/lib/saveinfo.cfm" />
+	</fieldset>
+	
 </form>
 </cfoutput>
