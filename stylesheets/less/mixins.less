@@ -442,8 +442,8 @@
 
   // in these cases the gradient won't cover the background, so we override
   &:hover, &:active, &.active, &.disabled, &[disabled] {
-    background-color: desaturate(@endColor, 10%);;
-	border-color: darken(@endColor,10%);
+    background-color: @endColor;
+	border-color: darken(@endColor,5%);
     *background-color: darken(@endColor, 5%);
   }
 

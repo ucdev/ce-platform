@@ -106,7 +106,7 @@
 .profile .pager .current.disabled,
 .profile .pager .current[disabled] {
   background-color: #a30119;
-  border-color: #700111;
+  border-color: #8a0115;
   *background-color: #8a0115;
 }
 .profile .pager .current:active,

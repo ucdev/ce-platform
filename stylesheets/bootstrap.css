@@ -4389,7 +4389,7 @@ button.close {
 .btn.disabled,
 .btn[disabled] {
   background-color: #e4e4e3;
-  border-color: #cbcbc9;
+  border-color: #d7d7d6;
   *background-color: #d7d7d6;
 }
 .btn:active,
@@ -4524,7 +4524,7 @@ button.close {
 .btn-primary.disabled,
 .btn-primary[disabled] {
   background-color: #a30119;
-  border-color: #700111;
+  border-color: #8a0115;
   *background-color: #8a0115;
 }
 .btn-primary:active,
@@ -4554,7 +4554,7 @@ button.close {
 .btn-warning.disabled,
 .btn-warning[disabled] {
   background-color: #f89406;
-  border-color: #c67605;
+  border-color: #df8505;
   *background-color: #df8505;
 }
 .btn-warning:active,
@@ -4584,7 +4584,7 @@ button.close {
 .btn-danger.disabled,
 .btn-danger[disabled] {
   background-color: #bd362f;
-  border-color: #942a25;
+  border-color: #a9302a;
   *background-color: #a9302a;
 }
 .btn-danger:active,
@@ -4614,7 +4614,7 @@ button.close {
 .btn-success.disabled,
 .btn-success[disabled] {
   background-color: #51a351;
-  border-color: #408140;
+  border-color: #499249;
   *background-color: #499249;
 }
 .btn-success:active,
@@ -4644,7 +4644,7 @@ button.close {
 .btn-info.disabled,
 .btn-info[disabled] {
   background-color: #2f96b4;
-  border-color: #24748c;
+  border-color: #2a85a0;
   *background-color: #2a85a0;
 }
 .btn-info:active,
@@ -4674,7 +4674,7 @@ button.close {
 .btn-inverse.disabled,
 .btn-inverse[disabled] {
   background-color: #222222;
-  border-color: #080808;
+  border-color: #151515;
   *background-color: #151515;
 }
 .btn-inverse:active,

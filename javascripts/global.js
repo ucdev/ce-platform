@@ -70,7 +70,34 @@ function SubmitForm(oForm) {
 	oForm.submit();
 }
 
+function getSprites() {
+	var resources = [];
+	$('[class^="icon16-"],[class*=" icon16-"]').each(function(i,val) {
+		var classes = $(this).attr('class').split(' ');
+		$(classes).each(function(i,val) {
+			console.log(val);
+			if (val !== '') {
+				resources.push(val);
+			}
+		});
+	});
+	
+	resources = resources.unique().sort();	
+	
+	$.ajax({
+		   url:'/resources/sprites/',
+		   type:'post',
+		   data:{
+				'images':resources.toString() 
+		   },
+		   success:function(data) {
+				$('head').append('<link rel="stylesheet" href="/stylesheets/sprites/' + $.trim(data) + '.css" type="text/css" />'); 
+		   }
+	});
+}
 $(function(){
+	getSprites();
+	
     $('input').keydown(function(e){
         if (e.keyCode == 13) {
             $(this).parents('form').submit();
@@ -79,6 +106,17 @@ $(function(){
     });
 });
 
+Array.prototype.unique = function () {
+	var arrVal = this;
+	var uniqueArr = [];
+	for (var i = arrVal.length; i--; ) {
+		var val = arrVal[i];
+		if ($.inArray(val, uniqueArr) === -1) {
+			uniqueArr.unshift(val);
+		}
+	}
+	return uniqueArr;
+}
 /* HISTORY OBJECT */
 function historyList(properties) {
 	/* SET DEFAULT VALUES */

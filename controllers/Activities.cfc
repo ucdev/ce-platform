@@ -1,4 +1,8 @@
 <cfcomponent extends="Controller">
+	<cffunction name="init">
+		
+	</cffunction>
+	
 	<cffunction name="index">
 		<cfset activityTypes = model("sys_activityType").findAll(maxRows=5)>
         <cfset activityCategories = model("Category").findAll(order="name")>
