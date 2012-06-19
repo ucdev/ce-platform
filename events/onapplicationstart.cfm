@@ -28,6 +28,9 @@
 <cfset generateBundle(type="js", bundle="ccpd.activity.participants", compress=true, 
 	sources="lib/activity.participants") />
             
+<cfset generateBundle(type="js", bundle="ccpd.attendee", compress=true, 
+	sources="lib/attendee") />
+            
 <cfset generateBundle(type="js", bundle="ccpd.people", compress=true, 
 	sources="lib/people") />
             

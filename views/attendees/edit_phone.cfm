@@ -1,3 +1,4 @@
+<cfinclude template="/lib/savejs.cfm" />
 <cfoutput>
 <h1>Editing Attendee</h1>
 #includePartial("showFlash")#

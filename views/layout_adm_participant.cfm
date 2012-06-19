@@ -1,5 +1,5 @@
 <cfoutput>
-#includePartial(partial="/attendees/attendee_js")#
+#includePartial(partial="/attendees/_js")#
 <div class="profile editor row">
 	<div class="projectBar span4">
 		#includePartial(partial="/attendees/sublayout/edit_photo")#
