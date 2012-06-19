@@ -1,6 +1,6 @@
 <cfcomponent extends="Model">
     <cffunction name="init">
-        <cfset table("imagetype")>
+        <cfset table("ce_imagetype")>
         <cfset property(name="id", column="id") />
         <!---<cfset setPrimaryKey(property="id") />--->
     </cffunction>

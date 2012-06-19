@@ -15,9 +15,10 @@
 
 <cfset set(dataSourceName="CCPD")>
 <cfset set(reloadPassword="05125586") />
-<cfset set(functionName="sendEmail", server="", username="", password="")> 
+<cfset set(functionName="sendEmail", server="", username="", password="")>
 <cfset set(softDeleteProperty="deleted")>
-<cfset set(tableNamePrefix="ce_")>
+<cfset set(timeStampOnCreateProperty="created")>
+<cfset set(timeStampOnUpdateProperty="updated")>
 <cfset set(overwritePlugins=false)>
 
 <!---<cfset set(functionName='selectTag',prependToLabel='',appendToLabel='',prepend='<div class="control-group"><div class="controls">', append='<p class="help-block"></p></div></div>',labelPlacement="before",insertBlank=true)>

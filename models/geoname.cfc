@@ -1,7 +1,7 @@
 <cfcomponent extends="Model">
     <cffunction name="init">
-        <cfset table("ce_relicensure")>
-        <cfset property(name="id", column="id") />
+        <cfset table("geoname")>
+        <cfset property(name="id", column="geonameid") />
         <!---<cfset setPrimaryKey(property="id") />--->
     </cffunction>
 </cfcomponent>

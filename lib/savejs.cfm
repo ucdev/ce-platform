@@ -93,7 +93,7 @@ $(document).ready(function() {
 	$("select").live("change",function() {
 		if(this.id != "AuthLevel" && this.id != "StatusChanger" && this.id != "CatAdder") {
 			Unsaved();
-			AddChange($("label[for='" + this.id + "']").html(),$(this).selectedTexts());
+			AddChange($(this).attr('name'),$(this).children('option[value=' + $(this).val() + ']').text());
 		}
 	});
 	$("input[type='checkbox']").live("change",function() {

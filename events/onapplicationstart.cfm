@@ -20,7 +20,9 @@
 			bootstrap-collapse,
 			bootstrap-carousel,
 			bootstrap-typeahead,
-			global") />
+			global,
+			uiTokenizer,
+			uiTypeahead") />
             
 <cfset generateBundle(type="js", bundle="ccpd.activity", compress=true, 
 	sources="lib/activity") />
@@ -35,11 +37,9 @@
 	sources="lib/people") />
             
 <cfset generateBundle(type="js", bundle="ccpd-legacy", compress=true, 
-	sources="jquery.autocomplete.pack,
-			jquery.blockUI,
+	sources="jquery.blockUI,
 			jquery.cfjs.packed,
 			jquery.maskedinput-1.1.3.pack,
-			jquery.tokenInput,
 			action_menu") />
 
 <cfset application['config'] = {} />

@@ -21,24 +21,32 @@
                     <input type="text" name="activity_participant[firstName]" id="activity_participant-firstName" class="span5" value="#activity_participant.firstName#" />
                 </div>
             </div>
+        </div>
+        <div class="control-group">
             <label for="activity_participant-middleName" class="control-label">Middle Name</label>
             <div class="controls">
                 <div class="input-append">
                     <input type="text" name="activity_participant[middleName]" id="activity_participant-middleName" class="span5" value="#activity_participant.middleName#" />
                 </div>
             </div>
+        </div>
+        <div class="control-group">
             <label for="activity_participant-lastName" class="control-label">Last Name</label>
             <div class="controls">
                 <div class="input-append">
                     <input type="text" name="activity_participant[lastName]" id="activity_participant-lastName" class="span5" value="#activity_participant.lastName#" />
                 </div>
             </div>
+        </div>
+        <div class="control-group">
             <label for="activity_participant-certName" class="control-label">Certificate Name</label>
             <div class="controls">
                 <div class="input-append">
                     <input type="text" name="activity_participant[certName]" id="activity_participant-certName" class="span5" value="#activity_participant.certName#" />
                 </div>
             </div>
+        </div>
+        <div class="control-group">
             <label for="activity_participant-email" class="control-label">Email</label>
             <div class="controls">
                 <div class="input-append">
@@ -50,44 +58,56 @@
             <label for="activity_participant-statusId" class="control-label">Status</label>
             <div class="controls">
                 <div class="input-append">
-                    <select name="attendee_participant[statusId]" id="attendee_participant-statusId" class="js-status">
+                    <select name="activity_participant[statusId]" id="activity_participant-statusId" class="js-status">
                     	<cfloop query="statuses">
                         <option value="#statuses.id#"<cfif activity_participant.statusId EQ statuses.id> selected="selected"</cfif>>#statuses.name#</option>
                         </cfloop>
                     </select>
                 </div>
             </div>
+        </div>
+        <div class="control-group">
             <label for="activity_participant-TermsFlag" class="control-label">Accepted Terms?</label>
             <div class="controls">
                 <div class="input-append">
                     <button class="btn js-btn-terms<cfif activity_participant.TermsFlag EQ "Y"> active</cfif>" id="btn-terms-y" type="button">Yes</button><button class="btn js-btn-terms<cfif activity_participant.TermsFlag EQ "N"> active</cfif>" id="btn-terms-n" type="button">No</button>
                 </div>
             </div>
+        </div>
+        <div class="control-group">
             <label for="activity_participant-MDflag" class="control-label">Is MD?</label>
             <div class="controls">
                 <div class="input-append">
                     <button class="btn js-btn-md<cfif activity_participant.MDflag EQ "Y"> active</cfif>" id="btn-md-y" type="button">Yes</button><button class="btn js-btn-md<cfif activity_participant.MDflag EQ "N"> active</cfif>" id="btn-md-n" type="button">No</button>
                 </div>
             </div>
+        </div>
+        <div class="control-group">
             <label for="activity_participant-PaymentFlag" class="control-label">Has Paid?</label>
             <div class="controls">
                 <div class="input-append">
                     <button class="btn js-btn-payment<cfif activity_participant.paymentFlag EQ "Y"> active</cfif>" id="btn-payment-y" type="button">Yes</button><button class="btn js-btn-payment<cfif activity_participant.paymentFlag EQ "N"> active</cfif>" id="btn-payment-n" type="button">No</button>
                 </div>
             </div>
-            <div class="payment-made" style="display: none;">
+        </div>
+        <div class="payment-made" style="display: none;">
+        	<div class="control-group">
                 <label for="activity_participant-PayAmount" class="control-label">Amount Paid</label>
                 <div class="controls">
                     <div class="input-append">
                         <input type="text" name="activity_participant[PayAmount]" id="activity_participant-PayAmount" value="#activity_participant.PayAmount#" class="span2" />
                     </div>
                 </div>
+            </div>
+            <div class="control-group">
                 <label for="activity_participant-PayOrderNo" class="control-label">Pay Order ##</label>
                 <div class="controls">
                     <div class="input-append">
                         <input type="text" name="activity_participant[PayOrderNo]" id="activity_participant-PayOrderNo" value="#activity_participant.PayOrderNo#" class="span2" />
                     </div>
                 </div>
+            </div>
+            <div class="control-group">
                 <label for="activity_participant-PaymentDate" class="control-label">Payment Date</label>
                 <div class="controls">
                     <div class="input-append">
@@ -96,8 +116,8 @@
                 </div>
             </div>
         </div>
-        <div class="control-group">
-        	<div id="register-date">
+        <div id="register-date">
+        	<div class="control-group">
                 <label for="activity_participant-RegisterDate" class="control-label">Registered Date</label>
                 <div class="controls">
                     <div class="input-append">
@@ -105,13 +125,17 @@
                     </div>
                 </div>
             </div>
-            <div id="complete-date">
+        </div>
+        <div id="complete-date">
+        	<div class="control-group">
                 <label for="activity_participant-CompleteDate" class="control-label">Completed Date</label>
                 <div class="controls">
                     <div class="input-append">
                         <input type="text" name="activity_participant[CompleteDate]" id="date3" value="#dateFormat(activity_participant.CompleteDate, 'MM/DD/YYYY')#" class="span2 js-date" /><button class="btn js-datepicker" type="button"><i class="icon-calendar"></i></button>
                     </div>
                 </div>
+            </div>
+            <div class="control-group">
                 <label for="activity_participant-emailSentFlag" class="control-label">Cert. Email Sent?</label>
                 <div class="controls">
                     <div class="input-append">
@@ -119,7 +143,9 @@
                     </div>
                 </div>
             </div>
-            <div id="term-date">
+        </div>
+        <div id="term-date">
+        	<div class="control-group">
                 <label for="activity_participant-TermDate" class="control-label">Failed Date</label>
                 <div class="controls">
                     <div class="input-append">

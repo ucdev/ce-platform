@@ -1,6 +1,6 @@
 <cfcomponent extends="Model">
     <cffunction name="init">
-        <cfset table("Project")>
+        <cfset table("ce_Project")>
         <cfset property(name="id", column="ProjectID") />
         <!---<cfset setPrimaryKey(property="id") />--->
     </cffunction>

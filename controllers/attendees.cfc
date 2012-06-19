@@ -16,6 +16,7 @@
 	<cffunction name="edit_address">
 		<!--- Find the record --->
     	<cfset activity_participant = model("attendee_address").findByKey(params.key)>
+        <cfset geodata = model("Geoname").findByKey(activity_participant.geonameid)>
         
     	<!--- Check if the record exists --->
 	    <cfif NOT IsObject(activity_participant)>
@@ -61,17 +62,16 @@
 		<cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
     	<cfset var activity_participant = model("attendee_address").findByKey(params.key)>
 		
-		<cfcontent type="text/javascript" />
-		
 		<cfset status.setStatus(false)>
 		<cfset status.setStatusMsg("Attendee Address Update Failed.")>
 		
 		<!--- Verify that the activity_participant updates successfully --->
 		<cfif activity_participant.update(params.activity_participant)>
-			<cfset flashInsert(success="The attendee was updated successfully.")>
+        	<cfset status.setStatus(true)>
+			<cfset flashInsert(success="The attendee address was updated successfully.")>
 		<!--- Otherwise --->
 		<cfelse>
-			<cfset flashInsert(error="There was an error updating the attendee.")>
+			<cfset flashInsert(error="There was an error updating the attendee address.")>
 		</cfif>
         
         <cfset renderText(status.getJSON()) />
@@ -82,18 +82,16 @@
 		<cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
     	<cfset var activity_participant = model("attendee_phone").findByKey(params.key)>
 		
-		<cfcontent type="text/javascript" />
-		
 		<cfset status.setStatus(false)>
 		<cfset status.setStatusMsg("Attendee Phone Update Failed.")>
-        
 		
 		<!--- Verify that the activity_participant updates successfully --->
 		<cfif activity_participant.update(params.activity_participant)>
-			<cfset flashInsert(success="The attendee was updated successfully.")>
+        	<cfset status.setStatus(true)>
+			<cfset flashInsert(success="The attendee phone inforamtion was updated successfully.")>
 		<!--- Otherwise --->
 		<cfelse>
-			<cfset flashInsert(error="There was an error updating the attendee.")>
+			<cfset flashInsert(error="There was an error updating the attendee phone inforamtion.")>
 		</cfif>
         
         <cfset renderText(status.getJSON()) />
