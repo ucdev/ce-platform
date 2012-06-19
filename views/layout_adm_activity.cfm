@@ -12,7 +12,7 @@
 		</div>
 		
 		<div class="titleBar span20">
-			<h3 class="pull-left">#includeContent("pageTitle")#</h3>
+			<h3 class="pull-left mls">#includeContent("pageTitle")#</h3>
 			<div class="pull-right mrm">
 				<a href="/activities/show/#activity.id#" class="btn"><i class="icon-chevron-left"></i> View Activity</a>
 			</div>

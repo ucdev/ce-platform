@@ -4389,6 +4389,7 @@ button.close {
 .btn.disabled,
 .btn[disabled] {
   background-color: #e4e4e3;
+  border-color: #cbcbc9;
   *background-color: #d7d7d6;
 }
 .btn:active,
@@ -4436,8 +4437,6 @@ button.close {
   cursor: default;
   background-color: #e6e6e6;
   background-image: none;
-  opacity: 0.65;
-  filter: alpha(opacity=65);
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -4525,6 +4524,7 @@ button.close {
 .btn-primary.disabled,
 .btn-primary[disabled] {
   background-color: #a30119;
+  border-color: #700111;
   *background-color: #8a0115;
 }
 .btn-primary:active,
@@ -4554,6 +4554,7 @@ button.close {
 .btn-warning.disabled,
 .btn-warning[disabled] {
   background-color: #f89406;
+  border-color: #c67605;
   *background-color: #df8505;
 }
 .btn-warning:active,
@@ -4583,6 +4584,7 @@ button.close {
 .btn-danger.disabled,
 .btn-danger[disabled] {
   background-color: #bd362f;
+  border-color: #942a25;
   *background-color: #a9302a;
 }
 .btn-danger:active,
@@ -4612,6 +4614,7 @@ button.close {
 .btn-success.disabled,
 .btn-success[disabled] {
   background-color: #51a351;
+  border-color: #408140;
   *background-color: #499249;
 }
 .btn-success:active,
@@ -4641,6 +4644,7 @@ button.close {
 .btn-info.disabled,
 .btn-info[disabled] {
   background-color: #2f96b4;
+  border-color: #24748c;
   *background-color: #2a85a0;
 }
 .btn-info:active,
@@ -4670,6 +4674,7 @@ button.close {
 .btn-inverse.disabled,
 .btn-inverse[disabled] {
   background-color: #222222;
+  border-color: #080808;
   *background-color: #151515;
 }
 .btn-inverse:active,
@@ -5540,6 +5545,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .btn-navbar.disabled,
 .navbar .btn-navbar[disabled] {
   background-color: #000000;
+  border-color: #000000;
   *background-color: #000000;
 }
 .navbar .btn-navbar:active,

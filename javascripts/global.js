@@ -303,4 +303,11 @@ $(function(){
 	$("#fax2").mask("(999) 999-9999");
 	$("#tin").mask("99-9999999");
 	$("#ssn").mask("9999");
+	
+	$(".control-label").each(function(i,val) {
+		var text = $(val).text();
+		var newText = text + ':'
+		
+		$(val).text(newText);
+	});
 });
