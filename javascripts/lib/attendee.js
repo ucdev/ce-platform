@@ -66,13 +66,22 @@ $(document).ready(function() {
 	showAttendeeDates($statusSelector.val());
 	/* INIT END */
 	
-	$addressGeoname.uiTypeahead({
-		ajaxSearchURL:'/geoname/findLocation',
-		showImage:true,
-		allowAdd:false,
-		size:'full',
-		defaultValue:geodata.id
-	});
+	if(typeof geodata != 'undefined') {
+		$addressGeoname.uiTypeahead({
+			ajaxSearchURL:'/geonames/findLocation',
+			showImage:false,
+			allowAdd:false,
+			size:'full',
+			defaultValue:geodata.name + ', ' + geodata.admin1_code,
+			onSelect: function(item) {
+				var $city = $('.js-city');
+				var $stateProvince = $('.js-state-province');
+				
+				$city.val(item.subtext1);
+				$stateProvince.val(item.subtext2);
+			}
+		});
+	}
 	
 	/*$addressGeoname.tokenInput("http://ws.geonames.org/searchJSON?featureClass=P&style=full&maxRows=12",{
 		queryParam:'name_startsWith',

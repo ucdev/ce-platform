@@ -185,7 +185,7 @@
 								var suggestions = [];
 								var curr_type = '';
 								var curr_type_friendly = '';
-								var payload = data.payload;
+								var payload = data.PAYLOAD;
 								currTotalResults = 0;
 								currTotalTypes = 0;
 								//process response
@@ -342,10 +342,10 @@
 					type:settings.ajaxSearchType,
 					dataType: "json",
 					data:{
-						hubId:settings.defaultValue
+						key:settings.defaultValue
 					},
 					success: function( data ) {
-						var hub = data.payload[0];
+						var hub = data.PAYLOAD;
 						
 						item_select(hub);
 					}
