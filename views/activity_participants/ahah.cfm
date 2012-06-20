@@ -13,6 +13,35 @@ totalPages = #attendeePager.getTotalNumberOfPages()#;
 </cfoutput>
 
 $(document).ready(function() {
+	
+	$(".PersonLink").each(function(i,val) {
+		$(this).qtip({
+			content:{
+				text:'Loading...',
+				ajax: {
+					url: '/tooltips/person/' + $.ListGetAt($(this).attr('id'),2,'|'), // URL to the local file
+					type: 'GET', // POST or GET
+					data: {} // Data to pass along with your request
+				}
+			},
+			position: {
+				my: 'top left',
+				at: 'bottom right',
+				target: false,
+				container: false,
+				viewport: false,
+				adjust: {
+					x: 0, y: 0,
+					mouse: true,
+					method: 'flip',
+					resize: true
+				},
+				effect: true
+			}
+		});
+	});
+	
+	
 	// UPDATED SELECTED MEMBER COUNT
 	$("#CheckedCount").html("(" + SelectedCount + ")");
 	$(".EditDateField").mask("99/99/9999");
@@ -90,7 +119,7 @@ $(document).ready(function() {
                 <th class="span1"><input type="checkbox" name="CheckAll" id="CheckAll" /></th>
                 <th class="span2"></th>
                 <th class="span4">Name</th>
-                <th class="span8">Status</th>
+                <th class="span7">Status</th>
                 <th>&nbsp;</th>
             </tr>
         </thead>

@@ -49,7 +49,7 @@
 	<div class="title"><h4>Global Options</h4></div>
 	<div class="content">
 		<div class="btn-group pull-left">
-			<a class="btn" title="Delete This Activity"><i class="icon16-bin"></i></a>
+			<a class="btn" title="Delete This Activity"><i class="icon16-cross"></i></a>
 			<a class="btn" title="Move This Activity"><i class="icon16-arrow-curve-000-left"></i></a>
 			<a class="btn" title="Copy This Activity"><i class="icon16-document-copy"></i></a>
 		</div>

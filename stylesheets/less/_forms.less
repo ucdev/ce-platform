@@ -9,6 +9,14 @@
 		margin: 0;
 	}
 	
+	.btn-group {
+		> .btn.active,.btn:active {
+			cursor: default;
+			border-color:darken(@btnPrimaryBackground,10%);
+			z-index: 1;
+		}
+	}
+	
 	.control-group {
 		padding-bottom: 5px;
 		margin-bottom: 0px;

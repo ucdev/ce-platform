@@ -79,7 +79,7 @@ function getSprites() {
 	$('[class^="icon16-"],[class*=" icon16-"]').each(function(i,val) {
 		var classes = $(this).attr('class').split(' ');
 		$(classes).each(function(i,val) {
-			console.log(val);
+			//console.log(val);
 			if (val !== '') {
 				resources.push(val);
 			}
