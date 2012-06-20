@@ -112,9 +112,7 @@
             
             <cfif arrayLen(status.getErrors()) EQ 0>
                 <!--- DELETE EXISTING --->
-                <cfset existingCredit = model("Activity_credit").findAll(where="activityId=" & params.key)>
-                <cfdump var="#existingCredit#" abort>
-                <cfset model("Activity_credit").deleteAll(where="activityId=" & params.key)>
+                <cfset model("Activity_credit").deleteAll(where="activityId=" & params.key, softDelete=false, includeSoftDeletes=true)>
                 
                 <cfloop query="qCredits">
                     <!--- if the CreditAmount Field is not empty it saves those values to the DB --->
