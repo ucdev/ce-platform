@@ -460,7 +460,7 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	$attendeeStatusChanger.live('click', function() {
+	$attendeeStatusChanger.live('click', function(e) {
 		var updateToStatus = this.id.split('-')[2];
 		
 		$.ajax({

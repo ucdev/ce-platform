@@ -12,6 +12,7 @@
 			jquery-ui-1.8.21.custom.min,
 			jquery.fixtext.js,
 			jquery.form.js,
+			jquery.qtip.js,
 			bootstrap-transition,
 			bootstrap-alert,
 			bootstrap-modal,
