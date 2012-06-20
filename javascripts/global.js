@@ -355,7 +355,7 @@ $(function(){
 	});
 });
 
-UTIL = {
+/*UTIL = {
 	exec: function( controller, action ) {
 	var ns = SITENAME,
 	action = ( action === undefined ) ? "init" : action;
@@ -374,4 +374,4 @@ UTIL = {
 }
 };
  
-$( document ).ready( UTIL.init );
+$( document ).ready( UTIL.init );*/
