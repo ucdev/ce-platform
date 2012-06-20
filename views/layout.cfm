@@ -11,7 +11,7 @@
 	#stylesheetLinkTag(bundle="ccpd")#
 	#javaScriptIncludeTag(bundle="ccpd")#
     #javaScriptIncludeTag(bundle="ccpd-legacy")#
-	#javaScriptIncludeTag(sources="less")#
+	<script src="/resources/jsloader/global.js?pagelet=#params.pagelet#&pagelet_token=#params.pagelet_token#" type="text/javascript"></script>
 	<style>
 	body {
 	padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -31,14 +31,14 @@
 	<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
 	</cfoutput>
 </head>
-
-<body>
 <cfoutput>
+<body data-pagelet="#params.pagelet#" data-pagelet_token="#params.pagelet_token#" data-controller="#lcase(params.controller)#" data-action="#lcase(params.action)#" data-version_token="#params.version_token#">
 	#includePartial(partial="/header")#
 	#includeContent()#
 	#includePartial(partial="/footer")#
-</cfoutput>
+
 <div class="alert alert-error" style="display:none;"></div>
 <div class="alert alert-success" style="display:none;"></div>
 </body>
+</cfoutput>
 </html>

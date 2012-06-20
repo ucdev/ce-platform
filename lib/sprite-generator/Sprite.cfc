@@ -414,16 +414,9 @@
 
 		<cfoutput>
 <cfsavecontent	variable=	"sSpriteCSS">
-.#this.sName# {
-	position:	absolute;
-	top:		0;
-	left:		0;
-
-	width:	#stUnitDimensions.width#px;
-	height:	#stUnitDimensions.height#px;
-	
-	background:	url( "#this.sName##sExtension#" ) no-repeat;
-
+[class^="icon16-"],
+[class*=" icon16-"] {
+  background-image: url("/images/#application.version_token#/sprites/#this.sName##sExtension#");
 }
 </cfsavecontent>
 		</cfoutput>
@@ -445,7 +438,7 @@
 					<cfif len( sImageName )>
 						<cfoutput>
 <cfsavecontent	variable=	"sSpriteCSS">#sSpriteCSS#
-	###sImageName#.#this.sName# {<cfif asGridImages[ currentColumn ][ currentRow ].height neq stUnitDimensions.height>
+	.icon16-#sImageName# {<cfif asGridImages[ currentColumn ][ currentRow ].height neq stUnitDimensions.height>
 		height:	#asGridImages[ currentColumn ][ currentRow ].height#px;</cfif><cfif asGridImages[ currentColumn ][ currentRow ].width neq stUnitDimensions.width>
 		width:	#asGridImages[ currentColumn ][ currentRow ].width#px;</cfif>
 		background-position:	#x#px #y#px;

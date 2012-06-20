@@ -1,7 +1,11 @@
-<cfset application.javaloader = javaLoader() /><!---
+<cfset application.javaloader = javaLoader() />
+<!---
 <cfset doLessGeneration = LessEngine(['bootstrap.less']) />--->
 <!---<cfset application.sengrid = createObject("component","lib.sendgrid").init(api_user='joshuairl',api_key='cfr010408') />
 --->
+
+<cfset application.version_token = "v3" />
+
 <cfset generateBundle(type="css", bundle="ccpd", compress=true, sources="bootstrap,jquery.ui,ccpd") />
 <cfset generateBundle(type="js", bundle="ccpd", compress=true, 
 	sources="jquery,
