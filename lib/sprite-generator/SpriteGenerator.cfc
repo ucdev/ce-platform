@@ -92,7 +92,7 @@
 				access=			"remote"
 				hint=			"I create a sprite from a directory.">
 		
-		<cfargument	name=		"sImageList"
+		<cfargument	name=		"arrImageList"
 			required=	"true"
 			hint=		"Specific files to sprite" />
 			
@@ -139,6 +139,7 @@
 
 		var	stImageFiles=	{};
 		var	stZipResult=	{};
+		
 		init();
 
 		oSprite=	createObject( "component" , "Sprite" ).init(
@@ -147,11 +148,10 @@
 			
 		oSprite.sImagePath=	sImagePath;
 
-		stImageFiles=	listToArray(arguments.sImageList,',');
-
-		for( sImageFilename in stImageFiles )
+		for( sImageFilename in arguments.arrImageList )
 			oSprite.addImage( sImageFilename=	sImageFilename );
-
+		
+		
 		oSprite.save();
 
 		FileMove(	"#sImageStorageLocation##oSprite.sName#.css" ,

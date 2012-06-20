@@ -23,7 +23,8 @@
 		
 	</div>
 </div>
-<!---<cfoutput>
+<!---
+<cfoutput>
 <div class="infoBar_section">
 	<div class="title"><h4>Meta Info</h4></div>
 	<div class="content">
@@ -41,15 +42,16 @@
 	</cfif>
 	</div>
 </div>
-</cfoutput>--->
+</cfoutput>
+--->
 
 <div class="infoBar_section">
 	<div class="title"><h4>Global Options</h4></div>
 	<div class="content">
 		<div class="btn-group pull-left">
-			<a class="btn" title="Delete This Activity"><i class="icon16-trash"></i></a>
+			<a class="btn" title="Delete This Activity"><i class="icon16-bin"></i></a>
 			<a class="btn" title="Move This Activity"><i class="icon16-arrow-curve-000-left"></i></a>
-			<a class="btn" title="Copy This Activity"><i class="icon16-copy"></i></a>
+			<a class="btn" title="Copy This Activity"><i class="icon16-document-copy"></i></a>
 		</div>
 	</div>
 </div>

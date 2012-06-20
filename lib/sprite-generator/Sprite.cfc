@@ -73,15 +73,10 @@
 
 		<cfscript>
 		var sImagePath=	"#this.sImagePath##sImageFilename#";
-		var imgNext = "";
-		var stImageDetails = {};
-		
-		if(NOT fileExists(sImagePath)) {
-			return false;
-		}
-		imgNext=	ImageRead( sImagePath );
 
-		stImageDetails=	{	sImageFilename=	sImageFilename ,
+		var	imgNext=	ImageRead( sImagePath );
+
+		var	stImageDetails=	{	sImageFilename=	sImageFilename ,
 									height=			imgNext.height ,
 									width=			imgNext.width };
 
@@ -238,7 +233,6 @@
 			}
 
 		}
-
 		if(	!bSameWidth && bOneColumn )
 			stSpriteDimensions.width=	stUnitDimensions.width;
 
@@ -255,7 +249,7 @@
 						stSpriteDimensions.height );
 						
 		}
-
+		
 		if( bSameExtension == false )
 			sExtension=	".png";
 
@@ -416,11 +410,18 @@
 <cfsavecontent	variable=	"sSpriteCSS">
 [class^="icon16-"],
 [class*=" icon16-"] {
-  background-image: url("/images/#application.version_token#/sprites/#this.sName##sExtension#");
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  vertical-align: text-top;
+  background-image: url( "/images/#application.version_token#/sprites/#this.sName##sExtension#" );
+  background-position: 14px 14px;
+  background-repeat: no-repeat;
+
 }
 </cfsavecontent>
 		</cfoutput>
-
 		<cfloop	from=	"1"
 				to=		"#stSpriteDimensions.rows#"
 				index=	"currentRow">

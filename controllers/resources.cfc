@@ -4,17 +4,18 @@
 		<cfparam name="params.images" default="" />
 		
 		<cfset spriteHash = "" />
-		<cfset imageFileList = "" />
+		<cfset imageFileList = [] />
 		<cfset var response = createObject("component","lib.buildStruct").init(status=false,statusMsg="failed to locate resource.") />
 		<cfset cssStore = expandPath("/stylesheets/#application.version_token#/sprites/") />
 		<cfset imgStore = expandPath("/images/#application.version_token#/sprites/") />
-		<cfif listLen(params.images,',') GT 0>
-			<cfset spriteHash = left(lcase(HASH(params.images,'MD5')),5) />
+		<cfset imgString = arrayTolist(params.images,',') />
+		<cfif arrayLen(params.images)>
+			<cfset spriteHash = left(lcase(HASH(imgString,'MD5')),5) />
 		</cfif>
 		
-		<cfloop list="#params.images#" index="i" delimiters=",">
-			<cfset imgFile = replace(i,'icon16-','') & ".png" />
-			<cfset imageFileList = listAppend(imageFileList,imgFile,',') />
+		<cfloop from="1" to="#arrayLen(params.images)#" index="i">
+			<cfset imgFile = replace(params.images[i],'icon16-','') & ".png" />
+			<cfset imageFileList.add(imgFile) />
 		</cfloop>
 		
 		<cfif NOT directoryExists(imgStore)>
@@ -26,11 +27,12 @@
 		</cfif>
 		
 		<cfset spritr = createObject("component","lib.sprite-generator.SpriteGenerator").generateFromList(
-			sImageList=imageFileList,
-			sImagePath=expandPath("/images/fugue/"),
+			arrImageList=imageFileList,
+			sImagePath=expandPath("\images\fugue\"),
 			sImageStorageLocation=imgStore,
 			sStylesheetStorageLocation=cssStore,
-			sName=spriteHash) />
+			sName=spriteHash,
+			bOneColumn=true) />
 		
 		<cfset renderText(spriteHash) />
 	</cffunction>

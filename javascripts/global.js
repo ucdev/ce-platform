@@ -92,7 +92,7 @@ function getSprites() {
 		   url:'/resources/sprites/',
 		   type:'post',
 		   data:{
-				'images':resources.toString() 
+				'images':resources
 		   },
 		   success:function(data) {
 				$('head').append('<link rel="stylesheet" href="/stylesheets/' + version_token + '/sprites/' + $.trim(data) + '.css" type="text/css" />'); 

@@ -1,6 +1,6 @@
 [class^="icon16-"],
 [class*=" icon16-"] {
-  background-image: url("/images/v3/sprites/adedf.png");
+  background-image: url("/stylesheets/v3/sprites/8cb71.png");
 }
 
 	.icon16-accme {
@@ -13,27 +13,52 @@
 
 	}
 
-	.icon16-card-address {
+	.icon16-calendar {
 		background-position:	-32px 0px;
 
 	}
 
-	.icon16-inbox-document {
+	.icon16-globe-green {
 		background-position:	-48px 0px;
 
 	}
 
-	.icon16-bug {
+	.icon16-users {
+		background-position:	-64px 0px;
+
+	}
+
+	.icon16-bin {
 		background-position:	0px -16px;
 
 	}
 
-	.icon16-calendar {
+	.icon16-bug {
 		background-position:	-16px -16px;
 
 	}
 
+	.icon16-card-address {
+		background-position:	-32px -16px;
+
+	}
+
+	.icon16-inbox-document {
+		background-position:	-48px -16px;
+
+	}
+
 	.icon16-chart-up-color {
+		background-position:	0px -16px;
+
+	}
+
+	.icon16-clock-history {
+		background-position:	-16px -16px;
+
+	}
+
+	.icon16-envelope {
 		background-position:	-32px -16px;
 
 	}
@@ -43,42 +68,22 @@
 
 	}
 
-	.icon16-clock-history {
-		background-position:	0px -32px;
-
-	}
-
-	.icon16-envelope {
-		background-position:	-16px -32px;
-
-	}
-
-	.icon16-globe-green {
-		background-position:	-32px -32px;
-
-	}
-
 	.icon16-sticky-note-pin {
-		background-position:	-48px -32px;
+		background-position:	0px -16px;
 
 	}
 
 	.icon16-trophy {
-		background-position:	0px -48px;
+		background-position:	-16px -16px;
 
 	}
 
 	.icon16-user-business {
-		background-position:	-16px -48px;
+		background-position:	-32px -16px;
 
 	}
 
 	.icon16-user-female {
-		background-position:	-32px -48px;
-
-	}
-
-	.icon16-users {
-		background-position:	-48px -48px;
+		background-position:	-48px -16px;
 
 	}
