@@ -5,9 +5,11 @@
 		
 		<cfset spriteHash = "" />
 		<cfset imageFileList = "" />
-		
+		<cfset var response = createObject("component","lib.buildStruct").init(status=false,statusMsg="failed to locate resource.") />
+		<cfset cssStore = expandPath("/stylesheets/#application.version_token#/sprites/") />
+		<cfset imgStore = expandPath("/images/#application.version_token#/sprites/") />
 		<cfif listLen(params.images,',') GT 0>
-			<cfset spriteHash = lcase(HASH(params.images,'MD5')) />
+			<cfset spriteHash = left(lcase(HASH(params.images,'MD5')),5) />
 		</cfif>
 		
 		<cfloop list="#params.images#" index="i" delimiters=",">
@@ -15,15 +17,39 @@
 			<cfset imageFileList = listAppend(imageFileList,imgFile,',') />
 		</cfloop>
 		
+		<cfif NOT directoryExists(imgStore)>
+			<cfdirectory action="create" directory="#imgStore#">
+		</cfif>
+		
+		<cfif NOT directoryExists(cssStore)>
+			<cfdirectory action="create" directory="#cssStore#">
+		</cfif>
+		
 		<cfset spritr = createObject("component","lib.sprite-generator.SpriteGenerator").generateFromList(
 			sImageList=imageFileList,
 			sImagePath=expandPath("/images/fugue/"),
-			sImageStorageLocation=expandPath("/images/sprites/"),
-			sStylesheetStorageLocation=expandPath("/stylesheets/sprites/"),
+			sImageStorageLocation=imgStore,
+			sStylesheetStorageLocation=cssStore,
 			sName=spriteHash) />
 		
 		<cfset renderText(spriteHash) />
 	</cffunction>
+	
+	<cffunction name="jsloader">
+		<cfparam name="params.key">
+		
+		<cfcontent type="text/javascript" />
+		
+		<cfset renderText(renderPartial(partial="/#params.key#",returnAs="string")) />
+	</cffunction>
+	
+	<!---<cffunction name="spriteloader">
+		<cfparam name="params.key">
+		
+		<cfcontent type="text/javascript" />
+		
+		<cfset renderText(renderPartial(partial="/#params.key#",returnAs="string")) />
+	</cffunction>--->
 </cfcomponent>
 
 

@@ -1,1 +1,1 @@
-#javaScriptIncludeTag(bundle="ccpd.activity.participants")#
+#javaScriptIncludeTag(bundle="ccpd.")#

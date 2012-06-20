@@ -2,6 +2,16 @@
 	<cffunction name="init">
 		<cfset filters(through="autoSetup") />
 		<cfset filters(through="autoLayout",type="after") />
+		<cfset filters(through="pagelet",type="before") />
+	</cffunction>
+	
+	<cffunction name="pagelet">
+		<cfparam name="params.controller" default="" />
+		<cfparam name="params.action" default="" />
+		
+		<cfparam name="params.pagelet" default="#lcase("#params.controller#_#params.action#")#" />
+		<cfparam name="params.pagelet_token" default="#lcase(left(HASH(params.pagelet,'MD5'),6))#" />
+		<cfparam name="params.version_token" default="#application.version_token#" />
 	</cffunction>
 	
 	<cffunction name="autoSetup">

@@ -70,6 +70,10 @@ function SubmitForm(oForm) {
 	oForm.submit();
 }
 
+function getResources() {
+	getSprites();	
+}
+
 function getSprites() {
 	var resources = [];
 	$('[class^="icon16-"],[class*=" icon16-"]').each(function(i,val) {
@@ -91,12 +95,13 @@ function getSprites() {
 				'images':resources.toString() 
 		   },
 		   success:function(data) {
-				$('head').append('<link rel="stylesheet" href="/stylesheets/sprites/' + $.trim(data) + '.css" type="text/css" />'); 
+				$('head').append('<link rel="stylesheet" href="/stylesheets/' + version_token + '/sprites/' + $.trim(data) + '.css" type="text/css" />'); 
 		   }
 	});
 }
+
 $(function(){
-	getSprites();
+	getResources();
 	
     $('input').keydown(function(e){
         if (e.keyCode == 13) {
@@ -349,3 +354,24 @@ $(function(){
 		$(val).text(newText);
 	});
 });
+
+UTIL = {
+	exec: function( controller, action ) {
+	var ns = SITENAME,
+	action = ( action === undefined ) ? "init" : action;
+	 
+	if ( controller !== "" && ns[controller] && typeof ns[controller][action] == "function" ) {ns[controller][action]();}
+	},
+	 
+	init: function() {
+	var body = document.body,
+	controller = body.getAttribute( "data-controller" ),
+	action = body.getAttribute( "data-action" );
+	 
+	UTIL.exec( "common" );
+	UTIL.exec( controller );
+	UTIL.exec( controller, action );
+}
+};
+ 
+$( document ).ready( UTIL.init );
