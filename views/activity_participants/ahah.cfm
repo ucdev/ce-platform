@@ -24,6 +24,12 @@ $(document).ready(function() {
 					data: {} // Data to pass along with your request
 				}
 			},
+			show: {
+				event: 'click'
+			},
+			hide: {
+				event: 'unfocus'
+			},
 			position: {
 				my: 'top left',
 				at: 'bottom right',
