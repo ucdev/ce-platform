@@ -122,7 +122,7 @@ $(document).ready(function() {
 			success:function(responseText,statusText) {
 				var d = new Date();
 				
-				if(responseText.STATUS == "false") {
+				if(!responseText.STATUS) {
 					$.each(responseText.ERRORS, function(i,item){
 						addError(item.MESSAGE,250,6000,4000);
 					});
@@ -136,6 +136,12 @@ $(document).ready(function() {
 					if(isPublishArea) {
 						updatePublishState();
 					}
+					
+					// DETERMINE IF AN postSave() FUNCTION EXISTS
+					if(typeof postSave == 'function') {
+						postSave(responseText);
+					}
+					
 					updateAll();
 					ClearChanges();
 					IsSaved = true;

@@ -31,6 +31,9 @@
 <cfset generateBundle(type="js", bundle="ccpd.activity", compress=true, 
 	sources="lib/activity") />
             
+<cfset generateBundle(type="js", bundle="ccpd.activity.credits", compress=true, 
+	sources="lib/activity.credits") />
+            
 <cfset generateBundle(type="js", bundle="ccpd.activity.participants", compress=true, 
 	sources="lib/activity.participants") />
             

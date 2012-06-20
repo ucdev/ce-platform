@@ -21,10 +21,11 @@
 	
 	<cffunction name="edit">
 		<cfparam name="params.key" type="integer" />
+		<cfparam name="params.submitted" type="integer" default="0" />
         <cfparam name="attributes.step" default="Login" />
 		
 		<!--- Create Bean --->
-		<cfset ActivityBean = CreateObject("component","#Application.Settings.Com#Activity.Activity").Init(ActivityID=Attributes.ActivityID)>
+		<cfset ActivityBean = CreateObject("component","#Application.Settings.Com#Activity.Activity").Init(ActivityID=params.key)>
 		
 		<cfset qActivityTypeList = Application.Com.ActivityTypeGateway.getByAttributes(DeletedFlag='N')>
 		<cfset qEMGroupings = Application.Com.GroupingGateway.getByAttributes(ActivityTypeID=2)>
@@ -96,7 +97,7 @@
 			<cfset ActivityBean.setDeletedFlag("Y")>
 			<cfset ParentBean = CreateObject("component","#Application.Settings.Com#Activity.Activity").Init()>
 		</cfif>
-		<cfif NOT attributes.submitted GT 0>
+		<cfif NOT params.submitted GT 0>
 			<cfset Attributes.Title = ActivityBean.getTitle()>
 			<cfset Attributes.Description = ActivityBean.getDescription()>
 			<cfset Attributes.SessionType = ActivityBean.getSessionType()>
@@ -128,7 +129,7 @@
 			</cfif>
 		</cfif>
 		
-        <cfif NOT isObject(activity)>
+        <cfif NOT isObject(ActivityBean)>
 	        <cfset flashInsert(error="Activity #params.key# was not found")>
 			<cfset redirectTo(action="index")>
         </cfif>
