@@ -13,17 +13,17 @@
 			<span class="caret"></span>
 		</a>
 		<ul class="dropdown-menu">
-			<li><a href="##" id="remove-attendees">Remove</a></li>
+			<li><a href="##" class="js-remove-attendees">Remove</a></li>
 			<li class="divider"></li>
 			<li class="nav-header">CHANGE STATUSES</li>
-			<li><a href="##" class="change-status" id="change-status-1">Complete</a></li>
-			<li><a href="##" class="change-status" id="change-status-4">Failed</a></li>
-			<li><a href="##" class="change-status" id="change-status-2">In Progress</a></li>
-			<li><a href="##" class="change-status" id="change-status-3">Registered</a></li>
+			<li><a href="##" class="js-change-status" id="change-status-1">Complete</a></li>
+			<li><a href="##" class="js-change-status" id="change-status-4">Failed</a></li>
+			<li><a href="##" class="js-change-status" id="change-status-2">In Progress</a></li>
+			<li><a href="##" class="js-change-status" id="change-status-3">Registered</a></li>
 			<li class="divider"></li>
 			<li class="nav-header">CERTIFICATES</li>
-			<li><a href="##" id="print-cme" class="print">CME Certificates</a></li>
-			<li><a href="##" id="print-cne" class="print">Nurse Certificates</a></li>
+			<li><a href="##" id="print-cme" class="js-print">CME Certificates</a></li>
+			<li><a href="##" id="print-cne" class="js-print">Nurse Certificates</a></li>
 		</ul>
 	</div>
 	
@@ -46,19 +46,19 @@
 			<span class="caret"></span>
 		</a>
 		<ul class="dropdown-menu attendees-filter">
-			<li class="attendee-status" id="status0"><a href="##"><span class="attendee-status-name">All</span> <span class="attendee-status-count"></span></a></li>
+			<li class="attendee-status js-attendee-status" id="status0"><a href="##"><span class="attendee-status-name">All</span> <span class="attendee-status-count"></span></a></li>
 			<li class="divider"></li>
-			<li class="attendee-status" id="status1"><a href="##"><span class="attendee-status-name">Complete</span> <span class="attendee-status-count"></span></a></li>
-			<li class="attendee-status" id="status4"><a href="##"><span class="attendee-status-name">Failed</span> <span class="attendee-status-count"></span></a></li>
-			<li class="attendee-status" id="status2"><a href="##"><span class="attendee-status-name">In Progress</span> <span class="attendee-status-count"></span></a></li>
-			<li class="attendee-status" id="status3"><a href="##"><span class="attendee-status-name">Registered</span> <span class="attendee-status-count"></span></a></li>
-			<li id="statusSelected"><a href="##"><span class="attendee-status-name">Selected</span> <span class="attendee-status-count">(0)</span></a></li>
+			<li class="attendee-status js-attendee-status" id="status1"><a href="##"><span class="attendee-status-name">Complete</span> <span class="attendee-status-count"></span></a></li>
+			<li class="attendee-status js-attendee-status" id="status4"><a href="##"><span class="attendee-status-name">Failed</span> <span class="attendee-status-count"></span></a></li>
+			<li class="attendee-status js-attendee-status" id="status2"><a href="##"><span class="attendee-status-name">In Progress</span> <span class="attendee-status-count"></span></a></li>
+			<li class="attendee-status js-attendee-status" id="status3"><a href="##"><span class="attendee-status-name">Registered</span> <span class="attendee-status-count"></span></a></li>
+			<li class="js-status-Selected" id="statusSelected"><a href="##"><span class="attendee-status-name">Selected</span> <span class="attendee-status-count">(0)</span></a></li>
 		</ul>
 	</div>
 </div>
 <div>
-	<div id="RegistrantsContainer"></div>
-	<div id="RegistrantsLoading" class="Loading"><img src="/admin/_images/ajax-loader.gif" />
+	<div id="RegistrantsContainer" class="js-registrants-container"></div>
+	<div id="RegistrantsLoading" class="Loading js-registrants-loading"><img src="/admin/_images/ajax-loader.gif" />
 	<div>Please Wait</div></div>
 </div>
 <div class="btn-toolbar clearfix">

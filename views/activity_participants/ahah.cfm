@@ -49,7 +49,6 @@ $(document).ready(function() {
 	
 	
 	// UPDATED SELECTED MEMBER COUNT
-	$("#CheckedCount").html("(" + SelectedCount + ")");
 	$(".EditDateField").mask("99/99/9999");
 	
 	updatePagesDropdown();
@@ -122,7 +121,7 @@ $(document).ready(function() {
     <table border="0" width="620" cellpadding="0" cellspacing="0" class="table">
         <thead>
             <tr>
-                <th class="span1"><input type="checkbox" name="CheckAll" id="CheckAll" /></th>
+                <th class="span1"><input type="checkbox" name="CheckAll" id="CheckAll" class="js-check-all" /></th>
                 <th class="span2"></th>
                 <th class="span4">Name</th>
                 <th class="span7">Status</th>
@@ -183,7 +182,7 @@ $(document).ready(function() {
                                         </cfcase>
                                     </cfswitch>
                                 </a>
-                                <a id="editstatusdate-#qAttendees.attendeeId#" class="btn EditStatusDate">
+                                <a id="editstatusdate-#qAttendees.attendeeId#" class="btn js-edit-status-date">
                                     <span style="position:relative;"><input type="hidden" id="CurrStatusDate-#qAttendees.attendeeId#" value="" />Edit</span>
                                 </a>
                                 <a class="btn dropdown-toggle" data-toggle="dropdown">
@@ -191,16 +190,16 @@ $(document).ready(function() {
                                 </a>
                                 <ul class="dropdown-menu pull-right" id="view-attendee-statuses-#qAttendees.attendeeId#">
 	                                <cfif qAttendees.CompleteDate NEQ "" AND qAttendees.StatusID EQ 1>
-                                	<li><a href="javascript://" class="view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-1"><cfif qAttendees.StatusID EQ 1><i class="icon-ok active-status"></i> </cfif>COMPLETE (#dateFormat(qAttendees.completeDate, "MM/DD/YYYY")#)</a></li>
+                                	<li><a href="javascript://" class="js-view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-1"><cfif qAttendees.StatusID EQ 1><i class="icon-ok active-status"></i> </cfif>COMPLETE (#dateFormat(qAttendees.completeDate, "MM/DD/YYYY")#)</a></li>
                                     </cfif>
                                     <cfif qAttendees.StatusID EQ 2>
-                                    <li><a href="javascript://" class="view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-3"><i class="icon-ok active-status"></i> IN PROGRESS</a></li><!--- THE 3 ON THE ID IS TO POINT IT TO THE REGISTEREDDATE FOR THE ATTENDEE ON EDIT --->
+                                    <li><a href="javascript://" class="js-view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-3"><i class="icon-ok active-status"></i> IN PROGRESS</a></li><!--- THE 3 ON THE ID IS TO POINT IT TO THE REGISTEREDDATE FOR THE ATTENDEE ON EDIT --->
                                     </cfif>
                                     <cfif qAttendees.RegisterDate NEQ "" OR qAttendees.StatusID EQ 3>
-                                    <li><a href="javascript://" class="view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-3"><cfif qAttendees.StatusID EQ 3><i class="icon-ok active-status"></i> </cfif>REGISTERED (#dateFormat(qAttendees.registerDate, "MM/DD/YYYY")#)</a></li>
+                                    <li><a href="javascript://" class="js-view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-3"><cfif qAttendees.StatusID EQ 3><i class="icon-ok active-status"></i> </cfif>REGISTERED (#dateFormat(qAttendees.registerDate, "MM/DD/YYYY")#)</a></li>
                                     </cfif>
                                     <cfif qAttendees.TermDate NEQ "" OR qAttendees.StatusID EQ 4>
-                                    <li><a href="javascript://" class="view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-4"><cfif qAttendees.StatusID EQ 4><i class="icon-ok active-status"></i> </cfif>FAILED (#dateFormat(qAttendees.termDate, "MM/DD/YYYY")#)</a></li>
+                                    <li><a href="javascript://" class="js-view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-4"><cfif qAttendees.StatusID EQ 4><i class="icon-ok active-status"></i> </cfif>FAILED (#dateFormat(qAttendees.termDate, "MM/DD/YYYY")#)</a></li>
                                     </cfif>
                                 </ul>
                             </div>
@@ -221,7 +220,7 @@ $(document).ready(function() {
                             </button>
                         </div>
 					<cfelse>
-                        <a href="javascript://" class="deleteLink">Delete</a>
+                        <a href="javascript://" class="js-delete-link">Delete</a>
                     </cfif>
 					</td>
                 </tr>

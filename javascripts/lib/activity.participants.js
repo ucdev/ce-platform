@@ -24,7 +24,7 @@ function clearSelectedMembers() {
 	SelectedAttendees = '';
 	SelectedMembers = '';
 	SelectedCount = 0;
-	$("#CheckedCount").html("(0)");
+	$("#label-status-selected").html('0');
 }
 
 function removeSelectedPerson(params) {
@@ -142,7 +142,7 @@ function updateRegistrants(nPage, nStatus) {
 			// CHECK IF ALL VIEWABLE ATTENDEES ARE SELECTED
 			if($(".AllAttendees").length == TotalAttendeeCount && SelectedAttendees.split(',').length == TotalAttendeeCount) {
 				// CHECK THE CHECK ALL BOX
-				$('#CheckAll').attr('checked', true);
+				$('.js-check-all').attr('checked', true);
 			}
 			
 			// CHECK IF ATTENDEE HAS BEEN MARKED AS SELECTED	
@@ -214,18 +214,18 @@ function updateStatusDate(nAttendee,nType) {
 }
 
 $(document).ready(function() {
-	var $attendeeRemover = $('#remove-attendees');
-	var $attendeeSelectedViewLink = $('#statusSelected');
-	var $attendeeStatusChanger = $('.change-status');
-	var $attendeeStatusViewChange = $('.view-attendee-statusdate');
-	var $checkAll = $("#CheckAll");
-	var $containerDiv = $('#RegistrantsContainer');
-	var $fakeAttendeeRemover = $('.deleteLink');
-	var $loadingDiv = $('#RegistrantsLoading');
+	var $attendeeRemover = $('.js-remove-attendees');
+	var $attendeeSelectedViewLink = $('.js-status-selected');
+	var $attendeeStatusChanger = $('.js-change-status');
+	var $attendeeStatusViewChange = $('.js-view-attendee-statusdate');
+	var $checkAll = $('.js-check-all');
+	var $containerDiv = $('.js-registrants-container');
+	var $fakeAttendeeRemover = $('.js-delete-link');
+	var $loadingDiv = $('.js-registrants-loading');
 	var $pager = $('a.page,a.first,a.last,a.next,a.previous');
-	var $printer = $('.print');
-	var $statusDateEditor = $(".EditStatusDate");
-	var $statusFilter = $('.attendees-filter li.attendee-status');
+	var $printer = $('.js-print');
+	var $statusDateEditor = $(".js-edit-status-date");
+	var $statusFilter = $('.attendees-filter li.js-attendee-status');
 	
 	MaxRegistrants = $("#MaxRegistrants").val();
 	AddlAttendees = $("#AddlAttendees").val();
@@ -259,7 +259,7 @@ $(document).ready(function() {
 	$checkAll.live('click', function() {
 		var $allAttendees = $(".AllAttendees");
 		var selectAll = $(this).attr("checked");
-		
+		console.log($allAttendees);
 		$allAttendees.each(function() {
 			var $row = $(this);
 			var $checkBox = $row.find('.MemberCheckbox');
