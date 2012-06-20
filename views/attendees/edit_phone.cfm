@@ -6,9 +6,9 @@
 #startFormTag(action="update_phone", key=params.key, params="activityId=" & params.activityId, id="EditForm", class="form-horizontal form-ccpd")#
 	<cfinclude template="/lib/saveinfo.cfm" />
     <fieldset>
-        #hiddenField(objectName='activity_participant', property='id', label='Attendee ID')#
-        #hiddenField(objectName='activity_participant', property='ActivityID', label='Activity ID')#
-        #hiddenField(objectName='activity_participant', property='PersonID', label='Person ID')#
+        #hiddenField(objectName='activity_participant', property='id')#
+        #hiddenField(objectName='activity_participant', property='ActivityID')#
+        #hiddenField(objectName='activity_participant', property='PersonID')#
         <input type="hidden" value="" name="ChangedFields" id="ChangedFields" />
         <input type="hidden" value="" name="ChangedValues" id="ChangedValues" />
         <div class="control-group">

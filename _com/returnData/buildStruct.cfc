@@ -2,7 +2,7 @@
 	<cfset variables.instance = StructNew() />
     
 	<cffunction name="init" returntype="_com.returnData.buildStruct" access="public" output="no">
-        <cfargument name="payload" type="any" required="false" default="#structNew()#" />
+        <cfargument name="payload" type="any" required="false" default="" />
         <cfargument name="errors" type="array" required="false" default="#arrayNew(1)#" />
 		<cfargument name="status" type="boolean" required="false" default="false" />
         <cfargument name="statusMsg" type="string" required="false" default="" />
@@ -40,7 +40,7 @@
 		<cfreturn variables.instance.payload />
 	</cffunction>
 	<cffunction name="setPayload" access="public" returntype="void" output="false">
-		<cfargument name="payload" type="struct" required="true" />
+		<cfargument name="payload" type="any" required="true" />
 		<cfset variables.instance.payload = arguments.payload />
 	</cffunction>
     

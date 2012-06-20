@@ -100,6 +100,7 @@ $(document).ready(function() {
 		dataType:'jsonp',
 		crossDomain:true,
 		success:function(data) {
+			console.log(data);
 			$.ajax({
 				url:'http://ws.geonames.org/searchJSON',
 				type:'get',

@@ -40,7 +40,8 @@
 	sources="jquery.blockUI,
 			jquery.cfjs.packed,
 			jquery.maskedinput-1.1.3.pack,
-			action_menu") />
+			action_menu,
+			jquery.tokenInput") />
 
 <cfset application['config'] = {} />
 <cfset application.config['name'] = "CCPD" />
