@@ -90,7 +90,7 @@ $(document).ready(function() {
                 <th class="span1"><input type="checkbox" name="CheckAll" id="CheckAll" /></th>
                 <th class="span2"></th>
                 <th class="span4">Name</th>
-                <th class="span8">Status</th>
+                <th class="span7">Status</th>
                 <th>&nbsp;</th>
             </tr>
         </thead>

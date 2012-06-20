@@ -1,1 +1,3 @@
-#javaScriptIncludeTag(bundle="ccpd.activity.participants")#
+<cfoutput>
+#javaScriptIncludeTag(bundle="ccpd.activity.faculties")#
+</cfoutput>
