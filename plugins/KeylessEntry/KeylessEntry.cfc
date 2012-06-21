@@ -11,7 +11,7 @@
 
 	<cffunction name="ajaxLoginRequired">
 		<cfif NOT structKeyExists(session,"currentUser")>
-			<cfset renderText(createObject("component","lib.buildStruct").init(status=false,statusMsg="Login is required to perform this action.").getJson()) />
+			<cfset renderText(createObject("component","lib.buildStruct").init(status=false,statusMsg="login_required").getJson()) />
 		</cfif>
 	</cffunction>
 	
@@ -19,7 +19,7 @@
 
 	<cffunction name="ajaxAdminRequired">
 		<cfif structKeyExists(session,"currentuser") AND NOT session.account.isAdmin()>
-			<cfset renderText(createObject("component","lib.buildStruct").init(status=false,statusMsg="You have insufficient priviledges to perform this action.").getJson()) />
+			<cfset renderText(createObject("component","lib.buildStruct").init(status=false,statusMsg="admin_required").getJson()) />
 		</cfif>
 	</cffunction>
 	

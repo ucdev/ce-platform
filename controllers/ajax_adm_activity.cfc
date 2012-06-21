@@ -651,7 +651,7 @@
         <cfset renderText(status.getJSON()) />
     </cffunction>
     
-	<cffunction name="saveActivity"  output="no">
+	<cffunction name="saveactivity"  output="no">
 		<cfparam name="params.ActivityID" default="" type="string" >
 		<cfparam name="params.Title" default="" type="string" >
 		<cfparam name="params.StartDate" default="" type="string">
@@ -700,6 +700,8 @@
 							changedfields=params.ChangedFields,
 							changedvalues=params.ChangedValues)>
         
+		<cfset model("activity").findByKey(params.activityid).save() />
+		
         <cfset renderText(status.getJSON()) />
     </cffunction>
     
