@@ -6,7 +6,6 @@
     </cffunction>
     
     <cffunction name="doUpload">
-        
 		<cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
         
         <cfif Len(this.fileName) LTE 0>

@@ -5,7 +5,7 @@
     	<cfparam name="params.keyType" default="" />
         
 		<cfset file = model("File").new(params.file)>
-        <cfset status = createObject("component", "#application.settings.com#lib.returnStruct").init()><br>
+		<cfset var status = createObject("component", "#Application.Settings.Com#returnData.buildStruct").init()>
 		
 		<cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Could not upload file due to unknown error.")>
@@ -21,9 +21,9 @@
         
 		<!--- Verify that the file creates successfully --->
 		<cfif fileUploaded.getStatus() AND file.save()>
-        	<cfset status.setStatus(true)>
+			<cfset status.setStatus(true)>
             <cfset status.setStatusMsg("File uploaded successfully.")>
-        	
+            <cfset status.setPayload(file.properties())>
 		<!--- Otherwise --->
 		<cfelse>
         	<cfset status.setStatusMsg("File could not be uploaded.")>

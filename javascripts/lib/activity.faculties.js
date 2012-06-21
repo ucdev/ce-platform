@@ -192,7 +192,12 @@ $(document).ready(function() {
 		buttons: { 
 			Save:function() {
 				$("#frmFileUpload").ajaxSubmit({
-					success: function() {
+					dataType: 'json',
+					forceSync: true,
+					success: function(data) {
+						console.log(data);
+						return false;
+						
 						$fileUploader.html('');
 						addMessage('File uploaded successfully.',500,6000,4000);
 						$fileUploader.dialog('close');
