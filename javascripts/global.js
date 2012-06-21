@@ -109,6 +109,31 @@ $(function(){
             return false;
         }
     });
+	
+	/* catch all ajax */
+	$("body").ajaxSuccess(function(ev,xhr) {
+		var response = $.parseJSON(xhr.responseText);
+		
+		if(response.STATUSMSG == 'login_required') {
+			
+		}
+	});
+	
+	$(".dialogLink").on("click",function(e) {
+		var $this = $(this);
+		var $href = $this.attr('href');
+		var $options = $this.attr('data-options');
+		var $settings = {
+			open: function(event, ui) { 
+				$.ajax({
+					url:$href,
+					
+				});
+			}
+			
+		};
+		$.dialog($options);
+	});
 });
 
 Array.prototype.unique = function () {

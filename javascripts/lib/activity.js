@@ -1,4 +1,4 @@
-
+$.Class("ccpd.activities",{},{})
 function continueCopy() {
 	var sNewActivityTitle = $("#NewActivityTitle").val();
 	var nNewActivityType = $("#NewActivityType").val();

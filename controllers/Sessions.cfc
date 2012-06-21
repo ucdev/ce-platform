@@ -4,6 +4,7 @@
 
 	<cffunction name="init">
 		<cfset filters(through="loginProhibited", only="new, create")>
+		<cfset super.init() />
 	</cffunction>
 
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
