@@ -1,8 +1,8 @@
 <cfcomponent extends="Model">
     <cffunction name="init">
         <cfset table("ce_File")>
-        <cfset property(name="id", column="FileID") />
-        <!---<cfset setPrimaryKey(property="id") />--->
+        <!---<cfset property(name="id", column="FileID") />--->
+        <cfset setPrimaryKey(property="FileID") />
     </cffunction>
     
     <cffunction name="doUpload">

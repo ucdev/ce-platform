@@ -195,8 +195,6 @@ $(document).ready(function() {
 					dataType: 'json',
 					forceSync: true,
 					success: function(data) {
-						console.log(data);
-						return false;
 						
 						$fileUploader.html('');
 						addMessage('File uploaded successfully.',500,6000,4000);
