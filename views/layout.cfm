@@ -17,15 +17,16 @@
 	<script src="/javascripts/app/controllers/#lcase(params.controller)#.js" type="text/javascript"></script>
 	<script src="/javascripts/app/views/#lcase(params.controller)#/#params.action#.js" type="text/javascript"></script>
 	<script type="text/javascript">
-		$.Class("ccpd.page",{
-			init:function(controller,action) {
-				this.controller = new ccpd[controller](action);
-			}
-		});
-		
-		(function(){
-			var page = new ccpd.page('#lcase(params.controller)#','#params.action#');
-		})();
+	/* PROOF OF CONCEPT. NEEDS MOVED, I know. */
+	$.Class("ccpd.page",{
+		init:function(controller,action) {
+			this.controller = new ccpd[controller](action);
+		}
+	});
+	
+	(function(){
+		var page = new ccpd.page('#lcase(params.controller)#','#params.action#');
+	})();
 	</script>
 	<script src="/resources/jsloader/global.js?pagelet=#params.pagelet#&pagelet_token=#params.pagelet_token#" type="text/javascript"></script>
 	<style>
