@@ -1,7 +1,7 @@
 <cfcomponent extends="Controller" output="false">
 	<!--- activity_faculties/ahah --->
     <cffunction name="ahah">
-		<cfset qActivityFacultyList = Application.Com.ActivityFacultyGateway.getByViewAttributes(ActivityID=params.ActivityID,DeletedFlag='N',OrderBy="sr.RoleID DESC, p1.LastName,p1.FirstName")>
+		<cfset qActivityFacultyList = Application.Com.ActivityFacultyGateway.getByViewAttributes(ActivityID=params.key,DeletedFlag='N',OrderBy="sr.RoleID DESC, p1.LastName,p1.FirstName")>
         
         <cfset renderPage(layout=false) />
     </cffunction>
@@ -50,7 +50,6 @@
 	
 	<!--- activity_faculties/index --->
 	<cffunction name="index">
-		<cfset activity_faculties = model("Activity_faculty").findAllByActivityId(value=params.key)>
 	</cffunction>
 	
 	<!--- activity_faculties/new --->

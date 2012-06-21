@@ -1,4 +1,25 @@
-var CurrPersonID = 0;
+function addSelectedRow(params) {
+	var settings = $.extend({},params);
+	
+	if(settings.faculty && settings.faculty > 0) {
+		if(!$.ListFind(selectedRows,settings.faculty,",")) {
+		selectedRows = $.ListAppend(selectedRows, settings.faculty, ",");
+		}
+	}
+	
+	updateSelectedCount(1);
+}
+
+function removeSelectedRow(params) {
+	var settings = $.extend({},params);
+	
+	if(settings.faculty && settings.faculty > 0) {
+		selectedRows = $.ListDeleteAt(selectedRows, $.ListFind(selectedRows, settings.faculty));
+	}
+	
+	
+	updateSelectedCount(-1);
+}
 
 function saveFacultyMember() {
 	$.blockUI({ message: '<h1>Adding Faculty Member...</h1>'});
@@ -36,15 +57,104 @@ function updateFaculty() {
 		success: function(data) {
 			$container.html(data);
 			$loader.hide();
+			
+			// CHECK IF ATTENDEE HAS BEEN MARKED AS SELECTED	
+			$(".js-all-faculty").each(function() {
+				var $row = $(this);
+				var $checkBox = $row.find('.js-selected-checkbox');
+				var nPerson = $row.find('.personId').val();
+				var nFaculty = $row.find('.facultyId').val();
+				
+				// DETERMINE IF CURRENT ROW NEEDS CHECKED
+				if($.ListFind(selectedRows, nFaculty)) {
+					$row.addClass('alert alert-info');
+					$checkBox.attr('checked', true);
+				}
+				
+				$checkBox.click(function() {
+					if($(this).attr("checked")) {
+						$row.addClass('alert alert-info');
+						
+						// ADD CURRENT MEMBER TO SELECTEDROWS LIST
+						addSelectedRow({
+							person:nPerson,
+							faculty:nFaculty
+						});
+					} else {
+						$row.removeClass('alert alert-info');
+						
+						// REMOVE CURRENT MEMBER FROM SELECTEDROWS LIST
+						removeSelectedRow({
+							person:nPerson,
+							faculty:nFaculty
+						});
+					}
+				});
+			});
 		}
 	});
 };
 
+function updateSelectedCount(nAmount) {
+	selectedCount = selectedCount + nAmount;
+	if(selectedCount > 0) {
+		$(".js-partic-actions .btn").removeClass('disabled');
+	} else {
+		$(".js-partic-actions .btn").addClass('disabled');
+	}
+	$(".js-label-status-selected").text(selectedCount);
+	
+}
+
 $(document).ready(function() {
+	var $checkAll = $('.js-check-all');
 	var $facultyRemover = $('.js-remove-faculty');
+	var $fileApprover = $('.js-approve-file');
+	var $fileUploader = $('.js-file-uploader');
+	var $fileUploadLink = $('.js-upload-file');
+	var $photo = $('.js-person-photo');
 	
 	// AHAH DATA LOAD
 	updateFaculty();
+		
+	$checkAll.live('click', function() {
+		var $allElem = $(".js-all-faculty");
+		var selectAll = $(this).attr("checked");
+		
+		$allElem.each(function() {
+			var $row = $(this);
+			var $checkBox = $row.find('.js-selected-checkbox');
+			var nPerson = $row.find('.personId').val();
+			var nFaculty = $row.find('.facultyId').val();
+			var rowChecked = $checkBox.attr("checked");
+			
+			if(selectAll && !rowChecked) {
+				// ADD CURRENT MEMBER TO SELECTEDMEMBERS LIST
+				addSelectedRow({
+					person: nPerson,
+					faculty: nFaculty
+				});
+				
+				$checkBox.attr("checked",true);
+				
+				// CHANGE BACKGROUND COLOR OF PERSONROW
+				$row.addClass('alert alert-info');
+			} else if(!selectAll && rowChecked) {
+				if(rowChecked) {
+					// ADD CURRENT MEMBER TO SELECTEDMEMBERS LIST
+					removeSelectedRow({
+						person: nPerson,
+						faculty: nFaculty
+					});
+					
+					$checkBox.attr("checked",false);
+					
+					// CHANGE BACKGROUND COLOR OF PERSONROW
+					$row.removeClass('alert alert-info');
+				}
+			}
+		});
+	});
 	
 	$facultyRemover.bind("click",function() {
 		if(confirm("Are you sure you want to remove the checked people from this Activity?")) {
@@ -55,7 +165,7 @@ $(document).ready(function() {
 			});
 			
 			$.blockUI({ message: '<h1>Removing Selected Faculty Members...</h1>'});
-			$.getJSON(sRootPath + "/_com/AJAX_Activity.cfc", { method: "removeCheckedFaculty", PersonList: result, ActivityID: nActivity, returnFormat: "plain" },
+			$.getJSON(sRootPath + "/AJAX_adm_Activity.cfc", { method: "removeCheckedFaculty", PersonList: result, ActivityID: nActivity, returnFormat: "plain" },
 			function(data) {
 				if(data.STATUS) {
 					addMessage(data.STATUSMSG,250,6000,4000);
@@ -71,37 +181,37 @@ $(document).ready(function() {
 	});
 	
 	/* NOTES DIALOG */
-	$("#FileUploader").dialog({ 
+	$fileUploader.dialog({ 
 		title:"Upload File",
 		modal: false, 
 		autoOpen: false,
 		height:246,
-		width:285,
+		width:350,
 		resizable: false,
 		stack: false,
 		buttons: { 
 			Save:function() {
 				$("#frmFileUpload").ajaxSubmit({
-					beforeSubmit:  function() {		// pre-submit callback 
-						$("#Section" + CurrPersonID).html("<img src=\"/admin/_images/ajax-loader.gif\"/><br />Please wait...");
-					}, 
-					url: sMyself + "File.Upload&Mode=Person&ModeID=" + CurrPersonID + "&ActivityID=" + nActivity + "&Submitted=1",
-					type: "post",
-					success: function() {			// post-submit callback 
-						$("#FileUploader").html("");
-						addMessage("File uploaded successfully.",250,6000,4000);
-						$("#FileUploader").dialog("close");
+					success: function() {
+						$fileUploader.html('');
+						addMessage('File uploaded successfully.',500,6000,4000);
+						$fileUploader.dialog('close');
 					}
 				}); 
 			},
 			Cancel:function() {
-				$(this).dialog("close");
+				$fileUploader.dialog('close');
 				updateFaculty();
 			}
 		},
 		open:function() {
-			$.post(sMyself + "File.Upload", { Mode: "Person", ModeID: CurrPersonID, ActivityID: nActivity }, function(data) {
-				$("#FileUploader").html(data);
+			$.ajax({
+				url: '/files/new/' + currPerson,
+				type: 'post',
+				data: { keyType: 'person', ActivityID: nActivity }, 
+				success: function(data) {
+					$fileUploader.html(data);
+				}
 			});
 		},
 		close:function() {
@@ -110,11 +220,35 @@ $(document).ready(function() {
 		}
 	});
 	
-	$(".UploadFile").click(function() {
-		CurrPersonID = $.ListGetAt(this.id,2,'|');
-		$("#FileUploader").dialog("open");
+	$fileUploadLink.live('click', function() {
+		currPerson = this.id.split('|')[1];
+		
+		$fileUploader.dialog("open");
 	});
-	/* // END NOTES DIALOG */
+		
+	/* FACULTY FILE APPROVAL */
+	$fileApprover.live('click', function() {
+		var idSplit = this.id.split('|');
+		console.log(idSplit);
+		var sApprovalType = idSplit[0];
+		var sFileType = idSplit[1];
+		var personId = idSplit[2];
+		
+		$.ajax({
+			url: "/AJAX_adm_Activity/approveFacultyFile", 
+			type: 'post',
+			data: { ActivityID: nActivity, PersonID: personId, FileType: sFileType, Mode: sApprovalType },
+			success: function(data) {			
+				if(data.STATUS) {
+					updateFaculty();
+					addMessage(data.STATUSMSG,250,6000,4000);
+				} else {
+					updateFaculty();
+					addError(data.STATUSMSG,250,6000,4000);
+				}
+			}
+		});
+	});
 	
 	/* PHOTO UPLOAD DIALOG */
 	$("#PhotoUpload").dialog({ 
@@ -129,54 +263,11 @@ $(document).ready(function() {
 		}
 	});
 	
-	$("img.PersonPhoto").click(function() {
-		var nPersonID = $.Replace(this.id,"Photo","","ALL");
-		$("#frmUpload").attr("src",sMyself + "Person.PhotoUpload?PersonID=" + nPersonID + "&ElementID=" + this.id);
+	$photo.live('click', function() {
+		var personId = this.id.split('Photo')[1];
+		
+		$("#frmUpload").attr("src", '/people/photoupload/' + personId + '?ElementID=' + this.id);
 		$("#PhotoUpload").dialog("open");
 	});
 	/* // END PHOTO UPLOAD DIALOG */
-		
-	/* FACULTY FILE APPROVAL */
-	$(".approveFile").click(function() {
-		var sApprovalType = $.ListGetAt(this.id, 1, "|");
-		var sFileType = $.ListGetAt(this.id, 2, "|");
-		var nPersonID = $.ListGetAt(this.id, 3, "|");
-		
-		$.getJSON(sRootPath + "/_com/AJAX_Activity.cfc", { method: "approveFacultyFile", ActivityID: nActivity, PersonID: nPersonID, FileType: sFileType, Mode: sApprovalType, returnFormat: "plain" },
-		function(data) {			
-			if(data.STATUS) {
-				updateFaculty();
-				addMessage(data.STATUSMSG,250,6000,4000);
-			} else {
-				updateFaculty();
-				addError(data.STATUSMSG,250,6000,4000);
-			}
-		});
-	});
-		
-	$("#CheckAll").click(function() {
-		if($("#CheckAll").attr("checked")) {
-			$(".MemberCheckbox").each(function() {
-				$(this).attr("checked",true);
-				
-				$(".AllFaculty").css("background-color","#FFD");
-			});
-		} else {
-			$(".MemberCheckbox").each(function() {
-				$(this).attr("checked",false);
-				
-				$(".AllFaculty").css("background-color","#FFF");
-			});
-		}
-	}); 
-	
-	$(".MemberCheckbox").bind("click", this, function() {
-		if($(this).attr("checked")) {
-			var nPersonID = $.Replace(this.id,"Checked","","ALL");
-			$("#PersonRow" + nPersonID).css("background-color","#FFD");
-		} else {
-			var nPersonID = $.Replace(this.id,"Checked","","ALL");
-			$("#PersonRow" + nPersonID).css("background-color","#FFF");
-		}
-	});
 });

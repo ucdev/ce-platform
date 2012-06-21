@@ -1,4 +1,5 @@
-function addSelectedAttendee(params) {
+function addSelectedRow(params) {
+	console.log(params);
 	var settings = $.extend({},params);
 	
 	if(settings.person && settings.person > 0) {
@@ -27,7 +28,7 @@ function clearSelectedMembers() {
 	$("#label-status-selected").html('0');
 }
 
-function removeSelectedPerson(params) {
+function removeSelectedRow(params) {
 	var settings = $.extend({},params);
 	
 	if(settings.person && settings.person > 0) {
@@ -147,7 +148,7 @@ function updateRegistrants(nPage, nStatus) {
 			
 			// CHECK IF ATTENDEE HAS BEEN MARKED AS SELECTED	
 			$(".AllAttendees").each(function() {
-				$row = $(this);
+				var $row = $(this);
 				var $checkBox = $row.find('.MemberCheckbox');
 				var nPerson = $row.find('.personId').val();
 				var nAttendee = $row.find('.attendeeId').val();
@@ -160,18 +161,18 @@ function updateRegistrants(nPage, nStatus) {
 				
 				$checkBox.click(function() {
 					if($(this).attr("checked")) {
-						$("#attendeeRow-" + nAttendee).addClass('alert alert-info');
+						$row.addClass('alert alert-info');
 						
 						// ADD CURRENT MEMBER TO SELECTEDMEMBERS LIST
-						addSelectedAttendee({
+						addSelectedRow({
 							person:nPerson,
 							attendee:nAttendee
 						});
 					} else {
-						$("#attendeeRow-" + nAttendee).removeClass('alert alert-info');
+						$row.removeClass('alert alert-info');
 						
 						// REMOVE CURRENT MEMBER FROM SELECTEDMEMBERS LIST
-						removeSelectedPerson({
+						removeSelectedRow({
 							person:nPerson,
 							attendee:nAttendee
 						});
@@ -259,7 +260,7 @@ $(document).ready(function() {
 	$checkAll.live('click', function() {
 		var $allAttendees = $(".AllAttendees");
 		var selectAll = $(this).attr("checked");
-		console.log($allAttendees);
+		
 		$allAttendees.each(function() {
 			var $row = $(this);
 			var $checkBox = $row.find('.MemberCheckbox');
@@ -269,7 +270,7 @@ $(document).ready(function() {
 			
 			if(selectAll && !rowChecked) {
 				// ADD CURRENT MEMBER TO SELECTEDMEMBERS LIST
-				addSelectedAttendee({
+				addSelectedRow({
 					person: nPerson,
 					attendee: nAttendee
 				});
@@ -281,7 +282,7 @@ $(document).ready(function() {
 			} else if(!selectAll && rowChecked) {
 				if(rowChecked) {
 					// ADD CURRENT MEMBER TO SELECTEDMEMBERS LIST
-					removeSelectedPerson({
+					removeSelectedRow({
 						person: nPerson,
 						attendee: nAttendee
 					});

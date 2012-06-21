@@ -1,74 +1,36 @@
-<h1>Create a New file</h1>
-
-<cfoutput>#includePartial("showFlash")#</cfoutput>
-
+<cfparam name="params.fileCaption" default="">
+<cfparam name="params.fileType" default="">
+<cfparam name="params.activityId" default="0">
 <cfoutput>
-
-			
-			
-			#errorMessagesFor("file")#
-	
-			#startFormTag(action="create")#
-		
-				
-					
-						#textField(objectName='file', property='FileID', label='File ID')#
-																
-				
-					
-						#textField(objectName='file', property='FileName', label='File Name')#
-																
-				
-					
-						#textField(objectName='file', property='FileCaption', label='File Caption')#
-																
-				
-					
-						#textField(objectName='file', property='FileSize', label='File Size')#
-																
-				
-					
-						#textField(objectName='file', property='FileTypeID', label='File Type ID')#
-																
-				
-					
-						#textField(objectName='file', property='PersonID', label='Person ID')#
-																
-				
-					
-						#textField(objectName='file', property='ActivityID', label='Activity ID')#
-																
-				
-					
-						#dateTimeSelect(objectName='file', property='Created', dateOrder='year,month,day', monthDisplay='abbreviations', label='Created')#
-																
-				
-					
-						#textField(objectName='file', property='CreatedBy', label='Created By')#
-																
-				
-					
-						#dateTimeSelect(objectName='file', property='Updated', dateOrder='year,month,day', monthDisplay='abbreviations', label='Updated')#
-																
-				
-					
-						#textField(objectName='file', property='UpdatedBy', label='Updated By')#
-																
-				
-					
-						#dateTimeSelect(objectName='file', property='Deleted', dateOrder='year,month,day', monthDisplay='abbreviations', label='Deleted')#
-																
-				
-					
-						#textField(objectName='file', property='DeletedFlag', label='Deleted Flag')#
-																
-				
-
-				#submitTag()#
-				
-			#endFormTag()#
-			
-		
-
-#linkTo(text="Return to the listing", action="index")#
+#startFormTag(controller="files", action="create", key=params.key, id="frmFileUpload", class="form-horizontal form-ccpd", multipart=true)#
+    <fieldset>
+    	#hiddenFieldTag(name="keyType", value=params.keyType)#
+        #hiddenFieldTag(name="activityId", value=params.activityId)#
+        <div class="control-group">
+            <label for="file-fileName" class="control-label">File</label>
+            <div class="controls">
+                <div class="input-append">
+                	#fileField(objectName="file", property="fileName", label="")#
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="file-fileCaption" class="control-label">Caption</label>
+            <div class="controls">
+                <div class="input-append">
+                	#textArea(objectName="file", property="fileCaption", label="")#
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="file-fileTypeId" class="control-label">Type</label>
+            <div class="controls">
+                <div class="input-append">
+                	#select(objectName="file", property="fileTypeId", options=fileTypeList, label="", includeBlank=true)#
+                </div>
+            </div>
+        </div>
+	</fieldset>
+    #submitTag()#
+#endFormTag()#
 </cfoutput>
