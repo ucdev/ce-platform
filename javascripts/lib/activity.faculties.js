@@ -54,6 +54,7 @@ function updateFaculty() {
 		url: "/activity_faculties/ahah/" + nActivity,
 		type: 'post',
 		data: { ActivityID: nActivity },
+		dataType: 'html',
 		success: function(data) {
 			$container.html(data);
 			$loader.hide();
@@ -62,6 +63,8 @@ function updateFaculty() {
 			$(".js-all-faculty").each(function() {
 				var $row = $(this);
 				var $checkBox = $row.find('.js-selected-checkbox');
+				var $fileUploader = $('.js-file-uploader');
+				var $fileUploadLink = $row.find('.js-upload-file');
 				var nPerson = $row.find('.personId').val();
 				var nFaculty = $row.find('.facultyId').val();
 				
@@ -90,6 +93,53 @@ function updateFaculty() {
 						});
 					}
 				});
+	
+				$fileUploader.dialog({ 
+					title:"Upload File",
+					modal: false, 
+					autoOpen: false,
+					height:246,
+					width:350,
+					resizable: false,
+					stack: false,
+					buttons: { 
+						Save:function() {
+							$("#frmFileUpload").ajaxSubmit({
+								dataType: 'json',
+								forceSync: true,
+								success: function(data) {
+									
+									$fileUploader.html('');
+									addMessage('File uploaded successfully.',500,6000,4000);
+									$fileUploader.dialog('close');
+								}
+							}); 
+						},
+						Cancel:function() {
+							$fileUploader.dialog('close');
+							updateFaculty();
+						}
+					},
+					open:function() {
+						console.log('in');
+						$.ajax({
+							url: '/files/new/' + nPerson,
+							type: 'post',
+							data: { keyType: 'person', activityId: nActivity, facultyId: nFaculty }, 
+							success: function(data) {
+								$fileUploader.html(data);
+							}
+						});
+					},
+					close:function() {
+						updateFaculty();
+						updateActions();
+					}
+				});
+	
+				$fileUploadLink.live('click', function() {
+					$fileUploader.dialog('open');
+				});
 			});
 		}
 	});
@@ -110,8 +160,6 @@ $(document).ready(function() {
 	var $checkAll = $('.js-check-all');
 	var $facultyRemover = $('.js-remove-faculty');
 	var $fileApprover = $('.js-approve-file');
-	var $fileUploader = $('.js-file-uploader');
-	var $fileUploadLink = $('.js-upload-file');
 	var $photo = $('.js-person-photo');
 	
 	// AHAH DATA LOAD
@@ -179,60 +227,10 @@ $(document).ready(function() {
 			});
 		}
 	});
-	
-	/* NOTES DIALOG */
-	$fileUploader.dialog({ 
-		title:"Upload File",
-		modal: false, 
-		autoOpen: false,
-		height:246,
-		width:350,
-		resizable: false,
-		stack: false,
-		buttons: { 
-			Save:function() {
-				$("#frmFileUpload").ajaxSubmit({
-					dataType: 'json',
-					forceSync: true,
-					success: function(data) {
-						
-						$fileUploader.html('');
-						addMessage('File uploaded successfully.',500,6000,4000);
-						$fileUploader.dialog('close');
-					}
-				}); 
-			},
-			Cancel:function() {
-				$fileUploader.dialog('close');
-				updateFaculty();
-			}
-		},
-		open:function() {
-			$.ajax({
-				url: '/files/new/' + currPerson,
-				type: 'post',
-				data: { keyType: 'person', ActivityID: nActivity }, 
-				success: function(data) {
-					$fileUploader.html(data);
-				}
-			});
-		},
-		close:function() {
-			updateFaculty();
-			updateActions();
-		}
-	});
-	
-	$fileUploadLink.live('click', function() {
-		currPerson = this.id.split('|')[1];
-		
-		$fileUploader.dialog("open");
-	});
 		
 	/* FACULTY FILE APPROVAL */
 	$fileApprover.live('click', function() {
 		var idSplit = this.id.split('|');
-		console.log(idSplit);
 		var sApprovalType = idSplit[0];
 		var sFileType = idSplit[1];
 		var personId = idSplit[2];

@@ -111,13 +111,13 @@ $(function(){
     });
 	
 	/* catch all ajax */
-	$("body").ajaxSuccess(function(ev,xhr) {
+	/*$("body").ajaxSuccess(function(ev,xhr) {
 		var response = $.parseJSON(xhr.responseText);
 		
 		if(response.STATUSMSG == 'login_required') {
 			
 		}
-	});
+	});*/
 	
 	$(".dialogLink").on("click",function(e) {
 		var $this = $(this);

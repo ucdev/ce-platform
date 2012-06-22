@@ -1,11 +1,13 @@
 <cfparam name="params.fileCaption" default="">
 <cfparam name="params.fileType" default="">
 <cfparam name="params.activityId" default="0">
+<cfparam name="params.facultyId" default="0">
 <cfoutput>
 #startFormTag(controller="files", action="create", key=params.key, id="frmFileUpload", class="form-horizontal form-ccpd", multipart=true)#
     <fieldset>
     	#hiddenFieldTag(name="keyType", value=params.keyType)#
         #hiddenFieldTag(name="activityId", value=params.activityId)#
+        #hiddenFieldTag(name="facultyId", value=params.facultyId)#
         <div class="control-group">
             <label for="file-fileName" class="control-label">File</label>
             <div class="controls">
@@ -31,5 +33,6 @@
             </div>
         </div>
 	</fieldset>
+    #submitTag()#
 #endFormTag()#
 </cfoutput>

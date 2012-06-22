@@ -42,7 +42,7 @@
                             <br />
                             <cfset FileCount = FileCount + 1>
                         </cfif>
-                        <a href="javascript://" class="js-upload-file" id="File|#qActivityFacultyList.PersonID#" title="Upload a new file"><i class="icon-upload"></i> Upload New</a>
+                        <a href="javascript://" class="js-upload-file" id="file-#qActivityFacultyList.PersonID#-4" title="Upload a new file"><i class="icon-upload"></i> Upload New</a>
                     </td>
                     <td class="DislosureBox" id="DislosureBox#facultyId#">
 						<cfif qActivityFacultyList.DisclosureFileID NEQ "">
@@ -61,7 +61,7 @@
                             </div>
                         	<cfset FileCount = FileCount + 1>
                         </cfif>
-                        <div class="row"><a href="javascript://" class="js-upload-file" id="File|#qActivityFacultyList.PersonID#" title="Upload a new file"><i class="icon-upload"></i> Upload New</a></div>
+                        <div class="row"><a href="javascript://" class="js-upload-file" id="file-#qActivityFacultyList.PersonID#-5" title="Upload a new file"><i class="icon-upload"></i> Upload New</a></div>
 					</td>
 				</tr>
 			</cfloop>

@@ -18,11 +18,11 @@
 	<script src="/javascripts/app/views/#lcase(params.controller)#/#params.action#.js" type="text/javascript"></script>
 	<script type="text/javascript">
 	/* PROOF OF CONCEPT. NEEDS MOVED, I know. */
-	$.Class("ccpd.page",{
+	<!---$.Class("ccpd.page",{
 		init:function(controller,action) {
 			this.controller = new ccpd[controller](action);
 		}
-	});
+	});--->
 	
 	(function(){
 		var page = new ccpd.page('#lcase(params.controller)#','#params.action#');

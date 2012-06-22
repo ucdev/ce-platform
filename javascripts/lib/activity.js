@@ -70,10 +70,10 @@ function updateAll() {
 }
 
 function updateStats() {
-	$.post(sMyself + "Activity.Stats", { ActivityID: nActivity }, 
+	/*$.post(sMyself + "Activity.Stats", { ActivityID: nActivity }, 
 		function(data) {
 			$("#ActivityStats").html(data);
-	});
+	});*/
 }
 
 function updateActions() {
@@ -84,10 +84,10 @@ function updateActions() {
 }
 
 function updateContainers() {
-	$.post(sMyself + "Activity.Container", { ActivityID: nActivity }, 
+	/*$.post(sMyself + "Activity.Container", { ActivityID: nActivity }, 
 		function(data) {
 			$("#Containers").html(data);
-	});
+	});*/
 }
 
 function updateActivityList() {
