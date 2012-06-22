@@ -6,54 +6,52 @@
 
 <cfset application.version_token = "v3" />
 
-<cfset generateBundle(type="css", bundle="ccpd", compress=true, sources="bootstrap,jquery.ui,ccpd") />
-<cfset generateBundle(type="js", bundle="ccpd", compress=true, 
-	sources="jquery,
-			jquery-ui-1.8.21.custom.min,
-			jquerymx-3.2.custom.js,
-			jquery.fixtext.js,
-			jquery.form.js,
-			jquery.qtip.js,
-			bootstrap-transition,
-			bootstrap-alert,
-			bootstrap-modal,
-			bootstrap-dropdown,
-			bootstrap-scrollspy,
-			bootstrap-tab,
-			bootstrap-tooltip,
-			bootstrap-popover,
-			bootstrap-button,
-			bootstrap-collapse,
-			bootstrap-carousel,
-			bootstrap-typeahead,
-			global,
-			uiTokenizer,
-			uiTypeahead") />
+<cfset generateBundle(type="css", bundle="#application.version_token#/ccpd", compress=true, sources="#application.version_token#/bootstrap,#application.version_token#/jquery.ui,#application.version_token#/ccpd") />
+<cfset generateBundle(type="js", bundle="#application.version_token#/ccpd", compress=true, 
+	sources="#application.version_token#/vendor/jquery/jquery,
+			#application.version_token#/vendor/jquery/jquery-ui-1.8.21.custom.min,
+			#application.version_token#/vendor/jquery/jquerymx-3.2.custom.js,
+			#application.version_token#/vendor/jquery/jquery.fixtext.js,
+			#application.version_token#/vendor/jquery/jquery.form.js,
+			#application.version_token#/vendor/jquery/jquery.qtip.js,
+			#application.version_token#/vendor/jquery/jquery.blockUI,
+			#application.version_token#/vendor/jquery/jquery.cfjs.packed,
+			#application.version_token#/vendor/jquery/jquery.maskedinput-1.1.3.pack,
+			#application.version_token#/vendor/jquery/jquery.tokenInput,
+			#application.version_token#/vendor/bootstrap/bootstrap-transition,
+			#application.version_token#/vendor/bootstrap/bootstrap-alert,
+			#application.version_token#/vendor/bootstrap/bootstrap-modal,
+			#application.version_token#/vendor/bootstrap/bootstrap-dropdown,
+			#application.version_token#/vendor/bootstrap/bootstrap-scrollspy,
+			#application.version_token#/vendor/bootstrap/bootstrap-tab,
+			#application.version_token#/vendor/bootstrap/bootstrap-tooltip,
+			#application.version_token#/vendor/bootstrap/bootstrap-popover,
+			#application.version_token#/vendor/bootstrap/bootstrap-button,
+			#application.version_token#/vendor/bootstrap/bootstrap-collapse,
+			#application.version_token#/vendor/bootstrap/bootstrap-carousel,
+			#application.version_token#/vendor/bootstrap/bootstrap-typeahead,
+			#application.version_token#/global,
+			#application.version_token#/action_menu,
+			#application.version_token#/uiTokenizer,
+			#application.version_token#/uiTypeahead") />
             
-<cfset generateBundle(type="js", bundle="ccpd.activity", compress=true, 
-	sources="lib/activity") />
+<cfset generateBundle(type="js", bundle="#application.version_token#/ccpd.activity", compress=true, 
+	sources="#application.version_token#/lib/activity") />
             
-<cfset generateBundle(type="js", bundle="ccpd.activity.credits", compress=true, 
-	sources="lib/activity.credits") />
+<cfset generateBundle(type="js", bundle="#application.version_token#/ccpd.activity.credits", compress=true, 
+	sources="#application.version_token#/lib/activity.credits") />
             
-<cfset generateBundle(type="js", bundle="ccpd.activity.participants", compress=true, 
-	sources="lib/activity.participants") />
+<cfset generateBundle(type="js", bundle="#application.version_token#/ccpd.activity.participants", compress=true, 
+	sources="#application.version_token#/lib/activity.participants") />
             
-<cfset generateBundle(type="js", bundle="ccpd.attendee", compress=true, 
-	sources="lib/attendee") />
+<cfset generateBundle(type="js", bundle="#application.version_token#/ccpd.attendee", compress=true, 
+	sources="#application.version_token#/lib/attendee") />
             
-<cfset generateBundle(type="js", bundle="ccpd.activity.participants", compress=true, 
-	sources="lib/activity.participants") />
+<cfset generateBundle(type="js", bundle="#application.version_token#/ccpd.activity.participants", compress=true, 
+	sources="#application.version_token#/lib/activity.participants") />
             
-<cfset generateBundle(type="js", bundle="ccpd.people", compress=true, 
-	sources="lib/people") />
-            
-<cfset generateBundle(type="js", bundle="ccpd-legacy", compress=true, 
-	sources="jquery.blockUI,
-			jquery.cfjs.packed,
-			jquery.maskedinput-1.1.3.pack,
-			action_menu,
-			jquery.tokenInput") />
+<cfset generateBundle(type="js", bundle="#application.version_token#/ccpd.people", compress=true, 
+	sources="#application.version_token#/lib/people") />
 
 <cfset application['config'] = {} />
 <cfset application.config['name'] = "CCPD" />

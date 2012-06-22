@@ -8,12 +8,9 @@
 	<meta name="author" content="">
 	
 	<!-- Le styles -->
-	#stylesheetLinkTag(bundle="ccpd")#
-	#javaScriptIncludeTag(bundle="ccpd")#
-    #javaScriptIncludeTag(bundle="ccpd-legacy")#
-	<!---<script type='text/javascript'
-          src='/steal/steal.js?/javascripts/global.js'>
-  </script>--->
+	#stylesheetLinkTag(bundle="#application.version_token#/ccpd")#
+	#javaScriptIncludeTag(bundle="#application.version_token#/ccpd")#
+	
 	<script src="/javascripts/app/controllers/#lcase(params.controller)#.js" type="text/javascript"></script>
 	<script src="/javascripts/app/views/#lcase(params.controller)#/#params.action#.js" type="text/javascript"></script>
 	<script type="text/javascript">

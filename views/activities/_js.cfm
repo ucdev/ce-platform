@@ -32,5 +32,5 @@ cActListWidth = #GetToken(Cookie.USER_ActListSize,1,",")#;--->
 
 </script>
 
-#javaScriptIncludeTag(bundle="ccpd.activity")#
+#javaScriptIncludeTag(bundle="#application.version_token#/ccpd.activity")#
 </cfoutput>

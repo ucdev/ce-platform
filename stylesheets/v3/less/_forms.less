@@ -1,0 +1,55 @@
+.form-ccpd {
+	.btn-toolbar {
+		.clearfix();
+	}
+	textarea,input[type=text],input[type=password] {
+		border: 1px solid #BDC7D8;
+		font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+		font-size: 11px;
+		margin: 0;
+	}
+	
+	.btn-group {
+		> .btn.active,.btn:active {
+			cursor: default;
+			border-color:darken(@btnPrimaryBackground,10%);
+			z-index: 1;
+		}
+	}
+	
+	.control-group {
+		padding-bottom: 5px;
+		margin-bottom: 0px;
+	}
+	.control-label {
+		width:100px;
+		font-weight:bold;
+		color:#666;
+		padding-right:10px;
+	}
+	
+	.controls {
+		margin-left:115px;
+	}
+	
+	.divider {
+		position:relative;
+		
+		.divider-title {
+			background-color: #FFFFFF;
+			color: #333333;
+			font-weight: bold;
+			left: 10px;
+			padding: 0 10px;
+			position: absolute;
+			top: -8px;
+		}
+		hr {
+			background: none repeat scroll 0 0 #D9D9D9;
+			border-width: 0;
+			color: #D9D9D9;
+			height: 1px;
+			margin: 4px 0 9px;
+		}
+	}
+}

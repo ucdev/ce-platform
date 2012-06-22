@@ -194,11 +194,11 @@ $(document).ready(function(){
 	<input type="hidden" value="#attributes.sessiontype#" name="SessionType" />
 	<input type="hidden" value="" name="ChangedFields" id="ChangedFields" />
 	<input type="hidden" value="" name="ChangedValues" id="ChangedValues" />
-	
-	#bTextAreaTag(name="title",rows="2",id="Title",label="Title",content="#HTMLSafe(Attributes.Title)#",class="span12",style="height: 36px;")#
-	#bSelectTag(name="activitytypeid",id="ActivityType",disabled="disabled",label="Type",options=qActivityTypeList,selected="#attributes.activitytypeid#")#
-	#bSelectTag(name="grouping",id="Grouping",disabled="disabled",label="Sub Type",options=[],selected="#attributes.groupingId#")#
-	#bSelectTag(name="sessiontype",id="SessionType",textField="name",valueField="key",disabled="disabled",label="Session Type",options=sessionTypes,selected="#attributes.sessionType#")#
+	#l("testestestes")#
+	#bTextAreaTag(name="title",rows="2",id="Title",label="#l("Title")#",content="#HTMLSafe(Attributes.Title)#",class="span12",style="height: 36px;")#
+	#bSelectTag(name="activitytypeid",id="ActivityType",disabled="disabled",label="#l("Type")#",options=qActivityTypeList,selected="#attributes.activitytypeid#")#
+	#bSelectTag(name="grouping",id="Grouping",disabled="disabled",label="#l("Sub Type")#",options=[],selected="#attributes.groupingId#")#
+	#bSelectTag(name="sessiontype",id="SessionType",textField="name",valueField="key",disabled="disabled",label="#l("Session Type")#",options=sessionTypes,selected="#attributes.sessionType#")#
 		
 	
 	<div class="divider">
