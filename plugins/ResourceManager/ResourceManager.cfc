@@ -26,6 +26,13 @@
 			<cffile action="write" file="#loc.viewJs#" output="" charset="utf-8"  />
 		</cfif>
 		
+		<!--- BUILD MODEL JS --->
+		<cfset loc.modelJs = "/javascripts/#application.version_token#/app/models/#lcase(singularize(params.action))#.js" />
+		
+		<cfif NOT fileExists(loc.modelJs)>
+			<cffile action="write" file="#loc.modelJs#" output="" charset="utf-8"  />
+		</cfif>
+		
 		<!---
 		<cfif NOT directoryExists(expandPath("/javascripts/#application.version_token#/app/views/#lcase(params.controller)#"))>
 			<cfdirectory action="create" directory="#expandPath("/javascripts/#application.version_token#/app/views/#lcase(params.controller)#")#">
