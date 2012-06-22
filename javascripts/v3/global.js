@@ -100,11 +100,16 @@ function getSprites() {
 	});
 }
 
-$('.projectBar .nav-list a').pjax({
-  container:'.contentBar',
-});
 
 $(function(){
+	$('.projectBar .nav-list a').pjax({
+		container:'.contentBar'
+	});
+	
+	$(".contentBar").on("pjax:end",function(ev) {
+		$(ev.relatedTarget.parentElement).siblings().removeClass('active');
+		$(ev.relatedTarget.parentElement).addClass('active');
+	});
 	getResources();
 	
     $('input').keydown(function(e){

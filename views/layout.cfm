@@ -3,7 +3,7 @@
 <head>
 	<cfoutput>
 	<meta charset="utf-8">
-	<title>#application.config.name#</title>
+	<title>#includeContent("pageTitle")# | #application.config.name#</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
 	
