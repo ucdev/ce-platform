@@ -11,21 +11,10 @@
 	#stylesheetLinkTag(bundle="#application.version_token#/ccpd")#
 	#javaScriptIncludeTag(bundle="#application.version_token#/ccpd")#
 	
-	<script src="/javascripts/app/controllers/#lcase(params.controller)#.js" type="text/javascript"></script>
-	<script src="/javascripts/app/views/#lcase(params.controller)#/#params.action#.js" type="text/javascript"></script>
-	<script type="text/javascript">
-	/* PROOF OF CONCEPT. NEEDS MOVED, I know. */
-	$.Class("ccpd.page",{
-		init:function(controller,action) {
-			this.controller = new ccpd[controller](action);
-		}
-	});
-	
-	(function(){
-		var page = new ccpd.page('#lcase(params.controller)#','#params.action#');
-	})();
-	</script>
 	<script src="/resources/jsloader/global.js?pagelet=#params.pagelet#&pagelet_token=#params.pagelet_token#" type="text/javascript"></script>
+	<script src="#resource(src='/javascripts/#application.version_token#/app/controllers/#lcase(params.controller)#.js')#" type="text/javascript"></script>
+	<script src="#resource(src='/javascripts/#application.version_token#/app/views/#lcase(params.controller)#/#params.action#.js')#" type="text/javascript"></script>
+	<script src="#resource(src='/javascripts/#application.version_token#/app/pagelet.js')#" type="text/javascript"></script>
 	<style>
 	body {
 	padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -51,8 +40,8 @@
 	#includeContent()#
 	#includePartial(partial="/footer")#
 
-<div class="alert alert-error" style="display:none;"></div>
-<div class="alert alert-success" style="display:none;"></div>
+	<div class="alert alert-error" style="display:none;"></div>
+	<div class="alert alert-success" style="display:none;"></div>
 </body>
 </cfoutput>
 </html>

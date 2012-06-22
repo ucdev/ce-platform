@@ -3,13 +3,16 @@ $.Class("ccpd.activities",
 	@STATIC PROPERTIES / METHODS
 	*/
 	{
+		domReady:function() {
+			
+		}
 	},
 	/*
 	@PROTOTYPE PROPERTIES / METHODS
 	*/
 	{
 		init: function(action) {
-			this.view = new ccpd.activities[action]();
+			this.action = action;
 		}
 	}
 );

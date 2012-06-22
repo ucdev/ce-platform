@@ -5,12 +5,18 @@
 	</cffunction>
 	
 	<cffunction name="resource" hint="I load all cached pagelet resources.">
-		<cfargument name="location" required="true" />
+		<cfargument name="type" required="true" />
+		<cfargument name="src" required="true" />
 		
-		<cfparam name="params.pagelet" default="" />
-		<cfparam name="params.pagelet_token" default="" />
+		<cfset var loc = {} />
+		<cfset loc.filepath = expandPath("/javascripts#params.src#") />
+		<cfset loc.httppath = "/javascripts#params.src#" />
 		
+		<cfif NOT fileExists(loc.filepath)>
+			<cffile action="write" file="#loc.filepath#" />
+		</cfif>
 		
+		<cfreturn arguments.httppath />
 	</cffunction>
 	
 	<cffunction name="$writeLessFile">
