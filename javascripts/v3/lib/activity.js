@@ -25,8 +25,8 @@ function continueCopy() {
 		nNewGrouping = 0;
 	}
 	
-	$.getJSON(sRootPath + "/ajax_adm_activity/", 
-		{ method: "CopyPaste", Mode: nCopyChoice, NewActivityTitle: sNewActivityTitle, NewActivityTypeID: nNewActivityType, NewGroupingID: nNewGrouping, ActivityID: nActivity, ReturnFormat:"plain" },
+	$.getJSON("/ajax_adm_activity/", 
+		{ method: "CopyPaste", Mode: nCopyChoice, NewActivityTitle: sNewActivityTitle, NewActivityTypeID: nNewActivityType, NewGroupingID: nNewGrouping, ActivityID: ccpd.tier2.nActivity, ReturnFormat:"plain" },
 		function(data) {
 			if(data.STATUS) {
 				window.location = sMyself + 'Activity.Detail?ActivityID=' + data.DATASET[0].ACTIVITYID + '&Message=' + data.STATUSMSG;
@@ -49,7 +49,7 @@ function getGroupingList(nID) {
 	$("#NewGrouping").removeOption("");
 	$("#NewGrouping").removeOption(/./);
 	
-	$("#NewGrouping").ajaxAddOption(sRootPath + "/ajax_adm_activity/getgroupings", { method: "", ATID: nID, returnFormat: "plain" }, false,
+	$("#NewGrouping").ajaxAddOption("/ajax_adm_activity/getgroupings", { method: "", ATID: nID, returnFormat: "plain" }, false,
 		function(data) {
 		
 		if($("#NewGrouping").val() != "") {
@@ -70,35 +70,35 @@ function updateAll() {
 }
 
 function updateStats() {
-	/*$.post(sMyself + "Activity.Stats", { ActivityID: nActivity }, 
+	/*$.post(sMyself + "Activity.Stats", { ActivityID: ccpd.tier2.nActivity }, 
 		function(data) {
 			$("#ActivityStats").html(data);
 	});*/
 }
 
 function updateActions() {
-	/*$.post(sMyself + "Activity.ActionsShort", { ActivityID: nActivity }, 
+	/*$.post(sMyself + "Activity.ActionsShort", { ActivityID: ccpd.tier2.nActivity }, 
 		function(data) {
 			$("#LatestActions").html(data);
 	});*/
 }
 
 function updateContainers() {
-	/*$.post(sMyself + "Activity.Container", { ActivityID: nActivity }, 
+	/*$.post(sMyself + "Activity.Container", { ActivityID: ccpd.tier2.nActivity }, 
 		function(data) {
 			$("#Containers").html(data);
 	});*/
 }
 
 function updateActivityList() {
-	$.post(sMyself + "Activity.ActivityList", { ActivityID: nActivity },
+	$.post(sMyself + "Activity.ActivityList", { ActivityID: ccpd.tier2.nActivity },
 	  	function(data){
 			$("#ActivityList").html(data);
 	  });
 }
 
 function updateNoteCount() {
-	$.post(sRootPath + "/ajax_adm_activity/getnotecount", { method: "", ActivityID: nActivity, returnFormat: "plain" }, 
+	$.post("/ajax_adm_activity/getnotecount", { method: "", ActivityID: ccpd.tier2.nActivity, returnFormat: "plain" }, 
 		function(data){
 			var nNoteCount =  $.ListGetAt($.Trim(data), 1, ".");
 			
@@ -122,7 +122,7 @@ $(document).ready(function() {
 			return false;
 		}
 		
-		$.post(sRootPath + "/ajax_adm_activity/updateactivitystatus", { method: "", ActivityID: nActivity, StatusID: nStatus, returnFormat:"plain" },
+		$.post("/ajax_adm_activity/updateactivitystatus", { method: "", ActivityID: ccpd.tier2.nActivity, StatusID: nStatus, returnFormat:"plain" },
 		  function(data){
 			var cleanData = $.trim(data);
 			updateActions();
@@ -130,7 +130,7 @@ $(document).ready(function() {
 			
 			addMessage("Activity status changed successfully!",250,6000,4000);
 		  });
-		$("#StatusIcon").attr("src",sRootPath + "/admin/_images/icons/Status" + $(this).val() + ".png");
+		$("#StatusIcon").attr("src","/admin/_images/icons/Status" + $(this).val() + ".png");
 	});
 	/* // END STATUS CHANGER */
 	
@@ -139,28 +139,28 @@ $(document).ready(function() {
 	$("#ActivityList").dialog({ 
 		title:"Activity List",
 		modal: false, 
-		autoOpen: cActListOpen,
-		height:cActListHeight,
-		width:cActListWidth,
-		position:[cActListPosX,cActListPosY],
+		autoOpen: ccpd.tier2.cActListOpen,
+		height:ccpd.tier2.cActListHeight,
+		width:ccpd.tier2.cActListWidth,
+		position:[ccpd.tier2.cActListPosX,ccpd.tier2.cActListPosY],
 		resizable: true,
 		dragStop: function(ev,ui) {
-			$.post(sRootPath + "/_com/UserSettings.cfc", { method:'setActListPos', position: ui.position.left + "," + ui.position.top });
+			$.post("/_com/UserSettings.cfc", { method:'setActListPos', position: ui.position.left + "," + ui.position.top });
 		},
 		open:function() {
 			updateActivityList();
 			$("#ActivityList").show();
-			$.post(sRootPath + "/_com/UserSettings.cfc", { method:'setActListOpen', IsOpen: 'true' });
+			$.post("/_com/UserSettings.cfc", { method:'setActListOpen', IsOpen: 'true' });
 			$("#ActivityDialogLink").fadeOut();
 			
 		},
 		close:function() {
 			$("#ActivityList").html("");
 			$("#ActivityDialogLink").fadeIn();
-			$.post(sRootPath + "/_com/UserSettings.cfc", { method:'setActListOpen', IsOpen: 'false' });
+			$.post("/_com/UserSettings.cfc", { method:'setActListOpen', IsOpen: 'false' });
 		},
 		resizeStop:function(ev,ui) {
-			$.post(sRootPath + "/_com/UserSettings.cfc", { method:'setActListSize', Size: ui.size.width + ',' + ui.size.height });
+			$.post("/_com/UserSettings.cfc", { method:'setActListSize', Size: ui.size.width + ',' + ui.size.height });
 		}
 	});
 	
@@ -181,8 +181,8 @@ $(document).ready(function() {
 		position:[150,150],
 		buttons: { 
 			Continue:function() {
-				$.post(sRootPath + "/ajax_adm_activity/", { method:'Move', FromActivityID: nActivity, ToActivityID: $("#ToActivity").val() }, function(data) {
-					window.location=sMyself + 'Activity.Detail?ActivityID=' + nActivity + '&Message=Activity successfully moved.';
+				$.post("/ajax_adm_activity/", { method:'Move', FromActivityID: ccpd.tier2.nActivity, ToActivityID: $("#ToActivity").val() }, function(data) {
+					window.location=sMyself + 'Activity.Detail?ActivityID=' + ccpd.tier2.nActivity + '&Message=Activity successfully moved.';
 				});
 				
 			}, 
@@ -239,7 +239,7 @@ $(document).ready(function() {
 	});
 	
 	$("#CopyLink").click(function() {
-		setCurrActivityType(nActivityType);
+		setCurrActivityType(ccpd.tier2.nActivityType);
 		$("#CopyDialog").dialog("open");
 		$("#NewActivityTitle").val("Copy of " + sActivityTitle);
 		$("#NewActivityTitle").focus();
@@ -272,18 +272,18 @@ $(document).ready(function() {
 	$("#NotesList").dialog({ 
 		title:"Notes",
 		modal: false, 
-		autoOpen: cActNotesOpen,
+		autoOpen: ccpd.tier2.cActNotesOpen,
 		height:430,
 		width:390,
-		position:[cActNotesPosX,cActNotesPosY],
+		position:[ccpd.tier2.cActNotesPosX,ccpd.tier2.cActNotesPosY],
 		resizable: false,
 		dragStop: function(ev,ui) {
-			$.post(sRootPath + "/_com/UserSettings.cfc", { method:'setActNotesPos', position: ui.position.left + "," + ui.position.top });
+			$.post("/_com/UserSettings.cfc", { method:'setActNotesPos', position: ui.position.left + "," + ui.position.top });
 		},
 		open:function() {
 			$("#NotesList").show();
-			$("#frmNotes").attr("src",sMyself + "Activity.Notes?ActivityID=" + nActivity);
-			$.post(sRootPath + "/_com/UserSettings.cfc", { method:'setActNotesOpen', IsOpen: 'true' });
+			$("#frmNotes").attr("src",sMyself + "Activity.Notes?ActivityID=" + ccpd.tier2.nActivity);
+			$.post("/_com/UserSettings.cfc", { method:'setActNotesOpen', IsOpen: 'true' });
 			$("#NotesDialogLink").fadeOut();
 		},
 		close:function() {
@@ -291,7 +291,7 @@ $(document).ready(function() {
 			
 			$("#NotesDialogLink").fadeIn();
 			$("#frmNotes").attr("src","javascript://");
-			$.post(sRootPath + "/_com/UserSettings.cfc", { method:'setActNotesOpen', IsOpen: 'false' });
+			$.post("/_com/UserSettings.cfc", { method:'setActNotesOpen', IsOpen: 'false' });
 		}
 	});
 
@@ -310,7 +310,7 @@ $(document).ready(function() {
 		position: [100,100],
 		resizable: true,
 		open:function() {
-			$.post(sMyself + "Activity.Overview", { ActivityID: nActivity },
+			$.post(sMyself + "Activity.Overview", { ActivityID: ccpd.tier2.nActivity },
 				function(data) {
 					$("#OverviewList").html(data);
 			});
@@ -339,7 +339,7 @@ $(document).ready(function() {
 		var sReason = prompt("Do you really want to delete '" + sActivityTitle + "'?  What is the reason?","");
 		
 		if(sReason != null && sReason != "") {
-			$.getJSON(sRootPath + "/ajax_adm_activity/deleteactivity", { method: "", ActivityID: nActivity, Reason: sReason, returnFormat: "plain" },
+			$.getJSON("/ajax_adm_activity/deleteactivity", { method: "", ActivityID: ccpd.tier2.nActivity, Reason: sReason, returnFormat: "plain" },
 				function(data) {
 					if(data.STATUS) {
 						window.location = sMyself + "Activity.Home?Message=" + data.STATUSMSG;
@@ -380,7 +380,7 @@ $(document).ready(function() {
 	});
 	
 	$("#ProcessSelect").change(function() {
-		$("#frmProcessQueue").attr("src",sMyself + "Process.AddToQueue?ActivityID=" + nActivity + "&ProcessID=" + $(this).val());
+		$("#frmProcessQueue").attr("src",sMyself + "Process.AddToQueue?ActivityID=" + ccpd.tier2.nActivity + "&ProcessID=" + $(this).val());
 		$("#ProcessQueueDialog").dialog("open");
 	});
 	

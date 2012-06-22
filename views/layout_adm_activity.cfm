@@ -1,4 +1,5 @@
 <cfoutput>
+	#includePartial(partial="/activities/js")#
 	<div class="profile editor row">
 		<div class="profile-bg">
 			<div class="profile-bg-inner"></div>

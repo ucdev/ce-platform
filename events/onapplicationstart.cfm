@@ -31,6 +31,7 @@
 			#application.version_token#/vendor/bootstrap/bootstrap-collapse,
 			#application.version_token#/vendor/bootstrap/bootstrap-carousel,
 			#application.version_token#/vendor/bootstrap/bootstrap-typeahead,
+			#application.version_token#/app/core/pagelet,
 			#application.version_token#/global,
 			#application.version_token#/action_menu,
 			#application.version_token#/uiTokenizer,
