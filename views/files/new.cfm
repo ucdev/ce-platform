@@ -33,6 +33,5 @@
             </div>
         </div>
 	</fieldset>
-    #submitTag()#
 #endFormTag()#
 </cfoutput>

@@ -34,11 +34,8 @@
                                 <cfset CVFileApproval = "Unapprove">
                             </cfif>
                             <a href="/files/download/cv/#qActivityFacultyList.facultyId#" title="Download the CV of #FirstName# #LastName#"><i class="icon-download"></i> Download</a>  <span class="label<cfif qActivityFacultyList.CVApproveFlag EQ "Y"> label-success<cfelseif DateDiff("yyyy",Now(),qActivityFacultyList.CVCreatedDate) LTE -3> label-important</cfif>">(#DateFormat(qActivityFacultyList.CVCreatedDate,"MM/DD/YYYY")#)</span><br />
-                            <cfif qActivityFacultyList.CVApproveFlag EQ "N">
-                                <a href="javascript://" id="Approve|CV|#qActivityFacultyList.PersonID#" class="approveFile js-approve-file" title="Mark the CV of #FirstName# #LastName# as Approved"><i class="icon-time"></i> Mark Approved</a>
-                            <cfelse>
-                                <i class="icon-time"></i> Approved <a href="javascript://" id="Unapprove|CV|#qActivityFacultyList.facultyId#" class="approveFile js-approve-file" title="Remove the Approved status from the CV of #FirstName# #LastName#">(remove)</a>
-                            </cfif>
+                            <span class="js-approve-file"><a href="javascript://" id="Approve|CV|#qActivityFacultyList.PersonID#" class="approveFile js-approve-file-link" title="Mark the CV of #FirstName# #LastName# as Approved"><i class="icon-time"></i> Mark Approved</a></span>
+                            <span class="js-unapprove-file"><i class="icon-time"></i> Approved <a href="javascript://" id="Unapprove|CV|#qActivityFacultyList.facultyId#" class="approveFile js-approve-file-link" title="Remove the Approved status from the CV of #FirstName# #LastName#">(remove)</a></span>
                             <br />
                             <cfset FileCount = FileCount + 1>
                         </cfif>
@@ -54,9 +51,9 @@
                             <div class="row"><a href="/files/download/disclosure/#qActivityFacultyList.facultyId#" title="Download the Disclosure of #FirstName# #LastName#"><i class="icon-download"></i> Download</a> <span class="label<cfif qActivityFacultyList.DisclosureApproveFlag EQ "Y"> label-success<cfelseif DateDiff("yyyy",Now(),qActivityFacultyList.DisclosureCreatedDate) LTE -1> label-important</cfif>">(#DateFormat(qActivityFacultyList.DisclosureCreatedDate,"MM/DD/YYYY")#)</span></div>
                             <div class="row">
 							<cfif qActivityFacultyList.DisclosureApproveFlag EQ "N">
-                                <a href="javascript://" id="Approve|Disclosure|#qActivityFacultyList.facultyId#" class="approveFile js-approve-file" title="Mark the Disclosure of #FirstName# #LastName# as Approved"><i class="icon-time"></i> Mark Approved</a>
+                                <a href="javascript://" id="Approve|Disclosure|#qActivityFacultyList.facultyId#" class="approveFile js-approve-file-link" title="Mark the Disclosure of #FirstName# #LastName# as Approved"><i class="icon-time"></i> Mark Approved</a>
                             <cfelse>
-                                <i class="icon-time"></i> Approved <a href="javascript://" id="Unapprove|Disclosure|#qActivityFacultyList.facultyId#" class="approveFile js-approve-file" title="Remove the Approved Status from the Disclosure of #FirstName# #LastName#">(remove)</a>
+                                <i class="icon-time"></i> Approved <a href="javascript://" id="Unapprove|Disclosure|#qActivityFacultyList.facultyId#" class="approveFile js-approve-file-link" title="Remove the Approved Status from the Disclosure of #FirstName# #LastName#">(remove)</a>
                             </cfif>
                             </div>
                         	<cfset FileCount = FileCount + 1>

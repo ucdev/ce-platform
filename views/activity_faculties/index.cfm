@@ -21,4 +21,5 @@
 	<div>Please Wait</div></div>
 </div>
 <div class="js-file-uploader"></div>
+<div class="js-photo-uploader"></div>
 </cfoutput>

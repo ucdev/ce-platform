@@ -65,8 +65,7 @@
     </cffunction>
 
 	<cffunction name="approveFacultyFile"  output="false">
-		<cfparam name="params.PersonID" type="string">
-		<cfparam name="params.ActivityID" type="string">
+		<cfparam name="params.facultyId" type="string">
         <cfparam name="params.FileType" type="string">
         <cfparam name="params.Mode" type="string">
         
@@ -77,7 +76,7 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot access file approval functionality for activity faculty.")>
         
-        <cfset status = Application.ActivityPeople.approveFacultyFile(params.PersonID,params.ActivityID,params.FileType,params.Mode)>
+        <cfset status = Application.ActivityPeople.approveFacultyFile(params.facultyId,params.FileType,params.Mode)>
         
         <cfset renderText(status.getJSON()) />
     </cffunction>
