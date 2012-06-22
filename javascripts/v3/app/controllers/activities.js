@@ -7,6 +7,7 @@ $.Class("ccpd.activities",
 			
 		}
 	},
+	
 	/*
 	@PROTOTYPE PROPERTIES / METHODS
 	*/

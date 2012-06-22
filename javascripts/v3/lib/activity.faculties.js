@@ -199,7 +199,7 @@ function updateSelectedCount(nAmount) {
 	
 }
 
-$(document).ready(function() {
+$("body").bind("pageLoad",function() {
 	var $checkAll = $('.js-check-all');
 	var $facultyRemover = $('.js-remove-faculty');
 	
