@@ -10,11 +10,7 @@
 	<!-- Le styles -->
 	#stylesheetLinkTag(bundle="#application.version_token#/ccpd")#
 	#javaScriptIncludeTag(bundle="#application.version_token#/ccpd")#
-	
-	<cfset generateBundle(type="js", 
-						bundle="#application.version_token#/ccpd.activity", compress=true, 
-						sources="#application.version_token#/lib/activity") 
-			/>
+
 	
 	<script src="/resources/jsloader/global.js?pagelet=#params.pagelet#&pagelet_token=#params.pagelet_token#" type="text/javascript"></script>
 	<script src="/javascripts/#application.version_token#/app/controllers/#lcase(params.controller)#.js" type="text/javascript"></script>

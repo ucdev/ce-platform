@@ -110,6 +110,7 @@ $(function(){
 		$(ev.relatedTarget.parentElement).siblings().removeClass('active');
 		$(ev.relatedTarget.parentElement).addClass('active');
 	});
+	
 	getResources();
 	
     $('input').keydown(function(e){
