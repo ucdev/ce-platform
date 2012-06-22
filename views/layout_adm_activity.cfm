@@ -19,7 +19,7 @@
 		</div>
 		
 		<div class="contentBar span15">
-			
+			<div class='loader' style='display:none'><img src='/images/255.png'></div>
 			#includeContent()#
 		</div>
 		

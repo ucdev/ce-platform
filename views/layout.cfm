@@ -18,7 +18,6 @@
 	
 	<script src="/resources/jsloader/global.js?pagelet=#params.pagelet#&pagelet_token=#params.pagelet_token#" type="text/javascript"></script>
 	<script src="/javascripts/#application.version_token#/app/controllers/#lcase(params.controller)#.js" type="text/javascript"></script>
-	
 	<script src="/javascripts/#application.version_token#/app/views/#lcase(params.controller)#/#params.action#.js" type="text/javascript"></script>
 	<script src="/javascripts/#application.version_token#/app/pagelet.js" type="text/javascript"></script>
 	<style>
