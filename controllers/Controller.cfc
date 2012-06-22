@@ -3,6 +3,7 @@
 		<cfset filters(through="autoSetup") />
 		<cfset filters(through="autoLayout",type="after") />
 		<cfset filters(through="pagelet",type="before") />
+		<cfset filters(through="resources",type="before") />
 	</cffunction>
 	
 	<cffunction name="pagelet">
