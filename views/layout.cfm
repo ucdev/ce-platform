@@ -13,9 +13,6 @@
 
 	
 	<script src="/resources/jsloader/global.js?pagelet=#params.pagelet#&pagelet_token=#params.pagelet_token#" type="text/javascript"></script>
-	<script src="/javascripts/#application.version_token#/app/controllers/#lcase(params.controller)#.js" type="text/javascript"></script>
-	<script src="/javascripts/#application.version_token#/app/views/#lcase(params.controller)#/#params.action#.js" type="text/javascript"></script>
-	<script src="/javascripts/#application.version_token#/app/pagelet.js" type="text/javascript"></script>
 	<style>
 	body {
 	padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */

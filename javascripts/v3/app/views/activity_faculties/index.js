@@ -1,9 +1,11 @@
 $.Class("ccpd.activity_faculties.index",{
-	init:function(controller,action) {
-		this.controller = new ccpd[controller](action);
-		console.log('in');
+	init:function(params) {
+		console.log('init');
+	},
+	setup:function() {
+		console.log('setup');
 	}
-});
+}, {});
 
 (function(){
 	

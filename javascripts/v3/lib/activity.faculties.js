@@ -1,3 +1,5 @@
+/*
+
 function addSelectedRow(params) {
 	var settings = $.extend({},params);
 	
@@ -269,3 +271,5 @@ $(document).ready(function() {
 		}
 	});
 });
+
+*/
