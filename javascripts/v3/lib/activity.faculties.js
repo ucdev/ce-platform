@@ -48,8 +48,11 @@ function saveFacultyMember() {
 function updateFaculty() {
 	var $loader = $(".js-faculty-loading");
 	var $container = $(".js-faculty-container");
+	var $fileUploader = $('.js-file-uploader');
+	var $photoUploader = $('.js-photo-uploader');
 	
 	$loader.show();
+	
 	$.ajax({
 		url: "/activity_faculties/ahah/" + nActivity,
 		type: 'post',
@@ -60,11 +63,14 @@ function updateFaculty() {
 			$loader.hide();
 			
 			// CHECK IF ATTENDEE HAS BEEN MARKED AS SELECTED	
+			$('.js-all-faculty').unbind();
+			
 			$(".js-all-faculty").each(function() {
 				var $row = $(this);
 				var $checkBox = $row.find('.js-selected-checkbox');
-				var $fileUploader = $('.js-file-uploader');
+				var $fileApprover = $row.find('.js-approve-file-link');
 				var $fileUploadLink = $row.find('.js-upload-file');
+				var $photo = $row.find('.js-person-photo');
 				var nPerson = $row.find('.personId').val();
 				var nFaculty = $row.find('.facultyId').val();
 				
@@ -92,6 +98,27 @@ function updateFaculty() {
 							faculty:nFaculty
 						});
 					}
+				});
+		
+				$fileApprover.live('click', function() {
+					var idSplit = this.id.split('|');
+					var sApprovalType = idSplit[0];
+					var sFileType = idSplit[1];
+					
+					$.ajax({
+						url: "/AJAX_adm_Activity/approveFacultyFile", 
+						type: 'post',
+						data: { facultyId: nFaculty, FileType: sFileType, Mode: sApprovalType },
+						success: function(data) {			
+							if(data.STATUS) {
+								updateFaculty();
+								addMessage(data.STATUSMSG,250,6000,4000);
+							} else {
+								updateFaculty();
+								addError(data.STATUSMSG,250,6000,4000);
+							}
+						}
+					});
 				});
 	
 				$fileUploader.dialog({ 
@@ -121,7 +148,6 @@ function updateFaculty() {
 						}
 					},
 					open:function() {
-						console.log('in');
 						$.ajax({
 							url: '/files/new/' + nPerson,
 							type: 'post',
@@ -139,6 +165,23 @@ function updateFaculty() {
 	
 				$fileUploadLink.live('click', function() {
 					$fileUploader.dialog('open');
+				});
+	
+				$photo.live('click', function() {
+					$("#frmUpload").attr("src", '/people/photoupload/' + nPerson + '?ElementID=' + this.id);
+					$photoUploader.dialog("open");
+				});
+				
+				$photoUploader.dialog({ 
+					title:"Upload Photo",
+					modal: false, 
+					autoOpen: false,
+					height:120,
+					width:450,
+					resizable: false,
+					open:function() {
+						$photoUploader.show();
+					}
 				});
 			});
 		}
@@ -159,8 +202,6 @@ function updateSelectedCount(nAmount) {
 $(document).ready(function() {
 	var $checkAll = $('.js-check-all');
 	var $facultyRemover = $('.js-remove-faculty');
-	var $fileApprover = $('.js-approve-file');
-	var $photo = $('.js-person-photo');
 	
 	// AHAH DATA LOAD
 	updateFaculty();
@@ -227,48 +268,4 @@ $(document).ready(function() {
 			});
 		}
 	});
-		
-	/* FACULTY FILE APPROVAL */
-	$fileApprover.live('click', function() {
-		var idSplit = this.id.split('|');
-		var sApprovalType = idSplit[0];
-		var sFileType = idSplit[1];
-		var personId = idSplit[2];
-		
-		$.ajax({
-			url: "/AJAX_adm_Activity/approveFacultyFile", 
-			type: 'post',
-			data: { ActivityID: nActivity, PersonID: personId, FileType: sFileType, Mode: sApprovalType },
-			success: function(data) {			
-				if(data.STATUS) {
-					updateFaculty();
-					addMessage(data.STATUSMSG,250,6000,4000);
-				} else {
-					updateFaculty();
-					addError(data.STATUSMSG,250,6000,4000);
-				}
-			}
-		});
-	});
-	
-	/* PHOTO UPLOAD DIALOG */
-	$("#PhotoUpload").dialog({ 
-		title:"Upload Photo",
-		modal: false, 
-		autoOpen: false,
-		height:120,
-		width:450,
-		resizable: false,
-		open:function() {
-			$("#PhotoUpload").show();
-		}
-	});
-	
-	$photo.live('click', function() {
-		var personId = this.id.split('Photo')[1];
-		
-		$("#frmUpload").attr("src", '/people/photoupload/' + personId + '?ElementID=' + this.id);
-		$("#PhotoUpload").dialog("open");
-	});
-	/* // END PHOTO UPLOAD DIALOG */
 });

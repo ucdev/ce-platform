@@ -1,4 +1,8 @@
 <cfcomponent extends="Controller" output="false">
+	<cffunction name="init">
+		<cfset filters(through="ajaxLoginRequired")>
+		<cfset filters(through="ajaxAdminRequired")>
+    </cffunction>
 	
 	<!--- files/create --->
 	<cffunction name="create">

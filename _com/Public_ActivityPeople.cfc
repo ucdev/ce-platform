@@ -4,8 +4,7 @@
 	</cffunction>
 
 	<cffunction name="approveFacultyFile" access="Public" output="true" returntype="struct">
-		<cfargument name="PersonID" required="true" type="string">
-		<cfargument name="ActivityID" required="true" type="string">
+		<cfargument name="facultyId" required="true" type="string">
         <cfargument name="FileType" required="true" type="string">
         <cfargument name="Mode" required="true" type="string">
         
@@ -14,7 +13,7 @@
         <cfset status.setStatus(false)>
         <cfset status.setStatusMsg("Cannot approve faculty file for unknown reasons.")>
         
-    	<cfif Arguments.PersonID EQ "" OR Arguments.ActivityID EQ "" OR Arguments.FileType EQ "" OR Arguments.Mode EQ "">
+    	<cfif Arguments.facultyId EQ "" OR Arguments.FileType EQ "" OR Arguments.Mode EQ "">
         	<cfset status.setStatusMsg("More information is required.")>
             <cfreturn status />
             <cfabort>
@@ -32,22 +31,23 @@
                 <cfquery name="qUpdateCVFlag" datasource="#Application.Settings.DSN#">
                     UPDATE ce_Activity_Faculty
                     SET CVApproveFlag = <cfqueryparam value="#ApproveFlag#" cfsqltype="cf_sql_char" />
-                    WHERE ActivityID = <cfqueryparam value="#Arguments.ActivityID#" cfsqltype="cf_sql_integer" /> AND PersonID = <cfqueryparam value="#Arguments.PersonID#" cfsqltype="cf_sql_integer" />
+                    WHERE facultyId = <cfqueryparam value="#Arguments.facultyId#" cfsqltype="cf_sql_integer" />
                 </cfquery>
             <cfelseif Arguments.FileType EQ "Disclosure">
                 <!--- UPDATE DISCLOSUREAPPROVEFLAG --->
                 <cfquery name="qUpdateDisclosureFlag" datasource="#Application.Settings.DSN#">
                     UPDATE ce_Activity_Faculty
                     SET DisclosureApproveFlag = <cfqueryparam value="#ApproveFlag#" cfsqltype="cf_sql_char" />
-                    WHERE ActivityID = <cfqueryparam value="#Arguments.ActivityID#" cfsqltype="cf_sql_integer" /> AND PersonID = <cfqueryparam value="#Arguments.PersonID#" cfsqltype="cf_sql_integer" />
+                    WHERE facultyId = <cfqueryparam value="#Arguments.facultyId#" cfsqltype="cf_sql_integer" />
                 </cfquery>
             </cfif>
             
             <!--- GET PERSONS NAME --->
             <cfquery name="qGetPersonName" datasource="#Application.Settings.DSN#">
-                SELECT FirstName, LastName
-                FROM ce_Person
-                WHERE PersonID = <cfqueryparam value="#Arguments.PersonID#" cfsqltype="cf_sql_integer" />
+                SELECT p.FirstName, p.LastName
+                FROM ce_activity_faculty AS af
+                INNER JOIN ce_Person AS p ON p.personId = af.personId
+                WHERE af.facultyId = <cfqueryparam value="#arguments.facultyId#" cfsqltype="cf_sql_integer" />
             </cfquery>
             
             <cfif ApproveFlag EQ "Y">
