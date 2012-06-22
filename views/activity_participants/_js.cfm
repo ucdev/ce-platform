@@ -17,12 +17,31 @@ var AddlAttendees;
 var NoChange = 0;
 var totalPages;
 
+ccpd.tier3 = new ccpd.core.pagelet({
+	nPageNo: #params.Page#,
+	nStatus: #params.status#,
+	SelectedMembers: '',
+	SelectedAttendees: '',
+	SelectedCount: 0,
+	TotalAttendeeCount:0,
+	TotalAttendeeList:'',
+	status4Count:0,
+	status2Count:0,
+	status3Count:0,
+	status1Count:0,
+	status0Count:0,
+	MaxRegistrants:0,
+	AddlAttendees:0,
+	NoChange: 0,
+	totalPages:0
+});
+
 <cfif structKeyExists(cookie, "user_attendee_page") AND GetToken(Cookie.USER_AttendeePage,1,"|") EQ params.ActivityID>
 <cfif getToken(cookie.user_attendeeStatus, 1, "|") EQ params.ActivityId>
-nPageNo = #getToken(Cookie.USER_AttendeePage,2,"|")#;
-nStatus = #getToken(Cookie.USER_AttendeeStatus,2,"|")#;
+ccpd.tier3.nPageNo = #getToken(Cookie.USER_AttendeePage,2,"|")#;
+ccpd.tier3.nStatus = #getToken(Cookie.USER_AttendeeStatus,2,"|")#;
 <cfelse>
-nPageNo = #getToken(Cookie.USER_AttendeePage,2,"|")#;
+ccpd.tier3.nPageNo = #getToken(Cookie.USER_AttendeePage,2,"|")#;
 </cfif>
 </cfif> 
 </script>   

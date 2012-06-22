@@ -11,11 +11,13 @@
 	#stylesheetLinkTag(bundle="#application.version_token#/ccpd")#
 	#javaScriptIncludeTag(bundle="#application.version_token#/ccpd")#
 
-	
 	<script src="/resources/jsloader/global.js?pagelet=#params.pagelet#&pagelet_token=#params.pagelet_token#" type="text/javascript"></script>
-	<script src="/javascripts/#application.version_token#/app/controllers/#lcase(params.controller)#.js" type="text/javascript"></script>
-	<script src="/javascripts/#application.version_token#/app/views/#lcase(params.controller)#/#params.action#.js" type="text/javascript"></script>
-	<script src="/javascripts/#application.version_token#/app/pagelet.js" type="text/javascript"></script>
+	<script>
+	ccpd.tier1 = new ccpd.core.pagelet({
+		pageUrl: '#urlFor(argumentcollection=params)#',
+		rootPath: '/'
+	});
+	</script>
 	<style>
 	body {
 	padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -36,7 +38,7 @@
 	</cfoutput>
 </head>
 <cfoutput>
-<body data-pagelet="#params.pagelet#" data-pagelet_token="#params.pagelet_token#" data-controller="#lcase(params.controller)#" data-action="#lcase(params.action)#" data-version_token="#params.version_token#">
+<body data-version_token="#params.version_token#">
 	#includePartial(partial="/header")#
 	#includeContent()#
 	#includePartial(partial="/footer")#
