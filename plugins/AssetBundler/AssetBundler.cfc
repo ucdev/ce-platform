@@ -106,6 +106,7 @@
 		<cfargument name="sources" type="string" required="false" default="" />
 		<cfargument name="type" type="string" required="false" default="#application.wheels.functions.javaScriptIncludeTag.type#" />
 		<cfargument name="bundle" type="string" required="false" default="" />
+		
 		<cfreturn $callOriginalIncludeMethod($includeMethod="javaScriptIncludeTag", $fileType="js", argumentCollection=arguments) />
 	</cffunction>
 	

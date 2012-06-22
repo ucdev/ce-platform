@@ -27,5 +27,5 @@ nPageNo = #getToken(Cookie.USER_AttendeePage,2,"|")#;
 </cfif> 
 </script>   
 
-#javaScriptIncludeTag(bundle="ccpd.activity.participants")#
+#javaScriptIncludeTag(bundle="#application.version_token#/ccpd.activity.participants")#
 </cfoutput>

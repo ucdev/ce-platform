@@ -7,5 +7,5 @@ geodata = #serializeJSON(geodata)#;
 </cfif>
 </script>
 
-#javaScriptIncludeTag(bundle="ccpd.attendee")#
+#javaScriptIncludeTag(bundle="#application.version_token#/ccpd.attendee")#
 </cfoutput>

@@ -5,5 +5,5 @@ var currPerson = 0;
 var selectedCount = 0;
 var selectedRows;
 </script>
-#javaScriptIncludeTag(bundle="ccpd.activity.faculties")#
+#javaScriptIncludeTag(bundle="#application.version_token#/ccpd.activity.faculties")#
 </cfoutput>

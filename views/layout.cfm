@@ -11,10 +11,15 @@
 	#stylesheetLinkTag(bundle="#application.version_token#/ccpd")#
 	#javaScriptIncludeTag(bundle="#application.version_token#/ccpd")#
 	
+	<cfset generateBundle(type="js", 
+						bundle="#application.version_token#/ccpd.activity", compress=true, 
+						sources="#application.version_token#/lib/activity") 
+			/>
+	
 	<script src="/resources/jsloader/global.js?pagelet=#params.pagelet#&pagelet_token=#params.pagelet_token#" type="text/javascript"></script>
-	<script src="#resource(src='/javascripts/#application.version_token#/app/controllers/#lcase(params.controller)#.js')#" type="text/javascript"></script>
-	<script src="#resource(src='/javascripts/#application.version_token#/app/views/#lcase(params.controller)#/#params.action#.js')#" type="text/javascript"></script>
-	<script src="#resource(src='/javascripts/#application.version_token#/app/pagelet.js')#" type="text/javascript"></script>
+	<script src="#resource(type='controllerJs',name='#lcase(params.controller)#')#" type="text/javascript"></script>
+	<script src="#resource(type='viewJs',name='#params.action#')#" type="text/javascript"></script>
+	<script src="/javascripts/#application.version_token#/app/pagelet.js" type="text/javascript"></script>
 	<style>
 	body {
 	padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */

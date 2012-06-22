@@ -1,3 +1,3 @@
 <cfoutput>
-#javaScriptIncludeTag(bundle="ccpd.activity.credits")#
+#javaScriptIncludeTag(bundle="#application.version_token#/ccpd.activity.credits")#
 </cfoutput>

@@ -1,5 +1,5 @@
 <cfoutput>
-#javaScriptIncludeTag(bundle="ccpd.people")#
+#javaScriptIncludeTag(bundle="#application.version_token#/ccpd.people")#
 #includePartial(partial="js")#
 <div class="profile editor row">
 	<div class="projectBar span4">

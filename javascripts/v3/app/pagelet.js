@@ -5,5 +5,5 @@ $.Class("ccpd.pagelet",{
 });
 
 (function(){
-	var pagelet = new ccpd.pagelet;
+	
 })();
