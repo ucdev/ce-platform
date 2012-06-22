@@ -21,6 +21,7 @@
         
 		<!--- Verify that the file creates successfully --->
 		<cfif fileUploaded.getStatus() AND file.save()>
+        	<!--- SAVE EXTRANEOUS RECORDS BASED ON FILETYPEID --->
         	<cfswitch expression="#file.fileTypeId#">
             	<cfcase value="1">
                 </cfcase>
@@ -29,14 +30,12 @@
             	<cfcase value="3">
                 </cfcase>
             	<cfcase value="4">
-                	<cfset faculty = model("Activity_faculty").findBykey(<!--- NEEDS FACULTY ID--->)>
-                    
-                    <cfdump var="#faculty#"><cfabort>
+                	<cfset faculty = model("Activity_faculty").findBykey(params.facultyId)>
                     <cfset faculty.updateProperty("cvFileId", file.id) />
                 </cfcase>
             	<cfcase value="5">
                 	<cfset faculty = model("Activity_faculty").findBykey(params.key)>
-                    <cfset faculty.updateProperty("cvFileId", file.id) />
+                    <cfset faculty.updateProperty("DisclosureFileId", file.id) />
                 </cfcase>
             </cfswitch>
 			<cfset status.setStatus(true)>
