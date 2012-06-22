@@ -4,17 +4,14 @@
 		<cfreturn this>
 	</cffunction>
 	
-	<cffunction name="resource" hint="I load all cached pagelet resources.">
-		<cfargument name="type" required="true" />
-		<cfargument name="name" required="true" />
-		
+	<cffunction name="resources" hint="I load all cached pagelet resources.">
 		<cfset var loc = {} />
 		<cfset loc.filepath = "" />
 		<cfset loc.httppath = "" />
 		
 		<cfswitch expression="#arguments.type#">
 			<cfcase value="controllerJs">
-				<cfset loc.filepath = "/javascripts/#application.version_token#/app/controllers/#arguments.name#.js" />
+				<cfset loc.filepath = "/javascripts/#application.version_token#/app/controllers/#lcase(params.controller)#.js" />
 			</cfcase>
 			<cfcase value="viewJs">
 				<cfif NOT directoryExists(expandPath("/javascripts/#application.version_token#/app/views/#lcase(params.controller)#"))>
