@@ -27,7 +27,14 @@
 		</cfif>
 		
 		<!--- BUILD MODEL JS --->
-		<cfset loc.modelJs = "/javascripts/#application.version_token#/app/models/#lcase(singularize(params.action))#.js" />
+		<cfset loc.modelJs = "/javascripts/#application.version_token#/app/models/#lcase(singularize(params.controller))#.js" />
+		
+		<cfif NOT fileExists(loc.modelJs)>
+			<cffile action="write" file="#loc.modelJs#" output="" charset="utf-8"  />
+		</cfif>
+		
+		<!--- BUILD LESS VIEW FILE --->
+		<cfset loc.modelJs = "/javascripts/#application.version_token#/app/models/#lcase(singularize(params.controller))#.js" />
 		
 		<cfif NOT fileExists(loc.modelJs)>
 			<cffile action="write" file="#loc.modelJs#" output="" charset="utf-8"  />

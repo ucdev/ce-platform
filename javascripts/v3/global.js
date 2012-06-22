@@ -100,6 +100,10 @@ function getSprites() {
 	});
 }
 
+$('.projectBar .nav-list a').pjax({
+  container:'.contentBar',
+});
+
 $(function(){
 	getResources();
 	
