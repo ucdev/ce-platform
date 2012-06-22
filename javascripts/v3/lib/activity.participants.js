@@ -1,4 +1,5 @@
-function addSelectedAttendee(params) {
+function addSelectedRow(params) {
+	console.log(params);
 	var settings = $.extend({},params);
 	
 	if(settings.person && settings.person > 0) {
@@ -24,10 +25,10 @@ function clearSelectedMembers() {
 	SelectedAttendees = '';
 	SelectedMembers = '';
 	SelectedCount = 0;
-	$("#CheckedCount").html("(0)");
+	$("#label-status-selected").html('0');
 }
 
-function removeSelectedPerson(params) {
+function removeSelectedRow(params) {
 	var settings = $.extend({},params);
 	
 	if(settings.person && settings.person > 0) {
@@ -142,12 +143,12 @@ function updateRegistrants(nPage, nStatus) {
 			// CHECK IF ALL VIEWABLE ATTENDEES ARE SELECTED
 			if($(".AllAttendees").length == TotalAttendeeCount && SelectedAttendees.split(',').length == TotalAttendeeCount) {
 				// CHECK THE CHECK ALL BOX
-				$('#CheckAll').attr('checked', true);
+				$('.js-check-all').attr('checked', true);
 			}
 			
 			// CHECK IF ATTENDEE HAS BEEN MARKED AS SELECTED	
 			$(".AllAttendees").each(function() {
-				$row = $(this);
+				var $row = $(this);
 				var $checkBox = $row.find('.MemberCheckbox');
 				var nPerson = $row.find('.personId').val();
 				var nAttendee = $row.find('.attendeeId').val();
@@ -160,18 +161,18 @@ function updateRegistrants(nPage, nStatus) {
 				
 				$checkBox.click(function() {
 					if($(this).attr("checked")) {
-						$("#attendeeRow-" + nAttendee).addClass('alert alert-info');
+						$row.addClass('alert alert-info');
 						
 						// ADD CURRENT MEMBER TO SELECTEDMEMBERS LIST
-						addSelectedAttendee({
+						addSelectedRow({
 							person:nPerson,
 							attendee:nAttendee
 						});
 					} else {
-						$("#attendeeRow-" + nAttendee).removeClass('alert alert-info');
+						$row.removeClass('alert alert-info');
 						
 						// REMOVE CURRENT MEMBER FROM SELECTEDMEMBERS LIST
-						removeSelectedPerson({
+						removeSelectedRow({
 							person:nPerson,
 							attendee:nAttendee
 						});
@@ -214,18 +215,18 @@ function updateStatusDate(nAttendee,nType) {
 }
 
 $(document).ready(function() {
-	var $attendeeRemover = $('#remove-attendees');
-	var $attendeeSelectedViewLink = $('#statusSelected');
-	var $attendeeStatusChanger = $('.change-status');
-	var $attendeeStatusViewChange = $('.view-attendee-statusdate');
-	var $checkAll = $("#CheckAll");
-	var $containerDiv = $('#RegistrantsContainer');
-	var $fakeAttendeeRemover = $('.deleteLink');
-	var $loadingDiv = $('#RegistrantsLoading');
+	var $attendeeRemover = $('.js-remove-attendees');
+	var $attendeeSelectedViewLink = $('.js-status-selected');
+	var $attendeeStatusChanger = $('.js-change-status');
+	var $attendeeStatusViewChange = $('.js-view-attendee-statusdate');
+	var $checkAll = $('.js-check-all');
+	var $containerDiv = $('.js-registrants-container');
+	var $fakeAttendeeRemover = $('.js-delete-link');
+	var $loadingDiv = $('.js-registrants-loading');
 	var $pager = $('a.page,a.first,a.last,a.next,a.previous');
-	var $printer = $('.print');
-	var $statusDateEditor = $(".EditStatusDate");
-	var $statusFilter = $('.attendees-filter li.attendee-status');
+	var $printer = $('.js-print');
+	var $statusDateEditor = $(".js-edit-status-date");
+	var $statusFilter = $('.attendees-filter li.js-attendee-status');
 	
 	MaxRegistrants = $("#MaxRegistrants").val();
 	AddlAttendees = $("#AddlAttendees").val();
@@ -269,7 +270,7 @@ $(document).ready(function() {
 			
 			if(selectAll && !rowChecked) {
 				// ADD CURRENT MEMBER TO SELECTEDMEMBERS LIST
-				addSelectedAttendee({
+				addSelectedRow({
 					person: nPerson,
 					attendee: nAttendee
 				});
@@ -281,7 +282,7 @@ $(document).ready(function() {
 			} else if(!selectAll && rowChecked) {
 				if(rowChecked) {
 					// ADD CURRENT MEMBER TO SELECTEDMEMBERS LIST
-					removeSelectedPerson({
+					removeSelectedRow({
 						person: nPerson,
 						attendee: nAttendee
 					});
