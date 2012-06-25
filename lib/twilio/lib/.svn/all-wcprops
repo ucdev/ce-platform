@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/twiliolibrary/!svn/ver/44/trunk/lib/classes
+END
+RESTRequest.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/twiliolibrary/!svn/ver/42/trunk/lib/classes/RESTRequest.cfc
+END
+RESTClient.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/twiliolibrary/!svn/ver/42/trunk/lib/classes/RESTClient.cfc
+END
+RESTResponse.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/twiliolibrary/!svn/ver/42/trunk/lib/classes/RESTResponse.cfc
+END
+TwiML.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/twiliolibrary/!svn/ver/44/trunk/lib/classes/TwiML.cfc
+END
+Utils.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/twiliolibrary/!svn/ver/42/trunk/lib/classes/Utils.cfc
+END
+Capability.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/twiliolibrary/!svn/ver/44/trunk/lib/classes/Capability.cfc
+END
