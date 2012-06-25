@@ -1,3 +1,4 @@
+
 <div class="btn-toolbar clearfix">
 	<div class="btn-group pull-left js-partic-actions">
 		<a class="btn dropdown-toggle disabled" data-toggle="dropdown" href="##">SELECTED: <span id="label-status-selected" class="js-label-status-selected">0</span></a>

@@ -65,7 +65,25 @@
 		<cfif structKeyExists(headers,'X-PJAX')>
 		<cfset renderText($renderLayout($layout='/layout_pjax',$type='template',$content=$renderPage($template="",$controller=params.controller,$action=params.action,$key=params.key,$layout=false))) />
 		<cfelse>
-		<cfset renderText($renderLayout($layout='/layout',$type='template',$content=$renderLayout($layout='/layout_pjax',$type='template',$content=$renderPage($template="",$controller=params.controller,$action=params.action,$key=params.key,$layout="/layout_#arguments.layoutFile#")))) />
+		<cfscript>
+		renderText(
+				$renderLayout(
+					$layout='/layout',
+					$type='template',
+					$content=$renderLayout(
+						$layout='/layout_#arguments.layoutFile#',
+						$type='template',
+						$content=$renderPage(
+						$template="",
+						$controller=params.controller,
+						$action=params.action,
+						$key=params.key,
+						$layout="/layout_pjax"
+						)
+					)
+				)
+			)
+		</cfscript>
 		</cfif>
 	</cffunction>
 	
