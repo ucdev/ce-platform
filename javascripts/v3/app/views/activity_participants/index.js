@@ -266,8 +266,19 @@ $.Class("ccpd.activity_participants",{
 	},
 	
 	updateRegistrants: function(params) {
-		var page = params.page;
-		var status = params.status;
+		var page;
+		var status;
+		
+		if(typeof params == 'object' && typeof params.page == 'number') {
+			page = params.page;
+		} else {
+			page = this.activity.nPageNo;
+		}
+		if(typeof params == 'object' && typeof params.status == 'number') {
+			status = params.status;
+		} else {
+			status = this.activity.nStatus;
+		}
 		
 		$.ajax({
 			url: '/activity_participants/ahah', 
@@ -369,6 +380,12 @@ $.Class("ccpd.activity_participants.participant",{},{
 				type: this.id.split('-')[2]
 			});
 		});
+		
+		// DETERMINE IF CURRENT ROW NEEDS CHECKED
+		if($.ListFind(ccpd.tier3.selectedRows, this.id)) {
+			participant.row.addClass('alert alert-info');
+			participant.checkBox.attr('checked', true);
+		}
 		
 		participant.checkBox.click(function() {
 			participant.selectRow();
