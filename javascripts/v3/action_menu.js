@@ -123,7 +123,7 @@ $.fn.isPersonActionLink = function () {
 								$(this).dialog("close");
 							},
 							Preview:function() {
-								window.open("Report.CMECert?ActivityID=" + nActivity + "&ReportID=5&SelectedMembers=" + oPerson.nPerson);
+								window.open("Report.CMECert?ActivityID=" + ccpd.tier2.nActivity + "&ReportID=5&SelectedMembers=" + oPerson.nPerson);
 							},
 							Cancel:function() {
 								$(this).dialog("close");
@@ -141,13 +141,13 @@ $.fn.isPersonActionLink = function () {
 					$("#email-cert-dialog").dialog("open");
 				break;
 			case "pCMECert":
-					window.open("/Report/CMECert?ActivityID=" + nActivity + "&ReportID=5&SelectedMembers=" + oPerson.nPerson);
+					window.open("/Report/CMECert?ActivityID=" + ccpd.tier2.nActivity + "&ReportID=5&SelectedMembers=" + oPerson.nPerson);
 				break;
 			case "CNECert":
-					window.open("/Report/CNECert?ActivityID=" + nActivity + "&ReportID=6&SelectedMembers=" + oPerson.nPerson);
+					window.open("/Report/CNECert?ActivityID=" + ccpd.tier2.nActivity + "&ReportID=6&SelectedMembers=" + oPerson.nPerson);
 				break;
             case "credits":
-					$.post("/Activity/AdjustCredits", { ActivityID: nActivity, PersonID: oPerson.nPerson, AttendeeID:oPerson.nAttendee }, 
+					$.post("/Activity/AdjustCredits", { ActivityID: ccpd.tier2.nActivity, PersonID: oPerson.nPerson, AttendeeID:oPerson.nAttendee }, 
 						function(data) {
 							$("#CreditsDialog").html(data);
 					});
@@ -219,7 +219,7 @@ $.fn.isPersonActionLink = function () {
 					   $.ajax({
 							  	url: '/AJAX_adm_Activity/sendCertificate',
 								type: 'post',
-								data: { activityId: nActivity, PersonID: oPerson.nPerson, AttendeeID:oPerson.nAttendee, returnFormat: 'plain' },
+								data: { activityId: ccpd.tier2.nActivity, PersonID: oPerson.nPerson, AttendeeID:oPerson.nAttendee, returnFormat: 'plain' },
 								dataType: 'json',
 								success: function(data) {
 									if(data.STATUS) {
@@ -234,9 +234,9 @@ $.fn.isPersonActionLink = function () {
 			case "reset":
 					if(confirm("Are you sure you want to reset the attendee record for " + oPerson.sPersonName + "?")) {
 						if(confirm("Do you want to clear all payment information attached to current attendee record for " + oPerson.sPersonName + "?")) {
-							resetAttendee(nActivity,oPerson.nAttendee,"Y");
+							resetAttendee(ccpd.tier2.nActivity,oPerson.nAttendee,"Y");
 						} else {
-							resetAttendee(nActivity,oPerson.nAttendee,"N");
+							resetAttendee(ccpd.tier2.nActivity,oPerson.nAttendee,"N");
 						}
 					}
 				break;
@@ -245,7 +245,7 @@ $.fn.isPersonActionLink = function () {
 						$.ajax({
 							url: "/AJAX_adm_Activity/removeCheckedAttendees",
 							type: 'post',
-							data: { AttendeeList: oPerson.nAttendee, ActivityID: nActivity, returnFormat: "plain" },
+							data: { AttendeeList: oPerson.nAttendee, ActivityID: ccpd.tier2.nActivity, returnFormat: "plain" },
 							dataType: 'json',
 							success: function(data) {
 								if(data.STATUS) {
@@ -279,7 +279,7 @@ $.fn.isPersonActionMenu = function () {
 		
 		/* REPLACE VARIABLES */
 		sMenuHTML = $.Replace(sMenuHTML,'{personid}',oPerson.nPerson,'ALL'); //PersonID
-		sMenuHTML = $.Replace(sMenuHTML,'{activityid}',nActivity,'ALL'); //ActivityID
+		sMenuHTML = $.Replace(sMenuHTML,'{activityid}',ccpd.tier2.nActivity,'ALL'); //ActivityID
 		
         oPerson.oLink.addClass("clicked").after(sMenuHTML);
         oPerson.oLink.siblings("ul").find("a").find("span").html(oPerson.sPersonName).end().isPersonActionLink();

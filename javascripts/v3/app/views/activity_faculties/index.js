@@ -11,20 +11,22 @@ $.Class("ccpd.activity_faculties",{
 	activity: [],
 	
 	updateFaculty: function() {
+		var faculties = this;
+		
 		$.ajax({
 			url: '/activity_faculties/ahah/',
 			data: { key: this.activity.nActivity },
 			type: 'post',
 			success: function(data) {
-				ccpd.tier3.container = $('.js-faculty-container');
-				ccpd.tier3.loader = $('.js-faculty-loading');
-				ccpd.tier3.fileUploader = $('.js-file-uploader');
-				ccpd.tier3.photoUploader = $('.js-photo-uploader');
+				faculties.container = $('.js-faculty-container');
+				faculties.loader = $('.js-faculty-loading');
+				faculties.fileUploader = $('.js-file-uploader');
+				faculties.photoUploader = $('.js-photo-uploader');
 				
-				ccpd.tier3.container.html(data);
-				ccpd.tier3.loader.hide();
+				faculties.container.html(data);
+				faculties.loader.hide();
 				
-				ccpd.tier3.fileUploader.dialog({ 
+				faculties.fileUploader.dialog({ 
 					title:"Upload File",
 					modal: false, 
 					autoOpen: false,
@@ -39,24 +41,24 @@ $.Class("ccpd.activity_faculties",{
 								forceSync: true,
 								success: function(data) {
 									addMessage('File uploaded successfully.',500,6000,4000);
-									ccpd.tier3.fileUploader.dialog('close');
+									faculties.fileUploader.dialog('close');
 									
-									ccpd.activity_faculties.updateFaculty();
+									faculties.updateFaculty();
 								}
 							}); 
 						},
 						Cancel:function() {
-							ccpd.tier3.fileUploader.dialog('close');
+							faculties.fileUploader.dialog('close');
 						}
 					},
 					open:function() {
 					},
 					close:function() {
-						ccpd.tier3.fileUploader.html('');
+						faculties.fileUploader.html('');
 					}
 				});
 					
-				ccpd.tier3.photoUploader.dialog({ 
+				faculties.photoUploader.dialog({ 
 					title:"Upload Photo",
 					modal: false, 
 					autoOpen: false,
@@ -64,7 +66,7 @@ $.Class("ccpd.activity_faculties",{
 					width:450,
 					resizable: false,
 					open:function() {
-						ccpd.tier3.photoUploader.show();
+						faculties.photoUploader.show();
 					}
 				});
 				
@@ -96,6 +98,7 @@ $.Class("ccpd.activity_faculties",{
 $.Class("ccpd.activity_faculties.faculty",{},{
 	init:function(params) {
 		var faculty = this;
+		this.parent = ccpd.activity_faculties;
 		
 		faculty.row = $(params.$elem);
 		
@@ -131,7 +134,7 @@ $.Class("ccpd.activity_faculties.faculty",{},{
 			faculty.unapproveFile('disclosure');
 		});
 		
-		ccpd.tier3.rows[this.id] = this;
+		ccpd.tier3.rows[this.id] = faculty;
 	},
 	
 	addSelectedRow: function() {
@@ -229,24 +232,31 @@ $.Class("ccpd.activity_faculties.faculty",{},{
 	
 	updateSelectedCount: function(val) {
 		ccpd.tier3.selectedCount += val;
+		if(ccpd.tier3.selectedCount > 0) {
+			$(".js-partic-actions .btn").removeClass('disabled');
+		} else {
+			$(".js-partic-actions .btn").addClass('disabled');
+		}
+		$(".js-label-status-selected").text(ccpd.tier3.selectedCount);
 	},
 	
 	uploadFile: function(type) {
+		var parent = this.parent;
 		$.ajax({
 			url: '/files/new/',
 			type: 'post',
 			data: { key: this.personId, keyType: 'person', activityId: ccpd.tier3.activity.nActivity, facultyId: this.id, fileType: type }, 
 			success: function(data) {
-				ccpd.tier3.fileUploader.html(data);
+				parent.fileUploader.html(data);
 			}
 		});
 		
-		ccpd.tier3.fileUploader.dialog('open');
+		this.parent.fileUploader.dialog('open');
 	},
 	
 	uploadPhoto: function() {
-		ccpd.tier3.photoUploader.find('iframe').attr("src", '/people/photoupload/' + this.personId + '?ElementID=' + this.photo.attr('id'));
-		ccpd.tier3.photoUploader.dialog("open");
+		this.parent.photoUploader.find('iframe').attr("src", '/people/photoupload/' + this.personId + '?ElementID=' + this.photo.attr('id'));
+		this.parent.photoUploader.dialog("open");
 	}
 }, {});
 

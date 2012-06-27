@@ -1,4 +1,3 @@
-<cfoutput>
 <script>
 ccpd.tier3 = new ccpd.core.pagelet({
 	activity: ccpd.tier2,
@@ -9,4 +8,3 @@ ccpd.tier3 = new ccpd.core.pagelet({
 	selectedRows: ''
 });
 </script>
-</cfoutput>
