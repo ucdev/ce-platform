@@ -227,7 +227,7 @@ $(document).ready(function() {
         </tbody>
     </table>
 <cfelse>
-	<cfif params.status GT 0>
+	<cfif structKeyexists(params, "status") AND params.status GT 0>
         <div style="background-image:url(/admin/_images/Sample_Attendees.jpg); font-size: 18px; text-align: center; height: 250px; width: 620px;">
             <div style="padding:25px 20px;">There are no registrants for this activity of this status.</div>
         </div>

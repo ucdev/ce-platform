@@ -7,21 +7,26 @@ $.Class("ccpd.activity_participants",{
 	},
 	
 	domReady: function(params) {
+		var participants = this;
+		
 		this.attendeeRemover = $('.js-remove-attendees');
+		this.attendeeSearch = $('.js-status-filtered');
+		this.attendeeSearch.clear = $('.js-clear-attendee-search');
+		this.attendeeSearch.form = $('.js-attendee-search');
+		this.attendeeSearch.input = $('.js-attendee-search-typeahead');
 		this.attendeeSelectedViewLink = $('.js-status-Selected');
 		this.attendeeStatusChanger = $('.js-change-status');
-		this.checkAll = $('.js-check-all');
 		this.pager = $('.js-pager-simple');
 		this.pager.label = $('.js-page-selector');
 		this.pager.list = $('.js-pages');
 		this.pager.next = $('.js-next-page');
+		this.pager.page;
 		this.pager.prev = $('.js-prev-page');
 		this.printer = $('.js-print');
 		this.statusFilter = $('.js-attendees-filter li.js-attendee-status');
 		this.contentContainer = $('.js-registrants-container');
 		this.loader = $('.js-registrants-loading');
-		
-		var participants = this;
+		this.checkAll = $('.js-check-all');
 		
 		this.updateRegistrants({
 			page: ccpd.tier3.nPageNo, 
@@ -34,29 +39,98 @@ $.Class("ccpd.activity_participants",{
 			participants.removeAttendees();
 		});
 		
+		this.attendeeSearch['clear'].click(function() {
+			participants.updateRegistrants({
+				page: ccpd.tier3.nPageNo,
+				status: ccpd.tier3.nStatus
+			});
+			participants.attendeeSearch['input'].val('');
+			participants.attendeeSearch['clear'].hide();
+		});
+							
+		this.attendeeSearch['input'].keyup(function() {
+			var delaySearching = (function() {
+				var timeCounter = 0;
+				
+				return function(callback, ms) {
+					clearTimeout(timeCounter);
+					timeCounter = setTimeout(callback, ms);
+					return false;
+				};
+			})();
+			var delayTimer = 1000;
+			var input = $(this);
+			
+			if(input.val().length > 0) {
+				participants.attendeeSearch.clear.show();
+			} else {
+				participants.attendeeSearch.clear.hide();
+			}
+			
+			delaySearching(function() {
+				if(input.val().length > 0) {
+					$.ajax({
+						url: '/activity_participants/search',
+						type: 'post',
+						data: { key: participants.activity.nActivity, q: input.val() },
+						success: function(data) {
+							participants.contentContainer.html(data);
+							participants.updatePagesDropdown();
+						}
+					});
+				}
+			}, delayTimer);
+		});
+		
 		// VIEW CHECKMARKED ATTENDEES FILTER LINK
 		this.attendeeSelectedViewLink.click(function() {
-			participants.viewCheckSelectedRows();
+			participants.viewSelectedRows();
 		});
 		
 		this.attendeeStatusChanger.click(function() {
 			participants.updateAttendeeStatuses();
 		});
 		
-		this.checkAll.click(function() {
-			participants.selectAllAttendees();
+		this.checkAll.live('click', function() {
+			var checkAll = false;
+			
+			if($(this).attr('checked')) {
+				checkAll = true;
+			}
+			
+			participants.selectAllAttendees({
+				checkStatus: checkAll
+			});
 		});
 		
 		this.pager['next'].click(function() {
-			participants.changePage('next');
+			if(ccpd.tier3.nPageNo+1 <= ccpd.tier3.totalPages) {
+				ccpd.tier3.nPageNo += 1
+											  
+				participants.changePage();
+			}
 		});
 		
 		this.pager['prev'].click(function() {
-			participants.changePage('prev');
+			if(ccpd.tier3.nPageNo-1 >= 1) {
+				ccpd.tier3.nPageNo -= 1
+											  
+				participants.changePage();
+			}
+		});
+		
+		this.pager['page'].live('click', function() {
+			ccpd.tier3.nPageNo = $(this).text();
+			
+			participants.changePage();
 		});
 		
 		this.printer.click(function() {
 			participants.printDocument();
+		});
+		
+		this.attendeeSearch.click(function(e) {
+			return false;
 		});
 		
 		this.statusFilter.click(function() {
@@ -69,17 +143,8 @@ $.Class("ccpd.activity_participants",{
 	
 	activity: [],
 	
-	changePage: function(dir) {
-		console.log(ccpd.tier3.nPageNo);
+	changePage: function() {
 		if(ccpd.tier3.nPageNo >= 1 && ccpd.tier3.nPageNo <= ccpd.tier3.totalPages) {
-			switch(dir) {
-				case 'next':
-					ccpd.tier3.nPageNo += 1
-					break;
-				case 'prev':
-					ccpd.tier3.nPageNo -= 1
-					break;
-			}
 			
 			// UPDATE SIMPLE PAGER LINKS
 			if(ccpd.tier3.nPageNo <= ccpd.tier3.totalPages) {
@@ -94,17 +159,21 @@ $.Class("ccpd.activity_participants",{
 				this.pager['prev'].addClass('disabled');
 			}
 		
-			// UPDATE SIMPLE PAGER PAGE DROPDOWN
+			// UPDATE SIMPLE PAGER DROPDOWN LABEL
 			this.pager['label'].text(ccpd.tier3.nPageNo);
 			
 			// UPDATE COOKIE FOR CURRENT ACTIVITY PAGE NUMBER
 			$.post("/UserSettings/setAttendeePage", { ActivityID: this.activity.nActivity, Page: ccpd.tier3.nPageNo });
 			
 			// RELOAD DATA
-			this.updateRegistrants(this.activity.nPageNo, ccpd.tier3.nStatus);
+			this.updateRegistrants({
+				page: ccpd.tier3.nPageNo, 
+				status: ccpd.tier3.nStatus
+			});
 		}
 	},
 	
+	// CHANGES WHICH ATTENDEES ARE SHOWN BASED ON THEIR STATUS
 	changeActiveAttendeeStatus: function() {
 		var statusLink = $(this).find('a');
 		var countContainer = $(this).find('span');
@@ -120,7 +189,10 @@ $.Class("ccpd.activity_participants",{
 			data: { ActivityID: this.activity.nActivity, status: ccpd.tier3.nStatus },
 			success: function(data) {
 				ccpd.tier3.nPageNo = 1;
-				participants.updateRegistrants(ccpd.tier3.nPageNo, ccpd.tier3.nStatus);
+				participants.updateRegistrants({
+					page: ccpd.tier3.nPageNo, 
+					status: ccpd.tier3.nStatus
+				});
 			}
 		});
 	},
@@ -149,15 +221,16 @@ $.Class("ccpd.activity_participants",{
 	},
 	
 	removeAttendees: function() {
+		var participants = this;
 		// DETERMINE IF THERE ARE ATTENDEES SELECTED
-		if(SelectedAttendees.length > 0) {
+		if(ccpd.tier3.selectedRows.length > 0) {
 			// DETERMINE IF THE USER MEANS TO REMOVE SELECTED ATTENDEES
 			if(confirm("Are you sure you want to remove the checked attendees from this activity?")) {		
 				$.blockUI({ message: '<h1>Removing Selected Attendees...</h1>'});
 				$.ajax({
-					url: "/AJAX_adm_Activity/removeCheckedAttendees", 
+					url: '/AJAX_adm_Activity/removeCheckedAttendees', 
 					type: 'post',
-					data: { PersonList: SelectedMembers,AttendeeList: SelectedAttendees, ActivityID: nActivity, returnFormat: "plain" },
+					data: { AttendeeList: ccpd.tier3.selectedRows, ActivityID: participants.activity.nActivity },
 					dataType: 'json',
 					success: function(data) {
 						if(data.STATUS) {
@@ -169,7 +242,10 @@ $.Class("ccpd.activity_participants",{
 						
 						updateStats();
 						$.unblockUI();
-						updateRegistrants(nPageNo, nStatus);
+						participants.updateRegistrants({
+							page: ccpd.tier3.nPageNo, 
+							status: ccpd.tier3.nStatus
+						});
 					}
 				});
 			}
@@ -178,52 +254,52 @@ $.Class("ccpd.activity_participants",{
 		}
 	},
 	
-	selectAllAttendees: function() {
-		var $allAttendees = $(".js-all-attendee");
-		var selectAll = this.checkAll.attr("checked");
+	selectAllAttendees: function(params) {
+		var participants = this;
+		var selectAll = params.checkStatus;
+		var rows = ccpd.tier3.rows;
 		
-		$allAttendees.each(function() {
-			var $row = $(this);
-			var $checkBox = $row.find('.MemberCheckbox');
-			var nPerson = $row.find('.personId').val();
-			var nAttendee = $row.find('.attendeeId').val();
-			var rowChecked = $checkBox.attr("checked");
+		for(curr in rows) {
+			var participant = rows[curr];
+			var row = participant.row;
+			var checkBox = participant.checkBox;
 			
-			if(selectAll && !rowChecked) {
-				// ADD CURRENT MEMBER TO SELECTEDMEMBERS LIST
-				addSelectedRow({
-					person: nPerson,
-					attendee: nAttendee
-				});
-				
-				$checkBox.attr("checked",true);
-				
-				// CHANGE BACKGROUND COLOR OF PERSONROW
-				$row.addClass('alert alert-info');
-			} else if(!selectAll && rowChecked) {
-				if(rowChecked) {
+			if(typeof participant.id == 'string') {
+				if(selectAll && !checkBox.is(':checked')) {
 					// ADD CURRENT MEMBER TO SELECTEDMEMBERS LIST
-					removeSelectedRow({
-						person: nPerson,
-						attendee: nAttendee
+					participant.addSelectedRow({
+						person: participant.personId,
+						attendee: participant.id
 					});
 					
-					$checkBox.attr("checked",false);
+					checkBox.attr("checked",true);
 					
 					// CHANGE BACKGROUND COLOR OF PERSONROW
-					$row.removeClass('alert alert-info');
+					row.addClass('alert alert-info');
+				} else if(!selectAll && checkBox.is(':checked')) {
+					// ADD CURRENT MEMBER TO SELECTEDMEMBERS LIST
+					participant.removeSelectedRow({
+						person: participant.personId,
+						attendee: participant.id
+					});
+					
+					checkBox.attr("checked",false);
+					
+					// CHANGE BACKGROUND COLOR OF PERSONROW
+					row.removeClass('alert alert-info');
 				}
 			}
-		});
+		}
 	},
 	
 	updateAttendeeStatuses: function() {
+		var participants = this;
 		var updateToStatus = this.id.split('-')[2];
 		
 		$.ajax({
 			url: "/AJAX_adm_Activity/updateAttendeeStatuses",
 			type: 'post',
-			data: { AttendeeList: SelectedAttendees, ActivityID: nActivity, StatusID: updateToStatus },
+			data: { AttendeeList: ccpd.tier3.selectedRows, ActivityID: this.activity.nActivity, StatusID: updateToStatus },
 			dataType: 'json',
 			success: function(data)  {
 				if(data.STATUS) {
@@ -231,7 +307,10 @@ $.Class("ccpd.activity_participants",{
 					updateStats();
 					clearSelectedMembers();
 					
-					updateRegistrants(nPageNo, nStatus);
+					participants.updateRegistrants({
+						page: ccpd.tier3.nPageNo, 
+						status: ccpd.tier3.nStatus
+					});
 				} else {
 					addError(data.STATUSMSG,500,6000,4000);
 				}
@@ -257,7 +336,7 @@ $.Class("ccpd.activity_participants",{
 		
 		// CREATE NEW PAGES LIST
 		for(var i=1; i<=ccpd.tier3.totalPages; i++) {
-			var pageLink = $('<a />').addClass('page').attr('href','/activity_participants/AHAH/' + this.activity.nActivity + '?status=' + ccpd.tier3.nStatus + '&page=' + i).text(i);
+			var pageLink = $('<a />').addClass('js-page').text(i);
 			var page = $('<li />').append(pageLink).appendTo(this.pager['list']);
 		}
 		
@@ -268,7 +347,7 @@ $.Class("ccpd.activity_participants",{
 		if(ccpd.tier3.nPageNo == 1) this.pager['prev'].addClass('disabled');
 		if(ccpd.tier3.nPageNo >= ccpd.tier3.totalPages) this.pager['next'].addClass('disabled');
 		
-		console.log(ccpd.tier3.totalPages);
+		this.pager['page'] = $('.js-page');
 	},
 	
 	updateRegistrants: function(params) {
@@ -290,15 +369,16 @@ $.Class("ccpd.activity_participants",{
 		$.ajax({
 			url: '/activity_participants/ahah', 
 			type: 'get',
-			data: { key: this.activity.nActivity, status: status, selectedAttendees: ccpd.tier3.selectedRows, page: page  },
+			data: { key: this.activity.nActivity, status: status, page: page  },
 			success: function(data) {
 				var activeStatusCheckMark = $('<i/>').addClass('icon-ok active-status js-active-status');
-				var allAttendees = $('.js-all-attendee');
+				
+				this.checkAll = $('.js-check-all');
 				
 				participants.contentContainer.html(data);
 				participants.loader.hide();
 				
-				allAttendees.unbind();
+				$('.js-all-attendee').unbind();
 				
 				// PLACE CHECKMARK BY ACTIVE STATUS
 				$('.js-active-status').remove();
@@ -308,13 +388,13 @@ $.Class("ccpd.activity_participants",{
 				$('.js-attendee-status-title').text($('.js-attendee-status-' + status).find('a span.js-attendee-status-name').text());
 				
 				// CHECK IF ALL VIEWABLE ATTENDEES ARE SELECTED
-				if(allAttendees.length == ccpd.tier3.TotalAttendeeCount && ccpd.tier3.selectedRows.split(',').length == ccpd.tier3.TotalAttendeeCount) {
+				if($('.js-all-attendee').length == ccpd.tier3.TotalAttendeeCount && ccpd.tier3.selectedRows.split(',').length == ccpd.tier3.TotalAttendeeCount) {
 					// CHECK THE CHECK ALL BOX
 					participants.checkAll.attr('checked', true);
 				}
 				
 				// CHECK IF ATTENDEE HAS BEEN MARKED AS SELECTED	
-				allAttendees.each(function() {
+				$('.js-all-attendee').each(function() {
 					var attendeeId = $(this).find('.attendeeId').val();
 					var attendeeContainer;
 					
@@ -361,10 +441,11 @@ $.Class("ccpd.activity_participants",{
 	},
 	
 	viewSelectedRows: function() {
-		var statusName = this.id.split('status')[1];
-		
-		if(SelectedAttendees.length > 0) {
-			updateRegistrants(1, statusName);
+		if(ccpd.tier3.selectedRows.length > 0) {
+			this.updateRegistrants({
+				page: 1, 
+				status: 'selected'
+			});
 		} else {
 			addError('You must select participants first.',500,6000,4000);
 		}
@@ -373,12 +454,9 @@ $.Class("ccpd.activity_participants",{
 
 $.Class("ccpd.activity_participants.participant",{},{
 	init:function(params) {
-		var participant = this;
 		this.parent = ccpd.activity_participants;
 		
-		participant.row = $(params.$elem);
-		
-		ccpd.tier3.rows[this.id] = participant;
+		this.domReady(params.$elem);
 	},
 	
 	addSelectedRow: function() {
@@ -414,7 +492,10 @@ $.Class("ccpd.activity_participants.participant",{},{
 		params.elem.prepend('<i class="icon-ok active-status"></i> ');
 	},
 	
-	domReady: function() {
+	domReady: function(elem) {
+		var participant = this;
+		
+		this.row = $(elem);
 		this.attendeeStatusViewChange = this.row.find('.js-view-attendee-statusdate');
 		this.checkBox = this.row.find('.js-selected-checkbox');
 		this.fakeAttendeeRemover = this.row.find('.js-delete-link');
@@ -422,7 +503,9 @@ $.Class("ccpd.activity_participants.participant",{},{
 		this.personId = this.row.find('.personId').val();
 		this.statusDateEditor = this.row.find('.js-edit-status-date');
 		
-		participant.attendeeStatusViewChange.click(function() {
+		ccpd.tier3.rows[this.id] = this;
+		
+		this.attendeeStatusViewChange.click(function() {
 			participant.changeAttendeeViewableStatus({
 				elem: $(this),
 				type: this.id.split('-')[2]
@@ -435,19 +518,19 @@ $.Class("ccpd.activity_participants.participant",{},{
 			participant.checkBox.attr('checked', true);
 		}
 		
-		participant.checkBox.click(function() {
+		this.checkBox.change(function() {
 			participant.selectRow();
 		});
 		
-		participant.fakeAttendeeRemover.click(function() {
+		this.fakeAttendeeRemover.click(function() {
 			participant.deleteFakeAttendee();
 		});
 		
-		participant.statusDateEditor.click(function() {
+		this.statusDateEditor.click(function() {
 			participant.editStatusDate();
 		});
 		
-		participant.row.isPerson();
+		this.row.isPerson();
 	},
 	
 	deleteFakeAttendee: function() {
@@ -571,12 +654,13 @@ $.Class("ccpd.activity_participants.participant",{},{
 	
 	updateSelectedCount: function(val) {
 		ccpd.tier3.selectedCount += val;
+		
 		if(ccpd.tier3.selectedCount > 0) {
 			$(".js-partic-actions .btn").removeClass('disabled');
 		} else {
 			$(".js-partic-actions .btn").addClass('disabled');
 		}
-		$(".js-label-status-selected").text(ccpd.tier3.selectedCount);
+		$(".js-attendee-status-selected-count").text(ccpd.tier3.selectedCount);
 	}
 }, {});
 

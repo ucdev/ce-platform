@@ -7,7 +7,7 @@
 		<a href="##" class="btn"><i class="icon-hdd"></i></a>
 	</div>
 	<div class="btn-group pull-left js-partic-actions">
-		<a class="btn dropdown-toggle disabled" data-toggle="dropdown" href="##">SELECTED: <span id="label-status-selected">0</span></a>
+		<a class="btn dropdown-toggle disabled" data-toggle="dropdown" href="##">SELECTED: <span id="label-status-selected" class="js-attendee-status-selected-count">0</span></a>
 		<a class="btn dropdown-toggle disabled" data-toggle="dropdown" href="##">
 			Actions
 			<span class="caret"></span>
@@ -26,10 +26,6 @@
 			<li><a href="##" id="print-cne" class="js-print">Nurse Certificates</a></li>
 		</ul>
 	</div>
-	
-	<form class="form-inline pull-left mll" action="">
-		<input type="text"  class="input-medium" placeholder="filter people" />	
-	</form>
 
 	<div class="btn-group pull-right pager-simple js-pager-simple">
 		<a href="javascript://" class="btn previous js-prev-page<cfif params.page EQ 1> disabled</cfif>"><i class="icon-chevron-left"></i></a>
@@ -52,7 +48,13 @@
 			<li class="attendee-status js-attendee-status js-attendee-status-4" id="status4"><a href="##"><span class="js-attendee-status-name">Failed</span> <span class="js-attendee-status-count"></span></a></li>
 			<li class="attendee-status js-attendee-status js-attendee-status-2" id="status2"><a href="##"><span class="js-attendee-status-name">In Progress</span> <span class="js-attendee-status-count"></span></a></li>
 			<li class="attendee-status js-attendee-status js-attendee-status-3" id="status3"><a href="##"><span class="js-attendee-status-name">Registered</span> <span class="js-attendee-status-count"></span></a></li>
-			<li class="js-status-Selected js-attendee-status-Selected" id="statusSelected"><a href="##"><span class="js-attendee-status-name">Selected</span> <span class="js-attendee-status-count">(0)</span></a></li>
+			<li class="js-status-Selected js-attendee-status-Selected" id="statusSelected"><a href="##"><span class="js-attendee-status-name">Selected</span> (<span class="js-attendee-status-selected-count">0</span>)</a></li>
+			<li class="js-status-filtered">
+            	<form class="form-inline pull-left mll js-attendee-search">
+                    <input type="text"  class="input-medium js-attendee-search-typeahead" placeholder="filter people" />
+                    <i class="icon-remove js-clear-attendee-search pull-right" style="display: none; position: relative; top: -19px;"></i>
+                </form>
+    		</li>
 		</ul>
 	</div>
 </div>

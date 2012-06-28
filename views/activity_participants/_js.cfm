@@ -10,7 +10,7 @@ ccpd.tier3 = new ccpd.core.pagelet({
 	nStatus: #params.status#,
 	rows: [],
 	selectedRows: '',
-	SelectedCount: 0,
+	selectedCount: 0,
 	status4Count:0,
 	status2Count:0,
 	status3Count:0,
