@@ -1,9 +1,10 @@
-<cfoutput>
 <script>
-var currFaculty = 0;
-var currPerson = 0;
-var selectedCount = 0;
-var selectedRows;
+ccpd.tier3 = new ccpd.core.pagelet({
+	activity: ccpd.tier2,
+	currFaculty: 0,
+	currPerson: 0,
+	rows: [],
+	selectedCount: 0,
+	selectedRows: ''
+});
 </script>
-#javaScriptIncludeTag(bundle="#application.version_token#/ccpd.activity.faculties")#
-</cfoutput>

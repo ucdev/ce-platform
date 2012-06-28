@@ -32,27 +32,27 @@
 	</form>
 
 	<div class="btn-group pull-right pager-simple">
-		<a href="/activities/adm_participants?ActivityID=13660&status=0&page=#params.page-1#" class="btn previous prev-page<cfif params.page EQ 1> disabled</cfif>"><i class="icon-chevron-left"></i></a>
+		<a href="javascript://" class="btn previous prev-page<cfif params.page EQ 1> disabled</cfif>"><i class="icon-chevron-left"></i></a>
 		<a class="btn dropdown-toggle" data-toggle="dropdown"><span class="pageSelector">#params.page#</span> <span class="caret"></span></a>
 
 		<ul class="dropdown-menu pages">
 		</ul>
-		<a href="/activities/adm_participants?ActivityID=13660&status=0&page=#params.page+1#" class="btn next next-page"><i class="icon-chevron-right"></i></a>
+		<a href="javascript://" class="btn next next-page"><i class="icon-chevron-right"></i></a>
 	</div>
 	<div class="btn-group pull-right">
 		<a class="btn" data-toggle="dropdown">Filter</a>
-		<a class="btn attendee-status-title" data-toggle="dropdown">All</a>
+		<a class="btn js-attendee-status-title" data-toggle="dropdown">All</a>
 		<a class="btn dropdown-toggle" data-toggle="dropdown">
 			<span class="caret"></span>
 		</a>
-		<ul class="dropdown-menu attendees-filter">
-			<li class="attendee-status js-attendee-status" id="status0"><a href="##"><span class="attendee-status-name">All</span> <span class="attendee-status-count"></span></a></li>
+		<ul class="dropdown-menu js-attendees-filter">
+			<li class="attendee-status js-attendee-status js-attendee-status-0" id="status0"><a href="##"><span class="js-attendee-status-name">All</span> <span class="js-attendee-status-count"></span></a></li>
 			<li class="divider"></li>
-			<li class="attendee-status js-attendee-status" id="status1"><a href="##"><span class="attendee-status-name">Complete</span> <span class="attendee-status-count"></span></a></li>
-			<li class="attendee-status js-attendee-status" id="status4"><a href="##"><span class="attendee-status-name">Failed</span> <span class="attendee-status-count"></span></a></li>
-			<li class="attendee-status js-attendee-status" id="status2"><a href="##"><span class="attendee-status-name">In Progress</span> <span class="attendee-status-count"></span></a></li>
-			<li class="attendee-status js-attendee-status" id="status3"><a href="##"><span class="attendee-status-name">Registered</span> <span class="attendee-status-count"></span></a></li>
-			<li class="js-status-Selected" id="statusSelected"><a href="##"><span class="attendee-status-name">Selected</span> <span class="attendee-status-count">(0)</span></a></li>
+			<li class="attendee-status js-attendee-status js-attendee-status-1" id="status1"><a href="##"><span class="js-attendee-status-name">Complete</span> <span class="js-attendee-status-count"></span></a></li>
+			<li class="attendee-status js-attendee-status js-attendee-status-4" id="status4"><a href="##"><span class="js-attendee-status-name">Failed</span> <span class="js-attendee-status-count"></span></a></li>
+			<li class="attendee-status js-attendee-status js-attendee-status-2" id="status2"><a href="##"><span class="js-attendee-status-name">In Progress</span> <span class="js-attendee-status-count"></span></a></li>
+			<li class="attendee-status js-attendee-status js-attendee-status-3" id="status3"><a href="##"><span class="js-attendee-status-name">Registered</span> <span class="js-attendee-status-count"></span></a></li>
+			<li class="js-status-Selected js-attendee-status-Selected" id="statusSelected"><a href="##"><span class="js-attendee-status-name">Selected</span> <span class="js-attendee-status-count">(0)</span></a></li>
 		</ul>
 	</div>
 </div>

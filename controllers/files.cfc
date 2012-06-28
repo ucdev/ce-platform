@@ -38,7 +38,7 @@
                     <cfset faculty.updateProperty("cvFileId", file.id) />
                 </cfcase>
             	<cfcase value="5">
-                	<cfset faculty = model("Activity_faculty").findBykey(params.key)>
+                	<cfset faculty = model("Activity_faculty").findBykey(params.facultyId)>
                     <cfset faculty.updateProperty("DisclosureFileId", file.id) />
                 </cfcase>
             </cfswitch>
@@ -52,6 +52,32 @@
         
         <cfset renderText(status.getJSON()) />
 	</cffunction>
+    
+    <cffunction name="download">
+    	<cfswitch expression="#params.key#">
+        	<cfcase value="cv">
+            	<cfset faculty = model("Activity_faculty").findByKey(params.id)>
+                
+                <cfif isObject(faculty)>
+                	<cfif len(trim(faculty.cvFileId)) GT 0>
+                    	<cfset file = model("File").findByKey(faculty.cvFileId)>
+                        <cfset physFilePath = ExpandPath('/files/_uploads/personFiles/#faculty.personId#/') & file.fileName>
+                    </cfif>
+                </cfif>
+            </cfcase>
+            
+            <cfcase value="disclosure">
+            	<cfset faculty = model("Activity_faculty").findByKey(params.id)>
+                
+                <cfif isObject(faculty)>
+                	<cfif len(trim(faculty.disclosureFileId)) GT 0>
+                    	<cfset file = model("File").findByKey(faculty.disclosureFileId)>
+                        <cfset physFilePath = ExpandPath('/files/_uploads/personFiles/#faculty.personId#/') & file.fileName>
+                    </cfif>
+                </cfif>
+            </cfcase>
+        </cfswitch>
+    </cffunction>
 	
 	<!--- files/delete/key --->
 	<cffunction name="delete">
@@ -88,13 +114,15 @@
 	<!--- files/new --->
 	<cffunction name="new">
 		<cfset file = model("File").new()>
-		<!---<cfset file = model("File").findByKey(15)>--->
-    	<!---<cfdump var="#params#"><cfabort>--->
-
+		
 		<cfif params.keyType EQ "person">
 	        <cfset fileTypeList = model("Sys_filetype").findAll(where="description='people'",order='Name')>
         <cfelse>
 	        <cfset fileTypeList = model("Sys_filetype").findAll(where="description='no people'",order='Name')>
+        </cfif>
+        
+        <cfif structKeyExists(params, "fileType")>
+        	<cfset file.fileTypeId = params.fileType>
         </cfif>
         
         <cfset renderPage(layout=false)>

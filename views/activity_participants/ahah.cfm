@@ -51,8 +51,8 @@ $(document).ready(function() {
 	// UPDATED SELECTED MEMBER COUNT
 	$(".EditDateField").mask("99/99/9999");
 	
-	updatePagesDropdown();
-	updateAttendeeFilterCounts();
+	ccpd.activity_participants.updatePagesDropdown();
+	ccpd.activity_participants.updateFilterCounts();
 	
 	$("#PersonDetail").dialog({ 
 		title: "Person Detail",
@@ -95,17 +95,17 @@ $(document).ready(function() {
         	<cfloop query="qActivityCredits">
                 <cfswitch expression="#qActivityCredits.CreditName#">
                     <cfcase value="CME">
-                        <li class="pCMECert"><a href="Report.CMECert?ActivityID=#params.activityId#&ReportID=5&SelectedMembers={personid}"><i/>CME Certificate</a></li>
+                        <li class="pCMECert"><a href="/reports/CMECert/#params.key#?ReportID=5&SelectedMembers={personid}"><i/>CME Certificate</a></li>
                     </cfcase>
                     <cfcase value="CNE">
-                        <li class="CNECert"><a href="Report.CNECert?ActivityID=#params.activityId#&ReportID=6&SelectedMembers={personid}"><i/>CNE Certificate</a></li>
+                        <li class="CNECert"><a href="/reports/CNECert/#params.key#?ReportID=6&SelectedMembers={personid}"><i/>CNE Certificate</a></li>
                     </cfcase>
                 </cfswitch>
             </cfloop>
             <li class="sendCertificate"><a href="javascript:void(0);"><i/>Send Certificate</a></li>
-			<li class="assess"><a href="/activity_participants/attendeeDetails?ActivityID={activityid}&PersonID={personid}"><i/>Assessments</a></li>
-			<li class="pifform"><a href="/activity/attendeeCDC?ActivityID={activityid}&PersonID={personid}"><i/>PIF Form</a></li>
-			<li class="credits"><a href="/activity/adjustCredits?ActivityID={activityid}&PersonID={personid}"><i/>Credits</a></li>
+			<li class="assess"><a href="/activity_participants/attendeeDetails/{activityid}?PersonID={personid}"><i/>Assessments</a></li>
+			<li class="pifform"><a href="/activity/attendeeCDC/{activityid}?PersonID={personid}"><i/>PIF Form</a></li>
+			<li class="credits"><a href="/activity/adjustCredits/{activityid}?PersonID={personid}"><i/>Credits</a></li>
 			<li class="togglemd"><a href="javascript:void(0);"><i/>Toggle MD</a></li>
 			<li class="reset"><a href="javascript:void(0);"><i/>Reset <span>user</span></a></li>
 			<li class="remove"><a href="javascript:void(0);"><i/>Remove <span>user</span></a></li>
@@ -130,9 +130,9 @@ $(document).ready(function() {
         </thead>
         <tbody>
             <cfoutput query="qAttendees" startrow="#AttendeePager.getStartRow()#" maxrows="#AttendeePager.getMaxRows()#">
-                <tr id="attendeeRow-#qAttendees.attendeeId#" class="personRow AllAttendees<cfif qAttendees.personDeleted> personDeleted</cfif>" rel="##PersonOptions#PersonID#">
+                <tr id="attendeeRow-#qAttendees.attendeeId#" class="personRow AllAttendees js-all-attendee<cfif qAttendees.personDeleted> personDeleted</cfif>" rel="##PersonOptions#PersonID#">
                     <td valign="top">
-						<input type="checkbox" name="Checked" class="MemberCheckbox" id="Checked-#attendeeId#" value="#attendeeId#" />
+						<input type="checkbox" name="Checked" class="MemberCheckbox js-selected-checkbox" id="Checked-#attendeeId#" value="#attendeeId#" />
 						<input type="hidden" class="attendeeId" value="#attendeeId#" />
 						<input type="hidden" class="personId" value="#qAttendees.personId#" />
 					</td>
@@ -140,9 +140,9 @@ $(document).ready(function() {
 						<cfif qAttendees.mdFlag EQ "Y"><div><span class="badge badge-important" style="position: relative; left: 30px; top: -55px;">MD</span></div></cfif></td>
                     <td valign="top" nowrap="nowrap">
 						<cfif personId GT 0>
-							<a href="/people/edit/#PersonID#" class="PersonLink" id="PERSON|#PersonID#|#LastName#, #FirstName#">#qAttendees.FullName#</a>
+							<a href="/people/edit/#PersonID#" class="PersonLink" id="PERSON|#PersonID#|#LastName#, #FirstName#"><span class="js-attende-name">#qAttendees.FullName#</span></a>
 						<cfelse>
-							#qAttendees.FullName#
+							<span class="js-attende-name">#qAttendees.FullName#</span>
 						</cfif>
 						<div class="attendee-status" id="attendee-status-#qAttendees.attendeeId#">#StatusName#</div>
 					</td>
@@ -190,16 +190,16 @@ $(document).ready(function() {
                                 </a>
                                 <ul class="dropdown-menu pull-right" id="view-attendee-statuses-#qAttendees.attendeeId#">
 	                                <cfif qAttendees.CompleteDate NEQ "" AND qAttendees.StatusID EQ 1>
-                                	<li><a href="javascript://" class="js-view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-1"><cfif qAttendees.StatusID EQ 1><i class="icon-ok active-status"></i> </cfif>COMPLETE (#dateFormat(qAttendees.completeDate, "MM/DD/YYYY")#)</a></li>
+                                	<li><a href="javascript://" class="js-view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-1"><cfif qAttendees.StatusID EQ 1><i class="icon-ok active-status js-active-status"></i> </cfif>COMPLETE (#dateFormat(qAttendees.completeDate, "MM/DD/YYYY")#)</a></li>
                                     </cfif>
                                     <cfif qAttendees.StatusID EQ 2>
-                                    <li><a href="javascript://" class="js-view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-3"><i class="icon-ok active-status"></i> IN PROGRESS</a></li><!--- THE 3 ON THE ID IS TO POINT IT TO THE REGISTEREDDATE FOR THE ATTENDEE ON EDIT --->
+                                    <li><a href="javascript://" class="js-view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-3"><i class="icon-ok active-status js-active-status"></i> IN PROGRESS</a></li><!--- THE 3 ON THE ID IS TO POINT IT TO THE REGISTEREDDATE FOR THE ATTENDEE ON EDIT --->
                                     </cfif>
                                     <cfif qAttendees.RegisterDate NEQ "" OR qAttendees.StatusID EQ 3>
-                                    <li><a href="javascript://" class="js-view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-3"><cfif qAttendees.StatusID EQ 3><i class="icon-ok active-status"></i> </cfif>REGISTERED (#dateFormat(qAttendees.registerDate, "MM/DD/YYYY")#)</a></li>
+                                    <li><a href="javascript://" class="js-view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-3"><cfif qAttendees.StatusID EQ 3><i class="icon-ok active-status js-active-status"></i> </cfif>REGISTERED (#dateFormat(qAttendees.registerDate, "MM/DD/YYYY")#)</a></li>
                                     </cfif>
                                     <cfif qAttendees.TermDate NEQ "" OR qAttendees.StatusID EQ 4>
-                                    <li><a href="javascript://" class="js-view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-4"><cfif qAttendees.StatusID EQ 4><i class="icon-ok active-status"></i> </cfif>FAILED (#dateFormat(qAttendees.termDate, "MM/DD/YYYY")#)</a></li>
+                                    <li><a href="javascript://" class="js-view-attendee-statusdate" id="AttendeeStatus-#qAttendees.attendeeid#-4"><cfif qAttendees.StatusID EQ 4><i class="icon-ok active-status js-active-status"></i> </cfif>FAILED (#dateFormat(qAttendees.termDate, "MM/DD/YYYY")#)</a></li>
                                     </cfif>
                                 </ul>
                             </div>

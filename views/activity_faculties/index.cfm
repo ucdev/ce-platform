@@ -22,5 +22,7 @@
 	<div>Please Wait</div></div>
 </div>
 <div class="js-file-uploader"></div>
-<div class="js-photo-uploader"></div>
+<div class="js-photo-uploader">
+	<iframe width="440" height="110" scrolling="no" src="" frameborder="0" id="frmUpload" class="js-photo-uploader-frame"></iframe>
+</div>
 </cfoutput>

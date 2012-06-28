@@ -4,8 +4,8 @@
 		<cfparam name="params.status" default="0" />
         <cfparam name="params.page" type="numeric" default="1" />
         
-		<cfset qAttendees = Application.activityAttendee.getAttendees(ActivityID=params.activityID,DeletedFlag="N")>
-		<cfset qActivityCredits = Application.Com.ActivityCreditGateway.getByViewAttributes(ActivityID=params.activityId)>
+		<cfset qAttendees = Application.activityAttendee.getAttendees(ActivityID=params.key,DeletedFlag="N")>
+		<cfset qActivityCredits = Application.Com.ActivityCreditGateway.getByViewAttributes(ActivityID=params.key)>
 		
 		<!--- LEGACY FIX --->
 		<cfset attributes.status = params.status />
@@ -37,8 +37,8 @@
 			</cfswitch>
 		</cfloop>
 		
-		<cfif params.status EQ 0 AND structKeyExists(cookie, "user_attendeeStatus") AND getToken(cookie.USER_AttendeeStatus,1,"|") EQ params.activityid>
-			<cfset attributes.status = getToken(cookie.USER_AttendeeStatus,2,"|")>
+		<cfif params.status EQ 0 AND structKeyExists(cookie, "user_attendeeStatus") AND getToken(cookie.USER_AttendeeStatus,1,"|") EQ params.key>
+			<cfset params.status = getToken(cookie.USER_AttendeeStatus,2,"|")>
 		</cfif>
 		
 		<cfif len(trim(params.status)) GT 0 AND params.status NEQ 0>
@@ -61,7 +61,7 @@
         
 		<cfset AttendeePager = CreateObject("component","#Application.Settings.Com#Pagination").init()>
 		<cfset AttendeePager.setQueryToPaginate(qAttendees)>
-		<cfset AttendeePager.setBaseLink("/activities/adm_participants?ActivityID=#params.activityId#&status=#params.status#") />
+		<cfset AttendeePager.setBaseLink("/activities/adm_participants/#params.key#?status=#params.status#") />
         <cfset AttendeePager.setPreviousLinkHTML("&larr; Previous") />
         <cfset AttendeePager.setNextLinkHTML("Next &rarr;") />
 		<cfset AttendeePager.setItemsPerPage(15) />
