@@ -31,13 +31,13 @@
 		<input type="text"  class="input-medium" placeholder="filter people" />	
 	</form>
 
-	<div class="btn-group pull-right pager-simple">
-		<a href="javascript://" class="btn previous prev-page<cfif params.page EQ 1> disabled</cfif>"><i class="icon-chevron-left"></i></a>
-		<a class="btn dropdown-toggle" data-toggle="dropdown"><span class="pageSelector">#params.page#</span> <span class="caret"></span></a>
+	<div class="btn-group pull-right pager-simple js-pager-simple">
+		<a href="javascript://" class="btn previous js-prev-page<cfif params.page EQ 1> disabled</cfif>"><i class="icon-chevron-left"></i></a>
+		<a class="btn dropdown-toggle" data-toggle="dropdown"><span class="js-page-selector">#params.page#</span> <span class="caret"></span></a>
 
-		<ul class="dropdown-menu pages">
+		<ul class="dropdown-menu pages js-pages">
 		</ul>
-		<a href="javascript://" class="btn next next-page"><i class="icon-chevron-right"></i></a>
+		<a href="javascript://" class="btn next js-next-page"><i class="icon-chevron-right"></i></a>
 	</div>
 	<div class="btn-group pull-right">
 		<a class="btn" data-toggle="dropdown">Filter</a>
@@ -62,12 +62,12 @@
 	<div>Please Wait</div></div>
 </div>
 <div class="btn-toolbar clearfix">
-    <div class="btn-group pull-right pager-simple">
-            <a href="/activities/adm_participants?ActivityID=13660&status=0&page=#params.page-1#" class="btn previous prev-page"><i class="icon-chevron-left"></i></a>
-            <a class="btn dropdown-toggle" data-toggle="dropdown"><span class="pageSelector">#params.page#</span> <span class="caret"></span></a>
-            <ul class="dropdown-menu pages">
+    <div class="btn-group pull-right pager-simple js-pager-simple">
+            <a href="javascript://" class="btn previous js-prev-page<cfif params.page EQ 1> disabled</cfif>"><i class="icon-chevron-left"></i></a>
+            <a class="btn dropdown-toggle" data-toggle="dropdown"><span class="js-page-selector">#params.page#</span> <span class="caret"></span></a>
+            <ul class="dropdown-menu page js-pagess">
             </ul>
-            <a href="/activities/adm_participants?ActivityID=13660&status=0&page=#params.page+1#" class="btn next next-page"><i class="icon-chevron-right"></i></a>
+            <a href="javascript://" class="btn next js-next-page"><i class="icon-chevron-right"></i></a>
 	</div>
 </div>
 </cfoutput>

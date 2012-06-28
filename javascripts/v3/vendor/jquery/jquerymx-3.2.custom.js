@@ -714,6 +714,9 @@
 			this.defaults = extend(true, {}, baseClass.defaults, this.defaults);
 			return arguments;
 		},
+		domReady: function() {
+			
+		},
 		rawInstance: function() {
 			// prevent running init
 			initializing = true;
@@ -856,6 +859,13 @@
 			if ( Class.init ) {
 				Class.init.apply(Class, args || concatArgs([_super_class],arguments));
 			}
+			
+			$(window).load(function() {
+				// call the class domReady
+				if ( Class.domReady ) {
+					Class.domReady.apply(Class, args || concatArgs([_super_class],arguments));
+				}
+			});
 
 			/* @Prototype*/
 			return Class;

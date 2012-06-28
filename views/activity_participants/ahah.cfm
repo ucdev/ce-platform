@@ -2,18 +2,17 @@
 
 <script type="text/javascript">
 <cfoutput>
-status4Count = #failCount#;
-status2Count = #progressCount#;
-status3Count = #registeredCount#;
-status1Count = #completeCount#;
-status0Count = #totalCount#;
-TotalAttendeeCount = #totalCount#;
-TotalAttendeeList = '#TotalAttendeeList#';
-totalPages = #attendeePager.getTotalNumberOfPages()#;
+ccpd.tier3.status4Count = #failCount#;
+ccpd.tier3.status2Count = #progressCount#;
+ccpd.tier3.status3Count = #registeredCount#;
+ccpd.tier3.status1Count = #completeCount#;
+ccpd.tier3.status0Count = #totalCount#;
+ccpd.tier3.TotalAttendeeCount = #totalCount#;
+ccpd.tier3.TotalAttendeeList = '#TotalAttendeeList#';
+ccpd.tier3.totalPages = #attendeePager.getTotalNumberOfPages()#;
 </cfoutput>
 
 $(document).ready(function() {
-	
 	$(".PersonLink").each(function(i,val) {
 		$(this).qtip({
 			content:{
