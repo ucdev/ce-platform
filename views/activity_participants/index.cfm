@@ -59,9 +59,22 @@
 	</div>
 </div>
 <div>
-	<div id="RegistrantsContainer" class="js-registrants-container"></div>
-	<div id="RegistrantsLoading" class="Loading js-registrants-loading"><img src="/admin/_images/ajax-loader.gif" />
-	<div>Please Wait</div></div>
+	<div id="RegistrantsContainer" class="js-registrants-container">
+    <table border="0" width="620" cellpadding="0" cellspacing="0" class="table">
+        <thead>
+            <tr>
+                <th class="span1"><input type="checkbox" name="CheckAll" id="CheckAll" class="js-check-all" /></th>
+                <th class="span2"></th>
+                <th class="span4">Name</th>
+                <th class="span7">Status</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody class="js-attendee-rows">
+        <!--- INSERT ATTENDEES HERE --->
+        </tbody>
+    </table>
+    </div>
 </div>
 <div class="btn-toolbar clearfix">
     <div class="btn-group pull-right pager-simple js-pager-simple">
@@ -72,4 +85,5 @@
             <a href="javascript://" class="btn next js-next-page"><i class="icon-chevron-right"></i></a>
 	</div>
 </div>
+#includePartial(partial="mustache/row")#
 </cfoutput>

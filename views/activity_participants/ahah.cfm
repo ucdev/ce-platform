@@ -1,16 +1,7 @@
 <cfparam name="params.Page" default="0">
 
 <script type="text/javascript">
-<cfoutput>
-ccpd.tier3.status4Count = #failCount#;
-ccpd.tier3.status2Count = #progressCount#;
-ccpd.tier3.status3Count = #registeredCount#;
-ccpd.tier3.status1Count = #completeCount#;
-ccpd.tier3.status0Count = #totalCount#;
-ccpd.tier3.TotalAttendeeCount = #totalCount#;
-ccpd.tier3.TotalAttendeeList = '#TotalAttendeeList#';
-ccpd.tier3.totalPages = #attendeePager.getTotalNumberOfPages()#;
-</cfoutput>
+
 
 $(document).ready(function() {
 	$(".PersonLink").each(function(i,val) {

@@ -1,8 +1,42 @@
 <cfcomponent extends="Controller" output="false">
-    
-    <cffunction name="ahah">
-		<cfparam name="params.status" default="0" />
+	
+	<!--- activity_participants/create --->
+	<cffunction name="create">
+		<cfset activity_participant = model("activity_participant").new(params.activity_participant)>
+		
+		<!--- Verify that the activity_participant creates successfully --->
+		<cfif activity_participant.save()>
+			<cfset flashInsert(success="The activity_participant was created successfully.")>
+            <cfset redirectTo(action="index")>
+		<!--- Otherwise --->
+		<cfelse>
+			<cfset flashInsert(error="There was an error creating the activity_participant.")>
+			<cfset renderPage(action="new")>
+		</cfif>
+	</cffunction>
+	
+	<!--- activity_participants/delete/key --->
+	<cffunction name="delete">
+		<cfset activity_participant = model("activity_participant").findByKey(params.key)>
+		
+		<!--- Verify that the activity_participant deletes successfully --->
+		<cfif activity_participant.delete()>
+			<cfset flashInsert(success="The activity_participant was deleted successfully.")>	
+            <cfset redirectTo(action="index")>
+		<!--- Otherwise --->
+		<cfelse>
+			<cfset flashInsert(error="There was an error deleting the activity_participant.")>
+			<cfset redirectTo(action="index")>
+		</cfif>
+	</cffunction>
+	
+	<!--- activity_participants/index --->
+	<cffunction name="index">
+		<cfparam name="params.key" type="integer" />
+		<cfparam name="params.status" type="numeric" default="0" />
         <cfparam name="params.page" type="numeric" default="1" />
+		
+		<cfset showInfoBar(false) />
         
 		<cfset qAttendees = Application.activityAttendee.getAttendees(ActivityID=params.key,DeletedFlag="N")>
 		<cfset qActivityCredits = Application.Com.ActivityCreditGateway.getByViewAttributes(ActivityID=params.key)>
@@ -19,8 +53,6 @@
 		<cfset registeredCount = 0>
 		
 		<cfloop query="qAttendees">
-			<cfset TotalAttendeeList = ListAppend(TotalAttendeeList, qAttendees.PersonID,",")>
-			
 			<cfswitch expression="#qAttendees.statusId#">
 				<cfcase value="1">
 					<cfset completeCount++>
@@ -71,47 +103,6 @@
 		<cfset AttendeePager.setUrlPageIndicator("page") />
 		<cfset AttendeePager.setShowNumericLinks(true) />
 		<cfset AttendeePager.setClassName("pager") />
-        
-        <cfset renderPage(layout=false) />
-    </cffunction>
-	
-	<!--- activity_participants/create --->
-	<cffunction name="create">
-		<cfset activity_participant = model("activity_participant").new(params.activity_participant)>
-		
-		<!--- Verify that the activity_participant creates successfully --->
-		<cfif activity_participant.save()>
-			<cfset flashInsert(success="The activity_participant was created successfully.")>
-            <cfset redirectTo(action="index")>
-		<!--- Otherwise --->
-		<cfelse>
-			<cfset flashInsert(error="There was an error creating the activity_participant.")>
-			<cfset renderPage(action="new")>
-		</cfif>
-	</cffunction>
-	
-	<!--- activity_participants/delete/key --->
-	<cffunction name="delete">
-		<cfset activity_participant = model("activity_participant").findByKey(params.key)>
-		
-		<!--- Verify that the activity_participant deletes successfully --->
-		<cfif activity_participant.delete()>
-			<cfset flashInsert(success="The activity_participant was deleted successfully.")>	
-            <cfset redirectTo(action="index")>
-		<!--- Otherwise --->
-		<cfelse>
-			<cfset flashInsert(error="There was an error deleting the activity_participant.")>
-			<cfset redirectTo(action="index")>
-		</cfif>
-	</cffunction>
-	
-	<!--- activity_participants/index --->
-	<cffunction name="index">
-		<cfparam name="params.key" type="integer" />
-		<cfparam name="params.status" type="numeric" default="0" />
-        <cfparam name="params.page" type="numeric" default="1" />
-		
-		<cfset showInfoBar(false) />
 	</cffunction>
 	
 	<!--- activity_participants/new --->

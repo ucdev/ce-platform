@@ -24,14 +24,10 @@ $.Class("ccpd.activity_participants",{
 		this.pager.prev = $('.js-prev-page');
 		this.printer = $('.js-print');
 		this.statusFilter = $('.js-attendees-filter li.js-attendee-status');
-		this.contentContainer = $('.js-registrants-container');
-		this.loader = $('.js-registrants-loading');
+		this.contentContainer = $('.js-attendee-rows');
 		this.checkAll = $('.js-check-all');
 		
-		this.updateRegistrants({
-			page: ccpd.tier3.nPageNo, 
-			status: ccpd.tier3.nStatus
-		});
+		this.loadRegistrants();
 				
 		participants.updatePagesDropdown();
 		
@@ -166,10 +162,7 @@ $.Class("ccpd.activity_participants",{
 			$.post("/UserSettings/setAttendeePage", { ActivityID: this.activity.nActivity, Page: ccpd.tier3.nPageNo });
 			
 			// RELOAD DATA
-			this.updateRegistrants({
-				page: ccpd.tier3.nPageNo, 
-				status: ccpd.tier3.nStatus
-			});
+			/* THIS IS WHERE ATTENDEES WILL BE LOADED FROM */
 		}
 	},
 	
@@ -350,10 +343,11 @@ $.Class("ccpd.activity_participants",{
 		this.pager['page'] = $('.js-page');
 	},
 	
-	updateRegistrants: function(params) {
+	loadRegistrants: function(params) {
 		var page;
 		var participants = this;
 		var status;
+		var attendeesList = ccpd.tier3.totalAttendeeList;
 		
 		if(typeof params == 'object' && typeof params.page == 'number') {
 			page = params.page;
@@ -366,78 +360,41 @@ $.Class("ccpd.activity_participants",{
 			status = ccpd.tier3.nStatus;
 		}
 		
-		$.ajax({
-			url: '/activity_participants/ahah', 
-			type: 'get',
-			data: { key: this.activity.nActivity, status: status, page: page  },
-			success: function(data) {
-				var activeStatusCheckMark = $('<i/>').addClass('icon-ok active-status js-active-status');
-				
-				this.checkAll = $('.js-check-all');
-				
-				participants.contentContainer.html(data);
-				participants.loader.hide();
-				
-				$('.js-all-attendee').unbind();
-				
-				// PLACE CHECKMARK BY ACTIVE STATUS
-				$('.js-active-status').remove();
-				$('.js-attendee-status-' + status).find('a').prepend(activeStatusCheckMark);
-				
-				// REPLACE ACTIVE STATUS TITLE
-				$('.js-attendee-status-title').text($('.js-attendee-status-' + status).find('a span.js-attendee-status-name').text());
-				
-				// CHECK IF ALL VIEWABLE ATTENDEES ARE SELECTED
-				if($('.js-all-attendee').length == ccpd.tier3.TotalAttendeeCount && ccpd.tier3.selectedRows.split(',').length == ccpd.tier3.TotalAttendeeCount) {
-					// CHECK THE CHECK ALL BOX
-					participants.checkAll.attr('checked', true);
-				}
-				
-				// CHECK IF ATTENDEE HAS BEEN MARKED AS SELECTED	
-				$('.js-all-attendee').each(function() {
-					var attendeeId = $(this).find('.attendeeId').val();
-					var attendeeContainer;
-					
-					ccpd.tier3.rows[attendeeId] = [];
-					
-					attendeeContainer = ccpd.tier3.rows[attendeeId];
-					
-					attendeeContainer['name'] = $('.js-attendee-name').text();
-					
-					attendeeContainer = new ccpd.activity_participants.participant({
-						$elem: $(this)
-					});
-					/*
-					
-					// DETERMINE IF CURRENT ROW NEEDS CHECKED
-					if($.ListFind(SelectedAttendees, nAttendee)) {
-						$row.addClass('alert alert-info');
-						$checkBox.attr('checked', true);
-					}
-					
-					$checkBox.click(function() {
-						if($(this).attr("checked")) {
-							$row.addClass('alert alert-info');
-							
-							// ADD CURRENT MEMBER TO SELECTEDMEMBERS LIST
-							addSelectedRow({
-								person:nPerson,
-								attendee:nAttendee
-							});
-						} else {
-							$row.removeClass('alert alert-info');
-							
-							// REMOVE CURRENT MEMBER FROM SELECTEDMEMBERS LIST
-							removeSelectedRow({
-								person:nPerson,
-								attendee:nAttendee
-							});
-						}
-					});
-					*/
-				});
+		for(curr in attendeesList) {
+			var attendee = attendeesList[curr];
+			var attendeeDOM = ccpd.tier3.rows[attendee.ATTENDEEID] = {};
+			var row;
+			
+			attendee.isStatus1 = false;
+			attendee.isStatus2 = false;
+			attendee.isStatus3 = false;
+			attendee.isStatus4 = false;
+			
+			switch(attendee.STATUSID) {
+				case 1:
+					attendee.isStatus1 = true;
+					break;
+				case 2:
+					attendee.isStatus2 = true;
+					break;
+				case 3:
+					attendee.isStatus3 = true;
+					break;
+				case 4:
+					attendee.isStatus4 = true;
+					break;
 			}
-		});
+			
+			row = Mustache.render($('#attendee-row').html(), attendee);
+			
+			attendeeDOM.elem = $(row);
+			
+			attendeeDOM = new ccpd.activity_participants.participant({ $elem: attendeeDOM.elem });
+			
+			attendeeDOM.elem = $('#attendeeRow-' + attendee.ATTENDEEID);
+		}
+		
+		this.changePage();
 	},
 	
 	viewSelectedRows: function() {
@@ -666,5 +623,4 @@ $.Class("ccpd.activity_participants.participant",{},{
 
 
 (function(){
-	
 })();
