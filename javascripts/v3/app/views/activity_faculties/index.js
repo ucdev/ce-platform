@@ -5,7 +5,59 @@ $.Class("ccpd.activity_faculties",{
 	init:function(params) {
 		this.activity = ccpd.tier2;
 		
+	},
+	
+	domReady: function() {
+		this.container = $('.js-faculty-container');
+		this.loader = $('.js-faculty-loading');
+		this.fileUploader = $('.js-file-uploader');
+		this.photoUploader = $('.js-photo-uploader');
+		
 		this.updateFaculty();
+				
+		this.fileUploader.dialog({ 
+			title:"Upload File",
+			modal: false, 
+			autoOpen: false,
+			height:246,
+			width:350,
+			resizable: false,
+			stack: false,
+			buttons: { 
+				Save:function() {
+					$("#frmFileUpload").ajaxSubmit({
+						dataType: 'json',
+						forceSync: true,
+						success: function(data) {
+							addMessage('File uploaded successfully.',500,6000,4000);
+							faculties.fileUploader.dialog('close');
+							
+							faculties.updateFaculty();
+						}
+					}); 
+				},
+				Cancel:function() {
+					faculties.fileUploader.dialog('close');
+				}
+			},
+			open:function() {
+			},
+			close:function() {
+				faculties.fileUploader.html('');
+			}
+		});
+					
+		this.photoUploader.dialog({ 
+			title:"Upload Photo",
+			modal: false, 
+			autoOpen: false,
+			height:120,
+			width:450,
+			resizable: false,
+			open:function() {
+				faculties.photoUploader.show();
+			}
+		});
 	},
 	
 	activity: [],
@@ -18,64 +70,17 @@ $.Class("ccpd.activity_faculties",{
 			data: { key: this.activity.nActivity },
 			type: 'post',
 			success: function(data) {
-				faculties.container = $('.js-faculty-container');
-				faculties.loader = $('.js-faculty-loading');
-				faculties.fileUploader = $('.js-file-uploader');
-				faculties.photoUploader = $('.js-photo-uploader');
+				var allFaculty = $('.js-all-faculty');
 				
 				faculties.container.html(data);
 				faculties.loader.hide();
 				
-				faculties.fileUploader.dialog({ 
-					title:"Upload File",
-					modal: false, 
-					autoOpen: false,
-					height:246,
-					width:350,
-					resizable: false,
-					stack: false,
-					buttons: { 
-						Save:function() {
-							$("#frmFileUpload").ajaxSubmit({
-								dataType: 'json',
-								forceSync: true,
-								success: function(data) {
-									addMessage('File uploaded successfully.',500,6000,4000);
-									faculties.fileUploader.dialog('close');
-									
-									faculties.updateFaculty();
-								}
-							}); 
-						},
-						Cancel:function() {
-							faculties.fileUploader.dialog('close');
-						}
-					},
-					open:function() {
-					},
-					close:function() {
-						faculties.fileUploader.html('');
-					}
-				});
-					
-				faculties.photoUploader.dialog({ 
-					title:"Upload Photo",
-					modal: false, 
-					autoOpen: false,
-					height:120,
-					width:450,
-					resizable: false,
-					open:function() {
-						faculties.photoUploader.show();
-					}
-				});
-				
 				// CHECK IF ATTENDEE HAS BEEN MARKED AS SELECTED	
-				$('.js-all-faculty').unbind();
+				allFaculty.unbind();
 				
 				ccpd.tier3.rows = [];
 				
-				$.each($('.js-all-faculty'), function(i, item) {
+				$.each(allFaculty, function(i, item) {
 					var facultyId = $(this).find('.facultyId').val();
 					var facultyContainer;
 					

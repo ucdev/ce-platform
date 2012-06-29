@@ -2,18 +2,17 @@
 
 <script type="text/javascript">
 <cfoutput>
-status4Count = #failCount#;
-status2Count = #progressCount#;
-status3Count = #registeredCount#;
-status1Count = #completeCount#;
-status0Count = #totalCount#;
-TotalAttendeeCount = #totalCount#;
-TotalAttendeeList = '#TotalAttendeeList#';
-totalPages = #attendeePager.getTotalNumberOfPages()#;
+ccpd.tier3.status4Count = #failCount#;
+ccpd.tier3.status2Count = #progressCount#;
+ccpd.tier3.status3Count = #registeredCount#;
+ccpd.tier3.status1Count = #completeCount#;
+ccpd.tier3.status0Count = #totalCount#;
+ccpd.tier3.TotalAttendeeCount = #totalCount#;
+ccpd.tier3.TotalAttendeeList = '#TotalAttendeeList#';
+ccpd.tier3.totalPages = #attendeePager.getTotalNumberOfPages()#;
 </cfoutput>
 
 $(document).ready(function() {
-	
 	$(".PersonLink").each(function(i,val) {
 		$(this).qtip({
 			content:{
@@ -228,7 +227,7 @@ $(document).ready(function() {
         </tbody>
     </table>
 <cfelse>
-	<cfif params.status GT 0>
+	<cfif structKeyexists(params, "status") AND params.status GT 0>
         <div style="background-image:url(/admin/_images/Sample_Attendees.jpg); font-size: 18px; text-align: center; height: 250px; width: 620px;">
             <div style="padding:25px 20px;">There are no registrants for this activity of this status.</div>
         </div>

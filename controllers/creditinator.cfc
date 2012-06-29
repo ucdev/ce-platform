@@ -42,7 +42,29 @@
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
 	<cffunction name="email"  output="no">
 		<cfparam name="params.message" default="" />
-	
+		
+		<!--- IMAP CONNECTION --->
+		<cfset imapCFC = CreateObject("component","lib.imap") />
+		<cfset imapInit = imapCFC.Init("ccpdcredit@gmail.com","cfr010408","imap.gmail.com",993,15,1) />
+		<cfset emails = imapCFC.list("Inbox") />
+		
+		<cfif emails.recordCount GT 0>
+			<cfloop query="emails">
+				<cfset email = model("credit_request_email").new() />
+				<cfset email.emailId = emails.id />
+				<cfset email.emailDate = emails.date />
+				<cfset email.emailFrom = emails.from />
+				<cfset email.messagenumber = emails.messagenumber />
+				<cfset email.emailReplyTo = emails.replyto />
+				<cfset email.emailSubject = emails.subject />
+				<cfset email.emailTo = emails.to />
+				<cfset email.emailSize = emails.size />
+				
+				<cfset email.save(validate=false) />
+			</cfloop>
+		</cfif>
+		
+		<cfset renderText(emails.recordCount) />
 	</cffunction>
 	
 	<cffunction name="sms"  output="no">
@@ -82,55 +104,54 @@
 		
 		<cfif isObject(activity)>
 			<cfset credit_request.activityId = activity.id />
-		</cfif>
-		
-		<!--- LOOKUP ACCOUNT --->
-		<cfset person = model("person").findByMobile(trim(twilio.number)) />
-		
-		<cfif isObject(person)>
-			<cfset credit_request.personId = person.id />
-		<cfelse>
-			<!--- LOOKUP PRIOR ATTENDEES --->
-			<cfset attendee = model("activity_participant").findByMobile(trim(twilio.number)) />
 			
-			<cfif isObject(attendee)>
-				<cfset credit_request.attendeeid = attendee.id />
+			<!--- LOOKUP ACCOUNT --->
+			<cfset person = model("person").findByMobile(trim(twilio.number)) />
+			
+			<cfif isObject(person)>
+				<cfset credit_request.personId = person.id />
+			<cfelse>
+				<!--- LOOKUP PRIOR ATTENDEES --->
+				<cfset attendee = model("activity_participant").findByMobile(trim(twilio.number)) />
+				
+				<cfif isObject(attendee)>
+					<cfset credit_request.attendeeid = attendee.id />
+				</cfif>
 			</cfif>
-		</cfif>
-		
-		<cfif credit_request.activityId LTE 0>
-			<cfset params.message = "Invalid code, visit http://ccpd.uc.edu/support" />
-		</cfif>
-		
-		<cfset credit_request.type='sms' />
-		<cfset credit_request.recordHash = HASH('#credit_request.personId#,#credit_request.activityId#,#credit_request.attendeeId#,#credit_request.phone#,#credit_request.email#','MD5') />
-		<cfset credit_request.createdAt=now() />
-		
-		<cfif isEmpty(params.message)>
-			<cfif credit_request.save()>
-				<!--- IF NO PERSON OR ATTENDEE --->
-				<cfif credit_request.activityId GT 0 AND 
-					(
-						NOT structKeyExists(credit_request,'personId')
-						OR 
-						credit_request.personId LTE 0
-					) 
-					AND 
-					(NOT structKeyExists(credit_request,'attendeeId') OR credit_request.attendeeId LTE 0)>
-					<cfset params.message = "We have logged your attendance. We still need to identify you, visit http://ccpd.uc.edu/ to link this mobile number to an account. This is a one time thing." />
-				<!--- IF PERSON --->
-				<cfelseif structKeyExists(credit_request,'personId') AND credit_request.personId GT 0>
-					<cfset params.message = "Thank you, #person.firstname#! We have logged your attendance. Visit http://ccpd.uc.edu/ for certificates and transcripts." />
-				<!--- IF PERSON --->
-				<cfelseif structKeyExists(credit_request,'attendeeId') AND credit_request.attendeeId GT 0>
-					<cfset params.message = "Thank you! We have logged your attendance. We still need to identify you, visit http://ccpd.uc.edu/ to link this mobile number to an account. This is a one time thing." />
+			
+			<cfset credit_request.type='sms' />
+			<cfset credit_request.recordHash = HASH('#credit_request.personId#,#credit_request.activityId#,#credit_request.attendeeId#,#credit_request.phone#,#credit_request.email#','MD5') />
+			<cfset credit_request.createdAt=now() />
+			
+			<cfif isEmpty(params.message)>
+				<cfif credit_request.save()>
+					<!--- IF NO PERSON OR ATTENDEE --->
+					<cfif credit_request.activityId GT 0 AND 
+						(
+							NOT structKeyExists(credit_request,'personId')
+							OR 
+							credit_request.personId LTE 0
+						)
+						AND 
+						(NOT structKeyExists(credit_request,'attendeeId') OR credit_request.attendeeId LTE 0)>
+						<cfset params.message = "We have logged your attendance. We still need to identify you, visit http://ccpd.uc.edu/ to link this mobile number to an account. This is a one time thing." />
+					<!--- IF PERSON --->
+					<cfelseif structKeyExists(credit_request,'personId') AND credit_request.personId GT 0>
+						<cfset params.message = "Thank you, #person.firstname#! We have logged your attendance. Visit http://ccpd.uc.edu/ for certificates and transcripts." />
+					<!--- IF PERSON --->
+					<cfelseif structKeyExists(credit_request,'attendeeId') AND credit_request.attendeeId GT 0>
+						<cfset params.message = "We have logged your attendance. We still need to identify you, visit http://ccpd.uc.edu/ to link this mobile number to an account. This is a one time thing." />
+					</cfif>
+				<cfelse>
+					<cfset params.message = "Invalid request. We have already logged your attendance for this event. If you feel this is incorrect, visit http://ccpd.uc.edu/support" />
 				</cfif>
 			<cfelse>
-				<cfset params.message = "Invalid request. We have already logged your attendance for this event. If you feel this is incorrect, visit http://ccpd.uc.edu/support" />
+				<cfset params.message = params.error />
 			</cfif>
 		<cfelse>
-			<cfset params.message = params.error />
+			<cfset params.message = "Invalid request. The code you provided is invalid." />
 		</cfif>
+		
 		
 		<cfscript>renderText($renderLayout($layout=false,$type='template',$content=$renderPage($template="",$controller=params.controller,$action=params.action,$layout=false)))</cfscript>
 	</cffunction>

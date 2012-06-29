@@ -194,7 +194,6 @@ $(document).ready(function(){
 	<input type="hidden" value="#attributes.sessiontype#" name="SessionType" />
 	<input type="hidden" value="" name="ChangedFields" id="ChangedFields" />
 	<input type="hidden" value="" name="ChangedValues" id="ChangedValues" />
-	#l("testestestes")#
 	#bTextAreaTag(name="title",rows="2",id="Title",label="#l("Title")#",content="#HTMLSafe(Attributes.Title)#",class="span12",style="height: 36px;")#
 	#bSelectTag(name="activitytypeid",id="ActivityType",disabled="disabled",label="#l("Type")#",options=qActivityTypeList,selected="#attributes.activitytypeid#")#
 	#bSelectTag(name="grouping",id="Grouping",disabled="disabled",label="#l("Sub Type")#",options=[],selected="#attributes.groupingId#")#
