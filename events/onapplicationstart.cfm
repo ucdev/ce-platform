@@ -19,6 +19,7 @@
 			#application.version_token#/vendor/jquery/jquery.maskedinput-1.1.3.pack,
 			#application.version_token#/vendor/jquery/jquery.tokenInput,
 			#application.version_token#/vendor/jquery/jquery.pjax.js,
+			#application.version_token#/vendor/jquery/mustache,
 			#application.version_token#/vendor/bootstrap/bootstrap-transition,
 			#application.version_token#/vendor/bootstrap/bootstrap-alert,
 			#application.version_token#/vendor/bootstrap/bootstrap-modal,

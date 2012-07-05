@@ -111,23 +111,41 @@
 			SELECT     
 				att.AttendeeID, 
 				att.ActivityID, 
-				att.PersonID, 
+				att.PersonID,
+                CASE
+                	WHEN att.PersonId > 0 THEN 'true'
+                    WHEN att.PersonId = 0 THEN 'false'
+                END AS isReal,
 				att.StatusID,
+                CASE att.StatusId
+                	WHEN 1 THEN att.completeDate
+                    WHEN 2 THEN att.RegisterDate
+                    WHEN 3 THEN att.RegisterDate
+                    WHEN 4 THEN att.TermDate
+                END AS currStatusDate,
 				att.CheckedInFlag, 
-				att.CheckIn, 
+				CONVERT(VARCHAR(10), att.CheckIn, 101) AS CheckIn, 
 				att.CheckedOutFlag, 
-				att.CheckOut, 
-				att.PaymentDate, 
+				CONVERT(VARCHAR(10), att.CheckOut, 101) AS CheckOut, 
+				CONVERT(VARCHAR(10), att.PaymentDate, 101) AS PaymentDate, 
 				att.PayAmount, 
 				att.PayOrderNo, 
-				att.RegisterDate, 
-				att.CompleteDate, 
-				att.TermDate,
-				att.Created, 
-				att.Updated, 
-				att.Deleted, 
+				CONVERT(VARCHAR(10), att.RegisterDate, 101) AS RegisterDate, 
+				CONVERT(VARCHAR(10), att.CompleteDate, 101) AS CompleteDate,
+				CONVERT(VARCHAR(10), att.TermDate, 101) AS TermDate,
+				CONVERT(VARCHAR(10), att.Created, 101) AS Created, 
+				CONVERT(VARCHAR(10), att.Updated, 101) AS Updated, 
+				CONVERT(VARCHAR(10), att.Deleted, 101) AS Deleted, 
 				att.DeletedFlag, 
+                CASE att.DeletedFlag
+                	WHEN 'Y' THEN 'true'
+                    WHEN 'N' THEN 'false'
+                END AS isDeleted,
 				att.MDflag,
+                CASE att.MDflag
+                	WHEN 'Y' THEN 'true'
+                    WHEN 'N' THEN 'false'
+                END AS isMD,
 				CASE 
 					WHEN isNull(att.PersonId,0) = 0 THEN
 						isNull(att.lastname,'') + ', ' + isNull(att.FirstName,'')
