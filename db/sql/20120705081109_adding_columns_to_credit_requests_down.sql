@@ -1,0 +1,19 @@
+
+ALTER TABLE [credit_requests] DROP COLUMN [firstname];
+ALTER TABLE [credit_requests] DROP COLUMN [middlename];
+ALTER TABLE [credit_requests] DROP COLUMN [lastname];
+ALTER TABLE [credit_requests] DROP COLUMN [degree];
+ALTER TABLE [credit_requests] DROP COLUMN [completedate];
+ALTER TABLE [credit_requests] DROP COLUMN [address1];
+ALTER TABLE [credit_requests] DROP COLUMN [address2];
+ALTER TABLE [credit_requests] DROP COLUMN [city];
+ALTER TABLE [credit_requests] DROP COLUMN [state];
+ALTER TABLE [credit_requests] DROP COLUMN [country];
+ALTER TABLE [credit_requests] DROP COLUMN [zipcode];
+ALTER TABLE [credit_requests] DROP COLUMN [phone1];
+ALTER TABLE [credit_requests] DROP COLUMN [phone1ext];
+ALTER TABLE [credit_requests] DROP COLUMN [phone2];
+ALTER TABLE [credit_requests] DROP COLUMN [phone2ext];
+ALTER TABLE [credit_requests] DROP COLUMN [fax];
+ALTER TABLE [credit_requests] DROP COLUMN [faxext];
+ALTER TABLE [credit_requests] DROP COLUMN [hours];
