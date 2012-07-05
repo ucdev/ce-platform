@@ -72,37 +72,6 @@
 		<cfif params.status EQ 0 AND structKeyExists(cookie, "user_attendeeStatus") AND getToken(cookie.USER_AttendeeStatus,1,"|") EQ params.key>
 			<cfset params.status = getToken(cookie.USER_AttendeeStatus,2,"|")>
 		</cfif>
-		
-		<cfif len(trim(params.status)) GT 0 AND params.status NEQ 0>
-        	<cfif isNumeric(params.status)>
-                <cfquery name="qTempAttendees" dbtype="query">
-                    SELECT *
-                    FROM qAttendees
-                    WHERE qAttendees.statusId = <cfqueryparam value="#params.status#" cfsqltype="cf_sql_integer" />
-                </cfquery>
-        		<cfset qAttendees = qTempAttendees>
-            <cfelseif params.status EQ 'selected' AND len(trim(params.selectedAttendees)) GT 0>
-                <cfquery name="qTempAttendees" dbtype="query">
-                    SELECT *
-                    FROM qAttendees
-                    WHERE qAttendees.attendeeId IN (#params.selectedAttendees#)
-                </cfquery>
-        		<cfset qAttendees = qTempAttendees>
-            </cfif>
-		</cfif>
-        
-		<cfset AttendeePager = CreateObject("component","#Application.Settings.Com#Pagination").init()>
-		<cfset AttendeePager.setQueryToPaginate(qAttendees)>
-		<cfset AttendeePager.setBaseLink("/activities/adm_participants/#params.key#?status=#params.status#") />
-        <cfset AttendeePager.setPreviousLinkHTML("&larr; Previous") />
-        <cfset AttendeePager.setNextLinkHTML("Next &rarr;") />
-		<cfset AttendeePager.setItemsPerPage(15) />
-        <cfset AttendeePager.setNumericDistanceFromCurrentPageVisible(1) />
-        <cfset AttendeePager.setNumericEndBufferCount(2) />
-        <cfset AttendeePager.setMissingNumbersHTML('...') />
-		<cfset AttendeePager.setUrlPageIndicator("page") />
-		<cfset AttendeePager.setShowNumericLinks(true) />
-		<cfset AttendeePager.setClassName("pager") />
 	</cffunction>
 	
 	<!--- activity_participants/new --->

@@ -27,19 +27,15 @@ $.Class("ccpd.activity_participants",{
 		this.contentContainer = $('.js-attendee-rows');
 		this.checkAll = $('.js-check-all');
 		
+		// BUILD DOM STRUCTURE
 		this.loadRegistrants();
-				
-		participants.updatePagesDropdown();
 		
 		this.attendeeRemover.click(function() {
 			participants.removeAttendees();
 		});
 		
 		this.attendeeSearch['clear'].click(function() {
-			participants.updateRegistrants({
-				page: ccpd.tier3.nPageNo,
-				status: ccpd.tier3.nStatus
-			});
+			participants.changePage();
 			participants.attendeeSearch['input'].val('');
 			participants.attendeeSearch['clear'].hide();
 		});
@@ -71,7 +67,7 @@ $.Class("ccpd.activity_participants",{
 						data: { key: participants.activity.nActivity, q: input.val() },
 						success: function(data) {
 							participants.contentContainer.html(data);
-							participants.updatePagesDropdown();
+							participants.updatePaginator();
 						}
 					});
 				}
@@ -140,8 +136,12 @@ $.Class("ccpd.activity_participants",{
 	activity: [],
 	
 	changePage: function() {
+		var attendeeList = ccpd.tier3.totalAttendeeList.statuses[ccpd.tier3.nStatus].attendees;
+		var attendeePlaceholder = this.contentContainer;
+		var checkAll = this.checkAll;
+		var attendeesToLoad = ccpd.tier3.rowsPerPage*ccpd.tier3.nPageNo;
+		
 		if(ccpd.tier3.nPageNo >= 1 && ccpd.tier3.nPageNo <= ccpd.tier3.totalPages) {
-			
 			// UPDATE SIMPLE PAGER LINKS
 			if(ccpd.tier3.nPageNo <= ccpd.tier3.totalPages) {
 				this.pager['next'].removeClass('disabled');
@@ -161,8 +161,27 @@ $.Class("ccpd.activity_participants",{
 			// UPDATE COOKIE FOR CURRENT ACTIVITY PAGE NUMBER
 			$.post("/UserSettings/setAttendeePage", { ActivityID: this.activity.nActivity, Page: ccpd.tier3.nPageNo });
 			
-			// RELOAD DATA
-			/* THIS IS WHERE ATTENDEES WILL BE LOADED FROM */
+			// UPDATE STATUS FILTER TEXT LABEL
+			$('.js-attendee-status-title').text(ccpd.tier3.totalAttendeeList.statuses[ccpd.tier3.nStatus].name);
+			
+			attendeePlaceholder.html('');
+			
+			// LOAD ATTENDEE DATA
+			for(var i = attendeesToLoad-15; i < attendeesToLoad; i++) {
+				
+				if(typeof attendeeList[i] != 'undefined') {
+					var attendee = ccpd.tier3.rows[attendeeList[i]];
+					attendee['row'].appendTo(attendeePlaceholder);
+	
+					attendee = new ccpd.activity_participants.participant({ $elem: attendee['row'] });
+				}
+			}
+			
+			if($('.js-selected-checkbox').filter(':checked').length == 15) {
+				checkAll.attr('checked', true);
+			} else {
+				checkAll.attr('checked', false);
+			}
 		}
 	},
 	
@@ -172,8 +191,7 @@ $.Class("ccpd.activity_participants",{
 		var countContainer = $(this).find('span');
 		var participants = this;
 		
-		this.contentContainer.html("");
-		this.loader.show();
+		this.contentContainer.html('');
 		
 		// UPDATE THE ATTENDEE STATUS COOKIE FOR CURRENT ACTIVITY
 		$.ajax({
@@ -182,12 +200,87 @@ $.Class("ccpd.activity_participants",{
 			data: { ActivityID: this.activity.nActivity, status: ccpd.tier3.nStatus },
 			success: function(data) {
 				ccpd.tier3.nPageNo = 1;
-				participants.updateRegistrants({
-					page: ccpd.tier3.nPageNo, 
-					status: ccpd.tier3.nStatus
-				});
+				
+				participants.updatePaginator();
+				
+				participants.changePage();
 			}
 		});
+	},
+	
+	loadRegistrants: function(params) {
+		var page;
+		var participants = this;
+		var status;
+		var attendeesList = ccpd.tier3.totalAttendeeList;
+		var attendeesStatusList = ccpd.tier3.totalAttendeeList['statuses'] = { 
+																			0: { 'name': 'All', 'attendees': [] }, 
+																			1: { 'name': 'Complete', 'attendees': [] }, 
+																			2: { 'name': 'In progress', 'attendees': [] }, 
+																			3: { 'name': 'Registered', 'attendees': [] }, 
+																			4: { 'name': 'Failed', 'attendees': [] }, 
+																			5: { 'name': 'Selected', 'attendees': [] } };
+		
+		if(typeof params == 'object' && typeof params.page == 'number') {
+			page = params.page;
+		} else {
+			page = ccpd.tier3.nPageNo;
+		}
+		if(typeof params == 'object' && typeof params.status == 'number') {
+			status = params.status;
+		} else {
+			status = ccpd.tier3.nStatus;
+		}
+		
+		for(curr in attendeesList) {
+			var row;
+			var attendee = attendeesList[curr];
+			var attendeeDOM = ccpd.tier3.rows[attendee.ATTENDEEID] = { 
+																'attendeeStatusViewChange': null,
+																'checkBox': null,
+																'fakeAttendeeRemover': null,
+																'id': 0,
+																'personId': 0,
+																'row': null, 
+																'statusDateEditor': null };
+			
+			attendee.isStatus1 = false;
+			attendee.isStatus2 = false;
+			attendee.isStatus3 = false;
+			attendee.isStatus4 = false;
+			
+			attendeesStatusList[0]['attendees'].push(attendee.ATTENDEEID);
+			
+			switch(attendee.STATUSID) {
+				case 1:
+					attendeesStatusList[1]['attendees'].push(attendee.ATTENDEEID);
+					attendee.isStatus1 = true;
+					break;
+				case 2:
+					attendeesStatusList[2]['attendees'].push(attendee.ATTENDEEID);
+					attendee.isStatus2 = true;
+					break;
+				case 3:
+					attendeesStatusList[3]['attendees'].push(attendee.ATTENDEEID);
+					attendee.isStatus3 = true;
+					break;
+				case 4:
+					attendeesStatusList[4]['attendees'].push(attendee.ATTENDEEID);
+					attendee.isStatus4 = true;
+					break;
+			}
+			
+			row = Mustache.render($('#attendee-row').html(), attendee);
+			
+			attendeeDOM.elem = $(row);
+			
+			attendeeDOM = new ccpd.activity_participants.participant({ $elem: attendeeDOM.elem });
+			
+			attendeeDOM.elem = $('#attendeeRow-' + attendee.ATTENDEEID);
+		}
+		
+		participants.updatePaginator();
+		this.changePage();
 	},
 	
 	printDocument: function() {
@@ -235,10 +328,9 @@ $.Class("ccpd.activity_participants",{
 						
 						updateStats();
 						$.unblockUI();
-						participants.updateRegistrants({
-							page: ccpd.tier3.nPageNo, 
-							status: ccpd.tier3.nStatus
-						});
+						
+						
+						participants.changePage();
 					}
 				});
 			}
@@ -250,10 +342,11 @@ $.Class("ccpd.activity_participants",{
 	selectAllAttendees: function(params) {
 		var participants = this;
 		var selectAll = params.checkStatus;
-		var rows = ccpd.tier3.rows;
+		var attendeeList = ccpd.tier3.totalAttendeeList.statuses[ccpd.tier3.nStatus].attendees;
+		var attendeesToSelect = ccpd.tier3.rowsPerPage*ccpd.tier3.nPageNo;
 		
-		for(curr in rows) {
-			var participant = rows[curr];
+		for(var i = attendeesToSelect-15; i < attendeesToSelect; i++) {
+			var participant = ccpd.tier3.rows[attendeeList[i]];
 			var row = participant.row;
 			var checkBox = participant.checkBox;
 			
@@ -300,10 +393,7 @@ $.Class("ccpd.activity_participants",{
 					updateStats();
 					clearSelectedMembers();
 					
-					participants.updateRegistrants({
-						page: ccpd.tier3.nPageNo, 
-						status: ccpd.tier3.nStatus
-					});
+					participants.changePage();
 				} else {
 					addError(data.STATUSMSG,500,6000,4000);
 				}
@@ -323,7 +413,9 @@ $.Class("ccpd.activity_participants",{
 		});
 	},
 	
-	updatePagesDropdown: function() {
+	updatePaginator: function() {
+		ccpd.tier3.totalPages = Math.ceil(ccpd.tier3.totalAttendeeList.statuses[ccpd.tier3.nStatus].attendees.length/ccpd.tier3.rowsPerPage);
+		
 		// CLEAR CURRENT PAGES LIST
 		this.pager['list'].children().remove();
 		
@@ -343,66 +435,14 @@ $.Class("ccpd.activity_participants",{
 		this.pager['page'] = $('.js-page');
 	},
 	
-	loadRegistrants: function(params) {
-		var page;
-		var participants = this;
-		var status;
-		var attendeesList = ccpd.tier3.totalAttendeeList;
-		
-		if(typeof params == 'object' && typeof params.page == 'number') {
-			page = params.page;
-		} else {
-			page = ccpd.tier3.nPageNo;
-		}
-		if(typeof params == 'object' && typeof params.status == 'number') {
-			status = params.status;
-		} else {
-			status = ccpd.tier3.nStatus;
-		}
-		
-		for(curr in attendeesList) {
-			var attendee = attendeesList[curr];
-			var attendeeDOM = ccpd.tier3.rows[attendee.ATTENDEEID] = {};
-			var row;
-			
-			attendee.isStatus1 = false;
-			attendee.isStatus2 = false;
-			attendee.isStatus3 = false;
-			attendee.isStatus4 = false;
-			
-			switch(attendee.STATUSID) {
-				case 1:
-					attendee.isStatus1 = true;
-					break;
-				case 2:
-					attendee.isStatus2 = true;
-					break;
-				case 3:
-					attendee.isStatus3 = true;
-					break;
-				case 4:
-					attendee.isStatus4 = true;
-					break;
-			}
-			
-			row = Mustache.render($('#attendee-row').html(), attendee);
-			
-			attendeeDOM.elem = $(row);
-			
-			attendeeDOM = new ccpd.activity_participants.participant({ $elem: attendeeDOM.elem });
-			
-			attendeeDOM.elem = $('#attendeeRow-' + attendee.ATTENDEEID);
-		}
-		
-		this.changePage();
-	},
-	
 	viewSelectedRows: function() {
-		if(ccpd.tier3.selectedRows.length > 0) {
-			this.updateRegistrants({
-				page: 1, 
-				status: 'selected'
-			});
+		if(ccpd.tier3.totalAttendeeList.statuses[5].attendees.length > 0) {
+			ccpd.tier3.nPageNo = 1;
+			ccpd.tier3.nStatus = 5;
+			
+			this.updatePaginator();
+			
+			this.changePage()
 		} else {
 			addError('You must select participants first.',500,6000,4000);
 		}
@@ -419,6 +459,7 @@ $.Class("ccpd.activity_participants.participant",{},{
 	addSelectedRow: function() {
 		if(!$.ListFind(ccpd.tier3.selectedRows, this.id, ',')) {
 			ccpd.tier3.selectedRows = $.ListAppend(ccpd.tier3.selectedRows, this.id, ',');
+			ccpd.tier3.totalAttendeeList.statuses[5].attendees.push(this.id);
 			
 			this.updateSelectedCount(1);
 		} 
@@ -569,10 +610,7 @@ $.Class("ccpd.activity_participants.participant",{},{
 					success: function(data) {
 						if(data.STATUS) {
 							addMessage(data.STATUSMSG,250,6000,4000);
-							participant.parent.updateRegistrants({
-								 page: participant.parent.activity.nPageNo, 
-								 status: participant.parent.activity.nStatus
-							});
+							participant.parent.changePage();
 						} else {
 							addError(data.STATUSMSG,250,6000,4000);
 							
@@ -591,6 +629,7 @@ $.Class("ccpd.activity_participants.participant",{},{
 	
 	removeSelectedRow: function() {
 		ccpd.tier3.selectedRows = $.ListDeleteAt(ccpd.tier3.selectedRows, $.ListFind(ccpd.tier3.selectedRows, this.id));
+		ccpd.tier3.totalAttendeeList.statuses[5].attendees = $.ListDeleteAt(ccpd.tier3.totalAttendeeList.statuses[5].attendees, $.ListFind(ccpd.tier3.totalAttendeeList.statuses[5].attendees, this.id));
 		
 		this.updateSelectedCount(-1);
 	}, 
