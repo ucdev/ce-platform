@@ -38,99 +38,26 @@
 		
 		<cfset showInfoBar(false) />
         
-		<cfset qAttendees = Application.activityAttendee.getAttendees(ActivityID=params.key,DeletedFlag="N")>
 		<cfset qActivityCredits = Application.Com.ActivityCreditGateway.getByViewAttributes(ActivityID=params.key)>
 		
 		<!--- LEGACY FIX --->
 		<cfset attributes.status = params.status />
 		
-		<!--- TOTALATTENDEELIST IS USED FOR SELECTING ALL ATTENDEES IN AN ACTIVITY --->
-		<cfset TotalAttendeeList = "">
-		<cfset totalCount = qAttendees.recordCount>
-		<cfset completeCount = 0>
-		<cfset failCount = 0>
-		<cfset progressCount = 0>
-		<cfset registeredCount = 0>
-		
-		<cfloop query="qAttendees">
-			<cfswitch expression="#qAttendees.statusId#">
-				<cfcase value="1">
-					<cfset completeCount++>
-				</cfcase>
-				<cfcase value="2">
-					<cfset progressCount++>
-				</cfcase>
-				<cfcase value="3">
-					<cfset registeredCount++>
-				</cfcase>
-				<cfcase value="4">
-					<cfset failCount++>
-				</cfcase>
-			</cfswitch>
-		</cfloop>
-		
 		<cfif params.status EQ 0 AND structKeyExists(cookie, "user_attendeeStatus") AND getToken(cookie.USER_AttendeeStatus,1,"|") EQ params.key>
 			<cfset params.status = getToken(cookie.USER_AttendeeStatus,2,"|")>
 		</cfif>
 	</cffunction>
+    
+    <cffunction name="loadData">
+		<cfset qAttendees = Application.activityAttendee.getAttendees(ActivityID=params.key,DeletedFlag="N")>
+        
+        <cfreturn renderText(serializeJSON(queryToStruct(qAttendees))) />
+    </cffunction>
 	
 	<!--- activity_participants/new --->
 	<cffunction name="new">
 		<cfset activity_participant = model("activity_participant").new()>
 	</cffunction>
-    
-    <!--- activity_participants/search --->
-    <cffunction name="search">
-    	<cfparam name="params.key" default="0" />
-    	<cfparam name="params.q" default="" />
-        
-		<cfset params.q = listToArray(replace(trim(params.q), " ", ",", "ALL"))>
-        
-        <cfset qActivityCredits = Application.Com.ActivityCreditGateway.getByViewAttributes(ActivityID=params.key)>
-        <cfset qAttendees = model("Activity_participant").searchActivity(params.key, params.q)>
-        
-        <!--- TOTALATTENDEELIST IS USED FOR SELECTING ALL ATTENDEES IN AN ACTIVITY --->
-        <cfset TotalAttendeeList = "">
-        <cfset totalCount = qAttendees.recordCount>
-        <cfset completeCount = 0>
-        <cfset failCount = 0>
-        <cfset progressCount = 0>
-        <cfset registeredCount = 0>
-        
-        <cfloop query="qAttendees">
-            <cfset TotalAttendeeList = ListAppend(TotalAttendeeList, qAttendees.PersonID,",")>
-            
-            <cfswitch expression="#qAttendees.statusId#">
-                <cfcase value="1">
-                    <cfset completeCount++>
-                </cfcase>
-                <cfcase value="2">
-                    <cfset progressCount++>
-                </cfcase>
-                <cfcase value="3">
-                    <cfset registeredCount++>
-                </cfcase>
-                <cfcase value="4">
-                    <cfset failCount++>
-                </cfcase>
-            </cfswitch>
-        </cfloop>
-    
-        <cfset AttendeePager = CreateObject("component","#Application.Settings.Com#Pagination").init()>
-        <cfset AttendeePager.setQueryToPaginate(qAttendees)>
-        <cfset AttendeePager.setPreviousLinkHTML("&larr; Previous") />
-        <cfset AttendeePager.setNextLinkHTML("Next &rarr;") />
-        <cfset AttendeePager.setItemsPerPage(15) />
-        <cfset AttendeePager.setNumericDistanceFromCurrentPageVisible(1) />
-        <cfset AttendeePager.setNumericEndBufferCount(2) />
-        <cfset AttendeePager.setMissingNumbersHTML('...') />
-        <cfset AttendeePager.setUrlPageIndicator("page") />
-        <cfset AttendeePager.setShowNumericLinks(true) />
-        <cfset AttendeePager.setClassName("pager") />
-    	
-        <cfset renderPage(action="ahah",layout=false)>
-        <!---<cfset renderText(status.getJSON()) />--->
-    </cffunction>
 	
 	<!--- activity_participants/show/key --->
 	<cffunction name="show">

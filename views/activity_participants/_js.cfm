@@ -11,15 +11,9 @@ ccpd.tier3 = new ccpd.core.pagelet({
 	rows: [],
 	selectedRows: '',
 	selectedCount: 0,
-	status4Count:#failCount#,
-	status2Count:#progressCount#,
-	status3Count:#registeredCount#,
-	status1Count:#completeCount#,
-	status0Count:#totalCount#,
-	totalAttendeeCount:#totalCount#,
-	totalAttendeeList:#serializeJSON(queryToStruct(qAttendees))#,
+	totalAttendeeList: [],
 	rowsPerPage:15,
-	totalPages: Math.ceil(#totalCount# / 15)
+	totalPages: 0
 });
 
 <cfif structKeyExists(cookie, "user_attendee_page") AND GetToken(Cookie.USER_AttendeePage,1,"|") EQ params.ActivityID>
