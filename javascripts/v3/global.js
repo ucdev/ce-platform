@@ -115,7 +115,6 @@ $(function(){
 		if($parent.hasClass('subnav')) {
 			$grandparent.addClass("open");
 		}
-		console.log($el.has('.subnav'));
 		$el.addClass("open");
 		if($el.has('.subnav')) {
 			$parent.addClass("open");	
