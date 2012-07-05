@@ -2,7 +2,11 @@
 <cfset tabs = [
 	{ 'icon':'card-address', 'label': 'General Info', 'controller':'activities', 'action':'edit' },
 	{ 'icon':'trophy', 'label': 'Credits', 'controller':'activity_credits', 'action':'edit' },
-	{ 'icon':'users', 'label': 'Participants', 'controller':'activity_participants', 'action':'index' },
+	{ 'icon':'users', 'label': 'Participants', 'controller':'activity_participants', 'action':'index',
+		'subnav':[
+			{ 'icon':'', 'label': 'Requests', 'controller':'credit_requests', 'action':'index' }
+		]
+	},
 	{ 'icon':'user-business', 'label': 'Faculty', 'controller':'activity_faculties', 'action':'index' },
 	{ 'icon':'user-female', 'label': 'Committee', 'controller':'activity_committees', 'action':'index' },
 	{ 'icon':'chart-up-color', 'label': 'Finances', 'controller':'activity_finances', 'action':'index',
