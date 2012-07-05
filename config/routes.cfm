@@ -6,5 +6,6 @@
 <cfset addRoute(name="login", pattern="login", controller="sessions", action="new")>
 <cfset addRoute(name="logout", pattern="logout", controller="sessions", action="destroy")>
 <cfset addRoute(name="signup", pattern="signup", controller="people", action="register")>
+<cfset addRoute(name="cron", pattern="cron/[job]", controller="cron", action="run")>
 <cfset addRoute(name="activate", pattern="activation/[activationCode]", controller="activations", action="activate")>
 <cfset addRoute(name="creditinator", pattern="code", controller="creditinator", action="start")>
