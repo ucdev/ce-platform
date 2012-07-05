@@ -118,10 +118,10 @@
                 END AS isReal,
 				att.StatusID,
                 CASE att.StatusId
-                	WHEN 1 THEN att.completeDate
-                    WHEN 2 THEN att.RegisterDate
-                    WHEN 3 THEN att.RegisterDate
-                    WHEN 4 THEN att.TermDate
+                	WHEN 1 THEN CONVERT(VARCHAR(10), att.completeDate, 101)
+                    WHEN 2 THEN CONVERT(VARCHAR(10), att.RegisterDate, 101)
+                    WHEN 3 THEN CONVERT(VARCHAR(10), att.RegisterDate, 101)
+                    WHEN 4 THEN CONVERT(VARCHAR(10), att.TermDate, 101)
                 END AS currStatusDate,
 				att.CheckedInFlag, 
 				CONVERT(VARCHAR(10), att.CheckIn, 101) AS CheckIn, 
@@ -161,7 +161,7 @@
 				address.Country,
 				A.Title, 
 				A.Description,
-				A.StartDate,
+				CONVERT(VARCHAR(10), A.StartDate, 101) AS StartDate,
 				ats.Name AS StatusName,
 				A.StartDate,
                 CASE p1.deletedFlag
