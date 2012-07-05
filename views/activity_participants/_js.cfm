@@ -29,6 +29,6 @@ ccpd.tier3.nStatus = #getToken(Cookie.USER_AttendeeStatus,2,"|")#;
 <cfelse>
 ccpd.tier3.nPageNo = #getToken(Cookie.USER_AttendeePage,2,"|")#;
 </cfif>
-</cfif> 
+</cfif>
 </script>
 </cfoutput>

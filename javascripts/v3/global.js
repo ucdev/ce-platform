@@ -110,15 +110,20 @@ $(function(){
 		var $el = $(ev.relatedTarget.parentElement);
 		var $parent = $el.parent();
 		var $grandparent = $parent.parent();
+		
 		$(".projectBar .nav-list li").removeClass('active').removeClass("open");
 		$el.addClass('active');
+		
 		if($parent.hasClass('subnav')) {
 			$grandparent.addClass("open");
 		}
+		
 		$el.addClass("open");
+		
 		if($el.has('.subnav')) {
 			$parent.addClass("open");	
 		}
+		
 	});
 	
 	getResources();

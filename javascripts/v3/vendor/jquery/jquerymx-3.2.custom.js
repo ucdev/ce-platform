@@ -712,10 +712,10 @@
 		setup: function( baseClass, fullName ) {
 			// set defaults as the merger of the parent defaults and this object's defaults
 			this.defaults = extend(true, {}, baseClass.defaults, this.defaults);
+			//this.domReady();
 			return arguments;
 		},
 		domReady: function() {
-			
 		},
 		rawInstance: function() {
 			// prevent running init
@@ -958,10 +958,6 @@
 		}
 
 	})
-
-
-
-
 
 	clss.callback = clss[STR_PROTOTYPE].callback = clss[STR_PROTOTYPE].
 	/**
