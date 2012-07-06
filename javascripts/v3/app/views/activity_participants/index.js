@@ -169,8 +169,6 @@ $.Class("ccpd.activity_participants",{
 	
 	activity: [],
 	
-	pageData: [],
-	
 	attendeeList: [],
 	
 	changePage: function() {
@@ -202,7 +200,7 @@ $.Class("ccpd.activity_participants",{
 			$('.js-attendee-status-title').text(this.attendeeList.statuses[this.pageData.nStatus].name);
 			
 			// CLEAR THE OLD ATTENDEE LIST
-			attendeePlaceholder.html('');
+			$('.js-all-attendee').detach('');
 			
 			// LOAD ATTENDEE DATA
 			for(var i = attendeesToLoad-15; i < attendeesToLoad; i++) {
@@ -277,7 +275,7 @@ $.Class("ccpd.activity_participants",{
 			attendeesStatusList = participants.attendeeList['statuses'] = { 
 																0: { 'name': 'All', 'attendees': [] }, 
 																1: { 'name': 'Complete', 'attendees': [] }, 
-																2: { 'name': 'In progress', 'attendees': [] }, 
+																2: { 'name': 'In Progress', 'attendees': [] }, 
 																3: { 'name': 'Registered', 'attendees': [] }, 
 																4: { 'name': 'Failed', 'attendees': [] }, 
 																'selected': { 'name': 'Selected', 'attendees': [] },
@@ -306,6 +304,7 @@ $.Class("ccpd.activity_participants",{
 					attendee.isStatus3 = false;
 					attendee.isStatus4 = false;
 					
+					// DETERMINE WHICH STATUS THE ATTENDEE IS CURRENTLY
 					switch(attendee.STATUSID) {
 						case 1:
 							attendeesStatusList[1]['attendees'].push(attendee.ATTENDEEID);
@@ -350,6 +349,8 @@ $.Class("ccpd.activity_participants",{
 		});
 	},
 	
+	pageData: [],
+	
 	printDocument: function() {
 		var task = this.id.split('-')[1];
 		
@@ -364,6 +365,7 @@ $.Class("ccpd.activity_participants",{
 				break;
 			
 			case 'cne':
+				// DETERMINE IF THERE ARE ATTENDEES SELECTED
 				if(SelectedAttendees.length > 0) {			
 					window.open("/report/CNECert?ActivityID=" + nActivity + "&ReportID=6&selectedAttendees=" + SelectedAttendees);
 				} else {
@@ -375,6 +377,7 @@ $.Class("ccpd.activity_participants",{
 	
 	removeAttendees: function() {
 		var participants = this;
+		
 		// DETERMINE IF THERE ARE ATTENDEES SELECTED
 		if(this.pageData.selectedRows.length > 0) {
 			// DETERMINE IF THE USER MEANS TO REMOVE SELECTED ATTENDEES
@@ -388,14 +391,20 @@ $.Class("ccpd.activity_participants",{
 					success: function(data) {
 						if(data.STATUS) {
 							addMessage(data.STATUSMSG,250,6000,4000);
-							clearSelectedMembers();
+							
+							$.each(participants.pageData.selectedRows.split(',') , function(i, item) {
+								$('.js-selected-checkbox').filter(':checked').remove();
+							});
+								   
+							participants.pageData.selectedCount = 0;
+							participants.pageData.selectedRows = '';
+							$('.js-attendee-status-selected-count').text(0);
+							$("#CheckedCount").html("(0)");
 						} else {
 							addError(data.STATUSMSG,250,6000,4000);
 						}
 						
-						updateStats();
 						$.unblockUI();
-						
 						
 						participants.changePage();
 					}
@@ -412,11 +421,13 @@ $.Class("ccpd.activity_participants",{
 		var attendeeList = this.attendeeList.statuses[this.pageData.nStatus].attendees;
 		var attendeesToSelect = this.pageData.rowsPerPage*this.pageData.nPageNo;
 		
+		// LOOP OVER CURRENTLY VIEWABLE ATTENDEES
 		for(var i = attendeesToSelect-15; i < attendeesToSelect; i++) {
 			var participant = this.pageData.rows[attendeeList[i]];
 			var row = participant.row;
 			var checkBox = participant.checkBox;
 			
+			// DETERMINE IF THE DATA IS UNDEFINED
 			if(typeof participant.id == 'string') {
 				if(selectAll && !checkBox.is(':checked')) {
 					// ADD CURRENT MEMBER TO SELECTEDMEMBERS LIST
@@ -485,7 +496,6 @@ $.Class("ccpd.activity_participants",{
 	},
 	
 	updatePaginator: function() {
-		console.log(this.pageData.nStatus);
 		this.pageData.totalPages = Math.ceil(this.attendeeList.statuses[this.pageData.nStatus].attendees.length/this.pageData.rowsPerPage);
 		
 		// CLEAR CURRENT PAGES LIST
