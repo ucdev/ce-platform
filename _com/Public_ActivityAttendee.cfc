@@ -112,10 +112,6 @@
 				att.AttendeeID, 
 				att.ActivityID, 
 				att.PersonID,
-                CASE
-                	WHEN att.PersonId > 0 THEN 'true'
-                    WHEN att.PersonId = 0 THEN 'false'
-                END AS isReal,
 				att.StatusID,
                 CASE att.StatusId
                 	WHEN 1 THEN CONVERT(VARCHAR(10), att.completeDate, 101)
@@ -137,15 +133,7 @@
 				CONVERT(VARCHAR(10), att.Updated, 101) AS Updated, 
 				CONVERT(VARCHAR(10), att.Deleted, 101) AS Deleted, 
 				att.DeletedFlag, 
-                CASE att.DeletedFlag
-                	WHEN 'Y' THEN 'true'
-                    WHEN 'N' THEN 'false'
-                END AS isDeleted,
 				att.MDflag,
-                CASE att.MDflag
-                	WHEN 'Y' THEN 'true'
-                    WHEN 'N' THEN 'false'
-                END AS isMD,
 				CASE 
 					WHEN isNull(att.PersonId,0) = 0 THEN
 						isNull(att.lastname,'') + ', ' + isNull(att.FirstName,'')

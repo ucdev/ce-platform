@@ -49,9 +49,17 @@
 	</cffunction>
     
     <cffunction name="loadData">
-		<cfset qAttendees = Application.activityAttendee.getAttendees(ActivityID=params.key,DeletedFlag="N")>
+		<cfparam name="params.key" type="integer" default="0" />
         
-        <cfreturn renderText(serializeJSON(queryToStruct(qAttendees))) />
+		<cfset returnVar = createObject("component","_com.returnData.buildStruct").init() />
+        
+		<cfset qAttendees = Application.activityAttendee.getAttendees(ActivityID=params.key,DeletedFlag="N")>
+        <cfset attendees = $cleanupAttendees() />
+        
+        <cfset returnVar.setData(queryToStruct(qAttendees)) />
+        <cfset returnVar.setPayload(attendees) />
+        
+        <cfreturn renderText(returnVar.getJSON()) />
     </cffunction>
 	
 	<!--- activity_participants/new --->
@@ -479,6 +487,64 @@
 		--->
 		<cfreturn local.csvData />
 	</cffunction>
+    
+    <cffunction name="$cleanupAttendees">
+    	<!--- ATTENDEES RESULT SET IS PASSED IN --->
+        <cfset attendees = {} />
+        
+        <cfloop query="qAttendees">
+        	<cfset attendees[qAttendees.attendeeId]['data'] = {
+													'activityId': qAttendees.activityId,
+													'attendeeId': qAttendees.attendeeId,
+													'city': qAttendees.city,
+													'completeDate': qAttendees.completeDate,
+													'created': qAttendees.created,
+													'currStatusDate': qAttendees.currStatusDate,
+													'deleted': qAttendees.deleted,
+													'deletedFlag': qAttendees.deletedFlag,
+													'email': qAttendees.email,
+													'firstName': qAttendees.firstName,
+													'fullName': qAttendees.fullName,
+													'isDeleted': false,
+													'isMD': false,
+													'isReal': true,
+													'isStatus1': false,
+													'isStatus2': false,
+													'isStatus3': false,
+													'isStatus4': false,
+													'lastName': qAttendees.lastName,
+													'mdFlag': qAttendees.mdFlag,
+													'middleName': qAttendees.middleName,
+													'payAmount': qAttendees.payAmount,
+													'paymentDate': qAttendees.paymentDate,
+													'payOrderNo': qAttendees.payOrderNo,
+													'personDeleted': qAttendees.personDeleted,
+													'personId': qAttendees.personId,
+													'registerDate': qAttendees.registerDate,
+													'startDate': qAttendees.startDate,
+													'state': qAttendees.state,
+													'statusId': qAttendees.statusId,
+													'statusName': qAttendees.statusName,
+													'termDate': qAttendees.termDate,
+													'updated': qAttendees.updated
+													} />
+                                                    
+        	<cfif qAttendees.deletedFlag EQ "Y">
+            	<cfset attendees[qAttendees.attendeeId]['data']['isDeleted'] = true>
+            </cfif>
+                                                    
+        	<cfif NOT qAttendees.hasAcctFlag>
+            	<cfset attendees[qAttendees.attendeeId]['data']['isReal'] = false>
+            </cfif>
+                                                    
+        	<cfif qAttendees.mdFlag EQ "Y">
+            	<cfset attendees[qAttendees.attendeeId]['data']['isMD'] = true>
+            </cfif>
+                                                    
+        </cfloop>
+        
+        <cfreturn attendees />
+    </cffunction>
 	
 	
 </cfcomponent>
