@@ -16,15 +16,6 @@ $.Class("ccpd.activity_participants",{
 	
 	domReady: function(params) {
 		var participants = this;
-		var delaySearching = (function() {
-			var timeCounter = 0;
-			
-			return function(callback, ms) {
-				clearTimeout(timeCounter);
-				timeCounter = setTimeout(callback, ms);
-				return false;
-			};
-		})();
 		
 		// DEFINE PAGE ELEMENT VARIABLE NAMES
 		this.attendeeRemover = $('.js-remove-attendees');
@@ -66,8 +57,8 @@ $.Class("ccpd.activity_participants",{
 		});
 							
 		this.attendeeSearch['input'].keyup(function() {
-			var delayTimer = 1000;
 			var input = $(this);
+			var statusList = participants.attendeeList.statuses['filtered'].attendees;
 			
 			// DETERMINE IF THE CLEAR FILTER DIV IS SHOWN OR HIDDEN
 			if(input.val().length > 0) {
@@ -76,34 +67,29 @@ $.Class("ccpd.activity_participants",{
 				participants.attendeeSearch.clear.hide();
 			}
 			
-			// WAIT FOR THE USER TO STOP TYPING FOR ALLOTED TIME (delayTimer var above)
-			delaySearching(function() {
-				var statusList = participants.attendeeList.statuses['filtered'].attendees;
+			// CLEAR CURRENT FILTER DOM ATTENDEE LIST
+			statusList.length = 0;
+			
+			// CLEAR CURRENT ATTENDEE HTML LIST
+			participants.contentContainer.html('');
+			
+			// DETERMINE IF SEARCH FILTER IS BLANK
+			if(input.val().length > 0) {
+				// LOOP OVER ATTENDEES
+				$.each(participants.attendeeList['attendees'], function(i, item) {
+					// SEE IF THE FIRST OR LAST NAME STARTS WITH THE SEARCH VALUE AND THAT TEHY ARE NOT ALREADY IN THE FILTER STATUS LIST
+					if((item.FIRSTNAME.startsWith(input.val()) || item.LASTNAME.startsWith(input.val())) && !$.ListFind(statusList, item.ATTENDEEID)) {
+						statusList.push(item.ATTENDEEID);
+					}
+				});
 				
-				// CLEAR CURRENT FILTER DOM ATTENDEE LIST
-				statusList.length = 0;
+				// SET CURRENT STATUS TO FILTERED
+				participants.pageData.nStatus = 'filtered';
 				
-				// CLEAR CURRENT ATTENDEE HTML LIST
-				participants.contentContainer.html('');
-				
-				// DETERMINE IF SEARCH FILTER IS BLANK
-				if(input.val().length > 0) {
-					// LOOP OVER ATTENDEES
-					$.each(participants.attendeeList['attendees'], function(i, item) {
-						// SEE IF THE FIRST OR LAST NAME STARTS WITH THE SEARCH VALUE AND THAT TEHY ARE NOT ALREADY IN THE FILTER STATUS LIST
-						if((item.FIRSTNAME.startsWith(input.val()) || item.LASTNAME.startsWith(input.val())) && !$.ListFind(statusList, item.ATTENDEEID)) {
-							statusList.push(item.ATTENDEEID);
-						}
-					});
-					
-					// SET CURRENT STATUS TO FILTERED
-					participants.pageData.nStatus = 'filtered';
-					
-					// UPDATE PAGINATOR AND RELOAD HTML
-					participants.updatePaginator();
-					participants.changePage();
-				}
-			}, delayTimer);
+				// UPDATE PAGINATOR AND RELOAD HTML
+				participants.updatePaginator();
+				participants.changePage();
+			}
 		});
 		
 		// VIEW CHECKMARKED ATTENDEES FILTER LINK
@@ -252,6 +238,18 @@ $.Class("ccpd.activity_participants",{
 		});
 	},
 	
+	cleanStatusArrays: function(params) {
+		// LOOP OVER EACH ATTENDEE STATUS TYPE ARRAY (CONTAINS ATTENDEE IDs)
+		$.each(this.pageData.totalAttendeeList['statuses'], function(i, list) {
+			var attendeeFound = $.inArray(params.id, list['attendees']);
+			
+			// REMOVE ATTENDEE REFERENCE IS FOUND IN ATTENDEE STATUS LISTS
+			if(attendeeFound > -1) {
+				list['attendees'].splice(attendeeFound, 1);
+			}
+		});
+	},
+	
 	getParticipants: function() {
 		var attendeesList = this.attendeeList;
 		var participants = this;
@@ -383,21 +381,17 @@ $.Class("ccpd.activity_participants",{
 						if(data.STATUS) {
 							addMessage(data.STATUSMSG,250,6000,4000);
 							
+							// LOOP OVER SELECTED ATTENDEE IDs
 							$.each(ccpd.tier3.totalAttendeeList.statuses['selected'].attendees, function(i, item) {
 								var attendeeId = item;
-								var statusId = participants.pageData.rows[attendeeId]['data']['statusId'];
 								
-								$.each(participants.attendeeList['statuses'], function(i, list) {
-									var attendeeFound = $.inArray(attendeeId, list['attendees']);
-									
-									// REMOVE ATTENDEE REFERENCE IS FOUND IN ATTENDEE STATUS LISTS
-									if(attendeeFound > -1) {
-										list['attendees'].splice(attendeeFound, 1);
-									}
+								// REMOVE CURRENT ATTENDEEID FROM STATUS LISTS
+								participants.cleanStatusArrays({
+									'id': attendeeId
 								});
 								
-								// REMOVE ATTENDEE FROM DOM
-								delete participants.pageData.rows[item];
+								// REMOVE CURRENT ATTENDEE DOM OBJECT
+								participants.pageData.rows[attendeeId].removeAttendee();
 							});
 								   
 							participants.pageData.selectedCount = 0;
@@ -717,7 +711,11 @@ $.Class("ccpd.activity_participants.participant",{},{
 	},
 	
 	removeAttendee: function() {
-		this.row.remove();
+		$(this).remove();
+		$(this).unbind();
+		
+		// REMOVE ATTENDEE FROM DOM
+		delete this;
 	},
 	
 	removeSelectedRow: function() {
