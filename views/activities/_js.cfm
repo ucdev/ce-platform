@@ -1,26 +1,38 @@
 <cfoutput>
 <script>
-//LEGACY STUFF
-ccpd.tier2 = new ccpd.core.pagelet({
-	cActNotesPosX: 0,
-	cActNotesPosY: 0,
-	cActNotesOpen: false,
-	cActListPosX: 0,
-	cActListPosY: 0,
-	cActListOpen: false,
-	cActListHeight: 0,
-	cActListWidth: 0,
-	nActivity: #Attributes.ActivityID#,
-	sActivityTitle: "#jsStringFormat(#activity.title#)#",
-	nActivityType: #activity.ActivityTypeID#,
+$(function(){
+	var activity = $.extend({},
+					#serializeJson(activity)#,
+					{
+					cActNotesPosX: 0,
+					cActNotesPosY: 0,
+					cActNotesOpen: false,
+					cActListPosX: 0,
+					cActListPosY: 0,
+					cActListOpen: false,
+					cActListHeight: 0,
+					cActListWidth: 0,
+					nActivity: #Attributes.ActivityID#,
+					sActivityTitle: "#jsStringFormat(#activity.title#)#",
+					nActivityType: #activity.ActivityTypeID#,
+					
+					<cfif isDefined("activity.groupingId") AND activity.GroupingID NEQ "">
+					nGrouping: #activity.GroupingID#
+					<cfelse>
+					nGrouping: 0
+					</cfif>
+					}
+	);
 	
-	<cfif isDefined("activity.groupingId") AND activity.GroupingID NEQ "">
-	nGrouping: #activity.GroupingID#
-	<cfelse>
-	nGrouping: 0
-	</cfif>
+	CE.Models.activity = Backbone.Model.extend({});
+	CE.Current.activity = new CE.Models.activity(activity);
 });
 
+//LEGACY STUFF
+<!---ccpd.tier2 = new ccpd.core.pagelet({
+	
+});
+--->
 <!---cActNotesPosX = #getToken(Cookie.USER_ActNotesPos,1,",")#;
 cActNotesPosY = #getToken(Cookie.USER_ActNotesPos,2,",")#;
 cActNotesOpen = #Cookie.USER_ActNotesOpen#;
@@ -31,5 +43,5 @@ cActListHeight = #GetToken(Cookie.USER_ActListSize,2,",")#;
 cActListWidth = #GetToken(Cookie.USER_ActListSize,1,",")#;--->
 </script>
 
-#javaScriptIncludeTag(bundle="#application.version_token#/ccpd.activity")#
+<!---#javaScriptIncludeTag(bundle="#application.version_token#/ccpd.activity")#--->
 </cfoutput>

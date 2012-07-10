@@ -158,6 +158,8 @@
 	            <cffile action="write" file="#loc.destinationFolderPath#/_showFlash.cfm" output="#loc.fileShowFlash#" mode="777"> 
 	            
 	        </cfcase>
+			
+			
 	        
 	        <cfcase value="Controller">
 	        	<!--- Expand the from and destination folders --->
@@ -172,6 +174,86 @@
 	            
 	            <!--- Write the file in the corresponding folder --->
 	            <cffile action="write" file="#loc.destinationFolderPath#/#lcase(pluralize(arguments.name))#.cfc" output="#loc.file#" mode="777"> 
+	        </cfcase>
+			
+			<cfcase value="JsView">
+	        	
+	            <!--- Expand the from and destination folders --->
+	    		<cfset loc.fromFolderPath = expandPath("plugins/scaffold/templates/#arguments.template#/javascripts/views")>
+	            <cfset loc.destinationFolderPath = expandPath("javascripts/views/" & LCase(pluralize(arguments.name)))>
+	            
+	            <!--- Create the directory to store the views in --->
+	            <cfif NOT DirectoryExists(loc.destinationFolderPath)>
+	            	<cfdirectory action="create" directory="#loc.destinationFolderPath#" mode="777">
+	            </cfif>
+	            
+	            <!--- Read the template files --->
+	            <cffile action="read" file="#loc.fromFolderPath#/index.js.cfm" variable="loc.fileIndex">
+	            <cffile action="read" file="#loc.fromFolderPath#/show.js.cfm" variable="loc.fileShow">
+	            <cffile action="read" file="#loc.fromFolderPath#/edit.js.cfm" variable="loc.fileEdit">
+	            
+	            <!--- Generate the forms and listing for the views
+	            <cfset loc.jsEdit = $generateJs_view_edit(arguments.name)>
+	            <cfset loc.jsIndex = $generateJs_view_index(arguments.name)>
+	            <cfset loc.jsShow = $generateJs_view_show(arguments.name)> --->
+	            
+				<!--- Replace the placeholders names --->
+	    		<cfset loc.fileIndex = $replacePlaceHolders(loc.fileIndex, arguments.name)>
+	            <cfset loc.fileShow = $replacePlaceHolders(loc.fileShow, arguments.name)>
+	            <cfset loc.fileNew = $replacePlaceHolders(loc.fileNew, arguments.name)>
+	            <cfset loc.fileEdit = $replacePlaceHolders(loc.fileEdit, arguments.name)>
+          
+	            <!--- Write the file in the corresponding folder --->
+	            <cffile action="write" file="#loc.destinationFolderPath#/index.cfm" output="#loc.fileIndex#" mode="777"> 
+	            <cffile action="write" file="#loc.destinationFolderPath#/show.cfm" output="#loc.fileShow#" mode="777"> 
+	            <cffile action="write" file="#loc.destinationFolderPath#/new.cfm" output="#loc.fileNew#" mode="777"> 
+	            <cffile action="write" file="#loc.destinationFolderPath#/edit.cfm" output="#loc.fileEdit#" mode="777"> 
+	            <cffile action="write" file="#loc.destinationFolderPath#/_showFlash.cfm" output="#loc.fileShowFlash#" mode="777">
+	        </cfcase>
+			
+			<cfcase value="JsCollection">
+	            <!--- Expand the from and destination folders --->
+	    		<cfset loc.fromFolderPath = expandPath("plugins/scaffold/templates/#arguments.template#/javascripts")>
+				<cfset loc.destinationFolderPath = expandPath("models")>
+	            
+	            <!--- Read the template file --->
+                <cffile action="read" file="#loc.fromFolderPath#/model.cfm" variable="loc.file">
+	            
+	            <!--- Replace the placeholders with real data to the user 
+	    		<cfset loc.file = $replacePlaceHolders(loc.file, arguments.name)> --->
+	            
+	            <!--- Write the file in the corresponding folder --->
+	            <cffile action="write" file="#loc.destinationFolderPath#/#lcase(arguments.name)#.cfc" output="#loc.file#" mode="777"> 
+	        </cfcase>
+			
+			<cfcase value="JsModel">
+	            <!--- Expand the from and destination folders --->
+	    		<cfset loc.fromFolderPath = expandPath("plugins/scaffold/templates/#arguments.template#/javascripts")>
+				<cfset loc.destinationFolderPath = expandPath("models")>
+	            
+	            <!--- Read the template file --->
+                <cffile action="read" file="#loc.fromFolderPath#/model.cfm" variable="loc.file">
+	            
+	            <!--- Replace the placeholders with real data to the user 
+	    		<cfset loc.file = $replacePlaceHolders(loc.file, arguments.name)> --->
+	            
+	            <!--- Write the file in the corresponding folder --->
+	            <cffile action="write" file="#loc.destinationFolderPath#/#lcase(arguments.name)#.cfc" output="#loc.file#" mode="777"> 
+	        </cfcase>
+			
+			<cfcase value="JsController">
+	            <!--- Expand the from and destination folders --->
+	    		<cfset loc.fromFolderPath = expandPath("plugins/scaffold/templates/#arguments.template#/javascripts")>
+				<cfset loc.destinationFolderPath = expandPath("models")>
+	            
+	            <!--- Read the template file --->
+                <cffile action="read" file="#loc.fromFolderPath#/model.cfm" variable="loc.file">
+	            
+	            <!--- Replace the placeholders with real data to the user 
+	    		<cfset loc.file = $replacePlaceHolders(loc.file, arguments.name)> --->
+	            
+	            <!--- Write the file in the corresponding folder --->
+	            <cffile action="write" file="#loc.destinationFolderPath#/#lcase(arguments.name)#.cfc" output="#loc.file#" mode="777"> 
 	        </cfcase>
 	        
 	        <cfdefaultcase>
@@ -200,6 +282,70 @@
 	    
 	    <cfreturn loc.replacedContent>
 	    
+	</cffunction>
+	
+	<cffunction name="$generateJs_collection" access="public" returntype="string" output="false">
+		
+	</cffunction>
+	
+	<cffunction name="$generateJs_controller" access="public" returntype="string" output="false">
+		
+	</cffunction>
+	
+	<cffunction name="$generateJs_model" access="public" returntype="string" output="false">
+		<cfargument name="name" type="string" required="true" hint="Name of the model to generator the form for">
+		
+		<cfset var loc = {}>
+		
+		<!--- Define the name of the object returned from the controller --->
+		<cfset loc.nameInSingularLowercase = LCase(arguments.name)>
+		<cfset loc.nameInPluralLowercase = LCase(pluralize(arguments.name))>
+		<cfset loc.nameInPluralUppercase = capitalize(pluralize(arguments.name))>
+		
+		<!--- Introspect the table to find the column names and types --->		
+		<cfset loc.columns = model(loc.nameInSingularLowercase).$classData()>
+		<cfset loc.columnsInOrder = loc.columns.PROPERTYLIST>
+
+		<cfprocessingdirective suppressWhiteSpace="true">
+		<cfsavecontent variable="loc.form">
+			<cfoutput>
+			
+			[startFormTag(action="create")]
+		
+				<cfloop list="#loc.columnsInOrder#" index="loc.property">
+					<cfif ListFindNoCase(model(loc.nameInSingularLowercase).primaryKey(), loc.columns.properties[loc.property].COLUMN) IS 0 AND loc.columns.properties[loc.property].COLUMN IS NOT "createdAt" AND loc.columns.properties[loc.property].COLUMN IS NOT "updatedAt" AND loc.columns.properties[loc.property].COLUMN IS NOT "deletedAt">
+						[#$generateFormField(loc.nameInSingularLowercase, loc.columns.properties[loc.property])#]
+					</cfif>											
+				</cfloop>
+
+				[submitTag()]
+				
+			[endFormTag()]
+			</cfoutput>
+		</cfsavecontent>
+		</cfprocessingdirective>
+		
+		<!--- Replace the HTML comments with ColdFusion comments --->
+		<cfset loc.form = Replace(loc.form, "<!--", "<!---", "All")>
+		<cfset loc.form = Replace(loc.form, "-->", "--->", "All")>
+		
+		<!--- Replace the brackets with number signs --->
+		<cfset loc.form = Replace(loc.form, "<%= ", "##", "All")>
+		<cfset loc.form = Replace(loc.form, "=%>", "##", "All")>
+		
+		<cfreturn loc.form>
+	</cffunction>
+	
+	<cffunction name="$generateJs_view_edit" access="public" returntype="string" output="false">
+		
+	</cffunction>
+	
+	<cffunction name="$generateJs_view_index" access="public" returntype="string" output="false">
+		
+	</cffunction>
+	
+	<cffunction name="$generateJs_view_show" access="public" returntype="string" output="false">
+		
 	</cffunction>
 	
 	<cffunction name="$generateEntryFormFromModel" access="public" returnType="string" hint="Generates an entry form from a Model by reading the table schema" output="false">

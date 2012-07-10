@@ -44,28 +44,34 @@
 		<cfset tab['activeSubAction'] = '' />
 		<cfset tab['subTabsHtml'] = '' />
 		
+		
+		<cfset tab_pagelet = lcase("#tab.controller#_#tab.action#") />
+		<cfset tab_pagelet_token = lcase(left(HASH(tab_pagelet,'MD5'),6)) />
+		
 		<!--- build subnav --->
 		<cfif structKeyExists(tab,'subnav') AND arrayLen(tab.subnav) GT 0>
 			<cfset tab['subTabsHtml'] = '<ul class="subnav subnav-list">' />
 			<cfloop from="1" to="#arrayLen(tab.subnav)#" index="e">
 				<cfset subtab = tab.subnav[e] />
+				<cfset subtab_pagelet = lcase("#subtab.controller#_#subtab.action#") />
+				<cfset subtab_pagelet_token = lcase(left(HASH(subtab_pagelet,'MD5'),6)) />
 				
 				<cfif params.controller EQ subtab.controller AND params.action EQ subtab.action>
 					<cfset tab.activeSubAction = subtab.action />
 					<cfset tab.activeSubController = subtab.controller />
 					
-					<cfset tab.subTabsHtml &= '<li class="active">' />
+					<cfset tab.subTabsHtml &= '<li class="js-#subtab_pagelet_token# active">' />
 				<cfelse>
-					<cfset tab.subTabsHtml &= '<li>' />
+					<cfset tab.subTabsHtml &= '<li class="js-#subtab_pagelet_token#">' />
 				</cfif>
 				
-				<cfset tab.subTabsHtml &= '<a href="#urlFor(controller=subtab.controller,action=subtab.action,key=params.activityId)#">#subtab.label#</a>' />
+				<cfset tab.subTabsHtml &= '<a href="#urlFor(controller=subtab.controller,action=subtab.action,key=params.activityId)#">#subtab.label# <span class="label counter">0</span></a>' />
 				
 				<cfset tab.subTabsHtml &= '</li>' />
 			</cfloop>
 			<cfset tab.subTabsHtml &= '</ul>' />
 		</cfif>
-	<li class="<cfif (params.controller EQ tab.controller AND params.action EQ tab.action)>active open</cfif><cfif (params.controller EQ tab.activeSubController AND params.action EQ tab.activeSubAction)> open</cfif>">
+	<li class="js-#tab_pagelet_token#<cfif (params.controller EQ tab.controller AND params.action EQ tab.action)> active open</cfif><cfif (params.controller EQ tab.activeSubController AND params.action EQ tab.activeSubAction)> open</cfif>">
 		<a href="#urlFor(controller=tab.controller,action=tab.action,key=params.activityId)#"><i class="icon16-#tab.icon#"></i> #tab.label#</a>
 		#tab.subTabsHtml#
 	</li>

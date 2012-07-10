@@ -9,15 +9,6 @@
 	
 	<!-- Le styles -->
 	#stylesheetLinkTag(bundle="#application.version_token#/ccpd")#
-	#javaScriptIncludeTag(bundle="#application.version_token#/ccpd")#
-
-	<script src="/resources/jsloader/global.js?pagelet=#params.pagelet#&pagelet_token=#params.pagelet_token#" type="text/javascript"></script>
-	<script>
-	ccpd.tier1 = new ccpd.core.pagelet({
-		pageUrl: '#urlFor(argumentcollection=params)#',
-		rootPath: '/'
-	});
-	</script>
 	<style>
 	body {
 	padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -35,16 +26,29 @@
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+	
+	
+	#javaScriptIncludeTag(bundle="CE")#
 	</cfoutput>
 </head>
 <cfoutput>
 <body data-version_token="#params.version_token#">
 	#includePartial(partial="/header")#
-	#includeContent()#
+	<div id="app">
+		#includeContent()#
+	</div>
 	#includePartial(partial="/footer")#
 
 	<div class="alert alert-error" style="display:none;"></div>
 	<div class="alert alert-success" style="display:none;"></div>
+	
+	<script type="text/javascript">
+		var bootOpts = {
+			params:#serializeJson(params)#
+		}
+		
+		CE.start(bootOpts);
+	</script>
 </body>
 </cfoutput>
 </html>

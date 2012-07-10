@@ -45,6 +45,7 @@
 		<option value="controller">Controller</option>
 		<option value="view">View</option>
 		<option value="model">Model</option>
+		<option value="backbonejs">Backbone.js (Model, Views, Controller, Collection, Route, etc.)</option>
 	</cfselect>
 	</p>
 	

@@ -5,8 +5,6 @@ $.Class("ccpd.activity_participants",{
 				return this.indexOf(str) == 0;
 			};
 		}
-		
-		this.domReady(params);
 	},
 	
 	init: function() {
@@ -17,7 +15,7 @@ $.Class("ccpd.activity_participants",{
 	},
 	
 	domReady: function(params) {
-		var participants = this;
+		/*var participants = this;
 		var delaySearching = (function() {
 			var timeCounter = 0;
 			
@@ -164,7 +162,7 @@ $.Class("ccpd.activity_participants",{
 			participants.pageData.nStatus = this.id.replace('status','');
 			
 			participants.changeActiveAttendeeStatus();
-		});
+		});*/
 	},
 	
 	activity: [],
@@ -272,6 +270,7 @@ $.Class("ccpd.activity_participants",{
 		});
 		
 		$('body').on('load_data', function() {
+			debug.info('data loaded');
 			attendeesStatusList = participants.attendeeList['statuses'] = { 
 																0: { 'name': 'All', 'attendees': [] }, 
 																1: { 'name': 'Complete', 'attendees': [] }, 
@@ -334,7 +333,7 @@ $.Class("ccpd.activity_participants",{
 					attendeeDOM = new ccpd.activity_participants.participant({ $elem: attendeeDOM.elem });
 					
 					// RE-ADD ROW HTML TO THE DOM ELEMENT (REQUIRED TO GET THE STATUS DATE FEATURES)
-					attendeeDOM.elem = $('#attendeeRow-' + attendee.ATTENDEEID);
+					attendeeDOM.elem = $(row);
 				}
 			}
 															
@@ -382,27 +381,16 @@ $.Class("ccpd.activity_participants",{
 		if(this.pageData.selectedRows.length > 0) {
 			// DETERMINE IF THE USER MEANS TO REMOVE SELECTED ATTENDEES
 			if(confirm("Are you sure you want to remove the checked attendees from this activity?")) {		
-				$.blockUI({ message: '<h1>Removing Selected Attendees...</h1>'});
+
+				
+						
 				$.ajax({
 					url: '/AJAX_adm_Activity/removeCheckedAttendees', 
 					type: 'post',
 					data: { AttendeeList: this.pageData.selectedRows, ActivityID: participants.activity.nActivity },
 					dataType: 'json',
 					success: function(data) {
-						if(data.STATUS) {
-							addMessage(data.STATUSMSG,250,6000,4000);
-							
-							$.each(participants.pageData.selectedRows.split(',') , function(i, item) {
-								$('.js-selected-checkbox').filter(':checked').remove();
-							});
-								   
-							participants.pageData.selectedCount = 0;
-							participants.pageData.selectedRows = '';
-							$('.js-attendee-status-selected-count').text(0);
-							$("#CheckedCount").html("(0)");
-						} else {
-							addError(data.STATUSMSG,250,6000,4000);
-						}
+						
 						
 						$.unblockUI();
 						
@@ -531,13 +519,16 @@ $.Class("ccpd.activity_participants",{
 	}
 }, {});
 
-$.Class("ccpd.activity_participants.participant",{},{
+$.Model('mparticipant',{
+  findAll: 'GET /activity_participants/loadData/' + ccpd.tier2.nActivity
+},{});
+
+$.Controller("cparticipant",{
 	init:function(params) {
 		this.parent = ccpd.activity_participants;
 		this.pageData = ccpd.tier3;
-		
-		this.domReady(params.$elem);
-	},
+		//this.domReady(params.$elem);
+	}/*,
 	
 	addSelectedRow: function() {
 		if(!$.ListFind(this.pageData.selectedRows, this.id, ',')) {
@@ -744,9 +735,5 @@ $.Class("ccpd.activity_participants.participant",{},{
 			$(".js-partic-actions .btn").addClass('disabled');
 		}
 		$(".js-attendee-status-selected-count").text(this.pageData.selectedCount);
-	}
+	}*/
 }, {});
-
-
-(function(){
-})();

@@ -7,5 +7,4 @@
 		<cfset subLayout("adm_activity") />
 	</cffunction>
 	
-	
 </cfcomponent>

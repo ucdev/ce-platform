@@ -27,10 +27,17 @@
 		</cfif>
 		
 		<!--- BUILD MODEL JS --->
-		<cfset loc.modelJs = "/javascripts/#application.version_token#/app/models/#lcase(singularize(params.controller))#.js" />
-		
+		<cfset loc.modelJs = "/javascripts/models/#lcase(singularize(params.controller))#.js" />
+
+		<cfsavecontent variable="loc.modelOutput"><cfoutput>
+		ccpd.#lcase(singularize(params.controller))# = Backbone.Model.extend({
+			initialize: function(){
+				debug.info("#singularize(params.controller)# model initialized.");
+			}
+		});
+		</cfoutput></cfsavecontent>
 		<cfif NOT fileExists(loc.modelJs)>
-			<cffile action="write" file="#loc.modelJs#" output="" charset="utf-8"  />
+			<cffile action="write" file="#loc.modelJs#" output="#loc.modelOutput#" charset="utf-8"  />
 		</cfif>
 		
 		<!--- BUILD LESS VIEW FILE --->

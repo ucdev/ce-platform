@@ -1,5 +1,5 @@
 <cf_mustache_template name="attendee-row"> 
-    <tr id="attendeeRow-{{ATTENDEEID}}" class="personRow AllAttendees js-all-attendee{{#isDeleted}} personDeleted{{/isDeleted}}" rel="#PersonOptions{{PERSONID}}">
+    <tr id="attendeeRow-{{ATTENDEEID}}" class="personRow AllAttendees js-attendee-{{ATTENDEEID}} js-all-attendee{{#isDeleted}} personDeleted{{/isDeleted}}" rel="#PersonOptions{{PERSONID}}">
         <td valign="top">
             <input type="checkbox" name="Checked" class="MemberCheckbox js-selected-checkbox" id="Checked-{{ATTENDEEID}}" value="{{ATTENDEEID}}" />
             <input type="hidden" class="attendeeId" value="{{ATTENDEEID}}" />
