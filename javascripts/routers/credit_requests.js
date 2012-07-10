@@ -5,16 +5,16 @@
  * Copyright (c)2012 University of Cincinnati
  * You are not authorized to use this code without receiving direct concent from the University of Cincinnati.
  *
- * @module: <%= loc.nameInPluralLowercase =%>
+ * @module: credit_requests
  * @def: Router
  */
  
-CE.module("<%= loc.nameInPluralLowercase =%>",function(self,CE,Backbone,Marionette,$,_) {
+CE.module("credit_requests",function(self,CE,Backbone,Marionette,$,_) {
 	this.router = Backbone.Marionette.AppRouter.extend({
 		appRoutes: {
 			'': 'index',
-			'<%= loc.nameInPluralLowercase =%>/:id': 'show',
-			'<%= loc.nameInPluralLowercase =%>/:id': 'edit'
+			'credit_requests/:id': 'show',
+			'credit_requests/:id': 'edit'
 		}
 	});
 });

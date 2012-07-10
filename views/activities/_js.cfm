@@ -1,4 +1,5 @@
 <cfoutput>
+#javascriptIncludeTag(bundle="ce.activities")#
 <script>
 $(function(){
 	var activity = $.extend({},
@@ -23,9 +24,6 @@ $(function(){
 		</cfif>
 		}
 	);
-	
-	CE.Models.activity = Backbone.Model.extend({});
-	CE.Current.activity = new CE.Models.activity(activity);
 });
 
 //LEGACY STUFF

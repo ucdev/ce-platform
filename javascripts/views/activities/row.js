@@ -5,11 +5,11 @@
  * Copyright (c)2012 University of Cincinnati
  * You are not authorized to use this code without receiving direct concent from the University of Cincinnati.
  *
- * @module: <%= loc.nameInPluralLowercase =%>
+ * @module: activities
  * @def: views.rowView
  */
  
-CE.module("<%= loc.nameInPluralLowercase =%>",function(self,CE,Backbone,Marionette,$,_
+CE.module("activities",function(self,CE,Backbone,Marionette,$,_
 	//dependencies (jquery plugins, etc.)
 	
 	) {
@@ -17,19 +17,19 @@ CE.module("<%= loc.nameInPluralLowercase =%>",function(self,CE,Backbone,Marionet
 	this.views.rowView = Backbone.Marionette.ItemView.extend({
 		tagName: 'tr',
 	
-		template: '<%= loc.nameInPluralLowercase =%>/row',
+		template: 'activities/row',
 		
 		events: {
 			'click .destroy': 'destroy',
 			'click .edit': 'edit'
 		},
 		
-		// delete: <%= loc.nameInSingularLowercase =%>
+		// delete: activity
 		destroy:function() {
 			
 		},
 		
-		// edit: <%= loc.nameInSingularLowercase =%>
+		// edit: activity
 		edit:function() {
 			
 		}

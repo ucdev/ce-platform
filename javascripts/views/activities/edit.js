@@ -5,16 +5,16 @@
  * Copyright (c)2012 University of Cincinnati
  * You are not authorized to use this code without receiving direct concent from the University of Cincinnati.
  *
- * @module: <%= loc.nameInPluralLowercase =%>
- * @def: views.showView
+ * @module: activities
+ * @def: views.editView
  */
  
-CE.module("<%= loc.nameInPluralLowercase =%>",function(self,CE,Backbone,Marionette,$,_
+CE.module("activities",function(self,CE,Backbone,Marionette,$,_
 	//dependencies (jquery plugins, etc.)
 	
 	) {
 	this.views = this.views || {};
-	this.views.showView = Backbone.Marionette.ItemView.extend({
-		template: '<%= loc.nameInPluralLowercase =%>/show',
+	this.views.editView = Backbone.Marionette.ItemView.extend({
+		template: 'activities/edit',
 	});
 });

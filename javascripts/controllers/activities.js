@@ -5,22 +5,22 @@
  * Copyright (c)2012 University of Cincinnati
  * You are not authorized to use this code without receiving direct concent from the University of Cincinnati.
  *
- * @module: <%= loc.nameInPluralLowercase =%>
+ * @module: activities
  * @def: Controller
  */
  
-CE.module("<%= loc.nameInPluralLowercase =%>",function(self,CE,Backbone,Marionette,$,_) {
+CE.module("activities",function(self,CE,Backbone,Marionette,$,_) {
 	this.controller = (function() {
-		function <%= loc.nameInPluralLowercase =%>() {
+		function activities() {
 			var main;
 			this.collection = new self.collection;
 			main = $('#app');
-			this.collection.reset(main.data('<%= loc.nameInPluralLowercase =%>'));
+			this.collection.reset(main.data('activities'));
 			window.col = this.collection;
-			main.removeData('<%= loc.nameInPluralLowercase =%>');
+			main.removeData('activities');
 		}
 		
-		<%= loc.nameInPluralLowercase =%>.prototype.indexView = function() {
+		activities.prototype.indexView = function() {
 			var view;
 			view = new self.views.indexView({
 				collection: this.collection
@@ -29,7 +29,7 @@ CE.module("<%= loc.nameInPluralLowercase =%>",function(self,CE,Backbone,Marionet
 			return CE.mainRegion.show(view);
 		};
 		
-		<%= loc.nameInPluralLowercase =%>.prototype.editView = function(id) {
+		activities.prototype.editView = function(id) {
 			var obj, view;
 			obj = this.collection.get(id);
 			
@@ -40,7 +40,7 @@ CE.module("<%= loc.nameInPluralLowercase =%>",function(self,CE,Backbone,Marionet
 			return CE.mainRegion.show(view);
 		};
 		
-		<%= loc.nameInPluralLowercase =%>.prototype.showView = function(id) {
+		activities.prototype.showView = function(id) {
 			var obj, view;
 			obj = this.collection.get(id);
 			
@@ -51,7 +51,7 @@ CE.module("<%= loc.nameInPluralLowercase =%>",function(self,CE,Backbone,Marionet
 			return CE.mainRegion.show(view);
 		};
 		
-		return <%= loc.nameInPluralLowercase =%>;
+		return activities;
 		
 	})();
 });
