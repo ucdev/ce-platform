@@ -2,7 +2,7 @@
 <cfset tabs = [
 	{ 'icon':'card-address', 'label': 'General Info', 'controller':'activities', 'action':'edit' },
 	{ 'icon':'trophy', 'label': 'Credits', 'controller':'activity_credits', 'action':'edit' },
-	{ 'icon':'users', 'label': 'Participants', 'controller':'activity_participants', 'action':'index',
+	{ 'icon':'users', 'label': 'Participants', 'controller':'activity_participants', 'action':'index','key':params.key,
 		'subnav':[
 			{ 'icon':'', 'label': 'Requests', 'controller':'credit_requests', 'action':'index' }
 		]

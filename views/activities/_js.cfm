@@ -1,7 +1,11 @@
 <cfoutput>
 #javascriptIncludeTag(bundle="ce.activities")#
 <script>
-$(function(){
+/*CE.addInitializer(function(options) {
+	debug.info("init: activity");
+});*/
+
+$(document).ready(function() {
 	var activity = $.extend({},
 		#serializeJson(activity)#,
 		{
@@ -25,21 +29,4 @@ $(function(){
 		}
 	);
 });
-
-//LEGACY STUFF
-<!---ccpd.tier2 = new ccpd.core.pagelet({
-	
-});
---->
-<!---cActNotesPosX = #getToken(Cookie.USER_ActNotesPos,1,",")#;
-cActNotesPosY = #getToken(Cookie.USER_ActNotesPos,2,",")#;
-cActNotesOpen = #Cookie.USER_ActNotesOpen#;
-cActListPosX = #getToken(Cookie.USER_ActListPos,1,",")#;
-cActListPosY = #getToken(Cookie.USER_ActListPos,2,",")#;
-cActListOpen = #Cookie.USER_ActListOpen#;
-cActListHeight = #GetToken(Cookie.USER_ActListSize,2,",")#;
-cActListWidth = #GetToken(Cookie.USER_ActListSize,1,",")#;--->
-</script>
-
-<!---#javaScriptIncludeTag(bundle="#application.version_token#/ccpd.activity")#--->
 </cfoutput>
