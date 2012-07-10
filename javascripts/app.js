@@ -19,5 +19,5 @@ CE.bind("initialize:after", function(options){
 });
 
 CE.addInitializer(function(options) {
-	CE.addRegions(mainRegion='#main');
+	CE.addRegions(mainRegion='#app');
 });

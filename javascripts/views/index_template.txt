@@ -1,0 +1,16 @@
+CE.Views.<%= loc.nameInPluralLowercase =%> = CE.Views.<%= loc.nameInPluralLowercase =%> || {};
+CE.Views.<%= loc.nameInPluralLowercase =%>.indexView = Backbone.Marionette.CompositeView.extend({
+	tagName: 'table',
+	// CONNECT THE ROW
+	itemView: CE.Views.<%= loc.nameInPluralLowercase =%>.rowView,
+	template: '<%= loc.nameInPluralLowercase =%>/row',
+	events: {
+		'click .new': 'newRecord'
+	},
+	appendHtml: function(collectionView, itemView) {
+		collectionView.$('.<%= loc.nameInPluralLowercase =%>').append(itemView.el);
+	},
+	newRecord:function() {
+			
+	}
+});

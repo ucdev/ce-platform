@@ -1,0 +1,2 @@
+CE.Models.<%= loc.nameInSingularLowercase =%> = CE.Models.<%= loc.nameInSingularLowercase =%> || {};
+CE.Models.<%= loc.nameInSingularLowercase =%> = Backbone.Model.extend({});

@@ -1,0 +1,20 @@
+CE.Views.<%= loc.nameInPluralLowercase =%> = CE.Views.<%= loc.nameInPluralLowercase =%> || {};
+CE.Views.<%= loc.nameInPluralLowercase =%>.rowView = Backbone.Marionette.ItemView.extend({
+	tagName: 'tr',
+	
+	template: '<%= loc.nameInPluralLowercase =%>/row',
+	
+	events: {
+		'click .destroy': 'destroy'
+	},
+	
+	// DELETE A CREDIT_REQUEST
+	destroy:function() {
+	
+	},
+	
+	// DELETE A CREDIT_REQUEST
+	destroy:function() {
+	
+	}
+});

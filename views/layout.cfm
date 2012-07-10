@@ -49,6 +49,8 @@
 		
 		CE.start(bootOpts);
 	</script>
+	
+	<cfdump var="#params#" />
 </body>
 </cfoutput>
 </html>

@@ -1,0 +1,8 @@
+CE.Routers.<%= loc.nameInPluralLowercase =%> = CE.Routers.<%= loc.nameInPluralLowercase =%> || {};
+CE.Routers.<%= loc.nameInPluralLowercase =%> = new Backbone.Marionette.AppRouter.extend({
+	appRoutes: {
+		'': 'index',
+		'<%= loc.nameInPluralLowercase =%>/:id': 'show',
+		'<%= loc.nameInPluralLowercase =%>/:id': 'edit'
+	}
+});

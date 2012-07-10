@@ -5,34 +5,21 @@
 <cfscript>
 drawRoutes()
 	// api
-	.scope("api")
+	.scope(name="api",path="api")
 		.resources("credit_requests")
+		.wildcard()
 	.end()
+	
+	.resources("credit_requests")
+	.resources("activity_participants")
+	.resources("activities")
+	.resources("people")
 	
 	.match(name="login", pattern="login", controller="sessions", action="new")
 	.match(name="logout", pattern="logout", controller="sessions", action="destroy")
 	.match(name="signup", pattern="signup", controller="people", action="register")
 	.match(name="activate", pattern="activation/[activationCode]", controller="activations", action="activate")
 	.match(name="creditinator", pattern="code", controller="creditinator", action="start")
-	
-    // administration side
-    .namespace("admin")
-        .controller("blog")
-            .get("new")
-            .post("create")
-            .get(name="show", pattern="show/[key]")
-            .get(name="edit", pattern="edit/[key]")
-            .put(name="update", pattern="update/[key]")
-            .delete(name="delete", pattern="delete/[key]")
-            .root(action="index")
-        .end()
-    .end()
-
-    // public side
-    .controller("blog")
-        .get(name="show", pattern="[key]")
-        .root(action="index")
-    .end()
 
     // default routes
     .wildcard()

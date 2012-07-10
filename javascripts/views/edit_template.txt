@@ -1,0 +1,4 @@
+CE.Views.<%= loc.nameInPluralLowercase =%> = CE.Views.<%= loc.nameInPluralLowercase =%> || {};
+CE.Views.<%= loc.nameInPluralLowercase =%>.editView = Backbone.Marionette.ItemView.extend({
+	template: '<%= loc.nameInPluralLowercase =%>/edit',
+});

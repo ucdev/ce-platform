@@ -7,7 +7,7 @@
 <cfset application.version_token = "v3" />
 <cfset application.messages = [] />
 <cfset generateBundle(type="css", bundle="#application.version_token#/ccpd", compress=true, sources="#application.version_token#/bootstrap,#application.version_token#/jquery.ui,#application.version_token#/ccpd") />
-<cfset generateBundle(type="js", bundle="CE", compress=true, 
+<cfset generateBundle(type="js", bundle="ce", compress=true, 
 sources="vendor/jquery/jquery,
 		vendor/jquery/jquery-ui-1.8.21.custom.min,
 		vendor/jquery/jquery.form.js,
@@ -29,6 +29,7 @@ sources="vendor/jquery/jquery,
 		vendor/ICanHaz,
 		vendor/debug,
 		app") />
+
 <cfset generateBundle(type="js", bundle="#application.version_token#/ccpd", compress=true, 
 	sources="
 			#application.version_token#/vendor/jquery/jquerymx-3.2.custom.js,
@@ -46,9 +47,49 @@ sources="vendor/jquery/jquery,
 			#application.version_token#/action_menu,
 			#application.version_token#/uiTokenizer,
 			#application.version_token#/uiTypeahead") />
-            
-<cfset generateBundle(type="js", bundle="#application.version_token#/ccpd.activity", compress=true, 
-	sources="#application.version_token#/lib/activity") />
+
+<cffunction name="$$singularize" returntype="string" access="public" output="false" hint="Returns the singular form of the passed in word."
+	examples=
+	'
+		<!--- Singularize a word, will result in "language" --->
+		##singularize("languages")##
+	'
+	categories="global,string" chapters="miscellaneous-helpers" functions="capitalize,humanize,pluralize">
+	<cfargument name="word" type="string" required="true" hint="String to singularize.">
+	<cfreturn $singularizeOrPluralize(text=arguments.word, which="singularize")>
+</cffunction>
+
+<cfset sources = "" /> 
+<cfdirectory action="list" directory="#expandPath('/javascripts/controllers')#" filter="*.js" name="jsList">
+<cfset baseDirPriority = "models,collections,controllers,routers,views" />
+<cfset baseViewFiles = "row,index,edit,show" />
+
+<cfloop query="jsList">
+	<cfloop list="#baseDirPriority#" index="key" delimiters=",">
+		<cfdump var="#key#">
+		<cfswitch expression="#key#">
+			<cfcase value="models">
+				<cfset fileLoc = "#key#/#$$singularize(replace(jsList.name,'.js',''))#" />
+				<cfset sources = listAppend(sources,"#fileLoc#",",")>
+			</cfcase>
+			<cfcase value="views">
+				<cfloop list="#baseViewFiles#" index="viewFile" delimiters=",">
+					<cfdump var="#viewFile#">
+					<cfset fileLoc = "#key#/#replace(jsList.name,'.js','')#/#viewFile#" />
+					<cfset sources = listAppend(sources,"#fileLoc#",",")>
+				</cfloop>
+			</cfcase>
+			<cfdefaultcase>
+				<cfset fileLoc = "#key#/#replace(jsList.name,'.js','')#" />
+				<cfset sources = listAppend(sources,"#fileLoc#",",")>
+			</cfdefaultcase>
+		</cfswitch>
+	</cfloop>
+	
+	<cfset generateBundle(type="js", bundle="ce.#replace(jsList.name,'.js','')#", compress=true, sources="#sources#") />
+</cfloop>
+
+
             
 <cfset generateBundle(type="js", bundle="#application.version_token#/ccpd.activity.credits", compress=true, 
 	sources="#application.version_token#/lib/activity.credits") />

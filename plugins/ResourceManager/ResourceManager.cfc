@@ -4,59 +4,91 @@
 		<cfreturn this>
 	</cffunction>
 	
-	<cffunction name="resources" hint="I load all cached pagelet resources.">
+	<cffunction name="createAssets" hint="I load all cached pagelet resources.">
 		<cfset var loc = {} />
 		<cfset loc.filepath = "" />
 		<cfset loc.httppath = "" />
+		<cfset loc.pathData = $getPathFromRequest(pathInfo=request.cgi.path_Info, scriptName=request.cgi.script_Name) />
 		
-		<!--- BUILD CONTROLLER JS --->
-		<cfset loc.controllerJs = "/javascripts/#application.version_token#/app/controllers/#lcase(params.controller)#.js" />
+		<cfset loc.nameInSingularLowercase = LCase(singularize(params.controller))>
+		<cfset loc.nameInPluralLowercase = LCase(params.controller)>
+		<cfset loc.nameInPluralUppercase = capitalize(params.controller)>
+		<cfset loc.actionName = lcase(params.action)>
 		
-		<cfif NOT fileExists(loc.controllerJs)>
-			<cffile action="write" file="#loc.controllerJs#" output="" charset="utf-8"  />
-		</cfif>
-		
-		<!--- BUILD VIEW JS --->
-		<cfif NOT directoryExists(expandPath("/javascripts/#application.version_token#/app/views/#lcase(params.controller)#"))>
-			<cfdirectory action="create" directory="#expandPath("/javascripts/#application.version_token#/app/views/#lcase(params.controller)#")#">
-		</cfif>
-		<cfset loc.viewJs = "/javascripts/#application.version_token#/app/views/#lcase(params.controller)#/#lcase(params.action)#.js" />
-		
-		<cfif NOT fileExists(loc.viewJs)>
-			<cffile action="write" file="#loc.viewJs#" output="" charset="utf-8"  />
-		</cfif>
-		
-		<!--- BUILD MODEL JS --->
-		<cfset loc.modelJs = "/javascripts/models/#lcase(singularize(params.controller))#.js" />
+		<cfif structKeyExists(params,'ROUTE') AND params.route NEQ "wildcard">
+			<!--- CONTROLLER JS --->
+			<cfset $renderTemplate(name="controller",templatePath=expandPath("/javascripts/controllers/template.txt"),outputPath=expandPath("/javascripts/controllers"),fileName="#loc.nameInPluralLowercase#.js") />
+			
+			<!--- COLLECTION JS --->
+			<cfset $renderTemplate(name="collection",templatePath=expandPath("/javascripts/collections/template.txt"),outputPath=expandPath("/javascripts/collections"),fileName="#loc.nameInPluralLowercase#.js") />
+			
+			<!--- MODEL JS --->
+			<cfset $renderTemplate(name="model",templatePath=expandPath("/javascripts/models/template.txt"),outputPath=expandPath("/javascripts/models"),fileName="#loc.nameInSingularLowercase#.js") />
+			
+			<!--- ROUTER JS --->
+			<cfset $renderTemplate(name="router",templatePath=expandPath("/javascripts/routers/template.txt"),outputPath=expandPath("/javascripts/routers"),fileName="#loc.nameInPluralLowercase#.js") />
 
-		<cfsavecontent variable="loc.modelOutput"><cfoutput>
-		ccpd.#lcase(singularize(params.controller))# = Backbone.Model.extend({
-			initialize: function(){
-				debug.info("#singularize(params.controller)# model initialized.");
-			}
-		});
-		</cfoutput></cfsavecontent>
-		<cfif NOT fileExists(loc.modelJs)>
-			<cffile action="write" file="#loc.modelJs#" output="#loc.modelOutput#" charset="utf-8"  />
+			<!--- VIEW EDIT JS --->
+			<cfset $renderTemplate(name="view_edit",templatePath=expandPath("/javascripts/views/edit_template.txt"),outputPath=expandPath("/javascripts/views/#loc.nameInPluralLowercase#"),fileName="edit.js") />
+
+			<!--- VIEW INDEX JS --->
+			<cfset $renderTemplate(name="view_index",templatePath=expandPath("/javascripts/views/index_template.txt"),outputPath=expandPath("/javascripts/views/#loc.nameInPluralLowercase#"),fileName="index.js") />
+			
+			<!--- VIEW SHOW JS --->
+			<cfset $renderTemplate(name="view_show",templatePath=expandPath("/javascripts/views/show_template.txt"),outputPath=expandPath("/javascripts/views/#loc.nameInPluralLowercase#"),fileName="show.js") />
+			
+			<!--- VIEW ROW JS --->
+			<cfset $renderTemplate(name="view_row",templatePath=expandPath("/javascripts/views/row_template.txt"),outputPath=expandPath("/javascripts/views/#loc.nameInPluralLowercase#"),fileName="row.js") />
+			
+			<!--- BUILD MODEL JS --->
+			<cfset loc.modelJs = "/javascripts/models/#lcase(singularize(params.controller))#.js" />
+	
+			<cfsavecontent variable="loc.modelOutput"><cfoutput>
+			ccpd.#lcase(singularize(params.controller))# = Backbone.Model.extend({
+				initialize: function(){
+					debug.info("#singularize(params.controller)# model initialized.");
+				}
+			});
+			</cfoutput></cfsavecontent>
+			<cfif NOT fileExists(loc.modelJs)>
+				<cffile action="write" file="#loc.modelJs#" output="#loc.modelOutput#" charset="utf-8"  />
+			</cfif>
+		
+			<!--- BUILD LESS VIEW FILE --->
+			<cfset loc.modelJs = "/javascripts/#application.version_token#/app/models/#lcase(singularize(params.controller))#.js" />
+			
+			<cfif NOT fileExists(loc.modelJs)>
+				<cffile action="write" file="#loc.modelJs#" output="" charset="utf-8"  />
+			</cfif>
+		</cfif>
+	</cffunction>
+	
+	<cffunction name="$renderTemplate">
+		<cfargument name="name" type="string" required="yes" />
+		<cfargument name="templatePath" type="string" required="yes" />
+		<cfargument name="outputPath" type="string" required="yes" />
+		<cfargument name="fileName" type="string" required="yes" />
+		
+		<cfset var loc = {} />
+		<cfset loc.nameInSingularLowercase = LCase(singularize(params.controller))>
+		<cfset loc.nameInPluralLowercase = LCase(params.controller)>
+		<cfset loc.nameInPluralUppercase = capitalize(params.controller)>
+		<cfset loc.actionName = lcase(params.action)>
+		<cfset loc.templatePath = arguments.templatePath />
+		<cfset loc.outputPath = arguments.outputPath />
+		<cfset loc.fileName = arguments.fileName />
+		<cfset loc.outputVar = "" />
+		
+		<cfif NOT directoryExists(loc.outputPath)>
+			<cfdirectory action="create" directory="#loc.outputPath#">
 		</cfif>
 		
-		<!--- BUILD LESS VIEW FILE --->
-		<cfset loc.modelJs = "/javascripts/#application.version_token#/app/models/#lcase(singularize(params.controller))#.js" />
-		
-		<cfif NOT fileExists(loc.modelJs)>
-			<cffile action="write" file="#loc.modelJs#" output="" charset="utf-8"  />
-		</cfif>
-		
-		<!---
-		<cfif NOT directoryExists(expandPath("/javascripts/#application.version_token#/app/views/#lcase(params.controller)#"))>
-			<cfdirectory action="create" directory="#expandPath("/javascripts/#application.version_token#/app/views/#lcase(params.controller)#")#">
-		</cfif>
-		
-		<cfset loc.filepath = "/javascripts/#application.version_token#/app/views/#lcase(params.controller)#/#arguments.name#.js" />
-		
-		<cfif NOT fileExists(loc.filepath)>
-			<cffile action="write" file="#loc.filepath#" output="" charset="utf-8"  />
-		</cfif>--->
+		<cfif NOT fileExists(loc.outputPath) AND fileExists(loc.templatePath)>
+				<cffile action="read" file="#loc.templatePath#" variable="loc.outputVar" />
+				<cfset loc.outputVar = Replace(loc.outputVar,"<%= loc.nameInPluralLowercase =%>","#loc.nameInPluralLowercase#","ALL") />
+				<cfset loc.outputVar = Replace(loc.outputVar,"<%= loc.nameInSingularLowercase =%>","#loc.nameInSingularLowercase#","ALL") />
+				<cffile action="write" file="#loc.outputPath#/#loc.fileName#" output="#loc.outputVar#" charset="utf-8"  />
+			</cfif>
 	</cffunction>
 	
 	<cffunction name="$writeLessFile">

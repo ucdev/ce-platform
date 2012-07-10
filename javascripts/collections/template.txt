@@ -1,0 +1,4 @@
+CE.Collections.<%= loc.nameInPluralLowercase =%> = Backbone.Collection.extend({
+	url: '/api/<%= loc.nameInPluralLowercase =%>',
+	model: CE.Models.<%= loc.nameInSingularLowercase =%>
+});
