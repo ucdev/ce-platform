@@ -1,9 +1,11 @@
 <cfoutput>
-#javascriptIncludeTag(bundle="ce.activities")#
 <script>
 /*CE.addInitializer(function(options) {
 	debug.info("init: activity");
 });*/
+CE.module("tier2",function(self,CE,Backbone,Marionette,$,_) {
+	
+});
 
 $(document).ready(function() {
 	var activity = $.extend({},
@@ -28,5 +30,8 @@ $(document).ready(function() {
 		</cfif>
 		}
 	);
+	
+	
 });
+</script>
 </cfoutput>

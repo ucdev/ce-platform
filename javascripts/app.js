@@ -2,6 +2,10 @@ window.CE = window.CE || {};
 
 CE = new Backbone.Marionette.Application();
 
+CE.module("tier1");
+CE.module("tier2");
+CE.module("tier3");
+
 CE.bind("initialize:before", function(options){
 	
 });
@@ -18,5 +22,5 @@ CE.addInitializer(function(options) {
 });
 
 $(document).ready(function() {
-	//CE.start();
+	CE.start();
 });

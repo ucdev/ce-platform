@@ -2,7 +2,7 @@
 <cfset tabs = [
 	{ 'icon':'card-address', 'label': 'General Info', 'controller':'activities', 'action':'edit' },
 	{ 'icon':'trophy', 'label': 'Credits', 'controller':'activity_credits', 'action':'edit' },
-	{ 'icon':'users', 'label': 'Participants', 'controller':'activity_participants', 'action':'index','key':params.key,
+	{ 'icon':'users', 'label': 'Participants', 'controller':'activity_participants', 'action':'index',
 		'subnav':[
 			{ 'icon':'', 'label': 'Requests', 'controller':'credit_requests', 'action':'index' }
 		]
@@ -35,7 +35,7 @@
 	{ 'icon':'report', 'label': 'Reports', 'controller':'activity_reports', 'action':'index' },
 	{ 'icon':'clock-history', 'label': 'History', 'controller':'activity_history', 'action':'index' }
 ] />
-<p>
+
 <ul class="nav nav-list">
 	<cfloop from="1" to="#arrayLen(tabs)#" index="i">
 		<cfset tab = tabs[i] />

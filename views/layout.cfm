@@ -41,16 +41,6 @@
 
 	<div class="alert alert-error" style="display:none;"></div>
 	<div class="alert alert-success" style="display:none;"></div>
-	
-	<script type="text/javascript">
-		var bootOpts = {
-			params:#serializeJson(params)#
-		}
-		
-		CE.start(bootOpts);
-	</script>
-	
-	<cfdump var="#params#" />
 </body>
 </cfoutput>
 </html>
