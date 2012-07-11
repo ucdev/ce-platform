@@ -1,6 +1,6 @@
 <cfoutput>
 	#includePartial(partial="/activities/js")#
-	<div class="profile editor row">
+	<div id="tier2" class="profile editor row">
 		<div class="profile-bg">
 			<div class="profile-bg-inner"></div>
 		</div>
@@ -17,7 +17,7 @@
 			</div>
 		</div>
 		
-		<div class="contentBar span15">
+		<div id="tier3" class="contentBar span15">
 			<div class="loader" style="display:none"><img src="/images/255.png" /></div>
 			#includeContent()#
 		</div>

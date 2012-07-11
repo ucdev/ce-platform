@@ -3,12 +3,8 @@
 /*CE.addInitializer(function(options) {
 	debug.info("init: activity");
 });*/
-CE.module("tier2",function(self,CE,Backbone,Marionette,$,_) {
-	
-});
-
-$(document).ready(function() {
-	var activity = $.extend({},
+CE.module("page",function(self,CE,Backbone,Marionette,$,_,activities) {	
+	self.params = $.extend({},
 		#serializeJson(activity)#,
 		{
 		cActNotesPosX: 0,
@@ -31,7 +27,29 @@ $(document).ready(function() {
 		}
 	);
 	
+	this.view = Backbone.View.extend({
+	  el: "##tier2",
 	
+	  events: {
+		"click ##thatThing": "youClickedIt"
+	  },
+	
+	  youClickedIt: function(){
+		alert("you clicked it!");
+	  }
+	});
+
+},CE.activities);
+
+CE.addInitializer(function() {
+	CE.page.router = new CE.activities.router({ controller: new CE.activities.controller });
+	
+	CE.vent.trigger("routing:started");
+});
+
+$(document).ready(function() {
+  var el = new CE.page.view().render().el;
+  $("##tier1 > .container").append(el);
 });
 </script>
 </cfoutput>

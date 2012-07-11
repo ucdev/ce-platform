@@ -4,10 +4,34 @@
 --->
 <cfscript>
 drawRoutes()
+	.scope(name="activity",path="activities/[activityId]/")
+		.resources("credit_requests")
+		.resources("activity_participants")
+		.resources("activity_credits")
+		.resources("activity_accme")
+		.resources("activity_faculties")
+		.resources("activity_committees")
+		.resources("activity_documents")
+		.resources("activity_finances")
+		.resources("activity_cdc")
+	.end()
+	
+	.resources("activities")
+	
 	// api
 	.scope(name="api",path="api")
 		.resources("credit_requests")
-		.wildcard()
+		.resources("activity_participants")
+		.resources("activities")
+		.resources("people")
+		//.wildcard()
+	.end()
+	
+	.scope(name="tmpl",path="tmpl")
+		.resources("credit_requests")
+		.resources("activity_participants")
+		.resources("activities")
+		.resources("people")
 	.end()
 	
 	.resources("credit_requests")

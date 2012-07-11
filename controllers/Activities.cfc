@@ -138,7 +138,7 @@
         <cfset activityCategories = model("Category").findAll(order="name")>
         <cfset activityGroupings = model("sys_grouping").findAll(maxRows=5)>
         
-		
+		<cfset renderWith(Attributes) />
 	</cffunction>
 	
 	<cffunction name="show">

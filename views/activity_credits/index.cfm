@@ -1,44 +1,27 @@
-<h1>Listing activity_credits</h1>
-
-<cfoutput>#includePartial("showFlash")#</cfoutput>
-
+<cfparam name="Attributes.Credits" default="">
 <cfoutput>
-<p>#linkTo(text="New activity_credit", action="new")#</p>
+<cfinclude template="/lib/savejs.cfm" />
+#startFormTag(name="frmAddCredits", id="EditForm", action="save", key=params.key)#
+<cfinclude template="/lib/saveinfo.cfm" />
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ViewSectionGrid">
+		<thead>
+			<tr>
+				<th class="span2" style="text-align:center;">&nbsp;</th>
+				<th class="span3">Type</th>
+				<th class="span3">Amount</th>
+				<th class="span6">Reference No</th>
+			</tr>
+		</thead>
+		<tbody>
+			<cfloop query="qCredits">
+                <tr>
+                    <td><input type="checkbox" class="js-check-box" name="Credits" id="credits-#qCredits.creditid#" value="#qCredits.creditid#"<cfif ListFind(params.Credits,qCredits.creditid,",")> checked</cfif> /></td>
+                    <td><label for="Credits#qCredits.creditid#">#qCredits.Name#</label></td>
+                    <td><input type="text" name="CreditAmount[#qCredits.creditid#]" class="span2 js-amount-#qCredits.creditId#" id="CreditAmount#qCredits.creditid#" value="#Evaluate('params.CreditAmount#qCredits.creditid#')#" /></td>
+                    <td><cfif qCredits.ReferenceFlag EQ "Y"><input type="text" name="ReferenceNo[#qCredits.creditid#]" class="js-reference-#qCredits.creditId#" id="ReferenceNo#qCredits.creditid#" value="#Evaluate('params.ReferenceNo#qCredits.creditid#')#" /><cfelse>&nbsp;</cfif></td>
+                </tr>
+			</cfloop>
+		</tbody>
+	</table>
+</form>
 </cfoutput>
-<cfoutput>
-<table class="table table-striped table-condensed">
-	<thead>
-		<th>Id</th>
-		<th>Activity ID</th>
-		<th>Credit ID</th>
-		<th>Amount</th>
-		<th>Reference No</th>
-		<th>Created</th>
-		<th>Created By</th>
-		<th>Updated</th>
-		<th>Updated By</th>
-		<th>Deleted</th>
-		<th>Deleted Flag</th>
-		
-	</thead>
-	<tbody>
-		<cfloop query="activity_credits">
-		<tr>
-			<td>#id#</td>
-		<td>#ActivityID#</td>
-		<td>#CreditID#</td>
-		<td>#Amount#</td>
-		<td>#ReferenceNo#</td>
-		<td>#Created#</td>
-		<td>#CreatedBy#</td>
-		<td>#Updated#</td>
-		<td>#UpdatedBy#</td>
-		<td>#Deleted#</td>
-		<td>#DeletedFlag#</td>
-		
-		</tr>
-		</cfloop>
-	</tbody>
-</table>
-</cfoutput>
-

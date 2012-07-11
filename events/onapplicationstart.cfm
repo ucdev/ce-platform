@@ -6,7 +6,7 @@
 
 <cfset application.version_token = "v3" />
 <cfset application.messages = [] />
-<cfset generateBundle(type="css", bundle="#application.version_token#/ccpd", compress=true, sources="#application.version_token#/bootstrap,#application.version_token#/jquery.ui,#application.version_token#/ccpd") />
+<cfset generateBundle(type="css", bundle="ce", compress=true, sources="#application.version_token#/bootstrap,#application.version_token#/jquery.ui,#application.version_token#/ccpd") />
 <cfset generateBundle(type="js", bundle="ce", compress=true, 
 sources="vendor/jquery/jquery,
 		vendor/jquery/jquery-ui-1.8.21.custom.min,
@@ -85,10 +85,9 @@ sources="vendor/jquery/jquery,
 			</cfdefaultcase>
 		</cfswitch>
 	</cfloop>
-	
-	<cfset generateBundle(type="js", bundle="ce.#replace(jsList.name,'.js','')#", compress=true, sources="#sources#") />
 </cfloop>
 
+<cfset generateBundle(type="js", bundle="ce.modules", compress=true, sources="#sources#") />
 
             
 <cfset generateBundle(type="js", bundle="#application.version_token#/ccpd.activity.credits", compress=true, 

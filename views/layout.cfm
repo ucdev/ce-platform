@@ -8,7 +8,7 @@
 	<meta name="author" content="">
 	
 	<!-- Le styles -->
-	#stylesheetLinkTag(bundle="#application.version_token#/ccpd")#
+	#stylesheetLinkTag(bundle="ce")#
 	<style>
 	body {
 	padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -28,19 +28,20 @@
 	<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
 	
 	
-	#javaScriptIncludeTag(bundle="CE")#
+	#javaScriptIncludeTag(bundle="ce")#
+	#javaScriptIncludeTag(bundle="ce.modules")#
 	</cfoutput>
 </head>
 <cfoutput>
 <body data-version_token="#params.version_token#">
-	#includePartial(partial="/header")#
-	<div id="app">
+	<div id="tier1">
+		#includePartial(partial="/header")#
 		#includeContent()#
+		#includePartial(partial="/footer")#
+		
+		<div class="alert alert-error" style="display:none;"></div>
+		<div class="alert alert-success" style="display:none;"></div>
 	</div>
-	#includePartial(partial="/footer")#
-
-	<div class="alert alert-error" style="display:none;"></div>
-	<div class="alert alert-success" style="display:none;"></div>
 </body>
 </cfoutput>
 </html>

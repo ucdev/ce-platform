@@ -83,7 +83,7 @@
 			<cfdirectory action="create" directory="#loc.outputPath#">
 		</cfif>
 		
-		<cfif NOT fileExists(loc.outputPath) AND fileExists(loc.templatePath)>
+		<cfif NOT fileExists(loc.outputPath & "/" & loc.fileName) AND fileExists(loc.templatePath)>
 				<cffile action="read" file="#loc.templatePath#" variable="loc.outputVar" />
 				<cfset loc.outputVar = Replace(loc.outputVar,"<%= loc.nameInPluralLowercase =%>","#loc.nameInPluralLowercase#","ALL") />
 				<cfset loc.outputVar = Replace(loc.outputVar,"<%= loc.nameInSingularLowercase =%>","#loc.nameInSingularLowercase#","ALL") />

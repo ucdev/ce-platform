@@ -35,7 +35,12 @@
 	
 	<!--- activity_credits/edit/key --->
 	<cffunction name="edit">
-		<cfparam name="params.key" type="integer" />
+			
+	</cffunction>
+    
+	<!--- activity_credits/index --->
+	<cffunction name="index">
+		<cfparam name="params.activityid" type="integer" />
 		<cfparam name="params.credits" default="" />
 		
 		<cfset attributes.credits = params.credits />
@@ -57,12 +62,7 @@
 			<cfset params.credits = ListAppend(params.Credits,qActivityCredits.CreditID,",")>
 			<cfset "params.CreditAmount#qActivityCredits.CreditID#" = qActivityCredits.Amount>
 			<cfset "params.ReferenceNo#qActivityCredits.CreditID#" = qActivityCredits.ReferenceNo>
-		</cfloop>	
-	</cffunction>
-    
-	<!--- activity_credits/index --->
-	<cffunction name="index">
-		<cfset activity_credits = model("Activity_credit").findAllByActivityId(value=params.key)>
+		</cfloop>
 	</cffunction>
 	
 	<!--- activity_credits/new --->
@@ -158,7 +158,7 @@
 	<!--- activity_credits/show/key --->
 	<cffunction name="show">
 		<!--- Find the record --->
-    	<cfset activity_credit = model("Activity_credit").findByKey(params.key)>
+    	<cfset activity_credit = model("Activity_credit").findByKey(params.activityid)>
     	
     	<!--- Check if the record exists --->
 	    <cfif NOT IsObject(activity_credit)>
