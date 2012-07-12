@@ -6,11 +6,19 @@
 
 <cfset application.version_token = "v3" />
 <cfset application.messages = [] />
-<cfset generateBundle(type="css", bundle="ce", compress=true, sources="#application.version_token#/bootstrap,#application.version_token#/jquery.ui,#application.version_token#/ccpd") />
+<cfset generateBundle(type="css", bundle="ce", compress=true, sources="bootstrap,jquery.ui,ccpd") />
 <cfset generateBundle(type="js", bundle="ce", compress=true, 
 sources="vendor/jquery/jquery,
 		vendor/jquery/jquery-ui-1.8.21.custom.min,
 		vendor/jquery/jquery.form.js,
+		vendor/jquery/jquerymx-3.2.custom.js,
+		vendor/jquery/jquery.qtip.js,
+		vendor/jquery/jquery.blockUI,
+		vendor/jquery/jquery.cfjs.packed,
+		vendor/jquery/jquery.maskedinput-1.1.3.pack,
+		vendor/jquery/jquery.tokenInput,
+		vendor/jquery/jquery.pjax.js,
+		vendor/mustache,
 		vendor/bootstrap/bootstrap-transition,
 		vendor/bootstrap/bootstrap-alert,
 		vendor/bootstrap/bootstrap-modal,
@@ -26,28 +34,17 @@ sources="vendor/jquery/jquery,
 		vendor/backbone/underscore,
 		vendor/backbone/backbone,
 		vendor/backbone/backbone.marionette,
-		vendor/ICanHaz,
-		vendor/debug,
-		app") />
+		app/app,
+		app/log,
+		app/global,
+		app/global/alerts,
+		app/ui,
+		app/ui/typeahead,
+		app/ui/tokenizer,
+		app/activity,
+		app/person") />
 
-<cfset generateBundle(type="js", bundle="#application.version_token#/ccpd", compress=true, 
-	sources="
-			#application.version_token#/vendor/jquery/jquerymx-3.2.custom.js,
-			#application.version_token#/vendor/jquery/jquery.fixtext.js,
-			#application.version_token#/vendor/jquery/jquery.form.js,
-			#application.version_token#/vendor/jquery/jquery.qtip.js,
-			#application.version_token#/vendor/jquery/jquery.blockUI,
-			#application.version_token#/vendor/jquery/jquery.cfjs.packed,
-			#application.version_token#/vendor/jquery/jquery.maskedinput-1.1.3.pack,
-			#application.version_token#/vendor/jquery/jquery.tokenInput,
-			#application.version_token#/vendor/jquery/jquery.pjax.js,
-			#application.version_token#/vendor/jquery/mustache,
-			#application.version_token#/app/core/pagelet,
-			#application.version_token#/global,
-			#application.version_token#/action_menu,
-			#application.version_token#/uiTokenizer,
-			#application.version_token#/uiTypeahead") />
-
+<!--- GENERATE MVC JS --->
 <cffunction name="$$singularize" returntype="string" access="public" output="false" hint="Returns the singular form of the passed in word."
 	examples=
 	'
@@ -87,29 +84,7 @@ sources="vendor/jquery/jquery,
 	</cfloop>
 </cfloop>
 
-<cfset generateBundle(type="js", bundle="ce.modules", compress=true, sources="#sources#") />
-
-            
-<cfset generateBundle(type="js", bundle="#application.version_token#/ccpd.activity.credits", compress=true, 
-	sources="#application.version_token#/lib/activity.credits") />
-            
-<cfset generateBundle(type="js", bundle="#application.version_token#/ccpd.activity.faculties", compress=true, 
-	sources="#application.version_token#/lib/activity.faculties") />
-            
-<cfset generateBundle(type="js", bundle="#application.version_token#/ccpd.activity.participants", compress=true, 
-	sources="#application.version_token#/lib/activity.participants") />
-    
-<cfset generateBundle(type="js", bundle="#application.version_token#/ccpd.activity.participants", compress=true, 
-	sources="#application.version_token#/lib/activity.participants") />
-            
-<cfset generateBundle(type="js", bundle="#application.version_token#/ccpd.attendee", compress=true, 
-	sources="#application.version_token#/lib/attendee") />
-            
-<cfset generateBundle(type="js", bundle="#application.version_token#/ccpd.activity.participants", compress=true, 
-	sources="#application.version_token#/lib/activity.participants") />
-            
-<cfset generateBundle(type="js", bundle="#application.version_token#/ccpd.people", compress=true, 
-	sources="#application.version_token#/lib/people") />
+<cfset generateBundle(type="js", bundle="ce.mvc", compress=true, sources="#sources#") />
 
 <cfset application['config'] = {} />
 <cfset application.config['name'] = "CCPD" />

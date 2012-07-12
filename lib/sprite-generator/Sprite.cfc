@@ -415,7 +415,7 @@
   height: 16px;
   line-height: 16px;
   vertical-align: text-top;
-  background-image: url( "/images/#application.version_token#/sprites/#this.sName##sExtension#" );
+  background-image: url( "/images/sprites/#this.sName##sExtension#" );
   background-position: 14px 14px;
   background-repeat: no-repeat;
 

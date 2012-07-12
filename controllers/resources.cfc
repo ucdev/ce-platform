@@ -6,8 +6,8 @@
 		<cfset spriteHash = "" />
 		<cfset imageFileList = [] />
 		<cfset var response = createObject("component","lib.buildStruct").init(status=false,statusMsg="failed to locate resource.") />
-		<cfset cssStore = expandPath("/stylesheets/#application.version_token#/sprites/") />
-		<cfset imgStore = expandPath("/images/#application.version_token#/sprites/") />
+		<cfset cssStore = expandPath("/stylesheets/sprites/") />
+		<cfset imgStore = expandPath("/images/sprites/") />
 		<cfset imgString = arrayTolist(params.images,',') />
 		<cfif arrayLen(params.images)>
 			<cfset spriteHash = left(lcase(HASH(imgString,'MD5')),5) />
