@@ -1,7 +1,1 @@
-ce.module("person",function(self,ce,Backbone,Marionette,$,_){
-	
-	// DOM READY
-	$(function() {
-		
-	});
-});
+/*! ce.Current.Person extends ce.Models.Person */

@@ -1,4 +1,4 @@
-/*!
+/*
 ICanHaz.js version 0.10 -- by @HenrikJoreteg
 More info at: http://icanhazjs.com
 */

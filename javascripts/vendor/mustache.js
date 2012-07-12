@@ -1,7 +1,4 @@
-/*!
- * mustache.js - Logic-less {{mustache}} templates with JavaScript
- * http://github.com/janl/mustache.js
- */
+/*! mustache.js - Logic-less {{mustache}} templates with JavaScript*/
 var Mustache = (typeof module !== "undefined" && module.exports) || {};
 
 (function (exports) {

@@ -11,6 +11,21 @@
 
 	<cffunction name="new">
 	</cffunction>
+	
+	<cffunction name="status">
+		<cfset response = createObject("lib.buildStruct").init(status=false,statusMsg="no_status") />
+		
+		<cfif isLoggedIn()>
+			<cfset response.setStatus(true) />
+			<cfset response.setStatusMsg("logged_in") />
+		<cfelse>
+			<cfset response.setStatus(false) />
+			<cfset response.setStatusMsg("logged_out") />
+		</cfif>
+		
+		<cfcontent type="text/javascript" />
+		<cfset renderText(response.getJson()) />
+	</cffunction>
 
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
 

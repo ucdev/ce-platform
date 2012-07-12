@@ -4,6 +4,21 @@
 		<cfset filters(through="autoLayout",type="after") />
 		<cfset filters(through="pagelet",type="before") />
 		<cfset filters(through="createAssets",type="before") />
+		<cfset filters(through="setUserInfo",type="before") />
+	</cffunction>
+	
+	<cffunction name="setUserInfo">
+		<cfif structKeyExists(session,'currentUser') AND isObject(session.currentuser)>
+			<cfset userInfo = duplicate(session.currentUser.properties()) />
+			<cfset structDelete(userInfo,'password') />
+			<cfset userInfo['loggedIn'] = true />
+		<cfelse>
+			<cfset userInfo = {
+				'loggedIn':false,
+				'id':0,
+				'name':'Anonymous Amos'
+			} />
+		</cfif>
 	</cffunction>
 	
 	<cffunction name="pagelet">

@@ -32,7 +32,7 @@
 </head>
 <cfoutput>
 <body data-version_token="#params.version_token#">
-	<div id="tier1">
+	<div id="app">
 		#includePartial(partial="/header")#
 		#includeContent()#
 		#includePartial(partial="/footer")#
@@ -40,6 +40,13 @@
 		<div class="alert alert-error" style="display:none;"></div>
 		<div class="alert alert-success" style="display:none;"></div>
 	</div>
+	
+	<script type="text/javascript">
+		//SETUP CE
+		$(function() {
+			ce.user.load(#serializeJson(userInfo)#);
+		});
+	</script>
 </body>
 </cfoutput>
 </html>

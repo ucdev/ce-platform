@@ -4,10 +4,11 @@
 --->
 <cfscript>
 drawRoutes()
+	// ACTIVITY SECTION
 	.scope(name="activity",path="activities/[activityId]/")
 		.resources("credit_requests")
-		.resources("activity_participants")
-		.resources("activity_credits")
+		.match(name="participants",pattern="participants",controller="activity_participants",action="index")
+		.match(name="credits",pattern="credits",controller="activity_credits",action="index")
 		.resources("activity_accme")
 		.resources("activity_faculties")
 		.resources("activity_committees")
@@ -16,16 +17,18 @@ drawRoutes()
 		.resources("activity_cdc")
 	.end()
 	
-	.resources("activities")
-	
 	// api
 	.scope(name="api",path="api")
 		.resources("credit_requests")
 		.resources("activity_participants")
 		.resources("activities")
 		.resources("people")
+		.resource("me")
+		.match(name="authstatus",pattern="/authstatus",controller="sessions",action="status")
 		//.wildcard()
 	.end()
+	
+	.resources("activities")
 	
 	.scope(name="tmpl",path="tmpl")
 		.resources("credit_requests")
@@ -39,6 +42,7 @@ drawRoutes()
 	.resources("activities")
 	.resources("people")
 	
+	.match(name="home", pattern="", controller="main", action="home")
 	.match(name="login", pattern="login", controller="sessions", action="new")
 	.match(name="logout", pattern="logout", controller="sessions", action="destroy")
 	.match(name="signup", pattern="signup", controller="people", action="register")

@@ -1,16 +1,6 @@
-/*!
- * CE Platform
- * http://ccpd.uc.edu/
- * 
- * Copyright (c)2012 University of Cincinnati
- * You are not authorized to use this code without receiving direct concent from the University of Cincinnati.
- *
- * @module: activity_credits
- * @def: Controller
- */
- 
-ce.module("activity_credits",function(self,ce,Backbone,Marionette,$,_) {
-	this.controller = (function() {
+/*! ce.Controllers.Activity_credits extends Backbone.Controller */
+ce.module("Controllers",function(self,ce,Backbone,Marionette,$,_) {
+	this.Activity_credits = (function() {
 		function activity_credits() {
 			var main;
 			this.collection = new self.collection;

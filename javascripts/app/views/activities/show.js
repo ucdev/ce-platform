@@ -1,20 +1,6 @@
-/*!
- * CE Platform
- * http://ccpd.uc.edu/
- * 
- * Copyright (c)2012 University of Cincinnati
- * You are not authorized to use this code without receiving direct concent from the University of Cincinnati.
- *
- * @module: activities
- * @def: views.showView
- */
- 
-ce.module("activities",function(self,ce,Backbone,Marionette,$,_
-	//dependencies (jquery plugins, etc.)
-	
-	) {
-	this.views = this.views || {};
-	this.views.showView = Backbone.Marionette.ItemView.extend({
+/*! ce.Views.Activities.ShowView extends Backbone.Marionette.ItemView */
+ce.module("Views.Activities",function(self,ce,Backbone,Marionette,$,_) {
+	self.ShowView = Backbone.Marionette.ItemView.extend({
 		template: 'activities/show',
 	});
 });

@@ -1,7 +1,4 @@
-
-			ccpd.activity_participant = Backbone.Model.extend({
-				initialize: function(){
-					debug.info("Activity_participant model initialized.");
-				}
-			});
-			
+/*! ce.Models.Activity_participant extends Backbone.Model */
+ce.module("Models",function(self,ce,Backbone,Marionette,$,_) {
+	this.Activity_participant =  Backbone.Model.extend({});
+});

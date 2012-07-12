@@ -1,50 +1,19 @@
-<cfset application.javaloader = javaLoader() />
 <!---
-<cfset doLessGeneration = LessEngine(['bootstrap.less']) />--->
-<!---<cfset application.sengrid = createObject("component","lib.sendgrid").init(api_user='joshuairl',api_key='cfr010408') />
+<cfset application.javaloader = javaLoader() />
+<cfset doLessGeneration = LessEngine(['bootstrap.less']) />
+<cfset application.sengrid = createObject("component","lib.sendgrid").init(api_user='joshuairl',api_key='cfr010408') />
 --->
 
 <cfset application.version_token = "v3" />
 <cfset application.messages = [] />
-<cfset generateBundle(type="css", bundle="ce", compress=true, sources="bootstrap,jquery.ui,ccpd") />
-<cfset generateBundle(type="js", bundle="ce", compress=true, 
-sources="vendor/jquery/jquery,
-		vendor/jquery/jquery-ui-1.8.21.custom.min,
-		vendor/jquery/jquery.form.js,
-		vendor/jquery/jquerymx-3.2.custom.js,
-		vendor/jquery/jquery.qtip.js,
-		vendor/jquery/jquery.blockUI,
-		vendor/jquery/jquery.cfjs.packed,
-		vendor/jquery/jquery.maskedinput-1.1.3.pack,
-		vendor/jquery/jquery.tokenInput,
-		vendor/jquery/jquery.pjax.js,
-		vendor/mustache,
-		vendor/bootstrap/bootstrap-transition,
-		vendor/bootstrap/bootstrap-alert,
-		vendor/bootstrap/bootstrap-modal,
-		vendor/bootstrap/bootstrap-dropdown,
-		vendor/bootstrap/bootstrap-scrollspy,
-		vendor/bootstrap/bootstrap-tab,
-		vendor/bootstrap/bootstrap-tooltip,
-		vendor/bootstrap/bootstrap-popover,
-		vendor/bootstrap/bootstrap-button,
-		vendor/bootstrap/bootstrap-collapse,
-		vendor/bootstrap/bootstrap-carousel,
-		vendor/bootstrap/bootstrap-typeahead,
-		vendor/backbone/underscore,
-		vendor/backbone/backbone,
-		vendor/backbone/backbone.marionette,
-		app/app,
-		app/log,
-		app/global,
-		app/global/alerts,
-		app/ui,
-		app/ui/typeahead,
-		app/ui/tokenizer,
-		app/activity,
-		app/person") />
 
-<!--- GENERATE MVC JS --->
+<!--- GENERATE CSS --->
+<cfset generateBundle(type="css", bundle="ce", compress=true, sources="bootstrap,jquery.ui,ccpd") />
+
+<cfset js = [] /> 
+<cfset jsScaffolded = [] />
+
+<!--- GENERATE JS --->
 <cffunction name="$$singularize" returntype="string" access="public" output="false" hint="Returns the singular form of the passed in word."
 	examples=
 	'
@@ -56,35 +25,105 @@ sources="vendor/jquery/jquery,
 	<cfreturn $singularizeOrPluralize(text=arguments.word, which="singularize")>
 </cffunction>
 
-<cfset sources = "" /> 
-<cfdirectory action="list" directory="#expandPath('/javascripts/controllers')#" filter="*.js" name="jsList">
+<cfdirectory action="list" directory="#expandPath('/javascripts/app/controllers')#" filter="*.js" name="jsList">
 <cfset baseDirPriority = "models,collections,controllers,routers,views" />
 <cfset baseViewFiles = "row,index,edit,show" />
 
 <cfloop query="jsList">
 	<cfloop list="#baseDirPriority#" index="key" delimiters=",">
-		<cfdump var="#key#">
+		<cfset fileLoc = "" />
+		
 		<cfswitch expression="#key#">
 			<cfcase value="models">
-				<cfset fileLoc = "#key#/#$$singularize(replace(jsList.name,'.js',''))#" />
-				<cfset sources = listAppend(sources,"#fileLoc#",",")>
+				<cfset fileLoc = "/app/#key#/#$$singularize(replace(jsList.name,'.js',''))#" />
+				<cfset jsScaffolded.add(fileLoc)>
 			</cfcase>
 			<cfcase value="views">
 				<cfloop list="#baseViewFiles#" index="viewFile" delimiters=",">
-					<cfdump var="#viewFile#">
-					<cfset fileLoc = "#key#/#replace(jsList.name,'.js','')#/#viewFile#" />
-					<cfset sources = listAppend(sources,"#fileLoc#",",")>
+					<cfset fileLoc = "/app/#key#/#replace(jsList.name,'.js','')#/#viewFile#" />
+					<cfset jsScaffolded.add(fileLoc)>
 				</cfloop>
 			</cfcase>
 			<cfdefaultcase>
-				<cfset fileLoc = "#key#/#replace(jsList.name,'.js','')#" />
-				<cfset sources = listAppend(sources,"#fileLoc#",",")>
+				<cfset fileLoc = "/app/#key#/#replace(jsList.name,'.js','')#" />
+				<cfset jsScaffolded.add(fileLoc)>
 			</cfdefaultcase>
 		</cfswitch>
 	</cfloop>
 </cfloop>
 
-<cfset generateBundle(type="js", bundle="ce.mvc", compress=true, sources="#sources#") />
+<cfscript>
+js.addAll([
+// GLOBAL VENDORS (avoid putting things here, try to embed / nest it within our "app" module system)
+/* jQuery, jQuery UI */
+"vendor/jquery/jquery",
+"vendor/jquery/jquery-ui-1.8.21.custom.min",
+
+/* Underscore */
+"vendor/backbone/underscore",
+
+/* Backbone */
+"vendor/backbone/backbone",
+"vendor/backbone/backbone.marionette",
+
+/* jQuery Plugins */
+"vendor/jquery/jquery.form.js",
+"vendor/jquery/jquerymx-3.2.custom.js",
+"vendor/jquery/jquery.qtip.js",
+"vendor/jquery/jquery.blockUI",
+"vendor/jquery/jquery.cfjs.packed",
+"vendor/jquery/jquery.maskedinput-1.1.3.pack",
+"vendor/jquery/jquery.tokenInput",
+"vendor/jquery/jquery.pjax.js",
+
+/* Twitter Bootstrap JS */
+"vendor/bootstrap/bootstrap-transition",
+"vendor/bootstrap/bootstrap-alert",
+"vendor/bootstrap/bootstrap-modal",
+"vendor/bootstrap/bootstrap-dropdown",
+"vendor/bootstrap/bootstrap-scrollspy",
+"vendor/bootstrap/bootstrap-tab",
+"vendor/bootstrap/bootstrap-tooltip",
+"vendor/bootstrap/bootstrap-popover",
+"vendor/bootstrap/bootstrap-button",
+"vendor/bootstrap/bootstrap-collapse",
+"vendor/bootstrap/bootstrap-carousel",
+"vendor/bootstrap/bootstrap-typeahead",
+
+// APPLICATION JS
+/* ce */
+"app/app",
+
+/* ce.log */
+"app/log",
+
+/* ce.global */
+"app/global",
+"app/global/alerts",
+
+/* ce.vendor [Nested Vendors (try to put jquery plugins within modules of our system, similar to "ui.typeahead"] */
+"app/vendor/mustache",
+
+/* ce.ui */
+"app/ui",
+"app/ui/typeahead",
+"app/ui/tokenizer",
+"app/ui/actionMenu"
+]);
+
+<!--- SCAFFOLDED MVC STUFF --->
+js.addAll(jsScaffolded);
+
+js.addAll([
+"app/user", // ce.user
+"app/user/events", // ce.user.events
+"app/user/auth", // ce.user.auth
+"app/activity", // ce.activity
+"app/person" // ce.person
+]);
+</cfscript>
+
+<cfset generateBundle(type="js", bundle="ce", compress=true, sources="#arrayToList(js,',')#") />
 
 <cfset application['config'] = {} />
 <cfset application.config['name'] = "CCPD" />

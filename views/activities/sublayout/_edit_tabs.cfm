@@ -1,8 +1,8 @@
 <cfoutput>
 <cfset tabs = [
 	{ 'icon':'card-address', 'label': 'General Info','route':'editActivity','key': params.activityId,'activityId': params.activityId },
-	{ 'icon':'trophy', 'label': 'Credits','route':'activityActivity_credits','key': params.activityId,'activityId': params.activityId },
-	{ 'icon':'users', 'label': 'Participants','route':'activityActivity_participants','key': params.activityId,'activityId': params.activityId,
+	{ 'icon':'trophy', 'label': 'Credits','route':'activityCredits','key': params.activityId,'activityId': params.activityId },
+	{ 'icon':'users', 'label': 'Participants','route':'activityParticipants','key': params.activityId,'activityId': params.activityId,
 		'subnav':[
 			{ 'icon':'', 'label': 'Requests', 'controller':'credit_requests', 'action':'index','key': params.activityId,'activityId': params.activityId }
 		]

@@ -1,16 +1,6 @@
-/*!
- * CE Platform
- * http://ccpd.uc.edu/
- * 
- * Copyright (c)2012 University of Cincinnati
- * You are not authorized to use this code without receiving direct concent from the University of Cincinnati.
- *
- * @module: main
- * @def: Controller
- */
- 
-ce.module("main",function(self,ce,Backbone,Marionette,$,_) {
-	this.controller = (function() {
+/*! ce.Controllers.Main extends Backbone.Controller */
+ce.module("Controllers",function(self,ce,Backbone,Marionette,$,_) {
+	this.Main = (function() {
 		function main() {
 			var main;
 			this.collection = new self.collection;
