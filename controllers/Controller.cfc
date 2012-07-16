@@ -73,32 +73,65 @@
 		<cfparam name="params.controller" default="" />
 		<cfparam name="params.action" default="" />
 		<cfparam name="params.key" default="0" />
+		<cfparam name="params._pjax" default="0" />
 		
 		<cfset var layout = "" />
 		<cfset var headers = GetHttpRequestData().Headers />
 		
 		<cfif structKeyExists(headers,'X-PJAX')>
-		<cfset renderText($renderLayout($layout='/layout_pjax',$type='template',$content=$renderPage($template="",$controller=params.controller,$action=params.action,$key=params.key,$layout=false))) />
+			<cfif params._pjax EQ "##page">
+				<cfset renderText(
+						$renderLayout(
+							$layout='/layout_#arguments.layoutFile#',
+							$type='template',
+							$content=$renderLayout(
+									$layout='/layout_pjax',
+									$type='template',
+									$content=$renderPage(
+										$template="",
+										$controller=params.controller,
+										$action=params.action,
+										$key=params.key,
+										$layout=false
+									)
+								)
+							)
+						) />
+			<cfelse>
+				<cfset renderText(
+						$renderLayout(
+								$layout='/layout_pjax',
+								$type='template',
+								$content=$renderPage(
+									$template="",
+									$controller=params.controller,
+									$action=params.action,
+									$key=params.key,
+									$layout=false
+								)
+							)
+						) />
+			</cfif>
 		<cfelse>
-		<cfscript>
-		renderText(
-				$renderLayout(
-					$layout='/layout',
-					$type='template',
-					$content=$renderLayout(
-						$layout='/layout_#arguments.layoutFile#',
+			<cfscript>
+			renderText(
+					$renderLayout(
+						$layout='/layout',
 						$type='template',
-						$content=$renderPage(
-						$template="",
-						$controller=params.controller,
-						$action=params.action,
-						$key=params.key,
-						$layout="/layout_pjax"
+						$content=$renderLayout(
+							$layout='/layout_#arguments.layoutFile#',
+							$type='template',
+							$content=$renderPage(
+								$template="",
+								$controller=params.controller,
+								$action=params.action,
+								$key=params.key,
+								$layout="/layout_pjax"
+							)
 						)
 					)
 				)
-			)
-		</cfscript>
+			</cfscript>
 		</cfif>
 	</cffunction>
 	

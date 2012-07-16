@@ -43,5 +43,5 @@
 	</div>
 </div>
 
-<div class="container">
+<div id="page" class="container">
 </cfoutput>

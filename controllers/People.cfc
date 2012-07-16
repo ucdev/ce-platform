@@ -4,6 +4,15 @@
 
 	<cffunction name="index">
 		<cfset People = model("Person").findAll(maxRows=100)>
+		
+		<cfset pageTitle("People") />
+		<cfset pageSubTitle("Browse or search people.") />
+		
+		<cfif isLoggedin()>
+			<cfset subLayout("user") />
+		<cfelse>
+			<cfset subLayout("guest") />
+		</cfif>
 	</cffunction>
 
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->

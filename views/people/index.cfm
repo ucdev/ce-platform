@@ -1,5 +1,4 @@
 <cfoutput>
-<h1>People</h1>
 <div class="row">
 	<div class="span18">
 		<table class="table table-striped table-condensed">
