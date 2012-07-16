@@ -60,7 +60,7 @@
 </div>
 <div>
 	<div id="RegistrantsContainer" class="js-registrants-container">
-    <table border="0" width="620" cellpadding="0" cellspacing="0" class="table">
+    <table border="0" width="620" cellpadding="0" cellspacing="0" class="js-participants-table">
         <thead>
             <tr>
                 <th class="span1"><input type="checkbox" name="CheckAll" id="CheckAll" class="js-check-all" /></th>

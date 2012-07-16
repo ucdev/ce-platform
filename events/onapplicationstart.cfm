@@ -119,6 +119,8 @@ js.addAll([
 "app/user/events", // ce.user.events
 "app/user/auth", // ce.user.auth
 "app/activity", // ce.activity
+"app/activity/participants", // ce.activity.participants
+"app/activity/participants/row", // ce.activity.participants.row
 "app/person" // ce.person
 ]);
 </cfscript>
