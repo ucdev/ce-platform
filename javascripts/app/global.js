@@ -25,7 +25,7 @@ ce.module("global",function(self,ce,Backbone,Marionette,$,_){
 			resources = resources.unique().sort();	
 			
 			$.ajax({
-				   url:'/resources/sprites/',
+				   url:'/assets/sprites/',
 				   type:'post',
 				   data:{
 						'images':resources

@@ -1,7 +1,7 @@
 <cfcomponent extends="Wheels">
 	<cffunction name="init">
 		<cfset filters(through="autoSetup") />
-		<cfset filters(through="autoLayout",type="after") />
+		<cfset filters(through="autoLayout",type="after",except="sprites") />
 		<cfset filters(through="pagelet",type="before") />
 		<cfset filters(through="createAssets",type="before") />
 		<cfset filters(through="setUserInfo",type="before") />
@@ -56,7 +56,7 @@
                 <cfset subLayout("adm_activity") />
 			<cfelseif params.controller EQ "activities" AND listFindNoCase("show",params.action)>
 				<cfset subLayout("pub_activity") />
-			<cfelse>
+			<cfelseif params.controller EQ "sessions" AND listFindNoCase("new",params.action)>
 				<cfset subLayout("basic") />
             </cfif>
         <cfelse>

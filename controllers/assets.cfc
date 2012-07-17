@@ -2,13 +2,13 @@
 
 	<cffunction name="sprites">
 		<cfparam name="params.images" default="" />
-		
 		<cfset spriteHash = "" />
 		<cfset imageFileList = [] />
 		<cfset var response = createObject("component","lib.buildStruct").init(status=false,statusMsg="failed to locate resource.") />
 		<cfset cssStore = expandPath("/stylesheets/sprites/") />
 		<cfset imgStore = expandPath("/images/sprites/") />
 		<cfset imgString = arrayTolist(params.images,',') />
+		
 		<cfif arrayLen(params.images)>
 			<cfset spriteHash = left(lcase(HASH(imgString,'MD5')),5) />
 		</cfif>
@@ -34,6 +34,7 @@
 			sName=spriteHash,
 			bOneColumn=true) />
 		
+		<cfcontent type="text/javascript">
 		<cfset renderText(spriteHash) />
 	</cffunction>
 	
