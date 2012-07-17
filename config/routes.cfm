@@ -29,6 +29,7 @@ drawRoutes()
 	.end()
 	
 	.resources("activities")
+	.match(name="messagesInbox",pattern="messages/inbox",controller="messages",action="inbox")
 	
 	.scope(name="tmpl",path="tmpl")
 		.resources("credit_requests")

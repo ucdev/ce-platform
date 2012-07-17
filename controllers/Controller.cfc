@@ -56,6 +56,8 @@
                 <cfset subLayout("adm_activity") />
 			<cfelseif params.controller EQ "activities" AND listFindNoCase("show",params.action)>
 				<cfset subLayout("pub_activity") />
+			<cfelseif params.controller EQ "messages" AND listFindNoCase("inbox,sent,trash",params.action)>
+				<cfset subLayout("user") />
 			<cfelseif params.controller EQ "sessions" AND listFindNoCase("new",params.action)>
 				<cfset subLayout("basic") />
             </cfif>
