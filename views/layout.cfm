@@ -28,16 +28,6 @@
 	<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
 	
 	#javaScriptIncludeTag(bundle="ce")#
-	
-	<!--Theme-->
-	<link href="http://cdn.wijmo.com/themes/aristo/jquery-wijmo.css" rel="stylesheet" type="text/css" title="rocket-jqueryui" />
-	
-	<!--Wijmo Widgets CSS-->
-	<link href="http://cdn.wijmo.com/jquery.wijmo-complete.all.2.1.4.min.css" rel="stylesheet" type="text/css" />
-	
-	<!--Wijmo Widgets JavaScript-->
-	<script src="http://cdn.wijmo.com/jquery.wijmo-open.all.2.1.4.min.js" type="text/javascript"></script>
-	<script src="http://cdn.wijmo.com/jquery.wijmo-complete.all.2.1.4.min.js" type="text/javascript"></script>
 	</cfoutput>
 </head>
 <cfoutput>
