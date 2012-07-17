@@ -9,7 +9,7 @@
 			</a>
 			<a class="brand" href="/"><img src="/images/logo_ribbon.png" /></a>
 			<div class="nav-collapse">
-				<ul class="nav">
+				<ul class="nav pjaxLinks">
 					<li<cfif params.controller EQ "main"> class="active"</cfif>><a href="/">Home</a></li>
 					<li<cfif params.controller EQ "activities"> class="active"</cfif>><a href="/activities/">Activities</a></li>
 					<li<cfif params.controller EQ "people"> class="active"</cfif>><a href="/people/">People</a></li>
@@ -19,8 +19,8 @@
 				</ul>
 				<cfif NOT isLoggedIn()>
 				<ul class="nav pull-right">
-					<li><a href="/login">Log In</a></li>
-					<li><a href="/signup">Sign Up</a></li>
+					<li><a href="/login" class="loginLink">Log In</a></li>
+					<li><a href="/signup" class="signupLink">Sign Up</a></li>
 				</ul>
 				<cfelse>
 				<ul class="nav pull-right">

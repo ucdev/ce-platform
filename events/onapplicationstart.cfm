@@ -65,6 +65,9 @@ js.addAll([
 /* Backbone */
 "vendor/backbone/backbone",
 "vendor/backbone/backbone.marionette",
+"vendor/knockout-2.1.0.debug.js",
+"vendor/knockback.js",
+
 
 /* jQuery Plugins */
 "vendor/jquery/jquery.form.js",
@@ -107,6 +110,7 @@ js.addAll([
 
 /* ce.ui */
 "app/ui",
+"app/ui/dialog",
 "app/ui/typeahead",
 "app/ui/tokenizer",
 "app/ui/actionMenu"

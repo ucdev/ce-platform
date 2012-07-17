@@ -12,9 +12,30 @@ ce.module("user",function(self,ce,Backbone,Marionette,$,_) {
 		}
 	}
 	
+	
+	self.loginView = Backbone.View.extend({
+		tagName: "div",
+		
+		className: "",
+		
+		
+		render: function() {
+			var view = this;
+			$.ajax({
+				url:'/login',
+				type:'post',
+				success:function(data) {
+					$(view.el).html(data);
+					return this;
+				}
+			});
+		}
+	});
+	
 	//LOGIN FUNCTION
 	self.login = function(params) {
-		
+		var view = new self.loginView();
+		ce.dialog.show(view);
 		self.trigger("loggedIn");
 	}
 	
