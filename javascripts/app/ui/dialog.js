@@ -16,6 +16,7 @@ ce.module("ui",function(self,ce,Backbone,Marionette,$,_){
 		
 		showDialog: function(view){
 			view.on("close", this.hideDialog, this);
+			this.$el.dialog(view);
 			this.$el.dialog('open');
 		},
 		

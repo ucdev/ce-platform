@@ -1,4 +1,11 @@
 <cfcomponent extends="Controller">
+	
+	<cffunction name="init">
+		<cfset filters(through="loginRequired") />
+		<cfset filters(through="adminRequired") />
+		<cfset super.init() />
+	</cffunction>
+	
 	<cffunction name="index">
 		<!---<cfset activityTypes = model("sysActivityType").findAll(maxRows=5)>
         <cfset activityCategories = model("Category").findAll(order="name")>

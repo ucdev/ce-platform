@@ -1,4 +1,11 @@
 <cfcomponent extends="Controller" output="false">
+
+	<cffunction name="init">
+		<cfset filters(through="loginRequired") />
+		<cfset filters(through="adminRequired") />
+		<cfset super.init() />
+	</cffunction>
+	
 	<!--- activity_faculties/ahah --->
     <cffunction name="ahah">
 		<cfset qActivityFacultyList = Application.Com.ActivityFacultyGateway.getByViewAttributes(ActivityID=params.key,DeletedFlag='N',OrderBy="sr.RoleID DESC, p1.LastName,p1.FirstName")>

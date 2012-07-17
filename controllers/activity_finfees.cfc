@@ -1,5 +1,11 @@
 <cfcomponent extends="Controller" output="false">
 	
+	<cffunction name="init">
+		<cfset filters(through="loginRequired") />
+		<cfset filters(through="adminRequired") />
+		<cfset super.init() />
+	</cffunction>
+	
 	<!--- activity_finfees/index --->
 	<cffunction name="index">
 		<cfset activity_finfees = model("Activity_finfee").findAllByActivityId(value=params.key)>
