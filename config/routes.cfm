@@ -4,6 +4,7 @@
 --->
 <cfscript>
 drawRoutes()
+	.match(name="tmpls",pattern="tmpls/get",controller="tmpls",action="get")
 	// ACTIVITY SECTION
 	.scope(name="activity",path="activities/[activityId]/")
 		.resources("credit_requests")

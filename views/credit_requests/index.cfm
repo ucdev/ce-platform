@@ -8,7 +8,7 @@
 	'sms':'phone',
 	'email':'email'
 } />
-<cfoutput>
+<cfoutput><!---
 <table border="0" width="620" cellpadding="0" cellspacing="0" class="table">
 	<thead>
 		<tr>
@@ -30,5 +30,5 @@
 		</tr>
 	</cfloop>
 	</tbody>
-</table>
+</table>--->
 </cfoutput>

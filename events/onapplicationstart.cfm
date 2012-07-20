@@ -104,6 +104,7 @@ js.addAll([
 "app/global",
 "app/global/alerts",
 "app/global/ajax",
+"app/global/templates",
 
 /* ce.vendor [Nested Vendors (try to put jquery plugins within modules of our system, similar to "ui.typeahead"] */
 "app/vendor/mustache",
