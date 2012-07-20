@@ -29,6 +29,7 @@ drawRoutes()
 	.end()
 	
 	.resources("activities")
+	.match(name="messagesInbox",pattern="messages/inbox",controller="messages",action="inbox")
 	
 	.scope(name="tmpl",path="tmpl")
 		.resources("credit_requests")
@@ -49,6 +50,7 @@ drawRoutes()
 	.match(name="activate", pattern="activation/[activationCode]", controller="activations", action="activate")
 	.match(name="creditinator", pattern="code", controller="creditinator", action="start")
 
+	.match(name="assetSprites",pattern="assets/[action]",controller="assets")
     // default routes
     .wildcard()
     .root(to="main##home")

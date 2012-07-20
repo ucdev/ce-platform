@@ -1,4 +1,10 @@
 <cfcomponent extends="Controller" output="false">
+	<cffunction name="init">
+		<cfset filters(through="loginRequired") />
+		<cfset filters(through="adminRequired") />
+		<cfset super.init() />
+	</cffunction>
+	
 	
 	<!--- activity_committees/index --->
 	<cffunction name="index">

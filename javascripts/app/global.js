@@ -11,28 +11,30 @@ ce.module("global",function(self,ce,Backbone,Marionette,$,_){
 	
 	function getSprites() {
 		var resources = [];
-		$('[class^="icon16-"],[class*=" icon16-"]').each(function(i,val) {
-			var classes = $(this).attr('class').split(' ');
-			$(classes).each(function(i,val) {
-				//console.log(val);
-				if (val !== '') {
-					resources.push(val);
-				}
+		if($('[class^="icon16-"],[class*=" icon16-"]').length) {
+			$('[class^="icon16-"],[class*=" icon16-"]').each(function(i,val) {
+				var classes = $(this).attr('class').split(' ');
+				$(classes).each(function(i,val) {
+					//console.log(val);
+					if (val !== '') {
+						resources.push(val);
+					}
+				});
 			});
-		});
-		
-		resources = resources.unique().sort();	
-		
-		$.ajax({
-			   url:'/resources/sprites/',
-			   type:'post',
-			   data:{
-					'images':resources
-			   },
-			   success:function(data) {
-					$('head').append('<link rel="stylesheet" href="/stylesheets/sprites/' + $.trim(data) + '.css" type="text/css" />'); 
-			   }
-		});
+			
+			resources = resources.unique().sort();	
+			
+			$.ajax({
+				   url:'/assets/sprites/',
+				   type:'post',
+				   data:{
+						'images':resources
+				   },
+				   success:function(data) {
+						$('head').append('<link rel="stylesheet" href="/stylesheets/sprites/' + $.trim(data) + '.css" type="text/css" />'); 
+				   }
+			});
+		}
 	}
 	
 	// GLOBAL DOM READY

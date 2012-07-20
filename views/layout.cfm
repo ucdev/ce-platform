@@ -47,6 +47,8 @@
 			ce.user.load(#serializeJson(userInfo)#);
 		});
 	</script>
+	
+	<div id="dialog"></div>
 </body>
 </cfoutput>
 </html>

@@ -65,6 +65,9 @@ js.addAll([
 /* Backbone */
 "vendor/backbone/backbone",
 "vendor/backbone/backbone.marionette",
+"vendor/knockout-2.1.0.debug.js",
+"vendor/knockback.js",
+
 
 /* jQuery Plugins */
 "vendor/jquery/jquery.form.js",
@@ -107,7 +110,7 @@ js.addAll([
 
 /* ce.ui */
 "app/ui",
-"app/ui/pager",
+"app/ui/dialog",
 "app/ui/typeahead",
 "app/ui/tokenizer",
 "app/ui/actionMenu"
@@ -121,9 +124,6 @@ js.addAll([
 "app/user/events", // ce.user.events
 "app/user/auth", // ce.user.auth
 "app/activity", // ce.activity
-"app/activity/participants", // ce.activity.participants
-"app/activity/participants/row", // ce.activity.participants.row
-"app/activity/participants/filter", // ce.activity.participants.row
 "app/person" // ce.person
 ]);
 </cfscript>

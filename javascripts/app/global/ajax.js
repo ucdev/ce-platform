@@ -1,7 +1,7 @@
 ce.module("global.ajax",function(self,ce,Backbone,Marionette,$,_){
 	$(function() {
 		$(document).on("click", ".projectBar .nav-list a", function(){ ce.log.info("subnav clicked") });  
-		$(document).on("click", ".navbar .nav li a", function(ev){ ce.log.info("topnav clicked"); ev.preventDefault(); });  
+		$(document).on("click", ".pjaxLinks a", function(ev){ ce.log.info("topnav clicked"); ev.preventDefault(); });  
 		
 		$(".navbar .nav li a").pjax({
 			container:"#page"

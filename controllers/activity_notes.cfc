@@ -1,5 +1,11 @@
 <cfcomponent extends="Controller" output="false">
 	
+	<cffunction name="init">
+		<cfset filters(through="loginRequired") />
+		<cfset filters(through="adminRequired") />
+		<cfset super.init() />
+	</cffunction>
+	
 	<!--- activity_notes/index --->
 	<cffunction name="index">
 		<cfset activity_notes = model("Activity_note").findAllByActivityId(value=params.key)>

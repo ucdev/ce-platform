@@ -1,14 +1,14 @@
 <cfcomponent output="false">
-
+	
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
-
-  <cffunction name="init">
-    <cfset this.version = "1.1,1.1.2">
-    <cfreturn this>
-  </cffunction>
-
+	
+	<cffunction name="init">
+		<cfset this.version = "1.1,1.1.2">
+		<cfreturn this>
+	</cffunction>
+	
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
-
+	
 	<cffunction name="ajaxLoginRequired">
 		<cfif NOT structKeyExists(session,"currentUser")>
 			<cfset renderText(createObject("component","lib.buildStruct").init(status=false,statusMsg="login_required").getJson()) />
@@ -16,7 +16,7 @@
 	</cffunction>
 	
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
-
+	
 	<cffunction name="ajaxAdminRequired">
 		<cfif structKeyExists(session,"currentuser") AND NOT session.account.isAdmin()>
 			<cfset renderText(createObject("component","lib.buildStruct").init(status=false,statusMsg="admin_required").getJson()) />
@@ -25,9 +25,18 @@
 	
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
 
-  <cffunction name="loginRequired">
+	<cffunction name="loginRequired">
 		<cfif Not structKeyExists(session,"currentUser")>
-			<cfset flashInsert(error="You do not have permissions to do that!")>
+			<cfset flashInsert(error="You must be logged in to continue...")>
+			<cfset redirectTo(controller="sessions", action="new")>
+		</cfif>
+	</cffunction>
+	
+	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
+	
+	<cffunction name="adminRequired">
+		<cfif structKeyExists(session,"currentuser") AND NOT session.account.isAdmin()>
+			<cfset flashInsert(error="You must be an administrator to continue...")>
 			<cfset redirectTo(controller="sessions", action="new")>
 		</cfif>
 	</cffunction>
