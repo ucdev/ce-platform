@@ -124,6 +124,8 @@ js.addAll([
 "app/user/events", // ce.user.events
 "app/user/auth", // ce.user.auth
 "app/activity", // ce.activity
+"app/activity/credit_requests", // ce.activity
+"app/activity/credit_requests/events", // ce.activity
 "app/person" // ce.person
 ]);
 </cfscript>

@@ -5,6 +5,30 @@
 		<cfset filters(through="pagelet",type="before") />
 		<cfset filters(through="createAssets",type="before") />
 		<cfset filters(through="setUserInfo",type="before") />
+		<cfset filters(through="loadTmpls",type="before") />
+	</cffunction>
+	
+	<cffunction name="loadTmpls">
+		<cfparam name="controller" type="string" default="">
+		
+		<cfset var tmpls = "" />
+		<cfset var tmplContent = "" />
+		
+		<cfif NOT isEmpty(params.controller)>
+			<cfset tmplDir = expandPath("/views/#tmplController#/templates/") />
+			<cfset partialName = replace(tmpls.name,"_","") />
+			
+			<cfif NOT directoryExists(tmplDir)>
+				<cfdirectory action="create" directory="#tmplDir#">
+			</cfif>
+		
+		<cfdirectory action="list" directory="#tmplDir#" filter="*.cfm" name="tmpls">
+		
+		<cfloop query="tmpls">
+			<cfset tmplKey = trim(params.controller) & "-" & trim(partialName) />
+			<cfset tmplContent = tmplContent & renderPartial(partial="#tmplDir##replace(tmpls.name,"_","")#",returnAs="string") />
+		</cfloop>
+		</cfif>
 	</cffunction>
 	
 	<cffunction name="setUserInfo">
