@@ -15,7 +15,6 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 			'click .js-status-Selected': 'viewSelectedRows',
 			'click .js-change-status': 'updateAttendeeStatuses',
 			'click .js-print': 'printDocument',
-			'click .js-attendee-rows': '',
 			'click .js-check-all': 'monitorCheckAll'
 		},
 		

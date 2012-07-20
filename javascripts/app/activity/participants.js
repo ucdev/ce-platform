@@ -15,14 +15,14 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 			totalPages: params.legacy.totalPages
 		};
 		
+		// CREATE ACTIVITY_PARTICIPANTS PAGE VIEW
+		self.View = new self.IndexView();
+		
 		// CREATE COLLECTION
 		self.collection = new ce.Collections.Activity_participants();
 		
 		// FILL COLLECTION
 		self.collection.fetch({ type: 'post', data: { key: ce.activity.Model.get('id') } });
-		
-		// CREATE ACTIVITY_PARTICIPANTS PAGE VIEW
-		self.View = new self.IndexView();
  
 		//console.dir(self.View);
 		//self.loadRegistrants();

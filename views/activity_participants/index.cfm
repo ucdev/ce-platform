@@ -51,7 +51,4 @@
 <div class="btn-toolbar clearfix">
     <div class="btn-group pull-right pager-simple js-ui-pager"></div>
 </div>
-#includePartial(partial="mustache/filter")#
-#includePartial(partial="mustache/row")#
-#includePartial(partial="mustache/pager")#
 </cfoutput>
