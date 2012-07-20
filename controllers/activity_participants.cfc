@@ -56,15 +56,10 @@
     <cffunction name="loadData">
 		<cfparam name="params.key" type="integer" default="0" />
         
-		<cfset returnVar = createObject("component","_com.returnData.buildStruct").init() />
-        
 		<cfset qAttendees = Application.activityAttendee.getAttendees(ActivityID=params.key,DeletedFlag="N")>
         <cfset attendees = $cleanupAttendees() />
         
-        <cfset returnVar.setData(queryToStruct(qAttendees)) />
-        <cfset returnVar.setPayload(attendees) />
-        
-        <cfreturn renderText(returnVar.getJSON()) />
+        <cfreturn renderText(serializeJSON(attendees)) />
     </cffunction>
 	
 	<!--- activity_participants/new --->
@@ -495,60 +490,81 @@
     
     <cffunction name="$cleanupAttendees">
     	<!--- ATTENDEES RESULT SET IS PASSED IN --->
-        <cfset attendees = {} />
+        <cfset attendees = queryNew("activityId,attendeeId,city,completeDate,created,currStatusDate,deleted,deletedFlag,email,firstName,fullName,isDeleted,isMD,isReal,isStatus1,isStatus2,isStatus3,isStatus4,lastName,mdFlag,middleName,payAmount,paymentDate,payOrderNo,personDeleted,personId,registerDate,startDate,state,statusId,statusName,termDate,updated") />
         
         <cfloop query="qAttendees">
-        	<cfset attendees[qAttendees.attendeeId]['data'] = {
-													'activityId': qAttendees.activityId,
-													'attendeeId': qAttendees.attendeeId,
-													'city': qAttendees.city,
-													'completeDate': qAttendees.completeDate,
-													'created': qAttendees.created,
-													'currStatusDate': qAttendees.currStatusDate,
-													'deleted': qAttendees.deleted,
-													'deletedFlag': qAttendees.deletedFlag,
-													'email': qAttendees.email,
-													'firstName': qAttendees.firstName,
-													'fullName': qAttendees.fullName,
-													'isDeleted': false,
-													'isMD': false,
-													'isReal': true,
-													'isStatus1': false,
-													'isStatus2': false,
-													'isStatus3': false,
-													'isStatus4': false,
-													'lastName': qAttendees.lastName,
-													'mdFlag': qAttendees.mdFlag,
-													'middleName': qAttendees.middleName,
-													'payAmount': qAttendees.payAmount,
-													'paymentDate': qAttendees.paymentDate,
-													'payOrderNo': qAttendees.payOrderNo,
-													'personDeleted': qAttendees.personDeleted,
-													'personId': qAttendees.personId,
-													'registerDate': qAttendees.registerDate,
-													'startDate': qAttendees.startDate,
-													'state': qAttendees.state,
-													'statusId': qAttendees.statusId,
-													'statusName': qAttendees.statusName,
-													'termDate': qAttendees.termDate,
-													'updated': qAttendees.updated
-													} />
-                                                    
-        	<cfif qAttendees.deletedFlag EQ "Y">
-            	<cfset attendees[qAttendees.attendeeId]['data']['isDeleted'] = true>
+        	<cfset queryAddRow(attendees)>
+            <cfset querySetCell(attendees, 'activityId', qAttendees.activityId)>
+            <cfset querySetCell(attendees, 'attendeeId', qAttendees.attendeeId)>
+            <cfset querySetCell(attendees, 'city', qAttendees.city)>
+            <cfset querySetCell(attendees, 'completeDate', qAttendees.completeDate)>
+            <cfset querySetCell(attendees, 'created', qAttendees.created)>
+            <cfset querySetCell(attendees, 'currStatusDate', qAttendees.currStatusDate)>
+            <cfset querySetCell(attendees, 'deleted', qAttendees.deleted)>
+            <cfset querySetCell(attendees, 'deletedFlag', qAttendees.deletedFlag)>
+            <cfset querySetCell(attendees, 'email', qAttendees.email)>
+            <cfset querySetCell(attendees, 'firstName', qAttendees.firstName)>
+            <cfset querySetCell(attendees, 'fullName', qAttendees.fullName)> 
+            <cfset querySetCell(attendees, 'lastName', qAttendees.lastName)>
+            <cfset querySetCell(attendees, 'mdFlag', qAttendees.mdFlag)>
+            <cfset querySetCell(attendees, 'middleName', qAttendees.middleName)>
+            <cfset querySetCell(attendees, 'payAmount', qAttendees.payAmount)>
+            <cfset querySetCell(attendees, 'paymentDate', qAttendees.paymentDate)>
+            <cfset querySetCell(attendees, 'payOrderNo', qAttendees.payOrderNo)>
+            <cfset querySetCell(attendees, 'personDeleted', qAttendees.personDeleted)>
+            <cfset querySetCell(attendees, 'personId', qAttendees.personId)>
+            <cfset querySetCell(attendees, 'registerDate', qAttendees.registerDate)>
+            <cfset querySetCell(attendees, 'startDate', qAttendees.startDate)>
+            <cfset querySetCell(attendees, 'state', qAttendees.state)>
+            <cfset querySetCell(attendees, 'statusId', qAttendees.statusId)>
+            <cfset querySetCell(attendees, 'statusName', qAttendees.statusName)>
+            <cfset querySetCell(attendees, 'termDate', qAttendees.termDate)>
+            <cfset querySetCell(attendees, 'updated', qAttendees.updated)> 
+        	
+			<cfif qAttendees.deletedFlag EQ "Y">
+            	<cfset querySetCell(attendees, 'isDeleted', true)>
+            <cfelse>
+           		<cfset querySetCell(attendees, 'isDeleted', false)>
             </cfif>
-                                                    
-        	<cfif NOT qAttendees.hasAcctFlag>
-            	<cfset attendees[qAttendees.attendeeId]['data']['isReal'] = false>
+            
+            <cfif qAttendees.mdFlag EQ "Y">
+				<cfset querySetCell(attendees, 'isMD', true)>
+            <cfelse>
+				<cfset querySetCell(attendees, 'isMD', false)>
             </cfif>
-                                                    
-        	<cfif qAttendees.mdFlag EQ "Y">
-            	<cfset attendees[qAttendees.attendeeId]['data']['isMD'] = true>
+            
+            <cfif NOT qAttendees.hasAcctFlag>
+	            <cfset querySetCell(attendees, 'isReal', false)>
+            <cfelse>
+	            <cfset querySetCell(attendees, 'isReal', true)>
             </cfif>
-                                                    
+            
+            <cfif qAttendees.statusId EQ 1>
+            	<cfset querySetCell(attendees, 'isStatus1', true)>
+            <cfelse>
+            	<cfset querySetCell(attendees, 'isStatus1', false)>
+            </cfif>
+            
+            <cfif qAttendees.statusId EQ 2>
+            	<cfset querySetCell(attendees, 'isStatus2', true)>
+            <cfelse>
+            	<cfset querySetCell(attendees, 'isStatus2', false)>
+            </cfif>
+            
+            <cfif qAttendees.statusId EQ 3>
+            	<cfset querySetCell(attendees, 'isStatus3', true)>
+            <cfelse>
+            	<cfset querySetCell(attendees, 'isStatus3', false)>
+            </cfif>
+            
+            <cfif qAttendees.statusId EQ 4>
+            	<cfset querySetCell(attendees, 'isStatus4', true)>
+            <cfelse>
+            	<cfset querySetCell(attendees, 'isStatus4', false)>
+            </cfif>                           
         </cfloop>
         
-        <cfreturn attendees />
+        <cfreturn queryToStruct(attendees) />
     </cffunction>
 	
 	
