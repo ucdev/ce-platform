@@ -21,10 +21,12 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 		self.loadRegistrants();
 		
 		self.on('participants_loaded', function() {
-			self.collection = new ce.Collections.Activity_participants({
+			self.Collection = new ce.Collections.Activity_participants({
 				collection: self.rows,
 				el: '.js-participants-table'
 			});
+			
+			self.Collection.render();
 		});
 	};
 });
