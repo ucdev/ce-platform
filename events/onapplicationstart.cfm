@@ -107,6 +107,7 @@ js.addAll([
 
 /* ce.ui */
 "app/ui",
+"app/ui/pager",
 "app/ui/typeahead",
 "app/ui/tokenizer",
 "app/ui/actionMenu"
@@ -122,6 +123,7 @@ js.addAll([
 "app/activity", // ce.activity
 "app/activity/participants", // ce.activity.participants
 "app/activity/participants/row", // ce.activity.participants.row
+"app/activity/participants/filter", // ce.activity.participants.row
 "app/person" // ce.person
 ]);
 </cfscript>
