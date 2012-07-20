@@ -22,13 +22,15 @@
 				<cfdirectory action="create" directory="#tmplDir#">
 			</cfif>
 		
-		<cfdirectory action="list" directory="#tmplDir#" filter="*.cfm" name="tmpls">
-		
-		<cfloop query="tmpls">
-			<cfset tmplKey = trim(params.controller) & "-" & trim(partialName) />
-			<cfset tmplContent = tmplContent & renderPartial(partial="#tmplDir##replace(tmpls.name,"_","")#",returnAs="string") />
-		</cfloop>
+			<cfdirectory action="list" directory="#tmplDir#" filter="*.cfm" name="tmpls">
+			
+			<cfloop query="tmpls">
+				<cfset tmplKey = trim(params.controller) & "-" & trim(partialName) />
+				<cfset tmplContent[tmplKey] = renderPartial(partial="#tmplDir##replace(tmpls.name,"_","")#",returnAs="string") />
+			</cfloop>
 		</cfif>
+		
+		<cfset ejsTemplates = tmplContent />
 	</cffunction>
 	
 	<cffunction name="setUserInfo">

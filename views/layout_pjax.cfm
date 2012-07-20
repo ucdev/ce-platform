@@ -11,4 +11,8 @@
 <div id="pagelet_#params.pagelet#" data-pagelet_token="#params.pagelet_token#" data-controller="#lcase(params.controller)#" data-action="#lcase(params.action)#">
 	#includeContent()#
 </div>
+
+<script>
+ce.templates = $.extend({},ce.templates,#serializeJson(ejsTemplates)#);
+</script>
 </cfoutput>
