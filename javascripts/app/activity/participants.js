@@ -22,18 +22,18 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 		self.collection = new ce.Collections.Activity_participants();
 		
 		// FILL COLLECTION
-		self.collection.fetch({ type: 'post', data: { key: ce.activity.Model.get('id') } });
- 
-		//console.dir(self.View);
-		//self.loadRegistrants();
+		self.collection.fetch({ 
+			type: 'post', 
+			data: { key: ce.activity.Model.get('id') },
+			success: function(data) {
+				self.trigger('participants_loaded');
+			}
+		});
 		
-		/*
 		self.on('participants_loaded', function() {
-			self.Collection = new ce.Collections.Activity_participants({
-				collection: self.rows,
-				el: '.js-participants-table'
+			$(self.collection.models).each(function(i, participant) {
+				participant.view = new self.RowView({ model: participant });
 			});
 		});
-		*/
 	};
 });

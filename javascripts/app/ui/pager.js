@@ -1,5 +1,5 @@
-ce.module("ui.pager",function(self,ce,Backbone,Marionette,$,_,Mustache){
-	Pager = Backbone.View.extend({
+ce.module("ui.pager",function(self,ce,Backbone,Marionette,$,_){
+	ce.ui.pager = Backbone.View.extend({
         initialize: function(){
             this.render();
         },
@@ -14,9 +14,9 @@ ce.module("ui.pager",function(self,ce,Backbone,Marionette,$,_,Mustache){
 		
 		render: function() {
 			var variables = { page_no: 1 };
-			var template = Mustache.render($('#ui-pager').html(), variables);
+			//var template = Mustache.render($('#ui-pager').html(), variables);
 			
-			this.$el.html(template);
+			//this.$el.html(template);
 			
 			ce.log.info('pager: loaded');
 		},
@@ -127,4 +127,4 @@ ce.module("ui.pager",function(self,ce,Backbone,Marionette,$,_,Mustache){
 		
 		this.pager['page'] = $('.js-page');
 	};
-}, ce.vendor.Mustache);
+});

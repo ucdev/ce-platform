@@ -1,4 +1,4 @@
-ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_,Mustache) {
+ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 	self.RowView =  Backbone.View.extend({
         initialize: function(){
 			this.render();
@@ -14,7 +14,6 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_,Musta
 		},
 		
 		render: function() {
-			self.rows[this.model.get('attendeeId')].row = $(Mustache.render($('#attendee-row').html(), this.model.toJSON()));
 		},
 		
 		changeAttendeeViewableStatus: function(params) {
@@ -152,4 +151,4 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_,Musta
 		}
 	});
 	
-}, ce.vendor.Mustache);
+});

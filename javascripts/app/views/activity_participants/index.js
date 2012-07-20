@@ -7,7 +7,7 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 		
 		constructor: function() {
 			self.filter = new self.Filter();
-			self.pager = new Pager();
+			//self.pager = new ce.ui.pager();
 		},
 		
 		events: {
