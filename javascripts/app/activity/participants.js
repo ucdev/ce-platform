@@ -15,18 +15,25 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 			totalPages: params.legacy.totalPages
 		};
 		
+		// CREATE COLLECTION
+		self.collection = new ce.Collections.Activity_participants();
+		
+		// FILL COLLECTION
+		self.collection.fetch({ type: 'post', data: { key: ce.activity.Model.get('id') } });
+		
+		// CREATE ACTIVITY_PARTICIPANTS PAGE VIEW
 		self.View = new self.IndexView();
  
 		//console.dir(self.View);
-		self.loadRegistrants();
+		//self.loadRegistrants();
 		
+		/*
 		self.on('participants_loaded', function() {
 			self.Collection = new ce.Collections.Activity_participants({
 				collection: self.rows,
 				el: '.js-participants-table'
 			});
-			
-			self.Collection.render();
 		});
+		*/
 	};
 });
