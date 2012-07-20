@@ -1,4 +1,6 @@
 /*! ce.Models.<%= loc.nameInSingularUppercase =%> extends Backbone.Model */
 ce.module("Models",function(self,ce,Backbone,Marionette,$,_) {
-	this.<%= loc.nameInSingularUppercase =%> =  Backbone.Model.extend({});
+	this.<%= loc.nameInSingularUppercase =%> =  Backbone.Model.extend({
+		url:'/<%= loc.nameInPluralLowercase =%>/:id'
+	});
 });

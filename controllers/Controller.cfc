@@ -9,7 +9,7 @@
 	</cffunction>
 	
 	<cffunction name="loadTmpls">
-		<cfparam name="controller" type="string" default="">
+		<cfparam name="params.controller" type="string" default="">
 		
 		<cfset var tmpls = "" />
 		<cfset var tmplContent = "" />
