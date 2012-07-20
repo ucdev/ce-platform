@@ -111,6 +111,7 @@ js.addAll([
 /* ce.ui */
 "app/ui",
 "app/ui/dialog",
+"app/ui/pager",
 "app/ui/typeahead",
 "app/ui/tokenizer",
 "app/ui/actionMenu"
