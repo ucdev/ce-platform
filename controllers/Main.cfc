@@ -5,9 +5,9 @@
 		<cfset pageSubTitle("Browse or search activities.") />
 		
 		<cfif isLoggedin()>
-			<cfset subLayout("user") />
+			<cfset subLayout("user","/users/home") />
 		<cfelse>
-			
+			<cfset subLayout("guest","/main/home") />
 		</cfif>
 	</cffunction>
 	

@@ -74,6 +74,7 @@
 	
 	<cffunction name="subLayout">
 		<cfargument name="layoutFile" type="string" required="no" default="" />
+		<cfargument name="template" type="string" required="no" default="" />
 		<cfparam name="params.controller" default="" />
 		<cfparam name="params.action" default="" />
 		<cfparam name="params.key" default="0" />
@@ -92,7 +93,7 @@
 									$layout='/layout_pjax',
 									$type='template',
 									$content=$renderPage(
-										$template="",
+										$template="#arguments.template#",
 										$controller=params.controller,
 										$action=params.action,
 										$key=params.key,
@@ -107,7 +108,7 @@
 								$layout='/layout_pjax',
 								$type='template',
 								$content=$renderPage(
-									$template="",
+									$template="#arguments.template#",
 									$controller=params.controller,
 									$action=params.action,
 									$key=params.key,
@@ -126,7 +127,7 @@
 							$layout='/layout_#arguments.layoutFile#',
 							$type='template',
 							$content=$renderPage(
-								$template="",
+								$template="#arguments.template#",
 								$controller=params.controller,
 								$action=params.action,
 								$key=params.key,
@@ -138,6 +139,7 @@
 			</cfscript>
 		</cfif>
 	</cffunction>
+	
 	
 	<cffunction name="pageTitle">
 		<cfargument name="titleText" type="string" required="no" default="" />
