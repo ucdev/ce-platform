@@ -12,21 +12,19 @@
 		<cfparam name="params.controller" type="string" default="">
 		
 		<cfset var tmpls = "" />
-		<cfset var tmplContent = "" />
-		
-		<cfif NOT isEmpty(params.controller)>
-			<cfset tmplDir = expandPath("/views/#tmplController#/templates/") />
-			<cfset partialName = replace(tmpls.name,"_","") />
+		<cfset var tmplContent = {} />
+		<cfif len(trim(params.controller)) GT 0>
+			<cfset tmplDir = expandPath("/views/#params.controller#/templates/") />
 			
 			<cfif NOT directoryExists(tmplDir)>
 				<cfdirectory action="create" directory="#tmplDir#">
 			</cfif>
 		
 			<cfdirectory action="list" directory="#tmplDir#" filter="*.cfm" name="tmpls">
-			
 			<cfloop query="tmpls">
+				<cfset partialName = replace(replace(tmpls.name,"_",""),".cfm","") />
 				<cfset tmplKey = trim(params.controller) & "-" & trim(partialName) />
-				<cfset tmplContent[tmplKey] = renderPartial(partial="#tmplDir##replace(tmpls.name,"_","")#",returnAs="string") />
+				<cfset tmplContent[lcase(tmplKey)] = renderPartial(partial="templates/#partialName#",returnAs="string") />
 			</cfloop>
 		</cfif>
 		
