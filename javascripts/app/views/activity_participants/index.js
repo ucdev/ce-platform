@@ -7,7 +7,7 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 		
 		constructor: function() {
 			self.filter = new self.Filter();
-			self.pager = new Pager();
+			//self.pager = new ce.ui.pager();
 		},
 		
 		events: {
@@ -15,7 +15,6 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 			'click .js-status-Selected': 'viewSelectedRows',
 			'click .js-change-status': 'updateAttendeeStatuses',
 			'click .js-print': 'printDocument',
-			'click .js-attendee-rows': '',
 			'click .js-check-all': 'monitorCheckAll'
 		},
 		

@@ -1,4 +1,4 @@
-ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_,Mustache){
+ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_){
 	self.Filter = Backbone.View.extend({
         initialize: function(){
             this.render();
@@ -14,9 +14,9 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_,Musta
 		
 		render: function() {
 			var variables = { page_no: 1 };
-			var template = Mustache.render($('#attendee-filter').html(), variables);
+			//var template = Mustache.render($('#attendee-filter').html(), variables);
 			
-			this.$el.html(template);
+			//this.$el.html(template);
 			
 			ce.log.info('filter: loaded');
 		},
@@ -95,4 +95,4 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_,Musta
 			}
 		}
 	});
-}, ce.vendor.Mustache);
+});
