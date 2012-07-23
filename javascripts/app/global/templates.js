@@ -7,24 +7,23 @@ ce.module("templates",function(self,ce,Backbone,Marionette,$,_) {
 		var template = "";
 		if (!tmpl){
 			$.ajax({
-			   url:'/tmpls/loader/' + tmplKey,
-			   type:'post',
-			   dataType:'html',
-			   async:false,
-			   success:function(data) {
-				template = data;
-			   }
+				url:'/tmpls/loader/' + tmplKey,
+				type:'post',
+				dataType:'html',
+				async:false,
+				success:function(data) {
+					template = $(data).html();
+					//ce.log.info(template);
+				}
 			});
 		  // precompile the template, for underscore.js templates
-		  tmpl = _.template(template.toString());
+		  tmpl = template;
 		  self.cache[tmplKey] = tmpl;
 		}
 	
 		return tmpl;
 	}
 });
-ce.templates.get('credit_requests-row');
-
 Backbone.Marionette.TemplateCache.prototype.loadTemplate = function(templateId){
 	var myTemplate = ce.templates.get(templateId);
 	

@@ -3,7 +3,6 @@ ce.module("activity.credit_requests",function(self,ce,Backbone,Marionette,$,_) {
 	self.ViewListItem = Backbone.Marionette.ItemView.extend({
 		template:"credit_requests-row",
 		tagName:"tr",
-		id:"credit_request",
 		className:"creditRequest"
 	});
 	
