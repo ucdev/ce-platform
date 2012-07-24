@@ -8,11 +8,9 @@ ce.module("templates",function(self,ce,Backbone,Marionette,$,_) {
 		if (!tmpl){
 			$.ajax({
 				url:'/tmpls/loader/' + tmplKey,
-				type:'post',
-				dataType:'html',
 				async:false,
 				success:function(data) {
-					template = $(data).html();
+					template = data;
 					//ce.log.info(template);
 				}
 			});

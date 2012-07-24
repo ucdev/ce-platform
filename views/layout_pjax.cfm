@@ -8,7 +8,7 @@
 </cfif>
 <!---<script src="/javascripts/#application.version_token#/app/views/#lcase(params.controller)#/#params.action#.js" type="text/javascript"></script>--->
 
-<div id="pagelet_#params.pagelet#" data-pagelet_token="#params.pagelet_token#" data-controller="#lcase(params.controller)#" data-action="#lcase(params.action)#">
+<div id="pagelet_#params.pagelet#" data-pagelet_token="#params.pagelet_token#" data-controller="#lcase(params.controller)#" data-action="#lcase(params.action)#" class="content-container">
 	#includeContent()#
 </div>
 </cfoutput>

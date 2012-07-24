@@ -1,26 +1,18 @@
 ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 	self.Row = Backbone.Marionette.ItemView.extend({
-		el: '.js-attendee-rows',
+		tagName: 'tr',
+		className:'activity_participants-row',
 		template:'activity_participants-row',
-		tagName:'tr',
-		
-		className:'attendeeRow',
-		onRender: function() {
-			var _data = this.serializeData()
-			var _temp = this.getTemplate();
-			var _html = Marionette.Renderer.render(_temp, _data);
-			console.log(_html);
-			//this.$el.append(_html);
-		}
 	});
 	
 	self.List = Backbone.Marionette.CompositeView.extend({
-		el: '.js-registrants-container',
-		tagName: 'table',
+		tagName: 'div',
+		className: 'activity_participants-page',
 		itemView: self.Row,
-		id:'RegistrantsContainer',
-		className: 'table-striped table-bordered',
-		template: 'activity_participants-table'
+		template: 'activity_participants-table',
+		appendHtml: function(collectionView, itemView) {
+			collectionView.$('tbody').append(itemView.el);
+		},
 	});
 	
 	self.load = function(params) {
@@ -47,9 +39,6 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 		self.CompositeView = new self.List({
 			collection: self.collection
 		});
-		
-		self.filter = new self.Filter();
-		self.pager = new ce.ui.Pager();
 		
 		ce.subpage.show(self.CompositeView);
 		self.trigger("page_loaded");
