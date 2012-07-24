@@ -1,5 +1,6 @@
 ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 	self.Row.extend({
+		el: 'js-attendee-rows',
 		
 		events: {
 			'click .js-view-attendee-statusdate': 'changeAttendeeViewableStatus',

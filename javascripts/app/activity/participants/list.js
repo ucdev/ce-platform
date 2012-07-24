@@ -1,9 +1,6 @@
 /*! ce.Views.Activity_participants.IndexView extends Backbone.Marionette.CompositeView */
 ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 	self.List.extend({
-		renderCollection: function() {
-			console.log('TEST');
-		},
 		
 		events: {
 			'click .js-remove-attendees': 'removeAttendees',

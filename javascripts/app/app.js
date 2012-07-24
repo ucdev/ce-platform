@@ -10,7 +10,7 @@ ce.bind("initialize:before", function(options){
 
 ce.addRegions({
   page: "#page",
-  subpage: ".contentBar"
+  subpage: ".contentBar div.content-container"
 });
 
 ce.bind("initialize:after", function(options){
