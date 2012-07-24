@@ -1,20 +1,22 @@
 /*! ce.user @description: represents the current user */
-ce.module("user",function(self,ce,Backbone,Marionette,$,_) {
-	self.Model = ce.Models.Person.extend({});
-	
-	
-	self.load = function(params) {
-		self.model = new self.Model(params);
+ce.module("user",{
+	startWithApp:false,
+	define:function(self,ce,Backbone,Marionette,$,_) {
+		self.Model = ce.Models.Person.extend({});
 		
-		self.trigger("loaded");
-	}
-	
-	
-	$(function() {
-		$(".loginLink").click(function(ev) {
-			self.login({});
+		self.addInitializer(function(params) {
+			self.model = new self.Model(params);
 			
-			return false;
+			self.trigger("loaded");
 		});
-	});
+		
+		
+		$(function() {
+			$(".loginLink").click(function(ev) {
+				self.login({});
+				
+				return false;
+			});
+		});
+	}
 });

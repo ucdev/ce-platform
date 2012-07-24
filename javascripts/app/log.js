@@ -202,3 +202,5 @@ ce.module("log",function(self,ce,Backbone,Marionette,$,_,wndw){
     }
   };
 },window);
+
+ce.log.start();
