@@ -22,3 +22,5 @@ ce.module("templates",function(self,ce,Backbone,Marionette,$,_) {
 		return tmpl;
 	}
 });
+
+ce.templates.start();
