@@ -32,20 +32,6 @@
 </div>
 <div>
 	<div id="RegistrantsContainer" class="js-registrants-container">
-    <table border="0" width="620" cellpadding="0" cellspacing="0" class="js-participants-table">
-        <thead>
-            <tr>
-                <th><input type="checkbox" name="CheckAll" id="CheckAll" class="js-check-all" /></th>
-                <th class="span2"></th>
-                <th class="span4">Name</th>
-                <th class="span7">Status</th>
-                <th>&nbsp;</th>
-            </tr>
-        </thead>
-        <tbody class="js-attendee-rows">
-        <!--- INSERT ATTENDEES HERE --->
-        </tbody>
-    </table>
     </div>
 </div>
 <div class="btn-toolbar clearfix">

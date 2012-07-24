@@ -1,5 +1,6 @@
-ce.module("ui.pager",function(self,ce,Backbone,Marionette,$,_){
-	ce.ui.pager = Backbone.View.extend({
+ce.module("ui",function(self,ce,Backbone,Marionette,$,_){
+	self.Pager = Backbone.Marionette.ItemView.extend({
+		template: 'activity_participants-pager',
         initialize: function(){
             this.render();
         },
@@ -13,12 +14,13 @@ ce.module("ui.pager",function(self,ce,Backbone,Marionette,$,_){
 		},
 		
 		render: function() {
-			var variables = { page_no: 1 };
-			//var template = Mustache.render($('#ui-pager').html(), variables);
+			var _data = { page_no: 1 };
+			var _temp = Marionette.Renderer.render(this.getTemplate());
+			var _tempRendered = _.template(_temp, _data);
 			
-			//this.$el.html(template);
+			this.$el.html(_tempRendered);
 			
-			ce.log.info('pager: loaded');
+			self.trigger('pager_loaded');
 		},
 		
 		nextPage: function() {

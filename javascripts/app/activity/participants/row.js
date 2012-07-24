@@ -1,19 +1,11 @@
 ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
-	self.RowView =  Backbone.View.extend({
-        initialize: function(){
-			this.render();
-        },
-		
-		el: '.js-attendee-rows',
+	self.Row.extend({
 		
 		events: {
 			'click .js-view-attendee-statusdate': 'changeAttendeeViewableStatus',
 			'change .js-selected-checkbox': 'selectRow',
 			'click .js-delete-link': 'deleteFakeAttendee',
 			'click .js-edit-status-date': 'editStatusDate'
-		},
-		
-		render: function() {
 		},
 		
 		changeAttendeeViewableStatus: function(params) {
@@ -150,5 +142,4 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 			}
 		}
 	});
-	
 });

@@ -1,4 +1,28 @@
 ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
+	self.Row = Backbone.Marionette.ItemView.extend({
+		el: '.js-attendee-rows',
+		template:'activity_participants-row',
+		tagName:'tr',
+		
+		className:'attendeeRow',
+		onRender: function() {
+			var _data = this.serializeData()
+			var _temp = this.getTemplate();
+			var _html = Marionette.Renderer.render(_temp, _data);
+			console.log(_html);
+			//this.$el.append(_html);
+		}
+	});
+	
+	self.List = Backbone.Marionette.CompositeView.extend({
+		el: '.js-registrants-container',
+		tagName: 'table',
+		itemView: self.Row,
+		id:'RegistrantsContainer',
+		className: 'table-striped table-bordered',
+		template: 'activity_participants-table'
+	});
+	
 	self.load = function(params) {
 		self.details = {
 			AddlAttendees: params.legacy.AddlAttendees,
@@ -15,25 +39,19 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 			totalPages: params.legacy.totalPages
 		};
 		
-		// CREATE ACTIVITY_PARTICIPANTS PAGE VIEW
-		self.View = new self.IndexView();
+		self.records = params.records;
 		
 		// CREATE COLLECTION
-		self.collection = new ce.Collections.Activity_participants();
+		self.collection = new ce.Collections.Activity_participants(params.records);
 		
-		// FILL COLLECTION
-		self.collection.fetch({ 
-			type: 'post', 
-			data: { key: ce.activity.Model.get('id') },
-			success: function(data) {
-				self.trigger('participants_loaded');
-			}
+		self.CompositeView = new self.List({
+			collection: self.collection
 		});
 		
-		self.on('participants_loaded', function() {
-			$(self.collection.models).each(function(i, participant) {
-				participant.view = new self.RowView({ model: participant });
-			});
-		});
+		self.filter = new self.Filter();
+		self.pager = new ce.ui.Pager();
+		
+		ce.subpage.show(self.CompositeView);
+		self.trigger("page_loaded");
 	};
 });

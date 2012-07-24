@@ -127,7 +127,9 @@ js.addAll([
 "app/user/auth", // ce.user.auth
 "app/activity", // ce.activity
 "app/activity/participants", // ce.activity.participants
+"app/activity/participants/events", // ce.activity.participants events
 "app/activity/participants/filter", // ce.activity.participants filter
+"app/activity/participants/list", // ce.activity.participants list
 "app/activity/participants/row", // ce.activity.participants row
 "app/activity/credit_requests", // ce.activity
 "app/activity/credit_requests/events", // ce.activity

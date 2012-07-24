@@ -1,5 +1,6 @@
 ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_){
-	self.Filter = Backbone.View.extend({
+	self.Filter = Backbone.Marionette.ItemView.extend({
+		template: 'activity_participants-filter',
         initialize: function(){
             this.render();
         },
@@ -13,12 +14,13 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_){
 		},
 		
 		render: function() {
-			var variables = { page_no: 1 };
-			//var template = Mustache.render($('#attendee-filter').html(), variables);
+			var _data = { };
+			var _temp = this.getTemplate();
+			var _html = Marionette.Renderer.render(_temp);
 			
-			//this.$el.html(template);
+			this.$el.html(_html);
 			
-			ce.log.info('filter: loaded');
+			self.trigger('filter_loaded');
 		},
 		
 		changeActiveAttendeeStatus: function() {

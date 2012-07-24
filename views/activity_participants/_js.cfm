@@ -12,13 +12,9 @@
 
 <cfoutput>
 <script>
-/*
-
-CE.addInitializer(function(options) {
-	debug.info("init: activity_participants");
-});*/
 $(document).ready(function() {
 	ce.activity.participants.load({
+		records: #serializeJson(attendees)#,
 		modelData:#serializeJson(qActivityCredits)#,
 		legacy:{
 			AddlAttendees:0,
