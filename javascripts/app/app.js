@@ -18,7 +18,7 @@ ce.bind("initialize:after", function(options){
 });
 
 ce.addInitializer(function(options) {
-	debug.info("init: app");
+	ce.log.info("init: app");
 });
 
 $(document).ready(function() {

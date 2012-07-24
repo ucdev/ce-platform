@@ -24,8 +24,8 @@ ce.module("ui",function(self,ce,Backbone,Marionette,$,_){
 			this.$el.dialog('close');
 		}
 	});
-});
-
-ce.addRegions({
-	dialog:ce.ui.dialog
+	
+	ce.addRegions({
+		dialog:ce.ui.dialog
+	});
 });

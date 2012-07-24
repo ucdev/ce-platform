@@ -65,33 +65,29 @@ js.addAll([
 /* Backbone */
 "vendor/backbone/backbone",
 "vendor/backbone/backbone.marionette",
-"vendor/knockout-2.1.0.debug.js",
-"vendor/knockback.js",
-
 
 /* jQuery Plugins */
-"vendor/jquery/jquery.form.js",
-"vendor/jquery/jquerymx-3.2.custom.js",
-"vendor/jquery/jquery.qtip.js",
+"vendor/jquery/jquery.form",
+"vendor/jquery/jquery.qtip",
 "vendor/jquery/jquery.blockUI",
 "vendor/jquery/jquery.cfjs.packed",
 "vendor/jquery/jquery.maskedinput-1.1.3.pack",
 "vendor/jquery/jquery.tokenInput",
-"vendor/jquery/jquery.pjax.js",
+"vendor/jquery/jquery.pjax",
 
 /* Twitter Bootstrap JS */
-"vendor/bootstrap/bootstrap-transition",
+<!---"vendor/bootstrap/bootstrap-transition",
 "vendor/bootstrap/bootstrap-alert",
-"vendor/bootstrap/bootstrap-modal",
+"vendor/bootstrap/bootstrap-modal",--->
 "vendor/bootstrap/bootstrap-dropdown",
-"vendor/bootstrap/bootstrap-scrollspy",
+<!---"vendor/bootstrap/bootstrap-scrollspy",
 "vendor/bootstrap/bootstrap-tab",
 "vendor/bootstrap/bootstrap-tooltip",
-"vendor/bootstrap/bootstrap-popover",
+"vendor/bootstrap/bootstrap-popover",--->
 "vendor/bootstrap/bootstrap-button",
-"vendor/bootstrap/bootstrap-collapse",
+<!---"vendor/bootstrap/bootstrap-collapse",
 "vendor/bootstrap/bootstrap-carousel",
-"vendor/bootstrap/bootstrap-typeahead",
+"vendor/bootstrap/bootstrap-typeahead",--->
 
 // APPLICATION JS
 /* ce */

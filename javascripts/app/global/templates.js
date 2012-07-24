@@ -24,8 +24,3 @@ ce.module("templates",function(self,ce,Backbone,Marionette,$,_) {
 		return tmpl;
 	}
 });
-Backbone.Marionette.TemplateCache.prototype.loadTemplate = function(templateId){
-	var myTemplate = ce.templates.get(templateId);
-	
-	return myTemplate;
-}
