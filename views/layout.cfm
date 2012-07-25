@@ -41,16 +41,14 @@
 		<div class="alert alert-success" style="display:none;"></div>
 	</div>
 	
-	<div id="dialog"></div>
-	
 	<script type="text/javascript">
 		//SETUP CE
-		ce.bind("initialize:after", function(options){
-			ce.user.start(#serializeJson(userInfo)#);
+		$(function() {
+			ce.user.load(#serializeJson(userInfo)#);
 		});
-		
-		ce.start();
 	</script>
+	
+	<div id="dialog"></div>
 </body>
 </cfoutput>
 </html>
