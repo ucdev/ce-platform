@@ -64,6 +64,7 @@ js.addAll([
 
 /* Backbone */
 "vendor/backbone/backbone",
+"vendor/backbone/backbone.paginator",
 "vendor/backbone/backbone.marionette",
 "vendor/knockout-2.1.0.debug.js",
 "vendor/knockback.js",
@@ -129,8 +130,8 @@ js.addAll([
 "app/activity/participants", // ce.activity.participants
 "app/activity/participants/events", // ce.activity.participants events
 "app/activity/participants/filter", // ce.activity.participants filter
-"app/activity/participants/list", // ce.activity.participants list
 "app/activity/participants/row", // ce.activity.participants row
+"app/activity/participants/list", // ce.activity.participants list
 "app/activity/credit_requests", // ce.activity
 "app/activity/credit_requests/events", // ce.activity
 "app/person" // ce.person
