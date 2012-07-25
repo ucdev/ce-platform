@@ -18,11 +18,21 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 		self.records = params.records;
 		
 		// CREATE COLLECTION
-		self.collection = new ce.Collections.Activity_participants(params.records);
+		self.collection = new ce.Collections.Activity_participants({
+			paginator_ui: {
+				firstPage: 1,
+				currentPage: 1,
+				perPage: 15
+			}
+		});
+		
+		self.collection.add(params.records);
 		
 		self.CompositeView = new self.List({
 			collection: self.collection
 		});
+		
+		
 		
 		ce.subpage.show(self.CompositeView);
 		self.trigger("page_loaded");

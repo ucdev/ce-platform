@@ -39,19 +39,14 @@
             <ul class="dropdown-menu pull-right" id="view-attendee-statuses-<%= ATTENDEEID %>">
                 <% if(STATUSID == 1) { %>
                     <li><a href="javascript://">COMPLETE (<%= CURRSTATUSDATE %>)</a></li>
-                    <li><a href="javascript://">REGISTERED (<%= CURRSTATUSDATE %>)</a></li>
                 <% } %>
                 <% if(STATUSID == 2) { %>
                     <li><a href="javascript://">IN PROGRESS</a></li>
-                    <li><a href="javascript://">REGISTERED (<%= CURRSTATUSDATE %>)</a></li>
-                <% } %>
-                <% if(STATUSID == 3) { %>
-                    <li><a href="javascript://">REGISTERED (<%= CURRSTATUSDATE %>)</a></li>
                 <% } %>
                 <% if(STATUSID == 4) { %>
-                    <li><a href="javascript://">REGISTERED (<%= CURRSTATUSDATE %>)</a></li>
                     <li><a href="javascript://">FAILED (<%= CURRSTATUSDATE %>)</a></li>
                 <% } %>
+                <li><a href="javascript://">REGISTERED (<%= CURRSTATUSDATE %>)</a></li>
             </ul>
         </div>
     </div>
