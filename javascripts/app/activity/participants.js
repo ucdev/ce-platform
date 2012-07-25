@@ -1,20 +1,4 @@
 ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
-	self.Row = Backbone.Marionette.ItemView.extend({
-		tagName: 'tr',
-		className:'activity_participants-row',
-		template:'activity_participants-row',
-	});
-	
-	self.List = Backbone.Marionette.CompositeView.extend({
-		tagName: 'div',
-		className: 'activity_participants-page',
-		itemView: self.Row,
-		template: 'activity_participants-table',
-		appendHtml: function(collectionView, itemView) {
-			collectionView.$('tbody').append(itemView.el);
-		},
-	});
-	
 	self.load = function(params) {
 		self.details = {
 			AddlAttendees: params.legacy.AddlAttendees,

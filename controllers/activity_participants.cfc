@@ -37,7 +37,7 @@
 	
 	<!--- activity_participants/index --->
 	<cffunction name="index">
-		<cfparam name="params.key" type="integer" />
+		<cfparam name="params.key" type="numeric" default="0" />
 		<cfparam name="params.status" type="numeric" default="0" />
         <cfparam name="params.page" type="numeric" default="1" />
 		
@@ -58,8 +58,9 @@
     
     <cffunction name="loadData">
 		<cfparam name="params.key" type="integer" default="0" />
-        
 		
+		<cfset qAttendees = Application.activityAttendee.getAttendees(ActivityID=params.activityId,DeletedFlag="N")>
+        <cfset attendees = $cleanupAttendees() />
         
         <cfreturn renderText(serializeJSON(attendees)) />
     </cffunction>
@@ -523,7 +524,7 @@
             <cfset querySetCell(attendees, 'termDate', qAttendees.termDate)>
             <cfset querySetCell(attendees, 'updated', qAttendees.updated)> 
         	
-			<cfif qAttendees.deletedFlag EQ "Y">
+			<cfif qAttendees.personDeleted EQ "Y">
             	<cfset querySetCell(attendees, 'isDeleted', true)>
             <cfelse>
            		<cfset querySetCell(attendees, 'isDeleted', false)>
