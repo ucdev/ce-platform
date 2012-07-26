@@ -22,7 +22,7 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 		self.collection = new ce.Collections.Activity_participants();
 		
 		// FILL COLLECTION
-		self.collection.add(params.records);
+		//self.collection.add(params.records);
 		
 		// CREATE PAGE VIEW
 		self.view = new self.List({
