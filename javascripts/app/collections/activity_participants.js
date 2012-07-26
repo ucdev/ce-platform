@@ -14,6 +14,8 @@ ce.module("Collections",function(self,ce,Backbone,Marionette,$,_) {
 			perPage: 15
 		},
 		parse: function(response) {
+			this.totalPages = Math.ceil(response.length / this.perPage);
+			
 			return response;
 		}
 	});
