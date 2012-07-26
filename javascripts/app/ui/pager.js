@@ -1,8 +1,11 @@
 ce.module("ui",function(self,ce,Backbone,Marionette,$,_){
 	self.Pager = Backbone.Marionette.ItemView.extend({
-		template: 'activity_participants-pager',
+		template: 'ui-pager',
         initialize: function(){
-            this.render();
+			this.collection.on('change', this.render, this);
+			this.collection.on('reset', this.render, this);
+			
+			this.$el.appendTo('.js-ui-pager');
         },
 		
 		el: '.js-ui-pager',
@@ -14,37 +17,32 @@ ce.module("ui",function(self,ce,Backbone,Marionette,$,_){
 		},
 		
 		render: function() {
-			var _data = { page_no: 1 };
-			var _temp = Marionette.Renderer.render(this.getTemplate());
-			var _tempRendered = _.template(_temp, _data);
-			
-			this.$el.html(_tempRendered);
+			var html = this.pagingTemplate(this.collection.info());
+			this.$el.html(html);
 			
 			self.trigger('pager_loaded');
 		},
 		
 		nextPage: function() {
+			e.preventDefault();
+			this.collection.nextPage();
+			
 			ce.log.info('pager: next page loaded');
-			/*if(participants.pageData.nPageNo+1 <= participants.pageData.totalPages) {
-				participants.pageData.nPageNo += 1
-											  
-				participants.changePage();
-			}*/
 		},
 		
 		prevPage: function() {
+			e.preventDefault();
+			this.collection.nextPage();
+			
 			ce.log.info('pager: previous page loaded');
-			/*if(participants.pageData.nPageNo-1 >= 1) {
-				participants.pageData.nPageNo -= 1
-											  
-				participants.changePage();
-			}*/
 		},
 		
 		selectPage: function() {
-			participants.pageData.nPageNo = $(this).text();
+			self.details.nPageNo = $(this).text();
 			
-			participants.changePage();
+			this.collection.goTo(self.details.nPageNo);
+			
+			ce.log.info('pager: page ' + self.details.nPageNo + ' loaded');
 		}
 	});
 	

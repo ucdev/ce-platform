@@ -3,7 +3,7 @@ ce.module("Models",function(self,ce,Backbone,Marionette,$,_) {
 	this.Activity_participant =  Backbone.Model.extend({
 		defaults: {
 			ACTIVITYID: 0,
-			ATTENDEE: 0,
+			ATTENDEEID: 0,
 			CITY: "",
 			COMPLETEDATE: "",
 			CREATED: "",

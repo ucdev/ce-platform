@@ -43,7 +43,7 @@
 		
 		<cfset showInfoBar(false) />
 		
-		<cfset qAttendees = Application.activityAttendee.getAttendees(ActivityID=params.activityId,DeletedFlag="N")>
+		<cfset qAttendees = Application.activityAttendee.getAttendees(ActivityID=params.key,DeletedFlag="N")>
         <cfset attendees = $cleanupAttendees() />
         
 		<cfset qActivityCredits = Application.Com.ActivityCreditGateway.getByViewAttributes(ActivityID=params.activityId)>
@@ -59,7 +59,7 @@
     <cffunction name="loadData">
 		<cfparam name="params.key" type="integer" default="0" />
 		
-		<cfset qAttendees = Application.activityAttendee.getAttendees(ActivityID=params.activityId,DeletedFlag="N")>
+		<cfset qAttendees = Application.activityAttendee.getAttendees(ActivityID=params.key,DeletedFlag="N")>
         <cfset attendees = $cleanupAttendees() />
         
         <cfreturn renderText(serializeJSON(attendees)) />

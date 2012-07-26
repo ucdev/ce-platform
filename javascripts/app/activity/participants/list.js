@@ -5,7 +5,36 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 		className: 'activity_participants-page',
 		itemView: self.Row,
 		template: 'activity_participants-table',
-		appendHtml: function(collectionView, itemView) {
+		
+		initialize: function() {
+			var coll = this.collection;
+			
+			coll.on('add', this.addOne, this);
+			coll.on('all', this.render, this);
+			coll.on('reset', this.addAll, this);
+			
+			coll.fetch({
+				data: { testing: ce.activity.Model.get('id') },
+				success: function() {
+					coll.pager();
+				}
+			});
+		},
+		
+		addAll: function() {
+			this.$el.empty();
+			this.collection.each(this.addOne);
+		},
+		
+		addOne: function(item) {
+			var view = new self.Row({
+				model: ce.Models.Activity_participant
+			});
+			$('.content-container').append(view.render().el);
+		},
+		
+		render: function() {}
+		/*appendHtml: function(collectionView, itemView) {
 			var row = itemView.el;
 			
 			$(row).attr({ 
@@ -18,7 +47,7 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 				$(row).addClass('personDeleted');
 			}
 			collectionView.$('tbody').append(row);
-		}
+		}*/
 	});
 });
 // JavaScript Document
