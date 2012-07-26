@@ -16,10 +16,20 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 			totalPages: params.legacy.totalPages
 		};
 		
+		self.paginatorCollection = ce.Collections.Activity_participants.extend({
+			
+			server_api: {
+				'$format': 'json',
+				'activityId':ce.activity.Model.get('id'),
+				'orderby': 'fullName',
+				'$skip': function() { return this.totalPages * this.perPage }
+			}
+		});
+		
 		self.records = params.records;
 		
 		// CREATE COLLECTION
-		self.collection = new ce.Collections.Activity_participants();
+		self.collection = new self.paginatorCollection();
 		
 		// FILL COLLECTION
 		//self.collection.add(params.records);

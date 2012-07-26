@@ -14,7 +14,6 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 			coll.on('reset', this.addAll, this);
 			
 			coll.fetch({
-				data: { testing: ce.activity.Model.get('id') },
 				success: function() {
 					coll.pager();
 				}
