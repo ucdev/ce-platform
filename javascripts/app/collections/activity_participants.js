@@ -8,14 +8,13 @@ ce.module("Collections",function(self,ce,Backbone,Marionette,$,_) {
 			dataType: 'json',
 			url: '/activity_participants/loadData/'
 		},
-		model: ce.Models.Activity_participant,
 		paginator_ui: {
 			firstPage: 1,
 			currentPage: 1,
 			perPage: 15
 		},
 		parse: function(response) {
-			console.dir(response);
+			return response;
 		}
 	});
 });
