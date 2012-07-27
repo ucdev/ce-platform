@@ -61,7 +61,6 @@
 		
 		<cfset qAttendees = Application.activityAttendee.getAttendees(ActivityID=params.key,DeletedFlag="N")>
         <cfset attendees = $cleanupAttendees() />
-        
         <cfreturn renderText(serializeJSON(attendees)) />
     </cffunction>
 	
