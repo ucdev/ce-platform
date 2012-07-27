@@ -8,10 +8,11 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 	});
 	
 	self.on("page_loaded",function() {
+			
+		self.list.pager = new ce.ui.Pager({
+			collection: self.list.collection
+		});
+		
 		ce.log.info("participants: page ready");
-	});
-	
-	self.on("pager_loaded",function() {
-		ce.log.info('participants: pager loaded');
 	});
 });
