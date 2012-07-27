@@ -3,6 +3,7 @@ ce.module("Collections",function(self,ce,Backbone,Marionette,$,_) {
 	self.Activity_participants = Backbone.Paginator.clientPager.extend({
 		initialize: function() {
 		},
+		
 		paginator_core: {
 			type: 'post',
 			dataType: 'json',

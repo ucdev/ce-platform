@@ -37,6 +37,11 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 		// CREATE PAGE VIEW
 		self.list = new self.List({
 			collection: self.collection
+		}).on('composite:rendered', function(){
+			self.pager = new ce.ui.Pager({
+				 el: $('.js-ui-pager'),
+				 collection: this.collection
+			});
 		});
 		
 		// SHOW PAGE VIEW
