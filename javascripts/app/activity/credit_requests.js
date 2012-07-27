@@ -2,6 +2,7 @@
 ce.module("activity.credit_requests",function(self,ce,Backbone,Marionette,$,_) {
 	self.ViewListItem = Backbone.Marionette.ItemView.extend({
 		tagName:"tr",
+		template:'credit_requests-row',
 		className:"creditRequest"
 	});
 	
@@ -11,17 +12,8 @@ ce.module("activity.credit_requests",function(self,ce,Backbone,Marionette,$,_) {
 		id:"credit_requests",
 		className: "table-striped table-bordered",
 		template: 'credit_requests-table',
-		
-		events: {
-			'click .new': 'newRecord'
-		},
-		
 		appendHtml: function(collectionView, itemView) {
 			collectionView.$('tbody').append(itemView.el);
-		},
-		
-		newRecord:function() {
-			
 		}
 	});
 	
