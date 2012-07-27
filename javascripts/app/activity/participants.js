@@ -35,12 +35,12 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 		//self.collection.add(params.records);
 		
 		// CREATE PAGE VIEW
-		self.view = new self.List({
+		self.list = new self.List({
 			collection: self.collection
 		});
 		
 		// SHOW PAGE VIEW
-		ce.subpage.show(self.view);
+		ce.subpage.show(self.list);
 		self.trigger("page_loaded");
 	};
 });

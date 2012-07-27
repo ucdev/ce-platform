@@ -5,6 +5,7 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 		className: 'activity_participants-page',
 		itemView: self.Row,
 		template: 'activity_participants-table',
+		model: ce.Models.Participants,
 		
 		initialize: function() {
 			var coll = this.collection;
@@ -29,11 +30,9 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 			var view = new self.Row({
 				model: ce.Models.Activity_participant
 			});
-			$('.content-container').append(view.render().el);
 		},
 		
-		render: function() {}
-		/*appendHtml: function(collectionView, itemView) {
+		appendHtml: function(collectionView, itemView) {
 			var row = itemView.el;
 			
 			$(row).attr({ 
@@ -45,8 +44,9 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 			if(itemView.model.get('PERSONDELETED') == 'true') {
 				$(row).addClass('personDeleted');
 			}
+			
 			collectionView.$('tbody').append(row);
-		}*/
+		}
 	});
 });
 // JavaScript Document
