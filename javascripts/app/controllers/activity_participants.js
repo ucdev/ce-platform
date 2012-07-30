@@ -22,7 +22,7 @@ ce.module("Controllers",function(self,ce,Backbone,Marionette,$,_) {
 		activity_participants.prototype.editView = function(id) {
 			var obj, view;
 			obj = this.collection.get(id);
-			
+			var test;
 			view = new self.views.editView({
 				model: obj
 			});
