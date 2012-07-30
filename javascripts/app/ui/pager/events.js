@@ -1,6 +1,6 @@
 ce.module("ui",function(self,ce,Backbone,Marionette,$,_){
-	self.on("pager_bound",function() {
-		ce.log.info('pager: bound');
+	self.on("pager_loaded",function() {
+		ce.log.info('pager: loaded');
 	});
 	
 	self.on("pager_dropdown_loaded",function() {

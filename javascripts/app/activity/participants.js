@@ -16,8 +16,8 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 			totalPages: params.legacy.totalPages
 		};
 		
+		// MODIFY CLIENT PAGER
 		self.paginatorCollection = ce.Collections.Activity_participants.extend({
-			
 			server_api: {
 				'$format': 'json',
 				'activityId':ce.activity.Model.get('id'),
@@ -26,26 +26,27 @@ ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 			}
 		});
 		
-		self.records = params.records;
-		
 		// CREATE COLLECTION
-		self.collection = new self.paginatorCollection();
+		self.collection = new self.paginatorCollection().add(params.records);
+		self.collection.pager();
 		
-		// FILL COLLECTION
-		//self.collection.add(params.records);
+		self.topbar = new self.Topbar().render();
 		
-		// CREATE PAGE VIEW
+		// BUILD PAGE VIEW AND RENDER IT
 		self.list = new self.List({
+			el: $('.content-container'),
 			collection: self.collection
-		}).on('composite:rendered', function(){
-			self.pager = new ce.ui.Pager({
-				 el: $('.js-ui-pager'),
-				 collection: this.collection
-			});
-		});
+		}).render();
 		
-		// SHOW PAGE VIEW
-		ce.subpage.show(self.list);
+		// BUILD PAGER
+		self.pager = new ce.ui.Pager({
+			el: $('.js-pager-container'),
+			collection: self.collection
+		}).render();
+		
+		//console.dir(self.list);
+		//console.dir(self.collection);
+		
 		self.trigger("page_loaded");
 	};
 });

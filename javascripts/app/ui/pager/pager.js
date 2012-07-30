@@ -1,5 +1,7 @@
 ce.module("ui",function(self,ce,Backbone,Marionette,$,_){
 	self.Pager = Backbone.View.extend({
+		template: ce.templates.get('ui-pager'),
+		
         initialize: function(){
 			this.collection.on('change', this.render, this);
 			this.collection.on('reset', this.render, this);
@@ -14,8 +16,10 @@ ce.module("ui",function(self,ce,Backbone,Marionette,$,_){
 		},
 		
 		render: function() {
+			// FORM THE TEMPLATE AND APPEND THE TEMPLATE HTML
+			this.$el.append( _.template(this.template, this.collection.info()));
 			
-			self.trigger('pager_bound');
+			self.trigger('pager_loaded');
 			
 			return this.el;
 		},
