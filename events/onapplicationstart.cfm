@@ -65,12 +65,10 @@ js.addAll([
 /* Backbone */
 "vendor/backbone/backbone",
 "vendor/backbone/backbone.paginator",
-"vendor/backbone/backbone.module",
 
 
 /* jQuery Plugins */
 "vendor/jquery/jquery.form.js",
-"vendor/jquery/jquerymx-3.2.custom.js",
 "vendor/jquery/jquery.qtip.js",
 "vendor/jquery/jquery.blockUI",
 "vendor/jquery/jquery.cfjs.packed",
@@ -94,31 +92,32 @@ js.addAll([
 
 // APPLICATION JS
 /* ce */
-"app/app",
+"app"/*,
 
-/* ce.log */
-"app/log",
+ ce.log 
+"app/log",*/
 
-/* ce.global */
+/* ce.global
 "app/global",
 "app/global/alerts",
 "app/global/ajax",
 "app/global/templates",
-
-/* ce.vendor [Nested Vendors (try to put jquery plugins within modules of our system, similar to "ui.typeahead"] */
+ */
+/* ce.vendor [Nested Vendors (try to put jquery plugins within modules of our system, similar to "ui.typeahead"] 
 "app/vendor/mustache",
-
-/* ce.ui */
+*/
+/* ce.ui 
 "app/ui",
 "app/ui/dialog",
 "app/ui/pager/pager",
 "app/ui/pager/events",
 "app/ui/typeahead",
 "app/ui/tokenizer",
-"app/ui/actionMenu"
+"app/ui/actionMenu"*/
 ]);
 
 <!--- SCAFFOLDED MVC STUFF --->
+
 js.addAll(jsScaffolded);
 
 js.addAll([
@@ -134,6 +133,7 @@ js.addAll([
 "app/activity/credit_requests", // ce.activity
 "app/activity/credit_requests/events", // ce.activity
 "app/person" // ce.person
+
 ]);
 </cfscript>
 
