@@ -1,4 +1,4 @@
-ce.module("ui",function(self,ce,Backbone,Marionette,$,_){
+ce.pkg("ui",function(self,ce,Backbone,Marionette,$,_){
 	self.on("pager_bound",function() {
 		ce.log.info('pager: bound');
 	});

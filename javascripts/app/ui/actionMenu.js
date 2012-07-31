@@ -1,4 +1,4 @@
-ce.module("ui.actionMenu",function(self,ce,Backbone,Marionette,$,_){
+ce.pkg("ui.actionMenu",function(self,ce,Backbone,Marionette,$,_){
 	$.fn.isPerson = function () {
 		return this.each(function () {
 			var oPersonRow = $(this);

@@ -1,5 +1,5 @@
 /*! ce.Controllers.Credit_requests extends Backbone.Controller */
-ce.module("Controllers",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("Controllers",function(self,ce,Backbone,Marionette,$,_) {
 	this.Credit_requests = (function() {
 		function credit_requests() {
 			var main;

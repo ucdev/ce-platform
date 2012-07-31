@@ -1,5 +1,5 @@
 /*! ce.Routers.Messages extends Backbone.Marionette.AppRouter */
-ce.module("Routers",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("Routers",function(self,ce,Backbone,Marionette,$,_) {
 	this.Messages = Backbone.Marionette.AppRouter.extend({
 		appRoutes: {
 			'': 'index',

@@ -1,4 +1,4 @@
-ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 	self.load = function(params) {
 		self.details = {
 			activityId: ce.activity.Model.get('id'),

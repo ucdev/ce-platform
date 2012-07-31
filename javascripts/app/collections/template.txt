@@ -1,5 +1,5 @@
 /*! ce.Collections.<%= loc.nameInPluralUppercase =%> extends Backbone.Collection */
-ce.module("Collections",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("Collections",function(self,ce,Backbone,Marionette,$,_) {
 	self.<%= loc.nameInPluralUppercase =%> = Backbone.Collection.extend({
 		url: '/api/<%= loc.nameInPluralLowercase =%>',
 		model: ce.Models.<%= loc.nameInSingularUppercase =%>

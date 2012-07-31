@@ -1,5 +1,5 @@
 /*! ce.Controllers.People extends Backbone.Controller */
-ce.module("Controllers",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("Controllers",function(self,ce,Backbone,Marionette,$,_) {
 	this.People = (function() {
 		function people() {
 			var main;

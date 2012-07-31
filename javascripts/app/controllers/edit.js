@@ -1,5 +1,5 @@
 /*! ce.Controllers.Edit extends Backbone.Controller */
-ce.module("Controllers",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("Controllers",function(self,ce,Backbone,Marionette,$,_) {
 	this.Edit = (function() {
 		function edit() {
 			var main;

@@ -1,5 +1,5 @@
 /*! ce.Controllers.Activity_credits extends Backbone.Controller */
-ce.module("Controllers",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("Controllers",function(self,ce,Backbone,Marionette,$,_) {
 	this.Activity_credits = (function() {
 		function activity_credits() {
 			var main;

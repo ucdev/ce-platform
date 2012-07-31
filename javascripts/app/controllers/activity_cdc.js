@@ -1,5 +1,5 @@
 /*! ce.Controllers.Activity_cdc extends Backbone.Controller */
-ce.module("Controllers",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("Controllers",function(self,ce,Backbone,Marionette,$,_) {
 	this.Activity_cdc = (function() {
 		function activity_cdc() {
 			var main;

@@ -1,5 +1,5 @@
 /*! ce.Controllers.Messages extends Backbone.Controller */
-ce.module("Controllers",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("Controllers",function(self,ce,Backbone,Marionette,$,_) {
 	this.Messages = (function() {
 		function messages() {
 			var main;

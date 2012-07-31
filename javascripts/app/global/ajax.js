@@ -1,4 +1,4 @@
-ce.module("global.ajax",function(self,ce,Backbone,Marionette,$,_){
+ce.pkg("global.ajax",function(self,ce,Backbone,Marionette,$,_){
 	$(function() {
 		$(document).on("click", ".projectBar .nav-list a", function(){ ce.log.info("subnav clicked") });  
 		$(document).on("click", ".pjaxLinks a", function(ev){ ce.log.info("topnav clicked"); ev.preventDefault(); });  

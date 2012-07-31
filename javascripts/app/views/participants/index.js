@@ -1,5 +1,5 @@
 /*! ce.Views.Participants.IndexView extends Backbone.Marionette.CompositeView */
-ce.module("Views.Participants",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("Views.Participants",function(self,ce,Backbone,Marionette,$,_) {
 	self.IndexView = Backbone.Marionette.CompositeView.extend({
 		tagName: 'table',
 		itemView: self.RowView,

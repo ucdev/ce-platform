@@ -1,4 +1,4 @@
-ce.module("ui.typeahead",function(self,ce,Backbone,Marionette,$,_){
+ce.pkg("ui.typeahead",function(self,ce,Backbone,Marionette,$,_){
 	// CEAuth - Form Field: Typeahead (kind of a combobox without predefined items)
     var methods = {
         /* INITIAL SETTINGS / HTML INJECTION */

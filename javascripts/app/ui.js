@@ -1,4 +1,4 @@
-ce.module("ui",function(self,ce,Backbone,Marionette,$,_){
+ce.pkg("ui",function(self,ce,Backbone,Marionette,$,_){
 	
 	// DOM READY
 	$(function() {

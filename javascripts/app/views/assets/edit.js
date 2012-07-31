@@ -1,5 +1,5 @@
 /*! ce.Views.Assets.EditView extends Backbone.Marionette.ItemView */
-ce.module("Views.Assets",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("Views.Assets",function(self,ce,Backbone,Marionette,$,_) {
 	self.EditView = Backbone.Marionette.ItemView.extend({
 		template: 'assets/edit',
 	});

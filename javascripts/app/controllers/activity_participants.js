@@ -1,5 +1,5 @@
 /*! ce.Controllers.Activity_participants extends Backbone.Controller */
-ce.module("Controllers",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("Controllers",function(self,ce,Backbone,Marionette,$,_) {
 	this.Activity_participants = (function() {
 		function activity_participants() {
 			var main;

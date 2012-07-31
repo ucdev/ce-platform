@@ -1,5 +1,5 @@
 /*! ce.user.auth @description: logs when user events */
-ce.module("user",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("user",function(self,ce,Backbone,Marionette,$,_) {
 	//LOGIN CHECK
 	self.isLoggedIn = function() {
 		if(self.model.get('loggedIn')) {

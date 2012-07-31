@@ -1,5 +1,5 @@
 /*! ce.Collections.Activity_participants extends Backbone.Collection */
-ce.module("Collections",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("Collections",function(self,ce,Backbone,Marionette,$,_) {
 	self.Activity_participants = Backbone.Paginator.clientPager.extend({
 		initialize: function() {
 		},

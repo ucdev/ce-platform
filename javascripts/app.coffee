@@ -1,11 +1,33 @@
-namespace = (target, name, block) ->
-  [target, name, block] = [exports ? window, arguments...] if arguments.length < 3
-  top = target
-  target = target[item] or= {} for item in name.split '.'
-  block target, top
+Inject.setModuleRoot "/javascripts/app/"
+Inject.enableDebug true
 
-namespace 'ce', (exports) ->
-	exports.hi = -> console.log 'Hi World!'
+#allows you to require jquery modules easily and hides jquery from main scope
+Inject.addRule /jquery/,
+	path:"vendor/jquery/jquery.js"
+	pointcuts:
+		after: () ->
+			module.setExports jQuery.noConflict
+			delete window["jQuery"]
+			delete window["$"]
 
-namespace 'ce.activity', (exports) ->
-	exports.test 'what up'
+Inject.addRule /jqueryui/,
+	path:"vendor/jquery/jquery-ui-1.8.21.custom.min.js"
+	pointcuts:
+		before: () ->
+			jQuery = require "jquery"
+
+Inject.addRule /underscore/,
+	path:"vendor/underscore/underscore.js"
+	pointcuts:
+		after: () ->
+			module.setExports _.noConflict
+			delete window["_"]
+
+Inject.addRule /backbone/,
+	path:"vendor/backbone/backbone.js"
+	pointcuts:
+		before: () ->
+			_ = require "underscore"
+
+require.run "bootloader"
+

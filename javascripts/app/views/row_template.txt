@@ -1,5 +1,5 @@
 /*! ce.Views.<%= loc.nameInPluralUppercase =%>.RowView extends Backbone.Marionette.ItemView */
-ce.module("Views.<%= loc.nameInPluralUppercase =%>",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("Views.<%= loc.nameInPluralUppercase =%>",function(self,ce,Backbone,Marionette,$,_) {
 	self.RowView = Backbone.Marionette.ItemView.extend({
 		tagName: 'tr',
 	

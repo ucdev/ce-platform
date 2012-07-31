@@ -1,5 +1,5 @@
 /*! ce.templates @description: template cache */
-ce.module("templates",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("templates",function(self,ce,Backbone,Marionette,$,_) {
 	self.get = function(tmplKey){
 		if (!self.cache){ self.cache = {}; }
 	
@@ -22,8 +22,8 @@ ce.module("templates",function(self,ce,Backbone,Marionette,$,_) {
 		return tmpl;
 	}
 });
-Backbone.Marionette.TemplateCache.prototype.loadTemplate = function(templateId){
-	var myTemplate = ce.templates.get(templateId);
+// Backbone.Marionette.TemplateCache.prototype.loadTemplate = function(templateId){
+// 	var myTemplate = ce.templates.get(templateId);
 	
-	return myTemplate;
-}
+// 	return myTemplate;
+// }

@@ -1,4 +1,4 @@
-ce.module("ui",function(self,ce,Backbone,Marionette,$,_){
+ce.pkg("ui",function(self,ce,Backbone,Marionette,$,_){
 	self.dialog = Backbone.Marionette.Region.extend({
 		el: "#dialog",
 		

@@ -1,9 +1,3 @@
-<!---
-<cfset application.javaloader = javaLoader() />
-<cfset doLessGeneration = LessEngine(['bootstrap.less']) />
-<cfset application.sengrid = createObject("component","lib.sendgrid").init(api_user='joshuairl',api_key='cfr010408') />
---->
-
 <cfset application.version_token = "v3" />
 <cfset application.messages = [] />
 
@@ -56,83 +50,85 @@
 js.addAll([
 // GLOBAL VENDORS (avoid putting things here, try to embed / nest it within our "app" module system)
 /* jQuery, jQuery UI */
-"vendor/jquery/jquery",
-"vendor/jquery/jquery-ui-1.8.21.custom.min",
+"inject",
+"app"
+// "vendor/jquery/jquery",
+// "vendor/jquery/jquery-ui-1.8.21.custom.min",
 
-/* Underscore */
-"vendor/backbone/underscore",
+// /* Underscore */
+// "vendor/backbone/underscore",
 
-/* Backbone */
-"vendor/backbone/backbone",
-"vendor/backbone/backbone.paginator",
+// /* Backbone */
+// "vendor/backbone/backbone",
+// "vendor/backbone/backbone.paginator",
+// "vendor/wn.src",
 
+// /* jQuery Plugins */
+// "vendor/jquery/jquery.form.js",
+// "vendor/jquery/jquery.qtip.js",
+// "vendor/jquery/jquery.blockUI",
+// "vendor/jquery/jquery.cfjs.packed",
+// "vendor/jquery/jquery.maskedinput-1.1.3.pack",
+// "vendor/jquery/jquery.tokenInput",
+// "vendor/jquery/jquery.pjax.js",
 
-/* jQuery Plugins */
-"vendor/jquery/jquery.form.js",
-"vendor/jquery/jquery.qtip.js",
-"vendor/jquery/jquery.blockUI",
-"vendor/jquery/jquery.cfjs.packed",
-"vendor/jquery/jquery.maskedinput-1.1.3.pack",
-"vendor/jquery/jquery.tokenInput",
-"vendor/jquery/jquery.pjax.js",
+// /* Twitter Bootstrap JS */
+// "vendor/bootstrap/bootstrap-transition",
+// "vendor/bootstrap/bootstrap-alert",
+// "vendor/bootstrap/bootstrap-modal",
+// "vendor/bootstrap/bootstrap-dropdown",
+// "vendor/bootstrap/bootstrap-scrollspy",
+// "vendor/bootstrap/bootstrap-tab",
+// "vendor/bootstrap/bootstrap-tooltip",
+// "vendor/bootstrap/bootstrap-popover",
+// "vendor/bootstrap/bootstrap-button",
+// "vendor/bootstrap/bootstrap-collapse",
+// "vendor/bootstrap/bootstrap-carousel",
+// "vendor/bootstrap/bootstrap-typeahead",
 
-/* Twitter Bootstrap JS */
-"vendor/bootstrap/bootstrap-transition",
-"vendor/bootstrap/bootstrap-alert",
-"vendor/bootstrap/bootstrap-modal",
-"vendor/bootstrap/bootstrap-dropdown",
-"vendor/bootstrap/bootstrap-scrollspy",
-"vendor/bootstrap/bootstrap-tab",
-"vendor/bootstrap/bootstrap-tooltip",
-"vendor/bootstrap/bootstrap-popover",
-"vendor/bootstrap/bootstrap-button",
-"vendor/bootstrap/bootstrap-collapse",
-"vendor/bootstrap/bootstrap-carousel",
-"vendor/bootstrap/bootstrap-typeahead",
+// // APPLICATION JS
+// /* ce */
+// "app",
 
-// APPLICATION JS
-/* ce */
-"app"/*,
+// /* ce.log */
+// "app/log",
 
- ce.log 
-"app/log",*/
+// ce.global
+// "app/global",
+// "app/global/alerts",
+// "app/global/ajax",
+// "app/global/templates",
 
-/* ce.global
-"app/global",
-"app/global/alerts",
-"app/global/ajax",
-"app/global/templates",
- */
-/* ce.vendor [Nested Vendors (try to put jquery plugins within modules of our system, similar to "ui.typeahead"] 
-"app/vendor/mustache",
-*/
-/* ce.ui 
-"app/ui",
-"app/ui/dialog",
-"app/ui/pager/pager",
-"app/ui/pager/events",
-"app/ui/typeahead",
-"app/ui/tokenizer",
-"app/ui/actionMenu"*/
-]);
+// /* ce.vendor [Nested Vendors (try to put jquery plugins within modules of our system, similar to "ui.typeahead"] */
+// "app/vendor/mustache",
 
-<!--- SCAFFOLDED MVC STUFF --->
+// /* ce.ui */
+// "app/ui",
+// "app/ui/dialog",
+// "app/ui/pager/pager",
+// "app/ui/pager/events",
+// "app/ui/typeahead",
+// "app/ui/tokenizer",
+// "app/ui/actionMenu"
+// ]);
 
-js.addAll(jsScaffolded);
+// <!--- SCAFFOLDED MVC STUFF --->
 
-js.addAll([
-"app/user", // ce.user
-"app/user/events", // ce.user.events
-"app/user/auth", // ce.user.auth
-"app/activity", // ce.activity
-"app/activity/participants", // ce.activity.participants
-"app/activity/participants/events", // ce.activity.participants events
-"app/activity/participants/filter", // ce.activity.participants filter
-"app/activity/participants/row", // ce.activity.participants row
-"app/activity/participants/list", // ce.activity.participants list
-"app/activity/credit_requests", // ce.activity
-"app/activity/credit_requests/events", // ce.activity
-"app/person" // ce.person
+// js.addAll(jsScaffolded);
+
+// js.addAll([
+// "app/user", // ce.user
+// "app/user/events", // ce.user.events
+// "app/user/auth", // ce.user.auth
+// "app/activity", // ce.activity
+// "app/activity/participants", // ce.activity.participants
+// "app/activity/participants/events", // ce.activity.participants events
+// "app/activity/participants/filter", // ce.activity.participants filter
+// "app/activity/participants/row", // ce.activity.participants row
+// "app/activity/participants/list", // ce.activity.participants list
+// "app/activity/credit_requests", // ce.activity
+// "app/activity/credit_requests/events", // ce.activity
+// "app/person" // ce.person
 
 ]);
 </cfscript>

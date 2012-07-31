@@ -1,5 +1,5 @@
 /*! ce.Controllers.<%= loc.nameInPluralUppercase =%> extends Backbone.Controller */
-ce.module("Controllers",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("Controllers",function(self,ce,Backbone,Marionette,$,_) {
 	this.<%= loc.nameInPluralUppercase =%> = (function() {
 		function <%= loc.nameInPluralLowercase =%>() {
 			var main;

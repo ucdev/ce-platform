@@ -1,5 +1,5 @@
 /*! ce.user.events @description: logs when user events */
-ce.module("user",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("user",function(self,ce,Backbone,Marionette,$,_) {
 	self.on("loggedIn",function() {
 		ce.log.info("user: logged in");
 	});

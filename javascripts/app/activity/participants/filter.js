@@ -1,4 +1,4 @@
-ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_){
+ce.pkg("activity.participants",function(self,ce,Backbone,Marionette,$,_){
 	self.Filter = Backbone.Marionette.ItemView.extend({
 		template: 'activity_participants-filter',
         initialize: function(){

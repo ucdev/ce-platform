@@ -1,5 +1,5 @@
-/*! ce.Current.Activity extends ce.Models.Activity */
-ce.module("activity",function(self,ce,Backbone,Marionette,$,_) {
+/*! ce.pkg.Activity extends ce.Models.Activity */
+ce.pkg("activity",function(self) {
 	self.load = function(params) {
 		self.userPrefs = {
 			actListHeight:  params.legacy.cActListHeight,

@@ -1,4 +1,4 @@
-ce.module("global",function(self,ce,Backbone,Marionette,$,_){
+ce.pkg("global",function(self,ce,Backbone,Marionette,$,_){
 	var StatusCount = 0;
 	
 	function SubmitForm(oForm) {

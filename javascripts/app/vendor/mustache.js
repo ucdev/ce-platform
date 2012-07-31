@@ -1,5 +1,5 @@
 /*! mustache.js - Logic-less {{mustache}} templates with JavaScript*/
-ce.module("vendor",function(self,ce,Backbone,Marionette,$,_){
+ce.pkg("vendor",function(self,ce,Backbone,Marionette,$,_){
 	self.Mustache = (typeof module !== "undefined" && module.exports) || {};
 	
 	(function (exports) {

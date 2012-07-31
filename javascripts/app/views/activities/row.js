@@ -1,5 +1,5 @@
 /*! ce.Views.Activities.RowView extends Backbone.Marionette.ItemView */
-ce.module("Views.Activities",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("Views.Activities",function(self,ce,Backbone,Marionette,$,_) {
 	self.RowView = Backbone.Marionette.ItemView.extend({
 		tagName: 'tr',
 	

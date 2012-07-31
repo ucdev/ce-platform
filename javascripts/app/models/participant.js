@@ -1,5 +1,5 @@
 /*! ce.Models.Participant extends Backbone.Model */
-ce.module("Models",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("Models",function(self,ce,Backbone,Marionette,$,_) {
 	this.Participant =  Backbone.Model.extend({
 		defaults: {
 			ACTIVITYID: 0,

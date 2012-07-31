@@ -1,4 +1,4 @@
-ce.module("MozApp",function(self,ce,Backbone,Marionette,$,_,navigator) {
+ce.pkg("MozApp",function(self,ce,Backbone,Marionette,$,_,navigator) {
     self.testinstall = function() {
 		if ((!navigator.mozApps) || (!navigator.mozApps.getSelf)) {
 			/*-----------------------------------------------------------+

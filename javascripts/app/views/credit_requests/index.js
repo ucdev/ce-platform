@@ -1,5 +1,5 @@
 /*! ce.Views.Credit_requests.IndexView extends Backbone.Marionette.CompositeView */
-ce.module("Views.Credit_requests",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("Views.Credit_requests",function(self,ce,Backbone,Marionette,$,_) {
 	self.IndexView = Backbone.Marionette.CompositeView.extend({
 		tagName: 'table',
 		itemView: self.RowView,

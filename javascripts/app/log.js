@@ -1,4 +1,4 @@
-ce.module("log",function(self,ce,Backbone,Marionette,$,_,wndw){
+ce.pkg("log",function(self,ce,Backbone,Marionette,$,_,wndw){
   var window = wndw,
     // Some convenient shortcuts.
     aps = Array.prototype.slice,

@@ -1,5 +1,5 @@
 /*! ce.Views.Activity_participants.IndexView extends Backbone.Marionette.CompositeView */
-ce.module("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("activity.participants",function(self,ce,Backbone,Marionette,$,_) {
 	self.List = Backbone.Marionette.CompositeView.extend({
 		tagName: 'div',
 		className: 'activity_participants-page',

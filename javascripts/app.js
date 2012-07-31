@@ -1,25 +1,40 @@
-(function() {
-  var namespace;
-  var __slice = Array.prototype.slice;
-  namespace = function(target, name, block) {
-    var item, top, _i, _len, _ref, _ref2;
-    if (arguments.length < 3) {
-      _ref = [typeof exports !== "undefined" && exports !== null ? exports : window].concat(__slice.call(arguments)), target = _ref[0], name = _ref[1], block = _ref[2];
+Inject.setModuleRoot("/javascripts/app/");
+Inject.enableDebug(true);
+Inject.addRule(/jquery/, {
+  path: "vendor/jquery/jquery.js",
+  pointcuts: {
+    after: function() {
+      module.setExports(jQuery.noConflict);
+      delete window["jQuery"];
+      return delete window["$"];
     }
-    top = target;
-    _ref2 = name.split('.');
-    for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
-      item = _ref2[_i];
-      target = target[item] || (target[item] = {});
+  }
+});
+Inject.addRule(/jqueryui/, {
+  path: "vendor/jquery/jquery-ui-1.8.21.custom.min.js",
+  pointcuts: {
+    before: function() {
+      var jQuery;
+      return jQuery = require("jquery");
     }
-    return block(target, top);
-  };
-  namespace('ce', function(exports) {
-    return exports.hi = function() {
-      return console.log('Hi World!');
-    };
-  });
-  namespace('ce.activity', function(exports) {
-    return exports.test('what up');
-  });
-}).call(this);
+  }
+});
+Inject.addRule(/underscore/, {
+  path: "vendor/underscore/underscore.js",
+  pointcuts: {
+    after: function() {
+      module.setExports(_.noConflict);
+      return delete window["_"];
+    }
+  }
+});
+Inject.addRule(/backbone/, {
+  path: "vendor/backbone/backbone.js",
+  pointcuts: {
+    before: function() {
+      var _;
+      return _ = require("underscore");
+    }
+  }
+});
+require.run("bootloader");

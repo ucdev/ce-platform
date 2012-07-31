@@ -1,4 +1,4 @@
-ce.module("ui",function(self,ce,Backbone,Marionette,$,_){
+ce.pkg("ui",function(self,ce,Backbone,Marionette,$,_){
 	self.Pager = Backbone.View.extend({
         initialize: function(){
 			this.collection.on('change', this.render, this);

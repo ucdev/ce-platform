@@ -1,4 +1,4 @@
-ce.module("global.alerts",function(self,ce,Backbone,Marionette,$,_){
+ce.pkg("global.alerts",function(self,ce,Backbone,Marionette,$,_){
 	self.showMessage = ce.showMessage = function(sStatus,nFadeIn,nFadeTo,nFadeOut) {
 		// DECLARE ELEMENT
 		var $alert = $('<div />').addClass('alert alert-success').html(sStatus);

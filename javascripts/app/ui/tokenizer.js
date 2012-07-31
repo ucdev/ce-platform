@@ -1,4 +1,4 @@
-ce.module("ui.tokenizer",function(self,ce,Backbone,Marionette,$,_){
+ce.pkg("ui.tokenizer",function(self,ce,Backbone,Marionette,$,_){
 	// CEAuth - Form Field: Tokenizer Input
 	var methods = {
 		/* INITIAL SETTINGS / HTML INJECTION */

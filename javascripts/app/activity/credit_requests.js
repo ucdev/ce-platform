@@ -1,5 +1,5 @@
 /*! ce.activity.credit_requests @description: logs when credit request events */
-ce.module("activity.credit_requests",function(self,ce,Backbone,Marionette,$,_) {
+ce.pkg("activity.credit_requests",function(self,ce,Backbone,Marionette,$,_) {
 	self.ViewListItem = Backbone.Marionette.ItemView.extend({
 		tagName:"tr",
 		template:'credit_requests-row',
