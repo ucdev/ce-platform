@@ -1,6 +1,0 @@
-/*! ce.Views.<%= loc.nameInPluralUppercase =%>.ShowView extends Backbone.Marionette.ItemView */
-ce.module("Views.<%= loc.nameInPluralUppercase =%>",function(self,ce,Backbone,Marionette,$,_) {
-	self.ShowView = Backbone.Marionette.ItemView.extend({
-		template: '<%= loc.nameInPluralLowercase =%>/show',
-	});
-});
