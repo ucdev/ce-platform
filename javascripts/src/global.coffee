@@ -38,55 +38,54 @@ ce.module "global", (self, ce, Backbone, Marionette, $, _) ->
   #		});
   
   # HISTORY OBJECT 
-  historyList = (properties) ->
-    
-    # SET DEFAULT VALUES 
-    $this = this
-    settings = properties
-    dataToSend =
-      personfrom: 0
-      personto: 0
-      activityto: 0
-      startrow: 1
-      maxrows: 25
+  # historyList = (properties) ->
+  #   # SET DEFAULT VALUES 
+  #   $this = this
+  #   settings = properties
+  #   dataToSend =
+  #     personfrom: 0
+  #     personto: 0
+  #     activityto: 0
+  #     startrow: 1
+  #     maxrows: 25
 
     
-    #console.log(settings);
-    $this.setMode = (mode) ->
-      settings.mode = mode
+  #   #console.log(settings);
+  #   $this.setMode = (mode) ->
+  #     settings.mode = mode
 
-    $this.setStartRow = (startrow) ->
-      settings.data.startrow = startrow
+  #   $this.setStartRow = (startrow) ->
+  #     settings.data.startrow = startrow
 
-    $this.setMaxRows = (maxrows) ->
-      settings.data.maxrows = maxrows
+  #   $this.setMaxRows = (maxrows) ->
+  #     settings.data.maxrows = maxrows
 
-    $this.getList = (clear, startTime, inject) ->
-      inject = "append"  unless inject
-      dataToSend =
-        personfrom: 0
-        personto: 0
-        startrow: 1
-        maxrows: 25
-        starttime: startTime
+  #   $this.getList = (clear, startTime, inject) ->
+  #     inject = "append"  unless inject
+  #     dataToSend =
+  #       personfrom: 0
+  #       personto: 0
+  #       startrow: 1
+  #       maxrows: 25
+  #       starttime: startTime
 
-		switch settings.mode
-			when "activityTo"
-				dataToSend.activityto = settings.data.activityto
-			when "personTo"
-				dataToSend.personto = settings.data.personto
-			when "personFrom"
-				dataToSend.personfrom = settings.data.personfrom
-			when "personAll"
-				dataToSend.personto = settings.data.personto
-				dataToSend.personfrom = settings.data.personfrom
-			when "all"
-				dataToSend.startrow = settings.data.startrow
-				dataToSend.maxrows = settings.data.maxrows
+		# switch settings.mode
+		# 	when "activityTo"
+		# 		dataToSend.activityto = settings.data.activityto
+		# 	when "personTo"
+		# 		dataToSend.personto = settings.data.personto
+		# 	when "personFrom"
+		# 		dataToSend.personfrom = settings.data.personfrom
+		# 	when "personAll"
+		# 		dataToSend.personto = settings.data.personto
+		# 		dataToSend.personfrom = settings.data.personfrom
+		# 	when "all"
+		# 		dataToSend.startrow = settings.data.startrow
+		# 		dataToSend.maxrows = settings.data.maxrows
 
-		settings.appendto.find(".history-item").remove()  if clear
-		listHistory settings.appendto, dataToSend, inject
-  
+		# settings.appendto.find(".history-item").remove()  if clear
+		# listHistory settings.appendto, dataToSend, inject
+		  
   # Takes an ISO time and returns a string representing how
   # long ago the date represents.
   prettyDate = (time) ->
