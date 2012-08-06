@@ -25,7 +25,7 @@
 	<cfreturn $singularizeOrPluralize(text=arguments.word, which="singularize")>
 </cffunction>
 
-<cfdirectory action="list" directory="#expandPath('/javascripts/app/controllers')#" filter="*.js" name="jsList">
+<cfdirectory action="list" directory="#expandPath('/javascripts/lib/controllers')#" filter="*.js" name="jsList">
 <cfset baseDirPriority = "models,collections,controllers,routers,views" />
 <cfset baseViewFiles = "row,index,edit,show" />
 
@@ -35,17 +35,17 @@
 		
 		<cfswitch expression="#key#">
 			<cfcase value="models">
-				<cfset fileLoc = "/app/#key#/#$$singularize(replace(jsList.name,'.js',''))#" />
+				<cfset fileLoc = "/lib/#key#/#$$singularize(replace(jsList.name,'.js',''))#" />
 				<cfset jsScaffolded.add(fileLoc)>
 			</cfcase>
 			<cfcase value="views">
 				<cfloop list="#baseViewFiles#" index="viewFile" delimiters=",">
-					<cfset fileLoc = "/app/#key#/#replace(jsList.name,'.js','')#/#viewFile#" />
+					<cfset fileLoc = "/lib/#key#/#replace(jsList.name,'.js','')#/#viewFile#" />
 					<cfset jsScaffolded.add(fileLoc)>
 				</cfloop>
 			</cfcase>
 			<cfdefaultcase>
-				<cfset fileLoc = "/app/#key#/#replace(jsList.name,'.js','')#" />
+				<cfset fileLoc = "/lib/#key#/#replace(jsList.name,'.js','')#" />
 				<cfset jsScaffolded.add(fileLoc)>
 			</cfdefaultcase>
 		</cfswitch>
@@ -94,47 +94,47 @@ js.addAll([
 
 // APPLICATION JS
 /* ce */
-"app/app",
+"lib/app",
 
 /* ce.log */
-"app/log",
+"lib/log",
 
 /* ce.global */
-"app/global",
-"app/global/alerts",
-"app/global/ajax",
-"app/global/templates",
+"lib/global",
+"lib/global/alerts",
+"lib/global/ajax",
+"lib/global/templates",
 
 /* ce.vendor [Nested Vendors (try to put jquery plugins within modules of our system, similar to "ui.typeahead"] */
-"app/vendor/mustache",
+"lib/vendor/mustache",
 
 /* ce.ui */
-"app/ui",
-"app/ui/dialog",
-"app/ui/pager/pager",
-"app/ui/pager/events",
-"app/ui/typeahead",
-"app/ui/tokenizer",
-"app/ui/actionMenu"
+"lib/ui",
+"lib/ui/dialog",
+"lib/ui/pager/pager",
+"lib/ui/pager/events",
+"lib/ui/typeahead",
+"lib/ui/tokenizer",
+"lib/ui/actionMenu"
 ]);
 
 <!--- SCAFFOLDED MVC STUFF --->
 js.addAll(jsScaffolded);
 
 js.addAll([
-"app/user", // ce.user
-"app/user/events", // ce.user.events
-"app/user/auth", // ce.user.auth
-"app/activity", // ce.activity
-"app/activity/participants", // ce.activity.participants
-"app/activity/participants/events", // ce.activity.participants events
-"app/activity/participants/filter", // ce.activity.participants filter
-"app/activity/participants/row", // ce.activity.participants row
-"app/activity/participants/list", // ce.activity.participants list
-"app/activity/participants/topbar", // ce.activity.participants topbar
-"app/activity/credit_requests", // ce.activity
-"app/activity/credit_requests/events", // ce.activity
-"app/person" // ce.person
+"lib/user", // ce.user
+"lib/user/events", // ce.user.events
+"lib/user/auth", // ce.user.auth
+"lib/activity", // ce.activity
+"lib/activity/participants", // ce.activity.participants
+"lib/activity/participants/events", // ce.activity.participants events
+"lib/activity/participants/filter", // ce.activity.participants filter
+"lib/activity/participants/row", // ce.activity.participants row
+"lib/activity/participants/list", // ce.activity.participants list
+"lib/activity/participants/topbar", // ce.activity.participants topbar
+"lib/activity/credit_requests", // ce.activity
+"lib/activity/credit_requests/events", // ce.activity
+"lib/person" // ce.person
 ]);
 </cfscript>
 

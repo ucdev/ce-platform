@@ -7,8 +7,8 @@
 # * docs  - generates annotated documentation using docco
 # * clean - clean generated .js files
 files = [
-  'lib'
-  'src'
+  'javascripts/lib'
+  'javascripts/src'
 ]
 
 fs = require 'fs'
