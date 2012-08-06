@@ -1,3 +1,3 @@
-#! ce.Models.<%= loc.nameInSingularUppercase =%> extends Backbone.Model 
-ce.module "Models", (self, ce, Backbone, Marionette, $, _) ->
+#! ce._core.models.<%= loc.nameInSingularUppercase =%> extends Backbone.Model 
+ce.module "_core.models", (self, ce, Backbone, Marionette, $, _) ->
   self.<%= loc.nameInSingularUppercase =%> = Backbone.Model.extend({})

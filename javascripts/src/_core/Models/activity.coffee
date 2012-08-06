@@ -1,4 +1,4 @@
-#! ce.Models.Activity extends Backbone.Model 
-ce.module "Models", (self, ce, Backbone, Marionette, $, _) ->
+#! ce._core.models.Activity extends Backbone.Model 
+ce.module "_core.models", (self, ce, Backbone, Marionette, $, _) ->
   self.Activity = Backbone.Model.extend({})
 
