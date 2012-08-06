@@ -132,6 +132,7 @@ js.addAll([
 "app/activity/participants/row", // ce.activity.participants row
 "app/activity/participants/list", // ce.activity.participants list
 "app/activity/participants/topbar", // ce.activity.participants topbar
+"app/activity/participants/bottombar", // ce.activity.participants bottombar
 "app/activity/credit_requests", // ce.activity
 "app/activity/credit_requests/events", // ce.activity
 "app/person" // ce.person

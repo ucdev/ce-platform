@@ -1,4 +1,4 @@
-<div class="btn-toolbar clearfix js-pager-container filter-container">
+<div class="btn-toolbar clearfix filter-container js-top-bar">
     <div class="btn-group pull-left">
         <a href="#" class="btn"><i class="icon-plus-sign"></i></a>
         <a href="#" class="btn"><i class="icon-hdd"></i></a>
@@ -23,5 +23,6 @@
             <li><a href="#" id="print-cne" class="js-print">Nurse Certificates</a></li>
         </ul>
     </div>
+    <div class="js-pager-container"></div>
     <!---<div class="btn-group pull-right js-attendee-filter"></div>--->
 </div>
