@@ -2,3 +2,7 @@
 /WEB-INF
 /WEB-INF
 .DS_Store
+
+*.sublime-project
+
+*.sublime-workspace
