@@ -128,13 +128,13 @@ ce.module "log", ((self, ce, Backbone, Marionette, $, _, wndw) ->
   while --idx >= 0
     ((method) ->
       self[method] = ->
-        log_level isnt 0 and con and con[method] and con[method].apply(con, arguments)
+        log_level isnt 0 and con and con[method] and con[method].apply(con, arguments_)
     ) pass_methods[idx]
   idx = log_methods.length
   while --idx >= 0
     ((idx, level) ->
       self[level] = ->
-        args = aps.call(arguments)
+        args = aps.call(arguments_)
         log_arr = [level].concat(args)
         logs.push log_arr
         exec_callback log_arr
@@ -155,17 +155,17 @@ ce.module "log", ((self, ce, Backbone, Marionette, $, _, wndw) ->
   # 
   #  debug.setCallback( callback [, force ] [, limit ] )
   # 
-  # Arguments:
+  # arguments_:
   # 
   #  callback - (Function) The aforementioned callback function. The first
-  #    argument is the logging level, and all subsequent arguments are those
+  #    argument is the logging level, and all subsequent Arguments are those
   #    passed to the initial debug logging method.
   #  force - (Boolean) If false, log to console.log if available, otherwise
   #    callback. If true, log to both console.log and callback.
   #  limit - (Number) If specified, number of lines to limit initial scrollback
   #    to.
   @setCallback = ->
-    args = aps.call(arguments)
+    args = aps.call(arguments_)
     max = logs.length
     i = max
     callback_func = args.shift() or null
