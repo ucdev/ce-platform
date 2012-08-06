@@ -1,0 +1,14 @@
+#! ce.Views.<%= loc.nameInPluralUppercase =%>.IndexView extends Backbone.Marionette.CompositeView 
+ce.module "Views.<%= loc.nameInPluralUppercase =%>", (self, ce, Backbone, Marionette, $, _) ->
+  self.IndexView = Backbone.Marionette.CompositeView.extend(
+    tagName: "table"
+    itemView: self.RowView
+    template: "<%= loc.nameInPluralLowercase =%>/index"
+    events:
+      "click .new": "newRecord"
+
+    appendHtml: (collectionView, itemView) ->
+      collectionView.$(".<%= loc.nameInPluralLowercase =%>").append itemView.el
+
+    newRecord: ->
+  )

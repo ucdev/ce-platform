@@ -5,10 +5,10 @@
 		<cfset filters(through="pagelet",type="before") />
 		<cfset filters(through="createAssets",type="before") />
 		<cfset filters(through="setUserInfo",type="before") />
-		<cfset filters(through="loadTmpls",type="before") />
+		<!--- <cfset filters(through="loadTmpls",type="before") /> --->
 	</cffunction>
 	
-	<cffunction name="loadTmpls">
+	<!--- <cffunction name="loadTmpls">
 		<cfparam name="params.controller" type="string" default="">
 		
 		<cfset var tmpls = "" />
@@ -29,7 +29,7 @@
 		</cfif>
 		
 		<cfset ejsTemplates = tmplContent />
-	</cffunction>
+	</cffunction> --->
 	
 	<cffunction name="setUserInfo">
 		<cfif structKeyExists(session,'currentUser') AND isObject(session.currentuser)>

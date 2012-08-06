@@ -9,7 +9,8 @@
 		<cfset loc.filepath = "" />
 		<cfset loc.httppath = "" />
 		<cfset loc.pathData = $getPathFromRequest(pathInfo=request.cgi.path_Info, scriptName=request.cgi.script_Name) />
-		
+		<cfset loc.srcPath = "/javascripts/src/_core/" />
+		<cfset loc.tmplPath = "/javascripts/src/_scaffold/" />
 		<cfset loc.nameInSingularUppercase = capitalize(singularize(params.controller))>
 		<cfset loc.nameInSingularLowercase = LCase(singularize(params.controller))>
 		<cfset loc.nameInPluralLowercase = LCase(params.controller)>
@@ -18,28 +19,28 @@
 		
 		<cfif structKeyExists(params,'ROUTE') AND params.route NEQ "wildcard">
 			<!--- CONTROLLER JS --->
-			<cfset $renderTemplate(name="controller",templatePath=expandPath("/javascripts/app/controllers/template.txt"),outputPath=expandPath("/javascripts/app/controllers"),fileName="#loc.nameInPluralLowercase#.js") />
+			<cfset $renderTemplate(name="controller",templatePath=expandPath("#loc.tmplPath#Controllers/template.txt"),outputPath=expandPath("#loc.srcPath#Controllers"),fileName="#loc.nameInPluralLowercase#.coffee") />
 			
 			<!--- COLLECTION JS --->
-			<cfset $renderTemplate(name="collection",templatePath=expandPath("/javascripts/app/collections/template.txt"),outputPath=expandPath("/javascripts/app/collections"),fileName="#loc.nameInPluralLowercase#.js") />
+			<cfset $renderTemplate(name="collection",templatePath=expandPath("#loc.tmplPath#Collections/template.txt"),outputPath=expandPath("#loc.srcPath#Collections"),fileName="#loc.nameInPluralLowercase#.coffee") />
 			
 			<!--- MODEL JS --->
-			<cfset $renderTemplate(name="model",templatePath=expandPath("/javascripts/app/models/template.txt"),outputPath=expandPath("/javascripts/app/models"),fileName="#loc.nameInSingularLowercase#.js") />
+			<cfset $renderTemplate(name="model",templatePath=expandPath("#loc.tmplPath#Models/template.txt"),outputPath=expandPath("#loc.srcPath#Models"),fileName="#loc.nameInSingularLowercase#.coffee") />
 			
 			<!--- ROUTER JS --->
-			<cfset $renderTemplate(name="router",templatePath=expandPath("/javascripts/app/routers/template.txt"),outputPath=expandPath("/javascripts/app/routers"),fileName="#loc.nameInPluralLowercase#.js") />
+			<cfset $renderTemplate(name="router",templatePath=expandPath("#loc.tmplPath#Routers/template.txt"),outputPath=expandPath("#loc.srcPath#Routers"),fileName="#loc.nameInPluralLowercase#.coffee") />
 
 			<!--- VIEW EDIT JS --->
-			<cfset $renderTemplate(name="view_edit",templatePath=expandPath("/javascripts/app/views/edit_template.txt"),outputPath=expandPath("/javascripts/app/views/#loc.nameInPluralLowercase#"),fileName="edit.js") />
+			<cfset $renderTemplate(name="view_edit",templatePath=expandPath("#loc.tmplPath#Views/edit_template.txt"),outputPath=expandPath("#loc.srcPath#Views/#loc.nameInPluralLowercase#"),fileName="edit.coffee") />
 
 			<!--- VIEW INDEX JS --->
-			<cfset $renderTemplate(name="view_index",templatePath=expandPath("/javascripts/app/views/index_template.txt"),outputPath=expandPath("/javascripts/app/views/#loc.nameInPluralLowercase#"),fileName="index.js") />
+			<cfset $renderTemplate(name="view_index",templatePath=expandPath("#loc.tmplPath#Views/index_template.txt"),outputPath=expandPath("#loc.srcPath#Views/#loc.nameInPluralLowercase#"),fileName="index.coffee") />
 			
 			<!--- VIEW SHOW JS --->
-			<cfset $renderTemplate(name="view_show",templatePath=expandPath("/javascripts/app/views/show_template.txt"),outputPath=expandPath("/javascripts/app/views/#loc.nameInPluralLowercase#"),fileName="show.js") />
+			<cfset $renderTemplate(name="view_show",templatePath=expandPath("#loc.tmplPath#Views/show_template.txt"),outputPath=expandPath("#loc.srcPath#Views/#loc.nameInPluralLowercase#"),fileName="show.coffee") />
 			
 			<!--- VIEW ROW JS --->
-			<cfset $renderTemplate(name="view_row",templatePath=expandPath("/javascripts/app/views/row_template.txt"),outputPath=expandPath("/javascripts/app/views/#loc.nameInPluralLowercase#"),fileName="row.js") />
+			<cfset $renderTemplate(name="view_row",templatePath=expandPath("#loc.tmplPath#Views/row_template.txt"),outputPath=expandPath("#loc.srcPath#Views/#loc.nameInPluralLowercase#"),fileName="row.coffee") />
 		</cfif>
 	</cffunction>
 	

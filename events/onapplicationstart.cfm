@@ -25,7 +25,7 @@
 	<cfreturn $singularizeOrPluralize(text=arguments.word, which="singularize")>
 </cffunction>
 
-<cfdirectory action="list" directory="#expandPath('/javascripts/lib/controllers')#" filter="*.js" name="jsList">
+<cfdirectory action="list" directory="#expandPath('/javascripts/lib/_core/controllers')#" filter="*.js" name="jsList">
 <cfset baseDirPriority = "models,collections,controllers,routers,views" />
 <cfset baseViewFiles = "row,index,edit,show" />
 
@@ -35,17 +35,17 @@
 		
 		<cfswitch expression="#key#">
 			<cfcase value="models">
-				<cfset fileLoc = "/lib/#key#/#$$singularize(replace(jsList.name,'.js',''))#" />
+				<cfset fileLoc = "/lib/_core/#key#/#$$singularize(replace(jsList.name,'.js',''))#" />
 				<cfset jsScaffolded.add(fileLoc)>
 			</cfcase>
 			<cfcase value="views">
 				<cfloop list="#baseViewFiles#" index="viewFile" delimiters=",">
-					<cfset fileLoc = "/lib/#key#/#replace(jsList.name,'.js','')#/#viewFile#" />
+					<cfset fileLoc = "/lib/_core/#key#/#replace(jsList.name,'.js','')#/#viewFile#" />
 					<cfset jsScaffolded.add(fileLoc)>
 				</cfloop>
 			</cfcase>
 			<cfdefaultcase>
-				<cfset fileLoc = "/lib/#key#/#replace(jsList.name,'.js','')#" />
+				<cfset fileLoc = "/lib/_core/#key#/#replace(jsList.name,'.js','')#" />
 				<cfset jsScaffolded.add(fileLoc)>
 			</cfdefaultcase>
 		</cfswitch>

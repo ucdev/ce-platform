@@ -12,7 +12,7 @@ ce.module "activity", (self, ce, Backbone, Marionette, $, _) ->
       actNotesPosY: params.legacy.cActNotesPosY
 
     self.legacy = params.legacy
-    self.Model = new ce.Models.Activity(params.modelData)
+    self.model = new ce.Models.Activity(params.modelData)
     self.trigger "loaded"
 
   self.on "loaded", ->
