@@ -65,7 +65,7 @@ js.addAll([
 /* Backbone */
 "vendor/backbone/backbone",
 "vendor/backbone/backbone.paginator",
-"vendor/backbone/backbone.module",
+"vendor/backbone/backbone.marionette",
 
 
 /* jQuery Plugins */
