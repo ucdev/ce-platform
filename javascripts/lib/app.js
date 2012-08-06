@@ -5,6 +5,8 @@ window.ce = window.ce || {};
 
 ce = new Backbone.Marionette.Application();
 
+ce.module("_core");
+
 ce.module("activity");
 
 ce.module("person");

@@ -1,5 +1,5 @@
-#! ce.Views.Activities.IndexView extends Backbone.Marionette.CompositeView 
-ce.module "Views.Activities", (self, ce, Backbone, Marionette, $, _) ->
+#! ce._core.views.activities.IndexView extends Backbone.Marionette.CompositeView 
+ce.module "_core.views.activities", (self, ce, Backbone, Marionette, $, _) ->
   self.IndexView = Backbone.Marionette.CompositeView.extend(
     tagName: "table"
     itemView: self.RowView

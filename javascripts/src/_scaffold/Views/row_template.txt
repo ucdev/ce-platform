@@ -1,5 +1,5 @@
-#! ce.Views.Activities.RowView extends Backbone.Marionette.ItemView 
-ce.module "Views.<%= loc.nameInPluralUppercase =%>", (self, ce, Backbone, Marionette, $, _) ->
+#! ce._core.views.<%= loc.nameInPluralLowercase =%>.RowView extends Backbone.Marionette.ItemView 
+ce.module "_core.views.<%= loc.nameInPluralLowercase =%>", (self, ce, Backbone, Marionette, $, _) ->
   self.RowView = Backbone.Marionette.ItemView.extend(
     tagName: "tr"
     template: "<%= loc.nameInPluralLowercase =%>/row"

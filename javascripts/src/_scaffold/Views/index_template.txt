@@ -1,5 +1,5 @@
-#! ce.Views.<%= loc.nameInPluralUppercase =%>.IndexView extends Backbone.Marionette.CompositeView 
-ce.module "Views.<%= loc.nameInPluralUppercase =%>", (self, ce, Backbone, Marionette, $, _) ->
+#! ce._core.views.<%= loc.nameInPluralLowercase =%>.IndexView extends Backbone.Marionette.CompositeView 
+ce.module "_core.views.<%= loc.nameInPluralLowercase =%>", (self, ce, Backbone, Marionette, $, _) ->
   self.IndexView = Backbone.Marionette.CompositeView.extend(
     tagName: "table"
     itemView: self.RowView

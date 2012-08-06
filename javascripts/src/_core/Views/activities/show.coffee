@@ -1,4 +1,4 @@
-#! ce.Views.Activities.ShowView extends Backbone.Marionette.ItemView 
-ce.module "Views.Activities", (self, ce, Backbone, Marionette, $, _) ->
+#! ce._core.views.activities.ShowView extends Backbone.Marionette.ItemView 
+ce.module "_core.views.activities", (self, ce, Backbone, Marionette, $, _) ->
   self.ShowView = Backbone.Marionette.ItemView.extend(template: "activities/show")
 

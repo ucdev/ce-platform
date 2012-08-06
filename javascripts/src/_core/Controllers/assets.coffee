@@ -1,5 +1,5 @@
-#! ce.Controllers.Assets extends Backbone.Controller 
-ce.module "Controllers", (self, ce, Backbone, Marionette, $, _) ->
+#! ce._core.controllers.Assets extends Backbone.Controller 
+ce.module "_core.controllers", (self, ce, Backbone, Marionette, $, _) ->
   @Assets = (->
     assets = ->
       main = undefined
