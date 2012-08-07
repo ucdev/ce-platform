@@ -20,6 +20,7 @@ ce.module "user", (self, ce, Backbone, Marionette, $, _) ->
         success: (data) ->
           $(view.el).html data
           this
+      return
 
   )
   
@@ -28,8 +29,12 @@ ce.module "user", (self, ce, Backbone, Marionette, $, _) ->
     view = new self.loginView()
     ce.dialog.show view
     self.trigger "loggedIn"
+    return
 
   
   #LOGOUT FUNCTION
   self.logout = (params) ->
     self.trigger "loggedOut"
+    return
+
+  return

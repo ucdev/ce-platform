@@ -4,11 +4,12 @@ ce.module("user", function(self, ce, Backbone, Marionette, $, _, models) {
   self.Model = models.Person.extend({});
   self.load = function(params) {
     self.model = new self.Model(params);
-    return self.trigger("loaded");
+    self.trigger("loaded");
   };
-  return $(function() {
-    return $(".loginLink").click(function(ev) {
+  $(function() {
+    $(".loginLink").click(function(ev) {
       self.login({});
+      ev.preventDefault();
       return false;
     });
   });

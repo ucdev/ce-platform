@@ -152,6 +152,8 @@ ce.module "global", (self, ce, Backbone, Marionette, $, _) ->
     sOutput = $.Replace(sOutput, "%", "", "ALL")
     sOutput
   StatusCount = 0
+  
+
   $ ->
     getResources()
     $("input").keydown (e) ->

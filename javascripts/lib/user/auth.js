@@ -15,7 +15,7 @@ ce.module("user", function(self, ce, Backbone, Marionette, $, _) {
     render: function() {
       var view;
       view = this;
-      return $.ajax({
+      $.ajax({
         url: "/login",
         type: "post",
         success: function(data) {
@@ -29,9 +29,9 @@ ce.module("user", function(self, ce, Backbone, Marionette, $, _) {
     var view;
     view = new self.loginView();
     ce.dialog.show(view);
-    return self.trigger("loggedIn");
+    self.trigger("loggedIn");
   };
-  return self.logout = function(params) {
-    return self.trigger("loggedOut");
+  self.logout = function(params) {
+    self.trigger("loggedOut");
   };
 });
