@@ -1,3 +1,3 @@
 #!/bin/bash
 cd ~/Sites/ccpd-dev/
-coffee -wc javascripts/lib javascripts/src
+coffee -wbco javascripts/lib javascripts/src
