@@ -35,17 +35,17 @@
 		
 		<cfswitch expression="#key#">
 			<cfcase value="models">
-				<cfset fileLoc = "/lib/_core/#key#/#$$singularize(replace(jsList.name,'.js',''))#" />
+				<cfset fileLoc = "lib/_core/#key#/#$$singularize(replace(jsList.name,'.js',''))#" />
 				<cfset jsScaffolded.add(fileLoc)>
 			</cfcase>
 			<cfcase value="views">
 				<cfloop list="#baseViewFiles#" index="viewFile" delimiters=",">
-					<cfset fileLoc = "/lib/_core/#key#/#replace(jsList.name,'.js','')#/#viewFile#" />
+					<cfset fileLoc = "lib/_core/#key#/#replace(jsList.name,'.js','')#/#viewFile#" />
 					<cfset jsScaffolded.add(fileLoc)>
 				</cfloop>
 			</cfcase>
 			<cfdefaultcase>
-				<cfset fileLoc = "/lib/_core/#key#/#replace(jsList.name,'.js','')#" />
+				<cfset fileLoc = "lib/_core/#key#/#replace(jsList.name,'.js','')#" />
 				<cfset jsScaffolded.add(fileLoc)>
 			</cfdefaultcase>
 		</cfswitch>
@@ -81,10 +81,8 @@ js.addAll([
 /* Twitter Bootstrap JS */
 "vendor/bootstrap/bootstrap-transition",
 "vendor/bootstrap/bootstrap-alert",
-"vendor/bootstrap/bootstrap-modal",
 "vendor/bootstrap/bootstrap-dropdown",
 "vendor/bootstrap/bootstrap-scrollspy",
-"vendor/bootstrap/bootstrap-tab",
 "vendor/bootstrap/bootstrap-tooltip",
 "vendor/bootstrap/bootstrap-popover",
 "vendor/bootstrap/bootstrap-button",

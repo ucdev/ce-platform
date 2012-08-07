@@ -1,26 +1,30 @@
 ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
-  self.dialog = Backbone.Marionette.Region.extend(
-    el: "#dialog"
+  self.dialog = Backbone.Marionette.Region.extend 
+    el: "#dialog",
+
     constructor: ->
       _.bindAll this
-      Backbone.Marionette.Region::constructor.apply this, arguments
-      @on "view:show", @showDialog, this
+      
+      Backbone.Marionette.Region.prototype.constructor.apply @, arguments
+      @.on "view:show", @showDialog, @
+
       return
+    ,
 
     getEl: (selector) ->
       $el = $(selector).dialog()
       $el.on "hidden", @close
-      return
+      return $el;
+    ,
 
     showDialog: (view) ->
-      view.on "close", @hideDialog, this
-      @$el.dialog view
-      @$el.dialog "open"
+      view.on("close", @hideDialog, @);
+      @$el.dialog('open');
       return
+    ,
 
     hideDialog: ->
-      @$el.dialog "close"
+      @$el.dialog('close');
       return
-  )
-
+  return
 ce.addRegions dialog: ce.ui.dialog
