@@ -2,18 +2,18 @@
 
 ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
   self.on("pager_loaded", function() {
-    return ce.log.info("pager: loaded");
+    ce.log.info("pager: loaded");
   });
   self.on("pager_dropdown_loaded", function() {
-    return ce.log.info("pager: links loaded");
+    ce.log.info("pager: links loaded");
   });
   self.on("pager_next", function() {
-    return ce.log.info("pager: next page loaded");
+    ce.log.info("pager: next page loaded");
   });
   self.on("pager_prev", function() {
-    return ce.log.info("pager: previous page loaded");
+    ce.log.info("pager: previous page loaded");
   });
   return self.on("pager_page_selected", function() {
-    return ce.log.info("pager: page " + self.collection.currentPage + " loaded");
+    ce.log.info("pager: page " + self.collection.currentPage + " loaded");
   });
 });
