@@ -3,11 +3,7 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
     el: "#dialog"
     constructor: ->
       _.bindAll this
-      console.log ("arguments");
-      console.dir(arguments);
-      console.log ("arguments_");
-      console.dir(arguments._);
-      Backbone.Marionette.Region::constructor.apply this, arguments_
+      Backbone.Marionette.Region::constructor.apply this, arguments
       @on "view:show", @showDialog, this
       return
 
