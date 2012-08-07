@@ -7,7 +7,11 @@
 	
 	<!--- activity_participants/create --->
 	<cffunction name="create">
-		<cfset activity_participant = model("activity_participant").new(params.activity_participant)>
+		<cfif structKeyExists(params, "activity_participant")>
+			<cfset activity_participant = model("activity_participant").new(params.activity_participant)>
+		<cfelse>
+			<cfset activity_participant = model("activity_participant").new(params)>
+		</cfif>
 		
 		<!--- Verify that the activity_participant creates successfully --->
 		<cfif activity_participant.save()>

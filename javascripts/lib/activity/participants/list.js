@@ -19,10 +19,8 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         silent: true
       });
     },
-    model: models.Activity_participant,
     render: function() {
-      this.$el.html(_.template(this.template));
-      return this.collection.all();
+      return this.$el.html(_.template(this.template));
     },
     addAll: function() {
       this.$el.empty;

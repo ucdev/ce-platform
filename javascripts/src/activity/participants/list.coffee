@@ -11,21 +11,19 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
       coll.on "reset", @addAll, this
 
       coll.fetch
-        success: ->
+        success:() ->
           coll.pager()
-          self.trigger("data_loaded") # TRIGGERS THE PAGER TO LOAD
+          self.trigger("data_loaded")
           return
         silent: true
 
       return
 
-    model: models.Activity_participant
+    #model: models.Activity_participant
 
     render: ->
       # RENDER TEMPLATE AND USE AS PAGE HTML
       @$el.html _.template @template
-
-      @collection.all();
 
     addAll: ->
       @$el.empty
