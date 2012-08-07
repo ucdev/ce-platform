@@ -41,10 +41,13 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     self.bottombar = new self.Bottombar({
       el: ".js-bottom-bar"
     }).render();
-    self.pager = new ce.ui.Pager({
-      el: $(".js-pager-container"),
-      collection: self.collection
-    }).render();
+    self.on("data_loaded", function() {
+      self.pager = new ce.ui.Pager({
+        el: $(".js-pager-container"),
+        collection: self.collection
+      });
+      self.pager.render();
+    });
     return self.trigger("page_loaded");
   };
 }, ce._core.models, ce._core.pagers);

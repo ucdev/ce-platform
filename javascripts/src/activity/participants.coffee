@@ -30,7 +30,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
     
     # CREATE COLLECTION
     self.collection = new self.paginatorCollection()
-    
+
     # BUILD TOP BUTTON TOOLBAR
     self.topbar = new self.Topbar(el: ".js-top-bar").render()
     
@@ -44,10 +44,13 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
     self.bottombar = new self.Bottombar(el: ".js-bottom-bar").render()
     
     # BUILD PAGER
-    self.pager = new ce.ui.Pager(
-      el: $(".js-pager-container")
-      collection: self.collection
-      ).render()
+    self.on "data_loaded", -> # EVENT BOUND TO BE CALLED AFTER THE DATA FETCH IS SUCCESSFUL
+      self.pager = new ce.ui.Pager(
+        el: $(".js-pager-container")
+        collection: self.collection
+        )
+      self.pager.render()
+      return
     
     # console.dir(self.list);
     # console.dir(self.collection);

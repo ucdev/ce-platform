@@ -9,18 +9,20 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       var coll;
       coll = this.collection;
       coll.on("add", this.addOne, this);
-      coll.on("all", this.addAll, this);
+      coll.on("all", this.render, this);
       coll.on("reset", this.addAll, this);
-      return coll.fetch({
+      coll.fetch({
         success: function() {
           coll.pager();
+          self.trigger("data_loaded");
         },
         silent: true
       });
     },
     model: models.Activity_participant,
     render: function() {
-      return this.$el.html(_.template(this.template));
+      this.$el.html(_.template(this.template));
+      return this.collection.all();
     },
     addAll: function() {
       this.$el.empty;
