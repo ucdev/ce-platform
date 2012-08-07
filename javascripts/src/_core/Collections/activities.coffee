@@ -1,5 +1,6 @@
 #! ce._core.Collections.Activities extends Backbone.Collection */
-ce.module "_core.Collections", (self, ce, Backbone, Marionette, $, _) ->
+ce.module "_core.Collections", (self, ce, Backbone, Marionette, $, _, models) ->
 	self.Activities = Backbone.Collection.extend
 		url: '/activities/',
-		model: ce.Models.Activity
+		model: models.Activity
+, ce._core.models

@@ -28,7 +28,7 @@ ce.module("log", (function(self, ce, Backbone, Marionette, $, _, wndw) {
   while (--idx >= 0) {
     (function(method) {
       return self[method] = function() {
-        return log_level !== 0 && con && con[method] && con[method].apply(con, arguments_);
+        return log_level !== 0 && con && con[method] && con[method].apply(con, arguments);
       };
     })(pass_methods[idx]);
   }
@@ -37,7 +37,7 @@ ce.module("log", (function(self, ce, Backbone, Marionette, $, _, wndw) {
     (function(idx, level) {
       return self[level] = function() {
         var args, log_arr;
-        args = aps.call(arguments_);
+        args = aps.call(arguments);
         log_arr = [level].concat(args);
         logs.push(log_arr);
         exec_callback(log_arr);
@@ -61,7 +61,7 @@ ce.module("log", (function(self, ce, Backbone, Marionette, $, _, wndw) {
   };
   return this.setCallback = function() {
     var args, i, max, _results;
-    args = aps.call(arguments_);
+    args = aps.call(arguments);
     max = logs.length;
     i = max;
     callback_func = args.shift() || null;

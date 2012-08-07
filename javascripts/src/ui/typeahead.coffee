@@ -218,13 +218,13 @@ ce.module "ui.typeahead", (self, ce, Backbone, Marionette, $, _) ->
       next_token = undefined
       switch event.keyCode
         when KEY.LEFT, KEY.RIGHT
-      , KEY.UP
-      , KEY.DOWN
-      , KEY.BACKSPACE
+        , KEY.UP
+        , KEY.DOWN
+        , KEY.BACKSPACE
           item_deselect()
         when KEY.TAB, KEY.RETURN
-      , KEY.COMMA
-      , KEY.ESC
+        , KEY.COMMA
+        , KEY.ESC
           true
     )
     $typeahead = $("<div/>").addClass("uiTypeahead").addClass(settings.typeaheadClass)
@@ -275,7 +275,6 @@ ce.module "ui.typeahead", (self, ce, Backbone, Marionette, $, _) ->
                   anItem =
                     label: "See more results for &quot;" + $input.val() + "&quot;"
                     value: 0
-                    image: ""
                     subText1: ""
                     subText2: ""
                     image: ""
@@ -356,7 +355,6 @@ ce.module "ui.typeahead", (self, ce, Backbone, Marionette, $, _) ->
     appendTo: null
     useExistingInput: false
     clearOnSelect: false
-    allowAdd: true
     size: "compact"
     bucketed: false
     shownCount: 5
@@ -384,13 +382,13 @@ ce.module "ui.typeahead", (self, ce, Backbone, Marionette, $, _) ->
 
 
 #var typingTimeout;
-#	function startTypingTimer(input_field)
-#	{	
-#		if (typingTimeout != undefined) 
-#			clearTimeout(typingTimeout);
-#		typingTimeout = setTimeout( function()
-#					{				
-#						eval(input_field.attr("onfinishinput"));
-#					}
-#		, 500);
-#	}
+# function startTypingTimer(input_field)
+# { 
+#   if (typingTimeout != undefined) 
+#     clearTimeout(typingTimeout);
+#   typingTimeout = setTimeout( function()
+#         {       
+#           eval(input_field.attr("onfinishinput"));
+#         }
+#   , 500);
+# }

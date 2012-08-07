@@ -5,7 +5,7 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
     el: "#dialog",
     constructor: function() {
       _.bindAll(this);
-      Backbone.Marionette.Region.prototype.constructor.apply(this, arguments_);
+      Backbone.Marionette.Region.prototype.constructor.apply(this, arguments);
       this.on("view:show", this.showDialog, this);
     },
     getEl: function(selector) {

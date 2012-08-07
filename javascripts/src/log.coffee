@@ -128,13 +128,13 @@ ce.module "log", ((self, ce, Backbone, Marionette, $, _, wndw) ->
   while --idx >= 0
     ((method) ->
       self[method] = ->
-        log_level isnt 0 and con and con[method] and con[method].apply(con, arguments_)
+        log_level isnt 0 and con and con[method] and con[method].apply(con, arguments)
     ) pass_methods[idx]
   idx = log_methods.length
   while --idx >= 0
     ((idx, level) ->
       self[level] = ->
-        args = aps.call(arguments_)
+        args = aps.call(arguments)
         log_arr = [level].concat(args)
         logs.push log_arr
         exec_callback log_arr
@@ -165,7 +165,7 @@ ce.module "log", ((self, ce, Backbone, Marionette, $, _, wndw) ->
   #  limit - (Number) If specified, number of lines to limit initial scrollback
   #    to.
   @setCallback = ->
-    args = aps.call(arguments_)
+    args = aps.call(arguments)
     max = logs.length
     i = max
     callback_func = args.shift() or null
