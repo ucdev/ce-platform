@@ -1,6 +1,6 @@
 ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
   self.Pager = Backbone.View.extend
-    template: ce.templates.get "ui-pager"
+    pagingTemplate: _.template ce.templates.get "ui-pager"
     initialize: ->
       @collection.on "change", @render, this
       @collection.on "reset", @render, this
@@ -11,10 +11,8 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
       "click a.js-prev-page": "prevPage"
 
     render: ->
-      #@$el.html ""
-      
       # FORM THE TEMPLATE AND APPEND THE TEMPLATE HTML
-      @$el.append _.template @template, @collection.info()
+      @$el.html @pagingTemplate @collection.info()
       self.trigger "pager_loaded"
       @el
 

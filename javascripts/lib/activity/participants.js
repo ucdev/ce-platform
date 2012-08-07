@@ -19,25 +19,27 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     };
     self.paginatorCollection = pagers.Activity_participants.extend({
       server_api: {
-        $format: "json",
-        activityId: self.details.activityId,
-        orderby: "fullName",
-        $skip: function() {
+        "$format": "json",
+        "$top": function() {
+          return this.totalPages * this.perPage;
+        },
+        "activityId": self.details.activityId,
+        "orderby": "fullName",
+        "$skip": function() {
           return this.totalPages * this.perPage;
         }
       }
     });
-    self.collection = new self.paginatorCollection().add(params.records);
-    self.collection.pager();
+    self.collection = new self.paginatorCollection();
     self.topbar = new self.Topbar({
-      el: ".content-container"
+      el: ".js-top-bar"
     }).render();
     self.list = new self.List({
-      el: $(".js-participant-table"),
+      el: $(".js-registrants-container"),
       collection: self.collection
     }).render();
     self.bottombar = new self.Bottombar({
-      el: ".content-container"
+      el: ".js-bottom-bar"
     }).render();
     self.pager = new ce.ui.Pager({
       el: $(".js-pager-container"),

@@ -4,6 +4,9 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
   return self.Row = Backbone.Marionette.ItemView.extend({
     tagName: "tr",
     className: "personRow AllAttendees js-all-attendee",
-    template: "activity_participants-row"
+    template: "activity_participants-row",
+    render: function() {
+      return this.$el.append(_.template(this.template));
+    }
   });
 });

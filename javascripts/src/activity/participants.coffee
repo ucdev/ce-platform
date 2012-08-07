@@ -19,31 +19,31 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
     # MODIFY CLIENT PAGER
     self.paginatorCollection = pagers.Activity_participants.extend
       server_api:
-        $format: "json"
-        activityId: self.details.activityId
-        orderby: "fullName"
-        $skip: ->
+        "$format": "json"
+        "$top": ->
+          @totalPages * @perPage
+        "activityId": self.details.activityId
+        "orderby": "fullName"
+        "$skip": ->
           @totalPages * @perPage
     
     
     # CREATE COLLECTION
-    self.collection = new self.paginatorCollection().add params.records
-    self.collection.pager()
+    self.collection = new self.paginatorCollection()
     
-    # # BUILD TOP BUTTON TOOLBAR
-    self.topbar = new self.Topbar(el: ".content-container").render()
+    # BUILD TOP BUTTON TOOLBAR
+    self.topbar = new self.Topbar(el: ".js-top-bar").render()
     
-    # # BUILD PAGE VIEW AND RENDER IT
+    # BUILD PAGE VIEW AND RENDER IT
     self.list = new self.List(
-      el: $(".js-participant-table")
+      el: $(".js-registrants-container")
       collection: self.collection
       ).render()
 
+    # BUILD BOTTOM BUTTON TOOLBAR
+    self.bottombar = new self.Bottombar(el: ".js-bottom-bar").render()
     
-    # # BUILD BOTTOM BUTTON TOOLBAR
-    self.bottombar = new self.Bottombar(el: ".content-container").render()
-    
-    # # # BUILD PAGER
+    # BUILD PAGER
     self.pager = new ce.ui.Pager(
       el: $(".js-pager-container")
       collection: self.collection

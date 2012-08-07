@@ -3,17 +3,33 @@
 ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _, models) {
   return self.List = Backbone.View.extend({
     template: ce.templates.get("activity_participants-table"),
+    rowEl: ".js-attendee-rows",
     className: "activity_participants-page",
     initialize: function() {
       var coll;
       coll = this.collection;
       coll.on("add", this.addOne, this);
-      coll.on("all", this.render, this);
-      return coll.on("reset", this.addAll, this);
+      coll.on("all", this.addAll, this);
+      coll.on("reset", this.addAll, this);
+      return coll.fetch({
+        success: function() {
+          coll.pager();
+        },
+        silent: true
+      });
     },
     model: models.Activity_participant,
     render: function() {
-      return this.$el.append(_.template(this.template));
+      return this.$el.html(_.template(this.template));
+    },
+    addAll: function() {
+      this.$el.empty;
+      this.collection.each(this.addOne);
+    },
+    addOne: function() {
+      var view;
+      view = new self.Row();
+      $(this.rowEl).append(view.render());
     }
   });
 }, ce._core.models);
