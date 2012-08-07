@@ -5,13 +5,13 @@ ce.module "_core.pagers", (self, ce, Backbone, Marionette, $, _, models) ->
 		paginator_core:
 			type: 'post'
 			dataType: 'json'
-			url:'/activity_participants/loadData'
+			url:'/activity_participants/'
 		paginator_ui:
 			firstPage: 1
 			currentPage: 1
 			perPage: 15
 		parse: (response) ->
-			@totalPages = Math.ceil(response.length / @perPage) 
+			@totalPages = Math.ceil(response.length / @perPage)
 			return response
 		model: models.Activity_participant
 ,ce._core.models

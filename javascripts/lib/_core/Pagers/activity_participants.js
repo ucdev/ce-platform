@@ -6,7 +6,7 @@ ce.module("_core.pagers", function(self, ce, Backbone, Marionette, $, _, models)
     paginator_core: {
       type: 'post',
       dataType: 'json',
-      url: '/activity_participants/loadData'
+      url: '/activity_participants/'
     },
     paginator_ui: {
       firstPage: 1,

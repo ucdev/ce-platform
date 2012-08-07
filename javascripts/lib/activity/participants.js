@@ -19,6 +19,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     };
     self.paginatorCollection = pagers.Activity_participants.extend({
       server_api: {
+<<<<<<< HEAD
         "$format": "json",
         "$top": function() {
           return this.totalPages * this.perPage;
@@ -26,13 +27,26 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         "activityId": self.details.activityId,
         "orderby": "fullName",
         "$skip": function() {
+=======
+        $format: "json",
+        activityId: self.details.activityId,
+        orderby: "fullName",
+        $skip: function() {
+>>>>>>> gsdfgsdfg
           return this.totalPages * this.perPage;
         }
       }
     });
     self.collection = new self.paginatorCollection();
     self.topbar = new self.Topbar({
-      el: ".js-top-bar"
+      el: ".content-container"
+    }).render();
+    self.list = new self.List({
+      el: $(".js-participant-table"),
+      collection: self.collection
+    }).render();
+    self.bottombar = new self.Bottombar({
+      el: ".content-container"
     }).render();
     self.list = new self.List({
       el: $(".js-registrants-container"),
