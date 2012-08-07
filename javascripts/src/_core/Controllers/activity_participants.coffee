@@ -1,5 +1,5 @@
-#! ce.Controllers.Activity_participants extends Backbone.Controller 
-ce.module "Controllers", (self, ce, Backbone, Marionette, $, _) ->
+#! ce._core.controllers.Activity_participants extends Backbone.Controller 
+ce.module "_core.controllers", (self, ce, Backbone, Marionette, $, _) ->
   @Activity_participants = (->
     activity_participants = ->
       main = undefined

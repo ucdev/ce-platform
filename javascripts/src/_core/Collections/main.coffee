@@ -1,5 +1,6 @@
-#! ce._core.Collections.Main extends Backbone.Collection */
-ce.module "_core.Collections", (self, ce, Backbone, Marionette, $, _) ->
+#! ce._core.collections.Main extends Backbone.Collection */
+ce.module "_core.collections", (self, ce, Backbone, Marionette, $, _, models) ->
 	self.Main = Backbone.Collection.extend
 		url: '/main/',
-		model: ce.Models.Main
+		model: models.Main
+,ce._core.models

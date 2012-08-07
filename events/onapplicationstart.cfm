@@ -26,7 +26,7 @@
 </cffunction>
 
 <cfdirectory action="list" directory="#expandPath('/javascripts/lib/_core/controllers')#" filter="*.js" name="jsList">
-<cfset baseDirPriority = "models,collections,controllers,routers,views" />
+<cfset baseDirPriority = "models,collections,controllers,pagers,routers,views" />
 <cfset baseViewFiles = "row,index,edit,show" />
 
 <cfloop query="jsList">
@@ -132,6 +132,7 @@ js.addAll([
 "lib/activity/participants/row", // ce.activity.participants row
 "lib/activity/participants/list", // ce.activity.participants list
 "lib/activity/participants/topbar", // ce.activity.participants topbar
+"lib/activity/participants/bottombar", // ce.activity.participants bottombar
 "lib/activity/credit_requests", // ce.activity
 "lib/activity/credit_requests/events", // ce.activity
 "lib/person" // ce.person

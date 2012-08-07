@@ -27,6 +27,9 @@
 			<!--- MODEL JS --->
 			<cfset $renderTemplate(name="model",templatePath=expandPath("#loc.tmplPath#Models/template.txt"),outputPath=expandPath("#loc.srcPath#Models"),fileName="#loc.nameInSingularLowercase#.coffee") />
 			
+			<!--- PAGER JS --->
+			<cfset $renderTemplate(name="pager",templatePath=expandPath("#loc.tmplPath#Pagers/template.txt"),outputPath=expandPath("#loc.srcPath#Pagers"),fileName="#loc.nameInPluralLowercase#.coffee") />
+			
 			<!--- ROUTER JS --->
 			<cfset $renderTemplate(name="router",templatePath=expandPath("#loc.tmplPath#Routers/template.txt"),outputPath=expandPath("#loc.srcPath#Routers"),fileName="#loc.nameInPluralLowercase#.coffee") />
 

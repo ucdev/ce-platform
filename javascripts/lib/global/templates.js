@@ -19,6 +19,7 @@ ce.module("templates", function(self, ce, Backbone, Marionette, $, _) {
       tmpl = template;
       self.cache[tmplKey] = tmpl;
     }
+    return tmpl;
   };
 });
 

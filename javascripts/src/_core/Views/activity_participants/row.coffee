@@ -1,5 +1,5 @@
-#! ce.Views.Activities.RowView extends Backbone.Marionette.ItemView 
-ce.module "Views.Activity_participants", (self, ce, Backbone, Marionette, $, _) ->
+#! ce._core.views.activity_participants.RowView extends Backbone.Marionette.ItemView 
+ce.module "_core.views.activity_participants", (self, ce, Backbone, Marionette, $, _) ->
   self.RowView = Backbone.Marionette.ItemView.extend(
     tagName: "tr"
     template: "activity_participants/row"

@@ -17,7 +17,7 @@ ce.module "templates", (self, ce, Backbone, Marionette, $, _) ->
       # precompile the template, for underscore.js templates
       tmpl = template
       self.cache[tmplKey] = tmpl
-    return
+    return tmpl
 
 Backbone.Marionette.TemplateCache::loadTemplate = (templateId) ->
   myTemplate = ce.templates.get(templateId)

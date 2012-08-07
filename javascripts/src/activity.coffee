@@ -1,5 +1,5 @@
 #! ce.Current.Activity extends ce.Models.Activity 
-ce.module "activity", (self, ce, Backbone, Marionette, $, _) ->
+ce.module "activity", (self, ce, Backbone, Marionette, $, _, models) ->
   self.load = (params) ->
     self.userPrefs =
       actListHeight: params.legacy.cActListHeight
@@ -12,9 +12,10 @@ ce.module "activity", (self, ce, Backbone, Marionette, $, _) ->
       actNotesPosY: params.legacy.cActNotesPosY
 
     self.legacy = params.legacy
-    self.model = new ce.Models.Activity(params.modelData)
+    self.model = new models.Activity(params.modelData)
     self.trigger "loaded"
 
   self.on "loaded", ->
     ce.log.info "activity: loaded"
+,ce._core.models
 
