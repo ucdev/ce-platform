@@ -5,6 +5,7 @@ ce.module("user", function(self, ce, Backbone, Marionette, $, _, models) {
   self.load = function(params) {
     self.model = new self.Model(params);
     self.trigger("loaded");
+    self.isLoggedIn();
   };
   $(function() {
     $(".loginLink").click(function(ev) {

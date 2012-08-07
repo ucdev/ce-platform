@@ -7,12 +7,15 @@ ce.module("global.ajax", function(self, ce, Backbone, Marionette, $, _) {
     });
     $(document).on("click", ".pjaxLinks a", function(ev) {
       ce.log.info("topnav clicked");
+      ev.preventDefault();
     });
     $(".pjaxLinks a").pjax({
-      container: "#page"
+      container: "#page",
+      timeout: 5000
     });
     $(".projectBar .nav-list a").pjax({
-      container: ".contentBar"
+      container: ".contentBar",
+      timeout: 5000
     });
     $(document).on("ajax:success", function() {
       ce.log.info("ajax:success");

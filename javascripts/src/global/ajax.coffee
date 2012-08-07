@@ -6,11 +6,18 @@ ce.module "global.ajax", (self, ce, Backbone, Marionette, $, _) ->
 
     $(document).on "click", ".pjaxLinks a", (ev) ->
       ce.log.info "topnav clicked"
-      #ev.preventDefault()
+      ev.preventDefault()
       return
 
-    $(".pjaxLinks a").pjax container: "#page"
-    $(".projectBar .nav-list a").pjax container: ".contentBar"
+    $(".pjaxLinks a").pjax 
+      container: "#page"
+      timeout: 5000
+
+    $(".projectBar .nav-list a").pjax 
+      container: ".contentBar"
+      timeout: 5000
+
+    
     
     $(document).on("ajax:success", ->
       ce.log.info "ajax:success"

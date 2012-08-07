@@ -5,6 +5,8 @@ ce.module "user", (self, ce, Backbone, Marionette, $, _, models) ->
 	self.load = (params) ->
 		self.model = new self.Model(params)
 		self.trigger "loaded"
+		self.isLoggedIn()
+		
 		return
 
 	$ ->

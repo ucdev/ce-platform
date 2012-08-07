@@ -6,6 +6,7 @@ ce.module("user", function(self, ce, Backbone, Marionette, $, _) {
       self.trigger("loggedIn");
       return true;
     } else {
+      self.trigger("loggedOut");
       return false;
     }
   };

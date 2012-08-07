@@ -7,6 +7,7 @@ ce.module "user", (self, ce, Backbone, Marionette, $, _) ->
       self.trigger "loggedIn"
       true
     else
+      self.trigger "loggedOut"
       false
 
   self.loginView = Backbone.View.extend(
