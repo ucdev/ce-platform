@@ -27,7 +27,7 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
     },
     selectPage: function() {
       var pageNo;
-      pageNo = parseInt($(this).text());
+      pageNo = parseInt($(arguments[0].currentTarget).attr("id").split("-")[1]);
       this.collection.goTo(pageNo);
       return self.trigger("pager_page_selected");
     },

@@ -1,9 +1,6 @@
 #! ce.Views.Activity_participants.IndexView extends Backbone.Marionette.CompositeView 
 ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models) ->
   self.List = Backbone.View.extend
-    template: ce.templates.get "activity_participants-table"
-    rowEl: ".js-attendee-rows"
-    className: "activity_participants-page"
     initialize: ->
       coll = @collection
       coll.on "add", @addOne, this
@@ -13,26 +10,25 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
       coll.fetch
         success:() ->
           coll.pager()
-          self.trigger("data_loaded")
+          self.trigger "data_loaded"
           return
         silent: true
 
       return
 
-    #model: models.Activity_participant
-
     render: ->
       # RENDER TEMPLATE AND USE AS PAGE HTML
-      @$el.html _.template @template
+      #@$el.append _.template @template
 
     addAll: ->
-      @$el.empty
+      @$el.empty()
       @collection.each @addOne
       return
 
-    addOne: ->
-      view = new self.Row()
-      $(@rowEl).append view.render()
+    addOne: (viewModel) ->
+      view = new self.Row  model: viewModel
+      $(".js-attendee-rows").append view.render().el
+      
       return
 
 ,ce._core.models

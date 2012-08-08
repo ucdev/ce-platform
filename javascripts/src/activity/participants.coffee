@@ -36,7 +36,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
     
     # BUILD PAGE VIEW AND RENDER IT
     self.list = new self.List(
-      el: $(".js-registrants-container")
+      el: ".js-attendee-rows"
       collection: self.collection
       ).render()
 
@@ -46,11 +46,10 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
     # BUILD PAGER
     self.on "data_loaded", -> # EVENT BOUND TO BE CALLED AFTER THE DATA FETCH IS SUCCESSFUL
       self.pager = new ce.ui.Pager(
-        el: $(".js-pager-container")
+        el: ".js-pager-container"
         collection: self.collection
         )
       self.pager.render()
-      return
     
     # console.dir(self.list);
     # console.dir(self.collection);

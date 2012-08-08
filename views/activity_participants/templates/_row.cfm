@@ -4,7 +4,7 @@
     <input type="hidden" class="PERSONID" value="<%= PERSONID %>" />
 </td>
 <td><img src="/images/no-photo/person_i.png">
-    <% if(ISMD) { %><div><span class="badge badge-important" style="position: relative; left: 30px; top: -55px;">MD</span></div><% } %></td>
+    <% if(ISMD) { %><div<% if(ISMD) { %> style="position: relative;"<% } %>><span class="badge badge-important" style="position: absolute; left: 30px; bottom: 0px;">MD</span></div><% } %></td>
 <td valign="top" nowrap="nowrap">
     <% if(ISREAL) { %>
         <a href="/people/edit/<%= PERSONID %>" class="PersonLink" id="PERSON|<%= PERSONID %>|<%= LASTNAME %>, <%= FIRSTNAME %>"><span class="js-attendee-name"><%= FULLNAME %></span></a>

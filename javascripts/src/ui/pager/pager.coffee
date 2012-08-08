@@ -25,7 +25,7 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
       self.trigger "pager_prev"
 
     selectPage: ->
-      pageNo = parseInt($(this).text())
+      pageNo = parseInt($(arguments[0].currentTarget).attr("id").split("-")[1])
       @collection.goTo pageNo
       self.trigger "pager_page_selected"
 

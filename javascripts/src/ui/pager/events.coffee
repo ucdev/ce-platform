@@ -3,10 +3,6 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
     ce.log.info "pager: loaded"
     return
 
-  self.on "pager_dropdown_loaded", ->
-    ce.log.info "pager: links loaded"
-    return
-
   self.on "pager_next", ->
     ce.log.info "pager: next page loaded"
     return
@@ -16,5 +12,5 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
     return
 
   self.on "pager_page_selected", ->
-    ce.log.info "pager: page " + self.collection.currentPage + " loaded"
+    ce.log.info "pager: selected page loaded"
     return

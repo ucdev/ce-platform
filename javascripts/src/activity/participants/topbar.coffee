@@ -5,3 +5,4 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
     render: ->
       # RENDER TEMPLATE AND USE AS PAGE HTML
       @$el.html _.template(@template)
+      return

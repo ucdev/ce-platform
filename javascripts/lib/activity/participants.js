@@ -35,7 +35,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       el: ".js-top-bar"
     }).render();
     self.list = new self.List({
-      el: $(".js-registrants-container"),
+      el: ".js-attendee-rows",
       collection: self.collection
     }).render();
     self.bottombar = new self.Bottombar({
@@ -43,10 +43,10 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     }).render();
     self.on("data_loaded", function() {
       self.pager = new ce.ui.Pager({
-        el: $(".js-pager-container"),
+        el: ".js-pager-container",
         collection: self.collection
       });
-      self.pager.render();
+      return self.pager.render();
     });
     return self.trigger("page_loaded");
   };
