@@ -5,7 +5,7 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
     pagingTemplate: _.template(ce.templates.get("ui-pager")),
     initialize: function() {
       this.collection.on("change", this.render, this);
-      return this.collection.on("reset", this.render, this);
+      this.collection.on("reset", this.render, this);
     },
     events: {
       "click a.js-next-page": "nextPage",
@@ -19,29 +19,17 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
     },
     nextPage: function() {
       this.collection.nextPage();
-      return self.trigger("pager_next");
+      self.trigger("pager_next");
     },
     prevPage: function() {
       this.collection.previousPage();
-      return self.trigger("pager_prev");
+      self.trigger("pager_prev");
     },
     selectPage: function() {
       var pageNo;
       pageNo = parseInt($(arguments[0].currentTarget).attr("id").split("-")[1]);
       this.collection.goTo(pageNo);
-      return self.trigger("pager_page_selected");
-    },
-    updatePageDropdown: function() {
-      var dropdown, pageEl, pageLink, pageNo;
-      dropdown = this.$el.find(".js-pages");
-      pageNo = 1;
-      while (pageNo <= this.collection.totalPages) {
-        pageEl = $("<li>");
-        pageLink = $("<a />").addClass("js-page").text(pageNo).append(pageLink);
-        pageEl.appendTo(dropdown);
-        pageNo++;
-      }
-      return self.trigger("pager_dropdown_loaded");
+      self.trigger("pager_page_selected");
     }
   });
 });

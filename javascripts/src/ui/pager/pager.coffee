@@ -4,6 +4,7 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
     initialize: ->
       @collection.on "change", @render, this
       @collection.on "reset", @render, this
+      return
 
     events:
       "click a.js-next-page": "nextPage"
@@ -18,24 +19,17 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 
     nextPage: ->
       @collection.nextPage()
+
       self.trigger "pager_next"
+      return
 
     prevPage: ->
       @collection.previousPage()
       self.trigger "pager_prev"
+      return
 
     selectPage: ->
       pageNo = parseInt($(arguments[0].currentTarget).attr("id").split("-")[1])
       @collection.goTo pageNo
       self.trigger "pager_page_selected"
-
-    updatePageDropdown: ->
-      dropdown = @$el.find ".js-pages"
-      pageNo = 1
-
-      while pageNo <= @collection.totalPages
-        pageEl = $("<li>")
-        pageLink = $("<a />").addClass("js-page").text(pageNo).append pageLink
-        pageEl.appendTo dropdown
-        pageNo++
-      self.trigger "pager_dropdown_loaded"
+      return
