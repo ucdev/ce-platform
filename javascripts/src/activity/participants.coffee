@@ -17,7 +17,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 
     
     # MODIFY CLIENT PAGER
-    self.paginatorCollection = pagers.Activity_participants.extend
+    self.paginatorCollection = pagers.clientActivity_participants.extend
       server_api:
         "$format": "json"
         "$top": ->
@@ -29,30 +29,28 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
     
     
     # CREATE COLLECTION
-    self.collection = new self.paginatorCollection()
+    self.collection = new self.paginatorCollection(
+      selectedRows: {}
+      )
 
     # BUILD TOP BUTTON TOOLBAR
     self.topbar = new self.Topbar(el: ".js-top-bar").render()
     
     # BUILD PAGE VIEW AND RENDER IT
-    self.list = new self.List(
+    self.list = new self.List
       el: ".js-attendee-rows"
       collection: self.collection
-      ).render()
 
     # BUILD BOTTOM BUTTON TOOLBAR
     self.bottombar = new self.Bottombar(el: ".js-bottom-bar").render()
     
     # BUILD PAGER
-    self.on "data_loaded", -> # EVENT BOUND TO BE CALLED AFTER THE DATA FETCH IS SUCCESSFUL
+    self.on "data_loaded", -> # EVENT BOUND TO BE CALLED AFTER THE COLLECTION FETCH IS SUCCESSFUL
       self.pager = new ce.ui.Pager(
         el: ".js-pager-container"
         collection: self.collection
-        )
-      self.pager.render()
+        ).render()
     
-    # console.dir(self.list);
-    # console.dir(self.collection);
     self.trigger "page_loaded"
 ,ce._core.models
 ,ce._core.pagers

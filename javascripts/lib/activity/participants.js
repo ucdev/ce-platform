@@ -17,7 +17,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       rowsPerPage: params.legacy.rowsPerPage,
       totalPages: params.legacy.totalPages
     };
-    self.paginatorCollection = pagers.Activity_participants.extend({
+    self.paginatorCollection = pagers.clientActivity_participants.extend({
       server_api: {
         "$format": "json",
         "$top": function() {
@@ -30,23 +30,24 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         }
       }
     });
-    self.collection = new self.paginatorCollection();
+    self.collection = new self.paginatorCollection({
+      selectedRows: {}
+    });
     self.topbar = new self.Topbar({
       el: ".js-top-bar"
     }).render();
     self.list = new self.List({
       el: ".js-attendee-rows",
       collection: self.collection
-    }).render();
+    });
     self.bottombar = new self.Bottombar({
       el: ".js-bottom-bar"
     }).render();
     self.on("data_loaded", function() {
-      self.pager = new ce.ui.Pager({
+      return self.pager = new ce.ui.Pager({
         el: ".js-pager-container",
         collection: self.collection
-      });
-      return self.pager.render();
+      }).render();
     });
     return self.trigger("page_loaded");
   };

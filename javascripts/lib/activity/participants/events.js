@@ -7,7 +7,10 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
   self.on("participants_loaded", function() {
     ce.log.info("participants: loaded");
   });
-  return self.on("page_loaded", function() {
+  self.on("page_loaded", function() {
     ce.log.info("participants: page ready");
+  });
+  return self.on("viewable_participant_date_changed", function() {
+    ce.log.info("participants: viewable date changed");
   });
 });

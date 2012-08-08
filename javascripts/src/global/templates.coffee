@@ -19,6 +19,9 @@ ce.module "templates", (self, ce, Backbone, Marionette, $, _) ->
       self.cache[tmplKey] = tmpl
     return tmpl
 
+  self.clear = ->
+    self.cache = {}
+
 Backbone.Marionette.TemplateCache::loadTemplate = (templateId) ->
   myTemplate = ce.templates.get(templateId)
   myTemplate

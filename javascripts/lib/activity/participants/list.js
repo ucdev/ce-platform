@@ -16,13 +16,13 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         silent: true
       });
     },
-    render: function() {},
     addAll: function() {
       this.$el.empty();
       this.collection.each(this.addOne);
     },
     addOne: function(viewModel) {
       var view;
+      viewModel.attributes.ISSELECTED = false;
       view = new self.Row({
         model: viewModel
       });

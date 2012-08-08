@@ -6,7 +6,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
       coll.on "add", @addOne, this
       coll.on "all", @render, this
       coll.on "reset", @addAll, this
-
+      
       coll.fetch
         success:() ->
           coll.pager()
@@ -16,16 +16,15 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 
       return
 
-    render: ->
-      # RENDER TEMPLATE AND USE AS PAGE HTML
-      #@$el.append _.template @template
-
     addAll: ->
       @$el.empty()
       @collection.each @addOne
       return
 
     addOne: (viewModel) ->
+      # ADDS FILTERABLE PROPERTY TO DETERMINE IF THE ROW IS SELECTED
+      viewModel.attributes.ISSELECTED = false
+      
       view = new self.Row  model: viewModel
       $(".js-attendee-rows").append view.render().el
       
