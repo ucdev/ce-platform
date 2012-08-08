@@ -41,13 +41,6 @@
 		<div class="alert alert-success" style="display:none;"></div>
 	</div>
 	
-	<script type="text/javascript">
-		//SETUP CE
-		$(function() {
-			ce.user.load(#serializeJson(userInfo)#);
-		});
-	</script>
-	
 	<div id="dialog"></div>
 </body>
 </cfoutput>

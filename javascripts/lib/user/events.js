@@ -8,6 +8,6 @@ ce.module("user", function(self, ce, Backbone, Marionette, $, _) {
     ce.log.warn("user: logged out");
   });
   self.on("loaded", function() {
-    ce.log.info("user: loaded");
+    ce.log.info("user: init");
   });
 });

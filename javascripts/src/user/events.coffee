@@ -9,6 +9,6 @@ ce.module "user", (self, ce, Backbone, Marionette, $, _) ->
     return
 
   self.on "loaded", ->
-    ce.log.info "user: loaded"
+    ce.log.info "user: init"
     return
   return

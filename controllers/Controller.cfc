@@ -36,11 +36,13 @@
 			<cfset userInfo = duplicate(session.currentUser.properties()) />
 			<cfset structDelete(userInfo,'password') />
 			<cfset userInfo['loggedIn'] = true />
+			<cfset userInfo['account'] = duplicate(session.account.properties()) />
 		<cfelse>
 			<cfset userInfo = {
 				'loggedIn':false,
 				'id':0,
-				'name':'Anonymous Amos'
+				'name':'Anonymous Amos',
+				'account':{}
 			} />
 		</cfif>
 	</cffunction>

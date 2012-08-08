@@ -1,4 +1,4 @@
-#! ce.Current.Activity extends ce.Models.Activity 
+#! ce.activity
 ce.module "activity", (self, ce, Backbone, Marionette, $, _, models) ->
   self.load = (params) ->
     self.userPrefs =

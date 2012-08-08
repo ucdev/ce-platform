@@ -30,12 +30,19 @@
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
 
 	<cffunction name="create">
+		<cfset returnVar = createObject("component","lib.buildStruct").init(status=false,statusMsg="login_failed") />
+
 		<cfif params.login is "" or params.password is "">
-			<cfset flashInsert(error="Login failed, please try again")>
-			<cfset redirectTo(action="new")>
+			<cfif NOT isAjax()>
+				<cfset flashInsert(error="Login failed, please try again")>
+				<cfset redirectTo(action="new")>
+			</cfif>
 		<cfelse>
 			<cfset $passwordAuthentication(params.login, params.password) />
 		</cfif>
+
+		<cfcontent type="text/javascript" />
+		<cfset renderText(returnVar.getJson()) />
 	</cffunction>
 
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
@@ -94,9 +101,16 @@
 		<cfset session.currentUser.lastLogin = now()>
 		<cfset session.currentUser.save()>
 
-		<!--- This redirects the user to the default account page but you can change this to go where you want --->
-		<cfset flashInsert(success="Hello <strong>#session.currentUser.firstName#</strong>! You are now signed in.")>
-		<cfset redirectTo(route="home")>
+		<cfset setUserInfo() />
+
+		<cfset returnVar.setStatus(true) />
+		<cfset returnVar.setStatusMsg("logged_in") />
+		<cfset returnVar.setPayload(userInfo) />
+		<cfif NOT isAjax()>
+			<!--- This redirects the user to the default account page but you can change this to go where you want --->
+			<cfset flashInsert(success="Hello <strong>#session.currentUser.firstName#</strong>! You are now signed in.")>
+			<cfset redirectTo(route="home")>
+		</cfif>
 	</cffunction>
 
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
@@ -105,8 +119,13 @@
 		<!---
 			TODO : would like to add a method call here to update a failed login table...
 		--->
-		<cfset flashInsert(error="Login failed, please try again!")>
-		<cfset redirectTo(action="new")>
+		<cfset returnVar.setStatus(false) />
+		<cfset returnVar.setStatusMsg("login_failed") />
+
+		<cfif NOT isAjax()>
+			<cfset flashInsert(error="Login failed, please try again!")>
+			<cfset redirectTo(action="new")>
+		</cfif>
 	</cffunction>
 
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->

@@ -4,6 +4,7 @@
 
 	<cffunction name="init">
 		<cfset filters(through="loginRequired",except="start,sms,email") />
+		<cfset super.init() />
 	</cffunction>
 
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
