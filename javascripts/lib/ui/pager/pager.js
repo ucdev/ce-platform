@@ -17,11 +17,15 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
       self.trigger("pager_loaded");
       return this.el;
     },
-    nextPage: function() {
-      this.collection.nextPage();
-      self.trigger("pager_next");
+    nextPage: function(e) {
+      e.preventDefault();
+      if (this.collection.currentPage < this.collection.totalPages) {
+        this.collection.nextPage();
+        self.trigger("pager_next");
+      }
     },
-    prevPage: function() {
+    prevPage: function(e) {
+      e.preventDefault();
       this.collection.previousPage();
       self.trigger("pager_prev");
     },

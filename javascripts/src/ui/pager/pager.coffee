@@ -17,13 +17,15 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
       self.trigger "pager_loaded"
       @el
 
-    nextPage: ->
-      @collection.nextPage()
-
-      self.trigger "pager_next"
+    nextPage: (e) ->
+      e.preventDefault()
+      if @collection.currentPage < @collection.totalPages
+        @collection.nextPage()
+        self.trigger "pager_next"
       return
 
-    prevPage: ->
+    prevPage: (e) ->
+      e.preventDefault()
       @collection.previousPage()
       self.trigger "pager_prev"
       return
