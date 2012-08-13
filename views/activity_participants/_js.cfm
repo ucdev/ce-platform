@@ -18,24 +18,10 @@ $(document).ready(function() {
 		modelData:#serializeJson(qActivityCredits)#,
 		legacy:{
 			AddlAttendees:0,
-			currAttendee: 0,
-			currPerson: 0,
 			MaxRegistrants:0,
 			NoChange: 0,
 			nPageNo: #currPageNo#,
-			nStatus: #currStatus#,
-			rows: [],
-			selectedRows: '',
-			selectedCount: 0,
-			totalAttendeeList: { 'attendees': [], 'statuses': { 0: { 'name': 'All', 'attendees': [] }, 
-																1: { 'name': 'Complete', 'attendees': [] }, 
-																2: { 'name': 'In Progress', 'attendees': [] }, 
-																3: { 'name': 'Registered', 'attendees': [] }, 
-																4: { 'name': 'Failed', 'attendees': [] }, 
-																'selected': { 'name': 'Selected', 'attendees': [] },
-																'filtered': { 'name': 'Filtered', 'attendees': [] }}},
-			rowsPerPage:15,
-			totalPages: 0
+			nStatus: #currStatus#
 		}
 	});
 });

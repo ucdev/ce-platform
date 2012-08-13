@@ -5,6 +5,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     template: ce.templates.get("activity_participants-topbar"),
     render: function() {
       this.$el.html(_.template(this.template));
+      self.trigger("topbar_loaded");
     }
   });
 });

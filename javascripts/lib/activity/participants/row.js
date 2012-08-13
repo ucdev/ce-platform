@@ -5,47 +5,31 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     tagName: "tr",
     className: "personRow AllAttendees js-all-attendee",
     template: _.template(ce.templates.get("activity_participants-row")),
-    events: {
-      "click .js-edit-status-date": "revealStatusDateEditor",
-      "click .js-cancel-edit-date": "hideStatusDateEditor",
-      "change .js-participant-checkbox": "selectAttendee",
-      "click .js-save-edited-date": "saveEditedStatusDate",
-      "click .js-view-attendee-status-info": "updateViewAttendeeStatuses"
+    bindViews: function() {
+      var attributesToPass, statusDateEl;
+      statusDateEl = this.$el.find(".js-status-date");
+      attributesToPass = {
+        STATUSID: this.model.get("STATUSID"),
+        ATTENDEEID: this.model.get("ATTENDEEID"),
+        COMPLETEDATE: this.model.get("COMPLETEDATE"),
+        CURRSTATUSDATE: this.model.get("CURRSTATUSDATE"),
+        CURRSTATUSID: this.model.get("CURRSTATUSID"),
+        REGISTERDATE: this.model.get("REGISTERDATE"),
+        TERMDATE: this.model.get("TERMDATE")
+      };
+      this.statusDate = new self.StatusDate({
+        el: statusDateEl,
+        model: new self.StatusDateModel(attributesToPass)
+      }).render();
     },
-    hideStatusDateEditor: function() {
-      this.$el.find(".js-edit-attendee-date").hide();
-      this.$el.find(".js-view-attendee-date").show();
+    events: {
+      "change .js-participant-checkbox": "selectAttendee"
     },
     render: function() {
       this.$el.empty();
       this.$el.append(this.template(this.model.toJSON()));
+      this.bindViews();
       return this;
-    },
-    revealStatusDateEditor: function() {
-      this.$el.find(".js-edit-date-field").val(this.$el.find(".js-hidden-current-attendee-date").val());
-      this.$el.find(".js-view-attendee-date").hide();
-      this.$el.find(".js-edit-attendee-date").show();
-    },
-    saveEditedStatusDate: function() {
-      var dateVal, row, statusVal;
-      row = this;
-      dateVal = this.$el.find(".js-edit-date-field").val();
-      statusVal = this.$el.find(".js-hidden-current-attendee-status").val();
-      $.ajax({
-        url: "/ajax_adm_activity/saveAttendeeDate",
-        type: "post",
-        data: {
-          attendeeId: this.model.get("ATTENDEEID"),
-          dateValue: dateVal,
-          type: statusVal
-        },
-        dataType: "json",
-        success: function(data) {
-          if (data.STATUS) {
-            row.render();
-          }
-        }
-      });
     },
     selectAttendee: function() {
       if ($(".js-participant-checkbox").is(":checked")) {
@@ -55,36 +39,6 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         this.$el.removeClass("alert-info");
         this.model.set("ISSELECTED", false);
       }
-    },
-    updateViewAttendeeStatuses: function() {
-      var container, dateType, hiddenDateContainer, hiddenStatusContainer;
-      container = this.$el.find(".js-current-view-status-date");
-      dateType = $(arguments[0].currentTarget).attr("id").split("-")[1];
-      hiddenDateContainer = this.$el.find(".js-hidden-current-attendee-date");
-      hiddenStatusContainer = this.$el.find(".js-hidden-current-attendee-status");
-      container.parent().hide();
-      $.ajax({
-        url: "/ajax_adm_activity/getAttendeeDate",
-        type: "post",
-        data: {
-          attendeeId: this.model.get("ATTENDEEID"),
-          type: dateType
-        },
-        dataType: "json",
-        success: function(data) {
-          if (data.STATUS) {
-            container.html(data.STATUSMSG);
-            hiddenDateContainer.val(data.PAYLOAD.month + "/" + data.PAYLOAD.day + "/" + data.PAYLOAD.year);
-            if (dateType === 2) {
-              hiddenStatusContainer.val(3);
-            } else {
-              hiddenStatusContainer.val(dateType);
-            }
-            self.trigger("viewable_participant_date_changed");
-          }
-          container.parent().show();
-        }
-      });
     }
   });
 });

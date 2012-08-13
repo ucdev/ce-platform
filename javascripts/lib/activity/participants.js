@@ -21,17 +21,23 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       server_api: {
         "$format": "json",
         "$top": function() {
-          return this.totalPages * this.perPage;
+          this.totalPages * this.perPage;
         },
         "activityId": self.details.activityId,
         "orderby": "fullName",
         "$skip": function() {
-          return this.totalPages * this.perPage;
+          this.totalPages * this.perPage;
         }
+      },
+      paginator_ui: {
+        "firstPage": 1,
+        "currentPage": self.details.nPageNo,
+        "perPage": 15
       }
     });
-    self.collection = new self.paginatorCollection({
-      selectedRows: {}
+    self.collection = new self.paginatorCollection;
+    self.StatusDateModel = models.Activity_participant.extend({
+      url: "/ajax_adm_activity/saveAttendeeDate"
     });
     self.topbar = new self.Topbar({
       el: ".js-top-bar"
@@ -49,6 +55,6 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         collection: self.collection
       }).render();
     });
-    return self.trigger("page_loaded");
+    self.trigger("page_loaded");
   };
 }, ce._core.models, ce._core.pagers);

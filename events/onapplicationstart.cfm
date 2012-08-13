@@ -131,6 +131,7 @@ js.addAll([
 "lib/activity/participants/list", // ce.activity.participants list
 "lib/activity/participants/topbar", // ce.activity.participants topbar
 "lib/activity/participants/bottombar", // ce.activity.participants bottombar
+"lib/activity/participants/statusdate", // ce.activity.participants statusdate
 "lib/activity/credit_requests", // ce.activity
 "lib/activity/credit_requests/events", // ce.activity
 "lib/person" // ce.person

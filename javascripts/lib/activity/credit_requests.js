@@ -16,7 +16,7 @@ ce.module("activity.credit_requests", function(self, ce, Backbone, Marionette, $
       return collectionView.$("tbody").append(itemView.el);
     }
   });
-  return self.load = function(params) {
+  self.load = function(params) {
     self.records = params.records;
     self.collection = new ce.Collections.Credit_requests(params.records);
     self.viewList = new self.ViewList({

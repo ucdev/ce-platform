@@ -20,3 +20,4 @@ ce.module "activity.credit_requests", (self, ce, Backbone, Marionette, $, _) ->
     self.viewList = new self.ViewList(collection: self.collection)
     ce.subpage.show self.viewList
     self.trigger "loaded"
+  return

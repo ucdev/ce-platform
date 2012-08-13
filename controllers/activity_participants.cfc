@@ -499,7 +499,7 @@
     
     <cffunction name="$cleanupAttendees">
     	<!--- ATTENDEES RESULT SET IS PASSED IN --->
-        <cfset attendees = queryNew("activityId,attendeeId,city,completeDate,created,currStatusDate,deleted,deletedFlag,email,firstName,fullName,isDeleted,isMD,isReal,isStatus1,isStatus2,isStatus3,isStatus4,lastName,mdFlag,middleName,payAmount,paymentDate,payOrderNo,personDeleted,personId,registerDate,startDate,state,statusId,statusName,termDate,updated") />
+        <cfset attendees = queryNew("activityId,attendeeId,city,completeDate,created,currStatusDate,currStatusId,deleted,deletedFlag,email,firstName,fullName,isDeleted,isMD,isReal,isStatus1,isStatus2,isStatus3,isStatus4,lastName,mdFlag,middleName,payAmount,paymentDate,payOrderNo,personDeleted,personId,registerDate,startDate,state,statusId,statusName,termDate,updated") />
         
         <cfloop query="qAttendees">
         	<cfset queryAddRow(attendees)>
@@ -509,6 +509,7 @@
             <cfset querySetCell(attendees, 'completeDate', qAttendees.completeDate)>
             <cfset querySetCell(attendees, 'created', qAttendees.created)>
             <cfset querySetCell(attendees, 'currStatusDate', qAttendees.currStatusDate)>
+            <cfset querySetCell(attendees, 'currStatusId', qAttendees.currStatusId)>
             <cfset querySetCell(attendees, 'deleted', qAttendees.deleted)>
             <cfset querySetCell(attendees, 'deletedFlag', qAttendees.deletedFlag)>
             <cfset querySetCell(attendees, 'email', qAttendees.email)>
