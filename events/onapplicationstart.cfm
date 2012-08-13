@@ -8,7 +8,7 @@
 <cfset application.messages = [] />
 
 <!--- GENERATE CSS --->
-<cfset generateBundle(type="css", bundle="ce", compress=true, sources="bootstrap,ce.ui,ce.lib") />
+<cfset generateBundle(type="css", bundle="ce", compress=true, sources="lib/bootstrap,lib/app,lib/app.ui") />
 
 <cfset js = [] /> 
 <cfset jsScaffolded = [] />
@@ -66,7 +66,7 @@ js.addAll([
 "vendor/backbone/backbone",
 "vendor/backbone/backbone.paginator",
 "vendor/backbone/backbone.marionette",
-"vendor/retina"
+"vendor/retina",
 
 
 /* jQuery Plugins */

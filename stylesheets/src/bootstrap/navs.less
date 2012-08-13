@@ -45,6 +45,7 @@
 
 // NAV LIST
 // --------
+
 .nav-list {
   padding-left: 15px;
   padding-right: 15px;
@@ -62,7 +63,7 @@
 .nav-list > .active > a,
 .nav-list > .active > a:hover {
   color: @white;
-  text-shadow: 0 -1px 0 rgba(255,255,255,.6);
+  text-shadow: 0 -1px 0 rgba(0,0,0,.2);
   background-color: @linkColor;
 }
 .nav-list [class^="icon-"] {
@@ -70,77 +71,6 @@
 }
 // Dividers (basically an hr) within the dropdown
 .nav-list .divider {
-  .nav-divider();
-}
-
-// SUB NAVS
-// ----------
-
-.subnav {
-  margin-left: 0;
-  margin-bottom: @baseLineHeight;
-  list-style: none;
-}
-
-// Make links block level
-.subnav > li > a {
-  display: block;
-}
-.subnav > li > a:hover {
-  text-decoration: none;
-  background-color: @grayLighter;
-}
-
-// Redeclare pull classes because of specifity
-.subnav > .pull-right {
-  float: right;
-}
-
-// Nav headers (for dropdowns and lists)
-.subnav .nav-header {
-  display: block;
-  padding: 3px 15px;
-  font-size: 11px;
-  font-weight: bold;
-  line-height: @baseLineHeight;
-  color: @grayLight;
-  text-shadow: 0 1px 0 rgba(255,255,255,.5);
-  text-transform: uppercase;
-}
-// Space them out when they follow another list item (link)
-.subnav li + .nav-header {
-  margin-top: 9px;
-}
-
-
-// subNAV LIST
-// --------
-
-.subnav-list {
-  padding-left: 0;
-  padding-right: 0;
-  margin-bottom: 0;
-}
-.subnav-list > li > a,
-.subnav-list .nav-header {
-  margin-left:  -15px;
-  margin-right: -15px;
-  text-shadow: 0 1px 0 rgba(255,255,255,.5);
-}
-.subnav-list > li > a {
-  padding: 3px 15px 3px 42px;
-}
-.subnav-list > .active > a,
-.subnav-list > .active > a:hover {
-  color: @white;
-  text-shadow: 0 -1px 0 rgba(255,255,255,.6);
-  background-color: @linkColor;
-}
-.subnav-list [class^="icon-"] {
-  margin-right: 2px;
-}
-// Dividers (basically an hr) within the dropdown
-.subnav-list .divider {
   .nav-divider();
 }
 

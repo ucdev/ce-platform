@@ -42,7 +42,6 @@
 // IE7 inline-block
 // ----------------
 .ie7-inline-block() {
-  display:inline;
   *display: inline; /* IE7 inline-block hack */
   *zoom: 1;
 }
@@ -82,10 +81,13 @@
 // Placeholder text
 // -------------------------
 .placeholder(@color: @placeholderText) {
-  :-moz-placeholder {
+  &:-moz-placeholder {
     color: @color;
   }
-  ::-webkit-input-placeholder {
+  &:-ms-input-placeholder {
+    color: @color;
+  }
+  &::-webkit-input-placeholder {
     color: @color;
   }
 }
@@ -167,6 +169,8 @@
     color: @textColor;
   }
   // Style inputs accordingly
+  .checkbox,
+  .radio,
   input,
   select,
   textarea {
@@ -313,6 +317,16 @@
           column-gap: @columnGap;
 }
 
+// Optional hyphenation
+.hyphens(@mode: auto) {
+  word-wrap: break-word;
+  -webkit-hyphens: @mode;
+     -moz-hyphens: @mode;
+      -ms-hyphens: @mode;
+       -o-hyphens: @mode;
+          hyphens: @mode;
+}
+
 // Opacity
 .opacity(@opacity) {
   opacity: @opacity / 100;
@@ -418,7 +432,7 @@
 // Horizontal dividers
 // -------------------------
 // Dividers (basically an hr) within dropdowns and nav lists
-.nav-divider() {
+.nav-divider(@top: #e5e5e5, @bottom: @white) {
   // IE7 needs a set width since we gave a height. Restricting just
   // to IE7 to keep the 1px left/right space in other browsers.
   // It is unclear where IE is getting the extra space that we need
@@ -428,8 +442,8 @@
   margin: ((@baseLineHeight / 2) - 1) 1px; // 8px 1px
   *margin: -5px 0 5px;
   overflow: hidden;
-  background-color: #e5e5e5;
-  border-bottom: 1px solid @white;
+  background-color: @top;
+  border-bottom: 1px solid @bottom;
 }
 
 // Button backgrounds
@@ -443,7 +457,6 @@
   // in these cases the gradient won't cover the background, so we override
   &:hover, &:active, &.active, &.disabled, &[disabled] {
     background-color: @endColor;
-	border-color: darken(@endColor,5%);
     *background-color: darken(@endColor, 5%);
   }
 

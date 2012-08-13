@@ -19,13 +19,13 @@
   text-shadow: 0 1px 1px rgba(255,255,255,.75);
   vertical-align: middle;
   cursor: pointer;
-  font-weight:bold;
   .buttonBackground(@btnBackground, @btnBackgroundHighlight);
   border: 1px solid @btnBorder;
   *border: 0; // Remove the border to prevent IE7's black border on input:focus
   border-bottom-color: darken(@btnBorder, 10%);
-  .border-radius(0px);
+  .border-radius(4px);
   .ie7-restore-left-whitespace(); // Give IE7 some love
+  .box-shadow(~"inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05)");
 }
 
 // Hover state
@@ -49,49 +49,33 @@
 // Active state
 .btn.active,
 .btn:active {
-	background-color: desaturate(lighten(@red,10%),15%);
-	color: @white;
-	background-image: none;
-	outline: 0;
-	
-	i {
-		background-image: url("@{iconWhiteSpritePath}");
-	}
-	text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.75);
-	.box-shadow(~"inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05)");
+  background-color: darken(@white, 10%);
+  background-color: darken(@white, 15%) e("\9");
+  background-image: none;
+  outline: 0;
+  .box-shadow(~"inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05)");
 }
 
 // Disabled state
 .btn.disabled,
 .btn[disabled] {
-	cursor: default;
-	background-color: darken(@white, 10%);
-	background-image: none;
-	.box-shadow(none);
-	text-shadow:none;
-	color:@grayDark;
+  cursor: default;
+  background-color: darken(@white, 10%);
+  background-image: none;
+  .opacity(65);
+  .box-shadow(none);
 }
 
 
 // Button Sizes
 // --------------------------------------------------
-// X-Large
-.btn-xlarge {
-  padding: 9px 23px;
-  font-size: @baseFontSize + 6px;
-  line-height: normal;
-  /*.border-radius(5px);*/
-}
-.btn-xlarge [class^="icon-"] {
-  margin-top: 1px;
-}
 
 // Large
 .btn-large {
   padding: 9px 14px;
   font-size: @baseFontSize + 2px;
   line-height: normal;
-  /*.border-radius(5px);*/
+  .border-radius(5px);
 }
 .btn-large [class^="icon-"] {
   margin-top: 1px;
