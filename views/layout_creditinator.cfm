@@ -8,8 +8,9 @@
 	<meta name="author" content="">
 	
 	<!-- Le styles -->
-	#stylesheetLinkTag(bundle="ccpd")#
+	#stylesheetLinkTag(bundle="ce")#
 	#javaScriptIncludeTag(bundle="ce")#
+	#javaScriptIncludeTag(sources="bootstrap-responsive")#
 	<style>
 	body {
 	padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */

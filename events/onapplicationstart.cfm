@@ -8,7 +8,7 @@
 <cfset application.messages = [] />
 
 <!--- GENERATE CSS --->
-<cfset generateBundle(type="css", bundle="ce", compress=true, sources="bootstrap,jquery.ui,ccpd") />
+<cfset generateBundle(type="css", bundle="ce", compress=true, sources="bootstrap,ce.ui,ce.lib") />
 
 <cfset js = [] /> 
 <cfset jsScaffolded = [] />
@@ -66,6 +66,7 @@ js.addAll([
 "vendor/backbone/backbone",
 "vendor/backbone/backbone.paginator",
 "vendor/backbone/backbone.marionette",
+"vendor/retina"
 
 
 /* jQuery Plugins */
@@ -134,6 +135,9 @@ js.addAll([
 "lib/activity/participants/statusdate", // ce.activity.participants statusdate
 "lib/activity/credit_requests", // ce.activity
 "lib/activity/credit_requests/events", // ce.activity
+"lib/creditinator",
+"lib/creditinator/view_step",
+"lib/creditinator/step_codeentry",
 "lib/person" // ce.person
 ]);
 </cfscript>
