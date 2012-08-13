@@ -35,42 +35,39 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         case 1:
           this.model.save({
             CURRSTATUSDATE: this.$el.find(".js-edit-date-field").val(),
-            CURRSTATUSID: this.$el.find(".js-hidden-current-attendee-status").val(),
+            CURRSTATUSID: this.model.get("CURRSTATUSID"),
             COMPLETEDATE: this.$el.find(".js-edit-date-field").val()
           });
           break;
         case 2:
           this.model.save({
             CURRSTATUSDATE: this.$el.find(".js-edit-date-field").val(),
-            CURRSTATUSID: this.$el.find(".js-hidden-current-attendee-status").val(),
+            CURRSTATUSID: this.model.get("CURRSTATUSID"),
             REGISTERDATE: this.$el.find(".js-edit-date-field").val()
           });
           break;
         case 3:
           this.model.save({
             CURRSTATUSDATE: this.$el.find(".js-edit-date-field").val(),
-            CURRSTATUSID: this.$el.find(".js-hidden-current-attendee-status").val(),
+            CURRSTATUSID: this.model.get("CURRSTATUSID"),
             REGISTERDATE: this.$el.find(".js-edit-date-field").val()
           });
           break;
         case 4:
           this.model.save({
             CURRSTATUSDATE: this.$el.find(".js-edit-date-field").val(),
-            CURRSTATUSID: this.$el.find(".js-hidden-current-attendee-status").val(),
+            CURRSTATUSID: this.model.get("CURRSTATUSID"),
             TERMDATE: this.$el.find(".js-edit-date-field").val()
           });
           break;
       }
     },
     updateViewAttendeeStatuses: function() {
-      var container, curr;
-      curr = this;
+      var container;
       container = this.$el.find(".js-current-view-status-date");
       this.model.set({
-        CURRSTATUSID: $(arguments[0].currentTarget).attr("id").split("-")[1]
+        CURRSTATUSID: parseInt($(arguments[0].currentTarget).attr("id").split("-")[1])
       });
-      container.parent().hide();
-      this.render();
     }
   });
 });

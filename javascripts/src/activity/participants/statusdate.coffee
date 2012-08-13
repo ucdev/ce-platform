@@ -46,31 +46,36 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 
 			switch @model.get("CURRSTATUSID")
 			    when 1
-			    	@model.save(CURRSTATUSDATE: @$el.find(".js-edit-date-field").val(),CURRSTATUSID: @$el.find(".js-hidden-current-attendee-status").val(),COMPLETEDATE: @$el.find(".js-edit-date-field").val())
+			    	@model.save
+			    		CURRSTATUSDATE: @$el.find(".js-edit-date-field").val()
+			    		CURRSTATUSID: @model.get("CURRSTATUSID")
+			    		COMPLETEDATE: @$el.find(".js-edit-date-field").val()
 			    	break
 			    when 2
-			    	@model.save(CURRSTATUSDATE: @$el.find(".js-edit-date-field").val(),CURRSTATUSID: @$el.find(".js-hidden-current-attendee-status").val(),REGISTERDATE: @$el.find(".js-edit-date-field").val())
+			    	@model.save
+			    		CURRSTATUSDATE: @$el.find(".js-edit-date-field").val()
+			    		CURRSTATUSID: @model.get("CURRSTATUSID")
+			    		REGISTERDATE: @$el.find(".js-edit-date-field").val()
 			    	break
 			    when 3
-			    	@model.save(CURRSTATUSDATE: @$el.find(".js-edit-date-field").val(),CURRSTATUSID: @$el.find(".js-hidden-current-attendee-status").val(),REGISTERDATE: @$el.find(".js-edit-date-field").val())
+			    	@model.save
+			    		CURRSTATUSDATE: @$el.find(".js-edit-date-field").val()
+			    		CURRSTATUSID: @model.get("CURRSTATUSID")
+			    		REGISTERDATE: @$el.find(".js-edit-date-field").val()
 			    	break
 			    when 4
-			    	@model.save(CURRSTATUSDATE: @$el.find(".js-edit-date-field").val(),CURRSTATUSID: @$el.find(".js-hidden-current-attendee-status").val(),TERMDATE: @$el.find(".js-edit-date-field").val())
+			    	@model.save
+			    		CURRSTATUSDATE: @$el.find(".js-edit-date-field").val()
+			    		CURRSTATUSID: @model.get("CURRSTATUSID")
+			    		TERMDATE: @$el.find(".js-edit-date-field").val()
 			    	break
-
 			return
 
 		updateViewAttendeeStatuses: ->
-			curr = @
 			container = @$el.find(".js-current-view-status-date")
 
 			# UPDATE MODEL INFO
 			@model.set
-				CURRSTATUSID: $(arguments[0].currentTarget).attr("id").split("-")[1]
+				CURRSTATUSID: parseInt $(arguments[0].currentTarget).attr("id").split("-")[1]
 
-			# HIDE THE BUTTON GROUP CONTAINING THE STATUS DATE VIEWER
-			container.parent().hide()
-
-			@render()
-				
 			return
