@@ -1,5 +1,11 @@
 .creditinator {
+	
 	@media (max-width: 979px) {
+
+		.navbar .header-title {
+			margin-left:120px;
+			display:block;
+		}
 		.form-actions {
 			position:fixed;
 			bottom:0;
@@ -12,7 +18,11 @@
 			margin:0 20px 0 20px;
 		}
 	}
-
+	@media (max-width: 480px) {
+		.navbar .header-title {
+			display:none;
+		}
+	}
 	@media (min-width: 979px) {
 		.creditinator-view {
 			margin-top:62px;

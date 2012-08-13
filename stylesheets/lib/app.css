@@ -224,6 +224,10 @@
   top: 31px;
 }
 @media (max-width: 979px) {
+  .creditinator .navbar .header-title {
+    margin-left: 120px;
+    display: block;
+  }
   .creditinator .form-actions {
     position: fixed;
     bottom: 0;
@@ -233,6 +237,11 @@
   }
   .creditinator .creditinator-view {
     margin: 0 20px 0 20px;
+  }
+}
+@media (max-width: 480px) {
+  .creditinator .navbar .header-title {
+    display: none;
   }
 }
 @media (min-width: 979px) {

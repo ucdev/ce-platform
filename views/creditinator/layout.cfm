@@ -6,7 +6,8 @@
 	<title>#application.config.name#</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
-	
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+   
 	<!-- Le styles -->
 	#stylesheetLinkTag(bundle="ce")#
 	#javaScriptIncludeTag(bundle="ce")#
@@ -26,7 +27,7 @@
 	</cfoutput>
 </head>
 
-<body>
+<body class="creditinator">
 <cfoutput>
 	#includePartial(partial="header")#
 	<div class="creditinator-view">
