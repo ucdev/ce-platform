@@ -11,14 +11,14 @@
 
 	<cffunction name="start">
 		
-		<cfset renderPage(layout="layout") />
+		<cfset renderPage(layout="layout",hideDebugInformation=true) />
 	</cffunction>
 	
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
 
 	<cffunction name="mobilesetup">
 		
-		<cfset renderPage(layout="layout") />
+		<cfset renderPage(layout="layout",hideDebugInformation=true) />
 	</cffunction>
 	
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->

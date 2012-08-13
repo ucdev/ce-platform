@@ -10,11 +10,7 @@
 	<!-- Le styles -->
 	#stylesheetLinkTag(bundle="ce")#
 	#javaScriptIncludeTag(bundle="ce")#
-	<style>
-	body {
-	padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-	}
-	</style>
+	#stylesheetLinkTag(sources="lib/bootstrap-responsive")#
 	
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
@@ -33,7 +29,9 @@
 <body>
 <cfoutput>
 	#includePartial(partial="header")#
+	<div class="creditinator-view">
 	#includeContent()#
+	</div>
 	#includePartial(partial="footer")#
 </cfoutput>
 </body>

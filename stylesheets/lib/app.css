@@ -26,6 +26,10 @@
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+.navbar .brand {
+  position: absolute;
+  padding: 0;
+}
 .profile {
   position: relative;
 }
@@ -219,12 +223,27 @@
 .viewer > .infoBar {
   top: 31px;
 }
+@media (max-width: 979px) {
+  .creditinator .form-actions {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+  }
+  .creditinator .creditinator-view {
+    margin: 0 20px 0 20px;
+  }
+}
+@media (min-width: 979px) {
+  .creditinator .creditinator-view {
+    margin-top: 62px;
+  }
+}
 .creditinator .start form {
   margin: 0px auto;
-  width: 554px;
 }
 .creditinator .start .alert-info {
-  width: 519px;
   margin: 0 auto;
   padding: 8px 17px 8px 14px;
 }
@@ -247,7 +266,6 @@
   border-radius: 3px 3px 3px 3px;
   margin: 13px auto;
   padding: 13px 9px 23px;
-  width: 532px;
 }
 .form-ccpd .btn-toolbar {
   *zoom: 1;

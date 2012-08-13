@@ -19,24 +19,6 @@
 						</cfif>
 					</ul>
 					--->
-					<cfif NOT isLoggedIn()>
-					<ul class="nav pull-right">
-						<li><a href="/login">Log In</a></li>
-						<li><a href="/signup">Sign Up</a></li>
-					</ul>
-					<cfelse>
-					<ul class="nav pull-right">
-						<li class="divider-vertical"></li>
-						<li class="dropdown">
-							<a href="##" class="dropdown-toggle" data-toggle="dropdown"><i class="fugue-#session.currentuser.id#" style="background-image:url('http://www.gravatar.com/avatar/#lcase(HASH(session.currentuser.email,'MD5'))#?d=identicon&s=16');background-position:0 0; margin-right:2px;"></i> #session.currentuser.displayname# <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="/people/edit/#session.currentuser.id#">Edit Profile</a></li>
-								<li class="divider"></li>
-								<li><a href="/logout">Logout</a></li>
-							</ul>
-						</li>
-					</ul>
-					</cfif>
 				</div><!--/.nav-collapse -->
 			</div>
 		</div>
