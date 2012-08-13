@@ -5,6 +5,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     template: _.template(ce.templates.get("activity_participants-statusdate")),
     initialize: function() {
       this.model.on("change", this.render, this);
+      this.model.on("change:CURRSTATUSID", this.updateParentModel, this);
     },
     model: self.StatusDateModel,
     events: {
@@ -61,6 +62,9 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
           });
           break;
       }
+    },
+    updateParentModel: function() {
+      this.options.parentModel.set(this.model.attributes);
     },
     updateViewAttendeeStatuses: function() {
       var container;

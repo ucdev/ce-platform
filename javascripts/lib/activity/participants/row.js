@@ -19,7 +19,8 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       };
       this.statusDate = new self.StatusDate({
         el: statusDateEl,
-        model: new self.StatusDateModel(attributesToPass)
+        model: new self.StatusDateModel(attributesToPass),
+        parentModel: this.model
       }).render();
     },
     events: {

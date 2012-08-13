@@ -19,6 +19,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 			@statusDate = new self.StatusDate(
 			  el: statusDateEl
 			  model: new self.StatusDateModel attributesToPass
+			  parentModel: @model
 			  ).render()
 
 			return

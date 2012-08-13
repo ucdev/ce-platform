@@ -3,6 +3,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 		template: _.template ce.templates.get "activity_participants-statusdate"
 		initialize: ->
 			@model.on "change", @render, @
+			@model.on "change:CURRSTATUSID", @updateParentModel, @
 
 			return
 
@@ -69,6 +70,12 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 			    		CURRSTATUSID: @model.get("CURRSTATUSID")
 			    		TERMDATE: @$el.find(".js-edit-date-field").val()
 			    	break
+			return
+
+		# KEEPS PARENT MODEL UP TO DATE
+		updateParentModel: ->
+			@options.parentModel.set @model.attributes
+
 			return
 
 		updateViewAttendeeStatuses: ->
