@@ -8,7 +8,8 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     },
     events: {
       "click .js-clear-attendee-search": "clearAttendeeSearch",
-      "click .js-attendee-search-typeahead": "searchAttendeeList",
+      "click .js-attendee-search-typeahead": "keepTypeaheadOpen",
+      "keyup .js-attendee-search-typeahead": "searchAttendeeList",
       "click .js-attendees-filter li.js-attendee-status": "filteredAttendeeStatus",
       "click .js-attendees-filter li.js-attendee-status-all": "showAll",
       "click .js-attendees-filter li.js-attendee-status-Selected": "showSelected"
@@ -20,10 +21,9 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       return this.el;
     },
     clearAttendeeSearch: function() {
-      participants.pageData.nStatus = 0;
-      participants.changePage();
-      participants.attendeeSearch["input"].val("");
-      return participants.attendeeSearch["clear"].hide();
+      this.$el.find(".js-attendee-search-typeahead").val("");
+      this.$el.find(".js-clear-attendee-search").hide();
+      this.showAll();
     },
     getFilterCounts: function() {
       var copyOfCollection, filterOptions;
@@ -45,40 +45,59 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       filterStatusName = $(e.currentTarget).find('.js-attendee-status-name').text();
       this.collection.setFilter(['STATUSID'], filterStatusId);
       this.collection.pager();
-      this.$el.find('.js-attendee-status-title').text(filterStatusName);
-      self.trigger("filter_selected");
+      this.updateFilterLabel(filterStatusName);
     },
-    searchAttendeeList: function() {
-      var input, statusList;
-      input = $(this);
-      statusList = participants.attendeeList.statuses["filtered"].attendees;
-      if (input.val().length > 0) {
-        participants.attendeeSearch.clear.show();
-      } else {
-        participants.attendeeSearch.clear.hide();
-      }
-      statusList.length = 0;
-      participants.contentContainer.html("");
-      if (input.val().length > 0) {
-        $.each(participants.attendeeList["attendees"], function(i, item) {
-          if ((item.FIRSTNAME.startsWith(input.val()) || item.LASTNAME.startsWith(input.val())) && !$.ListFind(statusList, item.ATTENDEEID)) {
-            return statusList.push(item.ATTENDEEID);
-          }
-        });
-        participants.pageData.nStatus = "filtered";
-        participants.updatePaginator();
-        return participants.changePage();
+    keepTypeaheadOpen: function(e) {
+      e.preventDefault();
+      return false;
+    },
+    searchAttendeeList: function(e) {
+      var filterVal, input;
+      if ($.inArray(e.keyCode, [32, 13, 16, 17]) !== 0) {
+        console.dir(e);
+        input = this.$el.find(".js-attendee-search-typeahead");
+        filterVal = input.val().toUpperCase().split(" ");
+        if (input.val().length > 0) {
+          this.$el.find(".js-clear-attendee-search").show();
+          $.each(this.collection.origModels, function(i, item) {
+            var firstName, lastName;
+            firstName = item.get("FIRSTNAME").toUpperCase();
+            lastName = item.get("LASTNAME").toUpperCase();
+            return $(filterVal).each(function(i, wordToMatch) {
+              if (firstName.indexOf(wordToMatch) > -1 || lastName.indexOf(wordToMatch) > -1) {
+                return item.set({
+                  "ISFILTERMATCH": true,
+                  silent: true
+                });
+              } else {
+                return item.set({
+                  "ISFILTERMATCH": false,
+                  silent: true
+                });
+              }
+            });
+          });
+          this.collection.setFilter(['ISFILTERMATCH'], 'true');
+          this.updateFilterLabel("Filtered");
+        } else {
+          this.$el.find(".js-clear-attendee-search").hide();
+          this.showAll();
+        }
       }
     },
     showAll: function() {
       this.collection.setFilter(['STATUSID'], [1, 2, 3, 4]);
       this.collection.pager();
-      this.$el.find('.js-attendee-status-title').text("All");
+      this.updateFilterLabel("All");
     },
     showSelected: function() {
       this.collection.setFilter(['ISSELECTED'], 'true');
       this.collection.pager();
-      return this.$el.find('.js-attendee-status-title').text("Selected");
+      this.updateFilterLabel("Selected");
+    },
+    updateFilterLabel: function(filterName) {
+      this.$el.find('.js-attendee-status-title').text(filterName);
+      return self.trigger("participants_filtered", filterName);
     }
   });
 });

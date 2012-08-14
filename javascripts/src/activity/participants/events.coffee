@@ -11,6 +11,9 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 		ce.log.info "participants: page ready"
 		return
 
+	self.on "participants_filtered", (name) ->
+		ce.log.info "participants: filter by " + name
+
 	self.on "participant_saved", (data) ->
 		ce.log.info "participant: saved"
 		return

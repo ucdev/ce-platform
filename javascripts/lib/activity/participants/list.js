@@ -7,7 +7,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       coll = this.collection;
       coll.on("add", this.addOne, this);
       coll.on("reset", this.addAll, this);
-      self.on("filter_selected", this.render, this);
+      self.on("participants_filtered", this.render, this);
       self.on("pager_next", this.render, this);
       self.on("pager_prev", this.render, this);
       self.on("page_loaded", this.render, this);
@@ -28,6 +28,9 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       if (typeof viewModel.get("ISSELECTED") === "undefined") {
         viewModel.set({
           ISSELECTED: false
+        });
+        viewModel.set({
+          ISFILTERMATCH: false
         });
       }
       view = new self.Row({

@@ -4,10 +4,7 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 		sortColumn: "FULLNAME"
 
 		initialize: ->
-			self.on "filter_selected", @render, @
-			self.on "pager_next", @render, @
-			self.on "pager_prev", @render, @
-			self.on "pager_page_selected", @render, @
+			@collection.on "reset", @render, @
 			return
 
 		events:

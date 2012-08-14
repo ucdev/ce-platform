@@ -8,7 +8,8 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 	
 		events:
 			"click .js-clear-attendee-search": "clearAttendeeSearch"
-			"click .js-attendee-search-typeahead": "searchAttendeeList"
+			"click .js-attendee-search-typeahead": "keepTypeaheadOpen"
+			"keyup .js-attendee-search-typeahead": "searchAttendeeList"
 			"click .js-attendees-filter li.js-attendee-status": "filteredAttendeeStatus"
 			"click .js-attendees-filter li.js-attendee-status-all": "showAll"
 			"click .js-attendees-filter li.js-attendee-status-Selected": "showSelected"
@@ -24,15 +25,12 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 			return @el
 
 		clearAttendeeSearch: ->
-			# SHOW ALL ATTENDESS
-			participants.pageData.nStatus = 0
-			  
-			# RELOAD PAGE DATA
-			participants.changePage()
-			  
 			# CLEAR FILTER TEXT FIELD AND HIDE THE CLEAR DIV
-			participants.attendeeSearch["input"].val ""
-			participants.attendeeSearch["clear"].hide()
+			@$el.find(".js-attendee-search-typeahead").val ""
+			@$el.find(".js-clear-attendee-search").hide()
+
+			@showAll()
+			return
 
 		getFilterCounts: ->
 			# CLONE THE COLLECTION
@@ -68,48 +66,49 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 			@collection.setFilter ['STATUSID'], filterStatusId
 			@collection.pager()
 
-			@$el.find('.js-attendee-status-title').text filterStatusName
-
-			self.trigger "filter_selected"
+			@updateFilterLabel filterStatusName
 			return
 
-		searchAttendeeList: ->
-			input = $(this)
-			statusList = participants.attendeeList.statuses["filtered"].attendees
-			  
-			# DETERMINE IF THE CLEAR FILTER DIV IS SHOWN OR HIDDEN
-			if input.val().length > 0
-				participants.attendeeSearch.clear.show()
-			else
-				participants.attendeeSearch.clear.hide()
-			  
-			# CLEAR CURRENT FILTER DOM ATTENDEE LIST
-			statusList.length = 0
-			  
-			# CLEAR CURRENT ATTENDEE HTML LIST
-			participants.contentContainer.html ""
-			  
-			# DETERMINE IF SEARCH FILTER IS BLANK
-			if input.val().length > 0
-				
-				# LOOP OVER ATTENDEES
-				$.each participants.attendeeList["attendees"], (i, item) ->
-					# SEE IF THE FIRST OR LAST NAME STARTS WITH THE SEARCH VALUE AND THAT TEHY ARE NOT ALREADY IN THE FILTER STATUS LIST
-					statusList.push item.ATTENDEEID  if (item.FIRSTNAME.startsWith(input.val()) or item.LASTNAME.startsWith(input.val())) and not $.ListFind(statusList, item.ATTENDEEID)
+		keepTypeaheadOpen: (e) ->
+			e.preventDefault()
+			return false
 
-				
-				# SET CURRENT STATUS TO FILTERED
-				participants.pageData.nStatus = "filtered"
-				
-				# UPDATE PAGINATOR AND RELOAD HTML
-				participants.updatePaginator()
-				participants.changePage()
+		searchAttendeeList: (e) ->
+			if $.inArray(e.keyCode, [32, 13, 16, 17]) != 0
+				console.dir e
+				input = @$el.find(".js-attendee-search-typeahead")
+				filterVal = input.val().toUpperCase().split(" ")
+
+				# DETERMINE IF THE CLEAR FILTER DIV IS SHOWN OR HIDDEN
+				if input.val().length > 0
+					@$el.find(".js-clear-attendee-search").show()
+
+					# FIND ATTENDEES MATCHES TO THE FILTER
+					$.each @collection.origModels, (i, item) ->
+						firstName = item.get("FIRSTNAME").toUpperCase()
+						lastName = item.get("LASTNAME").toUpperCase()
+
+						$(filterVal).each (i, wordToMatch) ->
+							if firstName.indexOf(wordToMatch) > -1 || lastName.indexOf(wordToMatch) > -1
+								item.set "ISFILTERMATCH": true, silent: true
+							else
+								item.set "ISFILTERMATCH": false, silent: true
+
+					@collection.setFilter ['ISFILTERMATCH'], 'true'
+
+					@updateFilterLabel "Filtered"
+
+					# SET CURRENT STATUS TO FILTERED
+				else
+					@$el.find(".js-clear-attendee-search").hide()
+					@showAll()
+			return
 
 		showAll: ->
 			@collection.setFilter ['STATUSID'], [1,2,3,4]
 			@collection.pager()
 
-			@$el.find('.js-attendee-status-title').text "All"
+			@updateFilterLabel "All"
 
 			return
 
@@ -117,4 +116,11 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 			@collection.setFilter ['ISSELECTED'], 'true'
 			@collection.pager()
 
-			@$el.find('.js-attendee-status-title').text "Selected"
+			@updateFilterLabel "Selected"
+
+			return
+
+		updateFilterLabel: (filterName) ->
+			@$el.find('.js-attendee-status-title').text filterName
+
+			self.trigger "participants_filtered", filterName

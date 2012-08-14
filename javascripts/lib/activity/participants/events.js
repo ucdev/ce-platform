@@ -10,6 +10,9 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
   self.on("page_loaded", function() {
     ce.log.info("participants: page ready");
   });
+  self.on("participants_filtered", function(name) {
+    return ce.log.info("participants: filter by " + name);
+  });
   self.on("participant_saved", function(data) {
     ce.log.info("participant: saved");
   });

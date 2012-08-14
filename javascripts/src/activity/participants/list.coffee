@@ -4,10 +4,9 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 		initialize: ->
 			coll = @collection
 			coll.on "add", @addOne, @
-			#coll.on "all", @render, @
 			coll.on "reset", @addAll, @
 
-			self.on "filter_selected", @render, @
+			self.on "participants_filtered", @render, @
 			self.on "pager_next", @render, @
 			self.on "pager_prev", @render, @
 			self.on "page_loaded", @render, @
@@ -32,6 +31,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 			# DETERMINE IF THE ROWMODEL CONTAINS THE ATTRIBUTE ISSELECTED
 			if typeof viewModel.get("ISSELECTED") == "undefined"
 				viewModel.set ISSELECTED: false
+				viewModel.set ISFILTERMATCH: false
 			
 			view = new self.Row  model: viewModel
 			$(".js-attendee-rows").append view.render().el

@@ -50,7 +50,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 		# BUILD BOTTOM BUTTON TOOLBAR
 		self.bottombar = new self.Bottombar(el: ".js-bottom-bar").render()
 		
-		# BUILD PAGER
+		# BUILD PAGER AND FILTER
 		self.on "data_loaded", -> # EVENT BOUND TO BE CALLED AFTER THE COLLECTION FETCH IS SUCCESSFUL
 			self.pager = new ce.ui.Pager(
 				el: ".js-pager-container"

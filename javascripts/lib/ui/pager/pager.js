@@ -5,10 +5,7 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
     pagingTemplate: _.template(ce.templates.get("ui-pager")),
     sortColumn: "FULLNAME",
     initialize: function() {
-      self.on("filter_selected", this.render, this);
-      self.on("pager_next", this.render, this);
-      self.on("pager_prev", this.render, this);
-      self.on("pager_page_selected", this.render, this);
+      this.collection.on("reset", this.render, this);
     },
     events: {
       "click a.js-next-page": "nextPage",
