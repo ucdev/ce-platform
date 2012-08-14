@@ -3,19 +3,20 @@
 ce.module("creditinator", function(self, ce, Backbone, Marionette, $, _, models, log, user) {
   self.views.steps.Start = self.views.StepView.extend({
     wheelsAction: "start",
-    wheelsControllerPath: "/creditinator/",
-    wheelsFullPath: function() {
-      return this.wheelsControllerPath + "" + this.wheelsAction;
+    nextStep: function() {
+      if (user.isLoggedIn()) {
+        return "finish";
+      } else {
+        return "identify";
+      }
     },
-    isStepValid: function() {
-      return false;
-    },
-    currentStep: "start",
-    nextStep: "identify",
     prevStep: "",
     stepTitle: "Welcome!",
     stepSubTitle: "Enter the code you were provided at the live event.",
     beforeGoToNext: function() {
+      $.ajax({
+        url: '/creditinator/checkcode'
+      });
       return true;
     }
   });

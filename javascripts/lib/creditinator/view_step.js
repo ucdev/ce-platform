@@ -34,7 +34,7 @@ ce.module("creditinator", function(self, ce, Backbone, Marionette, $, _, models,
     goToNext: function(ev) {
       if (this.beforeGoToNext()) {
         wheels.go({
-          url: '/creditinator/' + nextStep()
+          url: '/creditinator/' + this.nextStep()
         });
       }
       ev.preventDefault();

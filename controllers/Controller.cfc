@@ -74,8 +74,8 @@
 		<cfparam name="params.layout" default="" />
         
         <cfset var settings = {
-        	"subLayout":"layout_basic",
-        	"rootLayout":"layout"
+        	"subLayout":"/layout_basic",
+        	"rootLayout":"/layout"
         } />
         <cfif len(trim(params.layout)) EQ 0>
 			<cfif params.controller CONTAINS "activity_" AND listFindNoCase("edit,index,new,create,update,requests",params.action,',')>

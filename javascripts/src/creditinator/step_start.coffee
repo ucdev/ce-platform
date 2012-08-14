@@ -3,16 +3,12 @@ ce.module "creditinator", (self, ce, Backbone, Marionette, $, _, models,log,user
 	self.views.steps.Start = self.views.StepView.extend
 		#ELEMENTS
 	    wheelsAction:"start"
-	    wheelsControllerPath:"/creditinator/"
-	    wheelsFullPath: ->
-	    	return @wheelsControllerPath + "" + @wheelsAction
-	    
-	    #STEP STATE
-	    isStepValid: ->
-	    	return false
+	    nextStep: ->
+	    	if user.isLoggedIn()
+	    		return "finish"
+	    	else
+	    		return "identify"
 
-	    currentStep:"start"
-	    nextStep:"identify"
 	    prevStep:""
 	    
 	    #OTHER INFO
@@ -20,7 +16,8 @@ ce.module "creditinator", (self, ce, Backbone, Marionette, $, _, models,log,user
 	    stepSubTitle:"Enter the code you were provided at the live event."
 
 	    beforeGoToNext: ->
-	    	
+	    	$.ajax 
+	    		url:'/creditinator/checkcode'
 	    	return true
 	return
 ,ce._core.models,ce.log,ce.user
