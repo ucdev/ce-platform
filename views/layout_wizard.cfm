@@ -27,14 +27,12 @@
 </head>
 <cfoutput>
 <body data-version_token="#params.version_token#">
-	<script>
-	ce.start();
-	ce.user.load(#serializeJson(userInfo)#);
-	</script>
-	<div id="app">
-		#includePartial(partial="/header")#
+	<div id="app" class="ui_wizard">
+		#includePartial(partial="/ui/wizard/header")#
+		
 		#includeContent()#
-		#includePartial(partial="/footer")#
+		
+		#includePartial(partial="/ui/wizard/footer")#
 		
 		<div class="alert alert-error" style="display:none;"></div>
 		<div class="alert alert-success" style="display:none;"></div>

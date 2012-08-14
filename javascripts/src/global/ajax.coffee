@@ -41,7 +41,7 @@ ce.module "global.ajax", (self, ce, Backbone, Marionette, $, _) ->
       return
 
     $.bind "ajax:success", (xhr, data, status) ->
-      ce.log.dir data
+      #ce.log.dir data
       return
 
     return

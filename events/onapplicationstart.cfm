@@ -70,14 +70,13 @@ js.addAll([
 
 
 /* jQuery Plugins */
-"vendor/jquery/jquery.form.js",
-"vendor/jquery/jquerymx-3.2.custom.js",
-"vendor/jquery/jquery.qtip.js",
+"vendor/jquery/jquery.form",
+"vendor/jquery/jquery.qtip",
 "vendor/jquery/jquery.blockUI",
 "vendor/jquery/jquery.cfjs.packed",
 "vendor/jquery/jquery.maskedinput-1.1.3.pack",
 "vendor/jquery/jquery.tokenInput",
-"vendor/jquery/jquery.pjax.js",
+"vendor/jquery/jquery.pjax",
 
 /* Twitter Bootstrap JS */
 "vendor/bootstrap/bootstrap-transition",
@@ -94,9 +93,11 @@ js.addAll([
 // APPLICATION JS
 /* ce */
 "lib/app",
+"lib/utils",
 
 /* ce.log */
 "lib/log",
+"lib/wheels",
 
 /* ce.global */
 "lib/global",
@@ -109,6 +110,7 @@ js.addAll([
 
 /* ce.ui */
 "lib/ui",
+"lib/ui/wizard",
 "lib/ui/dialog",
 "lib/ui/pager/pager",
 "lib/ui/pager/events",
@@ -137,7 +139,9 @@ js.addAll([
 "lib/activity/credit_requests/events", // ce.activity
 "lib/creditinator",
 "lib/creditinator/view_step",
-"lib/creditinator/step_codeentry",
+"lib/creditinator/step_start",
+"lib/creditinator/step_identify",
+"lib/creditinator/step_finish",
 "lib/person" // ce.person
 ]);
 </cfscript>

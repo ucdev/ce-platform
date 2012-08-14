@@ -24,5 +24,11 @@
 		</div>
 	</div>
 
-	<div class="container contentArea">
+	<header>
+		<div id="progress_indicator"></div>
+		<h2 id="step_title"></h2>
+		<p id="step_instructions"></p>
+	</header>
+
+	<div class="current_step_container">
 </cfoutput>

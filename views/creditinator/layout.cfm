@@ -28,10 +28,19 @@
 </head>
 
 <body class="creditinator">
-<cfoutput>
+<cfoutput>	
+	<script>
+	ce.start();
+	ce.user.load(#serializeJson(userInfo)#);
+	</script>
 	#includePartial(partial="header")#
 	<div class="creditinator-view">
-	#includeContent()#
+		#includeContent()#
+		<div class="form-actions">
+			<a href="" class="backBtn btn btn-large pull-left">Back</a>
+			<a href="" class="continueBtn btn btn-primary btn-large pull-right">Continue</a> 
+			<a href="" class="fcg fsl mrl pull-right" style="line-height:28px;">Learn more</a> 
+		</div>
 	</div>
 	#includePartial(partial="footer")#
 </cfoutput>

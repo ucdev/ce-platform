@@ -1,44 +1,53 @@
-ce.module "creditinator", (self, ce, Backbone, Marionette, $, _, models,log) ->
+ce.module "creditinator", (self, ce, Backbone, Marionette, $, _, models,log,wheels) ->
 	self.views = self.views || {}
-	self.steps = self.steps || {}
+	self.views.steps = self.steps || {}
 	
 	#MAIN STEP VIEW (extend this to get proper structure and bindings)
 	self.views.StepView = Backbone.View.extend
-	    #ELEMENTS
-	    el:$(".creditinator-view")
-	    continueBtn:$(".continueBtn")
-	    backBtn:$(".backBtn")
-	    
-	    #STEP STATE
-	    isStepValid: ->
-	    	return false
-	    currentStep:"unknown"
-	    nextStep:"unknown"
-	    prevStep:"unknown"
+		#ELEMENTS
+		el:".creditinator-view"
+		continueEl:".continueBtn"
+		backEl:".backBtn"
 
-	    #OTHER INFO
-	    stepTitle:"Untitled Step"
-	    stepSubTitle:""
+		wheelsAction:"start"
+		wheelsControllerPath:"/creditinator/"
+		
+		wheelsFullPath: ->
+			return @wheelsControllerPath + "" + @wheelsAction
 
+		#STEP STATE
+		isStepValid: ->
+			return false
+		currentStep:"unknown"
+		nextStep: ->
+			return
+		prevStep:"unknown"
 
-	    events:
-	    	".continueBtn click":"moveOn"
-	    	".backBtn click":"moveBack"
+		#OTHER INFO
+		stepTitle:"Untitled Step"
+		stepSubTitle:""
 
-	    initialize: ->
-	      _.bindAll @
-	      @render()
+		events:
+			"click .continueBtn":"goToNext"
+			"click .backBtn":"goToPrev"
 
-	    beforeGoToNext: ->
-	    	
-	    	return true
+		initialize: ->
+			_.bindAll @
+			@render()
+			@$continueEl = $(@el).find(@continueEl);
+			@$backEl = $(@el).find(@backEl);
+		beforeGoToNext: ->
+			return
+		goToNext: (ev) ->
+			if @beforeGoToNext()
+				wheels.go
+					url: '/creditinator/' + nextStep()
 
-	    goToNext: ->
-	    	return
-
-	    goToPrev: ->
-	    	return
-
-	    render: ->
-	      $(@el).append ''
+			ev.preventDefault()
+			return false
+		goToPrev: ->
+			return
+		render: ->
+			$(@el).html()
 	return
+,ce._core.models,ce.log,ce.wheels

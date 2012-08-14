@@ -38,8 +38,6 @@ ce.module("global.ajax", function(self, ce, Backbone, Marionette, $, _) {
         $parent.addClass("open");
       }
     });
-    $.bind("ajax:success", function(xhr, data, status) {
-      ce.log.dir(data);
-    });
+    $.bind("ajax:success", function(xhr, data, status) {});
   });
 });
