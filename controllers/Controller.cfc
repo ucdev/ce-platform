@@ -78,7 +78,7 @@
         	"rootLayout":"/layout"
         } />
         <cfif len(trim(params.layout)) EQ 0>
-			<cfif params.controller CONTAINS "activity_" AND listFindNoCase("edit,index,new,create,update,requests",params.action,',')>
+			<cfif params.controller CONTAINS "activity_" AND listFindNoCase("edit,index,new,create,loaddata,update,requests",params.action,',')>
                 <cfset settings.subLayout = "/layout_adm_activity" />
             <cfelseif params.controller CONTAINS "person_" AND listFindNoCase("edit,index,new,create,update",params.action,',')>
                 <cfset settings.subLayout = "/layout_adm_person" />
