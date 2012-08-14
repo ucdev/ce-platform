@@ -2,7 +2,10 @@
 	<cffunction name="init">
 		<cfset filters(through="loginRequired") />
 		<cfset filters(through="adminRequired") />
-		<cfset super.init() />
+		<cfset filters(through="pagelet",type="before") />
+		<cfset filters(through="setUserInfo",type="before") />
+		<cfset filters(through="autoSetup") />
+		<cfset filters(through="autoLayout",type="after",except="loaddata") />
 	</cffunction>
 	
 	<!--- activity_participants/create --->
@@ -60,7 +63,7 @@
 		</cfif>
 	</cffunction>
     
-    <cffunction name="loadData">
+    <cffunction name="loaddata">
 		<cfparam name="params.activityId" type="integer" default="0" />
 		
 		<cfset qAttendees = Application.activityAttendee.getAttendees(ActivityID=params.activityId,DeletedFlag="N")>
