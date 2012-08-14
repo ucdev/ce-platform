@@ -28,8 +28,11 @@
 </head>
 
 <body class="creditinator">
-	<script>ce.start();</script>
-<cfoutput>
+<cfoutput>	
+	<script>
+	ce.start();
+	ce.user.load(#serializeJson(userInfo)#);
+	</script>
 	#includePartial(partial="header")#
 	<div class="creditinator-view">
 		#includeContent()#
@@ -40,13 +43,6 @@
 		</div>
 	</div>
 	#includePartial(partial="footer")#
-	<script type="text/javascript">
-	//SETUP CE
-	$(function() {
-		ce.start();
-		ce.user.load(<cfoutput>#serializeJson(userInfo)#</cfoutput>);
-	});
-	</script>
 </cfoutput>
 </body>
 </html>
