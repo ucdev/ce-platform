@@ -27,6 +27,7 @@
 </head>
 <cfoutput>
 <body data-version_token="#params.version_token#">
+	<script>ce.start();</script>
 	<div id="app">
 		#includePartial(partial="/header")#
 		#includeContent()#

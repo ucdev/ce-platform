@@ -19,7 +19,8 @@ ce.module "creditinator", (self, ce, Backbone, Marionette, $, _, models,log,whee
 		isStepValid: ->
 			return false
 		currentStep:"unknown"
-		nextStep:"unknown"
+		nextStep: ->
+			return
 		prevStep:"unknown"
 
 		#OTHER INFO
@@ -40,7 +41,7 @@ ce.module "creditinator", (self, ce, Backbone, Marionette, $, _, models,log,whee
 		goToNext: (ev) ->
 			if @beforeGoToNext()
 				wheels.go
-					url: @wheelsFullPath()
+					url: '/creditinator/' + nextStep()
 
 			ev.preventDefault()
 			return false

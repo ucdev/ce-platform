@@ -16,7 +16,7 @@ ce.module("creditinator", function(self, ce, Backbone, Marionette, $, _, models,
       return false;
     },
     currentStep: "unknown",
-    nextStep: "unknown",
+    nextStep: function() {},
     prevStep: "unknown",
     stepTitle: "Untitled Step",
     stepSubTitle: "",
@@ -34,7 +34,7 @@ ce.module("creditinator", function(self, ce, Backbone, Marionette, $, _, models,
     goToNext: function(ev) {
       if (this.beforeGoToNext()) {
         wheels.go({
-          url: this.wheelsFullPath()
+          url: '/creditinator/' + nextStep()
         });
       }
       ev.preventDefault();

@@ -7,7 +7,7 @@ ce.module("creditinator", function(self, ce, Backbone, Marionette, $, _, models,
     self.stepView = new self.views.steps.Start();
     self.trigger("loaded");
   };
-  return self.on("loaded", function() {
+  self.on("loaded", function() {
     log.info("creditinator: loaded");
   });
 }, ce._core.models, ce.log, ce.ui);

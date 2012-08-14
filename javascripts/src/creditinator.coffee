@@ -11,4 +11,5 @@ ce.module "creditinator", (self, ce, Backbone, Marionette, $, _, models,log,ui) 
     self.on "loaded", ->
         log.info "creditinator: loaded"
         return
+    return
 ,ce._core.models,ce.log,ce.ui

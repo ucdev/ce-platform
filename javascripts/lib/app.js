@@ -17,5 +17,9 @@ ce.addRegions({
 });
 
 ce.addInitializer(function(options) {
-  return debug.info("init: app");
+  return ce.trigger("loaded");
+});
+
+ce.on("loaded", function() {
+  return ce.log.info("app: started");
 });

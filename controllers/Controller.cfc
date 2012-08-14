@@ -92,7 +92,7 @@
 				
 			<cfelseif params.controller EQ "creditinator">
 				<cfset settings.rootLayout = "/creditinator/layout" />
-				<cfset settings.subLayout = "/layout_pjax" />
+				<cfset settings.subLayout = "" />
             </cfif>
 
             <cfset configLayouts(argumentCollection=settings) />

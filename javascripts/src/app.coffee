@@ -11,4 +11,8 @@ ce.addRegions
   subpage: ".contentBar div.content-container"
 
 ce.addInitializer (options) ->
-  debug.info "init: app"
+  ce.trigger("loaded")
+
+ce.on("loaded", ->
+    ce.log.info("app: started")
+)
