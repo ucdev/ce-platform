@@ -39,11 +39,6 @@
 		</div>
 	</div>
 	#includePartial(partial="footer")#
-	<script>
-	$(document).ready(function() {
-		ce.creditinator.load();
-	});
-	</script>
 </cfoutput>
 </body>
 </html>

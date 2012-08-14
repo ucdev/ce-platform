@@ -1,4 +1,7 @@
 <cfcomponent extends="Controller">
+	<cffunction name="init">
+
+	</cffunction>
 	<cffunction name="loader">
 		<cfset controllerKey = ListFirst(params.key,"-") />
 		<cfset tmplKey = ListLast(params.key,"-") />
