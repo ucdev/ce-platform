@@ -17,15 +17,20 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 				TERMDATE: @model.get("TERMDATE")
 
 			@statusDate = new self.StatusDate(
-			  el: statusDateEl
-			  model: new self.StatusDateModel attributesToPass
-			  parentModel: @model
-			  ).render()
+				el: statusDateEl
+				model: new self.StatusDateModel attributesToPass
+				parentModel: @model
+				).render()
 
 			return
 
 		events:
 			"change .js-participant-checkbox": "selectAttendee"
+
+		markSelected: ->
+			@$el.find(".js-participant-checkbox").attr "checked", true
+			@$el.addClass "alert-info"
+			return
 
 		render: ->
 			@$el.empty()
@@ -33,21 +38,25 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 			# RENDER TEMPLATE AND USE AS PAGE HTML
 			@$el.append @template @model.toJSON()
 
+			# DETERMINE IF THE ROW IS SELECTED
+			if @model.get "ISSELECTED"
+				@markSelected()
+
 			# ADD EXTRA VIEWS
 			@bindViews()
 			return @
 
-		selectAttendee: ->
+		selectAttendee: (e) ->
 			# DETERMINE IF THE ROW IS CHECKED
-			if $(".js-participant-checkbox").is(":checked")
+			if @$el.find(".js-participant-checkbox").is ":checked"
 				# ADD SELECTED CLASS
 				@$el.addClass "alert-info"
 
 				# SETS SELECTED PROPERTY TO TRUE
-				@.model.set("ISSELECTED", true)
+				@model.set "ISSELECTED": true
 			else
 				@$el.removeClass "alert-info"
 
 				# SETS SELECTED PROPERTY TO FALSE
-				@.model.set("ISSELECTED", false)
+				@model.set "ISSELECTED": false
 			return

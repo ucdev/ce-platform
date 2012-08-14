@@ -22,5 +22,5 @@
         <li><a href="#" id="print-cne" class="js-print">Nurse Certificates</a></li>
     </ul>
 </div>
-<div class="js-pager-container"></div>
-<!---<div class="btn-group pull-right js-attendee-filter"></div>--->
+<div class="btn-group pull-right pager-simple js-ui-pager js-pager-container"></div>
+<div class="btn-group pull-right js-attendee-filter"></div>

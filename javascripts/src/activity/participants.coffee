@@ -56,6 +56,11 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 				el: ".js-pager-container"
 				collection: self.collection
 				).render()
+
+			self.filter = new self.Filter(
+				el: ".js-attendee-filter"
+				collection: self.collection
+				).render()
 		
 		self.trigger "page_loaded"
 		return

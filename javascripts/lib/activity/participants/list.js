@@ -22,7 +22,11 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     },
     addOne: function(viewModel) {
       var view;
-      viewModel.attributes.ISSELECTED = false;
+      if (typeof viewModel.get("ISSELECTED") === "undefined") {
+        viewModel.set({
+          ISSELECTED: false
+        });
+      }
       view = new self.Row({
         model: viewModel
       });

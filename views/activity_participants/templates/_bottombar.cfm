@@ -1,1 +1,1 @@
-<div class="js-pager-container"></div>
+<div class="btn-group pull-right pager-simple js-ui-pager js-pager-container"></div>

@@ -26,19 +26,30 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     events: {
       "change .js-participant-checkbox": "selectAttendee"
     },
+    markSelected: function() {
+      this.$el.find(".js-participant-checkbox").attr("checked", true);
+      this.$el.addClass("alert-info");
+    },
     render: function() {
       this.$el.empty();
       this.$el.append(this.template(this.model.toJSON()));
+      if (this.model.get("ISSELECTED")) {
+        this.markSelected();
+      }
       this.bindViews();
       return this;
     },
-    selectAttendee: function() {
-      if ($(".js-participant-checkbox").is(":checked")) {
+    selectAttendee: function(e) {
+      if (this.$el.find(".js-participant-checkbox").is(":checked")) {
         this.$el.addClass("alert-info");
-        this.model.set("ISSELECTED", true);
+        this.model.set({
+          "ISSELECTED": true
+        });
       } else {
         this.$el.removeClass("alert-info");
-        this.model.set("ISSELECTED", false);
+        this.model.set({
+          "ISSELECTED": false
+        });
       }
     }
   });

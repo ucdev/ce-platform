@@ -23,7 +23,10 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 
 		addOne: (viewModel) ->
 			# ADDS FILTERABLE PROPERTY TO DETERMINE IF THE ROW IS SELECTED
-			viewModel.attributes.ISSELECTED = false
+			
+			# DETERMINE IF THE ROWMODEL CONTAINS THE ATTRIBUTE ISSELECTED
+			if typeof viewModel.get("ISSELECTED") == "undefined"
+				viewModel.set ISSELECTED: false
 			
 			view = new self.Row  model: viewModel
 			$(".js-attendee-rows").append view.render().el

@@ -50,8 +50,12 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       el: ".js-bottom-bar"
     }).render();
     self.on("data_loaded", function() {
-      return self.pager = new ce.ui.Pager({
+      self.pager = new ce.ui.Pager({
         el: ".js-pager-container",
+        collection: self.collection
+      }).render();
+      return self.filter = new self.Filter({
+        el: ".js-attendee-filter",
         collection: self.collection
       }).render();
     });
