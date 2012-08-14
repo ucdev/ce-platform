@@ -43,14 +43,17 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       if (this.$el.find(".js-participant-checkbox").is(":checked")) {
         this.$el.addClass("alert-info");
         this.model.set({
-          "ISSELECTED": true
+          "ISSELECTED": true,
+          silent: true
         });
       } else {
         this.$el.removeClass("alert-info");
         this.model.set({
-          "ISSELECTED": false
+          "ISSELECTED": false,
+          silent: true
         });
       }
+      self.trigger("selected_count_changed");
     }
   });
 });

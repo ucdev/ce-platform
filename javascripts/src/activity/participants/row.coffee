@@ -53,10 +53,12 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 				@$el.addClass "alert-info"
 
 				# SETS SELECTED PROPERTY TO TRUE
-				@model.set "ISSELECTED": true
+				@model.set "ISSELECTED": true, silent: true
 			else
 				@$el.removeClass "alert-info"
 
 				# SETS SELECTED PROPERTY TO FALSE
-				@model.set "ISSELECTED": false
+				@model.set "ISSELECTED": false, silent: true
+
+			self.trigger "selected_count_changed"
 			return

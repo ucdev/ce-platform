@@ -6,8 +6,11 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       var coll;
       coll = this.collection;
       coll.on("add", this.addOne, this);
-      coll.on("all", this.render, this);
       coll.on("reset", this.addAll, this);
+      self.on("filter_selected", this.render, this);
+      self.on("pager_next", this.render, this);
+      self.on("pager_prev", this.render, this);
+      self.on("page_loaded", this.render, this);
       coll.fetch({
         success: function() {
           coll.pager();
@@ -31,6 +34,9 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         model: viewModel
       });
       $(".js-attendee-rows").append(view.render().el);
+    },
+    render: function() {
+      return console.log("COLLECTION RENDERING");
     }
   });
 }, ce._core.models);

@@ -1,10 +1,13 @@
 ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 	self.Pager = Backbone.View.extend
 		pagingTemplate: _.template ce.templates.get "ui-pager"
+		sortColumn: "FULLNAME"
 
 		initialize: ->
-			@collection.on "change", @render, this
-			@collection.on "reset", @render, this
+			self.on "filter_selected", @render, @
+			self.on "pager_next", @render, @
+			self.on "pager_prev", @render, @
+			self.on "pager_page_selected", @render, @
 			return
 
 		events:
@@ -13,10 +16,13 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 			"click a.js-prev-page": "prevPage"
 
 		render: ->
+			@$el.empty()
+
 			# FORM THE TEMPLATE AND APPEND THE TEMPLATE HTML
 			@$el.html @pagingTemplate @collection.info()
+
 			self.trigger "pager_loaded"
-			return @el
+			return
 
 		nextPage: (e) ->
 			e.preventDefault()

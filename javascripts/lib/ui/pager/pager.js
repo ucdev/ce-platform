@@ -3,9 +3,12 @@
 ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
   self.Pager = Backbone.View.extend({
     pagingTemplate: _.template(ce.templates.get("ui-pager")),
+    sortColumn: "FULLNAME",
     initialize: function() {
-      this.collection.on("change", this.render, this);
-      this.collection.on("reset", this.render, this);
+      self.on("filter_selected", this.render, this);
+      self.on("pager_next", this.render, this);
+      self.on("pager_prev", this.render, this);
+      self.on("pager_page_selected", this.render, this);
     },
     events: {
       "click a.js-next-page": "nextPage",
@@ -13,9 +16,9 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
       "click a.js-prev-page": "prevPage"
     },
     render: function() {
+      this.$el.empty();
       this.$el.html(this.pagingTemplate(this.collection.info()));
       self.trigger("pager_loaded");
-      return this.el;
     },
     nextPage: function(e) {
       e.preventDefault();

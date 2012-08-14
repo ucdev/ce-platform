@@ -3,7 +3,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 		template: _.template ce.templates.get "activity_participants-filter"
 
 		initialize: ->
-			#@collection.on "change:ISSELECTED", @getFilterCounts, @
+			self.on "selected_count_changed", @getFilterCounts, @
 			return
 	
 		events:
@@ -11,6 +11,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 			"click .js-attendee-search-typeahead": "searchAttendeeList"
 			"click .js-attendees-filter li.js-attendee-status": "filteredAttendeeStatus"
 			"click .js-attendees-filter li.js-attendee-status-all": "showAll"
+			"click .js-attendees-filter li.js-attendee-status-Selected": "showSelected"
 
 		render: ->
 			# FORM THE TEMPLATE AND APPEND THE TEMPLATE HTML
@@ -55,10 +56,11 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 				$(@).find('span.js-attendee-status-count').text "(" + copyOfCollection.information.totalRecords + ")"
 				return
 
-			copyOfCollection.setFilter({ ISSELECTED: true })
+			copyOfCollection.setFilter ['ISSELECTED'], 'true'
 			@$el.find(".js-attendee-status-selected-count").text copyOfCollection.information.totalRecords
 			return
 
+		# SHOW ATTENDEES BASED ON THE SELECTED FILTER
 		filteredAttendeeStatus: (e) ->
 			filterStatusId = $(e.currentTarget).attr('id').replace('status','')
 			filterStatusName = $(e.currentTarget).find('.js-attendee-status-name').text()
@@ -68,6 +70,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 
 			@$el.find('.js-attendee-status-title').text filterStatusName
 
+			self.trigger "filter_selected"
 			return
 
 		searchAttendeeList: ->
@@ -110,6 +113,8 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 
 			return
 
-		updateSelectedCount: ->
-			console.log "in"
-			return
+		showSelected: ->
+			@collection.setFilter ['ISSELECTED'], 'true'
+			@collection.pager()
+
+			@$el.find('.js-attendee-status-title').text "Selected"

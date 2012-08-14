@@ -4,8 +4,13 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 		initialize: ->
 			coll = @collection
 			coll.on "add", @addOne, @
-			coll.on "all", @render, @
+			#coll.on "all", @render, @
 			coll.on "reset", @addAll, @
+
+			self.on "filter_selected", @render, @
+			self.on "pager_next", @render, @
+			self.on "pager_prev", @render, @
+			self.on "page_loaded", @render, @
 			
 			coll.fetch
 				success:() ->
@@ -32,6 +37,9 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 			$(".js-attendee-rows").append view.render().el
 			
 			return
+
+		render: ->
+			console.log "COLLECTION RENDERING"
 
 ,ce._core.models
 	

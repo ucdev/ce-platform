@@ -3,12 +3,15 @@
 ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _) {
   return self.Filter = Backbone.View.extend({
     template: _.template(ce.templates.get("activity_participants-filter")),
-    initialize: function() {},
+    initialize: function() {
+      self.on("selected_count_changed", this.getFilterCounts, this);
+    },
     events: {
       "click .js-clear-attendee-search": "clearAttendeeSearch",
       "click .js-attendee-search-typeahead": "searchAttendeeList",
       "click .js-attendees-filter li.js-attendee-status": "filteredAttendeeStatus",
-      "click .js-attendees-filter li.js-attendee-status-all": "showAll"
+      "click .js-attendees-filter li.js-attendee-status-all": "showAll",
+      "click .js-attendees-filter li.js-attendee-status-Selected": "showSelected"
     },
     render: function() {
       this.$el.html(this.template(this.collection.info()));
@@ -33,9 +36,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         copyOfCollection.setFilter(['STATUSID'], filterStatus);
         $(this).find('span.js-attendee-status-count').text("(" + copyOfCollection.information.totalRecords + ")");
       });
-      copyOfCollection.setFilter({
-        ISSELECTED: true
-      });
+      copyOfCollection.setFilter(['ISSELECTED'], 'true');
       this.$el.find(".js-attendee-status-selected-count").text(copyOfCollection.information.totalRecords);
     },
     filteredAttendeeStatus: function(e) {
@@ -45,6 +46,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       this.collection.setFilter(['STATUSID'], filterStatusId);
       this.collection.pager();
       this.$el.find('.js-attendee-status-title').text(filterStatusName);
+      self.trigger("filter_selected");
     },
     searchAttendeeList: function() {
       var input, statusList;
@@ -73,8 +75,10 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       this.collection.pager();
       this.$el.find('.js-attendee-status-title').text("All");
     },
-    updateSelectedCount: function() {
-      console.log("in");
+    showSelected: function() {
+      this.collection.setFilter(['ISSELECTED'], 'true');
+      this.collection.pager();
+      return this.$el.find('.js-attendee-status-title').text("Selected");
     }
   });
 });
