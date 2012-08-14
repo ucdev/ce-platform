@@ -73,22 +73,32 @@
 		<cfparam name="params.showInfoBar" default="true" />
 		<cfparam name="params.layout" default="" />
         
+        <cfset var settings = {
+        	"subLayout":"layout_basic",
+        	"rootLayout":"layout"
+        } />
         <cfif len(trim(params.layout)) EQ 0>
 			<cfif params.controller CONTAINS "activity_" AND listFindNoCase("edit,index,new,create,update,requests",params.action,',')>
-                <cfset subLayout('adm_activity') />
+                <cfset settings.subLayout = "/layout_adm_activity" />
             <cfelseif params.controller CONTAINS "person_" AND listFindNoCase("edit,index,new,create,update",params.action,',')>
-                <cfset subLayout('adm_person') />
+                <cfset settings.subLayout = "/layout_adm_person" />
             <cfelseif params.controller EQ "activities" AND listFindNoCase("edit",params.action)>
-                <cfset subLayout("adm_activity") />
+                <cfset settings.subLayout = "/layout_adm_activity" />
 			<cfelseif params.controller EQ "activities" AND listFindNoCase("show",params.action)>
-				<cfset subLayout("pub_activity") />
+				<cfset settings.subLayout = "/layout_pub_activity" />
 			<cfelseif params.controller EQ "messages" AND listFindNoCase("inbox,sent,trash",params.action)>
-				<cfset subLayout("user") />
+				<cfset settings.subLayout = "/layout_user" />
 			<cfelseif params.controller EQ "sessions" AND listFindNoCase("new",params.action)>
-				<cfset subLayout("basic") />
+				
+			<cfelseif params.controller EQ "creditinator">
+				<cfset settings.rootLayout = "/creditinator/layout" />
+				<cfset settings.subLayout = "/layout_pjax" />
             </cfif>
+
+            <cfset configLayouts(argumentCollection=settings) />
         <cfelse>
-        	<cfset subLayout("#params.layout#") />
+        	<cfset settings.subLayout = "/layout_#params.layout#" />
+        	<cfset configLayouts(argumentCollection=settings) />
         </cfif>
 	</cffunction>
 	
@@ -97,14 +107,23 @@
 		
 		<cfset params.showInfoBar = arguments.infobar />
 	</cffunction>
-	
+
 	<cffunction name="subLayout">
-		<cfargument name="layoutFile" type="string" required="no" default="" />
+		<cfset var args = duplicate(arguments) />
+		<cfif args[1] DOES NOT CONTAIN "layout_">
+			<cfset args[1] = "/layout_" & args[1] />
+		</cfif>
+		<cfset configLayouts(argumentCollection=args) />
+	</cffunction>
+	
+	<cffunction name="configLayouts">
+		<cfargument name="subLayout" type="string" required="no" default="/layout_basic" />
 		<cfargument name="template" type="string" required="no" default="" />
 		<cfparam name="params.controller" default="" />
 		<cfparam name="params.action" default="" />
 		<cfparam name="params.key" default="0" />
 		<cfparam name="params._pjax" default="0" />
+		<cfargument name="rootLayout" type="string" required="no" default="/layout" />
 		
 		<cfset var layout = "" />
 		<cfset var headers = GetHttpRequestData().Headers />
@@ -113,7 +132,7 @@
 			<cfif params._pjax EQ "##page">
 				<cfset renderText(
 						$renderLayout(
-							$layout='/layout_#arguments.layoutFile#',
+							$layout=arguments.subLayout,
 							$type='template',
 							$content=$renderLayout(
 									$layout='/layout_pjax',
@@ -147,10 +166,10 @@
 			<cfscript>
 			renderText(
 					$renderLayout(
-						$layout='/layout',
+						$layout=arguments.rootLayout,
 						$type='template',
 						$content=$renderLayout(
-							$layout='/layout_#arguments.layoutFile#',
+							$layout=arguments.subLayout,
 							$type='template',
 							$content=$renderPage(
 								$template="#arguments.template#",

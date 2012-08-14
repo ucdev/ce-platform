@@ -3,15 +3,12 @@
 <head>
 	<cfoutput>
 	<meta charset="utf-8">
-	<title>#application.config.name#</title>
+	<title>#includeContent("pageTitle")# | #application.config.name#</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
-	 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-   
+	
 	<!-- Le styles -->
 	#stylesheetLinkTag(bundle="ce")#
-	#javaScriptIncludeTag(bundle="ce")#
-	#stylesheetLinkTag(sources="lib/bootstrap-responsive")#
 	
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
@@ -24,26 +21,24 @@
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+	
+	#javaScriptIncludeTag(bundle="ce")#
 	</cfoutput>
 </head>
-
-<body class="creditinator">
 <cfoutput>
-	#includePartial(partial="header")#
-	<div class="creditinator-view">
+<body data-version_token="#params.version_token#">
+	<div id="app" class="ui_wizard">
+		#includePartial(partial="/ui/wizard/header")#
+		
 		#includeContent()#
-		<div class="form-actions">
-			<a href="" class="backBtn btn btn-large pull-left">Back</a>
-			<a href="" class="continueBtn btn btn-primary btn-large pull-right">Continue</a> 
-			<a href="" class="fcg fsl mrl pull-right" style="line-height:28px;">Learn more</a> 
-		</div>
+		
+		#includePartial(partial="/ui/wizard/footer")#
+		
+		<div class="alert alert-error" style="display:none;"></div>
+		<div class="alert alert-success" style="display:none;"></div>
 	</div>
-	#includePartial(partial="footer")#
-	<script>
-	$(document).ready(function() {
-		ce.creditinator.load();
-	});
-	</script>
-</cfoutput>
+	
+	<div id="dialog"></div>
 </body>
+</cfoutput>
 </html>
