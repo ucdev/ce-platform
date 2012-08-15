@@ -1,0 +1,67 @@
+<project name="socialauth-struts-demo" default="deploy-socialauth-struts-demo">
+	
+	<property name="basedir" value="." />	
+	<property file="${basedir}/env.properties" />
+	<property name="sourceDir" value="${basedir}/src" />
+	<property name="distDir" value="${basedir}/dist" />
+	<property name="webDir" value="${basedir}/WebContent" />
+	<property name="buildDir" value="${webDir}/WEB-INF/classes" />
+	<property name="libDir" value="${webDir}/WEB-INF/lib" />
+	<property name="metainfDir" value="${webDir}/WEB-INF/META-INF" />
+	<property name="deployDir" value="${tomcat.home}/webapps" />	
+	<property name="warDirectory" value="${deployDir}/socialauth-struts-demo" />
+
+	<path id="libraries">
+		<fileset dir="${libDir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${tomcat.home}/lib">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="clean">
+		<delete dir="${buildDir}" failonerror="true" />
+		<delete dir="${distDir}" failonerror="true" />
+		<delete dir="${warDirectory}" failonerror="true" />
+		<delete file="${tomcat.home}/webapps/socialauth-struts-demo.war"/>
+	</target>
+
+	<target name="init" depends="clean">
+		<mkdir dir="${buildDir}" />
+		<mkdir dir="${distDir}" />
+	</target>
+
+	<target name="compile" depends="init">
+		<javac destdir="${buildDir}" classpathref="libraries" debug="true">			
+			<src location="${sourceDir}" />
+		</javac>
+	</target>
+	
+	<target name="copyTask" depends="compile">		
+		<copy  todir="${buildDir}" file="${sourceDir}/oauth_consumer.properties"/> 		
+		<copy  todir="${buildDir}" file="${sourceDir}/properties.ini"/> 		
+		<copy  todir="${buildDir}" file="${sourceDir}/log4j.properties"/> 		
+	</target>
+	
+	<target name="warInternal" depends="copyTask" >
+		<war destfile="${distDir}/socialauth-struts-filter-demo.war" basedir="${webDir}"
+			webxml="${webDir}/WEB-INF/web.xml" >
+			
+			<classes dir="${buildDir}">
+				<include name="**/*.java" />
+				<include name="**/*.class" />
+				<include name="**/*.xml" />
+				<include name="**/*.properties" />
+			</classes>			
+		</war>
+	</target>
+	
+	<target name="deploy-socialauth-struts-demo" depends="warInternal" description="Build and test EAR, update db if required, deploy locally">
+		<echo message="Final packaging" />
+		<copy todir="${deployDir}">
+			<fileset dir="${distDir}"/>
+		</copy>
+	</target>
+
+</project>

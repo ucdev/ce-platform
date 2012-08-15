@@ -1,5 +1,5 @@
 ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
-  self.dialog = Backbone.Marionette.Region.extend 
+  self.Dialog = Backbone.Marionette.Region.extend 
     el: "#dialog",
 
     constructor: ->

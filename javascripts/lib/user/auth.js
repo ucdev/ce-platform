@@ -82,7 +82,7 @@ ce.module("user", function(self, ce, Backbone, Marionette, $, _, log) {
   });
   self.login = function(params) {
     var view;
-    view = new self.LoginView();
+    view = new ce.ui.Popup();
     ce.dialog.show(view);
     self.trigger("loggedIn");
   };
