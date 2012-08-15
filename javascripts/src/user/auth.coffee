@@ -83,7 +83,8 @@ ce.module "user", (self, ce, Backbone, Marionette, $, _, log) ->
 
   #LOGIN FUNCTION
   self.login = (params) ->
-    view = new self.LoginView()
+    view = new ce.ui.Popup()
+    
     ce.dialog.show view
     self.trigger "loggedIn"
     return

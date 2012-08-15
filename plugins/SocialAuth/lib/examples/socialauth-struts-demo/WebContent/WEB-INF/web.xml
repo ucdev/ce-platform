@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>socialauthdemo</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<display-name>socialauthdemo</display-name>
+		<description>App for social auth demo</description>
+		<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>/WEB-INF/struts-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<init-param>
+			<param-name>detail</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	
+	
+    
+	
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	
+	<session-config>
+		<session-timeout>1800</session-timeout>
+	</session-config>
+	
+	<mime-mapping>
+ 		<extension>css</extension>
+ 		<mime-type>text/css</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+ 		<extension>js</extension>
+ 		<mime-type>application/x-javascript</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+ 		<extension>jpeg jpg jpe</extension>
+ 		<mime-type>image/jpeg</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+ 		<extension>gif</extension>
+ 		<mime-type>image/gif</mime-type>
+	</mime-mapping>
+	
+		  
+	<taglib>
+		<taglib-uri>struts-bean</taglib-uri>
+	    <taglib-location>/WEB-INF/struts-bean.tld</taglib-location>
+	</taglib>
+ 
+  	<taglib>
+    	<taglib-uri>struts-html</taglib-uri>
+    	<taglib-location>/WEB-INF/struts-html.tld</taglib-location>
+  	</taglib>
+  
+  	<taglib>
+    	<taglib-uri>struts-logic</taglib-uri>
+    	<taglib-location>/WEB-INF/struts-logic.tld</taglib-location>
+  	</taglib>
+  	
+  	<error-page>
+  		<exception-type>java.lang.Exception</exception-type>
+  		<location>/jsp/error.jsp</location>
+  	</error-page>
+  	
+     
+</web-app>

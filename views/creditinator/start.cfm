@@ -6,6 +6,6 @@
 	
 	<form action="" class="form-horizontal">
 		<input type="text" class="input-large" />
-		
+		<div id="flip-counter" class="flip-counter"></div>
 	</form>
 </div>

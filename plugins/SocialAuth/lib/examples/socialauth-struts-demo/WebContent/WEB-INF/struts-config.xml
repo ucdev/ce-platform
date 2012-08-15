@@ -1,0 +1,25 @@
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+
+	<form-beans>
+	    	<form-bean name="authForm" type="com.auth.form.AuthForm" />
+	</form-beans>
+    
+    <action-mappings>
+    
+		<action path="/socialAuth" type="com.auth.actions.SocialAuthenticationAction" name="authForm" scope="session">
+			<forward name="failure" path="/jsp/error.jsp" />
+			<forward name="home" path="/index.jsp" />
+		</action>
+		
+		<action path="/socialAuthSuccessAction" type="com.auth.actions.SocialAuthSuccessAction" name="authForm" scope="session">
+			<forward name="success" path="/jsp/authSuccess.jsp" />
+			<forward name="failure" path="/jsp/error.jsp" />
+		</action>
+		<action path="/socialAuthUpdateStatusAction" type="com.auth.actions.SocialAuthUpdateStatusAction" name="authForm" scope="session">
+			<forward name="success" path="/jsp/statusSuccess.jsp" />
+			<forward name="failure" path="/jsp/statusSuccess.jsp" />
+		</action>
+	</action-mappings>
+
+</struts-config>

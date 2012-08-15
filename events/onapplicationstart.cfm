@@ -110,7 +110,8 @@ js.addAll([
 
 /* ce.ui */
 "lib/ui",
-"lib/ui/wizard",
+"lib/ui/counter",
+"lib/ui/popup",
 "lib/ui/dialog",
 "lib/ui/loader/loader",
 "lib/ui/loader/events",

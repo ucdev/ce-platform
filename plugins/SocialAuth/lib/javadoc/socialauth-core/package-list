@@ -1,0 +1,5 @@
+org.brickred.socialauth
+org.brickred.socialauth.exception
+org.brickred.socialauth.oauthstrategy
+org.brickred.socialauth.provider
+org.brickred.socialauth.util

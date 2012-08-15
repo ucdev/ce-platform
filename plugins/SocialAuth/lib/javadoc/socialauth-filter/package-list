@@ -1,0 +1,6 @@
+de.deltatree.social.web.filter.api
+de.deltatree.social.web.filter.api.security
+de.deltatree.social.web.filter.impl
+de.deltatree.social.web.filter.impl.props
+de.deltatree.social.web.filter.impl.security
+de.deltatree.social.web.filter.impl.tools
