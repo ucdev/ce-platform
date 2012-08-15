@@ -41,6 +41,15 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 
 		# BUILD TOP BUTTON TOOLBAR
 		self.topbar = new self.Topbar(el: ".js-top-bar").render()
+
+		# INIT LOADER
+		self.loader = new ce.ui.Loader
+			el: "#tier3"
+			parentEl: $(".content-container")
+
+		# REVEAL LOADER
+		#self.loader.start()
+		ce.ui.trigger "loader_start"
 		
 		# BUILD PAGE VIEW AND RENDER IT
 		self.list = new self.List
@@ -52,6 +61,10 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 		
 		# BUILD PAGER AND FILTER
 		self.on "data_loaded", -> # EVENT BOUND TO BE CALLED AFTER THE COLLECTION FETCH IS SUCCESSFUL
+			# REMOVE LOADER
+			#self.loader.stop()
+			ce.ui.trigger "loader_stop"
+
 			self.pager = new ce.ui.Pager(
 				el: ".js-pager-container"
 				collection: self.collection
@@ -62,6 +75,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 				collection: self.collection
 				).render()
 		
+		# TRIGGER PAGE LOADED EVENT
 		self.trigger "page_loaded"
 		return
 ,ce._core.models

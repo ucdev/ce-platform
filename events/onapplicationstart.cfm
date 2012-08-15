@@ -112,6 +112,8 @@ js.addAll([
 "lib/ui",
 "lib/ui/wizard",
 "lib/ui/dialog",
+"lib/ui/loader/loader",
+"lib/ui/loader/events",
 "lib/ui/pager/pager",
 "lib/ui/pager/events",
 "lib/ui/typeahead",

@@ -39,7 +39,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       $(".js-attendee-rows").append(view.render().el);
     },
     render: function() {
-      return console.log("COLLECTION RENDERING");
+      return self.trigger("collection_rendered");
     }
   });
 }, ce._core.models);

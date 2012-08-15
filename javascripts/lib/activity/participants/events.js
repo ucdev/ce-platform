@@ -4,6 +4,9 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
   self.on("bottombar_loaded", function() {
     ce.log.info("participants: bottom bar loaded");
   });
+  self.on("collection_rendered", function() {
+    return ce.log.info("participants: collection rendered");
+  });
   self.on("filter_loaded", function() {
     ce.log.info("participants: filter loaded");
   });

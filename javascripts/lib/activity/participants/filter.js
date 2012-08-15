@@ -54,28 +54,27 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     searchAttendeeList: function(e) {
       var filterVal, input;
       if ($.inArray(e.keyCode, [32, 13, 16, 17]) !== 0) {
-        console.dir(e);
         input = this.$el.find(".js-attendee-search-typeahead");
-        filterVal = input.val().toUpperCase().split(" ");
+        filterVal = input.val();
         if (input.val().length > 0) {
           this.$el.find(".js-clear-attendee-search").show();
           $.each(this.collection.origModels, function(i, item) {
-            var firstName, lastName;
-            firstName = item.get("FIRSTNAME").toUpperCase();
-            lastName = item.get("LASTNAME").toUpperCase();
-            return $(filterVal).each(function(i, wordToMatch) {
-              if (firstName.indexOf(wordToMatch) > -1 || lastName.indexOf(wordToMatch) > -1) {
-                return item.set({
-                  "ISFILTERMATCH": true,
-                  silent: true
-                });
-              } else {
-                return item.set({
-                  "ISFILTERMATCH": false,
-                  silent: true
-                });
-              }
-            });
+            var matchFilter, matches;
+            matchFilter = new RegExp(filterVal.replace(/(\S+)/g, function(s) {
+              return "\\b" + s + ".*";
+            }).replace(/\s+/g, ""), "gi");
+            matches = matchFilter.exec(item.get("FULLNAME"));
+            if (matches !== null) {
+              return item.set({
+                "ISFILTERMATCH": true,
+                silent: true
+              });
+            } else {
+              return item.set({
+                "ISFILTERMATCH": false,
+                silent: true
+              });
+            }
           });
           this.collection.setFilter(['ISFILTERMATCH'], 'true');
           this.updateFilterLabel("Filtered");

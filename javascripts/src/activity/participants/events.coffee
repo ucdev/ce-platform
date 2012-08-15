@@ -3,6 +3,9 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 		ce.log.info "participants: bottom bar loaded"
 		return
 
+	self.on "collection_rendered", ->
+		ce.log.info "participants: collection rendered"
+
 	self.on "filter_loaded", ->
 		ce.log.info "participants: filter loaded"
 		return

@@ -14,3 +14,4 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
   self.on "pager_page_selected", ->
     ce.log.info "pager: selected page loaded"
     return
+  return

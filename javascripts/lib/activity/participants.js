@@ -42,6 +42,11 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     self.topbar = new self.Topbar({
       el: ".js-top-bar"
     }).render();
+    self.loader = new ce.ui.Loader({
+      el: "#tier3",
+      parentEl: $(".content-container")
+    });
+    ce.ui.trigger("loader_start");
     self.list = new self.List({
       el: ".js-attendee-rows",
       collection: self.collection
@@ -50,6 +55,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       el: ".js-bottom-bar"
     }).render();
     self.on("data_loaded", function() {
+      ce.ui.trigger("loader_stop");
       self.pager = new ce.ui.Pager({
         el: ".js-pager-container",
         collection: self.collection

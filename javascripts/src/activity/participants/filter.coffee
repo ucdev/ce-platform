@@ -58,7 +58,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 			@$el.find(".js-attendee-status-selected-count").text copyOfCollection.information.totalRecords
 			return
 
-		# SHOW ATTENDEES BASED ON THE SELECTED FILTER
+		# SHOW ATTENDEES BASED ON THE SELECTED STATUS FILTER
 		filteredAttendeeStatus: (e) ->
 			filterStatusId = $(e.currentTarget).attr('id').replace('status','')
 			filterStatusName = $(e.currentTarget).find('.js-attendee-status-name').text()
@@ -69,15 +69,18 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 			@updateFilterLabel filterStatusName
 			return
 
+		# PREVENTS THE DROPDOWN MENU FROM CLOSING WHEN THE TEXTBOX FOR NAME FILTER IS CLICKED
 		keepTypeaheadOpen: (e) ->
 			e.preventDefault()
 			return false
 
+		# SEARCHES THE PARTICIPANT COLLECTION FOR MATCHES TO THE USER INPUT
 		searchAttendeeList: (e) ->
 			if $.inArray(e.keyCode, [32, 13, 16, 17]) != 0
-				console.dir e
+
+				# GET USER INPUT
 				input = @$el.find(".js-attendee-search-typeahead")
-				filterVal = input.val().toUpperCase().split(" ")
+				filterVal = input.val()
 
 				# DETERMINE IF THE CLEAR FILTER DIV IS SHOWN OR HIDDEN
 				if input.val().length > 0
@@ -85,14 +88,16 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 
 					# FIND ATTENDEES MATCHES TO THE FILTER
 					$.each @collection.origModels, (i, item) ->
-						firstName = item.get("FIRSTNAME").toUpperCase()
-						lastName = item.get("LASTNAME").toUpperCase()
+						matchFilter = new RegExp(filterVal.replace(/(\S+)/g, (s) ->
+										  "\\b" + s + ".*"
+										).replace(/\s+/g, ""), "gi")
 
-						$(filterVal).each (i, wordToMatch) ->
-							if firstName.indexOf(wordToMatch) > -1 || lastName.indexOf(wordToMatch) > -1
-								item.set "ISFILTERMATCH": true, silent: true
-							else
-								item.set "ISFILTERMATCH": false, silent: true
+						matches = matchFilter.exec item.get "FULLNAME"
+
+						if matches != null
+							item.set "ISFILTERMATCH": true, silent: true
+						else
+							item.set "ISFILTERMATCH": false, silent: true
 
 					@collection.setFilter ['ISFILTERMATCH'], 'true'
 
@@ -104,6 +109,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 					@showAll()
 			return
 
+		# REVEALS ALL PARTICPANTS
 		showAll: ->
 			@collection.setFilter ['STATUSID'], [1,2,3,4]
 			@collection.pager()
@@ -112,6 +118,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 
 			return
 
+		# REVEALS ALL PARTICIPANTS WHO HAVE BEEN CHECKMARKED
 		showSelected: ->
 			@collection.setFilter ['ISSELECTED'], 'true'
 			@collection.pager()
@@ -120,6 +127,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 
 			return
 
+		# UPDATES THE FILTER NAME LABEL
 		updateFilterLabel: (filterName) ->
 			@$el.find('.js-attendee-status-title').text filterName
 

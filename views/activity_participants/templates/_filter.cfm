@@ -13,7 +13,7 @@
     <li class="js-status-Selected js-attendee-status-Selected" id="statusSelected"><a href="#"><span class="js-attendee-status-name">Selected</span> (<span class="js-attendee-status-selected-count">0</span>)</a></li>
     <li class="js-status-filtered">
         <form class="form-inline pull-left mll js-attendee-search">
-            <input type="text"  class="input-medium js-attendee-search-typeahead" placeholder="filter people" />
+            <input type="text"  class="input-medium js-attendee-search-typeahead" placeholder="Filter by name" />
             <i class="icon-remove js-clear-attendee-search pull-right" style="display: none; position: relative; top: -19px;"></i>
         </form>
     </li>

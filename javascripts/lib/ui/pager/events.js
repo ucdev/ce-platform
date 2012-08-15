@@ -10,7 +10,7 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
   self.on("pager_prev", function() {
     ce.log.info("pager: previous page loaded");
   });
-  return self.on("pager_page_selected", function() {
+  self.on("pager_page_selected", function() {
     ce.log.info("pager: selected page loaded");
   });
 });
