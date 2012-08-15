@@ -1,3 +1,12 @@
+###
+
+HOW TO INIT LOADER
+self.loader = new ce.ui.Loader
+ 	el: WHERE THE ELEMENT WILL ATTACH TO
+ 	parentEl: THE ELEMENT CONTAINING THE PAGE CONTENT || $(".content-container") is the pagelet for tier3
+
+###
+
 ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 	self.Loader = Backbone.View.extend
 		template: _.template ce.templates.get "ui-loader"
