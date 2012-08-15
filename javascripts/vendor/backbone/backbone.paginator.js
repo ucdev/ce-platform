@@ -169,6 +169,7 @@ Backbone.Paginator = (function ( Backbone, _, $ ) {
 		// pager is used to sort, filter and show the data 
 		// you expect the library to display.
 		pager: function () {
+
 			var self = this,
 				disp = this.perPage,
 				start = (self.currentPage - 1) * disp,

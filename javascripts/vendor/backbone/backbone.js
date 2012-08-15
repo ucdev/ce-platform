@@ -705,6 +705,7 @@
       if (_.isEmpty(attrs)) return [];
       return this.filter(function(model) {
         for (var key in attrs) {
+          console.log(attrs);
           if (attrs[key] !== model.get(key)) return false;
         }
         return true;

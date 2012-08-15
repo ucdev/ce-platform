@@ -33,6 +33,45 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         "firstPage": 1,
         "currentPage": self.details.nPageNo,
         "perPage": 15
+      },
+      whereExpanded: function(attrs) {
+        return _.filter(this.origModels, function(model) {
+          var key;
+          for (key in attrs) {
+            if (attrs[key] !== model.get(key)) {
+              return false;
+            }
+          }
+          return true;
+        });
+      },
+      getCompleteCount: function() {
+        return this.whereExpanded({
+          ISSTATUS1: true
+        });
+      },
+      getInProgressCount: function() {
+        return this.whereExpanded({
+          ISSTATUS2: true
+        });
+      },
+      getRegisterCount: function() {
+        return this.whereExpanded({
+          ISSTATUS3: true
+        });
+      },
+      getSelectedCount: function() {
+        return this.whereExpanded({
+          ISSELECTED: true
+        });
+      },
+      getTermCount: function() {
+        return this.whereExpanded({
+          ISSTATUS4: true
+        });
+      },
+      getTotalCount: function() {
+        return this.information.totalUnfilteredRecords;
       }
     });
     self.collection = new self.paginatorCollection;
@@ -46,7 +85,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       el: "#tier3",
       parentEl: $(".content-container")
     });
-    ce.ui.trigger("loader_start");
+    self.loader.start();
     self.list = new self.List({
       el: ".js-attendee-rows",
       collection: self.collection
@@ -55,7 +94,11 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       el: ".js-bottom-bar"
     }).render();
     self.on("data_loaded", function() {
-      ce.ui.trigger("loader_stop");
+      self.loader.stop();
+      self.actions = new self.Actions({
+        el: ".js-partic-actions",
+        collection: self.collection
+      }).render();
       self.pager = new ce.ui.Pager({
         el: ".js-pager-container",
         collection: self.collection

@@ -26,18 +26,28 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       this.showAll();
     },
     getFilterCounts: function() {
-      var copyOfCollection, filterOptions;
-      copyOfCollection = _.clone(this.collection);
+      var curr, filterOptions;
+      curr = this;
       filterOptions = this.$el.find('.js-attendee-status');
-      this.$el.find('li.js-attendee-status-all').find('span.js-attendee-status-count').text("(" + copyOfCollection.information.totalUnfilteredRecords + ")");
+      this.$el.find('li.js-attendee-status-all').find('span.js-attendee-status-count').text("(" + this.collection.getTotalCount() + ")");
       $.each(filterOptions, function() {
         var filterStatus;
-        filterStatus = $(this).attr('id').replace('status', '');
-        copyOfCollection.setFilter(['STATUSID'], filterStatus);
-        $(this).find('span.js-attendee-status-count').text("(" + copyOfCollection.information.totalRecords + ")");
+        filterStatus = parseInt($(this).attr('id').replace('status', ''));
+        switch (filterStatus) {
+          case 1:
+            $(this).find('span.js-attendee-status-count').text("(" + curr.collection.getCompleteCount().length + ")");
+            break;
+          case 2:
+            $(this).find('span.js-attendee-status-count').text("(" + curr.collection.getInProgressCount().length + ")");
+            break;
+          case 3:
+            $(this).find('span.js-attendee-status-count').text("(" + curr.collection.getRegisterCount().length + ")");
+            break;
+          case 4:
+            $(this).find('span.js-attendee-status-count').text("(" + curr.collection.getTermCount().length + ")");
+        }
       });
-      copyOfCollection.setFilter(['ISSELECTED'], 'true');
-      this.$el.find(".js-attendee-status-selected-count").text(copyOfCollection.information.totalRecords);
+      this.$el.find(".js-attendee-status-selected-count").text(this.collection.getSelectedCount().length);
     },
     filteredAttendeeStatus: function(e) {
       var filterStatusId, filterStatusName;

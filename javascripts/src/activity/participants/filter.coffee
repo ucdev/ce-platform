@@ -24,6 +24,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 			self.trigger "filter_loaded"
 			return @el
 
+		# ClEARS THE NAME FILTER AND SHOWS ALL PARTICIPANTS
 		clearAttendeeSearch: ->
 			# CLEAR FILTER TEXT FIELD AND HIDE THE CLEAR DIV
 			@$el.find(".js-attendee-search-typeahead").val ""
@@ -32,30 +33,29 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 			@showAll()
 			return
 
+		# UPDATES THE COUNT OF PARTICIPANTS IN EACH FILTER LI ON THE DROPDOWN
 		getFilterCounts: ->
-			# CLONE THE COLLECTION
-			copyOfCollection = _.clone @collection
-
+			curr = @
 			# GET THE FILTER LIST
 			filterOptions = @$el.find '.js-attendee-status'
 
 			# SET TOTAL ATTENDEE COUNT FOR ALL STATUS FILTER
-			@$el.find('li.js-attendee-status-all').find('span.js-attendee-status-count').text "(" + copyOfCollection.information.totalUnfilteredRecords + ")"
+			@$el.find('li.js-attendee-status-all').find('span.js-attendee-status-count').text "(" + @collection.getTotalCount() + ")"
 
 			# SET ATTENDEE COUNT FOR EACH STATUS FILTER
 			$.each filterOptions, ->
 				# GET STATUS ID
-				filterStatus = $(@).attr('id').replace 'status', ''
-				
-				# FILTER THE COLLECTION BY THE STATUS ID
-				copyOfCollection.setFilter ['STATUSID'], filterStatus
+				filterStatus = parseInt $(@).attr('id').replace 'status', ''
 
 				# SET ATTENDEE COUNT FOR CURRENT STATUS
-				$(@).find('span.js-attendee-status-count').text "(" + copyOfCollection.information.totalRecords + ")"
+				switch filterStatus
+					when 1 then $(@).find('span.js-attendee-status-count').text "(" + curr.collection.getCompleteCount().length + ")"
+					when 2 then	$(@).find('span.js-attendee-status-count').text "(" + curr.collection.getInProgressCount().length + ")"
+					when 3 then	$(@).find('span.js-attendee-status-count').text "(" + curr.collection.getRegisterCount().length + ")"
+					when 4 then	$(@).find('span.js-attendee-status-count').text "(" + curr.collection.getTermCount().length + ")"
 				return
 
-			copyOfCollection.setFilter ['ISSELECTED'], 'true'
-			@$el.find(".js-attendee-status-selected-count").text copyOfCollection.information.totalRecords
+			@$el.find(".js-attendee-status-selected-count").text @collection.getSelectedCount().length
 			return
 
 		# SHOW ATTENDEES BASED ON THE SELECTED STATUS FILTER

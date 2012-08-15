@@ -32,6 +32,23 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 				"firstPage": 1
 				"currentPage": self.details.nPageNo
 				"perPage": 15
+			whereExpanded: (attrs) ->
+				return _.filter @origModels, (model) ->
+					for key of attrs
+						return false unless attrs[key] is model.get(key)
+					true
+			getCompleteCount: ->
+				return @whereExpanded(ISSTATUS1: true)
+			getInProgressCount: ->
+				return @whereExpanded(ISSTATUS2: true)
+			getRegisterCount: ->
+				return @whereExpanded(ISSTATUS3: true)
+			getSelectedCount: ->
+				return @whereExpanded(ISSELECTED: true)
+			getTermCount: ->
+				return @whereExpanded(ISSTATUS4: true)
+			getTotalCount: ->
+				return @information.totalUnfilteredRecords
 		
 		# CREATE COLLECTION
 		self.collection = new self.paginatorCollection
@@ -48,8 +65,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 			parentEl: $(".content-container")
 
 		# REVEAL LOADER
-		#self.loader.start()
-		ce.ui.trigger "loader_start"
+		self.loader.start()
 		
 		# BUILD PAGE VIEW AND RENDER IT
 		self.list = new self.List
@@ -62,8 +78,12 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 		# BUILD PAGER AND FILTER
 		self.on "data_loaded", -> # EVENT BOUND TO BE CALLED AFTER THE COLLECTION FETCH IS SUCCESSFUL
 			# REMOVE LOADER
-			#self.loader.stop()
-			ce.ui.trigger "loader_stop"
+			self.loader.stop()
+
+			self.actions = new self.Actions(
+				el: ".js-partic-actions"
+				collection: self.collection
+				).render()
 
 			self.pager = new ce.ui.Pager(
 				el: ".js-pager-container"

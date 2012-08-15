@@ -24,8 +24,10 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       }).render();
     },
     events: {
-      "change .js-participant-checkbox": "selectAttendee"
+      "change .js-participant-checkbox": "selectAttendee",
+      "click .js-delete-link": "deleteRow"
     },
+    deleteRow: function() {},
     markSelected: function() {
       this.$el.find(".js-participant-checkbox").attr("checked", true);
       this.$el.addClass("alert-info");
