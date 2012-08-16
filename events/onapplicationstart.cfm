@@ -77,6 +77,7 @@ js.addAll([
 "vendor/jquery/jquery.maskedinput-1.1.3.pack",
 "vendor/jquery/jquery.tokenInput",
 "vendor/jquery/jquery.pjax",
+"vendor/jquery/jquery.infieldlabel",
 
 /* Twitter Bootstrap JS */
 "vendor/bootstrap/bootstrap-transition",
@@ -112,6 +113,7 @@ js.addAll([
 "lib/ui",
 "lib/ui/counter",
 "lib/ui/popup",
+"lib/ui/placeholder",
 "lib/ui/dialog",
 "lib/ui/loader/loader",
 "lib/ui/loader/events",

@@ -25,5 +25,5 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
 });
 
 ce.addRegions({
-  dialog: ce.ui.dialog
+  dialog: ce.ui.Dialog
 });

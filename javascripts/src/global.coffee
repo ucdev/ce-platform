@@ -223,10 +223,6 @@ ce.module "global", (self, ce, Backbone, Marionette, $, _) ->
     $("#fax2").mask "(999) 999-9999"
     $("#tin").mask "99-9999999"
     $("#ssn").mask "9999"
-    $(".control-label").each (i, val) ->
-      text = $(val).text()
-      newText = text + ":"
-      $(val).text newText
 
 
 

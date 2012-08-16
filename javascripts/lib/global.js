@@ -182,12 +182,6 @@ ce.module("global", function(self, ce, Backbone, Marionette, $, _) {
     $("#fax1").mask("(999) 999-9999");
     $("#fax2").mask("(999) 999-9999");
     $("#tin").mask("99-9999999");
-    $("#ssn").mask("9999");
-    return $(".control-label").each(function(i, val) {
-      var newText, text;
-      text = $(val).text();
-      newText = text + ":";
-      return $(val).text(newText);
-    });
+    return $("#ssn").mask("9999");
   });
 });

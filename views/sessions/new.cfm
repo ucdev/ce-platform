@@ -1,13 +1,11 @@
 <script>
 $(document).ready(function() {
+	$("label").inFieldLabels();
 	$('#login').focus();
 });
 </script>
 
 <cfoutput>
-
-<h2>Login</h2>
-
 <div class="flash">
 	<cfif flashKeyExists('error')>
 		<div class="message error">
@@ -20,22 +18,21 @@ $(document).ready(function() {
 	</cfif>  
 </div>
 
-#startFormTag(action="create", class="form login")#
+#startFormTag(action="create", class="form login specialForm loginForm inFieldLabels")#
 	
-	<div class="control-group">
-		<label class="control-label" for="input01">Text input</label>
-		<div class="controls">
-			<input type="text" class="input-xlarge" id="input01">
-			<p class="help-block">Supporting help text</p>
+	<div class="grouped">
+		<div class="control-group first">
+			<label class="control-label" for="email">Email Address</label>
+			<div class="controls">
+				#textFieldTag(name="login", id="email", class="span24",autocomplete="off")#
+			</div>
 		</div>
-	</div>
-	<div>
-		<label class="label right">Login</label>
-		#textFieldTag(name="login", class="text_field")#
-	</div>
-	<div>
-		<label class="label right">Password</label>
-		#passwordFieldTag(name="password", class="text_field")#
+		<div class="control-group last">
+			<label class="control-label" for="password">Password</label>
+			<div class="controls">
+				#passwordFieldTag(name="password", id="password", class="span24",autocomplete="off")#
+			</div>
+		</div>
 	</div>
 
 #submitTag(value="Login", class="button")#

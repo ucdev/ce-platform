@@ -26,6 +26,96 @@
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+form.inFieldLabels {
+  position: relative;
+}
+form.inFieldLabels .control-group {
+  position: relative;
+}
+form.inFieldLabels .control-group label {
+  position: absolute;
+}
+.grouped .control-group {
+  margin: 0;
+}
+.grouped .control-group label {
+  font-size: 15.96px;
+  left: 10px;
+  top: 16px;
+  color: #888;
+}
+.grouped .control-group select,
+.grouped .control-group textarea,
+.grouped .control-group input[type="text"],
+.grouped .control-group input[type="password"],
+.grouped .control-group input[type="datetime"],
+.grouped .control-group input[type="datetime-local"],
+.grouped .control-group input[type="date"],
+.grouped .control-group input[type="month"],
+.grouped .control-group input[type="time"],
+.grouped .control-group input[type="week"],
+.grouped .control-group input[type="number"],
+.grouped .control-group input[type="email"],
+.grouped .control-group input[type="url"],
+.grouped .control-group input[type="search"],
+.grouped .control-group input[type="tel"],
+.grouped .control-group input[type="color"],
+.grouped .control-group .uneditable-input {
+  margin: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  border-top-width: 0;
+  font-size: 15.96px;
+  padding-left: 9px;
+  height: 40px;
+  color: #444;
+  -webkit-appearance: none;
+}
+.grouped .control-group.first select,
+.grouped .control-group.first textarea,
+.grouped .control-group.first input[type="text"],
+.grouped .control-group.first input[type="password"],
+.grouped .control-group.first input[type="datetime"],
+.grouped .control-group.first input[type="datetime-local"],
+.grouped .control-group.first input[type="date"],
+.grouped .control-group.first input[type="month"],
+.grouped .control-group.first input[type="time"],
+.grouped .control-group.first input[type="week"],
+.grouped .control-group.first input[type="number"],
+.grouped .control-group.first input[type="email"],
+.grouped .control-group.first input[type="url"],
+.grouped .control-group.first input[type="search"],
+.grouped .control-group.first input[type="tel"],
+.grouped .control-group.first input[type="color"],
+.grouped .control-group.first .uneditable-input {
+  margin: 0;
+  -webkit-border-radius: 10px 10px 0 0;
+  -moz-border-radius: 10px 10px 0 0;
+  border-radius: 10px 10px 0 0;
+  border-top-width: 1px;
+}
+.grouped .control-group.last select,
+.grouped .control-group.last textarea,
+.grouped .control-group.last input[type="text"],
+.grouped .control-group.last input[type="password"],
+.grouped .control-group.last input[type="datetime"],
+.grouped .control-group.last input[type="datetime-local"],
+.grouped .control-group.last input[type="date"],
+.grouped .control-group.last input[type="month"],
+.grouped .control-group.last input[type="time"],
+.grouped .control-group.last input[type="week"],
+.grouped .control-group.last input[type="number"],
+.grouped .control-group.last input[type="email"],
+.grouped .control-group.last input[type="url"],
+.grouped .control-group.last input[type="search"],
+.grouped .control-group.last input[type="tel"],
+.grouped .control-group.last input[type="color"],
+.grouped .control-group.last .uneditable-input {
+  -webkit-border-radius: 0 0 10px 10px;
+  -moz-border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px 10px;
+}
 .navbar .brand {
   position: absolute;
   padding: 0;
