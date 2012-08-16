@@ -21,15 +21,22 @@ $(document).ready(function() {
 </div>
 
 #startFormTag(action="create", class="form login")#
-
-<div>
-	<label class="label right">Login</label>
-	#textFieldTag(name="login", class="text_field")#
-</div>
-<div>
-	<label class="label right">Password</label>
-	#passwordFieldTag(name="password", class="text_field")#
-</div>
+	
+	<div class="control-group">
+		<label class="control-label" for="input01">Text input</label>
+		<div class="controls">
+			<input type="text" class="input-xlarge" id="input01">
+			<p class="help-block">Supporting help text</p>
+		</div>
+	</div>
+	<div>
+		<label class="label right">Login</label>
+		#textFieldTag(name="login", class="text_field")#
+	</div>
+	<div>
+		<label class="label right">Password</label>
+		#passwordFieldTag(name="password", class="text_field")#
+	</div>
 
 #submitTag(value="Login", class="button")#
 <p>Don't have an account? #linkTo(text="Sign up!", route="signup")#</p>

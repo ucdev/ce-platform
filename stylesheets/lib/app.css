@@ -30,6 +30,12 @@
   position: absolute;
   padding: 0;
 }
+.nav-collapse {
+  margin-left: 120px;
+}
+#page {
+  margin-top: 62px;
+}
 /* UI.Counter */
 /*
 
@@ -257,6 +263,11 @@ So you can have multiple counters on a page, just make sure each one has a class
 }
 .viewer > .infoBar {
   top: 31px;
+}
+@media (min-width: 979px) {
+  .creditinator .navbar .header-title {
+    margin-left: 120px;
+  }
 }
 @media (max-width: 979px) {
   .creditinator .navbar .header-title {

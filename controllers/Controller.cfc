@@ -93,6 +93,13 @@
 			<cfelseif params.controller EQ "creditinator">
 				<cfset settings.rootLayout = "/creditinator/layout" />
 				<cfset settings.subLayout = "" />
+			<cfelse>
+					<cfset settings.rootLayout = "/layout" />
+					<cfif isLoggedIn()>
+						<cfset settings.subLayout = "/layout_user" />
+					<cfelse>
+						<cfset settings.subLayout = "/layout_guest" />
+					</cfif>
             </cfif>
 
             <cfset configLayouts(argumentCollection=settings) />
