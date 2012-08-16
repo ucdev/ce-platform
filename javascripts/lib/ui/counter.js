@@ -8,6 +8,7 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
         Example: myCounter.setValue(500); would set the value of the counter to 500,
         no matter what value it was previously.
         
+        
         @param {int} n
         New counter value
     */

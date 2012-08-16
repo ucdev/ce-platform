@@ -9,7 +9,7 @@ self.loader = new ce.ui.Loader
 
 ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 	self.Loader = Backbone.View.extend
-		template: _.template ce.templates.get "ui-loader"
+		template: "ui-loader"
 
 		className: "loader"
 
@@ -19,6 +19,8 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 			return
 
 		render: ->
+			_temp = _.template ce.templates.get @template
+
 			# DETERMINE IF A PARENT ELEMENT IS PROVIDED
 			#parentEl IS THE CONTENT CONTAINER FOR THE PAGE
 			if typeof @options.parentEl != "undefined"
@@ -26,7 +28,7 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 				@options.parentEl.hide()
 
 			# FORM THE TEMPLATE AND APPEND THE TEMPLATE HTML
-			@$el.prepend @template
+			@$el.prepend _temp
 
 			self.trigger "loader_loaded"
 			return

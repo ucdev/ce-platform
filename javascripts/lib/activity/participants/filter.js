@@ -2,7 +2,7 @@
 
 ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _) {
   return self.Filter = Backbone.View.extend({
-    template: _.template(ce.templates.get("activity_participants-filter")),
+    template: "activity_participants-filter",
     initialize: function() {
       self.on("selected_count_changed", this.getFilterCounts, this);
     },
@@ -15,7 +15,10 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       "click .js-attendees-filter li.js-attendee-status-Selected": "showSelected"
     },
     render: function() {
-      this.$el.html(this.template(this.collection.info()));
+      var _temp;
+      this.$el.empty();
+      _temp = _.template(ce.templates.get(this.template));
+      this.$el.html(_temp(this.collection.info()));
       this.getFilterCounts();
       self.trigger("filter_loaded");
       return this.el;
@@ -35,19 +38,19 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         filterStatus = parseInt($(this).attr('id').replace('status', ''));
         switch (filterStatus) {
           case 1:
-            $(this).find('span.js-attendee-status-count').text("(" + curr.collection.getCompleteCount().length + ")");
+            $(this).find('span.js-attendee-status-count').text("(" + curr.collection.getCompleteCount() + ")");
             break;
           case 2:
-            $(this).find('span.js-attendee-status-count').text("(" + curr.collection.getInProgressCount().length + ")");
+            $(this).find('span.js-attendee-status-count').text("(" + curr.collection.getInProgressCount() + ")");
             break;
           case 3:
-            $(this).find('span.js-attendee-status-count').text("(" + curr.collection.getRegisterCount().length + ")");
+            $(this).find('span.js-attendee-status-count').text("(" + curr.collection.getRegisterCount() + ")");
             break;
           case 4:
-            $(this).find('span.js-attendee-status-count').text("(" + curr.collection.getTermCount().length + ")");
+            $(this).find('span.js-attendee-status-count').text("(" + curr.collection.getTermCount() + ")");
         }
       });
-      this.$el.find(".js-attendee-status-selected-count").text(this.collection.getSelectedCount().length);
+      this.$el.find(".js-attendee-status-selected-count").text(this.collection.getSelectedCount());
     },
     filteredAttendeeStatus: function(e) {
       var filterStatusId, filterStatusName;

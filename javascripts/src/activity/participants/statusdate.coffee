@@ -1,6 +1,6 @@
 ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 	self.StatusDate = Backbone.View.extend
-		template: _.template ce.templates.get "activity_participants-statusdate"
+		template: "activity_participants-statusdate"
 		initialize: ->
 			@model.on "change", @render, @
 			@model.on "change:CURRSTATUSID", @updateParentModel, @
@@ -18,8 +18,10 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 		render: ->
 			@$el.empty()
 
+			_temp = _.template ce.templates.get @template
+
 			# RENDER TEMPLATE AND USE AS PAGE HTML
-			@$el.html @template @model.toJSON()
+			@$el.html _temp @model.toJSON()
 
 			#MASK THE EDIT FIELD FOR THE DATE
 			@$el.find(".js-edit-date-field").mask "99/99/9999"

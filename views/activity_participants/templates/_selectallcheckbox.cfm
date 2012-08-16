@@ -1,0 +1,1 @@
+<input type="checkbox" name="CheckAll" id="CheckAll" class="js-check-all" />

@@ -2,7 +2,7 @@
 
 ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
   self.Pager = Backbone.View.extend({
-    pagingTemplate: _.template(ce.templates.get("ui-pager")),
+    pagingTemplate: "ui-pager",
     sortColumn: "FULLNAME",
     initialize: function() {
       this.collection.on("reset", this.render, this);
@@ -13,8 +13,10 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
       "click a.js-prev-page": "prevPage"
     },
     render: function() {
+      var _temp;
       this.$el.empty();
-      this.$el.html(this.pagingTemplate(this.collection.info()));
+      _temp = _.template(ce.templates.get(this.pagingTemplate));
+      this.$el.html(_temp(this.collection.info()));
       self.trigger("pager_loaded");
     },
     nextPage: function(e) {

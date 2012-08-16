@@ -1,5 +1,5 @@
-<a class="btn dropdown-toggle disabled" data-toggle="dropdown" href="#">SELECTED: <span id="label-status-selected" class="js-attendee-status-selected-count">0</span></a>
-<a class="btn dropdown-toggle disabled" data-toggle="dropdown" href="#">
+<a class="btn dropdown-toggle disabled js-action-menu-label" data-toggle="dropdown" href="#">SELECTED: <span id="label-status-selected" class="js-attendee-status-selected-count">0</span></a>
+<a class="btn dropdown-toggle disabledjs-action-menu-button" data-toggle="dropdown" href="#">
     Actions
     <span class="caret"></span>
 </a>

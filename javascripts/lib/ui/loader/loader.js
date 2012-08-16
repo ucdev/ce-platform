@@ -9,17 +9,19 @@ self.loader = new ce.ui.Loader
 
 ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
   self.Loader = Backbone.View.extend({
-    template: _.template(ce.templates.get("ui-loader")),
+    template: "ui-loader",
     className: "loader",
     initialize: function() {
       self.on("loader_start", this.start, this);
       self.on("loader_stop", this.stop, this);
     },
     render: function() {
+      var _temp;
+      _temp = _.template(ce.templates.get(this.template));
       if (typeof this.options.parentEl !== "undefined") {
         this.options.parentEl.hide();
       }
-      this.$el.prepend(this.template);
+      this.$el.prepend(_temp);
       self.trigger("loader_loaded");
     },
     start: function() {

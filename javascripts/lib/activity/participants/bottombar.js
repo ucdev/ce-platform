@@ -2,9 +2,12 @@
 
 ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _) {
   return self.Bottombar = Backbone.View.extend({
-    template: ce.templates.get("activity_participants-bottombar"),
+    template: "activity_participants-bottombar",
     render: function() {
-      this.$el.html(_.template(this.template));
+      var _temp;
+      this.$el.empty();
+      _temp = ce.templates.get(this.template);
+      this.$el.html(_.template(_temp));
       self.trigger("bottombar_loaded");
     }
   });

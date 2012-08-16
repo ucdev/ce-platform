@@ -1,6 +1,6 @@
 ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 	self.Pager = Backbone.View.extend
-		pagingTemplate: _.template ce.templates.get "ui-pager"
+		pagingTemplate: "ui-pager"
 		sortColumn: "FULLNAME"
 
 		initialize: ->
@@ -15,8 +15,10 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 		render: ->
 			@$el.empty()
 
+			_temp = _.template ce.templates.get @pagingTemplate
+
 			# FORM THE TEMPLATE AND APPEND THE TEMPLATE HTML
-			@$el.html @pagingTemplate @collection.info()
+			@$el.html _temp @collection.info()
 
 			self.trigger "pager_loaded"
 			return

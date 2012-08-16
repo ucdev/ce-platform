@@ -38,13 +38,13 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 						return false unless attrs[key] is model.get(key)
 					true
 			getCompleteCount: ->
-				return @whereExpanded(ISSTATUS1: true)
+				return @whereExpanded(ISSTATUS1: true).length
 			getInProgressCount: ->
-				return @whereExpanded(ISSTATUS2: true)
+				return @whereExpanded(ISSTATUS2: true).length
 			getRegisterCount: ->
-				return @whereExpanded(ISSTATUS3: true)
+				return @whereExpanded(ISSTATUS3: true).length
 			getSelectedCount: ->
-				return @whereExpanded(ISSELECTED: true)
+				return @whereExpanded(ISSELECTED: true).length
 			getTermCount: ->
 				return @whereExpanded(ISSTATUS4: true)
 			getTotalCount: ->
@@ -71,6 +71,12 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 		self.list = new self.List
 			el: ".js-attendee-rows"
 			collection: self.collection
+		
+		# BUILD SELECT ALL CHECK BOX
+		self.selectall = new self.SelectAllCheckBox(
+			el: ".js-selectall-placeholder"
+			collection: self.collection
+			).render()
 
 		# BUILD BOTTOM BUTTON TOOLBAR
 		self.bottombar = new self.Bottombar(el: ".js-bottom-bar").render()

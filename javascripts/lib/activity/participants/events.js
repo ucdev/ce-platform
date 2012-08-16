@@ -22,6 +22,9 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
   self.on("participants_loaded", function() {
     ce.log.info("participants: loaded");
   });
+  self.on("selectallcheckbox_rendered", function() {
+    return ce.log.info("participants: select all checkbox loaded");
+  });
   self.on("statusdate_saved", function() {
     ce.log.info("participant: status date saved");
   });

@@ -2,7 +2,7 @@
 
 ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _) {
   return self.StatusDate = Backbone.View.extend({
-    template: _.template(ce.templates.get("activity_participants-statusdate")),
+    template: "activity_participants-statusdate",
     initialize: function() {
       this.model.on("change", this.render, this);
       this.model.on("change:CURRSTATUSID", this.updateParentModel, this);
@@ -15,8 +15,10 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       "click .js-view-attendee-status-info": "updateViewAttendeeStatuses"
     },
     render: function() {
+      var _temp;
       this.$el.empty();
-      this.$el.html(this.template(this.model.toJSON()));
+      _temp = _.template(ce.templates.get(this.template));
+      this.$el.html(_temp(this.model.toJSON()));
       this.$el.find(".js-edit-date-field").mask("99/99/9999");
       return this;
     },

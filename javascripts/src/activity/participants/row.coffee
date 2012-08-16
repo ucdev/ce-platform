@@ -1,8 +1,11 @@
 ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
     self.Row = Backbone.View.extend
+        initialize: ->
+            @model.on "change:ISSELECTED", @selectRow, @
+
         tagName: "tr"
         className: "personRow AllAttendees js-all-attendee"
-        template: _.template ce.templates.get "activity_participants-row"
+        template: "activity_participants-row"
 
         bindViews: ->
             # ESTABLISHES THE STATUSDATE VIEW
@@ -25,22 +28,18 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
             return
 
         events:
-            "change .js-participant-checkbox": "selectAttendee"
+            "change .js-participant-checkbox": "selectRow"
             "click .js-delete-link": "deleteRow"
 
         deleteRow: ->
-            return
-
-        markSelected: ->
-            @$el.find(".js-participant-checkbox").attr "checked", true
-            @$el.addClass "alert-info"
-            return
 
         render: ->
             @$el.empty()
 
+            _temp = _.template ce.templates.get @template
+
             # RENDER TEMPLATE AND USE AS PAGE HTML
-            @$el.append @template @model.toJSON()
+            @$el.append _temp @model.toJSON()
 
             # DETERMINE IF THE ROW IS SELECTED
             if @model.get "ISSELECTED"
@@ -50,7 +49,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
             @bindViews()
             return @
 
-        selectAttendee: (e) ->
+        selectRow: (e) ->
             # DETERMINE IF THE ROW IS CHECKED
             if @$el.find(".js-participant-checkbox").is ":checked"
                 # ADD SELECTED CLASS

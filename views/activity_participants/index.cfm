@@ -3,7 +3,7 @@
 	<table class="js-registrants-container" id="RegistrantsContainer">
 	    <thead>
 	        <tr>
-	            <th><input type="checkbox" name="CheckAll" id="CheckAll" class="js-check-all" /></th>
+	            <th class="js-selectall-placeholder"></th>
 	            <th class="span2"></th>
 	            <th class="span4">Name</th>
 	            <th class="span7">Status</th>

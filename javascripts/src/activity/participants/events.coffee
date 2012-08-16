@@ -25,6 +25,9 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 		ce.log.info "participants: loaded"
 		return
 
+	self.on "selectallcheckbox_rendered", ->
+		ce.log.info "participants: select all checkbox loaded"
+
 	self.on "statusdate_saved", ->
 		ce.log.info "participant: status date saved"
 		return

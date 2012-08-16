@@ -2,9 +2,12 @@
 
 ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _) {
   return self.Row = Backbone.View.extend({
+    initialize: function() {
+      return this.model.on("change:ISSELECTED", this.selectRow, this);
+    },
     tagName: "tr",
     className: "personRow AllAttendees js-all-attendee",
-    template: _.template(ce.templates.get("activity_participants-row")),
+    template: "activity_participants-row",
     bindViews: function() {
       var attributesToPass, statusDateEl;
       statusDateEl = this.$el.find(".js-status-date");
@@ -24,24 +27,22 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       }).render();
     },
     events: {
-      "change .js-participant-checkbox": "selectAttendee",
+      "change .js-participant-checkbox": "selectRow",
       "click .js-delete-link": "deleteRow"
     },
     deleteRow: function() {},
-    markSelected: function() {
-      this.$el.find(".js-participant-checkbox").attr("checked", true);
-      this.$el.addClass("alert-info");
-    },
     render: function() {
+      var _temp;
       this.$el.empty();
-      this.$el.append(this.template(this.model.toJSON()));
+      _temp = _.template(ce.templates.get(this.template));
+      this.$el.append(_temp(this.model.toJSON()));
       if (this.model.get("ISSELECTED")) {
         this.markSelected();
       }
       this.bindViews();
       return this;
     },
-    selectAttendee: function(e) {
+    selectRow: function(e) {
       if (this.$el.find(".js-participant-checkbox").is(":checked")) {
         this.$el.addClass("alert-info");
         this.model.set({

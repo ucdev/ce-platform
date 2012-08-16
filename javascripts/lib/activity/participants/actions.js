@@ -2,17 +2,34 @@
 
 ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _) {
   return self.Actions = Backbone.View.extend({
-    template: _.template(ce.templates.get("activity_participants-actions")),
+    template: "activity_participants-actions",
     initialize: function() {
       self.on("selected_count_changed", this.updateSelectedCount, this);
     },
+    activateMenu: function() {
+      this.$el.find(".js-action-menu-button").removeClass("disabled");
+      return this.$el.find(".js-action-menu-label").removeClass("disabled");
+    },
+    deactivateMenu: function() {
+      this.$el.find(".js-action-menu-button").addClass("disabled");
+      return this.$el.find(".js-action-menu-label").addClass("disabled");
+    },
     render: function() {
+      var _temp;
       this.$el.empty();
-      this.$el.html(this.template);
+      _temp = _.template(ce.templates.get(this.template));
+      this.$el.html(_temp);
       return this;
     },
     updateSelectedCount: function() {
-      this.$el.find(".js-attendee-status-selected-count").text(this.collection.getSelectedCount().length);
+      var selectedCount;
+      selectedCount = this.collection.getSelectedCount();
+      this.$el.find(".js-attendee-status-selected-count").text(selectedCount);
+      if (selectedCount > 0) {
+        this.activateMenu();
+      } else {
+        this.deactivateMenu();
+      }
     }
   });
 });

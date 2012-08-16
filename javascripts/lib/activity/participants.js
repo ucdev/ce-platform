@@ -48,22 +48,22 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       getCompleteCount: function() {
         return this.whereExpanded({
           ISSTATUS1: true
-        });
+        }).length;
       },
       getInProgressCount: function() {
         return this.whereExpanded({
           ISSTATUS2: true
-        });
+        }).length;
       },
       getRegisterCount: function() {
         return this.whereExpanded({
           ISSTATUS3: true
-        });
+        }).length;
       },
       getSelectedCount: function() {
         return this.whereExpanded({
           ISSELECTED: true
-        });
+        }).length;
       },
       getTermCount: function() {
         return this.whereExpanded({
@@ -90,6 +90,10 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       el: ".js-attendee-rows",
       collection: self.collection
     });
+    self.selectall = new self.SelectAllCheckBox({
+      el: ".js-selectall-placeholder",
+      collection: self.collection
+    }).render();
     self.bottombar = new self.Bottombar({
       el: ".js-bottom-bar"
     }).render();

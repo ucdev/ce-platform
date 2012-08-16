@@ -24,7 +24,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       this.collection.each(this.addOne);
     },
     addOne: function(viewModel) {
-      var view;
+      var row;
       if (typeof viewModel.get("ISSELECTED") === "undefined") {
         viewModel.set({
           ISSELECTED: false
@@ -33,10 +33,14 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
           ISFILTERMATCH: false
         });
       }
-      view = new self.Row({
+      if (typeof self.rows === "undefined") {
+        self.rows = [];
+      }
+      row = new self.Row({
         model: viewModel
       });
-      $(".js-attendee-rows").append(view.render().el);
+      self.rows.push(row);
+      $(".js-attendee-rows").append(row.render().el);
     },
     render: function() {
       return self.trigger("collection_rendered");

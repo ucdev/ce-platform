@@ -2,9 +2,11 @@
 
 ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _) {
   return self.Topbar = Backbone.View.extend({
-    template: ce.templates.get("activity_participants-topbar"),
+    template: "activity_participants-topbar",
     render: function() {
-      this.$el.html(_.template(this.template));
+      var _temp;
+      _temp = _.template(ce.templates.get(this.template));
+      this.$el.html(_temp);
       self.trigger("topbar_loaded");
     }
   });

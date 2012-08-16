@@ -1,6 +1,6 @@
 ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 	self.Filter = Backbone.View.extend
-		template: _.template ce.templates.get "activity_participants-filter"
+		template: "activity_participants-filter"
 
 		initialize: ->
 			self.on "selected_count_changed", @getFilterCounts, @
@@ -15,8 +15,12 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 			"click .js-attendees-filter li.js-attendee-status-Selected": "showSelected"
 
 		render: ->
+			@$el.empty()
+			
+			_temp = _.template ce.templates.get @template
+
 			# FORM THE TEMPLATE AND APPEND THE TEMPLATE HTML
-			@$el.html @template @collection.info()
+			@$el.html _temp  @collection.info()
 
 			# PROVIDE PARTICIPANT COUNTS FOR EACH STATUS
 			@getFilterCounts()
@@ -49,13 +53,13 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 
 				# SET ATTENDEE COUNT FOR CURRENT STATUS
 				switch filterStatus
-					when 1 then $(@).find('span.js-attendee-status-count').text "(" + curr.collection.getCompleteCount().length + ")"
-					when 2 then	$(@).find('span.js-attendee-status-count').text "(" + curr.collection.getInProgressCount().length + ")"
-					when 3 then	$(@).find('span.js-attendee-status-count').text "(" + curr.collection.getRegisterCount().length + ")"
-					when 4 then	$(@).find('span.js-attendee-status-count').text "(" + curr.collection.getTermCount().length + ")"
+					when 1 then $(@).find('span.js-attendee-status-count').text "(" + curr.collection.getCompleteCount() + ")"
+					when 2 then	$(@).find('span.js-attendee-status-count').text "(" + curr.collection.getInProgressCount() + ")"
+					when 3 then	$(@).find('span.js-attendee-status-count').text "(" + curr.collection.getRegisterCount() + ")"
+					when 4 then	$(@).find('span.js-attendee-status-count').text "(" + curr.collection.getTermCount() + ")"
 				return
 
-			@$el.find(".js-attendee-status-selected-count").text @collection.getSelectedCount().length
+			@$el.find(".js-attendee-status-selected-count").text @collection.getSelectedCount()
 			return
 
 		# SHOW ATTENDEES BASED ON THE SELECTED STATUS FILTER
