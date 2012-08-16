@@ -880,15 +880,7 @@
 		<cfset status.setStatus(false)>
 		<cfset status.setStatusMsg("Cannot access update function for attendee dates.")>
 
-		<!--- DETERMINE IF DATA WAS PROPERLY PASSED TO THE FUNCTION --->
-		<cfif structKeyExists(params, "model")>
-			<cfset structAppend(params, deserializeJSON(params.model))>
-			<cfset structDelete(params, "model")>
-			
-			<cfset Status = Application.ActivityAttendee.saveAttendeeDate(params.AttendeeID,params.currStatusdate,params.currStatusId)>
-		<cfelse>
-			<cfset status.setStatusMsg("Invalid data formatting.")>
-		</cfif>
+		<cfset Status = Application.ActivityAttendee.saveAttendeeDate(params.AttendeeID,params.currStatusdate,params.currStatusId)>
 			
 		<cfset renderText(status.getJSON()) />
 	</cffunction>

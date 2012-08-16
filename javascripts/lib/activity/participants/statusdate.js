@@ -32,8 +32,6 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       this.$el.find(".js-edit-attendee-date").show();
     },
     saveEditedStatusDate: function() {
-      Backbone.emulateHTTP = true;
-      Backbone.emulateJSON = true;
       switch (this.model.get("CURRSTATUSID")) {
         case 1:
           this.model.save({

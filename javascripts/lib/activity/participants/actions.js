@@ -4,15 +4,37 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
   return self.Actions = Backbone.View.extend({
     template: "activity_participants-actions",
     initialize: function() {
-      self.on("selected_count_changed", this.updateSelectedCount, this);
+      ce.ui.on("selected_count_changed", this.updateSelectedCount, this);
+      self.on("row_selected", this.updateSelectedCount, this);
+    },
+    events: {
+      "click .js-change-status": "changeParticipantStatus",
+      "click .js-print-certificate": "printCertificate",
+      "click .js-remove-participants": "removeParticipants"
     },
     activateMenu: function() {
       this.$el.find(".js-action-menu-button").removeClass("disabled");
       return this.$el.find(".js-action-menu-label").removeClass("disabled");
     },
+    changeParticipantStatus: function(e) {
+      var newStatusId;
+      newStatusId = e.currentTarget.id.split("-")[2];
+      self.trigger("actions_status_changed");
+    },
     deactivateMenu: function() {
       this.$el.find(".js-action-menu-button").addClass("disabled");
-      return this.$el.find(".js-action-menu-label").addClass("disabled");
+      this.$el.find(".js-action-menu-label").addClass("disabled");
+    },
+    printCertificate: function(e) {
+      var certType;
+      certType = e.currentTarget.id.split("-")[1];
+      console.log(certType);
+    },
+    removeParticipants: function() {
+      if (confirm("Are you sure you wish to remove " + this.collection.getSelectedCount() + " attendees?")) {
+        console.log("Removing attendees...");
+      }
+      self.trigger("actions_participants_removed");
     },
     render: function() {
       var _temp;

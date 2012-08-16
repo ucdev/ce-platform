@@ -4,7 +4,8 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
   return self.Filter = Backbone.View.extend({
     template: "activity_participants-filter",
     initialize: function() {
-      self.on("selected_count_changed", this.getFilterCounts, this);
+      ce.ui.on("selected_count_changed", this.getFilterCounts, this);
+      self.on("row_selected", this.getFilterCounts, this);
     },
     events: {
       "click .js-clear-attendee-search": "clearAttendeeSearch",
@@ -33,9 +34,9 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       curr = this;
       filterOptions = this.$el.find('.js-attendee-status');
       this.$el.find('li.js-attendee-status-all').find('span.js-attendee-status-count').text("(" + this.collection.getTotalCount() + ")");
-      $.each(filterOptions, function() {
+      $.each(filterOptions, function(i, filter) {
         var filterStatus;
-        filterStatus = parseInt($(this).attr('id').replace('status', ''));
+        filterStatus = parseInt($(filter).attr('id').replace('status', ''));
         switch (filterStatus) {
           case 1:
             $(this).find('span.js-attendee-status-count').text("(" + curr.collection.getCompleteCount() + ")");

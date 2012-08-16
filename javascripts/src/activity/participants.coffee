@@ -45,6 +45,8 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 			getTotalCount: ->
 				return @information.totalUnfilteredRecords
 		
+		models.Activity_participant.prototype.idAttribute = "ATTENDEEID"
+		
 		# CREATE COLLECTION
 		self.collection = new self.paginatorCollection
 
@@ -61,22 +63,9 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 		# REVEAL LOADER
 		self.loader.start()
 		
-		# BUILD PAGE VIEW AND RENDER IT
-		self.list = new self.List
-			el: ".js-attendee-rows"
-			collection: self.collection
-		
-		# BUILD SELECT ALL CHECK BOX
-		self.selectall = new ce.ui.SelectAllCheckBox(
-			el: ".js-selectall-placeholder"
-			collection: self.collection
-			).render()
-
-		# BUILD BOTTOM BUTTON TOOLBAR
-		self.bottombar = new self.Bottombar(el: ".js-bottom-bar").render()
-		
 		# BUILD PAGER AND FILTER
 		self.on "data_loaded", -> # EVENT BOUND TO BE CALLED AFTER THE COLLECTION FETCH IS SUCCESSFUL
+			
 			# REMOVE LOADER
 			self.loader.stop()
 
@@ -94,6 +83,21 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 				el: ".js-attendee-filter"
 				collection: self.collection
 				).render()
+			return
+		
+		# BUILD PAGE VIEW AND RENDER IT
+		self.list = new self.List
+			el: ".js-attendee-rows"
+			collection: self.collection
+		
+		# BUILD SELECT ALL CHECK BOX
+		self.selectall = new ce.ui.SelectAllCheckBox(
+			el: ".js-selectall-placeholder"
+			collection: self.collection
+			).render()
+
+		# BUILD BOTTOM BUTTON TOOLBAR
+		self.bottombar = new self.Bottombar(el: ".js-bottom-bar").render()
 		
 		# TRIGGER PAGE LOADED EVENT
 		self.trigger "page_loaded"

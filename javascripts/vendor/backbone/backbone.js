@@ -1356,6 +1356,8 @@
       params.processData = false;
     }
 
+    params.data = model.attributes;
+
     // Make the request, allowing the user to override any Ajax options.
     return $.ajax(_.extend(params, options));
   };

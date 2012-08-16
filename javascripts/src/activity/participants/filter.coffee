@@ -3,7 +3,8 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 		template: "activity_participants-filter"
 
 		initialize: ->
-			self.on "selected_count_changed", @getFilterCounts, @
+			ce.ui.on "selected_count_changed", @getFilterCounts, @
+			self.on "row_selected", @getFilterCounts, @
 			return
 	
 		events:
@@ -40,6 +41,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 		# UPDATES THE COUNT OF PARTICIPANTS IN EACH FILTER LI ON THE DROPDOWN
 		getFilterCounts: ->
 			curr = @
+			
 			# GET THE FILTER LIST
 			filterOptions = @$el.find '.js-attendee-status'
 
@@ -47,10 +49,11 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 			@$el.find('li.js-attendee-status-all').find('span.js-attendee-status-count').text "(" + @collection.getTotalCount() + ")"
 
 			# SET ATTENDEE COUNT FOR EACH STATUS FILTER
-			$.each filterOptions, ->
+			$.each filterOptions, (i, filter) ->
+				
 				# GET STATUS ID
-				filterStatus = parseInt $(@).attr('id').replace 'status', ''
-
+				filterStatus = parseInt $(filter).attr('id').replace 'status', ''
+				
 				# SET ATTENDEE COUNT FOR CURRENT STATUS
 				switch filterStatus
 					when 1 then $(@).find('span.js-attendee-status-count').text "(" + curr.collection.getCompleteCount() + ")"

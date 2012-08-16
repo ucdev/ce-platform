@@ -71,7 +71,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
           silent: true
         });
       }
-      self.trigger("selected_count_changed");
+      self.trigger("row_selected");
     }
   });
 });

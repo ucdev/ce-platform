@@ -63,6 +63,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         return this.information.totalUnfilteredRecords;
       }
     });
+    models.Activity_participant.prototype.idAttribute = "ATTENDEEID";
     self.collection = new self.paginatorCollection;
     self.StatusDateModel = models.Activity_participant.extend({
       url: "/ajax_adm_activity/saveAttendeeDate"
@@ -74,6 +75,21 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       el: "#tier3"
     });
     self.loader.start();
+    self.on("data_loaded", function() {
+      self.loader.stop();
+      self.actions = new self.Actions({
+        el: ".js-partic-actions",
+        collection: self.collection
+      }).render();
+      self.pager = new ce.ui.Pager({
+        el: ".js-pager-container",
+        collection: self.collection
+      }).render();
+      self.filter = new self.Filter({
+        el: ".js-attendee-filter",
+        collection: self.collection
+      }).render();
+    });
     self.list = new self.List({
       el: ".js-attendee-rows",
       collection: self.collection
@@ -85,21 +101,6 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     self.bottombar = new self.Bottombar({
       el: ".js-bottom-bar"
     }).render();
-    self.on("data_loaded", function() {
-      self.loader.stop();
-      self.actions = new self.Actions({
-        el: ".js-partic-actions",
-        collection: self.collection
-      }).render();
-      self.pager = new ce.ui.Pager({
-        el: ".js-pager-container",
-        collection: self.collection
-      }).render();
-      return self.filter = new self.Filter({
-        el: ".js-attendee-filter",
-        collection: self.collection
-      }).render();
-    });
     self.trigger("page_loaded");
   };
 }, ce._core.models, ce._core.pagers);

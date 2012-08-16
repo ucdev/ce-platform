@@ -88,5 +88,5 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
                 # SETS SELECTED PROPERTY TO FALSE
                 @model.set "ISSELECTED": false, silent: true
 
-            self.trigger "selected_count_changed"
+            self.trigger "row_selected"
             return
