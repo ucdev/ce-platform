@@ -27,4 +27,5 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
       @$el.dialog('close');
       return
   return
-ce.addRegions dialog: ce.ui.dialog
+  
+ce.addRegions dialog: ce.ui.Dialog
