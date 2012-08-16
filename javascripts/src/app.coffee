@@ -13,6 +13,12 @@ ce.addRegions
 ce.addInitializer (options) ->
   ce.trigger("loaded")
 
+Backbone.Paginator.clientPager.prototype.whereExpanded = (attrs) ->
+	return _.filter @origModels, (model) ->
+		for key of attrs
+			return false unless attrs[key] is model.get(key)
+		true
+		
 ce.on("loaded", ->
     ce.log.info("app: started")
 )

@@ -32,11 +32,6 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 				"firstPage": 1
 				"currentPage": self.details.nPageNo
 				"perPage": 15
-			whereExpanded: (attrs) ->
-				return _.filter @origModels, (model) ->
-					for key of attrs
-						return false unless attrs[key] is model.get(key)
-					true
 			getCompleteCount: ->
 				return @whereExpanded(ISSTATUS1: true).length
 			getInProgressCount: ->
@@ -46,7 +41,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 			getSelectedCount: ->
 				return @whereExpanded(ISSELECTED: true).length
 			getTermCount: ->
-				return @whereExpanded(ISSTATUS4: true)
+				return @whereExpanded(ISSTATUS4: true).length
 			getTotalCount: ->
 				return @information.totalUnfilteredRecords
 		
@@ -62,7 +57,6 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 		# INIT LOADER
 		self.loader = new ce.ui.Loader
 			el: "#tier3"
-			parentEl: $(".content-container")
 
 		# REVEAL LOADER
 		self.loader.start()
@@ -73,7 +67,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 			collection: self.collection
 		
 		# BUILD SELECT ALL CHECK BOX
-		self.selectall = new self.SelectAllCheckBox(
+		self.selectall = new ce.ui.SelectAllCheckBox(
 			el: ".js-selectall-placeholder"
 			collection: self.collection
 			).render()

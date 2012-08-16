@@ -34,17 +34,6 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         "currentPage": self.details.nPageNo,
         "perPage": 15
       },
-      whereExpanded: function(attrs) {
-        return _.filter(this.origModels, function(model) {
-          var key;
-          for (key in attrs) {
-            if (attrs[key] !== model.get(key)) {
-              return false;
-            }
-          }
-          return true;
-        });
-      },
       getCompleteCount: function() {
         return this.whereExpanded({
           ISSTATUS1: true
@@ -68,7 +57,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       getTermCount: function() {
         return this.whereExpanded({
           ISSTATUS4: true
-        });
+        }).length;
       },
       getTotalCount: function() {
         return this.information.totalUnfilteredRecords;
@@ -82,15 +71,14 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       el: ".js-top-bar"
     }).render();
     self.loader = new ce.ui.Loader({
-      el: "#tier3",
-      parentEl: $(".content-container")
+      el: "#tier3"
     });
     self.loader.start();
     self.list = new self.List({
       el: ".js-attendee-rows",
       collection: self.collection
     });
-    self.selectall = new self.SelectAllCheckBox({
+    self.selectall = new ce.ui.SelectAllCheckBox({
       el: ".js-selectall-placeholder",
       collection: self.collection
     }).render();

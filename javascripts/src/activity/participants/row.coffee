@@ -1,12 +1,14 @@
 ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
     self.Row = Backbone.View.extend
         initialize: ->
-            @model.on "change:ISSELECTED", @selectRow, @
+            @model.on "change:ISSELECTED", @determineSelectedStatus, @
+            return
 
         tagName: "tr"
         className: "personRow AllAttendees js-all-attendee"
         template: "activity_participants-row"
 
+        # BIND EXTRANEOUS VIEWS THAT ARE CONTAINED WITHIN THE ROW
         bindViews: ->
             # ESTABLISHES THE STATUSDATE VIEW
             statusDateEl = @$el.find(".js-status-date")
@@ -31,7 +33,29 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
             "change .js-participant-checkbox": "selectRow"
             "click .js-delete-link": "deleteRow"
 
+        # USED WHEN SELECTED FROM AN OUTSIDE ENTITY
+        determineSelectedStatus: ->
+            if @model.get "ISSELECTED"
+                @markSelected()
+            else
+                @markUnselected()
+            return
+
+        # DELETES MODEL AND ROW FROM COLLECTION
         deleteRow: ->
+            return
+
+        # USED WHEN RENDERING THE VIEW TO DiSPLAY IT AS SELECTED OR WHEN BEING MODIFIED FROM OUTSIDE ENTITY
+        markSelected: ->
+            @$el.find(".js-participant-checkbox").attr "checked", true
+            @$el.addClass "alert-info"
+            return
+
+        # USED WHEN MODIFIED FROM AN OUTSIDE ENTITY
+        markUnselected: ->
+            @$el.find(".js-participant-checkbox").attr "checked", false
+            @$el.removeClass "alert-info"
+            return
 
         render: ->
             @$el.empty()
@@ -49,6 +73,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
             @bindViews()
             return @
 
+        # USED WHEN THE INDIVIDUAL ROW IS SELECTED
         selectRow: (e) ->
             # DETERMINE IF THE ROW IS CHECKED
             if @$el.find(".js-participant-checkbox").is ":checked"

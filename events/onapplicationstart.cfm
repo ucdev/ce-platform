@@ -117,6 +117,8 @@ js.addAll([
 "lib/ui/loader/events",
 "lib/ui/pager/pager",
 "lib/ui/pager/events",
+"lib/ui/selectallcheckbox/selectallcheckbox", // ce.activity.participants selectallcheckbox
+"lib/ui/selectallcheckbox/events", // ce.activity.participants selectallcheckbox
 "lib/ui/typeahead",
 "lib/ui/tokenizer",
 "lib/ui/actionMenu"
@@ -136,7 +138,6 @@ js.addAll([
 "lib/activity/participants/filter", // ce.activity.participants filter
 "lib/activity/participants/row", // ce.activity.participants row
 "lib/activity/participants/list", // ce.activity.participants list
-"lib/activity/participants/selectallcheckbox", // ce.activity.participants selectallcheckbox
 "lib/activity/participants/topbar", // ce.activity.participants topbar
 "lib/activity/participants/bottombar", // ce.activity.participants bottombar
 "lib/activity/participants/statusdate", // ce.activity.participants statusdate

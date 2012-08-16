@@ -3,7 +3,7 @@
 ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _) {
   return self.Row = Backbone.View.extend({
     initialize: function() {
-      return this.model.on("change:ISSELECTED", this.selectRow, this);
+      this.model.on("change:ISSELECTED", this.determineSelectedStatus, this);
     },
     tagName: "tr",
     className: "personRow AllAttendees js-all-attendee",
@@ -30,7 +30,22 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       "change .js-participant-checkbox": "selectRow",
       "click .js-delete-link": "deleteRow"
     },
+    determineSelectedStatus: function() {
+      if (this.model.get("ISSELECTED")) {
+        this.markSelected();
+      } else {
+        this.markUnselected();
+      }
+    },
     deleteRow: function() {},
+    markSelected: function() {
+      this.$el.find(".js-participant-checkbox").attr("checked", true);
+      this.$el.addClass("alert-info");
+    },
+    markUnselected: function() {
+      this.$el.find(".js-participant-checkbox").attr("checked", false);
+      this.$el.removeClass("alert-info");
+    },
     render: function() {
       var _temp;
       this.$el.empty();

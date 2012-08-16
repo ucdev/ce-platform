@@ -20,6 +20,18 @@ ce.addInitializer(function(options) {
   return ce.trigger("loaded");
 });
 
+Backbone.Paginator.clientPager.prototype.whereExpanded = function(attrs) {
+  return _.filter(this.origModels, function(model) {
+    var key;
+    for (key in attrs) {
+      if (attrs[key] !== model.get(key)) {
+        return false;
+      }
+    }
+    return true;
+  });
+};
+
 ce.on("loaded", function() {
   return ce.log.info("app: started");
 });
