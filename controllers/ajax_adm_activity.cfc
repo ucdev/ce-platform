@@ -1213,7 +1213,7 @@
 		
 		<cfset var status = createObject("component","#application.settings.com#returnData.buildStruct").init()>
 		
-		<!---<cfcontent type="text/javascript" />--->
+		<cfcontent type="text/javascript" />
 		
 		<cfset status.setStatus(false)>
 		<cfset status.setStatusMsg("Cannot access the update function for attendee MD status.")>

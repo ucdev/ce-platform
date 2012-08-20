@@ -4,6 +4,27 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
   return self.Row = Backbone.View.extend({
     initialize: function() {
       this.model.on("change:ISSELECTED", this.determineSelectedStatus, this);
+      this.model.on("change:ISMD", function() {
+        var mdStatus;
+        if (this.get("ISMD")) {
+          mdStatus = "y";
+        } else {
+          mdStatus = "n";
+        }
+        $.ajax({
+          url: "/ajax_adm_activity/updateMDStatus",
+          type: "post",
+          data: {
+            attendeeId: this.id,
+            MDNonMD: mdStatus
+          },
+          success: function(data) {
+            return console.log(data);
+          }
+        });
+        return;
+        return this;
+      });
     },
     tagName: "tr",
     className: "personRow AllAttendees js-all-attendee",
@@ -28,7 +49,10 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     },
     events: {
       "change .js-participant-checkbox": "selectRow",
-      "click .js-delete-link": "deleteRow"
+      "click .js-delete-link": "deleteRow",
+      "click .js-toggle-md": "toggleMD",
+      "click .js-remove-user": "removeUser",
+      "click .js-reset-user": "resetUser"
     },
     determineSelectedStatus: function() {
       if (this.model.get("ISSELECTED")) {
@@ -57,6 +81,14 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       this.bindViews();
       return this;
     },
+    removeUser: function() {
+      this.model.destroy();
+      self.trigger("participant_removed");
+    },
+    resetUser: function() {
+      this.render();
+      self.trigger("participant_reset");
+    },
     selectRow: function(e) {
       if (this.$el.find(".js-participant-checkbox").is(":checked")) {
         this.$el.addClass("alert-info");
@@ -72,6 +104,19 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         });
       }
       self.trigger("row_selected");
+    },
+    toggleMD: function() {
+      if (this.model.get("ISMD")) {
+        this.model.set({
+          "ISMD": false
+        });
+      } else {
+        this.model.set({
+          "ISMD": true
+        });
+      }
+      this.render();
+      self.trigger("participant_md_toggled");
     }
   });
 });

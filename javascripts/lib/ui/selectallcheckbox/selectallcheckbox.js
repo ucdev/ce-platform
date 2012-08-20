@@ -7,6 +7,7 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _, models) {
     qtipDeselectTemplate: "ui-deselectallqtip",
     initialize: function() {
       this.collection.on("reset", this.determineCheckedStatus, this);
+      self.on("selected_count_changed", this.determineCheckedStatus, this);
     },
     events: {
       "change .js-check-all": "selectAllVisibleParticipants"

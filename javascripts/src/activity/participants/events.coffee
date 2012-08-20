@@ -14,12 +14,23 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 		ce.log.info "participants: page ready"
 		return
 
-	self.on "participants_filtered", (name) ->
-		ce.log.info "participants: filter by " + name
-
 	self.on "participant_saved", (data) ->
 		ce.log.info "participant: saved"
 		return
+
+	self.on "participant_removed", (data) ->
+		ce.log.info "participant: removed"
+		return
+
+	self.on "participant_reset", (data) ->
+		ce.log.info "participant: reset"
+		return
+
+	self.on "participant_md_toggled", ->
+		ce.log.info "participant: updated MD status"
+
+	self.on "participants_filtered", (name) ->
+		ce.log.info "participants: filter by " + name
 
 	self.on "participants_loaded", ->
 		ce.log.info "participants: loaded"

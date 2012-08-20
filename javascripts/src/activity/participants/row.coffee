@@ -2,6 +2,22 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
     self.Row = Backbone.View.extend
         initialize: ->
             @model.on "change:ISSELECTED", @determineSelectedStatus, @
+            @model.on "change:ISMD", ->
+                if @get "ISMD"
+                    mdStatus = "y"
+                else
+                    mdStatus = "n"
+
+                $.ajax
+                    url: "/ajax_adm_activity/updateMDStatus"
+                    type: "post"
+                    data: 
+                        attendeeId: @id
+                        MDNonMD: mdStatus
+                    success: (data) ->
+                        console.log data
+                return
+                @
             return
 
         tagName: "tr"
@@ -32,6 +48,9 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
         events:
             "change .js-participant-checkbox": "selectRow"
             "click .js-delete-link": "deleteRow"
+            "click .js-toggle-md": "toggleMD"
+            "click .js-remove-user": "removeUser"
+            "click .js-reset-user": "resetUser"
 
         # USED WHEN SELECTED FROM AN OUTSIDE ENTITY
         determineSelectedStatus: ->
@@ -73,6 +92,16 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
             @bindViews()
             return @
 
+        removeUser: ->
+            @model.destroy()
+            self.trigger "participant_removed"
+            return
+
+        resetUser: ->
+            @render()
+            self.trigger "participant_reset"
+            return
+
         # USED WHEN THE INDIVIDUAL ROW IS SELECTED
         selectRow: (e) ->
             # DETERMINE IF THE ROW IS CHECKED
@@ -89,4 +118,15 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
                 @model.set "ISSELECTED": false, silent: true
 
             self.trigger "row_selected"
+            return
+
+        toggleMD: ->
+            if @model.get "ISMD"
+                @model.set "ISMD": false
+            else
+                @model.set "ISMD": true
+
+            @render()
+
+            self.trigger "participant_md_toggled"
             return

@@ -6,6 +6,7 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _, models) ->
 
 		initialize: ->
 			@collection.on "reset", @determineCheckedStatus, @
+			self.on "selected_count_changed", @determineCheckedStatus, @
 			return
 
 		events:

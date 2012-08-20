@@ -38,13 +38,15 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 				return @whereExpanded(ISSTATUS2: true).length
 			getRegisterCount: ->
 				return @whereExpanded(ISSTATUS3: true).length
+			getSelected: ->
+				return @whereExpanded(ISSELECTED: true)
 			getSelectedCount: ->
 				return @whereExpanded(ISSELECTED: true).length
 			getTermCount: ->
 				return @whereExpanded(ISSTATUS4: true).length
 			getTotalCount: ->
 				return @information.totalUnfilteredRecords
-		
+				
 		models.Activity_participant.prototype.idAttribute = "ATTENDEEID"
 		
 		# CREATE COLLECTION

@@ -49,6 +49,11 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
           ISSTATUS3: true
         }).length;
       },
+      getSelected: function() {
+        return this.whereExpanded({
+          ISSELECTED: true
+        });
+      },
       getSelectedCount: function() {
         return this.whereExpanded({
           ISSELECTED: true

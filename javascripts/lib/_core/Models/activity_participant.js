@@ -2,6 +2,6 @@
 
 ce.module("_core.models", function(self, ce, Backbone, Marionette, $, _) {
   return self.Activity_participant = Backbone.Model.extend({
-    url: "/Activity_participants/"
+    url: "/activity_participants/"
   });
 });

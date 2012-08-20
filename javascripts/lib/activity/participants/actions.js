@@ -10,15 +10,58 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     events: {
       "click .js-change-status": "changeParticipantStatus",
       "click .js-print-certificate": "printCertificate",
-      "click .js-remove-participants": "removeParticipants"
+      "click .js-remove-participants": "removeParticipants",
+      "click .js-unselect-participants": "unselectParticipants"
     },
     activateMenu: function() {
       this.$el.find(".js-action-menu-button").removeClass("disabled");
       return this.$el.find(".js-action-menu-label").removeClass("disabled");
     },
     changeParticipantStatus: function(e) {
-      var newStatusId;
-      newStatusId = e.currentTarget.id.split("-")[2];
+      var newStatusId, selectedParticipants;
+      newStatusId = parseInt(e.currentTarget.id.split("-")[2]);
+      selectedParticipants = this.collection.getSelected();
+      this.collection.model.prototype.url = "/testing/";
+      _.forEach(selectedParticipants, function(model) {
+        switch (newStatusId) {
+          case 1:
+            model.set({
+              STATUSID: 1,
+              ISSTATUS1: true,
+              ISSTATUS2: false,
+              ISSTATUS3: false,
+              ISSTATUS4: false
+            });
+            break;
+          case 2:
+            model.set({
+              STATUSID: 2,
+              ISSTATUS1: false,
+              ISSTATUS2: true,
+              ISSTATUS3: false,
+              ISSTATUS4: false
+            });
+            break;
+          case 3:
+            model.set({
+              STATUSID: 3,
+              ISSTATUS1: false,
+              ISSTATUS2: false,
+              ISSTATUS3: true,
+              ISSTATUS4: false
+            });
+            break;
+          case 4:
+            model.set({
+              STATUSID: 4,
+              ISSTATUS1: false,
+              ISSTATUS2: false,
+              ISSTATUS3: false,
+              ISSTATUS4: true
+            });
+        }
+        model.save();
+      });
       self.trigger("actions_status_changed");
     },
     deactivateMenu: function() {
@@ -42,6 +85,16 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       _temp = _.template(ce.templates.get(this.template));
       this.$el.html(_temp);
       return this;
+    },
+    unselectParticipants: function() {
+      var selectedParticipants;
+      selectedParticipants = this.collection.getSelected();
+      _.forEach(selectedParticipants, function(model) {
+        return model.set({
+          ISSELECTED: false
+        });
+      });
+      ce.ui.trigger("selected_count_changed");
     },
     updateSelectedCount: function() {
       var selectedCount;

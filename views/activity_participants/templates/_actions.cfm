@@ -4,6 +4,7 @@
     <span class="caret"></span>
 </a>
 <ul class="dropdown-menu">
+    <li><a href="#" class="js-unselect-participants">Clear Selection</a></li>
     <li><a href="#" class="js-remove-participants">Remove</a></li>
     <li class="divider"></li>
     <li class="nav-header">CHANGE STATUSES</li>

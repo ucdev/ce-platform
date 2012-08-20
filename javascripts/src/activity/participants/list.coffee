@@ -45,6 +45,6 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 
 		render: ->
 			self.trigger "collection_rendered"
-
+	return
 ,ce._core.models
 	

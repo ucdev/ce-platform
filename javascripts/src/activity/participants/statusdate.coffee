@@ -44,6 +44,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 			return
 
 		saveEditedStatusDate: ->
+			Backbone.emulateJSON = true
 			switch @model.get("CURRSTATUSID")
 			    when 1
 			    	@model.save
