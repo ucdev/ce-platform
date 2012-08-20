@@ -120,24 +120,88 @@ $(document).ready(function() {
 });
 </script>
 <cfoutput>
-<h2>Sign up</h2>
 #errorMessagesFor("person")#
-#startFormTag(controller="ajax_lms_auth",action="register", id="frmRegister")#
-#textField(objectName='person', property='firstName', append="<p class='help-block'></p>", prepend="", label="First Name*", class="span5", placeholder="First Name")#
-#textField(objectName='person', property='middleName', append="<p class='help-block'></p>", prepend="", label="Middle Name", class="span5", placeholder="Middle Name")#
-#textField(objectName='person', property='lastName', append="<p class='help-block'></p>", prepend="", label="Last Name*", class="span5", placeholder="Last Name")#
-#textField(objectName='person', property='suffix', append="<p class='help-block'></p>", prepend="", label="Suffix", class="span5", placeholder="Suffix")#
-#textField(objectName='person', property='geonameid', append="<p class='help-block'></p>", prepend="", label="City / Town*", class="span5")#
-#textField(objectName='person', property='email', append="<p class='help-block'></p>", prepend="", label="Email Address*", class="span5", placeholder="Email Address")#
-#textField(objectName='person', property='emailConfirm', append="<p class='help-block'></p>", prepend="", label="Confirm Address*", class="span5", placeholder="Retype Email")#
-#passwordField(objectName='person', property='password', append="<p class='help-block'></p>", prepend="", label="Password", class="span5", placeholder="Password")#
-#passwordField(objectName='person', property='passwordConfirmation', append="<p class='help-block'></p>", prepend="", label="Retype Password", class="span5", placeholder="Retype Password")#
-#select(objectName="person", property="gender", append="<p class='help-block'></p>", prepend="", class="span5", label="Gender", options={"F":"Female","M":"Male"}, includeBlank=true)#
 
-<p>Display Name* (used on certificates and transcripts)</p>
-<div class="displayname-container">
-	#textField(objectName='person', property='displayName', append="", prepend="", label="", class="span5", placeholder="Display Name")#
+#startFormTag(controller="ajax_lms_auth",action="register", id="frmRegister",class="form register responsiveForm span12")#
+<div class="grouped">
+	#btextField(
+		objectName='person', 
+		property='firstName', 
+		append="<p class='help-block'></p>", 
+		prepend="",
+		label="Full Name",
+		autocomplete="off"
+	)#
+
+	#btextField(
+		objectName='person', 
+		property='suffix', 
+		append="<p class='help-block'></p>", 
+		prepend="", 
+		label="Suffix",
+		autocomplete="off"
+	)#
+
+	#btextField(
+		objectName='person', 
+		property='geonameid', 
+		append="<p class='help-block'></p>", 
+		prepend="", 
+		label="City / Town",
+		autocomplete="off"
+	)#
+
+	#btextField(
+		objectName='person', 
+		property='email', 
+		append="<p class='help-block'></p>", 
+		prepend="", 
+		label="Email Address",
+		autocomplete="off"
+	)#
+
+	#btextField(
+		objectName='person', 
+		property='emailConfirm', 
+		append="<p class='help-block'></p>", 
+		prepend="", 
+		label="Confirm Address*",
+		autocomplete="off"
+	)#
+
+	#bpasswordField(
+		objectName='person', 
+		property='password', 
+		append="<p class='help-block'></p>", 
+		prepend="", 
+		label="Password",
+		autocomplete="off"
+	)#
+
+	#bpasswordField(
+		objectName='person', 
+		property='passwordConfirmation', 
+		append="<p class='help-block'></p>", 
+		prepend="", 
+		label="Retype Password",
+		autocomplete="off"
+	)#
+	
+	#bselect(
+		objectName="person", 
+		property="gender", 
+		append="<p class='help-block'></p>", 
+		prepend="", 
+		label="Gender", 
+		options={"F":"Female","M":"Male"}, 
+		includeBlank=true
+	)#
+
+	<p>Display Name* (used on certificates and transcripts)</p>
+	<div class="displayname-container">
+		#btextField(objectName='person', property='displayName', append="", prepend="", label="", class="span5")#
+	</div>
+	#submitTag(id="btnRegister")#
 </div>
-#submitTag(id="btnRegister")#
 #endFormTag()#
 </cfoutput>

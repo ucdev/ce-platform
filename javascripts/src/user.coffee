@@ -1,5 +1,6 @@
 #! ce.user @description: represents the current user 
 ce.module "user", (self, ce, Backbone, Marionette, $, _, models) ->
+	self.views = self.views || {}
 	self.Model = models.Person.extend({})
 	
 	self.load = (params) ->

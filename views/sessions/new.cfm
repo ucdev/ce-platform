@@ -15,28 +15,26 @@ $(document).ready(function() {
 		<div class="message error">
 			<p>#flash('notice')#</p>
 		</div>
-	</cfif>  
+	</cfif>
 </div>
 
-#startFormTag(action="create", class="form login specialForm loginForm inFieldLabels")#
-	
+#startFormTag(action="create", class="form login responsiveForm span12")#
 	<div class="grouped">
 		<div class="control-group first">
 			<label class="control-label" for="email">Email Address</label>
 			<div class="controls">
-				#textFieldTag(name="login", id="email", class="span24",autocomplete="off")#
+				#textFieldTag(name="login", id="email", class="span12",autocomplete="off")#
 			</div>
 		</div>
 		<div class="control-group last">
 			<label class="control-label" for="password">Password</label>
 			<div class="controls">
-				#passwordFieldTag(name="password", id="password", class="span24",autocomplete="off")#
+				#passwordFieldTag(name="password", id="password", class="span12",autocomplete="off")#
 			</div>
 		</div>
 	</div>
-
-#submitTag(value="Login", class="button")#
-<p>Don't have an account? #linkTo(text="Sign up!", route="signup")#</p>
+	<div class="mtm">#submitTag(value="Sign in", class="btn btn-primary span12")#</div>
+	<p>Don't have an account? #linkTo(text="Sign up!", route="signup")#</p>
 #endFormTag()#
 </cfoutput>
 

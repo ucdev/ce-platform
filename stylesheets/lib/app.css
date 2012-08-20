@@ -26,41 +26,53 @@
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
-form.inFieldLabels {
+.responsiveForm {
+  position: relative;
+  margin: auto!important;
+}
+.responsiveForm input[type="submit"] {
+  padding: 10px 6px;
+  font-size: 18px;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.responsiveForm .control-group {
   position: relative;
 }
-form.inFieldLabels .control-group {
-  position: relative;
-}
-form.inFieldLabels .control-group label {
+.responsiveForm .control-group label {
   position: absolute;
 }
-.grouped .control-group {
+.responsiveForm .grouped .control-group {
   margin: 0;
 }
-.grouped .control-group label {
+.responsiveForm .grouped .control-group label {
   font-size: 15.96px;
   left: 10px;
   top: 16px;
   color: #888;
 }
-.grouped .control-group select,
-.grouped .control-group textarea,
-.grouped .control-group input[type="text"],
-.grouped .control-group input[type="password"],
-.grouped .control-group input[type="datetime"],
-.grouped .control-group input[type="datetime-local"],
-.grouped .control-group input[type="date"],
-.grouped .control-group input[type="month"],
-.grouped .control-group input[type="time"],
-.grouped .control-group input[type="week"],
-.grouped .control-group input[type="number"],
-.grouped .control-group input[type="email"],
-.grouped .control-group input[type="url"],
-.grouped .control-group input[type="search"],
-.grouped .control-group input[type="tel"],
-.grouped .control-group input[type="color"],
-.grouped .control-group .uneditable-input {
+.responsiveForm .grouped .control-group select,
+.responsiveForm .grouped .control-group textarea,
+.responsiveForm .grouped .control-group input[type="text"],
+.responsiveForm .grouped .control-group input[type="password"],
+.responsiveForm .grouped .control-group input[type="datetime"],
+.responsiveForm .grouped .control-group input[type="datetime-local"],
+.responsiveForm .grouped .control-group input[type="date"],
+.responsiveForm .grouped .control-group input[type="month"],
+.responsiveForm .grouped .control-group input[type="time"],
+.responsiveForm .grouped .control-group input[type="week"],
+.responsiveForm .grouped .control-group input[type="number"],
+.responsiveForm .grouped .control-group input[type="email"],
+.responsiveForm .grouped .control-group input[type="url"],
+.responsiveForm .grouped .control-group input[type="search"],
+.responsiveForm .grouped .control-group input[type="tel"],
+.responsiveForm .grouped .control-group input[type="color"],
+.responsiveForm .grouped .control-group .uneditable-input {
   margin: 0;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -68,53 +80,81 @@ form.inFieldLabels .control-group label {
   border-top-width: 0;
   font-size: 15.96px;
   padding-left: 9px;
-  height: 40px;
+  height: 50px;
   color: #444;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-appearance: none;
 }
-.grouped .control-group.first select,
-.grouped .control-group.first textarea,
-.grouped .control-group.first input[type="text"],
-.grouped .control-group.first input[type="password"],
-.grouped .control-group.first input[type="datetime"],
-.grouped .control-group.first input[type="datetime-local"],
-.grouped .control-group.first input[type="date"],
-.grouped .control-group.first input[type="month"],
-.grouped .control-group.first input[type="time"],
-.grouped .control-group.first input[type="week"],
-.grouped .control-group.first input[type="number"],
-.grouped .control-group.first input[type="email"],
-.grouped .control-group.first input[type="url"],
-.grouped .control-group.first input[type="search"],
-.grouped .control-group.first input[type="tel"],
-.grouped .control-group.first input[type="color"],
-.grouped .control-group.first .uneditable-input {
+.responsiveForm .grouped .control-group.first select,
+.responsiveForm .grouped .control-group.first textarea,
+.responsiveForm .grouped .control-group.first input[type="text"],
+.responsiveForm .grouped .control-group.first input[type="password"],
+.responsiveForm .grouped .control-group.first input[type="datetime"],
+.responsiveForm .grouped .control-group.first input[type="datetime-local"],
+.responsiveForm .grouped .control-group.first input[type="date"],
+.responsiveForm .grouped .control-group.first input[type="month"],
+.responsiveForm .grouped .control-group.first input[type="time"],
+.responsiveForm .grouped .control-group.first input[type="week"],
+.responsiveForm .grouped .control-group.first input[type="number"],
+.responsiveForm .grouped .control-group.first input[type="email"],
+.responsiveForm .grouped .control-group.first input[type="url"],
+.responsiveForm .grouped .control-group.first input[type="search"],
+.responsiveForm .grouped .control-group.first input[type="tel"],
+.responsiveForm .grouped .control-group.first input[type="color"],
+.responsiveForm .grouped .control-group.first .uneditable-input {
   margin: 0;
   -webkit-border-radius: 10px 10px 0 0;
   -moz-border-radius: 10px 10px 0 0;
   border-radius: 10px 10px 0 0;
   border-top-width: 1px;
 }
-.grouped .control-group.last select,
-.grouped .control-group.last textarea,
-.grouped .control-group.last input[type="text"],
-.grouped .control-group.last input[type="password"],
-.grouped .control-group.last input[type="datetime"],
-.grouped .control-group.last input[type="datetime-local"],
-.grouped .control-group.last input[type="date"],
-.grouped .control-group.last input[type="month"],
-.grouped .control-group.last input[type="time"],
-.grouped .control-group.last input[type="week"],
-.grouped .control-group.last input[type="number"],
-.grouped .control-group.last input[type="email"],
-.grouped .control-group.last input[type="url"],
-.grouped .control-group.last input[type="search"],
-.grouped .control-group.last input[type="tel"],
-.grouped .control-group.last input[type="color"],
-.grouped .control-group.last .uneditable-input {
+.responsiveForm .grouped .control-group.last select,
+.responsiveForm .grouped .control-group.last textarea,
+.responsiveForm .grouped .control-group.last input[type="text"],
+.responsiveForm .grouped .control-group.last input[type="password"],
+.responsiveForm .grouped .control-group.last input[type="datetime"],
+.responsiveForm .grouped .control-group.last input[type="datetime-local"],
+.responsiveForm .grouped .control-group.last input[type="date"],
+.responsiveForm .grouped .control-group.last input[type="month"],
+.responsiveForm .grouped .control-group.last input[type="time"],
+.responsiveForm .grouped .control-group.last input[type="week"],
+.responsiveForm .grouped .control-group.last input[type="number"],
+.responsiveForm .grouped .control-group.last input[type="email"],
+.responsiveForm .grouped .control-group.last input[type="url"],
+.responsiveForm .grouped .control-group.last input[type="search"],
+.responsiveForm .grouped .control-group.last input[type="tel"],
+.responsiveForm .grouped .control-group.last input[type="color"],
+.responsiveForm .grouped .control-group.last .uneditable-input {
   -webkit-border-radius: 0 0 10px 10px;
   -moz-border-radius: 0 0 10px 10px;
   border-radius: 0 0 10px 10px;
+}
+@media (max-width: 767px) {
+  .responsiveForm .grouped .control-group select,
+  .responsiveForm .grouped .control-group textarea,
+  .responsiveForm .grouped .control-group input[type="text"],
+  .responsiveForm .grouped .control-group input[type="password"],
+  .responsiveForm .grouped .control-group input[type="datetime"],
+  .responsiveForm .grouped .control-group input[type="datetime-local"],
+  .responsiveForm .grouped .control-group input[type="date"],
+  .responsiveForm .grouped .control-group input[type="month"],
+  .responsiveForm .grouped .control-group input[type="time"],
+  .responsiveForm .grouped .control-group input[type="week"],
+  .responsiveForm .grouped .control-group input[type="number"],
+  .responsiveForm .grouped .control-group input[type="email"],
+  .responsiveForm .grouped .control-group input[type="url"],
+  .responsiveForm .grouped .control-group input[type="search"],
+  .responsiveForm .grouped .control-group input[type="tel"],
+  .responsiveForm .grouped .control-group input[type="color"],
+  .responsiveForm .grouped .control-group .uneditable-input {
+    height: 50px;
+  }
 }
 .navbar .brand {
   position: absolute;
@@ -123,8 +163,12 @@ form.inFieldLabels .control-group label {
 .nav-collapse {
   margin-left: 120px;
 }
-#page {
-  margin-top: 62px;
+html.touch .navbar-fixed-top,
+html.touch .navbar-fixed-bottom {
+  position: static;
+}
+html.touch #page {
+  margin-top: 32px;
 }
 /* UI.Counter */
 /*
@@ -947,6 +991,15 @@ select,
   -webkit-border-radius: 0 0 0 0;
   -moz-border-radius: 0 0 0 0;
   border-radius: 0 0 0 0;
+}
+#page {
+  margin-top: 62px;
+}
+@media (max-width: 767px) {
+  #page {
+    padding-top: 11px;
+    margin: 0px 15px 0 15px;
+  }
 }
 .align-left {
   text-align: left;

@@ -59,6 +59,7 @@ js.addAll([
 "vendor/jquery/jquery",
 "vendor/jquery/jquery-ui-1.8.21.custom.min",
 
+"vendor/modernizr",
 /* Underscore */
 "vendor/backbone/underscore",
 

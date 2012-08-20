@@ -88,7 +88,7 @@
 				<cfset settings.subLayout = "/layout_pub_activity" />
 			<cfelseif params.controller EQ "messages" AND listFindNoCase("inbox,sent,trash",params.action)>
 				<cfset settings.subLayout = "/layout_user" />
-			<cfelseif params.controller EQ "sessions" AND listFindNoCase("new",params.action)>
+			<cfelseif listFindNoCase("sessions,people",params.controller) AND listFindNoCase("new,register",params.action)>
 				<cfset settings.rootLayout = "/layout_auth" />
 				<cfset settings.subLayout = "" />
 			<cfelseif params.controller EQ "creditinator">

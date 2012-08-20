@@ -77,8 +77,6 @@ ce.module "user", (self, ce, Backbone, Marionette, $, _, log) ->
     cancel: () ->
 
       return
-
-
   )
 
   #LOGIN FUNCTION
