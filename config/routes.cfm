@@ -18,17 +18,6 @@ drawRoutes()
 		.resources("activity_cdc")
 	.end()
 	
-	// api
-	.scope(name="api",path="api")
-		.resources("credit_requests")
-		.resources("activity_participants")
-		.resources("activities")
-		.resources("people")
-		.resource("me")
-		.match(name="authstatus",pattern="/authstatus",controller="sessions",action="status")
-		//.wildcard()
-	.end()
-	
 	.resources("activities")
 	.match(name="messagesInbox",pattern="messages/inbox",controller="messages",action="inbox")
 	
@@ -40,9 +29,21 @@ drawRoutes()
 	.end()
 	
 	.resources("credit_requests")
-	.resources("activity_participants")
+	//.resources("activity_participants")
 	.resources("activities")
 	.resources("people")
+	
+	// api
+	.namespace("api")
+		.controller("activity_participants")
+			.get("new")
+			.get(name="show", pattern="show/[key]")
+			.get(name="edit", pattern="edit/[key]")
+			.put(name="update", pattern="update/[key]")
+			.delete(name="delete", pattern="delete/[key]")
+			.root(action="index")
+		.end()
+	.end()
 	
 	.match(name="home", pattern="", controller="main", action="home")
 	.match(name="login", pattern="login", controller="sessions", action="new")

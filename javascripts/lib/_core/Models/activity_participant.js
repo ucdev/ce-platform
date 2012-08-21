@@ -2,6 +2,14 @@
 
 ce.module("_core.models", function(self, ce, Backbone, Marionette, $, _) {
   return self.Activity_participant = Backbone.Model.extend({
-    url: "/activity_participants/"
+    url: function() {
+      var base;
+      base = "/api/activity_participants/";
+      if (this.isNew()) {
+        return base;
+      } else {
+        return base + this.id;
+      }
+    }
   });
 });

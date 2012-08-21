@@ -1,5 +1,6 @@
 <cfcomponent extends="Controller" output="false">
 	<cffunction name="init">
+		<cfset filters(through="createAssets",type="before") />
 		<cfset filters(through="loginRequired") />
 		<cfset filters(through="adminRequired") />
 		<cfset filters(through="pagelet",type="before") />

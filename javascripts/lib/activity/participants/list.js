@@ -21,6 +21,11 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     },
     addAll: function() {
       this.$el.empty();
+      if (typeof self.rows === "undefined") {
+        self.rows = [];
+      } else {
+        self.rows = [];
+      }
       this.collection.each(this.addOne);
     },
     addOne: function(viewModel) {
@@ -32,9 +37,6 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         viewModel.set({
           ISFILTERMATCH: false
         });
-      }
-      if (typeof self.rows === "undefined") {
-        self.rows = [];
       }
       row = new self.Row({
         model: viewModel

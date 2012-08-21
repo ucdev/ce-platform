@@ -21,7 +21,6 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       var newStatusId, selectedParticipants;
       newStatusId = parseInt(e.currentTarget.id.split("-")[2]);
       selectedParticipants = this.collection.getSelected();
-      this.collection.model.prototype.url = "/testing/";
       _.forEach(selectedParticipants, function(model) {
         switch (newStatusId) {
           case 1:

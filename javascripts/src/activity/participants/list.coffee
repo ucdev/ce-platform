@@ -22,6 +22,12 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 
 		addAll: ->
 			@$el.empty()
+			
+			if typeof self.rows == "undefined"
+				self.rows = []
+			else
+				self.rows = []
+
 			@collection.each @addOne
 			return
 
@@ -30,9 +36,6 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 			if typeof viewModel.get("ISSELECTED") == "undefined"
 				viewModel.set ISSELECTED: false
 				viewModel.set ISFILTERMATCH: false
-			
-			if typeof self.rows == "undefined"
-				self.rows = []
 
 			row = new self.Row 
 				model: viewModel
