@@ -18,7 +18,9 @@ Backbone.Paginator.clientPager.prototype.whereExpanded = (attrs) ->
 		for key of attrs
 			return false unless attrs[key] is model.get(key)
 		true
-		
+
+Backbone.emulateJSON = true
+
 ce.on("loaded", ->
     ce.log.info("app: started")
 )

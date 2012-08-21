@@ -4,27 +4,6 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
   return self.Row = Backbone.View.extend({
     initialize: function() {
       this.model.on("change:ISSELECTED", this.determineSelectedStatus, this);
-      this.model.on("change:ISMD", function() {
-        var mdStatus;
-        if (this.get("ISMD")) {
-          mdStatus = "y";
-        } else {
-          mdStatus = "n";
-        }
-        $.ajax({
-          url: "/ajax_adm_activity/updateMDStatus",
-          type: "post",
-          data: {
-            attendeeId: this.id,
-            MDNonMD: mdStatus
-          },
-          success: function(data) {
-            return console.log(data);
-          }
-        });
-        return;
-        return this;
-      });
     },
     tagName: "tr",
     className: "personRow AllAttendees js-all-attendee",
@@ -106,17 +85,25 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       self.trigger("row_selected");
     },
     toggleMD: function() {
+      var curr;
+      curr = this;
       if (this.model.get("ISMD")) {
         this.model.set({
-          "ISMD": false
+          "ISMD": false,
+          "MDFLAG": "N"
         });
       } else {
         this.model.set({
-          "ISMD": true
+          "ISMD": true,
+          "MDFLAG": "Y"
         });
       }
-      this.render();
-      self.trigger("participant_md_toggled");
+      this.model.save({}, {
+        success: function() {
+          self.trigger("participant_md_toggled");
+          return curr.render();
+        }
+      });
     }
   });
 });

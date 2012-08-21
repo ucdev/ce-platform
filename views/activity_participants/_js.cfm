@@ -14,8 +14,6 @@
 <script>
 $(document).ready(function() {
 	ce.activity.participants.load({
-		records: #serializeJson(attendees)#,
-		modelData:#serializeJson(qActivityCredits)#,
 		legacy:{
 			AddlAttendees:0,
 			MaxRegistrants:0,

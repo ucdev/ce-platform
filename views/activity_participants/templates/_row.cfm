@@ -11,7 +11,7 @@
     <% } else { %>
         <span class="js-attendee-name"><%= FULLNAME %></span>
     <% } %>
-    <div class="attendee-status" id="attendee-status-<%= ATTENDEEID %>"><%= STATUSNAME %></div>
+    <div class="attendee-status js-attendee-status" id="attendee-status-<%= ATTENDEEID %>"><%= STATUSNAME %></div>
 </td>
 <td class="js-status-date" id="StatusDate-<%= ATTENDEEID %>" valign="top"></td>
 <td valign="top" class="user-actions-outer">

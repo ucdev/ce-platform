@@ -29,20 +29,13 @@ drawRoutes()
 	.end()
 	
 	.resources("credit_requests")
-	//.resources("activity_participants")
+	.resources("activity_participants")
 	.resources("activities")
 	.resources("people")
 	
 	// api
 	.namespace("api")
-		.controller("activity_participants")
-			.get("new")
-			.get(name="show", pattern="show/[key]")
-			.get(name="edit", pattern="edit/[key]")
-			.put(name="update", pattern="update/[key]")
-			.delete(name="delete", pattern="delete/[key]")
-			.root(action="index")
-		.end()
+		.resources("activity_participants")
 	.end()
 	
 	.match(name="home", pattern="", controller="main", action="home")

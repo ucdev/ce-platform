@@ -32,6 +32,8 @@ Backbone.Paginator.clientPager.prototype.whereExpanded = function(attrs) {
   });
 };
 
+Backbone.emulateJSON = true;
+
 ce.on("loaded", function() {
   return ce.log.info("app: started");
 });

@@ -207,7 +207,7 @@
 		LEFT OUTER JOIN 
 			ce_Sys_AttendeeStatus ats ON ats.AttendeeStatusID = att.StatusID
 		WHERE     
-			(A.DeletedFlag='N')
+			(A.DeletedFlag='N') AND (A.Deleted IS NULL)
 		<cfif structKeyExists(arguments,"AttendeeID") and len(arguments.AttendeeID)>
 			AND	att.AttendeeID = <cfqueryparam value="#arguments.AttendeeID#" CFSQLType="cf_sql_integer" />
 		</cfif>

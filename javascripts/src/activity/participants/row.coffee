@@ -2,22 +2,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
     self.Row = Backbone.View.extend
         initialize: ->
             @model.on "change:ISSELECTED", @determineSelectedStatus, @
-            @model.on "change:ISMD", ->
-                if @get "ISMD"
-                    mdStatus = "y"
-                else
-                    mdStatus = "n"
-
-                $.ajax
-                    url: "/ajax_adm_activity/updateMDStatus"
-                    type: "post"
-                    data: 
-                        attendeeId: @id
-                        MDNonMD: mdStatus
-                    success: (data) ->
-                        console.log data
-                return
-                @
+            #self.on "change:ISMD", @toggleMD, @
             return
 
         tagName: "tr"
@@ -121,12 +106,21 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
             return
 
         toggleMD: ->
+            curr = @
             if @model.get "ISMD"
-                @model.set "ISMD": false
+                @model.set 
+                    "ISMD": false
+                    "MDFLAG": "N"
             else
-                @model.set "ISMD": true
+                @model.set
+                    "ISMD": true
+                    "MDFLAG": "Y"
 
-            @render()
+            @model.save(
+                {}
+                success: ->
+                    self.trigger "participant_md_toggled"
+                    curr.render()
+                )
 
-            self.trigger "participant_md_toggled"
             return

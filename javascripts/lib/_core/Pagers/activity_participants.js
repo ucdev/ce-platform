@@ -4,9 +4,9 @@ ce.module("_core.pagers", function(self, ce, Backbone, Marionette, $, _, models)
   self.clientActivity_participants = Backbone.Paginator.clientPager.extend({
     initialize: function() {},
     paginator_core: {
-      type: 'post',
+      type: 'get',
       dataType: 'json',
-      url: '/activity_participants/loadData'
+      url: '/api/activity_participants/'
     },
     paginator_ui: {
       firstPage: 1,
@@ -22,9 +22,9 @@ ce.module("_core.pagers", function(self, ce, Backbone, Marionette, $, _, models)
   return self.requestActivity_participants = Backbone.Paginator.requestPager.extend({
     initialize: function() {},
     paginator_core: {
-      type: 'post',
+      type: 'get',
       dataType: 'json',
-      url: '/activity_participants/loadData'
+      url: '/api/activity_participants/'
     },
     paginator_ui: {
       firstPage: 1,

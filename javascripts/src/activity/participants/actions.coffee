@@ -22,7 +22,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 		changeParticipantStatus: (e) ->
 			newStatusId = parseInt e.currentTarget.id.split("-")[2]
 			selectedParticipants = @collection.getSelected()
-
+			
 			# LOOP OVER SELECTED PARTICIPANTS
 			_.forEach selectedParticipants, (model) ->
 				# UPDATE STATUS INFORMATION

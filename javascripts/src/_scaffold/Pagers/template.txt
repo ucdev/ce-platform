@@ -3,9 +3,9 @@ ce.module "_core.pagers", (self, ce, Backbone, Marionette, $, _, models) ->
 	self.client<%= loc.nameInPluralUppercase =%> = Backbone.Paginator.clientPager.extend
 		initialize: ->
 		paginator_core:
-			type: 'post'
+			type: 'get'
 			dataType: 'json'
-			url:'/<%= loc.nameInPluralLowercase =%>/loadData'
+			url:'/api/<%= loc.nameInPluralLowercase =%>/'
 		paginator_ui:
 			firstPage: 1
 			currentPage: 1
@@ -17,9 +17,9 @@ ce.module "_core.pagers", (self, ce, Backbone, Marionette, $, _, models) ->
 	self.request<%= loc.nameInPluralUppercase =%> = Backbone.Paginator.requestPager.extend
 		initialize: ->
 		paginator_core:
-			type: 'post'
+			type: 'get'
 			dataType: 'json'
-			url:'/<%= loc.nameInPluralLowercase =%>/loadData'
+			url:'/api/<%= loc.nameInPluralLowercase =%>/'
 		paginator_ui:
 			firstPage: 1
 			currentPage: 1

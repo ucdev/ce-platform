@@ -23,7 +23,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 				"$top": ->
 					@totalPages * @perPage
 					return
-				"activityId": self.details.activityId
+				"key": self.details.activityId
 				"orderby": "fullName"
 				"$skip": ->
 					@totalPages * @perPage

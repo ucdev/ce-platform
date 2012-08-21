@@ -23,7 +23,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         "$top": function() {
           this.totalPages * this.perPage;
         },
-        "activityId": self.details.activityId,
+        "key": self.details.activityId,
         "orderby": "fullName",
         "$skip": function() {
           this.totalPages * this.perPage;
