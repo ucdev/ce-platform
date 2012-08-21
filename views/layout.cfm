@@ -22,14 +22,14 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
 	
-	#javaScriptIncludeTag(bundle="ce")#
+	<script data-main="javascripts/app/bootloader" src="javascripts/libs/require-jquery.js"></script>
 	</cfoutput>
 </head>
 <cfoutput>
 <body data-version_token="#params.version_token#">
 	<script>
-	ce.start();
-	ce.user.load(#serializeJson(userInfo)#);
+	//ce.start('#lcase(params.controller)#');
+	// ce.user.load(#serializeJson(userInfo)#);
 	</script>
 	<div id="app">
 		#includePartial(partial="/header")#
