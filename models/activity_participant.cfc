@@ -2,6 +2,7 @@
     <cffunction name="init">
         <cfset table("ce_Attendee")>
         <cfset property(name="id", column="AttendeeID") />
+        <cfset belongsTo(name="AttendeeStatus", modelName="Sys_AttendeeStatus", foreignKey="statusId") />
         <!---<cfset setPrimaryKey(property="id") />--->
     </cffunction>
     

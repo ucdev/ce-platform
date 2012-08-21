@@ -3,7 +3,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 		template: "activity_participants-statusdate"
 		initialize: ->
 			@model.on "change", @render, @
-			@model.on "change:CURRSTATUSID", @updateParentModel, @
+			#@model.on "change:CURRSTATUSID", @updateParentModel, @
 
 			return
 
@@ -83,6 +83,6 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 
 			# UPDATE MODEL INFO
 			@model.set
-				CURRSTATUSID: parseInt $(arguments[0].currentTarget).attr("id").split("-")[1]
+				STATUSID: parseInt $(arguments[0].currentTarget).attr("id").split("-")[1]
 
 			return

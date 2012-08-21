@@ -68,7 +68,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         return this.information.totalUnfilteredRecords;
       }
     });
-    models.Activity_participant.prototype.idAttribute = "ATTENDEEID";
+    models.Activity_participant.prototype.idAttribute = "ID";
     self.collection = new self.paginatorCollection;
     self.StatusDateModel = models.Activity_participant.extend({
       url: "/ajax_adm_activity/saveAttendeeDate"

@@ -47,7 +47,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 			getTotalCount: ->
 				return @information.totalUnfilteredRecords
 				
-		models.Activity_participant.prototype.idAttribute = "ATTENDEEID"
+		models.Activity_participant.prototype.idAttribute = "ID"
 		
 		# CREATE COLLECTION
 		self.collection = new self.paginatorCollection

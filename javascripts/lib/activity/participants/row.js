@@ -12,13 +12,13 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       var attributesToPass, statusDateEl;
       statusDateEl = this.$el.find(".js-status-date");
       attributesToPass = {
+        ID: this.model.get("ID"),
         STATUSID: this.model.get("STATUSID"),
-        ATTENDEEID: this.model.get("ATTENDEEID"),
-        COMPLETEDATE: this.model.get("COMPLETEDATE"),
-        CURRSTATUSDATE: this.model.get("CURRSTATUSDATE"),
-        CURRSTATUSID: this.model.get("CURRSTATUSID"),
-        REGISTERDATE: this.model.get("REGISTERDATE"),
-        TERMDATE: this.model.get("TERMDATE")
+        PARENTSTATUSID: this.model.get("STATUSID"),
+        COMPLETEDATE: Date(this.model.get("COMPLETEDATE")),
+        STATUSNAME: this.model.get("NAME"),
+        REGISTERDATE: Date(this.model.get("REGISTERDATE")),
+        TERMDATE: Date(this.model.get("TERMDATE"))
       };
       this.statusDate = new self.StatusDate({
         el: statusDateEl,

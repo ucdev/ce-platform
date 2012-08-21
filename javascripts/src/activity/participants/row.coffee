@@ -12,15 +12,15 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
         # BIND EXTRANEOUS VIEWS THAT ARE CONTAINED WITHIN THE ROW
         bindViews: ->
             # ESTABLISHES THE STATUSDATE VIEW
-            statusDateEl = @$el.find(".js-status-date")
+            statusDateEl = @$el.find ".js-status-date"
             attributesToPass = 
-                STATUSID: @model.get("STATUSID")
-                ATTENDEEID: @model.get("ATTENDEEID")
-                COMPLETEDATE: @model.get("COMPLETEDATE")
-                CURRSTATUSDATE: @model.get("CURRSTATUSDATE")
-                CURRSTATUSID: @model.get("CURRSTATUSID")
-                REGISTERDATE: @model.get("REGISTERDATE")
-                TERMDATE: @model.get("TERMDATE")
+                ID: @model.get "ID"
+                STATUSID: @model.get "STATUSID"
+                PARENTSTATUSID: @model.get "STATUSID"
+                COMPLETEDATE: Date(@model.get "COMPLETEDATE")
+                STATUSNAME: @model.get "NAME"
+                REGISTERDATE: Date(@model.get "REGISTERDATE")
+                TERMDATE: Date(@model.get "TERMDATE")
 
             @statusDate = new self.StatusDate(
                 el: statusDateEl

@@ -5,7 +5,6 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     template: "activity_participants-statusdate",
     initialize: function() {
       this.model.on("change", this.render, this);
-      this.model.on("change:CURRSTATUSID", this.updateParentModel, this);
     },
     model: self.StatusDateModel,
     events: {
@@ -71,7 +70,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       var container;
       container = this.$el.find(".js-current-view-status-date");
       this.model.set({
-        CURRSTATUSID: parseInt($(arguments[0].currentTarget).attr("id").split("-")[1])
+        STATUSID: parseInt($(arguments[0].currentTarget).attr("id").split("-")[1])
       });
     }
   });
