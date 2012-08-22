@@ -4,16 +4,29 @@
     <input type="hidden" class="PERSONID" value="<%= PERSONID %>" />
 </td>
 <td><img src="/images/no-photo/person_i.png">
-    <% if(MDFLAG == "Y") { %><div style="position: relative;"><span class="badge badge-important" style="position: absolute; left: 30px; bottom: 0px;">MD</span></div><% } %></td>
+    <% if(MDFLAG.toUpperCase() == "Y") { %><div style="position: relative;"><span class="badge badge-important" style="position: absolute; left: 30px; bottom: 0px;">MD</span></div><% } %>
+</td>
 <td valign="top" nowrap="nowrap">
     <% if(PERSONID > 0) { %>
         <a href="/people/edit/<%= PERSONID %>" class="PersonLink" id="PERSON|<%= PERSONID %>|<%= LASTNAME %>, <%= FIRSTNAME %>"><span class="js-attendee-name"><%= LASTNAME %>, <%= FIRSTNAME %></span></a>
     <% } else { %>
-        <span class="js-attendee-name"><%= FULLNAME %></span>
+        <span class="js-attendee-name"><%= LASTNAME %>, <%= FIRSTNAME %></span>
     <% } %>
-    <div class="attendee-status js-attendee-status" id="attendee-status-<%= ID %>"><%= NAME %></div>
+    <!--- <div class="attendee-status js-attendee-status" id="attendee-status-<%= ID %>"><%= NAME %></div> --->
 </td>
-<td class="js-status-date" id="StatusDate-<%= ID %>" valign="top"></td>
+<td class="js-status-date" id="StatusDate-<%= ID %>" valign="top">
+    <% formattedCompleteDate = Date(COMPLETEDATE).split(" ") %>
+    <% formattedRegisterDate = Date(REGISTERDATE).split(" ") %>
+    <% formattedTermDate = Date(TERMDATE).split(" ") %>
+    <%= NAME %>
+    <% if(STATUSID == 1) { %>
+        (<%= formattedCompleteDate[1] + " " + formattedCompleteDate[2] + ", " + formattedCompleteDate[3] %>)
+    <% } else if(STATUSID == 3) { %>
+        (<%= formattedRegisterDate[1] + " " + formattedRegisterDate[2] + ", " + formattedRegisterDate[3] %>)
+    <% } else if(STATUSID == 4) { %>
+        (<%= formattedTermDate[1] + " " + formattedTermDate[2] + ", " + formattedTermDate[3] %>)
+    <% } %>
+</td>
 <td valign="top" class="user-actions-outer">
 <% if(PERSONID > 0) { %>
     <div class="btn-group user-actions action-menu pull-left">

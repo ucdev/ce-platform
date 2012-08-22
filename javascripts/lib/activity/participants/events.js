@@ -5,7 +5,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     ce.log.info("participants: bottom bar loaded");
   });
   self.on("collection_rendered", function() {
-    return ce.log.info("participants: collection rendered");
+    ce.log.info("participants: collection rendered");
   });
   self.on("filter_loaded", function() {
     ce.log.info("participants: filter loaded");
@@ -13,23 +13,35 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
   self.on("page_loaded", function() {
     ce.log.info("participants: page ready");
   });
-  self.on("participant_saved", function(data) {
-    ce.log.info("participant: saved");
+  self.on("participant_md_toggled", function() {
+    ce.log.info("participant: updated MD status");
   });
-  self.on("participant_removed", function(data) {
+  self.on("participant_removed", function() {
     ce.log.info("participant: removed");
   });
-  self.on("participant_reset", function(data) {
+  self.on("participant_reset", function() {
     ce.log.info("participant: reset");
   });
-  self.on("participant_md_toggled", function() {
-    return ce.log.info("participant: updated MD status");
+  self.on("participant_saved", function() {
+    ce.log.info("participant: saved");
+  });
+  self.on("participant_status_updated", function(name) {
+    ce.log.info("participants: statuses updated to " + name);
   });
   self.on("participants_filtered", function(name) {
-    return ce.log.info("participants: filter by " + name);
+    ce.log.info("participants: filter by " + name);
   });
   self.on("participants_loaded", function() {
     ce.log.info("participants: loaded");
+  });
+  self.on("participants_removed", function(participants) {
+    ce.log.info("participants: " + participants.length + " removed");
+  });
+  self.on('printer_loaded', function() {
+    ce.log.info("printer: loaded");
+  });
+  self.on('printer_printed', function() {
+    ce.log.info("printer: job done");
   });
   self.on("selectallcheckbox_rendered", function() {
     return ce.log.info("participants: select all checkbox loaded");

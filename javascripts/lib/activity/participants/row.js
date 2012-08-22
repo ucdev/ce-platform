@@ -4,6 +4,9 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
   return self.Row = Backbone.View.extend({
     initialize: function() {
       this.model.on("change:ISSELECTED", this.determineSelectedStatus, this);
+      this.model.on("fetch", this.render, this);
+      self.on("participant_reset participant_md_toggled participant_status_updated", this.render, this);
+      self.on("participant_removed", this.remove, this);
     },
     tagName: "tr",
     className: "personRow AllAttendees js-all-attendee",
@@ -20,11 +23,6 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         REGISTERDATE: Date(this.model.get("REGISTERDATE")),
         TERMDATE: Date(this.model.get("TERMDATE"))
       };
-      this.statusDate = new self.StatusDate({
-        el: statusDateEl,
-        model: new self.StatusDateModel(attributesToPass),
-        parentModel: this.model
-      }).render();
     },
     events: {
       "change .js-participant-checkbox": "selectRow",
@@ -61,12 +59,38 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       return this;
     },
     removeUser: function() {
-      this.model.destroy();
-      self.trigger("participant_removed");
+      var curr;
+      curr = this;
+      if (confirm("Are you sure you want to remove " + this.model.get("FIRSTNAME") + " " + this.model.get("LASTNAME") + " from the activity?")) {
+        this.model.destroy({
+          wait: true,
+          success: function(model) {
+            self.trigger("participant_removed", model);
+          }
+        });
+      }
     },
     resetUser: function() {
-      this.render();
-      self.trigger("participant_reset");
+      var updatedValues;
+      if (confirm("Are you sure you want to reset the participant information for " + this.model.get("FIRSTNAME") + " " + this.model.get("LASTNAME"))) {
+        updatedValues = {
+          NAME: "Registered",
+          STATUSID: 3,
+          COMPLETEDATE: "",
+          TERMDATE: ""
+        };
+        if (confirm("Do you want to clear all payment information regarding " + this.model.get("FIRSTNAME") + " " + this.model.get("LASTNAME") + " for this activity?")) {
+          updatedValues.PAYMENTFLAG = "N";
+          updatedValues.PAYMENTAMOUNT = "";
+          updatedValues.PAYORDERNO = "";
+          updatedValues.PAYMENTDATE = "";
+        }
+        this.model.save(updatedValues, {
+          success: function() {
+            return self.trigger("participant_reset");
+          }
+        });
+      }
     },
     selectRow: function(e) {
       if (this.$el.find(".js-participant-checkbox").is(":checked")) {
@@ -85,24 +109,20 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       self.trigger("row_selected");
     },
     toggleMD: function() {
-      var curr;
+      var curr, newMDFlag;
       curr = this;
-      if (this.model.get("ISMD")) {
-        this.model.set({
-          "ISMD": false,
-          "MDFLAG": "N"
-        });
+      if (this.model.get("MDFLAG").toUpperCase() === "Y") {
+        newMDFlag = "N";
       } else {
-        this.model.set({
-          "ISMD": true,
-          "MDFLAG": "Y"
-        });
+        newMDFlag = "Y";
       }
-      this.model.save({}, {
+      this.model.save({
+        MDFLAG: newMDFlag
+      }, {
         success: function() {
-          self.trigger("participant_md_toggled");
-          return curr.render();
-        }
+          return self.trigger("participant_md_toggled");
+        },
+        error: function() {}
       });
     }
   });

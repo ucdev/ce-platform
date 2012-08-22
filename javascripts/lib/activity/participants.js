@@ -36,17 +36,20 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       },
       getCompleteCount: function() {
         return this.whereExpanded({
-          ISSTATUS1: true
+          STATUSID: 1
         }).length;
+      },
+      getFilteredCount: function() {
+        return this.sortedAndFilteredModels.length;
       },
       getInProgressCount: function() {
         return this.whereExpanded({
-          ISSTATUS2: true
+          STATUSID: 2
         }).length;
       },
       getRegisterCount: function() {
         return this.whereExpanded({
-          ISSTATUS3: true
+          STATUSID: 3
         }).length;
       },
       getSelected: function() {
@@ -61,7 +64,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       },
       getTermCount: function() {
         return this.whereExpanded({
-          ISSTATUS4: true
+          STATUSID: 4
         }).length;
       },
       getTotalCount: function() {
@@ -70,6 +73,12 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     });
     models.Activity_participant.prototype.idAttribute = "ID";
     self.collection = new self.paginatorCollection;
+    self.on("participant_removed participants_removed", function(models) {
+      _.forEach(models, function(model) {
+        self.collection.origModels.splice(self.collection.origModels.indexOf(model), 1);
+      });
+      self.collection.goTo(self.collection.currentPage);
+    });
     self.StatusDateModel = models.Activity_participant.extend({
       url: "/ajax_adm_activity/saveAttendeeDate"
     });
@@ -82,16 +91,36 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     self.loader.start();
     self.on("data_loaded", function() {
       self.loader.stop();
+      self.adder = new self.Adder({
+        el: ".js-add-participant",
+        collection: self.collection,
+        defaults: {
+          ID: 0,
+          COMPLETEDATE: "",
+          FIRSTNAME: "",
+          LASTNAME: "",
+          NAME: "",
+          MDFLAG: "N",
+          PERSONID: 0,
+          REGISTERDATE: "",
+          STATUSID: 3,
+          TERMDATE: ""
+        }
+      }).render();
+      self.printer = new self.Printer({
+        el: ".js-printer",
+        collection: self.collection
+      }).render();
       self.actions = new self.Actions({
         el: ".js-partic-actions",
         collection: self.collection
       }).render();
-      self.pager = new ce.ui.Pager({
-        el: ".js-pager-container",
-        collection: self.collection
-      }).render();
       self.filter = new self.Filter({
         el: ".js-attendee-filter",
+        collection: self.collection
+      }).render();
+      self.pager = new ce.ui.Pager({
+        el: ".js-pager-container",
         collection: self.collection
       }).render();
     });

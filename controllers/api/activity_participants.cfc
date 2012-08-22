@@ -4,10 +4,26 @@
 	</cffunction>
 	
 	<cffunction name="create">
+		<cfcontent type="text/javascript" />
+
+		<cfset object = model("Activity_participant").new(include="AttendeeStatus", returnAs="query")>
+
+		<cfreturn renderText(serializeJSON(queryToStruct(object))) />
 	</cffunction>
 
 	<cffunction name="delete">
-		<cfset renderText("DELETE IN") />
+		<cfcontent type="text/javascript" />
+
+		<cfset $cleanupParams() />
+
+		<cfset object = model("Activity_participant").findByKey(key=params.key, include="AttendeeStatus") />
+
+		<cfif object.delete()>
+			<cfset object = model("Activity_participant").findByKey(key=params.key, include="AttendeeStatus", returnAs="query") />
+			<cfreturn renderText(serializeJSON(queryToStruct(object))) />
+		<cfelse>
+			<cfreturn renderText(params) />
+		</cfif>
 	</cffunction>
 
 	<cffunction name="index">
@@ -19,20 +35,27 @@
 	</cffunction>
 
 	<cffunction name="show">
+		<cfcontent type="text/javascript" />
+
 		<cfset $cleanupParams() />
 
-		<cfset model = model("Activity_participant").findOneById(params.key)>
+		<cfset object = model("Activity_participant").findByKey(key=params.key, include="AttendeeStatus", returnAs="query") />
 
-		<cfreturn renderText(serializeJSON(model.properties())) />
+		<cfreturn renderText(serializeJSON(queryToStruct(object))) />
 	</cffunction>
 
 	<cffunction name="update">
+		<cfcontent type="text/javascript" />
+
 		<cfset $cleanupParams() />
 
-		<cfset modelTemp = model("Activity_participant").findOneById(params.key)>
+		<cfset object = model("Activity_participant").findByKey(params.key)>
 
-		<cfset modelTemp.save()>
-
-		<cfreturn renderText(model.properties()) />
+		<cfif isObject(object) AND object.update(params)>
+			<cfset object = model("Activity_participant").findByKey(key=params.key, include="AttendeeStatus", returnAs="query") />
+			<cfreturn renderText(serializeJSON(queryToStruct(object))) />
+		<cfelse>
+			<cfreturn renderText(params) />
+		</cfif>
 	</cffunction>
 </cfcomponent>

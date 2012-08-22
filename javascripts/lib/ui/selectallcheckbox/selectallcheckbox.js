@@ -31,7 +31,7 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _, models) {
       return self.trigger("selectallcheckbox_rendered");
     },
     deselectAllParticipants: function() {
-      _.forEach(this.collection.origModels, function(model) {
+      _.forEach(this.collection.sortedAndFilteredModels, function(model) {
         return model.set({
           ISSELECTED: false
         });
@@ -47,14 +47,14 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _, models) {
           return totalSelected++;
         }
       });
-      if (totalSelected === this.collection.perPage) {
+      if (totalSelected === this.collection.perPage || totalSelected === this.collection.models.length) {
         this.$el.find(".js-check-all").attr("checked", true);
       } else {
         this.$el.find(".js-check-all").attr("checked", false);
       }
     },
     selectAllParticipants: function() {
-      _.forEach(this.collection.origModels, function(model) {
+      _.forEach(this.collection.sortedAndFilteredModels, function(model) {
         return model.set({
           ISSELECTED: true
         });
@@ -80,7 +80,7 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _, models) {
         });
         self.trigger("selectallcheckbox_selectvisible");
       } else {
-        if (this.collection.getSelectedCount() === this.collection.getTotalCount()) {
+        if (this.collection.getSelectedCount() === this.collection.getFilteredCount()) {
           this.$el.qtip("option", "content.text", _.template(ce.templates.get(this.qtipDeselectTemplate)));
           this.$el.qtip("show");
           $($.find("a.js-deselect-all-participants")).click(function() {

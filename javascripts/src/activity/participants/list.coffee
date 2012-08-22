@@ -5,6 +5,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 			coll = @collection
 			coll.on "add", @addOne, @
 			coll.on "reset", @addAll, @
+			coll.on "remove", @render, @
 
 			self.on "participants_filtered", @render, @
 			self.on "pager_next", @render, @

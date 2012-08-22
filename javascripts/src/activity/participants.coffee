@@ -33,17 +33,19 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 				"currentPage": self.details.nPageNo
 				"perPage": 15
 			getCompleteCount: ->
-				return @whereExpanded(ISSTATUS1: true).length
+				return @whereExpanded(STATUSID: 1).length
+			getFilteredCount: ->
+				return @sortedAndFilteredModels.length
 			getInProgressCount: ->
-				return @whereExpanded(ISSTATUS2: true).length
+				return @whereExpanded(STATUSID: 2).length
 			getRegisterCount: ->
-				return @whereExpanded(ISSTATUS3: true).length
+				return @whereExpanded(STATUSID: 3).length
 			getSelected: ->
 				return @whereExpanded(ISSELECTED: true)
 			getSelectedCount: ->
 				return @whereExpanded(ISSELECTED: true).length
 			getTermCount: ->
-				return @whereExpanded(ISSTATUS4: true).length
+				return @whereExpanded(STATUSID: 4).length
 			getTotalCount: ->
 				return @information.totalUnfilteredRecords
 				
@@ -51,6 +53,17 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 		
 		# CREATE COLLECTION
 		self.collection = new self.paginatorCollection
+
+		# PROVIDE MODEL REMOVING FUNCTIONALITY TO COLLECTIOn
+		self.on "participant_removed participants_removed", (models) ->
+			_.forEach models, (model) ->
+				# REMOVE THE MODEL FROM THE FULL MODELS LIST
+				self.collection.origModels.splice self.collection.origModels.indexOf(model), 1
+				return
+
+			# RELOAD THE PAGE
+			self.collection.goTo self.collection.currentPage
+			return
 
 		self.StatusDateModel = models.Activity_participant.extend
 			url: "/ajax_adm_activity/saveAttendeeDate"
@@ -67,22 +80,42 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 		
 		# BUILD PAGER AND FILTER
 		self.on "data_loaded", -> # EVENT BOUND TO BE CALLED AFTER THE COLLECTION FETCH IS SUCCESSFUL
-			
 			# REMOVE LOADER
 			self.loader.stop()
+
+			self.adder = new self.Adder(
+				el: ".js-add-participant"
+				collection: self.collection
+				defaults: 
+					ID: 0
+					COMPLETEDATE: ""
+					FIRSTNAME: ""
+					LASTNAME: ""
+					NAME: ""
+					MDFLAG: "N"
+					PERSONID: 0
+					REGISTERDATE: ""
+					STATUSID: 3
+					TERMDATE: ""
+				).render()
+
+			self.printer = new self.Printer(
+				el: ".js-printer"
+				collection: self.collection
+				).render()
 
 			self.actions = new self.Actions(
 				el: ".js-partic-actions"
 				collection: self.collection
 				).render()
 
-			self.pager = new ce.ui.Pager(
-				el: ".js-pager-container"
+			self.filter = new self.Filter(
+				el: ".js-attendee-filter"
 				collection: self.collection
 				).render()
 
-			self.filter = new self.Filter(
-				el: ".js-attendee-filter"
+			self.pager = new ce.ui.Pager(
+				el: ".js-pager-container"
 				collection: self.collection
 				).render()
 			return

@@ -37,7 +37,7 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _, models) ->
 		# SELECTS EVERY MODEL OF DATA WTIHIN THE COLLECTION
 		deselectAllParticipants: ->
 			# LOOP OVER ENTIRE COLLECTION
-			_.forEach @collection.origModels, (model) ->
+			_.forEach @collection.sortedAndFilteredModels, (model) ->
 				# SET ISSELECTED AS FALSE
 				model.set ISSELECTED: false
 
@@ -57,7 +57,7 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _, models) ->
 					totalSelected++
 
 			# DETERMINE IF ALL MODELS WERE MARKED SELECTED
-			if totalSelected == @collection.perPage
+			if totalSelected == @collection.perPage || totalSelected == @collection.models.length
 				# MARK SELECTALL CHECKBOX AS CHECKED
 				@$el.find(".js-check-all").attr "checked", true
 			else
@@ -68,7 +68,7 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _, models) ->
 		# SELECTS EVERY MODEL OF DATA WTIHIN THE COLLECTION
 		selectAllParticipants: ->
 			# LOOP OVER ENTIRE COLLECTION
-			_.forEach @collection.origModels, (model) ->
+			_.forEach @collection.sortedAndFilteredModels, (model) ->
 				# SET ISSELECTED AS TRUE
 				model.set ISSELECTED: true
 
@@ -107,7 +107,8 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _, models) ->
 
 				self.trigger "selectallcheckbox_selectvisible"
 			else
-				if @collection.getSelectedCount() == @collection.getTotalCount()
+				# DETERMINE IF THE TOTAL SELECTED MATCHES THAT OF THE TOTAL CURRENTLY FILTERED
+				if @collection.getSelectedCount() == @collection.getFilteredCount()
 					# UPDATE QTIP CONTENT
 					@$el.qtip "option", "content.text", _.template ce.templates.get @qtipDeselectTemplate
 

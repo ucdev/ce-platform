@@ -7,6 +7,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       coll = this.collection;
       coll.on("add", this.addOne, this);
       coll.on("reset", this.addAll, this);
+      coll.on("remove", this.render, this);
       self.on("participants_filtered", this.render, this);
       self.on("pager_next", this.render, this);
       self.on("pager_prev", this.render, this);

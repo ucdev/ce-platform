@@ -81,7 +81,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 		updateViewAttendeeStatuses: ->
 			container = @$el.find(".js-current-view-status-date")
 
-			# UPDATE MODEL INFO
+			# UPDATE MODEL INFO <- THIS IS WHERE I LEFT OFF TRYING TO UPDATE THE VIEW TO PORTRAY STATUS CHANGE
 			@model.set
 				STATUSID: parseInt $(arguments[0].currentTarget).attr("id").split("-")[1]
 

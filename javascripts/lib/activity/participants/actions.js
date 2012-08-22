@@ -18,50 +18,35 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       return this.$el.find(".js-action-menu-label").removeClass("disabled");
     },
     changeParticipantStatus: function(e) {
-      var newStatusId, selectedParticipants;
+      var newStatusId, newStatusName, selectedParticipants;
       newStatusId = parseInt(e.currentTarget.id.split("-")[2]);
       selectedParticipants = this.collection.getSelected();
+      switch (newStatusId) {
+        case 1:
+          newStatusName = "Complete";
+          break;
+        case 2:
+          newStatusName = "In Progress";
+          break;
+        case 3:
+          newStatusName = "Registered";
+          break;
+        case 4:
+          newStatusName = "Terminated";
+      }
       _.forEach(selectedParticipants, function(model) {
-        switch (newStatusId) {
-          case 1:
-            model.set({
-              STATUSID: 1,
-              ISSTATUS1: true,
-              ISSTATUS2: false,
-              ISSTATUS3: false,
-              ISSTATUS4: false
-            });
-            break;
-          case 2:
-            model.set({
-              STATUSID: 2,
-              ISSTATUS1: false,
-              ISSTATUS2: true,
-              ISSTATUS3: false,
-              ISSTATUS4: false
-            });
-            break;
-          case 3:
-            model.set({
-              STATUSID: 3,
-              ISSTATUS1: false,
-              ISSTATUS2: false,
-              ISSTATUS3: true,
-              ISSTATUS4: false
-            });
-            break;
-          case 4:
-            model.set({
-              STATUSID: 4,
-              ISSTATUS1: false,
-              ISSTATUS2: false,
-              ISSTATUS3: false,
-              ISSTATUS4: true
-            });
-        }
-        model.save();
+        model.save({
+          STATUSID: newStatusId,
+          NAME: newStatusName,
+          ISSELECTED: false
+        }, {
+          success: function(obj) {
+            obj.fetch();
+            self.trigger("participant_status_updated", newStatusName);
+            return ce.ui.trigger("selected_count_changed");
+          }
+        });
       });
-      self.trigger("actions_status_changed");
     },
     deactivateMenu: function() {
       this.$el.find(".js-action-menu-button").addClass("disabled");
@@ -73,10 +58,18 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       console.log(certType);
     },
     removeParticipants: function() {
+      var selectedParticipants;
       if (confirm("Are you sure you wish to remove " + this.collection.getSelectedCount() + " attendees?")) {
-        console.log("Removing attendees...");
+        selectedParticipants = this.collection.getSelected();
+        _.forEach(selectedParticipants, function(model) {
+          return model.destroy({
+            wait: true,
+            success: function(model) {}
+          });
+        });
+        self.trigger("participants_removed", selectedParticipants);
+        ce.ui.trigger("selected_count_changed");
       }
-      self.trigger("actions_participants_removed");
     },
     render: function() {
       var _temp;

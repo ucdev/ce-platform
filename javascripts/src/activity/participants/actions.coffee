@@ -1,122 +1,114 @@
 ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
-	self.Actions = Backbone.View.extend
-		template: "activity_participants-actions"
+    self.Actions = Backbone.View.extend
+        template: "activity_participants-actions"
 
-		initialize: ->
-			ce.ui.on "selected_count_changed", @updateSelectedCount, @
-			self.on "row_selected", @updateSelectedCount, @
-			return
+        initialize: ->
+            ce.ui.on "selected_count_changed", @updateSelectedCount, @
+            self.on "row_selected", @updateSelectedCount, @
+            return
 
-		events:
-			"click .js-change-status": "changeParticipantStatus"
-			"click .js-print-certificate": "printCertificate"
-			"click .js-remove-participants": "removeParticipants"
-			"click .js-unselect-participants": "unselectParticipants"
+        events:
+            "click .js-change-status": "changeParticipantStatus"
+            "click .js-print-certificate": "printCertificate"
+            "click .js-remove-participants": "removeParticipants"
+            "click .js-unselect-participants": "unselectParticipants"
 
-		# ENABLE THE ACTIONS MENU
-		activateMenu: ->
-			@$el.find(".js-action-menu-button").removeClass "disabled"
-			@$el.find(".js-action-menu-label").removeClass "disabled"
+        # ENABLE THE ACTIONS MENU
+        activateMenu: ->
+            @$el.find(".js-action-menu-button").removeClass "disabled"
+            @$el.find(".js-action-menu-label").removeClass "disabled"
 
-		# UPDATE SELECTED PARTICIPANTS STATUS ID
-		changeParticipantStatus: (e) ->
-			newStatusId = parseInt e.currentTarget.id.split("-")[2]
-			selectedParticipants = @collection.getSelected()
-			
-			# LOOP OVER SELECTED PARTICIPANTS
-			_.forEach selectedParticipants, (model) ->
-				# UPDATE STATUS INFORMATION
-				switch newStatusId
-					when 1
-						model.set
-							STATUSID: 1
-							ISSTATUS1: true
-							ISSTATUS2: false
-							ISSTATUS3: false
-							ISSTATUS4: false
-					when 2
-						model.set
-							STATUSID: 2
-							ISSTATUS1: false
-							ISSTATUS2: true
-							ISSTATUS3: false
-							ISSTATUS4: false
-					when 3
-						model.set 
-							STATUSID: 3
-							ISSTATUS1: false
-							ISSTATUS2: false
-							ISSTATUS3: true
-							ISSTATUS4: false
-					when 4
-						model.set
-							STATUSID: 4
-							ISSTATUS1: false
-							ISSTATUS2: false
-							ISSTATUS3: false
-							ISSTATUS4: true
+        # UPDATE SELECTED PARTICIPANTS STATUS ID
+        changeParticipantStatus: (e) ->
+            newStatusId = parseInt e.currentTarget.id.split("-")[2]
+            selectedParticipants = @collection.getSelected()
 
-				model.save()
-				return
+            switch newStatusId
+                when 1
+                    newStatusName = "Complete"
+                when 2
+                    newStatusName = "In Progress"
+                when 3
+                    newStatusName = "Registered"
+                when 4
+                    newStatusName = "Terminated"
 
-			# UPDATE MODEL DATA TO REFLECT CHANGE
+            # LOOP OVER SELECTED PARTICIPANTS
+            _.forEach selectedParticipants, (model) ->
+                # UPDATE STATUS INFORMATION
+                model.save(
+                        STATUSID: newStatusId
+                        NAME: newStatusName
+                        ISSELECTED: false
+                    success: (obj) ->
+                        obj.fetch()
+                        self.trigger "participant_status_updated", newStatusName
+                        ce.ui.trigger "selected_count_changed"
+                    )
+                return
+            return
 
-			# SAVE MODEL DATA TO DB
+        # DISABLE THE ACTIONS MENU
+        deactivateMenu: ->
+            @$el.find(".js-action-menu-button").addClass "disabled"
+            @$el.find(".js-action-menu-label").addClass "disabled"
+            return
 
-			self.trigger "actions_status_changed"
-			return
+        # PRINT CERTIFICATES FOR SELECTED PARTICIPANTS
+        printCertificate: (e) ->
+            certType = e.currentTarget.id.split("-")[1]
+            console.log certType
+            return
 
-		# DISABLE THE ACTIONS MENU
-		deactivateMenu: ->
-			@$el.find(".js-action-menu-button").addClass "disabled"
-			@$el.find(".js-action-menu-label").addClass "disabled"
-			return
+        # REMOVE SELECTED PARTICIPANTS FROM THE ACTIVITY
+        removeParticipants: ->
+            if confirm "Are you sure you wish to remove " + @collection.getSelectedCount() + " attendees?"
+                selectedParticipants = @collection.getSelected()
+                
+                _.forEach selectedParticipants, (model) -> 
+                    model.destroy
+                        wait: true
+                        success: (model) ->
+                            return
 
-		# PRINT CERTIFICATES FOR SELECTED PARTICIPANTS
-		printCertificate: (e) ->
-			certType = e.currentTarget.id.split("-")[1]
-			console.log certType
-			return
 
-		# REMOVE SELECTED PARTICIPANTS FROM THE ACTIVITY
-		removeParticipants: ->
-			if confirm "Are you sure you wish to remove " + @collection.getSelectedCount() + " attendees?"
-				console.log "Removing attendees..."
-			self.trigger "actions_participants_removed"
-			return
+                self.trigger "participants_removed", selectedParticipants
+                ce.ui.trigger "selected_count_changed"
 
-		render: ->
-			@$el.empty()
+            return
 
-			_temp = _.template ce.templates.get @template
+        render: ->
+            @$el.empty()
 
-			# RENDER TEMPLATE AND USE AS PAGE HTML
-			@$el.html _temp
+            _temp = _.template ce.templates.get @template
 
-			return @
+            # RENDER TEMPLATE AND USE AS PAGE HTML
+            @$el.html _temp
 
-		unselectParticipants: ->
-			selectedParticipants = @collection.getSelected()
+            return @
 
-			# LOOP OVER SELECTED MODELS
-			_.forEach selectedParticipants, (model) ->
-				# SET ISSELECTED AS FALSE
-				model.set ISSELECTED: false
+        unselectParticipants: ->
+            selectedParticipants = @collection.getSelected()
 
-			ce.ui.trigger "selected_count_changed"
-			return
+            # LOOP OVER SELECTED MODELS
+            _.forEach selectedParticipants, (model) ->
+                # SET ISSELECTED AS FALSE
+                model.set ISSELECTED: false
 
-		# UPDATE THE SELECTED COUNT LABEL WITH THE MOST CURRENT SELECTED PARITCIPANT COUNT
-		updateSelectedCount: ->
-			# GET THE SELECTED COUNT
-			selectedCount = @collection.getSelectedCount()
-			
-			# UPDATE THE SELECTED COUNT
-			@$el.find(".js-attendee-status-selected-count").text selectedCount
+            ce.ui.trigger "selected_count_changed"
+            return
 
-			if selectedCount > 0
-				@activateMenu()
-			else
-				@deactivateMenu()
+        # UPDATE THE SELECTED COUNT LABEL WITH THE MOST CURRENT SELECTED PARITCIPANT COUNT
+        updateSelectedCount: ->
+            # GET THE SELECTED COUNT
+            selectedCount = @collection.getSelectedCount()
+            
+            # UPDATE THE SELECTED COUNT
+            @$el.find(".js-attendee-status-selected-count").text selectedCount
 
-			return
+            if selectedCount > 0
+                @activateMenu()
+            else
+                @deactivateMenu()
+
+            return

@@ -5,7 +5,7 @@
 </a>
 <ul class="dropdown-menu">
     <li><a href="javascript://" class="js-unselect-participants">Clear Selection</a></li>
-    <li><a href="#" class="js-remove-participants">Remove</a></li>
+    <li><a href="javascript://" class="js-remove-participants">Remove</a></li>
     <li class="divider"></li>
     <li class="nav-header">CHANGE STATUSES</li>
     <li><a href="javascript://" class="js-change-status" id="change-status-1">Complete</a></li>

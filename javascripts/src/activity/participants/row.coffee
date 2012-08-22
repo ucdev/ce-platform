@@ -2,7 +2,9 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
     self.Row = Backbone.View.extend
         initialize: ->
             @model.on "change:ISSELECTED", @determineSelectedStatus, @
-            #self.on "change:ISMD", @toggleMD, @
+            @model.on "fetch", @render, @
+            self.on "participant_reset participant_md_toggled participant_status_updated", @render, @
+            self.on "participant_removed", @remove, @
             return
 
         tagName: "tr"
@@ -22,11 +24,12 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
                 REGISTERDATE: Date(@model.get "REGISTERDATE")
                 TERMDATE: Date(@model.get "TERMDATE")
 
-            @statusDate = new self.StatusDate(
-                el: statusDateEl
-                model: new self.StatusDateModel attributesToPass
-                parentModel: @model
-                ).render()
+            # REMOVED TO SIMPLIFY ACTIVITY PARTICIPANTS || 8/23/12 JS
+            # @statusDate = new self.StatusDate(
+            #     el: statusDateEl
+            #     model: new self.StatusDateModel attributesToPass
+            #     parentModel: @model
+            #     ).render()
 
             return
 
@@ -78,13 +81,41 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
             return @
 
         removeUser: ->
-            @model.destroy()
-            self.trigger "participant_removed"
+            curr = @
+            if confirm "Are you sure you want to remove " + @model.get("FIRSTNAME") + " " + @model.get("LASTNAME") + " from the activity?"
+                @model.destroy
+                    wait: true
+                    success: (model) ->
+                        self.trigger "participant_removed", model
+                        return
+
             return
 
         resetUser: ->
-            @render()
-            self.trigger "participant_reset"
+            # CONFIRM THE RESETTING OF THE PARTICIPANT
+            if confirm "Are you sure you want to reset the participant information for " + @model.get("FIRSTNAME") + " " + @model.get "LASTNAME"
+                # RESET VALUES TO REPRESENT INITIAL DATA
+                updatedValues = 
+                    NAME: "Registered"
+                    STATUSID: 3
+                    COMPLETEDATE: ""
+                    TERMDATE: ""
+
+                # DETERMINE IF THE PAYMENT INFO SHOULD ALSO BE RESET
+                if confirm "Do you want to clear all payment information regarding " + @model.get("FIRSTNAME") + " " + @model.get("LASTNAME") + " for this activity?"
+                    # ADD PAYMENT INFORMATION VALUES TO THE RESET VALUES LIST
+                    updatedValues.PAYMENTFLAG = "N"
+                    updatedValues.PAYMENTAMOUNT = ""
+                    updatedValues.PAYORDERNO = ""
+                    updatedValues.PAYMENTDATE = ""
+                
+                # SAVE THE RESET TO THE DB
+                @model.save(
+                    updatedValues
+                    success: ->
+                        self.trigger "participant_reset"
+                    )
+
             return
 
         # USED WHEN THE INDIVIDUAL ROW IS SELECTED
@@ -107,20 +138,16 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 
         toggleMD: ->
             curr = @
-            if @model.get "ISMD"
-                @model.set 
-                    "ISMD": false
-                    "MDFLAG": "N"
+            if @model.get("MDFLAG").toUpperCase() == "Y"
+                newMDFlag = "N"
             else
-                @model.set
-                    "ISMD": true
-                    "MDFLAG": "Y"
+                newMDFlag = "Y"
 
             @model.save(
-                {}
+                { MDFLAG: newMDFlag }
                 success: ->
                     self.trigger "participant_md_toggled"
-                    curr.render()
+                error: ->
                 )
 
             return
