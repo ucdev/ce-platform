@@ -22,23 +22,27 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
 	
-	#javaScriptIncludeTag(bundle="ce")#
+	#javaScriptIncludeTag(sources="vendor/inject/inject")#
+	#javaScriptIncludeTag(sources="app/prereq.js")#
+	
+	<!--[if gte IE 7]>
+	#javaScriptIncludeTag(sources="vendor/inject/inject-ie7")#
+	<![endif]-->
+
+	<script>
+	require.run("app/bootloader");
+	</script>
 	</cfoutput>
 </head>
 <cfoutput>
 <body data-version_token="#params.version_token#">
-	<script>
-	ce.start();
-	ce.user.load(#serializeJson(userInfo)#);
-	</script>
 	<div id="app">
+		<div id="error-output" style="display:none; position:fixed;z-index:100" class="alert alert-error"></div>
+		</div>
 		#includePartial(partial="/header")#
 		#includeContent()#
 		#includePartial(partial="/footer")#
 		
-		<div class="alert alert-error" style="display:none;"></div>
-		<div class="alert alert-success" style="display:none;"></div>
-	</div>
 	
 	<div id="dialog"></div>
 </body>

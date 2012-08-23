@@ -25,6 +25,8 @@
 	<cfreturn $singularizeOrPluralize(text=arguments.word, which="singularize")>
 </cffunction>
 
+<cfset buildCore() />
+
 <cfdirectory action="list" directory="#expandPath('/javascripts/lib/_core/controllers')#" filter="*.js" name="jsList">
 <cfset baseDirPriority = "models,collections,controllers,pagers,routers,views" />
 <cfset baseViewFiles = "row,index,edit,show" />
