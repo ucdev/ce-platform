@@ -16,3 +16,7 @@ We say facebook-esque because each "course" and each "person" has a "page" that 
 * CFWheels (a rails inspired CFML framework for rapid development)
 * RESTful API
 * oAuth2 SSO (Sign-in with <ce_platform>)
+
+##Database
+* SQL Server 2005 *:(*
+* Currently uses our previously designed database we've used for many years.
