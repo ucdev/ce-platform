@@ -18,5 +18,6 @@ We say facebook-esque because each "course" and each "person" has a "page" that 
 * oAuth2 SSO (Sign-in with <ce_platform>)
 
 ##Database
-* SQL Server 2005 *:(*
+* SQL Server 2005 :-/
 * Currently uses our previously designed database we've used for many years.
+* Our database creation is done through DBMigrate now so we should be able to port it to MySQL or something else quite easily with adapters.
