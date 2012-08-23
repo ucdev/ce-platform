@@ -72,7 +72,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
           self.certContainer.html(data);
         },
         error: function() {
-          certContainer.html("FUCK SAKE, MATE");
+          self.certContainer.html("FUCK SAKE, MATE");
         }
       });
       self.certContainer.dialog("show");

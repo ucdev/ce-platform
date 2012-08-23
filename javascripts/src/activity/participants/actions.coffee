@@ -60,7 +60,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
             certType = e.currentTarget.id.split("-")[1]
             selectedParticipants = @collection.getSelected()
             idList = []
-            
+
             _.forEach selectedParticipants, (model) ->
                 idList.push model.id
 
@@ -76,7 +76,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
                     self.certContainer.html data 
                     return
                 error: ->
-                    certContainer.html "FUCK SAKE, MATE"
+                    self.certContainer.html "FUCK SAKE, MATE"
                     return
 
             self.certContainer.dialog "show"
