@@ -2,7 +2,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
     self.Row = Backbone.View.extend
         initialize: ->
             @model.on "change:ISSELECTED", @determineSelectedStatus, @
-            @model.on "fetch", @render, @
+
             self.on "participant_reset participant_md_toggled participant_status_updated", @render, @
             self.on "participant_removed", @remove, @
             return
@@ -34,11 +34,13 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
             return
 
         events:
-            "change .js-participant-checkbox": "selectRow"
             "click .js-delete-link": "deleteRow"
-            "click .js-toggle-md": "toggleMD"
+            "change .js-participant-checkbox": "selectRow"
+            "click .js-print-cme": "printCME"
+            "click .js-print-cne": "printCNE"
             "click .js-remove-user": "removeUser"
             "click .js-reset-user": "resetUser"
+            "click .js-toggle-md": "toggleMD"
 
         # USED WHEN SELECTED FROM AN OUTSIDE ENTITY
         determineSelectedStatus: ->
@@ -50,6 +52,12 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 
         # DELETES MODEL AND ROW FROM COLLECTION
         deleteRow: ->
+            model.destroy
+                wait: true
+                success: (model) ->
+                    return
+
+            self.trigger "participant_removed"
             return
 
         # USED WHEN RENDERING THE VIEW TO DiSPLAY IT AS SELECTED OR WHEN BEING MODIFIED FROM OUTSIDE ENTITY
@@ -62,6 +70,44 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
         markUnselected: ->
             @$el.find(".js-participant-checkbox").attr "checked", false
             @$el.removeClass "alert-info"
+            return
+
+        printCME: ->
+            self.certContainer.empty()
+
+            certContent = $.ajax
+                url: "/reports/cmecert"
+                type: "post"
+                data:
+                    selectedattendees: @model.id
+                dataType: "json"
+                success: (data) ->
+                    self.certContainer.html data 
+                    return
+                error: ->
+                    self.certContainer.html "FUCK SAKE, MATE"
+                    return
+
+            self.certContainer.dialog "show"
+            return
+
+        printCNE: ->
+            self.certContainer.empty()
+
+            certContent = $.ajax
+                url: "/reports/cnecert"
+                type: "post"
+                data:
+                    selectedattendees: @model.id
+                dataType: "json"
+                success: (data) ->
+                    self.certContainer.html data 
+                    return
+                error: ->
+                    self.certContainer.html "FUCK SAKE, MATE"
+                    return
+
+            self.certContainer.dialog "show"
             return
 
         render: ->
@@ -133,6 +179,10 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
                 # SETS SELECTED PROPERTY TO FALSE
                 @model.set "ISSELECTED": false, silent: true
 
+                if typeof @model.collection.filterFields != "undefined"
+                    if @model.collection.filterFields[0] == "ISSELECTED"
+                        self.trigger "page_reload"
+
             self.trigger "row_selected"
             return
 
@@ -147,7 +197,6 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
                 { MDFLAG: newMDFlag }
                 success: ->
                     self.trigger "participant_md_toggled"
-                error: ->
                 )
 
             return

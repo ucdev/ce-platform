@@ -18,5 +18,5 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 			return @el
 
 		print: ->
-			self.tigger "printer_printed"
+			self.trigger "printer_printed"
 			return

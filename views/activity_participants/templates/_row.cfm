@@ -34,9 +34,9 @@
             <i class="icon-cog"></i><span class="caret"></span>
         </a>
         <ul class="dropdown-menu" id="menuActions-<%= ID %>">
-            <li class="pCMECert"><a href="Report.CMECert?ActivityID=<%= ACTIVITYID %>&ReportID=5&SelectedMembers=<%= PERSONID %>"><i/>CME Certificate</a></li>
-            <li class="CNECert"><a href="Report.CNECert?ActivityID=<%= ACTIVITYID %>&ReportID=6&SelectedMembers=<%= PERSONID %>"><i/>CNE Certificate</a></li>
-            <li class="sendCertificate"><a href="javascript:void(0);"><i/>Send Certificate</a></li>
+            <li><a href="javascript://" class="js-print-cme"><i/>CME Certificate</a></li>
+            <li><a href="javascript://" class="js-print-cne"><i/>CNE Certificate</a></li>
+            <li class="sendCertificate"><a href="javascript://"><i/>Send Certificate</a></li>
             <li class="assess"><a href="/activity_participants/attendeeDetails?ActivityID=<%= ACTIVITYID %>&PersonID=<%= PERSONID %>"><i/>Assessments</a></li>
             <!---<li class="pifform"><a href="/activity/attendeeCDC?ActivityID=<%= ACTIVITYID %>&PersonID=<%= PERSONID %>"><i/>PIF Form</a></li>--->
             <li class="credits"><a href="/activity/adjustCredits?ActivityID=<%= ACTIVITYID %>&PersonID=<%= PERSONID %>"><i/>Credits</a></li>

@@ -12,6 +12,8 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       self.on("pager_next", this.render, this);
       self.on("pager_prev", this.render, this);
       self.on("page_loaded", this.render, this);
+      self.on("page_reload", this.reload, this);
+      ce.ui.on("selectallcheckbox_deselectall selectallcheckbox_deselectvisible", this.reload, this);
       coll.fetch({
         success: function() {
           coll.pager();
@@ -47,6 +49,10 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     },
     render: function() {
       return self.trigger("collection_rendered");
+    },
+    reload: function() {
+      this.collection.goTo(this.collection.currentPage);
+      return self.trigger("page_reloaded");
     }
   });
 }, ce._core.models);

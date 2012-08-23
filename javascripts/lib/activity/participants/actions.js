@@ -15,7 +15,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     },
     activateMenu: function() {
       this.$el.find(".js-action-menu-button").removeClass("disabled");
-      return this.$el.find(".js-action-menu-label").removeClass("disabled");
+      this.$el.find(".js-action-menu-label").removeClass("disabled");
     },
     changeParticipantStatus: function(e) {
       var newStatusId, newStatusName, selectedParticipants;
@@ -53,22 +53,40 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       this.$el.find(".js-action-menu-label").addClass("disabled");
     },
     printCertificate: function(e) {
-      var certType;
+      var certContent, certType, idList, selectedParticipants;
       certType = e.currentTarget.id.split("-")[1];
-      console.log(certType);
+      selectedParticipants = this.collection.getSelected();
+      idList = [];
+      _.forEach(selectedParticipants, function(model) {
+        return idList.push(model.id);
+      });
+      self.certContainer.empty();
+      certContent = $.ajax({
+        url: "/reports/" + certType + "cert",
+        type: "post",
+        data: {
+          selectedattendees: idList.toString()
+        },
+        dataType: "json",
+        success: function(data) {
+          self.certContainer.html(data);
+        },
+        error: function() {
+          certContainer.html("FUCK SAKE, MATE");
+        }
+      });
+      self.certContainer.dialog("show");
     },
     removeParticipants: function() {
       var selectedParticipants;
       if (confirm("Are you sure you wish to remove " + this.collection.getSelectedCount() + " attendees?")) {
         selectedParticipants = this.collection.getSelected();
-        _.forEach(selectedParticipants, function(model) {
-          return model.destroy({
-            wait: true,
-            success: function(model) {}
-          });
+        this.model.destroy({
+          wait: true,
+          success: function(model) {}
         });
         self.trigger("participants_removed", selectedParticipants);
-        ce.ui.trigger("selected_count_changed");
+        ce.ui.trigger("selected_count_changed", this.model);
       }
     },
     render: function() {

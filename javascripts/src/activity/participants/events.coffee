@@ -15,6 +15,10 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 		ce.log.info "participants: page ready"
 		return
 
+	self.on "page_reloaded", ->
+		ce.log.info "participants: page reloaded"
+		return
+
 	self.on "participant_md_toggled", ->
 		ce.log.info "participant: updated MD status"
 		return

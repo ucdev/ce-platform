@@ -17,6 +17,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
         activateMenu: ->
             @$el.find(".js-action-menu-button").removeClass "disabled"
             @$el.find(".js-action-menu-label").removeClass "disabled"
+            return
 
         # UPDATE SELECTED PARTICIPANTS STATUS ID
         changeParticipantStatus: (e) ->
@@ -57,7 +58,28 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
         # PRINT CERTIFICATES FOR SELECTED PARTICIPANTS
         printCertificate: (e) ->
             certType = e.currentTarget.id.split("-")[1]
-            console.log certType
+            selectedParticipants = @collection.getSelected()
+            idList = []
+            
+            _.forEach selectedParticipants, (model) ->
+                idList.push model.id
+
+            self.certContainer.empty()
+
+            certContent = $.ajax
+                url: "/reports/" + certType + "cert"
+                type: "post"
+                data:
+                    selectedattendees: idList.toString()
+                dataType: "json"
+                success: (data) ->
+                    self.certContainer.html data 
+                    return
+                error: ->
+                    certContainer.html "FUCK SAKE, MATE"
+                    return
+
+            self.certContainer.dialog "show"
             return
 
         # REMOVE SELECTED PARTICIPANTS FROM THE ACTIVITY
@@ -65,16 +87,13 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
             if confirm "Are you sure you wish to remove " + @collection.getSelectedCount() + " attendees?"
                 selectedParticipants = @collection.getSelected()
                 
-                _.forEach selectedParticipants, (model) -> 
-                    model.destroy
-                        wait: true
-                        success: (model) ->
-                            return
-
+                @model.destroy
+                    wait: true
+                    success: (model) ->
+                        return
 
                 self.trigger "participants_removed", selectedParticipants
-                ce.ui.trigger "selected_count_changed"
-
+                ce.ui.trigger "selected_count_changed", @model
             return
 
         render: ->

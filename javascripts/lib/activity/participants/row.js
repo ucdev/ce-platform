@@ -4,7 +4,6 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
   return self.Row = Backbone.View.extend({
     initialize: function() {
       this.model.on("change:ISSELECTED", this.determineSelectedStatus, this);
-      this.model.on("fetch", this.render, this);
       self.on("participant_reset participant_md_toggled participant_status_updated", this.render, this);
       self.on("participant_removed", this.remove, this);
     },
@@ -25,11 +24,13 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       };
     },
     events: {
-      "change .js-participant-checkbox": "selectRow",
       "click .js-delete-link": "deleteRow",
-      "click .js-toggle-md": "toggleMD",
+      "change .js-participant-checkbox": "selectRow",
+      "click .js-print-cme": "printCME",
+      "click .js-print-cne": "printCNE",
       "click .js-remove-user": "removeUser",
-      "click .js-reset-user": "resetUser"
+      "click .js-reset-user": "resetUser",
+      "click .js-toggle-md": "toggleMD"
     },
     determineSelectedStatus: function() {
       if (this.model.get("ISSELECTED")) {
@@ -38,7 +39,13 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         this.markUnselected();
       }
     },
-    deleteRow: function() {},
+    deleteRow: function() {
+      model.destroy({
+        wait: true,
+        success: function(model) {}
+      });
+      self.trigger("participant_removed");
+    },
     markSelected: function() {
       this.$el.find(".js-participant-checkbox").attr("checked", true);
       this.$el.addClass("alert-info");
@@ -46,6 +53,44 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     markUnselected: function() {
       this.$el.find(".js-participant-checkbox").attr("checked", false);
       this.$el.removeClass("alert-info");
+    },
+    printCME: function() {
+      var certContent;
+      self.certContainer.empty();
+      certContent = $.ajax({
+        url: "/reports/cmecert",
+        type: "post",
+        data: {
+          selectedattendees: this.model.id
+        },
+        dataType: "json",
+        success: function(data) {
+          self.certContainer.html(data);
+        },
+        error: function() {
+          self.certContainer.html("FUCK SAKE, MATE");
+        }
+      });
+      self.certContainer.dialog("show");
+    },
+    printCNE: function() {
+      var certContent;
+      self.certContainer.empty();
+      certContent = $.ajax({
+        url: "/reports/cnecert",
+        type: "post",
+        data: {
+          selectedattendees: this.model.id
+        },
+        dataType: "json",
+        success: function(data) {
+          self.certContainer.html(data);
+        },
+        error: function() {
+          self.certContainer.html("FUCK SAKE, MATE");
+        }
+      });
+      self.certContainer.dialog("show");
     },
     render: function() {
       var _temp;
@@ -105,6 +150,11 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
           "ISSELECTED": false,
           silent: true
         });
+        if (typeof this.model.collection.filterFields !== "undefined") {
+          if (this.model.collection.filterFields[0] === "ISSELECTED") {
+            self.trigger("page_reload");
+          }
+        }
       }
       self.trigger("row_selected");
     },
@@ -121,8 +171,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       }, {
         success: function() {
           return self.trigger("participant_md_toggled");
-        },
-        error: function() {}
+        }
       });
     }
   });

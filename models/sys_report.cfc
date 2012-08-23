@@ -8,12 +8,10 @@
     <!------------------------------------------------------------------------------------------->
     
     <cffunction name="getCMECertDataFor">
-    	<cfargument name="activityId" type="numeric" required="yes">
-        <cfargument name="selectedAttendees" type="string" required="no">
-        <cfargument name="selectedMembers" type="string" required="no">
+        <cfargument name="selectedAttendees" type="string" required="yes">
         
-    	<cfquery name="qReportDataPre" datasource="#get('dataSourceName')#">
-            SELECT 	a.MDFlag,
+        <cfquery name="qReportDataPre" datasource="#get('dataSourceName')#">
+            SELECT  a.MDFlag,
                     a.CompleteDate,
                     act.StartDate AS CertificateDate,
                     act.EndDate,
@@ -53,16 +51,7 @@
                 (
                     a.AttendeeId IN (#arguments.SelectedAttendees#) AND
                     a.DeletedFlag = 'N' AND 
-                    a.ActivityID = <cfqueryparam value="#arguments.ActivityID#" cfsqltype="cf_sql_integer" /> AND 
-                    sc.Name = <cfqueryparam value="CME" cfsqltype="cf_sql_varchar" /> AND
-                    act.DeletedFlag = 'N' AND
-                    a.StatusId = 1
-                )
-                <cfelseif IsDefined("arguments.SelectedMembers") AND len(trim(arguments.SelectedMembers)) GT 0>
-                (
-                    a.PersonId IN (#arguments.SelectedMembers#) AND
-                    a.DeletedFlag = 'N' AND 
-                    a.ActivityID = <cfqueryparam value="#arguments.ActivityID#" cfsqltype="cf_sql_integer" /> AND 
+                    a.ActivityID = a.activityId AND 
                     sc.Name = <cfqueryparam value="CME" cfsqltype="cf_sql_varchar" /> AND
                     act.DeletedFlag = 'N' AND
                     a.StatusId = 1
@@ -163,6 +152,76 @@
             
             <cfset RowCount++>
         </cfloop>
+        
+        <cfreturn qReportData />
+    </cffunction>
+    
+    <cffunction name="getCNECertDataFor">
+        <cfargument name="selectedAttendees" type="string" required="yes">
+        
+        <cfquery name="qReportData" datasource="#Application.Settings.DSN#">
+            SELECT  act.StartDate AS CertificateDate,
+                    act.endDate,
+                    act.Title AS ActivityTitle, 
+                    act.Location AS ActivityLocation,
+                    act.sponsor, 
+                    p.CertName AS DisplayName,
+                    ac.Amount AS TotalAmount,
+                    sc.Name AS CreditName,
+                    (SELECT TOP 1 attc.Amount
+                     FROM ce_AttendeeCredit attc
+                     WHERE (attc.AttendeeID = a.AttendeeID) AND (attc.CreditID = 2)) AS CreditAmount,
+                    (SELECT TOP 1 attc.ReferenceNo
+                     FROM ce_AttendeeCredit attc
+                     WHERE (attc.AttendeeID = a.AttendeeID) AND (attc.CreditID = 2)) AS ReferenceNumber,
+                    (SELECT TOP 1 p1.FirstName
+                     FROM ce_Activity_Faculty af
+                     INNER JOIN ce_Person p1 ON p1.PersonID = af.PersonID
+                     WHERE af.DeletedFlag = <cfqueryparam value="N" cfsqltype="cf_sql_char" />) AS FacultyFName,
+                    (SELECT TOP 1 p1.LastName
+                     FROM ce_Activity_Faculty af
+                     INNER JOIN ce_Person p1 ON p1.PersonID = af.PersonID
+                     WHERE af.DeletedFlag = <cfqueryparam value="N" cfsqltype="cf_sql_char" />) AS FacultyLName
+            FROM ce_Attendee a
+            INNER JOIN ce_Person p ON p.PersonID = a.PersonID AND p.deletedFlag = 'N'
+            INNER JOIN ce_Activity_Credit ac ON ac.ActivityID = a.activityId
+            INNER JOIN ce_Sys_Credit sc ON sc.CreditID = ac.CreditID
+            LEFT OUTER JOIN ce_Activity act ON act.ActivityID = a.activityId
+            WHERE 
+                <cfif IsDefined("Attributes.SelectedAttendees") AND len(trim(attributes.SelectedAttendees)) GT 0>
+                (
+                    a.AttendeeId IN (#Attributes.SelectedAttendees#) AND
+                    a.DeletedFlag = 'N' AND 
+                    a.ActivityID = a.activityId AND 
+                    sc.Name = <cfqueryparam value="CNE" cfsqltype="cf_sql_varchar" /> AND
+                    act.DeletedFlag = 'N' AND
+                    a.StatusId = 1
+                )
+                <cfelse>
+                a.DeletedFlag = 'N' AND 
+                a.ActivityID = a.activityId AND 
+                sc.Name = <cfqueryparam value="CNE" cfsqltype="cf_sql_varchar" /> AND
+                act.DeletedFlag = 'N' AND
+                a.StatusId = 1
+                </cfif>
+        </cfquery>
+
+        <cfif qReportData.recordCount GT 0>
+            <cfset ActStartDate = qReportData.CertificateDate>
+            <cfset ActEndDate = qReportData.EndDate>
+            
+            <cfif qReportData.CertificateDate EQ qReportData.EndDate>
+                <cfset qReportData.CertificateDate = ActStartDate>
+            <cfelse>
+                <cfif compare(datepart("yyyy", actStartDate), datepart("yyyy", ActEndDate)) EQ 0 AND compare(datepart("m", actStartDate), datepart("m", ActEndDate)) EQ 0>
+                    <cfset qReportData.CertificateDate = dateFormat(ActStartDate, "MMMM DD") & " - " & dateFormat(ActEndDate, "DD, YYYY")>
+                <cfelseif compare(datepart("yyyy", actStartDate), datepart("yyyy", ActEndDate)) EQ 0>
+                    <cfset qReportData.CertificateDate = dateFormat(ActStartDate, "MMMM DD") & " - " & dateFormat(ActEndDate, "MMMM DD, YYYY")>
+                <cfelse>
+                    <cfset qReportData.CertificateDate = ActStartDate & " - " & ActEndDate>
+                </cfif>
+            </cfif>
+        </cfif>
         
         <cfreturn qReportData />
     </cffunction>

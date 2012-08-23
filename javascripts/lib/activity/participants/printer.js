@@ -15,7 +15,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       return this.el;
     },
     print: function() {
-      self.tigger("printer_printed");
+      self.trigger("printer_printed");
     }
   });
 });

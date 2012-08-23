@@ -14,3 +14,4 @@
 	</table>
 </div>
 <div class="btn-toolbar clearfix js-bottom-bar"></div>
+<div class="js-cert-container"></div>

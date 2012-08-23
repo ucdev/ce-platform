@@ -14,7 +14,7 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 
 		render: ->
 			@$el.empty()
-
+			
 			_temp = _.template ce.templates.get @pagingTemplate
 
 			# FORM THE TEMPLATE AND APPEND THE TEMPLATE HTML

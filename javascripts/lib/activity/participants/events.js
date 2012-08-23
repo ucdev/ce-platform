@@ -13,6 +13,9 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
   self.on("page_loaded", function() {
     ce.log.info("participants: page ready");
   });
+  self.on("page_reloaded", function() {
+    ce.log.info("participants: page reloaded");
+  });
   self.on("participant_md_toggled", function() {
     ce.log.info("participant: updated MD status");
   });

@@ -11,6 +11,9 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 			self.on "pager_next", @render, @
 			self.on "pager_prev", @render, @
 			self.on "page_loaded", @render, @
+			self.on "page_reload", @reload, @
+
+			ce.ui.on "selectallcheckbox_deselectall selectallcheckbox_deselectvisible", @reload, @
 			
 			coll.fetch
 				success:() ->
@@ -49,6 +52,10 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 
 		render: ->
 			self.trigger "collection_rendered"
+
+		reload: ->
+			@collection.goTo @collection.currentPage
+			self.trigger "page_reloaded"
 	return
 ,ce._core.models
 	

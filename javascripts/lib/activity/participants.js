@@ -73,6 +73,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     });
     models.Activity_participant.prototype.idAttribute = "ID";
     self.collection = new self.paginatorCollection;
+    self.certContainer = $(".js-cert-container").dialog();
     self.on("participant_removed participants_removed", function(models) {
       _.forEach(models, function(model) {
         self.collection.origModels.splice(self.collection.origModels.indexOf(model), 1);
@@ -84,6 +85,9 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     });
     self.topbar = new self.Topbar({
       el: ".js-top-bar"
+    }).render();
+    self.bottombar = new self.Bottombar({
+      el: ".js-bottom-bar"
     }).render();
     self.loader = new ce.ui.Loader({
       el: "#tier3"
@@ -131,9 +135,6 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     self.selectall = new ce.ui.SelectAllCheckBox({
       el: ".js-selectall-placeholder",
       collection: self.collection
-    }).render();
-    self.bottombar = new self.Bottombar({
-      el: ".js-bottom-bar"
     }).render();
     self.trigger("page_loaded");
   };
