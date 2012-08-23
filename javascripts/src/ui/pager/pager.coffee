@@ -10,6 +10,9 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 		events:
 			"click a.js-next-page": "nextPage"
 			"click a.js-page": "selectPage"
+			"click a.js-show-page-dropdown": "extendedDropdownFunctionality"
+			"click .js-page-sizer": "preventClose"
+			"change .js-page-sizer": "changePageSize"
 			"click a.js-prev-page": "prevPage"
 
 		render: ->
@@ -20,7 +23,25 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 			# FORM THE TEMPLATE AND APPEND THE TEMPLATE HTML
 			@$el.html _temp @collection.info()
 
+			# PROVIDE THE CURRENT PAGE SIZE VALUE
+			@$el.find(".js-page-sizer").val @collection.perPage
+
 			self.trigger "pager_loaded"
+			return
+
+		changePageSize: (e) ->
+			updatedValue = parseInt e.currentTarget.value
+
+			if typeof updatedValue == "number" && updatedValue != @collection.perPage && updatedValue > 0
+				@collection.howManyPer parseInt e.currentTarget.value
+				self.trigger "pager_page_size_changed"
+
+			return
+
+		extendedDropdownFunctionality: ->
+			$(@$el.find(".js-page-sizer")).focus()
+			console.log $(@$el.find(".js-page-sizer"))
+			console.log "IN"
 			return
 
 		nextPage: (e) ->
@@ -29,6 +50,9 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 				@collection.nextPage()
 				self.trigger "pager_next"
 			return
+
+		preventClose: (e) ->
+			return false
 
 		prevPage: (e) ->
 			e.preventDefault()

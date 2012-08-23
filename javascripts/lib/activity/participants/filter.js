@@ -9,7 +9,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     },
     events: {
       "click .js-clear-attendee-search": "clearAttendeeSearch",
-      "click .js-attendee-search-typeahead": "keepTypeaheadOpen",
+      "click .js-attendee-search-typeahead": "preventClose",
       "keyup .js-attendee-search-typeahead": "searchAttendeeList",
       "click .js-attendees-filter li.js-attendee-status": "filteredAttendeeStatus",
       "click .js-attendees-filter li.js-attendee-status-all": "showAll",
@@ -61,8 +61,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       this.collection.pager();
       this.updateFilterLabel(filterStatusName);
     },
-    keepTypeaheadOpen: function(e) {
-      e.preventDefault();
+    preventClose: function(e) {
       return false;
     },
     searchAttendeeList: function(e) {
@@ -77,7 +76,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
             matchFilter = new RegExp(filterVal.replace(/(\S+)/g, function(s) {
               return "\\b" + s + ".*";
             }).replace(/\s+/g, ""), "gi");
-            matches = matchFilter.exec(item.get("FULLNAME"));
+            matches = matchFilter.exec(item.get("FIRSTNAME") + " " + item.get("LASTNAME"));
             if (matches !== null) {
               return item.set({
                 "ISFILTERMATCH": true,

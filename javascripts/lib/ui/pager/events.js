@@ -13,4 +13,7 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
   self.on("pager_page_selected", function() {
     ce.log.info("pager: selected page loaded");
   });
+  self.on("pager_page_size_changed", function() {
+    return ce.log.info("pager: page size updated");
+  });
 });

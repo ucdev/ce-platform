@@ -14,4 +14,7 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
   self.on "pager_page_selected", ->
     ce.log.info "pager: selected page loaded"
     return
+
+  self.on "pager_page_size_changed", ->
+    ce.log.info "pager: page size updated"
   return

@@ -9,7 +9,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 	
 		events:
 			"click .js-clear-attendee-search": "clearAttendeeSearch"
-			"click .js-attendee-search-typeahead": "keepTypeaheadOpen"
+			"click .js-attendee-search-typeahead": "preventClose"
 			"keyup .js-attendee-search-typeahead": "searchAttendeeList"
 			"click .js-attendees-filter li.js-attendee-status": "filteredAttendeeStatus"
 			"click .js-attendees-filter li.js-attendee-status-all": "showAll"
@@ -77,8 +77,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 			return
 
 		# PREVENTS THE DROPDOWN MENU FROM CLOSING WHEN THE TEXTBOX FOR NAME FILTER IS CLICKED
-		keepTypeaheadOpen: (e) ->
-			e.preventDefault()
+		preventClose: (e) ->
 			return false
 
 		# SEARCHES THE PARTICIPANT COLLECTION FOR MATCHES TO THE USER INPUT
@@ -99,7 +98,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 										  "\\b" + s + ".*"
 										).replace(/\s+/g, ""), "gi")
 
-						matches = matchFilter.exec item.get "FULLNAME"
+						matches = matchFilter.exec item.get("FIRSTNAME") + " " + item.get("LASTNAME")
 
 						if matches != null
 							item.set "ISFILTERMATCH": true, silent: true
