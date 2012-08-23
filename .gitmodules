@@ -1,0 +1,3 @@
+[submodule "javascripts/inject"]
+	path = javascripts/inject
+	url = https://github.com/linkedin/inject.git
