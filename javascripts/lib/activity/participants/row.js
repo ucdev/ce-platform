@@ -4,6 +4,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
   return self.Row = Backbone.View.extend({
     initialize: function() {
       this.model.on("change:ISSELECTED", this.determineSelectedStatus, this);
+      this.model.on("change:FIRSTNAME change:LASTNAME", this.setFullName, this);
       self.on("participant_reset participant_md_toggled participant_status_updated", this.render, this);
       self.on("participant_removed", this.remove, this);
     },
@@ -156,7 +157,12 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
           }
         }
       }
-      self.trigger("row_selected");
+      ce.ui.trigger("row_selected");
+    },
+    setFullName: function() {
+      this.model.set({
+        "FULLNAME": this.model.get("FIRSTNAME") + " " + this.model.get("LASTNAME")
+      });
     },
     toggleMD: function() {
       var curr, newMDFlag;

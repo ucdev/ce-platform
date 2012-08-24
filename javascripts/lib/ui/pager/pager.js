@@ -33,8 +33,6 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
     },
     extendedDropdownFunctionality: function() {
       $(this.$el.find(".js-page-sizer")).focus();
-      console.log($(this.$el.find(".js-page-sizer")));
-      console.log("IN");
     },
     nextPage: function(e) {
       e.preventDefault();

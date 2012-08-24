@@ -2,9 +2,11 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
     self.Row = Backbone.View.extend
         initialize: ->
             @model.on "change:ISSELECTED", @determineSelectedStatus, @
+            @model.on "change:FIRSTNAME change:LASTNAME", @setFullName, @
 
             self.on "participant_reset participant_md_toggled participant_status_updated", @render, @
             self.on "participant_removed", @remove, @
+
             return
 
         tagName: "tr"
@@ -183,7 +185,11 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
                     if @model.collection.filterFields[0] == "ISSELECTED"
                         self.trigger "page_reload"
 
-            self.trigger "row_selected"
+            ce.ui.trigger "row_selected"
+            return
+
+        setFullName: ->
+            @model.set "FULLNAME": @model.get("FIRSTNAME") + " " + @model.get "LASTNAME"
             return
 
         toggleMD: ->

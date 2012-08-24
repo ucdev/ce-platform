@@ -28,7 +28,6 @@
     <% } %>
 </td>
 <td valign="top" class="user-actions-outer">
-<% if(PERSONID > 0) { %>
     <div class="btn-group user-actions action-menu pull-left">
         <a class="btn dropdown-toggle" data-toggle="dropdown">
             <i class="icon-cog"></i><span class="caret"></span>
@@ -45,7 +44,4 @@
             <li class="remove"><a href="javascript://" class="js-remove-user"><i/>Remove <%= FIRSTNAME %> <%= LASTNAME %></a></li>
         </ul>
     </div>
-<% } else { %>
-    <a href="javascript://" class="js-delete-link">Delete</a>
-<% } %>
 </td>

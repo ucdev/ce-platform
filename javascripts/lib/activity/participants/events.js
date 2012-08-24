@@ -7,9 +7,6 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
   self.on("collection_rendered", function() {
     ce.log.info("participants: collection rendered");
   });
-  self.on("filter_loaded", function() {
-    ce.log.info("participants: filter loaded");
-  });
   self.on("page_loaded", function() {
     ce.log.info("participants: page ready");
   });
@@ -30,9 +27,6 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
   });
   self.on("participant_status_updated", function(name) {
     ce.log.info("participants: statuses updated to " + name);
-  });
-  self.on("participants_filtered", function(name) {
-    ce.log.info("participants: filter by " + name);
   });
   self.on("participants_loaded", function() {
     ce.log.info("participants: loaded");

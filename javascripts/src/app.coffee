@@ -18,6 +18,14 @@ Backbone.Paginator.clientPager.prototype.whereExpanded = (attrs) ->
 		for key of attrs
 			return false unless attrs[key] is model.get(key)
 		true
+Backbone.Paginator.clientPager.prototype.getFilteredCount = ->
+	return @sortedAndFilteredModels.length
+Backbone.Paginator.clientPager.prototype.getTotalCount = ->
+	return @information.totalUnfilteredRecords
+Backbone.Paginator.clientPager.prototype.getSelected = ->
+    return @whereExpanded(ISSELECTED: true)
+Backbone.Paginator.clientPager.prototype.getSelectedCount = ->
+    return @whereExpanded(ISSELECTED: true).length
 
 Backbone.emulateJSON = true
 

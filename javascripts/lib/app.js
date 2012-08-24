@@ -32,6 +32,26 @@ Backbone.Paginator.clientPager.prototype.whereExpanded = function(attrs) {
   });
 };
 
+Backbone.Paginator.clientPager.prototype.getFilteredCount = function() {
+  return this.sortedAndFilteredModels.length;
+};
+
+Backbone.Paginator.clientPager.prototype.getTotalCount = function() {
+  return this.information.totalUnfilteredRecords;
+};
+
+Backbone.Paginator.clientPager.prototype.getSelected = function() {
+  return this.whereExpanded({
+    ISSELECTED: true
+  });
+};
+
+Backbone.Paginator.clientPager.prototype.getSelectedCount = function() {
+  return this.whereExpanded({
+    ISSELECTED: true
+  }).length;
+};
+
 Backbone.emulateJSON = true;
 
 ce.on("loaded", function() {

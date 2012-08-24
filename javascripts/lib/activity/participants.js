@@ -39,9 +39,6 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
           STATUSID: 1
         }).length;
       },
-      getFilteredCount: function() {
-        return this.sortedAndFilteredModels.length;
-      },
       getInProgressCount: function() {
         return this.whereExpanded({
           STATUSID: 2
@@ -52,23 +49,10 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
           STATUSID: 3
         }).length;
       },
-      getSelected: function() {
-        return this.whereExpanded({
-          ISSELECTED: true
-        });
-      },
-      getSelectedCount: function() {
-        return this.whereExpanded({
-          ISSELECTED: true
-        }).length;
-      },
       getTermCount: function() {
         return this.whereExpanded({
           STATUSID: 4
         }).length;
-      },
-      getTotalCount: function() {
-        return this.information.totalUnfilteredRecords;
       }
     });
     models.Activity_participant.prototype.idAttribute = "ID";
@@ -119,9 +103,18 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         el: ".js-partic-actions",
         collection: self.collection
       }).render();
-      self.filter = new self.Filter({
+      self.filter = new ce.ui.Filter({
         el: ".js-attendee-filter",
-        collection: self.collection
+        collection: self.collection,
+        filterOptionField: "STATUSID",
+        filterOptions: {
+          "Complete": 1,
+          "Failed": 4,
+          "In Progress": 2,
+          "Registered": 3
+        },
+        typeaheadField: "FULLNAME",
+        typeaheadPlaceholder: "Filter by name"
       }).render();
       self.pager = new ce.ui.Pager({
         el: ".js-pager-container",

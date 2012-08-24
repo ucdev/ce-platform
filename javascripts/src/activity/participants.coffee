@@ -34,20 +34,12 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
                 "perPage": 15
             getCompleteCount: ->
                 return @whereExpanded(STATUSID: 1).length
-            getFilteredCount: ->
-                return @sortedAndFilteredModels.length
             getInProgressCount: ->
                 return @whereExpanded(STATUSID: 2).length
             getRegisterCount: ->
                 return @whereExpanded(STATUSID: 3).length
-            getSelected: ->
-                return @whereExpanded(ISSELECTED: true)
-            getSelectedCount: ->
-                return @whereExpanded(ISSELECTED: true).length
             getTermCount: ->
                 return @whereExpanded(STATUSID: 4).length
-            getTotalCount: ->
-                return @information.totalUnfilteredRecords
                 
         models.Activity_participant.prototype.idAttribute = "ID"
         
@@ -113,9 +105,17 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
                 collection: self.collection
                 ).render()
 
-            self.filter = new self.Filter(
+            self.filter = new ce.ui.Filter(
                 el: ".js-attendee-filter"
                 collection: self.collection
+                filterOptionField: "STATUSID"
+                filterOptions: 
+                    "Complete": 1
+                    "Failed": 4
+                    "In Progress": 2
+                    "Registered": 3
+                typeaheadField: "FULLNAME"
+                typeaheadPlaceholder: "Filter by name"
                 ).render()
 
             self.pager = new ce.ui.Pager(

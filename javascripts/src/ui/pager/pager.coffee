@@ -40,8 +40,6 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 
 		extendedDropdownFunctionality: ->
 			$(@$el.find(".js-page-sizer")).focus()
-			console.log $(@$el.find(".js-page-sizer"))
-			console.log "IN"
 			return
 
 		nextPage: (e) ->

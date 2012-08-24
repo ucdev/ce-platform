@@ -7,10 +7,6 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 		ce.log.info "participants: collection rendered"
 		return
 
-	self.on "filter_loaded", ->
-		ce.log.info "participants: filter loaded"
-		return
-
 	self.on "page_loaded", ->
 		ce.log.info "participants: page ready"
 		return
@@ -37,10 +33,6 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 
 	self.on "participant_status_updated", (name) ->
 		ce.log.info "participants: statuses updated to " + name
-		return
-
-	self.on "participants_filtered", (name) ->
-		ce.log.info "participants: filter by " + name
 		return
 
 	self.on "participants_loaded", ->

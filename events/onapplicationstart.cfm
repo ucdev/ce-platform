@@ -118,6 +118,8 @@ js.addAll([
 "lib/ui/dialog",
 "lib/ui/loader/loader",
 "lib/ui/loader/events",
+"lib/ui/filter/filter",
+"lib/ui/filter/events",
 "lib/ui/pager/pager",
 "lib/ui/pager/events",
 "lib/ui/selectallcheckbox/selectallcheckbox", // ce.activity.participants selectallcheckbox
@@ -140,7 +142,6 @@ js.addAll([
 "lib/activity/participants/addbtn", // ce.activity.participants add btn
 "lib/activity/participants/printer", // ce.activity.participants printer
 "lib/activity/participants/actions", // ce.activity.participants filter
-"lib/activity/participants/filter", // ce.activity.participants filter
 "lib/activity/participants/row", // ce.activity.participants row
 "lib/activity/participants/list", // ce.activity.participants list
 "lib/activity/participants/topbar", // ce.activity.participants topbar

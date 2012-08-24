@@ -14,6 +14,7 @@ ce.module "_core.pagers", (self, ce, Backbone, Marionette, $, _, models) ->
 			@totalPages = Math.ceil(response.length / @perPage)
 			return response
 		model: models.Activity
+
 	self.requestActivities = Backbone.Paginator.requestPager.extend
 		initialize: ->
 		paginator_core:
@@ -28,4 +29,5 @@ ce.module "_core.pagers", (self, ce, Backbone, Marionette, $, _, models) ->
 			@totalPages = Math.ceil(response.length / @perPage)
 			return response
 		model: models.Activity
+	return
 ,ce._core.models

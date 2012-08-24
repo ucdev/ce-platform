@@ -7,7 +7,8 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 			coll.on "reset", @addAll, @
 			coll.on "remove", @render, @
 
-			self.on "participants_filtered", @render, @
+			ce.ui.on "filter_filtered", @render, @
+			
 			self.on "pager_next", @render, @
 			self.on "pager_prev", @render, @
 			self.on "page_loaded", @render, @
@@ -36,10 +37,7 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 			return
 
 		addOne: (viewModel) ->
-			# DETERMINE IF THE ROWMODEL CONTAINS THE ATTRIBUTE ISSELECTED
-			if typeof viewModel.get("ISSELECTED") == "undefined"
-				viewModel.set ISSELECTED: false
-				viewModel.set ISFILTERMATCH: false
+			viewModel.set FULLNAME: viewModel.get("FIRSTNAME") + " " + viewModel.get "LASTNAME"
 
 			row = new self.Row 
 				model: viewModel

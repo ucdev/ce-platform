@@ -8,7 +8,7 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
       coll.on("add", this.addOne, this);
       coll.on("reset", this.addAll, this);
       coll.on("remove", this.render, this);
-      self.on("participants_filtered", this.render, this);
+      ce.ui.on("filter_filtered", this.render, this);
       self.on("pager_next", this.render, this);
       self.on("pager_prev", this.render, this);
       self.on("page_loaded", this.render, this);
@@ -33,14 +33,9 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     },
     addOne: function(viewModel) {
       var row;
-      if (typeof viewModel.get("ISSELECTED") === "undefined") {
-        viewModel.set({
-          ISSELECTED: false
-        });
-        viewModel.set({
-          ISFILTERMATCH: false
-        });
-      }
+      viewModel.set({
+        FULLNAME: viewModel.get("FIRSTNAME") + " " + viewModel.get("LASTNAME")
+      });
       row = new self.Row({
         model: viewModel
       });

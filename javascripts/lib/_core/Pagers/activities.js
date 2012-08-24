@@ -19,7 +19,7 @@ ce.module("_core.pagers", function(self, ce, Backbone, Marionette, $, _, models)
     },
     model: models.Activity
   });
-  return self.requestActivities = Backbone.Paginator.requestPager.extend({
+  self.requestActivities = Backbone.Paginator.requestPager.extend({
     initialize: function() {},
     paginator_core: {
       type: 'post',
