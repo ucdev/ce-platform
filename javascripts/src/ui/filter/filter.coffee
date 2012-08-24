@@ -41,6 +41,7 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 			# FORM THE TEMPLATE AND APPEND THE TEMPLATE HTML
 			@$el.html _temp  @collection.info()
 
+			# PROVIDE A PLACEHOLDER FOR THE TYPEAHEAD
 			@$el.find(".js-search-filter-typeahead").attr("placeholder", @options.typeaheadPlaceholder)
 
 			# GET FILTER OPTIONS APPEND LOCATION
@@ -54,13 +55,13 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 				# APPEND OPTION
 				$(currFilterOption).appendTo filterOptionContainer
 
-			# PROVIDE PARTICIPANT COUNTS FOR EACH STATUS
+			# PROVIDE COUNTS FOR EACH FILTER OPTION
 			@getFilterCounts()
 
 			self.trigger "filter_loaded"
 			return @el
 
-		# ClEARS THE NAME FILTER AND SHOWS ALL PARTICIPANTS
+		# ClEARS THE SEARCH FILTER AND SHOW ALL MODELS
 		clearSearch: ->
 			# CLEAR FILTER TEXT FIELD AND HIDE THE CLEAR DIV
 			@$el.find(".js-search-filter-typeahead").val ""
@@ -69,7 +70,7 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 			@showAll()
 			return
 
-		# UPDATES THE COUNT OF PARTICIPANTS IN EACH FILTER LI ON THE DROPDOWN
+		# UPDATES THE COUNT OF MODELS IN EACH FILTER OPTION
 		getFilterCounts: ->
 			curr = @
 			coll = @collection
@@ -78,36 +79,37 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 			# GET THE FILTER LIST
 			filterOptions = @$el.find ".js-filter-option"
 
-			# SET TOTAL ATTENDEE COUNT FOR ALL STATUS FILTER
+			# SET TOTAL COUNT FOR ALL FILTER OPTION
 			@$el.find('li.js-filter-all').find('span.js-filter-option-all-count').text "(" + coll.getTotalCount() + ")"
 			
 			# SET FILTER COUNT FOR EACH FILTER OPTION
 			$.each filterOptions, (i, filter) ->
+				$filter = $(filter)
 				filterByValue = parseInt $(filter).attr('id').replace 'filter', ''
 
 				# SET FILTER COUNT FOR CURRENT FILTER OPTION
-				$(@).find('span.js-filter-option-count').text "(" + eval("coll.whereExpanded({" + filterByField + ": " + filterByValue + "})").length + ")"
+				$filter.find('span.js-filter-option-count').text "(" + eval("coll.whereExpanded({" + filterByField + ": " + filterByValue + "})").length + ")"
 				return
 
 			@$el.find(".js-filter-option-selected-count").text coll.getSelectedCount()
 			return
 
-		# SHOW ATTENDEES BASED ON THE SELECTED STATUS FILTER
+		# SHOW MODELS BASED ON THE SELECTED FILTER OPTION
 		filterCollection: (e) ->
-			filterStatusId = $(e.currentTarget).attr('id').replace('filter','')
-			filterStatusName = $(e.currentTarget).find('.js-filter-option-name').text()
+			filterOptionId = $(e.currentTarget).attr('id').replace('filter','')
+			filterOptionName = $(e.currentTarget).find('.js-filter-option-name').text()
 
-			@collection.setFilter [@options.filterOptionField], filterStatusId
+			@collection.setFilter [@options.filterOptionField], filterOptionId
 			@collection.pager()
 
-			@updateFilterLabel filterStatusName
+			@updateFilterLabel filterOptionName
 			return
 
 		# PREVENTS THE DROPDOWN MENU FROM CLOSING WHEN THE TEXTBOX FOR NAME FILTER IS CLICKED
 		preventClose: (e) ->
 			return false
 
-		# SEARCHES THE PARTICIPANT COLLECTION FOR MATCHES TO THE USER INPUT
+		# SEARCHES THE COLLECTION FOR MATCHES TO THE SEARCH FILTER INPUT
 		searchCollection: (e) ->
 			if $.inArray(e.keyCode, [32, 13, 16, 17]) != 0
 
@@ -120,7 +122,7 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 				if input.val().length > 0
 					@$el.find(".js-clear-search-filter").show()
 
-					# FIND ATTENDEES MATCHES TO THE FILTER
+					# FIND MODELS THAT MATCH TO THE SEARCH FILTER
 					$.each @collection.origModels, (i, item) ->
 						matchFilter = new RegExp(filterVal.replace(/(\S+)/g, (s) ->
 										  "\\b" + s + ".*"
@@ -154,7 +156,7 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 			@updateFilterLabel "All"
 			return
 
-		# REVEALS ALL PARTICIPANTS WHO HAVE BEEN CHECKMARKED
+		# REVEALS ALL MODELS WHO HAVE BEEN CHECKMARKED
 		showSelected: ->
 			@collection.setFilter ['ISSELECTED'], 'true'
 			@collection.pager()

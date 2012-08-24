@@ -61,19 +61,20 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
       filterOptions = this.$el.find(".js-filter-option");
       this.$el.find('li.js-filter-all').find('span.js-filter-option-all-count').text("(" + coll.getTotalCount() + ")");
       $.each(filterOptions, function(i, filter) {
-        var filterByValue;
+        var $filter, filterByValue;
+        $filter = $(filter);
         filterByValue = parseInt($(filter).attr('id').replace('filter', ''));
-        $(this).find('span.js-filter-option-count').text("(" + eval("coll.whereExpanded({" + filterByField + ": " + filterByValue + "})").length + ")");
+        $filter.find('span.js-filter-option-count').text("(" + eval("coll.whereExpanded({" + filterByField + ": " + filterByValue + "})").length + ")");
       });
       this.$el.find(".js-filter-option-selected-count").text(coll.getSelectedCount());
     },
     filterCollection: function(e) {
-      var filterStatusId, filterStatusName;
-      filterStatusId = $(e.currentTarget).attr('id').replace('filter', '');
-      filterStatusName = $(e.currentTarget).find('.js-filter-option-name').text();
-      this.collection.setFilter([this.options.filterOptionField], filterStatusId);
+      var filterOptionId, filterOptionName;
+      filterOptionId = $(e.currentTarget).attr('id').replace('filter', '');
+      filterOptionName = $(e.currentTarget).find('.js-filter-option-name').text();
+      this.collection.setFilter([this.options.filterOptionField], filterOptionId);
       this.collection.pager();
-      this.updateFilterLabel(filterStatusName);
+      this.updateFilterLabel(filterOptionName);
     },
     preventClose: function(e) {
       return false;
