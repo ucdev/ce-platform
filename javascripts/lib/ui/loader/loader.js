@@ -4,14 +4,30 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
   self.Loader = Backbone.View.extend({
     template: "ui-loader",
     className: "loader",
+    defaults: {
+      lines: 8,
+      length: 3,
+      width: 4,
+      radius: 10,
+      corners: .3,
+      rotate: 0,
+      color: '#000',
+      speed: 1,
+      trail: 60,
+      shadow: false,
+      hwaccel: false,
+      className: 'loader',
+      zIndex: 2e9,
+      top: '30px',
+      left: '50%'
+    },
     initialize: function() {
       self.on("loader_start", this.start, this);
       self.on("loader_stop", this.stop, this);
     },
     render: function() {
-      var _temp;
-      _temp = _.template(ce.templates.get(this.template));
-      this.$el.prepend(_temp);
+      this.spinner = new Spinner(this.defaults).spin();
+      this.$el.prepend(this.spinner.el);
       self.trigger("loader_loaded");
     },
     start: function() {
@@ -19,6 +35,7 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
       self.trigger("loader_started");
     },
     stop: function() {
+      this.spinner.stop();
       $("." + this.className).remove();
       self.trigger("loader_stopped");
     }

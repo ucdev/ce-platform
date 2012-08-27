@@ -68,6 +68,7 @@ js.addAll([
 "vendor/backbone/backbone.paginator",
 "vendor/backbone/backbone.marionette",
 "vendor/retina",
+"vendor/spin",
 
 
 /* jQuery Plugins */

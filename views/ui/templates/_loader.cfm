@@ -1,1 +1,1 @@
-<div class="loader"><img src="/images/255.png" /></div>
+<div class="loader"><!--- <img src="/images/255.png" /> ---></div>
