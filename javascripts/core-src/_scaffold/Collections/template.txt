@@ -1,9 +1,0 @@
-/*! app/core/collections/<%= loc.nameInPluralUppercase =%> */
-define("app/core/collections/<%= loc.nameInPluralUppercase =%>",function() {
-	var <%= loc.nameInPluralUppercase =%> = Backbone.Collection.extend({
-			url: '/<%= loc.nameInPluralLowercase =%>/',
-			model: models.<%= loc.nameInSingularUppercase =%>
-		});
-
-	exports.<%= loc.nameInPluralUppercase =%> = <%= loc.nameInPluralUppercase =%>;
-});

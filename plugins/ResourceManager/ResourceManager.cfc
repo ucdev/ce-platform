@@ -8,10 +8,18 @@
 		<cfset var loc = {} />
 		<cfset loc.filepath = "" />
 		<cfset loc.httppath = "" />
-		<cfset loc.srcPath = "/javascripts/app/core/" />
-		<cfset loc.tmplPath = "/javascripts/_scaffold/" />
-
+		<cfset loc.srcPath = "/javascripts/app/base/" />
+		<cfset loc.tmplPath = "/javascripts/.scaffold_templates/" />
+		<cfset loc.coreFilePath = expandPath('/javascripts/app/base.js') />
+		<cfset loc.collectionsFilePath = expandPath('/javascripts/app/base/collections.js') />
+		<cfset loc.modelsFilePath = expandPath('/javascripts/app/base/models.js') />
+		<cfset loc.collectionsArray = [] />
+		<cfset loc.modelsArray = [] />
 		<cfdirectory action="list" directory="#expandPath('/models')#" filter="*.cfc" name="qModels">
+		<cfif fileExists(loc.coreFilePath)>
+			<cffile action="delete" file="#loc.coreFilePath#">
+		</cfif>
+		<cffile action="write" file="#loc.coreFilePath#" output="/*! ce-platform base modules */">
 
 		<cfloop query="qModels">
 			<cfset loc.name = replace(qModels.name,'.cfc','') />
@@ -20,33 +28,45 @@
 			<cfset loc.nameInPluralLowercase = LCase(pluralize(loc.name))>
 			<cfset loc.nameInPluralUppercase = capitalize(pluralize(loc.name))>
 			
-			<!--- CONTROLLER js --->
+			<!--- CONTROLLER js 
 			<cfset $renderTemplate(name="controller",templatePath=expandPath("#loc.tmplPath#Controllers/template.txt"),outputPath=expandPath("#loc.srcPath#Controllers"),fileName="#loc.nameInPluralLowercase#.js",modelName="#loc.name#") />
-			
+			--->
+
 			<!--- COLLECTION js --->
-			<cfset $renderTemplate(name="collection",templatePath=expandPath("#loc.tmplPath#Collections/template.txt"),outputPath=expandPath("#loc.srcPath#Collections"),fileName="#loc.nameInPluralLowercase#.js",modelName="#loc.name#") />
+			<cfset collectionOutput = $renderTemplate(name="collection",templatePath=expandPath("#loc.tmplPath#Collections/template.txt"),outputPath=expandPath("#loc.srcPath#collections"),fileName="#loc.nameInPluralLowercase#.js",modelName="#loc.name#") />
+			<cffile action="append" file="#loc.collectionsFilePath#" output="#collectionOutput#" addNewLine=true />
+			<cfset loc.collectionsArray.add("app/collections/" & loc.nameInPluralLowercase) />
 			
 			<!--- MODEL js --->
-			<cfset $renderTemplate(name="model",templatePath=expandPath("#loc.tmplPath#Models/template.txt"),outputPath=expandPath("#loc.srcPath#Models"),fileName="#loc.nameInSingularLowercase#.js",modelName="#loc.name#") />
-			
+			<cfset modelOutput = $renderTemplate(name="model",templatePath=expandPath("#loc.tmplPath#Models/template.txt"),outputPath=expandPath("#loc.srcPath#models"),fileName="#loc.nameInSingularLowercase#.js",modelName="#loc.name#") />
+			<cffile action="append" file="#loc.modelsFilePath#" output="#modelOutput#" addNewLine=true />
+			<cfset loc.modelsArray.add("app/models/" & loc.nameInPluralLowercase) />
+
 			<!--- PAGER js --->
-			<cfset $renderTemplate(name="pager",templatePath=expandPath("#loc.tmplPath#Pagers/template.txt"),outputPath=expandPath("#loc.srcPath#Pagers"),fileName="#loc.nameInPluralLowercase#.js",modelName="#loc.name#") />
+			<cfset pagerOutput = $renderTemplate(name="pager",templatePath=expandPath("#loc.tmplPath#Pagers/template.txt"),outputPath=expandPath("#loc.srcPath#collections"),fileName="#loc.nameInPluralLowercase#_paged.js",modelName="#loc.name#") />
+			<cffile action="append" file="#loc.collectionsFilePath#" output="#pagerOutput#" addNewLine=true />
+			<cfset loc.collectionsArray.add("app/collections/" & loc.nameInPluralLowercase & "_paged") />
 			
-			<!--- ROUTER js --->
-			<cfset $renderTemplate(name="router",templatePath=expandPath("#loc.tmplPath#Routers/template.txt"),outputPath=expandPath("#loc.srcPath#Routers"),fileName="#loc.nameInPluralLowercase#.js",modelName="#loc.name#") />
+			<!--- ROUTER js 
+			<cfset $renderTemplate(name="router",templatePath=expandPath("#loc.tmplPath#Routers/template.txt"),outputPath=expandPath("#loc.srcPath#routers"),fileName="#loc.nameInPluralLowercase#.js",modelName="#loc.name#") />
+--->
+			<!--- VIEW EDIT js 
+			<cfset $renderTemplate(name="view_edit",templatePath=expandPath("#loc.tmplPath#Views/edit_template.txt"),outputPath=expandPath("#loc.srcPath#views/#loc.nameInPluralLowercase#"),fileName="edit.js",modelName="#loc.name#") />
+--->
+			<!--- VIEW INDEX js 
+			<cfset $renderTemplate(name="view_index",templatePath=expandPath("#loc.tmplPath#Views/index_template.txt"),outputPath=expandPath("#loc.srcPath#views/#loc.nameInPluralLowercase#"),fileName="index.js",modelName="#loc.name#") />
+			--->
+			<!--- VIEW SHOW js 
+			<cfset $renderTemplate(name="view_show",templatePath=expandPath("#loc.tmplPath#Views/show_template.txt"),outputPath=expandPath("#loc.srcPath#views/#loc.nameInPluralLowercase#"),fileName="show.js",modelName="#loc.name#") />
+			--->
+			<!--- VIEW ROW js 
+			<cfset $renderTemplate(name="view_row",templatePath=expandPath("#loc.tmplPath#Views/row_template.txt"),outputPath=expandPath("#loc.srcPath#views/#loc.nameInPluralLowercase#"),fileName="row.js",modelName="#loc.name#") />
+		---></cfloop>
 
-			<!--- VIEW EDIT js --->
-			<cfset $renderTemplate(name="view_edit",templatePath=expandPath("#loc.tmplPath#Views/edit_template.txt"),outputPath=expandPath("#loc.srcPath#Views/#loc.nameInPluralLowercase#"),fileName="edit.js",modelName="#loc.name#") />
-
-			<!--- VIEW INDEX js --->
-			<cfset $renderTemplate(name="view_index",templatePath=expandPath("#loc.tmplPath#Views/index_template.txt"),outputPath=expandPath("#loc.srcPath#Views/#loc.nameInPluralLowercase#"),fileName="index.js",modelName="#loc.name#") />
-			
-			<!--- VIEW SHOW js --->
-			<cfset $renderTemplate(name="view_show",templatePath=expandPath("#loc.tmplPath#Views/show_template.txt"),outputPath=expandPath("#loc.srcPath#Views/#loc.nameInPluralLowercase#"),fileName="show.js",modelName="#loc.name#") />
-			
-			<!--- VIEW ROW js --->
-			<cfset $renderTemplate(name="view_row",templatePath=expandPath("#loc.tmplPath#Views/row_template.txt"),outputPath=expandPath("#loc.srcPath#Views/#loc.nameInPluralLowercase#"),fileName="row.js",modelName="#loc.name#") />
-		</cfloop>
+			<!--- APPEND REQUIRE.ENSURE TO BASE LISTS 
+			<cffile action="append" file="#loc.modelsFilePath#" output="require.ensure(#serializeJson(loc.modelsArray)#)" addNewLine=true />
+			<cffile action="append" file="#loc.collectionsFilePath#" output="require.ensure(#serializeJson(loc.collectionsArray)#)" addNewLine=true />
+			--->
 		
 	</cffunction>
 	<cffunction name="createAssets" hint="I load all cached pagelet resources.">
@@ -114,13 +134,15 @@
 		</cfif>
 		
 		<cfif NOT fileExists(loc.outputPath & "/" & loc.fileName) AND fileExists(loc.templatePath)>
-				<cffile action="read" file="#loc.templatePath#" variable="loc.outputVar" />
-				<cfset loc.outputVar = Replace(loc.outputVar,"<%= loc.nameInPluralLowercase =%>","#loc.nameInPluralLowercase#","ALL") />
-				<cfset loc.outputVar = Replace(loc.outputVar,"<%= loc.nameInPluralUppercase =%>","#loc.nameInPluralUppercase#","ALL") />
-				<cfset loc.outputVar = Replace(loc.outputVar,"<%= loc.nameInSingularUppercase =%>","#loc.nameInSingularUppercase#","ALL") />
-				<cfset loc.outputVar = Replace(loc.outputVar,"<%= loc.nameInSingularLowercase =%>","#loc.nameInSingularLowercase#","ALL") />
-				<cffile action="write" file="#loc.outputPath#/#loc.fileName#" output="#loc.outputVar#" charset="utf-8"  />
-			</cfif>
+			<cffile action="read" file="#loc.templatePath#" variable="loc.outputVar" />
+			<cfset loc.outputVar = Replace(loc.outputVar,"<%= loc.nameInPluralLowercase =%>","#loc.nameInPluralLowercase#","ALL") />
+			<cfset loc.outputVar = Replace(loc.outputVar,"<%= loc.nameInPluralUppercase =%>","#loc.nameInPluralUppercase#","ALL") />
+			<cfset loc.outputVar = Replace(loc.outputVar,"<%= loc.nameInSingularUppercase =%>","#loc.nameInSingularUppercase#","ALL") />
+			<cfset loc.outputVar = Replace(loc.outputVar,"<%= loc.nameInSingularLowercase =%>","#loc.nameInSingularLowercase#","ALL") />
+			<cffile action="write" file="#loc.outputPath#/#loc.fileName#" output="#loc.outputVar#" charset="utf-8"  />
+		</cfif>
+
+		<cfreturn loc.outputVar />
 	</cffunction>
 	
 	<cffunction name="$writeLessFile">

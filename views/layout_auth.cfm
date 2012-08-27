@@ -9,8 +9,8 @@
 	 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
    
 	<!-- Le styles -->
-	#stylesheetLinkTag(bundle="ce")#
-	#javaScriptIncludeTag(bundle="ce")#
+	#stylesheetLinkTag(bundle="ce")#<!--- 
+	#javaScriptIncludeTag(bundle="ce")# --->
 	#stylesheetLinkTag(sources="lib/bootstrap-responsive")#
 	
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -30,8 +30,8 @@
 <body class="auth">
 <cfoutput>	
 	<script>
-	ce.start();
-	ce.user.load(#serializeJson(userInfo)#);
+	// ce.start();
+	// ce.user.load(#serializeJson(userInfo)#);
 	</script>
 	#includePartial(partial="/header_basic")#
 	<div class="auth-view">

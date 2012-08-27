@@ -1,0 +1,29 @@
+/*! app/collections/<%= loc.nameInPluralLowercase =%>_paged
+*   @requires: app,app/models/<%= loc.nameInSingularLowercase =%>
+*   @extends: app.Collection_paged
+*   @exports: app.collections.<%= loc.nameInPluralUppercase =%>_paged
+*/
+define("app/collections/<%= loc.nameInPluralUppercase =%>_paged",["require","app","app/models"],function(require,app) {
+  var <%= loc.nameInSingularUppercase =%>Model = require("app/models/<%= loc.nameInSingularLowercase =%>");
+
+  var <%= loc.nameInPluralUppercase =%>_paged = app.Collection_paged.extend({
+          initialize: function() {},
+          paginator_core: {
+            type: 'get',
+            dataType: 'json',
+            url: '/api/<%= loc.nameInPluralLowercase =%>/'
+          },
+          paginator_ui: {
+            firstPage: 1,
+            currentPage: 1,
+            perPage: 15
+          },
+          parse: function(response) {
+            this.totalPages = Math.ceil(response.length / this.perPage);
+            return response;
+          },
+          model: <%= loc.nameInSingularUppercase =%>Model
+      });
+
+  module.setExports(<%= loc.nameInPluralUppercase =%>_paged);
+});

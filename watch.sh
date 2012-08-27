@@ -1,2 +1,2 @@
 #!/bin/bash
-coffee -wbco javascripts/app javascripts/src
+coffee -wbco javascripts/ javascripts/_coffee/

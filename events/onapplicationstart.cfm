@@ -27,7 +27,7 @@
 
 <cfset buildCore() />
 
-<cfdirectory action="list" directory="#expandPath('/javascripts/lib/_core/controllers')#" filter="*.js" name="jsList">
+<!--- <cfdirectory action="list" directory="#expandPath('/javascripts/app/controllers')#" filter="*.js" name="jsList">
 <cfset baseDirPriority = "models,collections,controllers,pagers,routers,views" />
 <cfset baseViewFiles = "row,index,edit,show" />
 
@@ -52,9 +52,9 @@
 			</cfdefaultcase>
 		</cfswitch>
 	</cfloop>
-</cfloop>
+</cfloop> --->
 
-<cfscript>
+<!--- <cfscript>
 js.addAll([
 // GLOBAL VENDORS (avoid putting things here, try to embed / nest it within our "app" module system)
 /* jQuery, jQuery UI */
@@ -157,9 +157,9 @@ js.addAll([
 "lib/creditinator/step_finish",
 "lib/person" // ce.person
 ]);
-</cfscript>
+</cfscript> --->
 
-<cfset generateBundle(type="js", bundle="ce", compress=true, sources="#arrayToList(js,',')#") />
+<!--- <cfset generateBundle(type="js", bundle="ce", compress=true, sources="#arrayToList(js,',')#") /> --->
 
 <cfset application['config'] = {} />
 <cfset application.config['name'] = "CCPD" />
