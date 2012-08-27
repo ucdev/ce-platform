@@ -21,3 +21,4 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
 
 		add: ->
 			@collection.add @options.defaults
+			return

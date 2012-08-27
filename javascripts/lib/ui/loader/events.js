@@ -7,7 +7,7 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
   self.on("loader_started", function() {
     ce.log.info("loader: started");
   });
-  return self.on("loader_stopped", function() {
+  self.on("loader_stopped", function() {
     ce.log.info("loader: stopped");
   });
 });

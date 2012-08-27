@@ -16,15 +16,15 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
         # BIND EXTRANEOUS VIEWS THAT ARE CONTAINED WITHIN THE ROW
         bindViews: ->
             # ESTABLISHES THE STATUSDATE VIEW
-            statusDateEl = @$el.find ".js-status-date"
-            attributesToPass = 
-                ID: @model.get "ID"
-                STATUSID: @model.get "STATUSID"
-                PARENTSTATUSID: @model.get "STATUSID"
-                COMPLETEDATE: Date(@model.get "COMPLETEDATE")
-                STATUSNAME: @model.get "NAME"
-                REGISTERDATE: Date(@model.get "REGISTERDATE")
-                TERMDATE: Date(@model.get "TERMDATE")
+            # statusDateEl = @$el.find ".js-status-date"
+            # attributesToPass = 
+            #     ID: @model.get "ID"
+            #     STATUSID: @model.get "STATUSID"
+            #     PARENTSTATUSID: @model.get "STATUSID"
+            #     COMPLETEDATE: Date(@model.get "COMPLETEDATE")
+            #     STATUSNAME: @model.get "NAME"
+            #     REGISTERDATE: Date(@model.get "REGISTERDATE")
+            #     TERMDATE: Date(@model.get "TERMDATE")
 
             # REMOVED TO SIMPLIFY ACTIVITY PARTICIPANTS || 8/23/12 JS
             # @statusDate = new self.StatusDate(
@@ -32,11 +32,27 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
             #     model: new self.StatusDateModel attributesToPass
             #     parentModel: @model
             #     ).render()
-
+            if !@editDialog
+                editContainer = @$el.find(".js-edit-attendee-container")
+                curr = @
+                @editDialog = $(editContainer).dialog
+                    autoOpen: false
+                    buttons:
+                        Okay: ->
+                            return false
+                        Cancel: ->
+                            curr.editDialog.dialog("close")
+                            return false
+                    height: 500
+                    modal: true
+                    position: ['300px', '300px']
+                    title: "Editing " + curr.model.get("FIRSTNAME") + " " + curr.model.get "LASTNAME"
+                    width: 500
             return
 
         events:
             "click .js-delete-link": "deleteRow"
+            "click .js-edit-attendee": "editRow"
             "change .js-participant-checkbox": "selectRow"
             "click .js-print-cme": "printCME"
             "click .js-print-cne": "printCNE"
@@ -60,6 +76,21 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _) ->
                     return
 
             self.trigger "participant_removed"
+            return
+
+        # OPENS ATTENDEE EDIT FORM DIALOG
+        editRow: ->
+            editContainer = $(@editDialog)
+            $.ajax
+                url: "/attendees/edit"
+                type: "post"
+                data:
+                    key: @model.id
+                    activityId: @model.get "ACTIVITYID"
+                success: (data) ->
+                    editContainer.html data
+                    editContainer.dialog "open"
+                    return
             return
 
         # USED WHEN RENDERING THE VIEW TO DiSPLAY IT AS SELECTED OR WHEN BEING MODIFIED FROM OUTSIDE ENTITY

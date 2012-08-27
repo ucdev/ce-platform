@@ -6,3 +6,4 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 	self.on "filter_loaded", ->
 		ce.log.info "filter: loaded"
 		return
+	return

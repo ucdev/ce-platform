@@ -28,7 +28,7 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _, models) {
         },
         hide: "unfocus"
       });
-      return self.trigger("selectallcheckbox_rendered");
+      self.trigger("selectallcheckbox_rendered");
     },
     deselectAllParticipants: function() {
       _.forEach(this.collection.sortedAndFilteredModels, function(model) {

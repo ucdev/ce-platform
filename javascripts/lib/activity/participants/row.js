@@ -12,20 +12,32 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
     className: "personRow AllAttendees js-all-attendee",
     template: "activity_participants-row",
     bindViews: function() {
-      var attributesToPass, statusDateEl;
-      statusDateEl = this.$el.find(".js-status-date");
-      attributesToPass = {
-        ID: this.model.get("ID"),
-        STATUSID: this.model.get("STATUSID"),
-        PARENTSTATUSID: this.model.get("STATUSID"),
-        COMPLETEDATE: Date(this.model.get("COMPLETEDATE")),
-        STATUSNAME: this.model.get("NAME"),
-        REGISTERDATE: Date(this.model.get("REGISTERDATE")),
-        TERMDATE: Date(this.model.get("TERMDATE"))
-      };
+      var curr, editContainer;
+      if (!this.editDialog) {
+        editContainer = this.$el.find(".js-edit-attendee-container");
+        curr = this;
+        this.editDialog = $(editContainer).dialog({
+          autoOpen: false,
+          buttons: {
+            Okay: function() {
+              return false;
+            },
+            Cancel: function() {
+              curr.editDialog.dialog("close");
+              return false;
+            }
+          },
+          height: 500,
+          modal: true,
+          position: ['300px', '300px'],
+          title: "Editing " + curr.model.get("FIRSTNAME") + " " + curr.model.get("LASTNAME"),
+          width: 500
+        });
+      }
     },
     events: {
       "click .js-delete-link": "deleteRow",
+      "click .js-edit-attendee": "editRow",
       "change .js-participant-checkbox": "selectRow",
       "click .js-print-cme": "printCME",
       "click .js-print-cne": "printCNE",
@@ -46,6 +58,22 @@ ce.module("activity.participants", function(self, ce, Backbone, Marionette, $, _
         success: function(model) {}
       });
       self.trigger("participant_removed");
+    },
+    editRow: function() {
+      var editContainer;
+      editContainer = $(this.editDialog);
+      $.ajax({
+        url: "/attendees/edit",
+        type: "post",
+        data: {
+          key: this.model.id,
+          activityId: this.model.get("ACTIVITYID")
+        },
+        success: function(data) {
+          editContainer.html(data);
+          editContainer.dialog("open");
+        }
+      });
     },
     markSelected: function() {
       this.$el.find(".js-participant-checkbox").attr("checked", true);

@@ -4,7 +4,7 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
   self.on("filter_filtered", function(name) {
     ce.log.info("filter: filtered by " + name);
   });
-  return self.on("filter_loaded", function() {
+  self.on("filter_loaded", function() {
     ce.log.info("filter: loaded");
   });
 });

@@ -33,6 +33,7 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _, models) ->
 				hide: "unfocus"
 
 			self.trigger "selectallcheckbox_rendered"
+			return
 
 		# SELECTS EVERY MODEL OF DATA WTIHIN THE COLLECTION
 		deselectAllParticipants: ->

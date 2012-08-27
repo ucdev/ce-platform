@@ -169,3 +169,4 @@ ce.module "ui", (self, ce, Backbone, Marionette, $, _) ->
 			@$el.find('.js-filter-option-title').text filterName
 
 			self.trigger "filter_filtered", filterName
+			return

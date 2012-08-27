@@ -8,6 +8,7 @@
 	            <th class="span4">Name</th>
 	            <th class="span7">Status</th>
 	            <th>&nbsp;</th>
+	            <th>&nbsp;</th>
 	        </tr>
 	    </thead>
 	    <tbody class="js-attendee-rows"></tbody>

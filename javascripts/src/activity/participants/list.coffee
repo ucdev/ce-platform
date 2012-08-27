@@ -50,10 +50,12 @@ ce.module "activity.participants", (self, ce, Backbone, Marionette, $, _, models
 
 		render: ->
 			self.trigger "collection_rendered"
+			return
 
 		reload: ->
 			@collection.goTo @collection.currentPage
 			self.trigger "page_reloaded"
+			return
 	return
 ,ce._core.models
 	

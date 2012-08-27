@@ -45,3 +45,7 @@
         </ul>
     </div>
 </td>
+<td valign="top">
+    <a href="javascript://" class="js-edit-attendee">Edit</a>
+    <div class="js-edit-attendee-container"></div>
+</td>

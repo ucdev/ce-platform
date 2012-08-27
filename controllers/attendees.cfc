@@ -8,7 +8,7 @@
     	<!--- Check if the record exists --->
 	    <cfif NOT IsObject(activity_participant)>
 	        <cfset flashInsert(error="activity_participant #params.key# was not found")>
-			<cfset redirectTo(controller='activity_participants',action='index', key=params.activityId)>
+			<cfset redirectTo(controller='activity_participants',action='index', activityId=params.activityId)>
 	    </cfif>
 	</cffunction>
     

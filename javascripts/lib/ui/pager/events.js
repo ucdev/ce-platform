@@ -14,6 +14,6 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
     ce.log.info("pager: selected page loaded");
   });
   self.on("pager_page_size_changed", function() {
-    return ce.log.info("pager: page size updated");
+    ce.log.info("pager: page size updated");
   });
 });

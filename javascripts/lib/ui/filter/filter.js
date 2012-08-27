@@ -125,7 +125,7 @@ ce.module("ui", function(self, ce, Backbone, Marionette, $, _) {
     },
     updateFilterLabel: function(filterName) {
       this.$el.find('.js-filter-option-title').text(filterName);
-      return self.trigger("filter_filtered", filterName);
+      self.trigger("filter_filtered", filterName);
     }
   });
 });
