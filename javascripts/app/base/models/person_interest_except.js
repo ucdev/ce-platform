@@ -1,10 +1,11 @@
 /*! app/models/person_interest_except 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Person_interest_except
 */
-define("app/models/person_interest_except",["require","app"],function(require,app) {
-	var Person_interest_exceptModel = app.Model.extend({
+define("app/models/person_interest_except",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Person_interest_exceptModel = AppModel.extend({
 		url: function() {
 			base = "/api/person_interest_excepts/"
             

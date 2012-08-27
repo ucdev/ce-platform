@@ -1,12 +1,13 @@
 /*! app/collections/objectfields
-* 	@requires: app,app/models/objectfield
+* 	@requires: app,app/collection,app/models/objectfield
 * 	@extends: app.Collection
 * 	@exports: app.collections.Objectfields
 */
-define("app/collections/objectfields",["require","app","app/models"],function(require,app) {
+define("app/collections/objectfields",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ObjectfieldModel = require("app/models/objectfield");
-
-	var Objectfields = app.Collection.extend({
+	
+	Objectfields = AppCollection.extend({
 		url: '/objectfields/',
 		model: ObjectfieldModel
 	});

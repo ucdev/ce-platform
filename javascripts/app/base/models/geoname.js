@@ -1,10 +1,11 @@
 /*! app/models/geoname 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Geoname
 */
-define("app/models/geoname",["require","app"],function(require,app) {
-	var GeonameModel = app.Model.extend({
+define("app/models/geoname",["require"],function(require) {
+	var AppModel = require("app/model");
+	var GeonameModel = AppModel.extend({
 		url: function() {
 			base = "/api/geonames/"
             

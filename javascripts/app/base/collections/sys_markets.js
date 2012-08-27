@@ -1,12 +1,13 @@
 /*! app/collections/sys_markets
-* 	@requires: app,app/models/sys_market
+* 	@requires: app,app/collection,app/models/sys_market
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_markets
 */
-define("app/collections/sys_markets",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_markets",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_marketModel = require("app/models/sys_market");
-
-	var Sys_markets = app.Collection.extend({
+	
+	Sys_markets = AppCollection.extend({
 		url: '/sys_markets/',
 		model: Sys_marketModel
 	});

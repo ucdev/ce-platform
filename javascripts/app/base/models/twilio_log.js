@@ -1,10 +1,11 @@
 /*! app/models/twilio_log 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Twilio_log
 */
-define("app/models/twilio_log",["require","app"],function(require,app) {
-	var Twilio_logModel = app.Model.extend({
+define("app/models/twilio_log",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Twilio_logModel = AppModel.extend({
 		url: function() {
 			base = "/api/twilio_logs/"
             

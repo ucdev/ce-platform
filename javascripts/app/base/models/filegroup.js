@@ -1,10 +1,11 @@
 /*! app/models/filegroup 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Filegroup
 */
-define("app/models/filegroup",["require","app"],function(require,app) {
-	var FilegroupModel = app.Model.extend({
+define("app/models/filegroup",["require"],function(require) {
+	var AppModel = require("app/model");
+	var FilegroupModel = AppModel.extend({
 		url: function() {
 			base = "/api/filegroups/"
             

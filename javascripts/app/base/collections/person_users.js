@@ -1,12 +1,13 @@
 /*! app/collections/person_users
-* 	@requires: app,app/models/person_user
+* 	@requires: app,app/collection,app/models/person_user
 * 	@extends: app.Collection
 * 	@exports: app.collections.Person_users
 */
-define("app/collections/person_users",["require","app","app/models"],function(require,app) {
+define("app/collections/person_users",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Person_userModel = require("app/models/person_user");
-
-	var Person_users = app.Collection.extend({
+	
+	Person_users = AppCollection.extend({
 		url: '/person_users/',
 		model: Person_userModel
 	});

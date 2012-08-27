@@ -1,10 +1,11 @@
 /*! app/models/stat_entry 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Stat_entry
 */
-define("app/models/stat_entry",["require","app"],function(require,app) {
-	var Stat_entryModel = app.Model.extend({
+define("app/models/stat_entry",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Stat_entryModel = AppModel.extend({
 		url: function() {
 			base = "/api/stat_entries/"
             

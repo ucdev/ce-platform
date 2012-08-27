@@ -1,22 +1,16 @@
 define "app/user",["require","backbone","jquery"],(require,Backbone,$) ->
-    class User extends Backbone.View
+    Mixable = require("app/mixable")
+    auth = require("app/user/auth")
+    #evnts = require("app/user/events")
+    console.log(auth)
+    class User extends Mixable
+        @include auth
+        #@include events
         constructor: (params) ->
-            @model = new self.Model(params)
-            @trigger "loaded"
-            @isLoggedIn()
+            @model = new @Model(params)
             
+            #@include events
             return
         Model: require("app/models/person")
-
-
-
-    $ ->
-        $(".loginLink").click (ev) ->
-            user.login {}
-
-            ev.preventDefault()
-            false
-        return
-    return
 
     module.setExports(User)

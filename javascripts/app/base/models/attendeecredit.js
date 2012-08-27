@@ -1,10 +1,11 @@
 /*! app/models/attendeecredit 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Attendeecredit
 */
-define("app/models/attendeecredit",["require","app"],function(require,app) {
-	var AttendeecreditModel = app.Model.extend({
+define("app/models/attendeecredit",["require"],function(require) {
+	var AppModel = require("app/model");
+	var AttendeecreditModel = AppModel.extend({
 		url: function() {
 			base = "/api/attendeecredits/"
             

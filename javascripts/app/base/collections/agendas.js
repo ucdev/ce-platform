@@ -1,12 +1,13 @@
 /*! app/collections/agendas
-* 	@requires: app,app/models/agenda
+* 	@requires: app,app/collection,app/models/agenda
 * 	@extends: app.Collection
 * 	@exports: app.collections.Agendas
 */
-define("app/collections/agendas",["require","app","app/models"],function(require,app) {
+define("app/collections/agendas",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AgendaModel = require("app/models/agenda");
-
-	var Agendas = app.Collection.extend({
+	
+	Agendas = AppCollection.extend({
 		url: '/agendas/',
 		model: AgendaModel
 	});

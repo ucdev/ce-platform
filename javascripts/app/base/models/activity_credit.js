@@ -1,10 +1,11 @@
 /*! app/models/activity_credit 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_credit
 */
-define("app/models/activity_credit",["require","app"],function(require,app) {
-	var Activity_creditModel = app.Model.extend({
+define("app/models/activity_credit",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_creditModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_credits/"
             

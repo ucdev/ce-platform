@@ -1,10 +1,11 @@
 /*! app/models/sys_funrn 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_funrn
 */
-define("app/models/sys_funrn",["require","app"],function(require,app) {
-	var Sys_funrnModel = app.Model.extend({
+define("app/models/sys_funrn",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_funrnModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_funrns/"
             

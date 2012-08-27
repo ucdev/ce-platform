@@ -1,10 +1,11 @@
 /*! app/models/sys_sitelm 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_sitelm
 */
-define("app/models/sys_sitelm",["require","app"],function(require,app) {
-	var Sys_sitelmModel = app.Model.extend({
+define("app/models/sys_sitelm",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_sitelmModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_sitelms/"
             

@@ -1,10 +1,11 @@
 /*! app/models/category 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Category
 */
-define("app/models/category",["require","app"],function(require,app) {
-	var CategoryModel = app.Model.extend({
+define("app/models/category",["require"],function(require) {
+	var AppModel = require("app/model");
+	var CategoryModel = AppModel.extend({
 		url: function() {
 			base = "/api/categories/"
             

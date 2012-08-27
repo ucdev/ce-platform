@@ -1,10 +1,11 @@
 /*! app/models/entity_credit 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Entity_credit
 */
-define("app/models/entity_credit",["require","app"],function(require,app) {
-	var Entity_creditModel = app.Model.extend({
+define("app/models/entity_credit",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Entity_creditModel = AppModel.extend({
 		url: function() {
 			base = "/api/entity_credits/"
             

@@ -1,12 +1,13 @@
 /*! app/collections/activity_finsupports
-* 	@requires: app,app/models/activity_finsupport
+* 	@requires: app,app/collection,app/models/activity_finsupport
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_finsupports
 */
-define("app/collections/activity_finsupports",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_finsupports",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_finsupportModel = require("app/models/activity_finsupport");
-
-	var Activity_finsupports = app.Collection.extend({
+	
+	Activity_finsupports = AppCollection.extend({
 		url: '/activity_finsupports/',
 		model: Activity_finsupportModel
 	});

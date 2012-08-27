@@ -1,10 +1,11 @@
 /*! app/models/objectform 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Objectform
 */
-define("app/models/objectform",["require","app"],function(require,app) {
-	var ObjectformModel = app.Model.extend({
+define("app/models/objectform",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ObjectformModel = AppModel.extend({
 		url: function() {
 			base = "/api/objectforms/"
             

@@ -1,12 +1,13 @@
 /*! app/collections/occupations
-* 	@requires: app,app/models/occupation
+* 	@requires: app,app/collection,app/models/occupation
 * 	@extends: app.Collection
 * 	@exports: app.collections.Occupations
 */
-define("app/collections/occupations",["require","app","app/models"],function(require,app) {
+define("app/collections/occupations",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var OccupationModel = require("app/models/occupation");
-
-	var Occupations = app.Collection.extend({
+	
+	Occupations = AppCollection.extend({
 		url: '/occupations/',
 		model: OccupationModel
 	});

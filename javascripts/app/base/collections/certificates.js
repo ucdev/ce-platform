@@ -1,12 +1,13 @@
 /*! app/collections/certificates
-* 	@requires: app,app/models/certificate
+* 	@requires: app,app/collection,app/models/certificate
 * 	@extends: app.Collection
 * 	@exports: app.collections.Certificates
 */
-define("app/collections/certificates",["require","app","app/models"],function(require,app) {
+define("app/collections/certificates",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var CertificateModel = require("app/models/certificate");
-
-	var Certificates = app.Collection.extend({
+	
+	Certificates = AppCollection.extend({
 		url: '/certificates/',
 		model: CertificateModel
 	});

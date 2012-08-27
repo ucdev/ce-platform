@@ -1,10 +1,11 @@
 /*! app/models/entity_entityrole 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Entity_entityrole
 */
-define("app/models/entity_entityrole",["require","app"],function(require,app) {
-	var Entity_entityroleModel = app.Model.extend({
+define("app/models/entity_entityrole",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Entity_entityroleModel = AppModel.extend({
 		url: function() {
 			base = "/api/entity_entityroles/"
             

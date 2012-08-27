@@ -1,10 +1,11 @@
 /*! app/models/sys_activityrole 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_activityrole
 */
-define("app/models/sys_activityrole",["require","app"],function(require,app) {
-	var Sys_activityroleModel = app.Model.extend({
+define("app/models/sys_activityrole",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_activityroleModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_activityroles/"
             

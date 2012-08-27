@@ -1,10 +1,11 @@
 /*! app/models/degree_credit 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Degree_credit
 */
-define("app/models/degree_credit",["require","app"],function(require,app) {
-	var Degree_creditModel = app.Model.extend({
+define("app/models/degree_credit",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Degree_creditModel = AppModel.extend({
 		url: function() {
 			base = "/api/degree_credits/"
             

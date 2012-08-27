@@ -1,12 +1,13 @@
 /*! app/collections/histories
-* 	@requires: app,app/models/history
+* 	@requires: app,app/collection,app/models/history
 * 	@extends: app.Collection
 * 	@exports: app.collections.Histories
 */
-define("app/collections/histories",["require","app","app/models"],function(require,app) {
+define("app/collections/histories",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var HistoryModel = require("app/models/history");
-
-	var Histories = app.Collection.extend({
+	
+	Histories = AppCollection.extend({
 		url: '/histories/',
 		model: HistoryModel
 	});

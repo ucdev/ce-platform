@@ -1,12 +1,13 @@
 /*! app/collections/sys_ethnicities
-* 	@requires: app,app/models/sys_ethnicity
+* 	@requires: app,app/collection,app/models/sys_ethnicity
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_ethnicities
 */
-define("app/collections/sys_ethnicities",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_ethnicities",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_ethnicityModel = require("app/models/sys_ethnicity");
-
-	var Sys_ethnicities = app.Collection.extend({
+	
+	Sys_ethnicities = AppCollection.extend({
 		url: '/sys_ethnicities/',
 		model: Sys_ethnicityModel
 	});

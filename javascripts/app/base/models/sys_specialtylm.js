@@ -1,10 +1,11 @@
 /*! app/models/sys_specialtylm 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_specialtylm
 */
-define("app/models/sys_specialtylm",["require","app"],function(require,app) {
-	var Sys_specialtylmModel = app.Model.extend({
+define("app/models/sys_specialtylm",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_specialtylmModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_specialtylms/"
             

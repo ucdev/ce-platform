@@ -1,12 +1,13 @@
 /*! app/collections/credit_requests
-* 	@requires: app,app/models/credit_request
+* 	@requires: app,app/collection,app/models/credit_request
 * 	@extends: app.Collection
 * 	@exports: app.collections.Credit_requests
 */
-define("app/collections/credit_requests",["require","app","app/models"],function(require,app) {
+define("app/collections/credit_requests",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Credit_requestModel = require("app/models/credit_request");
-
-	var Credit_requests = app.Collection.extend({
+	
+	Credit_requests = AppCollection.extend({
 		url: '/credit_requests/',
 		model: Credit_requestModel
 	});

@@ -1,10 +1,11 @@
 /*! app/models/image 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Image
 */
-define("app/models/image",["require","app"],function(require,app) {
-	var ImageModel = app.Model.extend({
+define("app/models/image",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ImageModel = AppModel.extend({
 		url: function() {
 			base = "/api/images/"
             

@@ -1,12 +1,13 @@
 /*! app/collections/sys_categorylms
-* 	@requires: app,app/models/sys_categorylm
+* 	@requires: app,app/collection,app/models/sys_categorylm
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_categorylms
 */
-define("app/collections/sys_categorylms",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_categorylms",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_categorylmModel = require("app/models/sys_categorylm");
-
-	var Sys_categorylms = app.Collection.extend({
+	
+	Sys_categorylms = AppCollection.extend({
 		url: '/sys_categorylms/',
 		model: Sys_categorylmModel
 	});

@@ -1,10 +1,11 @@
 /*! app/models/sys_addresstype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_addresstype
 */
-define("app/models/sys_addresstype",["require","app"],function(require,app) {
-	var Sys_addresstypeModel = app.Model.extend({
+define("app/models/sys_addresstype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_addresstypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_addresstypes/"
             

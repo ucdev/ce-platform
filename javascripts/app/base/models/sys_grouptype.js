@@ -1,10 +1,11 @@
 /*! app/models/sys_grouptype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_grouptype
 */
-define("app/models/sys_grouptype",["require","app"],function(require,app) {
-	var Sys_grouptypeModel = app.Model.extend({
+define("app/models/sys_grouptype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_grouptypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_grouptypes/"
             

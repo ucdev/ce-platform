@@ -16,11 +16,13 @@ define("app", ["require", "backbone", "jquery", "bootstrap"], function(require, 
       this.Model = require("app/model");
       this.Collection = require("app/collection");
       this.User = require("app/user");
+      this.log = require("logger");
       this.log.info("app: started");
     }
 
     return App;
 
   })(Backbone.View);
+  console.log("test");
   return module.setExports(App);
 });

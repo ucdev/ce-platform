@@ -1,12 +1,13 @@
 /*! app/collections/attendee_components
-* 	@requires: app,app/models/attendee_component
+* 	@requires: app,app/collection,app/models/attendee_component
 * 	@extends: app.Collection
 * 	@exports: app.collections.Attendee_components
 */
-define("app/collections/attendee_components",["require","app","app/models"],function(require,app) {
+define("app/collections/attendee_components",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Attendee_componentModel = require("app/models/attendee_component");
-
-	var Attendee_components = app.Collection.extend({
+	
+	Attendee_components = AppCollection.extend({
 		url: '/attendee_components/',
 		model: Attendee_componentModel
 	});

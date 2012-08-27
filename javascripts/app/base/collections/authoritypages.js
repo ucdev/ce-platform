@@ -1,12 +1,13 @@
 /*! app/collections/authoritypages
-* 	@requires: app,app/models/authoritypage
+* 	@requires: app,app/collection,app/models/authoritypage
 * 	@extends: app.Collection
 * 	@exports: app.collections.Authoritypages
 */
-define("app/collections/authoritypages",["require","app","app/models"],function(require,app) {
+define("app/collections/authoritypages",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AuthoritypageModel = require("app/models/authoritypage");
-
-	var Authoritypages = app.Collection.extend({
+	
+	Authoritypages = AppCollection.extend({
 		url: '/authoritypages/',
 		model: AuthoritypageModel
 	});

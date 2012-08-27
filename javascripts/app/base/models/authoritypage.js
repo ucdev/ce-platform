@@ -1,10 +1,11 @@
 /*! app/models/authoritypage 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Authoritypage
 */
-define("app/models/authoritypage",["require","app"],function(require,app) {
-	var AuthoritypageModel = app.Model.extend({
+define("app/models/authoritypage",["require"],function(require) {
+	var AppModel = require("app/model");
+	var AuthoritypageModel = AppModel.extend({
 		url: function() {
 			base = "/api/authoritypages/"
             

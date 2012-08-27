@@ -1,10 +1,11 @@
 /*! app/models/activity_finsupport 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_finsupport
 */
-define("app/models/activity_finsupport",["require","app"],function(require,app) {
-	var Activity_finsupportModel = app.Model.extend({
+define("app/models/activity_finsupport",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_finsupportModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_finsupports/"
             

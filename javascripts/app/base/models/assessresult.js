@@ -1,10 +1,11 @@
 /*! app/models/assessresult 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Assessresult
 */
-define("app/models/assessresult",["require","app"],function(require,app) {
-	var AssessresultModel = app.Model.extend({
+define("app/models/assessresult",["require"],function(require) {
+	var AppModel = require("app/model");
+	var AssessresultModel = AppModel.extend({
 		url: function() {
 			base = "/api/assessresults/"
             

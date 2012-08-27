@@ -1,12 +1,13 @@
 /*! app/collections/activity_applications
-* 	@requires: app,app/models/activity_application
+* 	@requires: app,app/collection,app/models/activity_application
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_applications
 */
-define("app/collections/activity_applications",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_applications",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_applicationModel = require("app/models/activity_application");
-
-	var Activity_applications = app.Collection.extend({
+	
+	Activity_applications = AppCollection.extend({
 		url: '/activity_applications/',
 		model: Activity_applicationModel
 	});

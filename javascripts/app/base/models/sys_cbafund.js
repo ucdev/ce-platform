@@ -1,10 +1,11 @@
 /*! app/models/sys_cbafund 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_cbafund
 */
-define("app/models/sys_cbafund",["require","app"],function(require,app) {
-	var Sys_cbafundModel = app.Model.extend({
+define("app/models/sys_cbafund",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_cbafundModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_cbafunds/"
             

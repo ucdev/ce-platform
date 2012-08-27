@@ -5,10 +5,11 @@ define "app",["require","backbone","jquery","bootstrap"],(require,Backbone,$,boo
             @$doc = @$win.document
             @$body = @$doc.body
             @el = $("#app")
-
+            
             @Model = require("app/model")
             @Collection = require("app/collection")
             @User = require("app/user")
+            @log = require("logger")
             @log.info("app: started")
 
     #app = new App()
@@ -25,4 +26,5 @@ define "app",["require","backbone","jquery","bootstrap"],(require,Backbone,$,boo
     # #     ce.log.info("app: started")
     # # )
     # return
+    console.log("test")
     module.setExports(App)

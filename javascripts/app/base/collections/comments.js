@@ -1,12 +1,13 @@
 /*! app/collections/comments
-* 	@requires: app,app/models/comment
+* 	@requires: app,app/collection,app/models/comment
 * 	@extends: app.Collection
 * 	@exports: app.collections.Comments
 */
-define("app/collections/comments",["require","app","app/models"],function(require,app) {
+define("app/collections/comments",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var CommentModel = require("app/models/comment");
-
-	var Comments = app.Collection.extend({
+	
+	Comments = AppCollection.extend({
 		url: '/comments/',
 		model: CommentModel
 	});

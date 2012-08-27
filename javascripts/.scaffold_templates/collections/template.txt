@@ -1,12 +1,13 @@
 /*! app/collections/<%= loc.nameInPluralLowercase =%>
-* 	@requires: app,app/models/<%= loc.nameInSingularLowercase =%>
+* 	@requires: app,app/collection,app/models/<%= loc.nameInSingularLowercase =%>
 * 	@extends: app.Collection
 * 	@exports: app.collections.<%= loc.nameInPluralUppercase =%>
 */
-define("app/collections/<%= loc.nameInPluralLowercase =%>",["require","app","app/models"],function(require,app) {
+define("app/collections/<%= loc.nameInPluralLowercase =%>",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var <%= loc.nameInSingularUppercase =%>Model = require("app/models/<%= loc.nameInSingularLowercase =%>");
-
-	var <%= loc.nameInPluralUppercase =%> = app.Collection.extend({
+	
+	<%= loc.nameInPluralUppercase =%> = AppCollection.extend({
 		url: '/<%= loc.nameInPluralLowercase =%>/',
 		model: <%= loc.nameInSingularUppercase =%>Model
 	});

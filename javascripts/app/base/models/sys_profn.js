@@ -1,10 +1,11 @@
 /*! app/models/sys_profn 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_profn
 */
-define("app/models/sys_profn",["require","app"],function(require,app) {
-	var Sys_profnModel = app.Model.extend({
+define("app/models/sys_profn",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_profnModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_profns/"
             

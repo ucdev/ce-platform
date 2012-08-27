@@ -1,10 +1,11 @@
 /*! app/models/activity_finledger 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_finledger
 */
-define("app/models/activity_finledger",["require","app"],function(require,app) {
-	var Activity_finledgerModel = app.Model.extend({
+define("app/models/activity_finledger",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_finledgerModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_finledgers/"
             

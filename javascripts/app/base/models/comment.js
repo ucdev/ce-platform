@@ -1,10 +1,11 @@
 /*! app/models/comment 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Comment
 */
-define("app/models/comment",["require","app"],function(require,app) {
-	var CommentModel = app.Model.extend({
+define("app/models/comment",["require"],function(require) {
+	var AppModel = require("app/model");
+	var CommentModel = AppModel.extend({
 		url: function() {
 			base = "/api/comments/"
             

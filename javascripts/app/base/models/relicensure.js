@@ -1,10 +1,11 @@
 /*! app/models/relicensure 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Relicensure
 */
-define("app/models/relicensure",["require","app"],function(require,app) {
-	var RelicensureModel = app.Model.extend({
+define("app/models/relicensure",["require"],function(require) {
+	var AppModel = require("app/model");
+	var RelicensureModel = AppModel.extend({
 		url: function() {
 			base = "/api/relicensures/"
             

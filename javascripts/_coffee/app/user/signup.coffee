@@ -1,5 +1,6 @@
 #! ce.user.auth @description: logs when user events 
-ce.module "user", (self, ce, Backbone, Marionette, $, _, log, user) ->
+define "app/user/signup",["require","backbone","jquery"],(require,Backbone,$) ->
+    self = {}
     self.views.SignupForm = Backbone.View.extend(
         el:"#frmRegister"
         
@@ -29,4 +30,5 @@ ce.module "user", (self, ce, Backbone, Marionette, $, _, log, user) ->
             return
     )
     return
-,ce.log,ce.user
+
+    module.setExports(self)

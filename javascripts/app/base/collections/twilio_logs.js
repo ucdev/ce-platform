@@ -1,12 +1,13 @@
 /*! app/collections/twilio_logs
-* 	@requires: app,app/models/twilio_log
+* 	@requires: app,app/collection,app/models/twilio_log
 * 	@extends: app.Collection
 * 	@exports: app.collections.Twilio_logs
 */
-define("app/collections/twilio_logs",["require","app","app/models"],function(require,app) {
+define("app/collections/twilio_logs",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Twilio_logModel = require("app/models/twilio_log");
-
-	var Twilio_logs = app.Collection.extend({
+	
+	Twilio_logs = AppCollection.extend({
 		url: '/twilio_logs/',
 		model: Twilio_logModel
 	});

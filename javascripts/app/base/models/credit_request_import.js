@@ -1,10 +1,11 @@
 /*! app/models/credit_request_import 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Credit_request_import
 */
-define("app/models/credit_request_import",["require","app"],function(require,app) {
-	var Credit_request_importModel = app.Model.extend({
+define("app/models/credit_request_import",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Credit_request_importModel = AppModel.extend({
 		url: function() {
 			base = "/api/credit_request_imports/"
             

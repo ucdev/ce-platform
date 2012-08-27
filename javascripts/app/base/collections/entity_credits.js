@@ -1,12 +1,13 @@
 /*! app/collections/entity_credits
-* 	@requires: app,app/models/entity_credit
+* 	@requires: app,app/collection,app/models/entity_credit
 * 	@extends: app.Collection
 * 	@exports: app.collections.Entity_credits
 */
-define("app/collections/entity_credits",["require","app","app/models"],function(require,app) {
+define("app/collections/entity_credits",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Entity_creditModel = require("app/models/entity_credit");
-
-	var Entity_credits = app.Collection.extend({
+	
+	Entity_credits = AppCollection.extend({
 		url: '/entity_credits/',
 		model: Entity_creditModel
 	});

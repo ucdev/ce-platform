@@ -1,12 +1,13 @@
 /*! app/collections/sys_components
-* 	@requires: app,app/models/sys_component
+* 	@requires: app,app/collection,app/models/sys_component
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_components
 */
-define("app/collections/sys_components",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_components",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_componentModel = require("app/models/sys_component");
-
-	var Sys_components = app.Collection.extend({
+	
+	Sys_components = AppCollection.extend({
 		url: '/sys_components/',
 		model: Sys_componentModel
 	});

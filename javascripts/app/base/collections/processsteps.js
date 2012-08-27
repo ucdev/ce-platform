@@ -1,12 +1,13 @@
 /*! app/collections/processsteps
-* 	@requires: app,app/models/processstep
+* 	@requires: app,app/collection,app/models/processstep
 * 	@extends: app.Collection
 * 	@exports: app.collections.Processsteps
 */
-define("app/collections/processsteps",["require","app","app/models"],function(require,app) {
+define("app/collections/processsteps",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ProcessstepModel = require("app/models/processstep");
-
-	var Processsteps = app.Collection.extend({
+	
+	Processsteps = AppCollection.extend({
 		url: '/processsteps/',
 		model: ProcessstepModel
 	});

@@ -1,12 +1,13 @@
 /*! app/collections/entities
-* 	@requires: app,app/models/entity
+* 	@requires: app,app/collection,app/models/entity
 * 	@extends: app.Collection
 * 	@exports: app.collections.Entities
 */
-define("app/collections/entities",["require","app","app/models"],function(require,app) {
+define("app/collections/entities",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var EntityModel = require("app/models/entity");
-
-	var Entities = app.Collection.extend({
+	
+	Entities = AppCollection.extend({
 		url: '/entities/',
 		model: EntityModel
 	});

@@ -1,12 +1,13 @@
 /*! app/collections/sys_occclasses
-* 	@requires: app,app/models/sys_occclass
+* 	@requires: app,app/collection,app/models/sys_occclass
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_occclasses
 */
-define("app/collections/sys_occclasses",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_occclasses",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_occclassModel = require("app/models/sys_occclass");
-
-	var Sys_occclasses = app.Collection.extend({
+	
+	Sys_occclasses = AppCollection.extend({
 		url: '/sys_occclasses/',
 		model: Sys_occclassModel
 	});

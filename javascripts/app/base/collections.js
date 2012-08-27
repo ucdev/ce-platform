@@ -1,12 +1,13 @@
 /*! app/collections/accounts
-* 	@requires: app,app/models/account
+* 	@requires: app,app/collection,app/models/account
 * 	@extends: app.Collection
 * 	@exports: app.collections.Accounts
 */
-define("app/collections/accounts",["require","app","app/models"],function(require,app) {
+define("app/collections/accounts",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AccountModel = require("app/models/account");
-
-	var Accounts = app.Collection.extend({
+	
+	Accounts = AppCollection.extend({
 		url: '/accounts/',
 		model: AccountModel
 	});
@@ -43,14 +44,15 @@ define("app/collections/Accounts_paged",["require","app","app/models"],function(
   module.setExports(Accounts_paged);
 });
 /*! app/collections/actions
-* 	@requires: app,app/models/action
+* 	@requires: app,app/collection,app/models/action
 * 	@extends: app.Collection
 * 	@exports: app.collections.Actions
 */
-define("app/collections/actions",["require","app","app/models"],function(require,app) {
+define("app/collections/actions",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ActionModel = require("app/models/action");
-
-	var Actions = app.Collection.extend({
+	
+	Actions = AppCollection.extend({
 		url: '/actions/',
 		model: ActionModel
 	});
@@ -87,14 +89,15 @@ define("app/collections/Actions_paged",["require","app","app/models"],function(r
   module.setExports(Actions_paged);
 });
 /*! app/collections/activities
-* 	@requires: app,app/models/activity
+* 	@requires: app,app/collection,app/models/activity
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activities
 */
-define("app/collections/activities",["require","app","app/models"],function(require,app) {
+define("app/collections/activities",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ActivityModel = require("app/models/activity");
-
-	var Activities = app.Collection.extend({
+	
+	Activities = AppCollection.extend({
 		url: '/activities/',
 		model: ActivityModel
 	});
@@ -131,14 +134,15 @@ define("app/collections/Activities_paged",["require","app","app/models"],functio
   module.setExports(Activities_paged);
 });
 /*! app/collections/activity_accmes
-* 	@requires: app,app/models/activity_accme
+* 	@requires: app,app/collection,app/models/activity_accme
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_accmes
 */
-define("app/collections/activity_accmes",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_accmes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_accmeModel = require("app/models/activity_accme");
-
-	var Activity_accmes = app.Collection.extend({
+	
+	Activity_accmes = AppCollection.extend({
 		url: '/activity_accmes/',
 		model: Activity_accmeModel
 	});
@@ -175,14 +179,15 @@ define("app/collections/Activity_accmes_paged",["require","app","app/models"],fu
   module.setExports(Activity_accmes_paged);
 });
 /*! app/collections/activity_applications
-* 	@requires: app,app/models/activity_application
+* 	@requires: app,app/collection,app/models/activity_application
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_applications
 */
-define("app/collections/activity_applications",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_applications",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_applicationModel = require("app/models/activity_application");
-
-	var Activity_applications = app.Collection.extend({
+	
+	Activity_applications = AppCollection.extend({
 		url: '/activity_applications/',
 		model: Activity_applicationModel
 	});
@@ -219,14 +224,15 @@ define("app/collections/Activity_applications_paged",["require","app","app/model
   module.setExports(Activity_applications_paged);
 });
 /*! app/collections/activity_categorylms
-* 	@requires: app,app/models/activity_categorylm
+* 	@requires: app,app/collection,app/models/activity_categorylm
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_categorylms
 */
-define("app/collections/activity_categorylms",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_categorylms",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_categorylmModel = require("app/models/activity_categorylm");
-
-	var Activity_categorylms = app.Collection.extend({
+	
+	Activity_categorylms = AppCollection.extend({
 		url: '/activity_categorylms/',
 		model: Activity_categorylmModel
 	});
@@ -263,14 +269,15 @@ define("app/collections/Activity_categorylms_paged",["require","app","app/models
   module.setExports(Activity_categorylms_paged);
 });
 /*! app/collections/activity_cdcs
-* 	@requires: app,app/models/activity_cdc
+* 	@requires: app,app/collection,app/models/activity_cdc
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_cdcs
 */
-define("app/collections/activity_cdcs",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_cdcs",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_cdcModel = require("app/models/activity_cdc");
-
-	var Activity_cdcs = app.Collection.extend({
+	
+	Activity_cdcs = AppCollection.extend({
 		url: '/activity_cdcs/',
 		model: Activity_cdcModel
 	});
@@ -307,14 +314,15 @@ define("app/collections/Activity_cdcs_paged",["require","app","app/models"],func
   module.setExports(Activity_cdcs_paged);
 });
 /*! app/collections/activity_comments
-* 	@requires: app,app/models/activity_comment
+* 	@requires: app,app/collection,app/models/activity_comment
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_comments
 */
-define("app/collections/activity_comments",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_comments",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_commentModel = require("app/models/activity_comment");
-
-	var Activity_comments = app.Collection.extend({
+	
+	Activity_comments = AppCollection.extend({
 		url: '/activity_comments/',
 		model: Activity_commentModel
 	});
@@ -351,14 +359,15 @@ define("app/collections/Activity_comments_paged",["require","app","app/models"],
   module.setExports(Activity_comments_paged);
 });
 /*! app/collections/activity_committees
-* 	@requires: app,app/models/activity_committee
+* 	@requires: app,app/collection,app/models/activity_committee
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_committees
 */
-define("app/collections/activity_committees",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_committees",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_committeeModel = require("app/models/activity_committee");
-
-	var Activity_committees = app.Collection.extend({
+	
+	Activity_committees = AppCollection.extend({
 		url: '/activity_committees/',
 		model: Activity_committeeModel
 	});
@@ -395,14 +404,15 @@ define("app/collections/Activity_committees_paged",["require","app","app/models"
   module.setExports(Activity_committees_paged);
 });
 /*! app/collections/activity_containers
-* 	@requires: app,app/models/activity_container
+* 	@requires: app,app/collection,app/models/activity_container
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_containers
 */
-define("app/collections/activity_containers",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_containers",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_containerModel = require("app/models/activity_container");
-
-	var Activity_containers = app.Collection.extend({
+	
+	Activity_containers = AppCollection.extend({
 		url: '/activity_containers/',
 		model: Activity_containerModel
 	});
@@ -439,14 +449,15 @@ define("app/collections/Activity_containers_paged",["require","app","app/models"
   module.setExports(Activity_containers_paged);
 });
 /*! app/collections/activity_credits
-* 	@requires: app,app/models/activity_credit
+* 	@requires: app,app/collection,app/models/activity_credit
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_credits
 */
-define("app/collections/activity_credits",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_credits",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_creditModel = require("app/models/activity_credit");
-
-	var Activity_credits = app.Collection.extend({
+	
+	Activity_credits = AppCollection.extend({
 		url: '/activity_credits/',
 		model: Activity_creditModel
 	});
@@ -483,14 +494,15 @@ define("app/collections/Activity_credits_paged",["require","app","app/models"],f
   module.setExports(Activity_credits_paged);
 });
 /*! app/collections/activity_faculties
-* 	@requires: app,app/models/activity_faculty
+* 	@requires: app,app/collection,app/models/activity_faculty
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_faculties
 */
-define("app/collections/activity_faculties",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_faculties",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_facultyModel = require("app/models/activity_faculty");
-
-	var Activity_faculties = app.Collection.extend({
+	
+	Activity_faculties = AppCollection.extend({
 		url: '/activity_faculties/',
 		model: Activity_facultyModel
 	});
@@ -527,14 +539,15 @@ define("app/collections/Activity_faculties_paged",["require","app","app/models"]
   module.setExports(Activity_faculties_paged);
 });
 /*! app/collections/activity_finbudgets
-* 	@requires: app,app/models/activity_finbudget
+* 	@requires: app,app/collection,app/models/activity_finbudget
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_finbudgets
 */
-define("app/collections/activity_finbudgets",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_finbudgets",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_finbudgetModel = require("app/models/activity_finbudget");
-
-	var Activity_finbudgets = app.Collection.extend({
+	
+	Activity_finbudgets = AppCollection.extend({
 		url: '/activity_finbudgets/',
 		model: Activity_finbudgetModel
 	});
@@ -571,14 +584,15 @@ define("app/collections/Activity_finbudgets_paged",["require","app","app/models"
   module.setExports(Activity_finbudgets_paged);
 });
 /*! app/collections/activity_finfees
-* 	@requires: app,app/models/activity_finfee
+* 	@requires: app,app/collection,app/models/activity_finfee
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_finfees
 */
-define("app/collections/activity_finfees",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_finfees",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_finfeeModel = require("app/models/activity_finfee");
-
-	var Activity_finfees = app.Collection.extend({
+	
+	Activity_finfees = AppCollection.extend({
 		url: '/activity_finfees/',
 		model: Activity_finfeeModel
 	});
@@ -615,14 +629,15 @@ define("app/collections/Activity_finfees_paged",["require","app","app/models"],f
   module.setExports(Activity_finfees_paged);
 });
 /*! app/collections/activity_finledgers
-* 	@requires: app,app/models/activity_finledger
+* 	@requires: app,app/collection,app/models/activity_finledger
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_finledgers
 */
-define("app/collections/activity_finledgers",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_finledgers",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_finledgerModel = require("app/models/activity_finledger");
-
-	var Activity_finledgers = app.Collection.extend({
+	
+	Activity_finledgers = AppCollection.extend({
 		url: '/activity_finledgers/',
 		model: Activity_finledgerModel
 	});
@@ -659,14 +674,15 @@ define("app/collections/Activity_finledgers_paged",["require","app","app/models"
   module.setExports(Activity_finledgers_paged);
 });
 /*! app/collections/activity_finsupports
-* 	@requires: app,app/models/activity_finsupport
+* 	@requires: app,app/collection,app/models/activity_finsupport
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_finsupports
 */
-define("app/collections/activity_finsupports",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_finsupports",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_finsupportModel = require("app/models/activity_finsupport");
-
-	var Activity_finsupports = app.Collection.extend({
+	
+	Activity_finsupports = AppCollection.extend({
 		url: '/activity_finsupports/',
 		model: Activity_finsupportModel
 	});
@@ -703,14 +719,15 @@ define("app/collections/Activity_finsupports_paged",["require","app","app/models
   module.setExports(Activity_finsupports_paged);
 });
 /*! app/collections/activity_notes
-* 	@requires: app,app/models/activity_note
+* 	@requires: app,app/collection,app/models/activity_note
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_notes
 */
-define("app/collections/activity_notes",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_notes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_noteModel = require("app/models/activity_note");
-
-	var Activity_notes = app.Collection.extend({
+	
+	Activity_notes = AppCollection.extend({
 		url: '/activity_notes/',
 		model: Activity_noteModel
 	});
@@ -747,14 +764,15 @@ define("app/collections/Activity_notes_paged",["require","app","app/models"],fun
   module.setExports(Activity_notes_paged);
 });
 /*! app/collections/activity_others
-* 	@requires: app,app/models/activity_other
+* 	@requires: app,app/collection,app/models/activity_other
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_others
 */
-define("app/collections/activity_others",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_others",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_otherModel = require("app/models/activity_other");
-
-	var Activity_others = app.Collection.extend({
+	
+	Activity_others = AppCollection.extend({
 		url: '/activity_others/',
 		model: Activity_otherModel
 	});
@@ -791,14 +809,15 @@ define("app/collections/Activity_others_paged",["require","app","app/models"],fu
   module.setExports(Activity_others_paged);
 });
 /*! app/collections/activity_participants
-* 	@requires: app,app/models/activity_participant
+* 	@requires: app,app/collection,app/models/activity_participant
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_participants
 */
-define("app/collections/activity_participants",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_participants",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_participantModel = require("app/models/activity_participant");
-
-	var Activity_participants = app.Collection.extend({
+	
+	Activity_participants = AppCollection.extend({
 		url: '/activity_participants/',
 		model: Activity_participantModel
 	});
@@ -835,14 +854,15 @@ define("app/collections/Activity_participants_paged",["require","app","app/model
   module.setExports(Activity_participants_paged);
 });
 /*! app/collections/activity_profiles
-* 	@requires: app,app/models/activity_profile
+* 	@requires: app,app/collection,app/models/activity_profile
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_profiles
 */
-define("app/collections/activity_profiles",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_profiles",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_profileModel = require("app/models/activity_profile");
-
-	var Activity_profiles = app.Collection.extend({
+	
+	Activity_profiles = AppCollection.extend({
 		url: '/activity_profiles/',
 		model: Activity_profileModel
 	});
@@ -879,14 +899,15 @@ define("app/collections/Activity_profiles_paged",["require","app","app/models"],
   module.setExports(Activity_profiles_paged);
 });
 /*! app/collections/activity_pubcomponents
-* 	@requires: app,app/models/activity_pubcomponent
+* 	@requires: app,app/collection,app/models/activity_pubcomponent
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_pubcomponents
 */
-define("app/collections/activity_pubcomponents",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_pubcomponents",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_pubcomponentModel = require("app/models/activity_pubcomponent");
-
-	var Activity_pubcomponents = app.Collection.extend({
+	
+	Activity_pubcomponents = AppCollection.extend({
 		url: '/activity_pubcomponents/',
 		model: Activity_pubcomponentModel
 	});
@@ -923,14 +944,15 @@ define("app/collections/Activity_pubcomponents_paged",["require","app","app/mode
   module.setExports(Activity_pubcomponents_paged);
 });
 /*! app/collections/activity_publishes
-* 	@requires: app,app/models/activity_publish
+* 	@requires: app,app/collection,app/models/activity_publish
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_publishes
 */
-define("app/collections/activity_publishes",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_publishes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_publishModel = require("app/models/activity_publish");
-
-	var Activity_publishes = app.Collection.extend({
+	
+	Activity_publishes = AppCollection.extend({
 		url: '/activity_publishes/',
 		model: Activity_publishModel
 	});
@@ -967,14 +989,15 @@ define("app/collections/Activity_publishes_paged",["require","app","app/models"]
   module.setExports(Activity_publishes_paged);
 });
 /*! app/collections/activity_pubsteps
-* 	@requires: app,app/models/activity_pubstep
+* 	@requires: app,app/collection,app/models/activity_pubstep
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_pubsteps
 */
-define("app/collections/activity_pubsteps",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_pubsteps",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_pubstepModel = require("app/models/activity_pubstep");
-
-	var Activity_pubsteps = app.Collection.extend({
+	
+	Activity_pubsteps = AppCollection.extend({
 		url: '/activity_pubsteps/',
 		model: Activity_pubstepModel
 	});
@@ -1011,14 +1034,15 @@ define("app/collections/Activity_pubsteps_paged",["require","app","app/models"],
   module.setExports(Activity_pubsteps_paged);
 });
 /*! app/collections/activity_sites
-* 	@requires: app,app/models/activity_site
+* 	@requires: app,app/collection,app/models/activity_site
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_sites
 */
-define("app/collections/activity_sites",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_sites",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_siteModel = require("app/models/activity_site");
-
-	var Activity_sites = app.Collection.extend({
+	
+	Activity_sites = AppCollection.extend({
 		url: '/activity_sites/',
 		model: Activity_siteModel
 	});
@@ -1055,14 +1079,15 @@ define("app/collections/Activity_sites_paged",["require","app","app/models"],fun
   module.setExports(Activity_sites_paged);
 });
 /*! app/collections/activity_specialtylms
-* 	@requires: app,app/models/activity_specialtylm
+* 	@requires: app,app/collection,app/models/activity_specialtylm
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_specialtylms
 */
-define("app/collections/activity_specialtylms",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_specialtylms",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_specialtylmModel = require("app/models/activity_specialtylm");
-
-	var Activity_specialtylms = app.Collection.extend({
+	
+	Activity_specialtylms = AppCollection.extend({
 		url: '/activity_specialtylms/',
 		model: Activity_specialtylmModel
 	});
@@ -1099,14 +1124,15 @@ define("app/collections/Activity_specialtylms_paged",["require","app","app/model
   module.setExports(Activity_specialtylms_paged);
 });
 /*! app/collections/activity_steps
-* 	@requires: app,app/models/activity_step
+* 	@requires: app,app/collection,app/models/activity_step
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_steps
 */
-define("app/collections/activity_steps",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_steps",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_stepModel = require("app/models/activity_step");
-
-	var Activity_steps = app.Collection.extend({
+	
+	Activity_steps = AppCollection.extend({
 		url: '/activity_steps/',
 		model: Activity_stepModel
 	});
@@ -1143,14 +1169,15 @@ define("app/collections/Activity_steps_paged",["require","app","app/models"],fun
   module.setExports(Activity_steps_paged);
 });
 /*! app/collections/activity_tag_relates
-* 	@requires: app,app/models/activity_tag_relate
+* 	@requires: app,app/collection,app/models/activity_tag_relate
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_tag_relates
 */
-define("app/collections/activity_tag_relates",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_tag_relates",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_tag_relateModel = require("app/models/activity_tag_relate");
-
-	var Activity_tag_relates = app.Collection.extend({
+	
+	Activity_tag_relates = AppCollection.extend({
 		url: '/activity_tag_relates/',
 		model: Activity_tag_relateModel
 	});
@@ -1187,14 +1214,15 @@ define("app/collections/Activity_tag_relates_paged",["require","app","app/models
   module.setExports(Activity_tag_relates_paged);
 });
 /*! app/collections/activity_tags
-* 	@requires: app,app/models/activity_tag
+* 	@requires: app,app/collection,app/models/activity_tag
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_tags
 */
-define("app/collections/activity_tags",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_tags",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_tagModel = require("app/models/activity_tag");
-
-	var Activity_tags = app.Collection.extend({
+	
+	Activity_tags = AppCollection.extend({
 		url: '/activity_tags/',
 		model: Activity_tagModel
 	});
@@ -1231,14 +1259,15 @@ define("app/collections/Activity_tags_paged",["require","app","app/models"],func
   module.setExports(Activity_tags_paged);
 });
 /*! app/collections/activity_users
-* 	@requires: app,app/models/activity_user
+* 	@requires: app,app/collection,app/models/activity_user
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_users
 */
-define("app/collections/activity_users",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_users",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_userModel = require("app/models/activity_user");
-
-	var Activity_users = app.Collection.extend({
+	
+	Activity_users = AppCollection.extend({
 		url: '/activity_users/',
 		model: Activity_userModel
 	});
@@ -1275,14 +1304,15 @@ define("app/collections/Activity_users_paged",["require","app","app/models"],fun
   module.setExports(Activity_users_paged);
 });
 /*! app/collections/activity_votes
-* 	@requires: app,app/models/activity_vote
+* 	@requires: app,app/collection,app/models/activity_vote
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_votes
 */
-define("app/collections/activity_votes",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_votes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_voteModel = require("app/models/activity_vote");
-
-	var Activity_votes = app.Collection.extend({
+	
+	Activity_votes = AppCollection.extend({
 		url: '/activity_votes/',
 		model: Activity_voteModel
 	});
@@ -1319,14 +1349,15 @@ define("app/collections/Activity_votes_paged",["require","app","app/models"],fun
   module.setExports(Activity_votes_paged);
 });
 /*! app/collections/agendas
-* 	@requires: app,app/models/agenda
+* 	@requires: app,app/collection,app/models/agenda
 * 	@extends: app.Collection
 * 	@exports: app.collections.Agendas
 */
-define("app/collections/agendas",["require","app","app/models"],function(require,app) {
+define("app/collections/agendas",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AgendaModel = require("app/models/agenda");
-
-	var Agendas = app.Collection.extend({
+	
+	Agendas = AppCollection.extend({
 		url: '/agendas/',
 		model: AgendaModel
 	});
@@ -1363,14 +1394,15 @@ define("app/collections/Agendas_paged",["require","app","app/models"],function(r
   module.setExports(Agendas_paged);
 });
 /*! app/collections/assessanswers
-* 	@requires: app,app/models/assessanswer
+* 	@requires: app,app/collection,app/models/assessanswer
 * 	@extends: app.Collection
 * 	@exports: app.collections.Assessanswers
 */
-define("app/collections/assessanswers",["require","app","app/models"],function(require,app) {
+define("app/collections/assessanswers",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AssessanswerModel = require("app/models/assessanswer");
-
-	var Assessanswers = app.Collection.extend({
+	
+	Assessanswers = AppCollection.extend({
 		url: '/assessanswers/',
 		model: AssessanswerModel
 	});
@@ -1407,14 +1439,15 @@ define("app/collections/Assessanswers_paged",["require","app","app/models"],func
   module.setExports(Assessanswers_paged);
 });
 /*! app/collections/assessments
-* 	@requires: app,app/models/assessment
+* 	@requires: app,app/collection,app/models/assessment
 * 	@extends: app.Collection
 * 	@exports: app.collections.Assessments
 */
-define("app/collections/assessments",["require","app","app/models"],function(require,app) {
+define("app/collections/assessments",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AssessmentModel = require("app/models/assessment");
-
-	var Assessments = app.Collection.extend({
+	
+	Assessments = AppCollection.extend({
 		url: '/assessments/',
 		model: AssessmentModel
 	});
@@ -1451,14 +1484,15 @@ define("app/collections/Assessments_paged",["require","app","app/models"],functi
   module.setExports(Assessments_paged);
 });
 /*! app/collections/assessquestions
-* 	@requires: app,app/models/assessquestion
+* 	@requires: app,app/collection,app/models/assessquestion
 * 	@extends: app.Collection
 * 	@exports: app.collections.Assessquestions
 */
-define("app/collections/assessquestions",["require","app","app/models"],function(require,app) {
+define("app/collections/assessquestions",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AssessquestionModel = require("app/models/assessquestion");
-
-	var Assessquestions = app.Collection.extend({
+	
+	Assessquestions = AppCollection.extend({
 		url: '/assessquestions/',
 		model: AssessquestionModel
 	});
@@ -1495,14 +1529,15 @@ define("app/collections/Assessquestions_paged",["require","app","app/models"],fu
   module.setExports(Assessquestions_paged);
 });
 /*! app/collections/assessresults
-* 	@requires: app,app/models/assessresult
+* 	@requires: app,app/collection,app/models/assessresult
 * 	@extends: app.Collection
 * 	@exports: app.collections.Assessresults
 */
-define("app/collections/assessresults",["require","app","app/models"],function(require,app) {
+define("app/collections/assessresults",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AssessresultModel = require("app/models/assessresult");
-
-	var Assessresults = app.Collection.extend({
+	
+	Assessresults = AppCollection.extend({
 		url: '/assessresults/',
 		model: AssessresultModel
 	});
@@ -1539,14 +1574,15 @@ define("app/collections/Assessresults_paged",["require","app","app/models"],func
   module.setExports(Assessresults_paged);
 });
 /*! app/collections/assesssections
-* 	@requires: app,app/models/assesssection
+* 	@requires: app,app/collection,app/models/assesssection
 * 	@extends: app.Collection
 * 	@exports: app.collections.Assesssections
 */
-define("app/collections/assesssections",["require","app","app/models"],function(require,app) {
+define("app/collections/assesssections",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AssesssectionModel = require("app/models/assesssection");
-
-	var Assesssections = app.Collection.extend({
+	
+	Assesssections = AppCollection.extend({
 		url: '/assesssections/',
 		model: AssesssectionModel
 	});
@@ -1583,14 +1619,15 @@ define("app/collections/Assesssections_paged",["require","app","app/models"],fun
   module.setExports(Assesssections_paged);
 });
 /*! app/collections/assesstmpls
-* 	@requires: app,app/models/assesstmpl
+* 	@requires: app,app/collection,app/models/assesstmpl
 * 	@extends: app.Collection
 * 	@exports: app.collections.Assesstmpls
 */
-define("app/collections/assesstmpls",["require","app","app/models"],function(require,app) {
+define("app/collections/assesstmpls",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AssesstmplModel = require("app/models/assesstmpl");
-
-	var Assesstmpls = app.Collection.extend({
+	
+	Assesstmpls = AppCollection.extend({
 		url: '/assesstmpls/',
 		model: AssesstmplModel
 	});
@@ -1627,14 +1664,15 @@ define("app/collections/Assesstmpls_paged",["require","app","app/models"],functi
   module.setExports(Assesstmpls_paged);
 });
 /*! app/collections/attendees
-* 	@requires: app,app/models/attendee
+* 	@requires: app,app/collection,app/models/attendee
 * 	@extends: app.Collection
 * 	@exports: app.collections.Attendees
 */
-define("app/collections/attendees",["require","app","app/models"],function(require,app) {
+define("app/collections/attendees",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AttendeeModel = require("app/models/attendee");
-
-	var Attendees = app.Collection.extend({
+	
+	Attendees = AppCollection.extend({
 		url: '/attendees/',
 		model: AttendeeModel
 	});
@@ -1671,14 +1709,15 @@ define("app/collections/Attendees_paged",["require","app","app/models"],function
   module.setExports(Attendees_paged);
 });
 /*! app/collections/attendee_addresses
-* 	@requires: app,app/models/attendee_address
+* 	@requires: app,app/collection,app/models/attendee_address
 * 	@extends: app.Collection
 * 	@exports: app.collections.Attendee_addresses
 */
-define("app/collections/attendee_addresses",["require","app","app/models"],function(require,app) {
+define("app/collections/attendee_addresses",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Attendee_addressModel = require("app/models/attendee_address");
-
-	var Attendee_addresses = app.Collection.extend({
+	
+	Attendee_addresses = AppCollection.extend({
 		url: '/attendee_addresses/',
 		model: Attendee_addressModel
 	});
@@ -1715,14 +1754,15 @@ define("app/collections/Attendee_addresses_paged",["require","app","app/models"]
   module.setExports(Attendee_addresses_paged);
 });
 /*! app/collections/attendee_components
-* 	@requires: app,app/models/attendee_component
+* 	@requires: app,app/collection,app/models/attendee_component
 * 	@extends: app.Collection
 * 	@exports: app.collections.Attendee_components
 */
-define("app/collections/attendee_components",["require","app","app/models"],function(require,app) {
+define("app/collections/attendee_components",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Attendee_componentModel = require("app/models/attendee_component");
-
-	var Attendee_components = app.Collection.extend({
+	
+	Attendee_components = AppCollection.extend({
 		url: '/attendee_components/',
 		model: Attendee_componentModel
 	});
@@ -1759,14 +1799,15 @@ define("app/collections/Attendee_components_paged",["require","app","app/models"
   module.setExports(Attendee_components_paged);
 });
 /*! app/collections/attendee_phones
-* 	@requires: app,app/models/attendee_phone
+* 	@requires: app,app/collection,app/models/attendee_phone
 * 	@extends: app.Collection
 * 	@exports: app.collections.Attendee_phones
 */
-define("app/collections/attendee_phones",["require","app","app/models"],function(require,app) {
+define("app/collections/attendee_phones",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Attendee_phoneModel = require("app/models/attendee_phone");
-
-	var Attendee_phones = app.Collection.extend({
+	
+	Attendee_phones = AppCollection.extend({
 		url: '/attendee_phones/',
 		model: Attendee_phoneModel
 	});
@@ -1803,14 +1844,15 @@ define("app/collections/Attendee_phones_paged",["require","app","app/models"],fu
   module.setExports(Attendee_phones_paged);
 });
 /*! app/collections/attendee_steps
-* 	@requires: app,app/models/attendee_step
+* 	@requires: app,app/collection,app/models/attendee_step
 * 	@extends: app.Collection
 * 	@exports: app.collections.Attendee_steps
 */
-define("app/collections/attendee_steps",["require","app","app/models"],function(require,app) {
+define("app/collections/attendee_steps",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Attendee_stepModel = require("app/models/attendee_step");
-
-	var Attendee_steps = app.Collection.extend({
+	
+	Attendee_steps = AppCollection.extend({
 		url: '/attendee_steps/',
 		model: Attendee_stepModel
 	});
@@ -1847,14 +1889,15 @@ define("app/collections/Attendee_steps_paged",["require","app","app/models"],fun
   module.setExports(Attendee_steps_paged);
 });
 /*! app/collections/attendeecdcs
-* 	@requires: app,app/models/attendeecdc
+* 	@requires: app,app/collection,app/models/attendeecdc
 * 	@extends: app.Collection
 * 	@exports: app.collections.Attendeecdcs
 */
-define("app/collections/attendeecdcs",["require","app","app/models"],function(require,app) {
+define("app/collections/attendeecdcs",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AttendeecdcModel = require("app/models/attendeecdc");
-
-	var Attendeecdcs = app.Collection.extend({
+	
+	Attendeecdcs = AppCollection.extend({
 		url: '/attendeecdcs/',
 		model: AttendeecdcModel
 	});
@@ -1891,14 +1934,15 @@ define("app/collections/Attendeecdcs_paged",["require","app","app/models"],funct
   module.setExports(Attendeecdcs_paged);
 });
 /*! app/collections/attendeecredits
-* 	@requires: app,app/models/attendeecredit
+* 	@requires: app,app/collection,app/models/attendeecredit
 * 	@extends: app.Collection
 * 	@exports: app.collections.Attendeecredits
 */
-define("app/collections/attendeecredits",["require","app","app/models"],function(require,app) {
+define("app/collections/attendeecredits",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AttendeecreditModel = require("app/models/attendeecredit");
-
-	var Attendeecredits = app.Collection.extend({
+	
+	Attendeecredits = AppCollection.extend({
 		url: '/attendeecredits/',
 		model: AttendeecreditModel
 	});
@@ -1935,14 +1979,15 @@ define("app/collections/Attendeecredits_paged",["require","app","app/models"],fu
   module.setExports(Attendeecredits_paged);
 });
 /*! app/collections/authorities
-* 	@requires: app,app/models/authority
+* 	@requires: app,app/collection,app/models/authority
 * 	@extends: app.Collection
 * 	@exports: app.collections.Authorities
 */
-define("app/collections/authorities",["require","app","app/models"],function(require,app) {
+define("app/collections/authorities",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AuthorityModel = require("app/models/authority");
-
-	var Authorities = app.Collection.extend({
+	
+	Authorities = AppCollection.extend({
 		url: '/authorities/',
 		model: AuthorityModel
 	});
@@ -1979,14 +2024,15 @@ define("app/collections/Authorities_paged",["require","app","app/models"],functi
   module.setExports(Authorities_paged);
 });
 /*! app/collections/authoritypages
-* 	@requires: app,app/models/authoritypage
+* 	@requires: app,app/collection,app/models/authoritypage
 * 	@extends: app.Collection
 * 	@exports: app.collections.Authoritypages
 */
-define("app/collections/authoritypages",["require","app","app/models"],function(require,app) {
+define("app/collections/authoritypages",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AuthoritypageModel = require("app/models/authoritypage");
-
-	var Authoritypages = app.Collection.extend({
+	
+	Authoritypages = AppCollection.extend({
 		url: '/authoritypages/',
 		model: AuthoritypageModel
 	});
@@ -2023,14 +2069,15 @@ define("app/collections/Authoritypages_paged",["require","app","app/models"],fun
   module.setExports(Authoritypages_paged);
 });
 /*! app/collections/categories
-* 	@requires: app,app/models/category
+* 	@requires: app,app/collection,app/models/category
 * 	@extends: app.Collection
 * 	@exports: app.collections.Categories
 */
-define("app/collections/categories",["require","app","app/models"],function(require,app) {
+define("app/collections/categories",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var CategoryModel = require("app/models/category");
-
-	var Categories = app.Collection.extend({
+	
+	Categories = AppCollection.extend({
 		url: '/categories/',
 		model: CategoryModel
 	});
@@ -2067,14 +2114,15 @@ define("app/collections/Categories_paged",["require","app","app/models"],functio
   module.setExports(Categories_paged);
 });
 /*! app/collections/certs
-* 	@requires: app,app/models/cert
+* 	@requires: app,app/collection,app/models/cert
 * 	@extends: app.Collection
 * 	@exports: app.collections.Certs
 */
-define("app/collections/certs",["require","app","app/models"],function(require,app) {
+define("app/collections/certs",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var CertModel = require("app/models/cert");
-
-	var Certs = app.Collection.extend({
+	
+	Certs = AppCollection.extend({
 		url: '/certs/',
 		model: CertModel
 	});
@@ -2111,14 +2159,15 @@ define("app/collections/Certs_paged",["require","app","app/models"],function(req
   module.setExports(Certs_paged);
 });
 /*! app/collections/cert_credits
-* 	@requires: app,app/models/cert_credit
+* 	@requires: app,app/collection,app/models/cert_credit
 * 	@extends: app.Collection
 * 	@exports: app.collections.Cert_credits
 */
-define("app/collections/cert_credits",["require","app","app/models"],function(require,app) {
+define("app/collections/cert_credits",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Cert_creditModel = require("app/models/cert_credit");
-
-	var Cert_credits = app.Collection.extend({
+	
+	Cert_credits = AppCollection.extend({
 		url: '/cert_credits/',
 		model: Cert_creditModel
 	});
@@ -2155,14 +2204,15 @@ define("app/collections/Cert_credits_paged",["require","app","app/models"],funct
   module.setExports(Cert_credits_paged);
 });
 /*! app/collections/certificates
-* 	@requires: app,app/models/certificate
+* 	@requires: app,app/collection,app/models/certificate
 * 	@extends: app.Collection
 * 	@exports: app.collections.Certificates
 */
-define("app/collections/certificates",["require","app","app/models"],function(require,app) {
+define("app/collections/certificates",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var CertificateModel = require("app/models/certificate");
-
-	var Certificates = app.Collection.extend({
+	
+	Certificates = AppCollection.extend({
 		url: '/certificates/',
 		model: CertificateModel
 	});
@@ -2199,14 +2249,15 @@ define("app/collections/Certificates_paged",["require","app","app/models"],funct
   module.setExports(Certificates_paged);
 });
 /*! app/collections/comments
-* 	@requires: app,app/models/comment
+* 	@requires: app,app/collection,app/models/comment
 * 	@extends: app.Collection
 * 	@exports: app.collections.Comments
 */
-define("app/collections/comments",["require","app","app/models"],function(require,app) {
+define("app/collections/comments",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var CommentModel = require("app/models/comment");
-
-	var Comments = app.Collection.extend({
+	
+	Comments = AppCollection.extend({
 		url: '/comments/',
 		model: CommentModel
 	});
@@ -2243,14 +2294,15 @@ define("app/collections/Comments_paged",["require","app","app/models"],function(
   module.setExports(Comments_paged);
 });
 /*! app/collections/credit_certs
-* 	@requires: app,app/models/credit_cert
+* 	@requires: app,app/collection,app/models/credit_cert
 * 	@extends: app.Collection
 * 	@exports: app.collections.Credit_certs
 */
-define("app/collections/credit_certs",["require","app","app/models"],function(require,app) {
+define("app/collections/credit_certs",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Credit_certModel = require("app/models/credit_cert");
-
-	var Credit_certs = app.Collection.extend({
+	
+	Credit_certs = AppCollection.extend({
 		url: '/credit_certs/',
 		model: Credit_certModel
 	});
@@ -2287,14 +2339,15 @@ define("app/collections/Credit_certs_paged",["require","app","app/models"],funct
   module.setExports(Credit_certs_paged);
 });
 /*! app/collections/credit_requests
-* 	@requires: app,app/models/credit_request
+* 	@requires: app,app/collection,app/models/credit_request
 * 	@extends: app.Collection
 * 	@exports: app.collections.Credit_requests
 */
-define("app/collections/credit_requests",["require","app","app/models"],function(require,app) {
+define("app/collections/credit_requests",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Credit_requestModel = require("app/models/credit_request");
-
-	var Credit_requests = app.Collection.extend({
+	
+	Credit_requests = AppCollection.extend({
 		url: '/credit_requests/',
 		model: Credit_requestModel
 	});
@@ -2331,14 +2384,15 @@ define("app/collections/Credit_requests_paged",["require","app","app/models"],fu
   module.setExports(Credit_requests_paged);
 });
 /*! app/collections/credit_request_emails
-* 	@requires: app,app/models/credit_request_email
+* 	@requires: app,app/collection,app/models/credit_request_email
 * 	@extends: app.Collection
 * 	@exports: app.collections.Credit_request_emails
 */
-define("app/collections/credit_request_emails",["require","app","app/models"],function(require,app) {
+define("app/collections/credit_request_emails",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Credit_request_emailModel = require("app/models/credit_request_email");
-
-	var Credit_request_emails = app.Collection.extend({
+	
+	Credit_request_emails = AppCollection.extend({
 		url: '/credit_request_emails/',
 		model: Credit_request_emailModel
 	});
@@ -2375,14 +2429,15 @@ define("app/collections/Credit_request_emails_paged",["require","app","app/model
   module.setExports(Credit_request_emails_paged);
 });
 /*! app/collections/credit_request_imports
-* 	@requires: app,app/models/credit_request_import
+* 	@requires: app,app/collection,app/models/credit_request_import
 * 	@extends: app.Collection
 * 	@exports: app.collections.Credit_request_imports
 */
-define("app/collections/credit_request_imports",["require","app","app/models"],function(require,app) {
+define("app/collections/credit_request_imports",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Credit_request_importModel = require("app/models/credit_request_import");
-
-	var Credit_request_imports = app.Collection.extend({
+	
+	Credit_request_imports = AppCollection.extend({
 		url: '/credit_request_imports/',
 		model: Credit_request_importModel
 	});
@@ -2419,14 +2474,15 @@ define("app/collections/Credit_request_imports_paged",["require","app","app/mode
   module.setExports(Credit_request_imports_paged);
 });
 /*! app/collections/degrees
-* 	@requires: app,app/models/degree
+* 	@requires: app,app/collection,app/models/degree
 * 	@extends: app.Collection
 * 	@exports: app.collections.Degrees
 */
-define("app/collections/degrees",["require","app","app/models"],function(require,app) {
+define("app/collections/degrees",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var DegreeModel = require("app/models/degree");
-
-	var Degrees = app.Collection.extend({
+	
+	Degrees = AppCollection.extend({
 		url: '/degrees/',
 		model: DegreeModel
 	});
@@ -2463,14 +2519,15 @@ define("app/collections/Degrees_paged",["require","app","app/models"],function(r
   module.setExports(Degrees_paged);
 });
 /*! app/collections/degree_credits
-* 	@requires: app,app/models/degree_credit
+* 	@requires: app,app/collection,app/models/degree_credit
 * 	@extends: app.Collection
 * 	@exports: app.collections.Degree_credits
 */
-define("app/collections/degree_credits",["require","app","app/models"],function(require,app) {
+define("app/collections/degree_credits",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Degree_creditModel = require("app/models/degree_credit");
-
-	var Degree_credits = app.Collection.extend({
+	
+	Degree_credits = AppCollection.extend({
 		url: '/degree_credits/',
 		model: Degree_creditModel
 	});
@@ -2507,14 +2564,15 @@ define("app/collections/Degree_credits_paged",["require","app","app/models"],fun
   module.setExports(Degree_credits_paged);
 });
 /*! app/collections/entities
-* 	@requires: app,app/models/entity
+* 	@requires: app,app/collection,app/models/entity
 * 	@extends: app.Collection
 * 	@exports: app.collections.Entities
 */
-define("app/collections/entities",["require","app","app/models"],function(require,app) {
+define("app/collections/entities",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var EntityModel = require("app/models/entity");
-
-	var Entities = app.Collection.extend({
+	
+	Entities = AppCollection.extend({
 		url: '/entities/',
 		model: EntityModel
 	});
@@ -2551,14 +2609,15 @@ define("app/collections/Entities_paged",["require","app","app/models"],function(
   module.setExports(Entities_paged);
 });
 /*! app/collections/entity_activities
-* 	@requires: app,app/models/entity_activity
+* 	@requires: app,app/collection,app/models/entity_activity
 * 	@extends: app.Collection
 * 	@exports: app.collections.Entity_activities
 */
-define("app/collections/entity_activities",["require","app","app/models"],function(require,app) {
+define("app/collections/entity_activities",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Entity_activityModel = require("app/models/entity_activity");
-
-	var Entity_activities = app.Collection.extend({
+	
+	Entity_activities = AppCollection.extend({
 		url: '/entity_activities/',
 		model: Entity_activityModel
 	});
@@ -2595,14 +2654,15 @@ define("app/collections/Entity_activities_paged",["require","app","app/models"],
   module.setExports(Entity_activities_paged);
 });
 /*! app/collections/entity_credits
-* 	@requires: app,app/models/entity_credit
+* 	@requires: app,app/collection,app/models/entity_credit
 * 	@extends: app.Collection
 * 	@exports: app.collections.Entity_credits
 */
-define("app/collections/entity_credits",["require","app","app/models"],function(require,app) {
+define("app/collections/entity_credits",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Entity_creditModel = require("app/models/entity_credit");
-
-	var Entity_credits = app.Collection.extend({
+	
+	Entity_credits = AppCollection.extend({
 		url: '/entity_credits/',
 		model: Entity_creditModel
 	});
@@ -2639,14 +2699,15 @@ define("app/collections/Entity_credits_paged",["require","app","app/models"],fun
   module.setExports(Entity_credits_paged);
 });
 /*! app/collections/entity_entityroles
-* 	@requires: app,app/models/entity_entityrole
+* 	@requires: app,app/collection,app/models/entity_entityrole
 * 	@extends: app.Collection
 * 	@exports: app.collections.Entity_entityroles
 */
-define("app/collections/entity_entityroles",["require","app","app/models"],function(require,app) {
+define("app/collections/entity_entityroles",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Entity_entityroleModel = require("app/models/entity_entityrole");
-
-	var Entity_entityroles = app.Collection.extend({
+	
+	Entity_entityroles = AppCollection.extend({
 		url: '/entity_entityroles/',
 		model: Entity_entityroleModel
 	});
@@ -2683,14 +2744,15 @@ define("app/collections/Entity_entityroles_paged",["require","app","app/models"]
   module.setExports(Entity_entityroles_paged);
 });
 /*! app/collections/entity_entitytypes
-* 	@requires: app,app/models/entity_entitytype
+* 	@requires: app,app/collection,app/models/entity_entitytype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Entity_entitytypes
 */
-define("app/collections/entity_entitytypes",["require","app","app/models"],function(require,app) {
+define("app/collections/entity_entitytypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Entity_entitytypeModel = require("app/models/entity_entitytype");
-
-	var Entity_entitytypes = app.Collection.extend({
+	
+	Entity_entitytypes = AppCollection.extend({
 		url: '/entity_entitytypes/',
 		model: Entity_entitytypeModel
 	});
@@ -2727,14 +2789,15 @@ define("app/collections/Entity_entitytypes_paged",["require","app","app/models"]
   module.setExports(Entity_entitytypes_paged);
 });
 /*! app/collections/entity_persons
-* 	@requires: app,app/models/entity_person
+* 	@requires: app,app/collection,app/models/entity_person
 * 	@extends: app.Collection
 * 	@exports: app.collections.Entity_persons
 */
-define("app/collections/entity_persons",["require","app","app/models"],function(require,app) {
+define("app/collections/entity_persons",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Entity_personModel = require("app/models/entity_person");
-
-	var Entity_persons = app.Collection.extend({
+	
+	Entity_persons = AppCollection.extend({
 		url: '/entity_persons/',
 		model: Entity_personModel
 	});
@@ -2771,14 +2834,15 @@ define("app/collections/Entity_persons_paged",["require","app","app/models"],fun
   module.setExports(Entity_persons_paged);
 });
 /*! app/collections/entity_relates
-* 	@requires: app,app/models/entity_relate
+* 	@requires: app,app/collection,app/models/entity_relate
 * 	@extends: app.Collection
 * 	@exports: app.collections.Entity_relates
 */
-define("app/collections/entity_relates",["require","app","app/models"],function(require,app) {
+define("app/collections/entity_relates",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Entity_relateModel = require("app/models/entity_relate");
-
-	var Entity_relates = app.Collection.extend({
+	
+	Entity_relates = AppCollection.extend({
 		url: '/entity_relates/',
 		model: Entity_relateModel
 	});
@@ -2815,14 +2879,15 @@ define("app/collections/Entity_relates_paged",["require","app","app/models"],fun
   module.setExports(Entity_relates_paged);
 });
 /*! app/collections/entityroles
-* 	@requires: app,app/models/entityrole
+* 	@requires: app,app/collection,app/models/entityrole
 * 	@extends: app.Collection
 * 	@exports: app.collections.Entityroles
 */
-define("app/collections/entityroles",["require","app","app/models"],function(require,app) {
+define("app/collections/entityroles",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var EntityroleModel = require("app/models/entityrole");
-
-	var Entityroles = app.Collection.extend({
+	
+	Entityroles = AppCollection.extend({
 		url: '/entityroles/',
 		model: EntityroleModel
 	});
@@ -2859,14 +2924,15 @@ define("app/collections/Entityroles_paged",["require","app","app/models"],functi
   module.setExports(Entityroles_paged);
 });
 /*! app/collections/entitytypes
-* 	@requires: app,app/models/entitytype
+* 	@requires: app,app/collection,app/models/entitytype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Entitytypes
 */
-define("app/collections/entitytypes",["require","app","app/models"],function(require,app) {
+define("app/collections/entitytypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var EntitytypeModel = require("app/models/entitytype");
-
-	var Entitytypes = app.Collection.extend({
+	
+	Entitytypes = AppCollection.extend({
 		url: '/entitytypes/',
 		model: EntitytypeModel
 	});
@@ -2903,14 +2969,15 @@ define("app/collections/Entitytypes_paged",["require","app","app/models"],functi
   module.setExports(Entitytypes_paged);
 });
 /*! app/collections/files
-* 	@requires: app,app/models/file
+* 	@requires: app,app/collection,app/models/file
 * 	@extends: app.Collection
 * 	@exports: app.collections.Files
 */
-define("app/collections/files",["require","app","app/models"],function(require,app) {
+define("app/collections/files",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var FileModel = require("app/models/file");
-
-	var Files = app.Collection.extend({
+	
+	Files = AppCollection.extend({
 		url: '/files/',
 		model: FileModel
 	});
@@ -2947,14 +3014,15 @@ define("app/collections/Files_paged",["require","app","app/models"],function(req
   module.setExports(Files_paged);
 });
 /*! app/collections/filegroups
-* 	@requires: app,app/models/filegroup
+* 	@requires: app,app/collection,app/models/filegroup
 * 	@extends: app.Collection
 * 	@exports: app.collections.Filegroups
 */
-define("app/collections/filegroups",["require","app","app/models"],function(require,app) {
+define("app/collections/filegroups",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var FilegroupModel = require("app/models/filegroup");
-
-	var Filegroups = app.Collection.extend({
+	
+	Filegroups = AppCollection.extend({
 		url: '/filegroups/',
 		model: FilegroupModel
 	});
@@ -2991,14 +3059,15 @@ define("app/collections/Filegroups_paged",["require","app","app/models"],functio
   module.setExports(Filegroups_paged);
 });
 /*! app/collections/geonames
-* 	@requires: app,app/models/geoname
+* 	@requires: app,app/collection,app/models/geoname
 * 	@extends: app.Collection
 * 	@exports: app.collections.Geonames
 */
-define("app/collections/geonames",["require","app","app/models"],function(require,app) {
+define("app/collections/geonames",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var GeonameModel = require("app/models/geoname");
-
-	var Geonames = app.Collection.extend({
+	
+	Geonames = AppCollection.extend({
 		url: '/geonames/',
 		model: GeonameModel
 	});
@@ -3035,14 +3104,15 @@ define("app/collections/Geonames_paged",["require","app","app/models"],function(
   module.setExports(Geonames_paged);
 });
 /*! app/collections/groups
-* 	@requires: app,app/models/group
+* 	@requires: app,app/collection,app/models/group
 * 	@extends: app.Collection
 * 	@exports: app.collections.Groups
 */
-define("app/collections/groups",["require","app","app/models"],function(require,app) {
+define("app/collections/groups",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var GroupModel = require("app/models/group");
-
-	var Groups = app.Collection.extend({
+	
+	Groups = AppCollection.extend({
 		url: '/groups/',
 		model: GroupModel
 	});
@@ -3079,14 +3149,15 @@ define("app/collections/Groups_paged",["require","app","app/models"],function(re
   module.setExports(Groups_paged);
 });
 /*! app/collections/grouptypes
-* 	@requires: app,app/models/grouptype
+* 	@requires: app,app/collection,app/models/grouptype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Grouptypes
 */
-define("app/collections/grouptypes",["require","app","app/models"],function(require,app) {
+define("app/collections/grouptypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var GrouptypeModel = require("app/models/grouptype");
-
-	var Grouptypes = app.Collection.extend({
+	
+	Grouptypes = AppCollection.extend({
 		url: '/grouptypes/',
 		model: GrouptypeModel
 	});
@@ -3123,14 +3194,15 @@ define("app/collections/Grouptypes_paged",["require","app","app/models"],functio
   module.setExports(Grouptypes_paged);
 });
 /*! app/collections/histories
-* 	@requires: app,app/models/history
+* 	@requires: app,app/collection,app/models/history
 * 	@extends: app.Collection
 * 	@exports: app.collections.Histories
 */
-define("app/collections/histories",["require","app","app/models"],function(require,app) {
+define("app/collections/histories",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var HistoryModel = require("app/models/history");
-
-	var Histories = app.Collection.extend({
+	
+	Histories = AppCollection.extend({
 		url: '/histories/',
 		model: HistoryModel
 	});
@@ -3167,14 +3239,15 @@ define("app/collections/Histories_paged",["require","app","app/models"],function
   module.setExports(Histories_paged);
 });
 /*! app/collections/hubs
-* 	@requires: app,app/models/hub
+* 	@requires: app,app/collection,app/models/hub
 * 	@extends: app.Collection
 * 	@exports: app.collections.Hubs
 */
-define("app/collections/hubs",["require","app","app/models"],function(require,app) {
+define("app/collections/hubs",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var HubModel = require("app/models/hub");
-
-	var Hubs = app.Collection.extend({
+	
+	Hubs = AppCollection.extend({
 		url: '/hubs/',
 		model: HubModel
 	});
@@ -3211,14 +3284,15 @@ define("app/collections/Hubs_paged",["require","app","app/models"],function(requ
   module.setExports(Hubs_paged);
 });
 /*! app/collections/images
-* 	@requires: app,app/models/image
+* 	@requires: app,app/collection,app/models/image
 * 	@extends: app.Collection
 * 	@exports: app.collections.Images
 */
-define("app/collections/images",["require","app","app/models"],function(require,app) {
+define("app/collections/images",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ImageModel = require("app/models/image");
-
-	var Images = app.Collection.extend({
+	
+	Images = AppCollection.extend({
 		url: '/images/',
 		model: ImageModel
 	});
@@ -3255,14 +3329,15 @@ define("app/collections/Images_paged",["require","app","app/models"],function(re
   module.setExports(Images_paged);
 });
 /*! app/collections/imagetypes
-* 	@requires: app,app/models/imagetype
+* 	@requires: app,app/collection,app/models/imagetype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Imagetypes
 */
-define("app/collections/imagetypes",["require","app","app/models"],function(require,app) {
+define("app/collections/imagetypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ImagetypeModel = require("app/models/imagetype");
-
-	var Imagetypes = app.Collection.extend({
+	
+	Imagetypes = AppCollection.extend({
 		url: '/imagetypes/',
 		model: ImagetypeModel
 	});
@@ -3299,14 +3374,15 @@ define("app/collections/Imagetypes_paged",["require","app","app/models"],functio
   module.setExports(Imagetypes_paged);
 });
 /*! app/collections/locations
-* 	@requires: app,app/models/location
+* 	@requires: app,app/collection,app/models/location
 * 	@extends: app.Collection
 * 	@exports: app.collections.Locations
 */
-define("app/collections/locations",["require","app","app/models"],function(require,app) {
+define("app/collections/locations",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var LocationModel = require("app/models/location");
-
-	var Locations = app.Collection.extend({
+	
+	Locations = AppCollection.extend({
 		url: '/locations/',
 		model: LocationModel
 	});
@@ -3343,14 +3419,15 @@ define("app/collections/Locations_paged",["require","app","app/models"],function
   module.setExports(Locations_paged);
 });
 /*! app/collections/locationtypes
-* 	@requires: app,app/models/locationtype
+* 	@requires: app,app/collection,app/models/locationtype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Locationtypes
 */
-define("app/collections/locationtypes",["require","app","app/models"],function(require,app) {
+define("app/collections/locationtypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var LocationtypeModel = require("app/models/locationtype");
-
-	var Locationtypes = app.Collection.extend({
+	
+	Locationtypes = AppCollection.extend({
 		url: '/locationtypes/',
 		model: LocationtypeModel
 	});
@@ -3387,14 +3464,15 @@ define("app/collections/Locationtypes_paged",["require","app","app/models"],func
   module.setExports(Locationtypes_paged);
 });
 /*! app/collections/models
-* 	@requires: app,app/models/model
+* 	@requires: app,app/collection,app/models/model
 * 	@extends: app.Collection
 * 	@exports: app.collections.Models
 */
-define("app/collections/models",["require","app","app/models"],function(require,app) {
+define("app/collections/models",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ModelModel = require("app/models/model");
-
-	var Models = app.Collection.extend({
+	
+	Models = AppCollection.extend({
 		url: '/models/',
 		model: ModelModel
 	});
@@ -3431,14 +3509,15 @@ define("app/collections/Models_paged",["require","app","app/models"],function(re
   module.setExports(Models_paged);
 });
 /*! app/collections/objects
-* 	@requires: app,app/models/object
+* 	@requires: app,app/collection,app/models/object
 * 	@extends: app.Collection
 * 	@exports: app.collections.Objects
 */
-define("app/collections/objects",["require","app","app/models"],function(require,app) {
+define("app/collections/objects",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ObjectModel = require("app/models/object");
-
-	var Objects = app.Collection.extend({
+	
+	Objects = AppCollection.extend({
 		url: '/objects/',
 		model: ObjectModel
 	});
@@ -3475,14 +3554,15 @@ define("app/collections/Objects_paged",["require","app","app/models"],function(r
   module.setExports(Objects_paged);
 });
 /*! app/collections/objectdatas
-* 	@requires: app,app/models/objectdatum
+* 	@requires: app,app/collection,app/models/objectdatum
 * 	@extends: app.Collection
 * 	@exports: app.collections.Objectdatas
 */
-define("app/collections/objectdatas",["require","app","app/models"],function(require,app) {
+define("app/collections/objectdatas",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ObjectdatumModel = require("app/models/objectdatum");
-
-	var Objectdatas = app.Collection.extend({
+	
+	Objectdatas = AppCollection.extend({
 		url: '/objectdatas/',
 		model: ObjectdatumModel
 	});
@@ -3519,14 +3599,15 @@ define("app/collections/Objectdatas_paged",["require","app","app/models"],functi
   module.setExports(Objectdatas_paged);
 });
 /*! app/collections/objectfields
-* 	@requires: app,app/models/objectfield
+* 	@requires: app,app/collection,app/models/objectfield
 * 	@extends: app.Collection
 * 	@exports: app.collections.Objectfields
 */
-define("app/collections/objectfields",["require","app","app/models"],function(require,app) {
+define("app/collections/objectfields",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ObjectfieldModel = require("app/models/objectfield");
-
-	var Objectfields = app.Collection.extend({
+	
+	Objectfields = AppCollection.extend({
 		url: '/objectfields/',
 		model: ObjectfieldModel
 	});
@@ -3563,14 +3644,15 @@ define("app/collections/Objectfields_paged",["require","app","app/models"],funct
   module.setExports(Objectfields_paged);
 });
 /*! app/collections/objectfieldtypes
-* 	@requires: app,app/models/objectfieldtype
+* 	@requires: app,app/collection,app/models/objectfieldtype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Objectfieldtypes
 */
-define("app/collections/objectfieldtypes",["require","app","app/models"],function(require,app) {
+define("app/collections/objectfieldtypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ObjectfieldtypeModel = require("app/models/objectfieldtype");
-
-	var Objectfieldtypes = app.Collection.extend({
+	
+	Objectfieldtypes = AppCollection.extend({
 		url: '/objectfieldtypes/',
 		model: ObjectfieldtypeModel
 	});
@@ -3607,14 +3689,15 @@ define("app/collections/Objectfieldtypes_paged",["require","app","app/models"],f
   module.setExports(Objectfieldtypes_paged);
 });
 /*! app/collections/objectforms
-* 	@requires: app,app/models/objectform
+* 	@requires: app,app/collection,app/models/objectform
 * 	@extends: app.Collection
 * 	@exports: app.collections.Objectforms
 */
-define("app/collections/objectforms",["require","app","app/models"],function(require,app) {
+define("app/collections/objectforms",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ObjectformModel = require("app/models/objectform");
-
-	var Objectforms = app.Collection.extend({
+	
+	Objectforms = AppCollection.extend({
 		url: '/objectforms/',
 		model: ObjectformModel
 	});
@@ -3651,14 +3734,15 @@ define("app/collections/Objectforms_paged",["require","app","app/models"],functi
   module.setExports(Objectforms_paged);
 });
 /*! app/collections/objecttypes
-* 	@requires: app,app/models/objecttype
+* 	@requires: app,app/collection,app/models/objecttype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Objecttypes
 */
-define("app/collections/objecttypes",["require","app","app/models"],function(require,app) {
+define("app/collections/objecttypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ObjecttypeModel = require("app/models/objecttype");
-
-	var Objecttypes = app.Collection.extend({
+	
+	Objecttypes = AppCollection.extend({
 		url: '/objecttypes/',
 		model: ObjecttypeModel
 	});
@@ -3695,14 +3779,15 @@ define("app/collections/Objecttypes_paged",["require","app","app/models"],functi
   module.setExports(Objecttypes_paged);
 });
 /*! app/collections/occupations
-* 	@requires: app,app/models/occupation
+* 	@requires: app,app/collection,app/models/occupation
 * 	@extends: app.Collection
 * 	@exports: app.collections.Occupations
 */
-define("app/collections/occupations",["require","app","app/models"],function(require,app) {
+define("app/collections/occupations",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var OccupationModel = require("app/models/occupation");
-
-	var Occupations = app.Collection.extend({
+	
+	Occupations = AppCollection.extend({
 		url: '/occupations/',
 		model: OccupationModel
 	});
@@ -3739,14 +3824,15 @@ define("app/collections/Occupations_paged",["require","app","app/models"],functi
   module.setExports(Occupations_paged);
 });
 /*! app/collections/pages
-* 	@requires: app,app/models/page
+* 	@requires: app,app/collection,app/models/page
 * 	@extends: app.Collection
 * 	@exports: app.collections.Pages
 */
-define("app/collections/pages",["require","app","app/models"],function(require,app) {
+define("app/collections/pages",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var PageModel = require("app/models/page");
-
-	var Pages = app.Collection.extend({
+	
+	Pages = AppCollection.extend({
 		url: '/pages/',
 		model: PageModel
 	});
@@ -3783,14 +3869,15 @@ define("app/collections/Pages_paged",["require","app","app/models"],function(req
   module.setExports(Pages_paged);
 });
 /*! app/collections/page_elements
-* 	@requires: app,app/models/page_element
+* 	@requires: app,app/collection,app/models/page_element
 * 	@extends: app.Collection
 * 	@exports: app.collections.Page_elements
 */
-define("app/collections/page_elements",["require","app","app/models"],function(require,app) {
+define("app/collections/page_elements",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Page_elementModel = require("app/models/page_element");
-
-	var Page_elements = app.Collection.extend({
+	
+	Page_elements = AppCollection.extend({
 		url: '/page_elements/',
 		model: Page_elementModel
 	});
@@ -3827,14 +3914,15 @@ define("app/collections/Page_elements_paged",["require","app","app/models"],func
   module.setExports(Page_elements_paged);
 });
 /*! app/collections/page_sections
-* 	@requires: app,app/models/page_section
+* 	@requires: app,app/collection,app/models/page_section
 * 	@extends: app.Collection
 * 	@exports: app.collections.Page_sections
 */
-define("app/collections/page_sections",["require","app","app/models"],function(require,app) {
+define("app/collections/page_sections",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Page_sectionModel = require("app/models/page_section");
-
-	var Page_sections = app.Collection.extend({
+	
+	Page_sections = AppCollection.extend({
 		url: '/page_sections/',
 		model: Page_sectionModel
 	});
@@ -3871,14 +3959,15 @@ define("app/collections/Page_sections_paged",["require","app","app/models"],func
   module.setExports(Page_sections_paged);
 });
 /*! app/collections/pagelayouts
-* 	@requires: app,app/models/pagelayout
+* 	@requires: app,app/collection,app/models/pagelayout
 * 	@extends: app.Collection
 * 	@exports: app.collections.Pagelayouts
 */
-define("app/collections/pagelayouts",["require","app","app/models"],function(require,app) {
+define("app/collections/pagelayouts",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var PagelayoutModel = require("app/models/pagelayout");
-
-	var Pagelayouts = app.Collection.extend({
+	
+	Pagelayouts = AppCollection.extend({
 		url: '/pagelayouts/',
 		model: PagelayoutModel
 	});
@@ -3915,14 +4004,15 @@ define("app/collections/Pagelayouts_paged",["require","app","app/models"],functi
   module.setExports(Pagelayouts_paged);
 });
 /*! app/collections/pagelayoutmenus
-* 	@requires: app,app/models/pagelayoutmenu
+* 	@requires: app,app/collection,app/models/pagelayoutmenu
 * 	@extends: app.Collection
 * 	@exports: app.collections.Pagelayoutmenus
 */
-define("app/collections/pagelayoutmenus",["require","app","app/models"],function(require,app) {
+define("app/collections/pagelayoutmenus",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var PagelayoutmenuModel = require("app/models/pagelayoutmenu");
-
-	var Pagelayoutmenus = app.Collection.extend({
+	
+	Pagelayoutmenus = AppCollection.extend({
 		url: '/pagelayoutmenus/',
 		model: PagelayoutmenuModel
 	});
@@ -3959,14 +4049,15 @@ define("app/collections/Pagelayoutmenus_paged",["require","app","app/models"],fu
   module.setExports(Pagelayoutmenus_paged);
 });
 /*! app/collections/pagelayoutmenu_pages
-* 	@requires: app,app/models/pagelayoutmenu_page
+* 	@requires: app,app/collection,app/models/pagelayoutmenu_page
 * 	@extends: app.Collection
 * 	@exports: app.collections.Pagelayoutmenu_pages
 */
-define("app/collections/pagelayoutmenu_pages",["require","app","app/models"],function(require,app) {
+define("app/collections/pagelayoutmenu_pages",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Pagelayoutmenu_pageModel = require("app/models/pagelayoutmenu_page");
-
-	var Pagelayoutmenu_pages = app.Collection.extend({
+	
+	Pagelayoutmenu_pages = AppCollection.extend({
 		url: '/pagelayoutmenu_pages/',
 		model: Pagelayoutmenu_pageModel
 	});
@@ -4003,14 +4094,15 @@ define("app/collections/Pagelayoutmenu_pages_paged",["require","app","app/models
   module.setExports(Pagelayoutmenu_pages_paged);
 });
 /*! app/collections/people
-* 	@requires: app,app/models/person
+* 	@requires: app,app/collection,app/models/person
 * 	@extends: app.Collection
 * 	@exports: app.collections.People
 */
-define("app/collections/people",["require","app","app/models"],function(require,app) {
+define("app/collections/people",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var PersonModel = require("app/models/person");
-
-	var People = app.Collection.extend({
+	
+	People = AppCollection.extend({
 		url: '/people/',
 		model: PersonModel
 	});
@@ -4047,14 +4139,15 @@ define("app/collections/People_paged",["require","app","app/models"],function(re
   module.setExports(People_paged);
 });
 /*! app/collections/person_addresses
-* 	@requires: app,app/models/person_address
+* 	@requires: app,app/collection,app/models/person_address
 * 	@extends: app.Collection
 * 	@exports: app.collections.Person_addresses
 */
-define("app/collections/person_addresses",["require","app","app/models"],function(require,app) {
+define("app/collections/person_addresses",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Person_addressModel = require("app/models/person_address");
-
-	var Person_addresses = app.Collection.extend({
+	
+	Person_addresses = AppCollection.extend({
 		url: '/person_addresses/',
 		model: Person_addressModel
 	});
@@ -4091,14 +4184,15 @@ define("app/collections/Person_addresses_paged",["require","app","app/models"],f
   module.setExports(Person_addresses_paged);
 });
 /*! app/collections/person_clients
-* 	@requires: app,app/models/person_client
+* 	@requires: app,app/collection,app/models/person_client
 * 	@extends: app.Collection
 * 	@exports: app.collections.Person_clients
 */
-define("app/collections/person_clients",["require","app","app/models"],function(require,app) {
+define("app/collections/person_clients",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Person_clientModel = require("app/models/person_client");
-
-	var Person_clients = app.Collection.extend({
+	
+	Person_clients = AppCollection.extend({
 		url: '/person_clients/',
 		model: Person_clientModel
 	});
@@ -4135,14 +4229,15 @@ define("app/collections/Person_clients_paged",["require","app","app/models"],fun
   module.setExports(Person_clients_paged);
 });
 /*! app/collections/person_degrees
-* 	@requires: app,app/models/person_degree
+* 	@requires: app,app/collection,app/models/person_degree
 * 	@extends: app.Collection
 * 	@exports: app.collections.Person_degrees
 */
-define("app/collections/person_degrees",["require","app","app/models"],function(require,app) {
+define("app/collections/person_degrees",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Person_degreeModel = require("app/models/person_degree");
-
-	var Person_degrees = app.Collection.extend({
+	
+	Person_degrees = AppCollection.extend({
 		url: '/person_degrees/',
 		model: Person_degreeModel
 	});
@@ -4179,14 +4274,15 @@ define("app/collections/Person_degrees_paged",["require","app","app/models"],fun
   module.setExports(Person_degrees_paged);
 });
 /*! app/collections/person_emails
-* 	@requires: app,app/models/person_email
+* 	@requires: app,app/collection,app/models/person_email
 * 	@extends: app.Collection
 * 	@exports: app.collections.Person_emails
 */
-define("app/collections/person_emails",["require","app","app/models"],function(require,app) {
+define("app/collections/person_emails",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Person_emailModel = require("app/models/person_email");
-
-	var Person_emails = app.Collection.extend({
+	
+	Person_emails = AppCollection.extend({
 		url: '/person_emails/',
 		model: Person_emailModel
 	});
@@ -4223,14 +4319,15 @@ define("app/collections/Person_emails_paged",["require","app","app/models"],func
   module.setExports(Person_emails_paged);
 });
 /*! app/collections/person_files
-* 	@requires: app,app/models/person_file
+* 	@requires: app,app/collection,app/models/person_file
 * 	@extends: app.Collection
 * 	@exports: app.collections.Person_files
 */
-define("app/collections/person_files",["require","app","app/models"],function(require,app) {
+define("app/collections/person_files",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Person_fileModel = require("app/models/person_file");
-
-	var Person_files = app.Collection.extend({
+	
+	Person_files = AppCollection.extend({
 		url: '/person_files/',
 		model: Person_fileModel
 	});
@@ -4267,14 +4364,15 @@ define("app/collections/Person_files_paged",["require","app","app/models"],funct
   module.setExports(Person_files_paged);
 });
 /*! app/collections/person_interest_excepts
-* 	@requires: app,app/models/person_interest_except
+* 	@requires: app,app/collection,app/models/person_interest_except
 * 	@extends: app.Collection
 * 	@exports: app.collections.Person_interest_excepts
 */
-define("app/collections/person_interest_excepts",["require","app","app/models"],function(require,app) {
+define("app/collections/person_interest_excepts",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Person_interest_exceptModel = require("app/models/person_interest_except");
-
-	var Person_interest_excepts = app.Collection.extend({
+	
+	Person_interest_excepts = AppCollection.extend({
 		url: '/person_interest_excepts/',
 		model: Person_interest_exceptModel
 	});
@@ -4311,14 +4409,15 @@ define("app/collections/Person_interest_excepts_paged",["require","app","app/mod
   module.setExports(Person_interest_excepts_paged);
 });
 /*! app/collections/person_notes
-* 	@requires: app,app/models/person_note
+* 	@requires: app,app/collection,app/models/person_note
 * 	@extends: app.Collection
 * 	@exports: app.collections.Person_notes
 */
-define("app/collections/person_notes",["require","app","app/models"],function(require,app) {
+define("app/collections/person_notes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Person_noteModel = require("app/models/person_note");
-
-	var Person_notes = app.Collection.extend({
+	
+	Person_notes = AppCollection.extend({
 		url: '/person_notes/',
 		model: Person_noteModel
 	});
@@ -4355,14 +4454,15 @@ define("app/collections/Person_notes_paged",["require","app","app/models"],funct
   module.setExports(Person_notes_paged);
 });
 /*! app/collections/person_prefs
-* 	@requires: app,app/models/person_pref
+* 	@requires: app,app/collection,app/models/person_pref
 * 	@extends: app.Collection
 * 	@exports: app.collections.Person_prefs
 */
-define("app/collections/person_prefs",["require","app","app/models"],function(require,app) {
+define("app/collections/person_prefs",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Person_prefModel = require("app/models/person_pref");
-
-	var Person_prefs = app.Collection.extend({
+	
+	Person_prefs = AppCollection.extend({
 		url: '/person_prefs/',
 		model: Person_prefModel
 	});
@@ -4399,14 +4499,15 @@ define("app/collections/Person_prefs_paged",["require","app","app/models"],funct
   module.setExports(Person_prefs_paged);
 });
 /*! app/collections/person_specialtylms
-* 	@requires: app,app/models/person_specialtylm
+* 	@requires: app,app/collection,app/models/person_specialtylm
 * 	@extends: app.Collection
 * 	@exports: app.collections.Person_specialtylms
 */
-define("app/collections/person_specialtylms",["require","app","app/models"],function(require,app) {
+define("app/collections/person_specialtylms",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Person_specialtylmModel = require("app/models/person_specialtylm");
-
-	var Person_specialtylms = app.Collection.extend({
+	
+	Person_specialtylms = AppCollection.extend({
 		url: '/person_specialtylms/',
 		model: Person_specialtylmModel
 	});
@@ -4443,14 +4544,15 @@ define("app/collections/Person_specialtylms_paged",["require","app","app/models"
   module.setExports(Person_specialtylms_paged);
 });
 /*! app/collections/person_users
-* 	@requires: app,app/models/person_user
+* 	@requires: app,app/collection,app/models/person_user
 * 	@extends: app.Collection
 * 	@exports: app.collections.Person_users
 */
-define("app/collections/person_users",["require","app","app/models"],function(require,app) {
+define("app/collections/person_users",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Person_userModel = require("app/models/person_user");
-
-	var Person_users = app.Collection.extend({
+	
+	Person_users = AppCollection.extend({
 		url: '/person_users/',
 		model: Person_userModel
 	});
@@ -4487,14 +4589,15 @@ define("app/collections/Person_users_paged",["require","app","app/models"],funct
   module.setExports(Person_users_paged);
 });
 /*! app/collections/processes
-* 	@requires: app,app/models/process
+* 	@requires: app,app/collection,app/models/process
 * 	@extends: app.Collection
 * 	@exports: app.collections.Processes
 */
-define("app/collections/processes",["require","app","app/models"],function(require,app) {
+define("app/collections/processes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ProcessModel = require("app/models/process");
-
-	var Processes = app.Collection.extend({
+	
+	Processes = AppCollection.extend({
 		url: '/processes/',
 		model: ProcessModel
 	});
@@ -4531,14 +4634,15 @@ define("app/collections/Processes_paged",["require","app","app/models"],function
   module.setExports(Processes_paged);
 });
 /*! app/collections/process_persons
-* 	@requires: app,app/models/process_person
+* 	@requires: app,app/collection,app/models/process_person
 * 	@extends: app.Collection
 * 	@exports: app.collections.Process_persons
 */
-define("app/collections/process_persons",["require","app","app/models"],function(require,app) {
+define("app/collections/process_persons",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Process_personModel = require("app/models/process_person");
-
-	var Process_persons = app.Collection.extend({
+	
+	Process_persons = AppCollection.extend({
 		url: '/process_persons/',
 		model: Process_personModel
 	});
@@ -4575,14 +4679,15 @@ define("app/collections/Process_persons_paged",["require","app","app/models"],fu
   module.setExports(Process_persons_paged);
 });
 /*! app/collections/processmanagers
-* 	@requires: app,app/models/processmanager
+* 	@requires: app,app/collection,app/models/processmanager
 * 	@extends: app.Collection
 * 	@exports: app.collections.Processmanagers
 */
-define("app/collections/processmanagers",["require","app","app/models"],function(require,app) {
+define("app/collections/processmanagers",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ProcessmanagerModel = require("app/models/processmanager");
-
-	var Processmanagers = app.Collection.extend({
+	
+	Processmanagers = AppCollection.extend({
 		url: '/processmanagers/',
 		model: ProcessmanagerModel
 	});
@@ -4619,14 +4724,15 @@ define("app/collections/Processmanagers_paged",["require","app","app/models"],fu
   module.setExports(Processmanagers_paged);
 });
 /*! app/collections/processsteps
-* 	@requires: app,app/models/processstep
+* 	@requires: app,app/collection,app/models/processstep
 * 	@extends: app.Collection
 * 	@exports: app.collections.Processsteps
 */
-define("app/collections/processsteps",["require","app","app/models"],function(require,app) {
+define("app/collections/processsteps",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ProcessstepModel = require("app/models/processstep");
-
-	var Processsteps = app.Collection.extend({
+	
+	Processsteps = AppCollection.extend({
 		url: '/processsteps/',
 		model: ProcessstepModel
 	});
@@ -4663,14 +4769,15 @@ define("app/collections/Processsteps_paged",["require","app","app/models"],funct
   module.setExports(Processsteps_paged);
 });
 /*! app/collections/processstep_activities
-* 	@requires: app,app/models/processstep_activity
+* 	@requires: app,app/collection,app/models/processstep_activity
 * 	@extends: app.Collection
 * 	@exports: app.collections.Processstep_activities
 */
-define("app/collections/processstep_activities",["require","app","app/models"],function(require,app) {
+define("app/collections/processstep_activities",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Processstep_activityModel = require("app/models/processstep_activity");
-
-	var Processstep_activities = app.Collection.extend({
+	
+	Processstep_activities = AppCollection.extend({
 		url: '/processstep_activities/',
 		model: Processstep_activityModel
 	});
@@ -4707,14 +4814,15 @@ define("app/collections/Processstep_activities_paged",["require","app","app/mode
   module.setExports(Processstep_activities_paged);
 });
 /*! app/collections/professionareas
-* 	@requires: app,app/models/professionarea
+* 	@requires: app,app/collection,app/models/professionarea
 * 	@extends: app.Collection
 * 	@exports: app.collections.Professionareas
 */
-define("app/collections/professionareas",["require","app","app/models"],function(require,app) {
+define("app/collections/professionareas",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ProfessionareaModel = require("app/models/professionarea");
-
-	var Professionareas = app.Collection.extend({
+	
+	Professionareas = AppCollection.extend({
 		url: '/professionareas/',
 		model: ProfessionareaModel
 	});
@@ -4751,14 +4859,15 @@ define("app/collections/Professionareas_paged",["require","app","app/models"],fu
   module.setExports(Professionareas_paged);
 });
 /*! app/collections/projects
-* 	@requires: app,app/models/project
+* 	@requires: app,app/collection,app/models/project
 * 	@extends: app.Collection
 * 	@exports: app.collections.Projects
 */
-define("app/collections/projects",["require","app","app/models"],function(require,app) {
+define("app/collections/projects",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ProjectModel = require("app/models/project");
-
-	var Projects = app.Collection.extend({
+	
+	Projects = AppCollection.extend({
 		url: '/projects/',
 		model: ProjectModel
 	});
@@ -4795,14 +4904,15 @@ define("app/collections/Projects_paged",["require","app","app/models"],function(
   module.setExports(Projects_paged);
 });
 /*! app/collections/relicensures
-* 	@requires: app,app/models/relicensure
+* 	@requires: app,app/collection,app/models/relicensure
 * 	@extends: app.Collection
 * 	@exports: app.collections.Relicensures
 */
-define("app/collections/relicensures",["require","app","app/models"],function(require,app) {
+define("app/collections/relicensures",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var RelicensureModel = require("app/models/relicensure");
-
-	var Relicensures = app.Collection.extend({
+	
+	Relicensures = AppCollection.extend({
 		url: '/relicensures/',
 		model: RelicensureModel
 	});
@@ -4839,14 +4949,15 @@ define("app/collections/Relicensures_paged",["require","app","app/models"],funct
   module.setExports(Relicensures_paged);
 });
 /*! app/collections/stat_entries
-* 	@requires: app,app/models/stat_entry
+* 	@requires: app,app/collection,app/models/stat_entry
 * 	@extends: app.Collection
 * 	@exports: app.collections.Stat_entries
 */
-define("app/collections/stat_entries",["require","app","app/models"],function(require,app) {
+define("app/collections/stat_entries",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Stat_entryModel = require("app/models/stat_entry");
-
-	var Stat_entries = app.Collection.extend({
+	
+	Stat_entries = AppCollection.extend({
 		url: '/stat_entries/',
 		model: Stat_entryModel
 	});
@@ -4883,14 +4994,15 @@ define("app/collections/Stat_entries_paged",["require","app","app/models"],funct
   module.setExports(Stat_entries_paged);
 });
 /*! app/collections/stat_logs
-* 	@requires: app,app/models/stat_log
+* 	@requires: app,app/collection,app/models/stat_log
 * 	@extends: app.Collection
 * 	@exports: app.collections.Stat_logs
 */
-define("app/collections/stat_logs",["require","app","app/models"],function(require,app) {
+define("app/collections/stat_logs",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Stat_logModel = require("app/models/stat_log");
-
-	var Stat_logs = app.Collection.extend({
+	
+	Stat_logs = AppCollection.extend({
 		url: '/stat_logs/',
 		model: Stat_logModel
 	});
@@ -4927,14 +5039,15 @@ define("app/collections/Stat_logs_paged",["require","app","app/models"],function
   module.setExports(Stat_logs_paged);
 });
 /*! app/collections/subscriptions
-* 	@requires: app,app/models/subscription
+* 	@requires: app,app/collection,app/models/subscription
 * 	@extends: app.Collection
 * 	@exports: app.collections.Subscriptions
 */
-define("app/collections/subscriptions",["require","app","app/models"],function(require,app) {
+define("app/collections/subscriptions",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var SubscriptionModel = require("app/models/subscription");
-
-	var Subscriptions = app.Collection.extend({
+	
+	Subscriptions = AppCollection.extend({
 		url: '/subscriptions/',
 		model: SubscriptionModel
 	});
@@ -4971,14 +5084,15 @@ define("app/collections/Subscriptions_paged",["require","app","app/models"],func
   module.setExports(Subscriptions_paged);
 });
 /*! app/collections/sys_activityroles
-* 	@requires: app,app/models/sys_activityrole
+* 	@requires: app,app/collection,app/models/sys_activityrole
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_activityroles
 */
-define("app/collections/sys_activityroles",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_activityroles",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_activityroleModel = require("app/models/sys_activityrole");
-
-	var Sys_activityroles = app.Collection.extend({
+	
+	Sys_activityroles = AppCollection.extend({
 		url: '/sys_activityroles/',
 		model: Sys_activityroleModel
 	});
@@ -5015,14 +5129,15 @@ define("app/collections/Sys_activityroles_paged",["require","app","app/models"],
   module.setExports(Sys_activityroles_paged);
 });
 /*! app/collections/sys_activitysteptypes
-* 	@requires: app,app/models/sys_activitysteptype
+* 	@requires: app,app/collection,app/models/sys_activitysteptype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_activitysteptypes
 */
-define("app/collections/sys_activitysteptypes",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_activitysteptypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_activitysteptypeModel = require("app/models/sys_activitysteptype");
-
-	var Sys_activitysteptypes = app.Collection.extend({
+	
+	Sys_activitysteptypes = AppCollection.extend({
 		url: '/sys_activitysteptypes/',
 		model: Sys_activitysteptypeModel
 	});
@@ -5059,14 +5174,15 @@ define("app/collections/Sys_activitysteptypes_paged",["require","app","app/model
   module.setExports(Sys_activitysteptypes_paged);
 });
 /*! app/collections/sys_activitytypes
-* 	@requires: app,app/models/sys_activitytype
+* 	@requires: app,app/collection,app/models/sys_activitytype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_activitytypes
 */
-define("app/collections/sys_activitytypes",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_activitytypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_activitytypeModel = require("app/models/sys_activitytype");
-
-	var Sys_activitytypes = app.Collection.extend({
+	
+	Sys_activitytypes = AppCollection.extend({
 		url: '/sys_activitytypes/',
 		model: Sys_activitytypeModel
 	});
@@ -5103,14 +5219,15 @@ define("app/collections/Sys_activitytypes_paged",["require","app","app/models"],
   module.setExports(Sys_activitytypes_paged);
 });
 /*! app/collections/sys_addresstypes
-* 	@requires: app,app/models/sys_addresstype
+* 	@requires: app,app/collection,app/models/sys_addresstype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_addresstypes
 */
-define("app/collections/sys_addresstypes",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_addresstypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_addresstypeModel = require("app/models/sys_addresstype");
-
-	var Sys_addresstypes = app.Collection.extend({
+	
+	Sys_addresstypes = AppCollection.extend({
 		url: '/sys_addresstypes/',
 		model: Sys_addresstypeModel
 	});
@@ -5147,14 +5264,15 @@ define("app/collections/Sys_addresstypes_paged",["require","app","app/models"],f
   module.setExports(Sys_addresstypes_paged);
 });
 /*! app/collections/sys_apiclients
-* 	@requires: app,app/models/sys_apiclient
+* 	@requires: app,app/collection,app/models/sys_apiclient
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_apiclients
 */
-define("app/collections/sys_apiclients",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_apiclients",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_apiclientModel = require("app/models/sys_apiclient");
-
-	var Sys_apiclients = app.Collection.extend({
+	
+	Sys_apiclients = AppCollection.extend({
 		url: '/sys_apiclients/',
 		model: Sys_apiclientModel
 	});
@@ -5191,14 +5309,15 @@ define("app/collections/Sys_apiclients_paged",["require","app","app/models"],fun
   module.setExports(Sys_apiclients_paged);
 });
 /*! app/collections/sys_assessquestiontypes
-* 	@requires: app,app/models/sys_assessquestiontype
+* 	@requires: app,app/collection,app/models/sys_assessquestiontype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_assessquestiontypes
 */
-define("app/collections/sys_assessquestiontypes",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_assessquestiontypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_assessquestiontypeModel = require("app/models/sys_assessquestiontype");
-
-	var Sys_assessquestiontypes = app.Collection.extend({
+	
+	Sys_assessquestiontypes = AppCollection.extend({
 		url: '/sys_assessquestiontypes/',
 		model: Sys_assessquestiontypeModel
 	});
@@ -5235,14 +5354,15 @@ define("app/collections/Sys_assessquestiontypes_paged",["require","app","app/mod
   module.setExports(Sys_assessquestiontypes_paged);
 });
 /*! app/collections/sys_assessresultstatuses
-* 	@requires: app,app/models/sys_assessresultstatu
+* 	@requires: app,app/collection,app/models/sys_assessresultstatu
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_assessresultstatuses
 */
-define("app/collections/sys_assessresultstatuses",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_assessresultstatuses",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_assessresultstatuModel = require("app/models/sys_assessresultstatu");
-
-	var Sys_assessresultstatuses = app.Collection.extend({
+	
+	Sys_assessresultstatuses = AppCollection.extend({
 		url: '/sys_assessresultstatuses/',
 		model: Sys_assessresultstatuModel
 	});
@@ -5279,14 +5399,15 @@ define("app/collections/Sys_assessresultstatuses_paged",["require","app","app/mo
   module.setExports(Sys_assessresultstatuses_paged);
 });
 /*! app/collections/sys_assesstypes
-* 	@requires: app,app/models/sys_assesstype
+* 	@requires: app,app/collection,app/models/sys_assesstype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_assesstypes
 */
-define("app/collections/sys_assesstypes",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_assesstypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_assesstypeModel = require("app/models/sys_assesstype");
-
-	var Sys_assesstypes = app.Collection.extend({
+	
+	Sys_assesstypes = AppCollection.extend({
 		url: '/sys_assesstypes/',
 		model: Sys_assesstypeModel
 	});
@@ -5323,14 +5444,15 @@ define("app/collections/Sys_assesstypes_paged",["require","app","app/models"],fu
   module.setExports(Sys_assesstypes_paged);
 });
 /*! app/collections/sys_attendeestatuses
-* 	@requires: app,app/models/sys_attendeestatu
+* 	@requires: app,app/collection,app/models/sys_attendeestatu
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_attendeestatuses
 */
-define("app/collections/sys_attendeestatuses",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_attendeestatuses",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_attendeestatuModel = require("app/models/sys_attendeestatu");
-
-	var Sys_attendeestatuses = app.Collection.extend({
+	
+	Sys_attendeestatuses = AppCollection.extend({
 		url: '/sys_attendeestatuses/',
 		model: Sys_attendeestatuModel
 	});
@@ -5367,14 +5489,15 @@ define("app/collections/Sys_attendeestatuses_paged",["require","app","app/models
   module.setExports(Sys_attendeestatuses_paged);
 });
 /*! app/collections/sys_categorylms
-* 	@requires: app,app/models/sys_categorylm
+* 	@requires: app,app/collection,app/models/sys_categorylm
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_categorylms
 */
-define("app/collections/sys_categorylms",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_categorylms",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_categorylmModel = require("app/models/sys_categorylm");
-
-	var Sys_categorylms = app.Collection.extend({
+	
+	Sys_categorylms = AppCollection.extend({
 		url: '/sys_categorylms/',
 		model: Sys_categorylmModel
 	});
@@ -5411,14 +5534,15 @@ define("app/collections/Sys_categorylms_paged",["require","app","app/models"],fu
   module.setExports(Sys_categorylms_paged);
 });
 /*! app/collections/sys_cbafunds
-* 	@requires: app,app/models/sys_cbafund
+* 	@requires: app,app/collection,app/models/sys_cbafund
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_cbafunds
 */
-define("app/collections/sys_cbafunds",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_cbafunds",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_cbafundModel = require("app/models/sys_cbafund");
-
-	var Sys_cbafunds = app.Collection.extend({
+	
+	Sys_cbafunds = AppCollection.extend({
 		url: '/sys_cbafunds/',
 		model: Sys_cbafundModel
 	});
@@ -5455,14 +5579,15 @@ define("app/collections/Sys_cbafunds_paged",["require","app","app/models"],funct
   module.setExports(Sys_cbafunds_paged);
 });
 /*! app/collections/sys_cbofunds
-* 	@requires: app,app/models/sys_cbofund
+* 	@requires: app,app/collection,app/models/sys_cbofund
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_cbofunds
 */
-define("app/collections/sys_cbofunds",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_cbofunds",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_cbofundModel = require("app/models/sys_cbofund");
-
-	var Sys_cbofunds = app.Collection.extend({
+	
+	Sys_cbofunds = AppCollection.extend({
 		url: '/sys_cbofunds/',
 		model: Sys_cbofundModel
 	});
@@ -5499,14 +5624,15 @@ define("app/collections/Sys_cbofunds_paged",["require","app","app/models"],funct
   module.setExports(Sys_cbofunds_paged);
 });
 /*! app/collections/sys_components
-* 	@requires: app,app/models/sys_component
+* 	@requires: app,app/collection,app/models/sys_component
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_components
 */
-define("app/collections/sys_components",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_components",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_componentModel = require("app/models/sys_component");
-
-	var Sys_components = app.Collection.extend({
+	
+	Sys_components = AppCollection.extend({
 		url: '/sys_components/',
 		model: Sys_componentModel
 	});
@@ -5543,14 +5669,15 @@ define("app/collections/Sys_components_paged",["require","app","app/models"],fun
   module.setExports(Sys_components_paged);
 });
 /*! app/collections/sys_countries
-* 	@requires: app,app/models/sys_country
+* 	@requires: app,app/collection,app/models/sys_country
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_countries
 */
-define("app/collections/sys_countries",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_countries",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_countryModel = require("app/models/sys_country");
-
-	var Sys_countries = app.Collection.extend({
+	
+	Sys_countries = AppCollection.extend({
 		url: '/sys_countries/',
 		model: Sys_countryModel
 	});
@@ -5587,14 +5714,15 @@ define("app/collections/Sys_countries_paged",["require","app","app/models"],func
   module.setExports(Sys_countries_paged);
 });
 /*! app/collections/sys_credits
-* 	@requires: app,app/models/sys_credit
+* 	@requires: app,app/collection,app/models/sys_credit
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_credits
 */
-define("app/collections/sys_credits",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_credits",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_creditModel = require("app/models/sys_credit");
-
-	var Sys_credits = app.Collection.extend({
+	
+	Sys_credits = AppCollection.extend({
 		url: '/sys_credits/',
 		model: Sys_creditModel
 	});
@@ -5631,14 +5759,15 @@ define("app/collections/Sys_credits_paged",["require","app","app/models"],functi
   module.setExports(Sys_credits_paged);
 });
 /*! app/collections/sys_degrees
-* 	@requires: app,app/models/sys_degree
+* 	@requires: app,app/collection,app/models/sys_degree
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_degrees
 */
-define("app/collections/sys_degrees",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_degrees",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_degreeModel = require("app/models/sys_degree");
-
-	var Sys_degrees = app.Collection.extend({
+	
+	Sys_degrees = AppCollection.extend({
 		url: '/sys_degrees/',
 		model: Sys_degreeModel
 	});
@@ -5675,14 +5804,15 @@ define("app/collections/Sys_degrees_paged",["require","app","app/models"],functi
   module.setExports(Sys_degrees_paged);
 });
 /*! app/collections/sys_emailstyles
-* 	@requires: app,app/models/sys_emailstyle
+* 	@requires: app,app/collection,app/models/sys_emailstyle
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_emailstyles
 */
-define("app/collections/sys_emailstyles",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_emailstyles",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_emailstyleModel = require("app/models/sys_emailstyle");
-
-	var Sys_emailstyles = app.Collection.extend({
+	
+	Sys_emailstyles = AppCollection.extend({
 		url: '/sys_emailstyles/',
 		model: Sys_emailstyleModel
 	});
@@ -5719,14 +5849,15 @@ define("app/collections/Sys_emailstyles_paged",["require","app","app/models"],fu
   module.setExports(Sys_emailstyles_paged);
 });
 /*! app/collections/sys_entrytypes
-* 	@requires: app,app/models/sys_entrytype
+* 	@requires: app,app/collection,app/models/sys_entrytype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_entrytypes
 */
-define("app/collections/sys_entrytypes",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_entrytypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_entrytypeModel = require("app/models/sys_entrytype");
-
-	var Sys_entrytypes = app.Collection.extend({
+	
+	Sys_entrytypes = AppCollection.extend({
 		url: '/sys_entrytypes/',
 		model: Sys_entrytypeModel
 	});
@@ -5763,14 +5894,15 @@ define("app/collections/Sys_entrytypes_paged",["require","app","app/models"],fun
   module.setExports(Sys_entrytypes_paged);
 });
 /*! app/collections/sys_ethnicities
-* 	@requires: app,app/models/sys_ethnicity
+* 	@requires: app,app/collection,app/models/sys_ethnicity
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_ethnicities
 */
-define("app/collections/sys_ethnicities",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_ethnicities",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_ethnicityModel = require("app/models/sys_ethnicity");
-
-	var Sys_ethnicities = app.Collection.extend({
+	
+	Sys_ethnicities = AppCollection.extend({
 		url: '/sys_ethnicities/',
 		model: Sys_ethnicityModel
 	});
@@ -5807,14 +5939,15 @@ define("app/collections/Sys_ethnicities_paged",["require","app","app/models"],fu
   module.setExports(Sys_ethnicities_paged);
 });
 /*! app/collections/sys_filetypes
-* 	@requires: app,app/models/sys_filetype
+* 	@requires: app,app/collection,app/models/sys_filetype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_filetypes
 */
-define("app/collections/sys_filetypes",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_filetypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_filetypeModel = require("app/models/sys_filetype");
-
-	var Sys_filetypes = app.Collection.extend({
+	
+	Sys_filetypes = AppCollection.extend({
 		url: '/sys_filetypes/',
 		model: Sys_filetypeModel
 	});
@@ -5851,14 +5984,15 @@ define("app/collections/Sys_filetypes_paged",["require","app","app/models"],func
   module.setExports(Sys_filetypes_paged);
 });
 /*! app/collections/sys_funrcs
-* 	@requires: app,app/models/sys_funrc
+* 	@requires: app,app/collection,app/models/sys_funrc
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_funrcs
 */
-define("app/collections/sys_funrcs",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_funrcs",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_funrcModel = require("app/models/sys_funrc");
-
-	var Sys_funrcs = app.Collection.extend({
+	
+	Sys_funrcs = AppCollection.extend({
 		url: '/sys_funrcs/',
 		model: Sys_funrcModel
 	});
@@ -5895,14 +6029,15 @@ define("app/collections/Sys_funrcs_paged",["require","app","app/models"],functio
   module.setExports(Sys_funrcs_paged);
 });
 /*! app/collections/sys_funrns
-* 	@requires: app,app/models/sys_funrn
+* 	@requires: app,app/collection,app/models/sys_funrn
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_funrns
 */
-define("app/collections/sys_funrns",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_funrns",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_funrnModel = require("app/models/sys_funrn");
-
-	var Sys_funrns = app.Collection.extend({
+	
+	Sys_funrns = AppCollection.extend({
 		url: '/sys_funrns/',
 		model: Sys_funrnModel
 	});
@@ -5939,14 +6074,15 @@ define("app/collections/Sys_funrns_paged",["require","app","app/models"],functio
   module.setExports(Sys_funrns_paged);
 });
 /*! app/collections/sys_groupings
-* 	@requires: app,app/models/sys_grouping
+* 	@requires: app,app/collection,app/models/sys_grouping
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_groupings
 */
-define("app/collections/sys_groupings",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_groupings",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_groupingModel = require("app/models/sys_grouping");
-
-	var Sys_groupings = app.Collection.extend({
+	
+	Sys_groupings = AppCollection.extend({
 		url: '/sys_groupings/',
 		model: Sys_groupingModel
 	});
@@ -5983,14 +6119,15 @@ define("app/collections/Sys_groupings_paged",["require","app","app/models"],func
   module.setExports(Sys_groupings_paged);
 });
 /*! app/collections/sys_grouptypes
-* 	@requires: app,app/models/sys_grouptype
+* 	@requires: app,app/collection,app/models/sys_grouptype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_grouptypes
 */
-define("app/collections/sys_grouptypes",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_grouptypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_grouptypeModel = require("app/models/sys_grouptype");
-
-	var Sys_grouptypes = app.Collection.extend({
+	
+	Sys_grouptypes = AppCollection.extend({
 		url: '/sys_grouptypes/',
 		model: Sys_grouptypeModel
 	});
@@ -6027,14 +6164,15 @@ define("app/collections/Sys_grouptypes_paged",["require","app","app/models"],fun
   module.setExports(Sys_grouptypes_paged);
 });
 /*! app/collections/sys_historystyles
-* 	@requires: app,app/models/sys_historystyle
+* 	@requires: app,app/collection,app/models/sys_historystyle
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_historystyles
 */
-define("app/collections/sys_historystyles",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_historystyles",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_historystyleModel = require("app/models/sys_historystyle");
-
-	var Sys_historystyles = app.Collection.extend({
+	
+	Sys_historystyles = AppCollection.extend({
 		url: '/sys_historystyles/',
 		model: Sys_historystyleModel
 	});
@@ -6071,14 +6209,15 @@ define("app/collections/Sys_historystyles_paged",["require","app","app/models"],
   module.setExports(Sys_historystyles_paged);
 });
 /*! app/collections/sys_historytypes
-* 	@requires: app,app/models/sys_historytype
+* 	@requires: app,app/collection,app/models/sys_historytype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_historytypes
 */
-define("app/collections/sys_historytypes",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_historytypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_historytypeModel = require("app/models/sys_historytype");
-
-	var Sys_historytypes = app.Collection.extend({
+	
+	Sys_historytypes = AppCollection.extend({
 		url: '/sys_historytypes/',
 		model: Sys_historytypeModel
 	});
@@ -6115,14 +6254,15 @@ define("app/collections/Sys_historytypes_paged",["require","app","app/models"],f
   module.setExports(Sys_historytypes_paged);
 });
 /*! app/collections/sys_markets
-* 	@requires: app,app/models/sys_market
+* 	@requires: app,app/collection,app/models/sys_market
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_markets
 */
-define("app/collections/sys_markets",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_markets",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_marketModel = require("app/models/sys_market");
-
-	var Sys_markets = app.Collection.extend({
+	
+	Sys_markets = AppCollection.extend({
 		url: '/sys_markets/',
 		model: Sys_marketModel
 	});
@@ -6159,14 +6299,15 @@ define("app/collections/Sys_markets_paged",["require","app","app/models"],functi
   module.setExports(Sys_markets_paged);
 });
 /*! app/collections/sys_occclasses
-* 	@requires: app,app/models/sys_occclass
+* 	@requires: app,app/collection,app/models/sys_occclass
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_occclasses
 */
-define("app/collections/sys_occclasses",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_occclasses",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_occclassModel = require("app/models/sys_occclass");
-
-	var Sys_occclasses = app.Collection.extend({
+	
+	Sys_occclasses = AppCollection.extend({
 		url: '/sys_occclasses/',
 		model: Sys_occclassModel
 	});
@@ -6203,14 +6344,15 @@ define("app/collections/Sys_occclasses_paged",["require","app","app/models"],fun
   module.setExports(Sys_occclasses_paged);
 });
 /*! app/collections/sys_orgtypes
-* 	@requires: app,app/models/sys_orgtype
+* 	@requires: app,app/collection,app/models/sys_orgtype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_orgtypes
 */
-define("app/collections/sys_orgtypes",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_orgtypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_orgtypeModel = require("app/models/sys_orgtype");
-
-	var Sys_orgtypes = app.Collection.extend({
+	
+	Sys_orgtypes = AppCollection.extend({
 		url: '/sys_orgtypes/',
 		model: Sys_orgtypeModel
 	});
@@ -6247,14 +6389,15 @@ define("app/collections/Sys_orgtypes_paged",["require","app","app/models"],funct
   module.setExports(Sys_orgtypes_paged);
 });
 /*! app/collections/sys_personstatuses
-* 	@requires: app,app/models/sys_personstatu
+* 	@requires: app,app/collection,app/models/sys_personstatu
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_personstatuses
 */
-define("app/collections/sys_personstatuses",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_personstatuses",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_personstatuModel = require("app/models/sys_personstatu");
-
-	var Sys_personstatuses = app.Collection.extend({
+	
+	Sys_personstatuses = AppCollection.extend({
 		url: '/sys_personstatuses/',
 		model: Sys_personstatuModel
 	});
@@ -6291,14 +6434,15 @@ define("app/collections/Sys_personstatuses_paged",["require","app","app/models"]
   module.setExports(Sys_personstatuses_paged);
 });
 /*! app/collections/sys_prinemps
-* 	@requires: app,app/models/sys_prinemp
+* 	@requires: app,app/collection,app/models/sys_prinemp
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_prinemps
 */
-define("app/collections/sys_prinemps",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_prinemps",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_prinempModel = require("app/models/sys_prinemp");
-
-	var Sys_prinemps = app.Collection.extend({
+	
+	Sys_prinemps = AppCollection.extend({
 		url: '/sys_prinemps/',
 		model: Sys_prinempModel
 	});
@@ -6335,14 +6479,15 @@ define("app/collections/Sys_prinemps_paged",["require","app","app/models"],funct
   module.setExports(Sys_prinemps_paged);
 });
 /*! app/collections/sys_profcs
-* 	@requires: app,app/models/sys_profc
+* 	@requires: app,app/collection,app/models/sys_profc
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_profcs
 */
-define("app/collections/sys_profcs",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_profcs",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_profcModel = require("app/models/sys_profc");
-
-	var Sys_profcs = app.Collection.extend({
+	
+	Sys_profcs = AppCollection.extend({
 		url: '/sys_profcs/',
 		model: Sys_profcModel
 	});
@@ -6379,14 +6524,15 @@ define("app/collections/Sys_profcs_paged",["require","app","app/models"],functio
   module.setExports(Sys_profcs_paged);
 });
 /*! app/collections/sys_profns
-* 	@requires: app,app/models/sys_profn
+* 	@requires: app,app/collection,app/models/sys_profn
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_profns
 */
-define("app/collections/sys_profns",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_profns",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_profnModel = require("app/models/sys_profn");
-
-	var Sys_profns = app.Collection.extend({
+	
+	Sys_profns = AppCollection.extend({
 		url: '/sys_profns/',
 		model: Sys_profnModel
 	});
@@ -6423,14 +6569,15 @@ define("app/collections/Sys_profns_paged",["require","app","app/models"],functio
   module.setExports(Sys_profns_paged);
 });
 /*! app/collections/sys_projecttypes
-* 	@requires: app,app/models/sys_projecttype
+* 	@requires: app,app/collection,app/models/sys_projecttype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_projecttypes
 */
-define("app/collections/sys_projecttypes",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_projecttypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_projecttypeModel = require("app/models/sys_projecttype");
-
-	var Sys_projecttypes = app.Collection.extend({
+	
+	Sys_projecttypes = AppCollection.extend({
 		url: '/sys_projecttypes/',
 		model: Sys_projecttypeModel
 	});
@@ -6467,14 +6614,15 @@ define("app/collections/Sys_projecttypes_paged",["require","app","app/models"],f
   module.setExports(Sys_projecttypes_paged);
 });
 /*! app/collections/sys_reports
-* 	@requires: app,app/models/sys_report
+* 	@requires: app,app/collection,app/models/sys_report
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_reports
 */
-define("app/collections/sys_reports",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_reports",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_reportModel = require("app/models/sys_report");
-
-	var Sys_reports = app.Collection.extend({
+	
+	Sys_reports = AppCollection.extend({
 		url: '/sys_reports/',
 		model: Sys_reportModel
 	});
@@ -6511,14 +6659,15 @@ define("app/collections/Sys_reports_paged",["require","app","app/models"],functi
   module.setExports(Sys_reports_paged);
 });
 /*! app/collections/sys_roles
-* 	@requires: app,app/models/sys_role
+* 	@requires: app,app/collection,app/models/sys_role
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_roles
 */
-define("app/collections/sys_roles",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_roles",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_roleModel = require("app/models/sys_role");
-
-	var Sys_roles = app.Collection.extend({
+	
+	Sys_roles = AppCollection.extend({
 		url: '/sys_roles/',
 		model: Sys_roleModel
 	});
@@ -6555,14 +6704,15 @@ define("app/collections/Sys_roles_paged",["require","app","app/models"],function
   module.setExports(Sys_roles_paged);
 });
 /*! app/collections/sys_sitelms
-* 	@requires: app,app/models/sys_sitelm
+* 	@requires: app,app/collection,app/models/sys_sitelm
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_sitelms
 */
-define("app/collections/sys_sitelms",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_sitelms",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_sitelmModel = require("app/models/sys_sitelm");
-
-	var Sys_sitelms = app.Collection.extend({
+	
+	Sys_sitelms = AppCollection.extend({
 		url: '/sys_sitelms/',
 		model: Sys_sitelmModel
 	});
@@ -6599,14 +6749,15 @@ define("app/collections/Sys_sitelms_paged",["require","app","app/models"],functi
   module.setExports(Sys_sitelms_paged);
 });
 /*! app/collections/sys_specialtylms
-* 	@requires: app,app/models/sys_specialtylm
+* 	@requires: app,app/collection,app/models/sys_specialtylm
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_specialtylms
 */
-define("app/collections/sys_specialtylms",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_specialtylms",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_specialtylmModel = require("app/models/sys_specialtylm");
-
-	var Sys_specialtylms = app.Collection.extend({
+	
+	Sys_specialtylms = AppCollection.extend({
 		url: '/sys_specialtylms/',
 		model: Sys_specialtylmModel
 	});
@@ -6643,14 +6794,15 @@ define("app/collections/Sys_specialtylms_paged",["require","app","app/models"],f
   module.setExports(Sys_specialtylms_paged);
 });
 /*! app/collections/sys_stat_log_types
-* 	@requires: app,app/models/sys_stat_log_type
+* 	@requires: app,app/collection,app/models/sys_stat_log_type
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_stat_log_types
 */
-define("app/collections/sys_stat_log_types",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_stat_log_types",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_stat_log_typeModel = require("app/models/sys_stat_log_type");
-
-	var Sys_stat_log_types = app.Collection.extend({
+	
+	Sys_stat_log_types = AppCollection.extend({
 		url: '/sys_stat_log_types/',
 		model: Sys_stat_log_typeModel
 	});
@@ -6687,14 +6839,15 @@ define("app/collections/Sys_stat_log_types_paged",["require","app","app/models"]
   module.setExports(Sys_stat_log_types_paged);
 });
 /*! app/collections/sys_stat_types
-* 	@requires: app,app/models/sys_stat_type
+* 	@requires: app,app/collection,app/models/sys_stat_type
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_stat_types
 */
-define("app/collections/sys_stat_types",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_stat_types",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_stat_typeModel = require("app/models/sys_stat_type");
-
-	var Sys_stat_types = app.Collection.extend({
+	
+	Sys_stat_types = AppCollection.extend({
 		url: '/sys_stat_types/',
 		model: Sys_stat_typeModel
 	});
@@ -6731,14 +6884,15 @@ define("app/collections/Sys_stat_types_paged",["require","app","app/models"],fun
   module.setExports(Sys_stat_types_paged);
 });
 /*! app/collections/sys_states
-* 	@requires: app,app/models/sys_state
+* 	@requires: app,app/collection,app/models/sys_state
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_states
 */
-define("app/collections/sys_states",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_states",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_stateModel = require("app/models/sys_state");
-
-	var Sys_states = app.Collection.extend({
+	
+	Sys_states = AppCollection.extend({
 		url: '/sys_states/',
 		model: Sys_stateModel
 	});
@@ -6775,14 +6929,15 @@ define("app/collections/Sys_states_paged",["require","app","app/models"],functio
   module.setExports(Sys_states_paged);
 });
 /*! app/collections/sys_statuses
-* 	@requires: app,app/models/sys_statu
+* 	@requires: app,app/collection,app/models/sys_statu
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_statuses
 */
-define("app/collections/sys_statuses",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_statuses",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_statuModel = require("app/models/sys_statu");
-
-	var Sys_statuses = app.Collection.extend({
+	
+	Sys_statuses = AppCollection.extend({
 		url: '/sys_statuses/',
 		model: Sys_statuModel
 	});
@@ -6819,14 +6974,15 @@ define("app/collections/Sys_statuses_paged",["require","app","app/models"],funct
   module.setExports(Sys_statuses_paged);
 });
 /*! app/collections/sys_stepstatuses
-* 	@requires: app,app/models/sys_stepstatu
+* 	@requires: app,app/collection,app/models/sys_stepstatu
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_stepstatuses
 */
-define("app/collections/sys_stepstatuses",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_stepstatuses",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_stepstatuModel = require("app/models/sys_stepstatu");
-
-	var Sys_stepstatuses = app.Collection.extend({
+	
+	Sys_stepstatuses = AppCollection.extend({
 		url: '/sys_stepstatuses/',
 		model: Sys_stepstatuModel
 	});
@@ -6863,14 +7019,15 @@ define("app/collections/Sys_stepstatuses_paged",["require","app","app/models"],f
   module.setExports(Sys_stepstatuses_paged);
 });
 /*! app/collections/sys_subscriptiontypes
-* 	@requires: app,app/models/sys_subscriptiontype
+* 	@requires: app,app/collection,app/models/sys_subscriptiontype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_subscriptiontypes
 */
-define("app/collections/sys_subscriptiontypes",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_subscriptiontypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_subscriptiontypeModel = require("app/models/sys_subscriptiontype");
-
-	var Sys_subscriptiontypes = app.Collection.extend({
+	
+	Sys_subscriptiontypes = AppCollection.extend({
 		url: '/sys_subscriptiontypes/',
 		model: Sys_subscriptiontypeModel
 	});
@@ -6907,14 +7064,15 @@ define("app/collections/Sys_subscriptiontypes_paged",["require","app","app/model
   module.setExports(Sys_subscriptiontypes_paged);
 });
 /*! app/collections/sys_supporters
-* 	@requires: app,app/models/sys_supporter
+* 	@requires: app,app/collection,app/models/sys_supporter
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_supporters
 */
-define("app/collections/sys_supporters",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_supporters",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_supporterModel = require("app/models/sys_supporter");
-
-	var Sys_supporters = app.Collection.extend({
+	
+	Sys_supporters = AppCollection.extend({
 		url: '/sys_supporters/',
 		model: Sys_supporterModel
 	});
@@ -6951,14 +7109,15 @@ define("app/collections/Sys_supporters_paged",["require","app","app/models"],fun
   module.setExports(Sys_supporters_paged);
 });
 /*! app/collections/sys_supporttypes
-* 	@requires: app,app/models/sys_supporttype
+* 	@requires: app,app/collection,app/models/sys_supporttype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_supporttypes
 */
-define("app/collections/sys_supporttypes",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_supporttypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_supporttypeModel = require("app/models/sys_supporttype");
-
-	var Sys_supporttypes = app.Collection.extend({
+	
+	Sys_supporttypes = AppCollection.extend({
 		url: '/sys_supporttypes/',
 		model: Sys_supporttypeModel
 	});
@@ -6995,14 +7154,15 @@ define("app/collections/Sys_supporttypes_paged",["require","app","app/models"],f
   module.setExports(Sys_supporttypes_paged);
 });
 /*! app/collections/sys_testtypes
-* 	@requires: app,app/models/sys_testtype
+* 	@requires: app,app/collection,app/models/sys_testtype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_testtypes
 */
-define("app/collections/sys_testtypes",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_testtypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_testtypeModel = require("app/models/sys_testtype");
-
-	var Sys_testtypes = app.Collection.extend({
+	
+	Sys_testtypes = AppCollection.extend({
 		url: '/sys_testtypes/',
 		model: Sys_testtypeModel
 	});
@@ -7039,14 +7199,15 @@ define("app/collections/Sys_testtypes_paged",["require","app","app/models"],func
   module.setExports(Sys_testtypes_paged);
 });
 /*! app/collections/twilio_logs
-* 	@requires: app,app/models/twilio_log
+* 	@requires: app,app/collection,app/models/twilio_log
 * 	@extends: app.Collection
 * 	@exports: app.collections.Twilio_logs
 */
-define("app/collections/twilio_logs",["require","app","app/models"],function(require,app) {
+define("app/collections/twilio_logs",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Twilio_logModel = require("app/models/twilio_log");
-
-	var Twilio_logs = app.Collection.extend({
+	
+	Twilio_logs = AppCollection.extend({
 		url: '/twilio_logs/',
 		model: Twilio_logModel
 	});
@@ -7083,14 +7244,15 @@ define("app/collections/Twilio_logs_paged",["require","app","app/models"],functi
   module.setExports(Twilio_logs_paged);
 });
 /*! app/collections/wheels
-* 	@requires: app,app/models/wheel
+* 	@requires: app,app/collection,app/models/wheel
 * 	@extends: app.Collection
 * 	@exports: app.collections.Wheels
 */
-define("app/collections/wheels",["require","app","app/models"],function(require,app) {
+define("app/collections/wheels",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var WheelModel = require("app/models/wheel");
-
-	var Wheels = app.Collection.extend({
+	
+	Wheels = AppCollection.extend({
 		url: '/wheels/',
 		model: WheelModel
 	});
@@ -7126,6 +7288,1950 @@ define("app/collections/Wheels_paged",["require","app","app/models"],function(re
 
   module.setExports(Wheels_paged);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

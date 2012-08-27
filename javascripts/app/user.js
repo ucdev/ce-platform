@@ -3,15 +3,18 @@ var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 define("app/user", ["require", "backbone", "jquery"], function(require, Backbone, $) {
-  var User;
+  var Mixable, User, auth;
+  Mixable = require("app/mixable");
+  auth = require("app/user/auth");
+  console.log(auth);
   User = (function(_super) {
 
     __extends(User, _super);
 
+    User.include(auth);
+
     function User(params) {
-      this.model = new self.Model(params);
-      this.trigger("loaded");
-      this.isLoggedIn();
+      this.model = new this.Model(params);
       return;
     }
 
@@ -19,14 +22,6 @@ define("app/user", ["require", "backbone", "jquery"], function(require, Backbone
 
     return User;
 
-  })(Backbone.View);
-  $(function() {
-    $(".loginLink").click(function(ev) {
-      user.login({});
-      ev.preventDefault();
-      return false;
-    });
-  });
-  return;
+  })(Mixable);
   return module.setExports(User);
 });

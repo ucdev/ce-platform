@@ -1,12 +1,13 @@
 /*! app/collections/assessments
-* 	@requires: app,app/models/assessment
+* 	@requires: app,app/collection,app/models/assessment
 * 	@extends: app.Collection
 * 	@exports: app.collections.Assessments
 */
-define("app/collections/assessments",["require","app","app/models"],function(require,app) {
+define("app/collections/assessments",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AssessmentModel = require("app/models/assessment");
-
-	var Assessments = app.Collection.extend({
+	
+	Assessments = AppCollection.extend({
 		url: '/assessments/',
 		model: AssessmentModel
 	});

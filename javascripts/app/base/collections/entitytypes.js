@@ -1,12 +1,13 @@
 /*! app/collections/entitytypes
-* 	@requires: app,app/models/entitytype
+* 	@requires: app,app/collection,app/models/entitytype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Entitytypes
 */
-define("app/collections/entitytypes",["require","app","app/models"],function(require,app) {
+define("app/collections/entitytypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var EntitytypeModel = require("app/models/entitytype");
-
-	var Entitytypes = app.Collection.extend({
+	
+	Entitytypes = AppCollection.extend({
 		url: '/entitytypes/',
 		model: EntitytypeModel
 	});

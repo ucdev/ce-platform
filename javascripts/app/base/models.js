@@ -1,10 +1,11 @@
 /*! app/models/account 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Account
 */
-define("app/models/account",["require","app"],function(require,app) {
-	var AccountModel = app.Model.extend({
+define("app/models/account",["require"],function(require) {
+	var AppModel = require("app/model");
+	var AccountModel = AppModel.extend({
 		url: function() {
 			base = "/api/accounts/"
             
@@ -19,12 +20,13 @@ define("app/models/account",["require","app"],function(require,app) {
 	module.setExports(AccountModel)
 });
 /*! app/models/action 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Action
 */
-define("app/models/action",["require","app"],function(require,app) {
-	var ActionModel = app.Model.extend({
+define("app/models/action",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ActionModel = AppModel.extend({
 		url: function() {
 			base = "/api/actions/"
             
@@ -39,12 +41,13 @@ define("app/models/action",["require","app"],function(require,app) {
 	module.setExports(ActionModel)
 });
 /*! app/models/activity 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity
 */
-define("app/models/activity",["require","app"],function(require,app) {
-	var ActivityModel = app.Model.extend({
+define("app/models/activity",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ActivityModel = AppModel.extend({
 		url: function() {
 			base = "/api/activities/"
             
@@ -59,12 +62,13 @@ define("app/models/activity",["require","app"],function(require,app) {
 	module.setExports(ActivityModel)
 });
 /*! app/models/activity_accme 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_accme
 */
-define("app/models/activity_accme",["require","app"],function(require,app) {
-	var Activity_accmeModel = app.Model.extend({
+define("app/models/activity_accme",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_accmeModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_accmes/"
             
@@ -79,12 +83,13 @@ define("app/models/activity_accme",["require","app"],function(require,app) {
 	module.setExports(Activity_accmeModel)
 });
 /*! app/models/activity_application 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_application
 */
-define("app/models/activity_application",["require","app"],function(require,app) {
-	var Activity_applicationModel = app.Model.extend({
+define("app/models/activity_application",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_applicationModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_applications/"
             
@@ -99,12 +104,13 @@ define("app/models/activity_application",["require","app"],function(require,app)
 	module.setExports(Activity_applicationModel)
 });
 /*! app/models/activity_categorylm 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_categorylm
 */
-define("app/models/activity_categorylm",["require","app"],function(require,app) {
-	var Activity_categorylmModel = app.Model.extend({
+define("app/models/activity_categorylm",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_categorylmModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_categorylms/"
             
@@ -119,12 +125,13 @@ define("app/models/activity_categorylm",["require","app"],function(require,app) 
 	module.setExports(Activity_categorylmModel)
 });
 /*! app/models/activity_cdc 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_cdc
 */
-define("app/models/activity_cdc",["require","app"],function(require,app) {
-	var Activity_cdcModel = app.Model.extend({
+define("app/models/activity_cdc",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_cdcModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_cdcs/"
             
@@ -139,12 +146,13 @@ define("app/models/activity_cdc",["require","app"],function(require,app) {
 	module.setExports(Activity_cdcModel)
 });
 /*! app/models/activity_comment 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_comment
 */
-define("app/models/activity_comment",["require","app"],function(require,app) {
-	var Activity_commentModel = app.Model.extend({
+define("app/models/activity_comment",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_commentModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_comments/"
             
@@ -159,12 +167,13 @@ define("app/models/activity_comment",["require","app"],function(require,app) {
 	module.setExports(Activity_commentModel)
 });
 /*! app/models/activity_committee 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_committee
 */
-define("app/models/activity_committee",["require","app"],function(require,app) {
-	var Activity_committeeModel = app.Model.extend({
+define("app/models/activity_committee",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_committeeModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_committees/"
             
@@ -179,12 +188,13 @@ define("app/models/activity_committee",["require","app"],function(require,app) {
 	module.setExports(Activity_committeeModel)
 });
 /*! app/models/activity_container 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_container
 */
-define("app/models/activity_container",["require","app"],function(require,app) {
-	var Activity_containerModel = app.Model.extend({
+define("app/models/activity_container",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_containerModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_containers/"
             
@@ -199,12 +209,13 @@ define("app/models/activity_container",["require","app"],function(require,app) {
 	module.setExports(Activity_containerModel)
 });
 /*! app/models/activity_credit 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_credit
 */
-define("app/models/activity_credit",["require","app"],function(require,app) {
-	var Activity_creditModel = app.Model.extend({
+define("app/models/activity_credit",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_creditModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_credits/"
             
@@ -219,12 +230,13 @@ define("app/models/activity_credit",["require","app"],function(require,app) {
 	module.setExports(Activity_creditModel)
 });
 /*! app/models/activity_faculty 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_faculty
 */
-define("app/models/activity_faculty",["require","app"],function(require,app) {
-	var Activity_facultyModel = app.Model.extend({
+define("app/models/activity_faculty",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_facultyModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_faculties/"
             
@@ -239,12 +251,13 @@ define("app/models/activity_faculty",["require","app"],function(require,app) {
 	module.setExports(Activity_facultyModel)
 });
 /*! app/models/activity_finbudget 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_finbudget
 */
-define("app/models/activity_finbudget",["require","app"],function(require,app) {
-	var Activity_finbudgetModel = app.Model.extend({
+define("app/models/activity_finbudget",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_finbudgetModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_finbudgets/"
             
@@ -259,12 +272,13 @@ define("app/models/activity_finbudget",["require","app"],function(require,app) {
 	module.setExports(Activity_finbudgetModel)
 });
 /*! app/models/activity_finfee 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_finfee
 */
-define("app/models/activity_finfee",["require","app"],function(require,app) {
-	var Activity_finfeeModel = app.Model.extend({
+define("app/models/activity_finfee",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_finfeeModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_finfees/"
             
@@ -279,12 +293,13 @@ define("app/models/activity_finfee",["require","app"],function(require,app) {
 	module.setExports(Activity_finfeeModel)
 });
 /*! app/models/activity_finledger 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_finledger
 */
-define("app/models/activity_finledger",["require","app"],function(require,app) {
-	var Activity_finledgerModel = app.Model.extend({
+define("app/models/activity_finledger",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_finledgerModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_finledgers/"
             
@@ -299,12 +314,13 @@ define("app/models/activity_finledger",["require","app"],function(require,app) {
 	module.setExports(Activity_finledgerModel)
 });
 /*! app/models/activity_finsupport 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_finsupport
 */
-define("app/models/activity_finsupport",["require","app"],function(require,app) {
-	var Activity_finsupportModel = app.Model.extend({
+define("app/models/activity_finsupport",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_finsupportModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_finsupports/"
             
@@ -319,12 +335,13 @@ define("app/models/activity_finsupport",["require","app"],function(require,app) 
 	module.setExports(Activity_finsupportModel)
 });
 /*! app/models/activity_note 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_note
 */
-define("app/models/activity_note",["require","app"],function(require,app) {
-	var Activity_noteModel = app.Model.extend({
+define("app/models/activity_note",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_noteModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_notes/"
             
@@ -339,12 +356,13 @@ define("app/models/activity_note",["require","app"],function(require,app) {
 	module.setExports(Activity_noteModel)
 });
 /*! app/models/activity_other 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_other
 */
-define("app/models/activity_other",["require","app"],function(require,app) {
-	var Activity_otherModel = app.Model.extend({
+define("app/models/activity_other",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_otherModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_others/"
             
@@ -359,12 +377,13 @@ define("app/models/activity_other",["require","app"],function(require,app) {
 	module.setExports(Activity_otherModel)
 });
 /*! app/models/activity_participant 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_participant
 */
-define("app/models/activity_participant",["require","app"],function(require,app) {
-	var Activity_participantModel = app.Model.extend({
+define("app/models/activity_participant",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_participantModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_participants/"
             
@@ -379,12 +398,13 @@ define("app/models/activity_participant",["require","app"],function(require,app)
 	module.setExports(Activity_participantModel)
 });
 /*! app/models/activity_profile 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_profile
 */
-define("app/models/activity_profile",["require","app"],function(require,app) {
-	var Activity_profileModel = app.Model.extend({
+define("app/models/activity_profile",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_profileModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_profiles/"
             
@@ -399,12 +419,13 @@ define("app/models/activity_profile",["require","app"],function(require,app) {
 	module.setExports(Activity_profileModel)
 });
 /*! app/models/activity_pubcomponent 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_pubcomponent
 */
-define("app/models/activity_pubcomponent",["require","app"],function(require,app) {
-	var Activity_pubcomponentModel = app.Model.extend({
+define("app/models/activity_pubcomponent",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_pubcomponentModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_pubcomponents/"
             
@@ -419,12 +440,13 @@ define("app/models/activity_pubcomponent",["require","app"],function(require,app
 	module.setExports(Activity_pubcomponentModel)
 });
 /*! app/models/activity_publish 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_publish
 */
-define("app/models/activity_publish",["require","app"],function(require,app) {
-	var Activity_publishModel = app.Model.extend({
+define("app/models/activity_publish",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_publishModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_publishes/"
             
@@ -439,12 +461,13 @@ define("app/models/activity_publish",["require","app"],function(require,app) {
 	module.setExports(Activity_publishModel)
 });
 /*! app/models/activity_pubstep 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_pubstep
 */
-define("app/models/activity_pubstep",["require","app"],function(require,app) {
-	var Activity_pubstepModel = app.Model.extend({
+define("app/models/activity_pubstep",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_pubstepModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_pubsteps/"
             
@@ -459,12 +482,13 @@ define("app/models/activity_pubstep",["require","app"],function(require,app) {
 	module.setExports(Activity_pubstepModel)
 });
 /*! app/models/activity_site 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_site
 */
-define("app/models/activity_site",["require","app"],function(require,app) {
-	var Activity_siteModel = app.Model.extend({
+define("app/models/activity_site",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_siteModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_sites/"
             
@@ -479,12 +503,13 @@ define("app/models/activity_site",["require","app"],function(require,app) {
 	module.setExports(Activity_siteModel)
 });
 /*! app/models/activity_specialtylm 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_specialtylm
 */
-define("app/models/activity_specialtylm",["require","app"],function(require,app) {
-	var Activity_specialtylmModel = app.Model.extend({
+define("app/models/activity_specialtylm",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_specialtylmModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_specialtylms/"
             
@@ -499,12 +524,13 @@ define("app/models/activity_specialtylm",["require","app"],function(require,app)
 	module.setExports(Activity_specialtylmModel)
 });
 /*! app/models/activity_step 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_step
 */
-define("app/models/activity_step",["require","app"],function(require,app) {
-	var Activity_stepModel = app.Model.extend({
+define("app/models/activity_step",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_stepModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_steps/"
             
@@ -519,12 +545,13 @@ define("app/models/activity_step",["require","app"],function(require,app) {
 	module.setExports(Activity_stepModel)
 });
 /*! app/models/activity_tag_relate 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_tag_relate
 */
-define("app/models/activity_tag_relate",["require","app"],function(require,app) {
-	var Activity_tag_relateModel = app.Model.extend({
+define("app/models/activity_tag_relate",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_tag_relateModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_tag_relates/"
             
@@ -539,12 +566,13 @@ define("app/models/activity_tag_relate",["require","app"],function(require,app) 
 	module.setExports(Activity_tag_relateModel)
 });
 /*! app/models/activity_tag 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_tag
 */
-define("app/models/activity_tag",["require","app"],function(require,app) {
-	var Activity_tagModel = app.Model.extend({
+define("app/models/activity_tag",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_tagModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_tags/"
             
@@ -559,12 +587,13 @@ define("app/models/activity_tag",["require","app"],function(require,app) {
 	module.setExports(Activity_tagModel)
 });
 /*! app/models/activity_user 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_user
 */
-define("app/models/activity_user",["require","app"],function(require,app) {
-	var Activity_userModel = app.Model.extend({
+define("app/models/activity_user",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_userModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_users/"
             
@@ -579,12 +608,13 @@ define("app/models/activity_user",["require","app"],function(require,app) {
 	module.setExports(Activity_userModel)
 });
 /*! app/models/activity_vote 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_vote
 */
-define("app/models/activity_vote",["require","app"],function(require,app) {
-	var Activity_voteModel = app.Model.extend({
+define("app/models/activity_vote",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_voteModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_votes/"
             
@@ -599,12 +629,13 @@ define("app/models/activity_vote",["require","app"],function(require,app) {
 	module.setExports(Activity_voteModel)
 });
 /*! app/models/agenda 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Agenda
 */
-define("app/models/agenda",["require","app"],function(require,app) {
-	var AgendaModel = app.Model.extend({
+define("app/models/agenda",["require"],function(require) {
+	var AppModel = require("app/model");
+	var AgendaModel = AppModel.extend({
 		url: function() {
 			base = "/api/agendas/"
             
@@ -619,12 +650,13 @@ define("app/models/agenda",["require","app"],function(require,app) {
 	module.setExports(AgendaModel)
 });
 /*! app/models/assessanswer 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Assessanswer
 */
-define("app/models/assessanswer",["require","app"],function(require,app) {
-	var AssessanswerModel = app.Model.extend({
+define("app/models/assessanswer",["require"],function(require) {
+	var AppModel = require("app/model");
+	var AssessanswerModel = AppModel.extend({
 		url: function() {
 			base = "/api/assessanswers/"
             
@@ -639,12 +671,13 @@ define("app/models/assessanswer",["require","app"],function(require,app) {
 	module.setExports(AssessanswerModel)
 });
 /*! app/models/assessment 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Assessment
 */
-define("app/models/assessment",["require","app"],function(require,app) {
-	var AssessmentModel = app.Model.extend({
+define("app/models/assessment",["require"],function(require) {
+	var AppModel = require("app/model");
+	var AssessmentModel = AppModel.extend({
 		url: function() {
 			base = "/api/assessments/"
             
@@ -659,12 +692,13 @@ define("app/models/assessment",["require","app"],function(require,app) {
 	module.setExports(AssessmentModel)
 });
 /*! app/models/assessquestion 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Assessquestion
 */
-define("app/models/assessquestion",["require","app"],function(require,app) {
-	var AssessquestionModel = app.Model.extend({
+define("app/models/assessquestion",["require"],function(require) {
+	var AppModel = require("app/model");
+	var AssessquestionModel = AppModel.extend({
 		url: function() {
 			base = "/api/assessquestions/"
             
@@ -679,12 +713,13 @@ define("app/models/assessquestion",["require","app"],function(require,app) {
 	module.setExports(AssessquestionModel)
 });
 /*! app/models/assessresult 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Assessresult
 */
-define("app/models/assessresult",["require","app"],function(require,app) {
-	var AssessresultModel = app.Model.extend({
+define("app/models/assessresult",["require"],function(require) {
+	var AppModel = require("app/model");
+	var AssessresultModel = AppModel.extend({
 		url: function() {
 			base = "/api/assessresults/"
             
@@ -699,12 +734,13 @@ define("app/models/assessresult",["require","app"],function(require,app) {
 	module.setExports(AssessresultModel)
 });
 /*! app/models/assesssection 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Assesssection
 */
-define("app/models/assesssection",["require","app"],function(require,app) {
-	var AssesssectionModel = app.Model.extend({
+define("app/models/assesssection",["require"],function(require) {
+	var AppModel = require("app/model");
+	var AssesssectionModel = AppModel.extend({
 		url: function() {
 			base = "/api/assesssections/"
             
@@ -719,12 +755,13 @@ define("app/models/assesssection",["require","app"],function(require,app) {
 	module.setExports(AssesssectionModel)
 });
 /*! app/models/assesstmpl 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Assesstmpl
 */
-define("app/models/assesstmpl",["require","app"],function(require,app) {
-	var AssesstmplModel = app.Model.extend({
+define("app/models/assesstmpl",["require"],function(require) {
+	var AppModel = require("app/model");
+	var AssesstmplModel = AppModel.extend({
 		url: function() {
 			base = "/api/assesstmpls/"
             
@@ -739,12 +776,13 @@ define("app/models/assesstmpl",["require","app"],function(require,app) {
 	module.setExports(AssesstmplModel)
 });
 /*! app/models/attendee 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Attendee
 */
-define("app/models/attendee",["require","app"],function(require,app) {
-	var AttendeeModel = app.Model.extend({
+define("app/models/attendee",["require"],function(require) {
+	var AppModel = require("app/model");
+	var AttendeeModel = AppModel.extend({
 		url: function() {
 			base = "/api/attendees/"
             
@@ -759,12 +797,13 @@ define("app/models/attendee",["require","app"],function(require,app) {
 	module.setExports(AttendeeModel)
 });
 /*! app/models/attendee_address 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Attendee_address
 */
-define("app/models/attendee_address",["require","app"],function(require,app) {
-	var Attendee_addressModel = app.Model.extend({
+define("app/models/attendee_address",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Attendee_addressModel = AppModel.extend({
 		url: function() {
 			base = "/api/attendee_addresses/"
             
@@ -779,12 +818,13 @@ define("app/models/attendee_address",["require","app"],function(require,app) {
 	module.setExports(Attendee_addressModel)
 });
 /*! app/models/attendee_component 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Attendee_component
 */
-define("app/models/attendee_component",["require","app"],function(require,app) {
-	var Attendee_componentModel = app.Model.extend({
+define("app/models/attendee_component",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Attendee_componentModel = AppModel.extend({
 		url: function() {
 			base = "/api/attendee_components/"
             
@@ -799,12 +839,13 @@ define("app/models/attendee_component",["require","app"],function(require,app) {
 	module.setExports(Attendee_componentModel)
 });
 /*! app/models/attendee_phone 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Attendee_phone
 */
-define("app/models/attendee_phone",["require","app"],function(require,app) {
-	var Attendee_phoneModel = app.Model.extend({
+define("app/models/attendee_phone",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Attendee_phoneModel = AppModel.extend({
 		url: function() {
 			base = "/api/attendee_phones/"
             
@@ -819,12 +860,13 @@ define("app/models/attendee_phone",["require","app"],function(require,app) {
 	module.setExports(Attendee_phoneModel)
 });
 /*! app/models/attendee_step 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Attendee_step
 */
-define("app/models/attendee_step",["require","app"],function(require,app) {
-	var Attendee_stepModel = app.Model.extend({
+define("app/models/attendee_step",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Attendee_stepModel = AppModel.extend({
 		url: function() {
 			base = "/api/attendee_steps/"
             
@@ -839,12 +881,13 @@ define("app/models/attendee_step",["require","app"],function(require,app) {
 	module.setExports(Attendee_stepModel)
 });
 /*! app/models/attendeecdc 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Attendeecdc
 */
-define("app/models/attendeecdc",["require","app"],function(require,app) {
-	var AttendeecdcModel = app.Model.extend({
+define("app/models/attendeecdc",["require"],function(require) {
+	var AppModel = require("app/model");
+	var AttendeecdcModel = AppModel.extend({
 		url: function() {
 			base = "/api/attendeecdcs/"
             
@@ -859,12 +902,13 @@ define("app/models/attendeecdc",["require","app"],function(require,app) {
 	module.setExports(AttendeecdcModel)
 });
 /*! app/models/attendeecredit 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Attendeecredit
 */
-define("app/models/attendeecredit",["require","app"],function(require,app) {
-	var AttendeecreditModel = app.Model.extend({
+define("app/models/attendeecredit",["require"],function(require) {
+	var AppModel = require("app/model");
+	var AttendeecreditModel = AppModel.extend({
 		url: function() {
 			base = "/api/attendeecredits/"
             
@@ -879,12 +923,13 @@ define("app/models/attendeecredit",["require","app"],function(require,app) {
 	module.setExports(AttendeecreditModel)
 });
 /*! app/models/authority 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Authority
 */
-define("app/models/authority",["require","app"],function(require,app) {
-	var AuthorityModel = app.Model.extend({
+define("app/models/authority",["require"],function(require) {
+	var AppModel = require("app/model");
+	var AuthorityModel = AppModel.extend({
 		url: function() {
 			base = "/api/authorities/"
             
@@ -899,12 +944,13 @@ define("app/models/authority",["require","app"],function(require,app) {
 	module.setExports(AuthorityModel)
 });
 /*! app/models/authoritypage 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Authoritypage
 */
-define("app/models/authoritypage",["require","app"],function(require,app) {
-	var AuthoritypageModel = app.Model.extend({
+define("app/models/authoritypage",["require"],function(require) {
+	var AppModel = require("app/model");
+	var AuthoritypageModel = AppModel.extend({
 		url: function() {
 			base = "/api/authoritypages/"
             
@@ -919,12 +965,13 @@ define("app/models/authoritypage",["require","app"],function(require,app) {
 	module.setExports(AuthoritypageModel)
 });
 /*! app/models/category 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Category
 */
-define("app/models/category",["require","app"],function(require,app) {
-	var CategoryModel = app.Model.extend({
+define("app/models/category",["require"],function(require) {
+	var AppModel = require("app/model");
+	var CategoryModel = AppModel.extend({
 		url: function() {
 			base = "/api/categories/"
             
@@ -939,12 +986,13 @@ define("app/models/category",["require","app"],function(require,app) {
 	module.setExports(CategoryModel)
 });
 /*! app/models/cert 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Cert
 */
-define("app/models/cert",["require","app"],function(require,app) {
-	var CertModel = app.Model.extend({
+define("app/models/cert",["require"],function(require) {
+	var AppModel = require("app/model");
+	var CertModel = AppModel.extend({
 		url: function() {
 			base = "/api/certs/"
             
@@ -959,12 +1007,13 @@ define("app/models/cert",["require","app"],function(require,app) {
 	module.setExports(CertModel)
 });
 /*! app/models/cert_credit 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Cert_credit
 */
-define("app/models/cert_credit",["require","app"],function(require,app) {
-	var Cert_creditModel = app.Model.extend({
+define("app/models/cert_credit",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Cert_creditModel = AppModel.extend({
 		url: function() {
 			base = "/api/cert_credits/"
             
@@ -979,12 +1028,13 @@ define("app/models/cert_credit",["require","app"],function(require,app) {
 	module.setExports(Cert_creditModel)
 });
 /*! app/models/certificate 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Certificate
 */
-define("app/models/certificate",["require","app"],function(require,app) {
-	var CertificateModel = app.Model.extend({
+define("app/models/certificate",["require"],function(require) {
+	var AppModel = require("app/model");
+	var CertificateModel = AppModel.extend({
 		url: function() {
 			base = "/api/certificates/"
             
@@ -999,12 +1049,13 @@ define("app/models/certificate",["require","app"],function(require,app) {
 	module.setExports(CertificateModel)
 });
 /*! app/models/comment 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Comment
 */
-define("app/models/comment",["require","app"],function(require,app) {
-	var CommentModel = app.Model.extend({
+define("app/models/comment",["require"],function(require) {
+	var AppModel = require("app/model");
+	var CommentModel = AppModel.extend({
 		url: function() {
 			base = "/api/comments/"
             
@@ -1019,12 +1070,13 @@ define("app/models/comment",["require","app"],function(require,app) {
 	module.setExports(CommentModel)
 });
 /*! app/models/credit_cert 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Credit_cert
 */
-define("app/models/credit_cert",["require","app"],function(require,app) {
-	var Credit_certModel = app.Model.extend({
+define("app/models/credit_cert",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Credit_certModel = AppModel.extend({
 		url: function() {
 			base = "/api/credit_certs/"
             
@@ -1039,12 +1091,13 @@ define("app/models/credit_cert",["require","app"],function(require,app) {
 	module.setExports(Credit_certModel)
 });
 /*! app/models/credit_request 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Credit_request
 */
-define("app/models/credit_request",["require","app"],function(require,app) {
-	var Credit_requestModel = app.Model.extend({
+define("app/models/credit_request",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Credit_requestModel = AppModel.extend({
 		url: function() {
 			base = "/api/credit_requests/"
             
@@ -1059,12 +1112,13 @@ define("app/models/credit_request",["require","app"],function(require,app) {
 	module.setExports(Credit_requestModel)
 });
 /*! app/models/credit_request_email 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Credit_request_email
 */
-define("app/models/credit_request_email",["require","app"],function(require,app) {
-	var Credit_request_emailModel = app.Model.extend({
+define("app/models/credit_request_email",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Credit_request_emailModel = AppModel.extend({
 		url: function() {
 			base = "/api/credit_request_emails/"
             
@@ -1079,12 +1133,13 @@ define("app/models/credit_request_email",["require","app"],function(require,app)
 	module.setExports(Credit_request_emailModel)
 });
 /*! app/models/credit_request_import 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Credit_request_import
 */
-define("app/models/credit_request_import",["require","app"],function(require,app) {
-	var Credit_request_importModel = app.Model.extend({
+define("app/models/credit_request_import",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Credit_request_importModel = AppModel.extend({
 		url: function() {
 			base = "/api/credit_request_imports/"
             
@@ -1099,12 +1154,13 @@ define("app/models/credit_request_import",["require","app"],function(require,app
 	module.setExports(Credit_request_importModel)
 });
 /*! app/models/degree 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Degree
 */
-define("app/models/degree",["require","app"],function(require,app) {
-	var DegreeModel = app.Model.extend({
+define("app/models/degree",["require"],function(require) {
+	var AppModel = require("app/model");
+	var DegreeModel = AppModel.extend({
 		url: function() {
 			base = "/api/degrees/"
             
@@ -1119,12 +1175,13 @@ define("app/models/degree",["require","app"],function(require,app) {
 	module.setExports(DegreeModel)
 });
 /*! app/models/degree_credit 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Degree_credit
 */
-define("app/models/degree_credit",["require","app"],function(require,app) {
-	var Degree_creditModel = app.Model.extend({
+define("app/models/degree_credit",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Degree_creditModel = AppModel.extend({
 		url: function() {
 			base = "/api/degree_credits/"
             
@@ -1139,12 +1196,13 @@ define("app/models/degree_credit",["require","app"],function(require,app) {
 	module.setExports(Degree_creditModel)
 });
 /*! app/models/entity 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Entity
 */
-define("app/models/entity",["require","app"],function(require,app) {
-	var EntityModel = app.Model.extend({
+define("app/models/entity",["require"],function(require) {
+	var AppModel = require("app/model");
+	var EntityModel = AppModel.extend({
 		url: function() {
 			base = "/api/entities/"
             
@@ -1159,12 +1217,13 @@ define("app/models/entity",["require","app"],function(require,app) {
 	module.setExports(EntityModel)
 });
 /*! app/models/entity_activity 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Entity_activity
 */
-define("app/models/entity_activity",["require","app"],function(require,app) {
-	var Entity_activityModel = app.Model.extend({
+define("app/models/entity_activity",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Entity_activityModel = AppModel.extend({
 		url: function() {
 			base = "/api/entity_activities/"
             
@@ -1179,12 +1238,13 @@ define("app/models/entity_activity",["require","app"],function(require,app) {
 	module.setExports(Entity_activityModel)
 });
 /*! app/models/entity_credit 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Entity_credit
 */
-define("app/models/entity_credit",["require","app"],function(require,app) {
-	var Entity_creditModel = app.Model.extend({
+define("app/models/entity_credit",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Entity_creditModel = AppModel.extend({
 		url: function() {
 			base = "/api/entity_credits/"
             
@@ -1199,12 +1259,13 @@ define("app/models/entity_credit",["require","app"],function(require,app) {
 	module.setExports(Entity_creditModel)
 });
 /*! app/models/entity_entityrole 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Entity_entityrole
 */
-define("app/models/entity_entityrole",["require","app"],function(require,app) {
-	var Entity_entityroleModel = app.Model.extend({
+define("app/models/entity_entityrole",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Entity_entityroleModel = AppModel.extend({
 		url: function() {
 			base = "/api/entity_entityroles/"
             
@@ -1219,12 +1280,13 @@ define("app/models/entity_entityrole",["require","app"],function(require,app) {
 	module.setExports(Entity_entityroleModel)
 });
 /*! app/models/entity_entitytype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Entity_entitytype
 */
-define("app/models/entity_entitytype",["require","app"],function(require,app) {
-	var Entity_entitytypeModel = app.Model.extend({
+define("app/models/entity_entitytype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Entity_entitytypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/entity_entitytypes/"
             
@@ -1239,12 +1301,13 @@ define("app/models/entity_entitytype",["require","app"],function(require,app) {
 	module.setExports(Entity_entitytypeModel)
 });
 /*! app/models/entity_person 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Entity_person
 */
-define("app/models/entity_person",["require","app"],function(require,app) {
-	var Entity_personModel = app.Model.extend({
+define("app/models/entity_person",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Entity_personModel = AppModel.extend({
 		url: function() {
 			base = "/api/entity_persons/"
             
@@ -1259,12 +1322,13 @@ define("app/models/entity_person",["require","app"],function(require,app) {
 	module.setExports(Entity_personModel)
 });
 /*! app/models/entity_relate 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Entity_relate
 */
-define("app/models/entity_relate",["require","app"],function(require,app) {
-	var Entity_relateModel = app.Model.extend({
+define("app/models/entity_relate",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Entity_relateModel = AppModel.extend({
 		url: function() {
 			base = "/api/entity_relates/"
             
@@ -1279,12 +1343,13 @@ define("app/models/entity_relate",["require","app"],function(require,app) {
 	module.setExports(Entity_relateModel)
 });
 /*! app/models/entityrole 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Entityrole
 */
-define("app/models/entityrole",["require","app"],function(require,app) {
-	var EntityroleModel = app.Model.extend({
+define("app/models/entityrole",["require"],function(require) {
+	var AppModel = require("app/model");
+	var EntityroleModel = AppModel.extend({
 		url: function() {
 			base = "/api/entityroles/"
             
@@ -1299,12 +1364,13 @@ define("app/models/entityrole",["require","app"],function(require,app) {
 	module.setExports(EntityroleModel)
 });
 /*! app/models/entitytype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Entitytype
 */
-define("app/models/entitytype",["require","app"],function(require,app) {
-	var EntitytypeModel = app.Model.extend({
+define("app/models/entitytype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var EntitytypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/entitytypes/"
             
@@ -1319,12 +1385,13 @@ define("app/models/entitytype",["require","app"],function(require,app) {
 	module.setExports(EntitytypeModel)
 });
 /*! app/models/file 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.File
 */
-define("app/models/file",["require","app"],function(require,app) {
-	var FileModel = app.Model.extend({
+define("app/models/file",["require"],function(require) {
+	var AppModel = require("app/model");
+	var FileModel = AppModel.extend({
 		url: function() {
 			base = "/api/files/"
             
@@ -1339,12 +1406,13 @@ define("app/models/file",["require","app"],function(require,app) {
 	module.setExports(FileModel)
 });
 /*! app/models/filegroup 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Filegroup
 */
-define("app/models/filegroup",["require","app"],function(require,app) {
-	var FilegroupModel = app.Model.extend({
+define("app/models/filegroup",["require"],function(require) {
+	var AppModel = require("app/model");
+	var FilegroupModel = AppModel.extend({
 		url: function() {
 			base = "/api/filegroups/"
             
@@ -1359,12 +1427,13 @@ define("app/models/filegroup",["require","app"],function(require,app) {
 	module.setExports(FilegroupModel)
 });
 /*! app/models/geoname 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Geoname
 */
-define("app/models/geoname",["require","app"],function(require,app) {
-	var GeonameModel = app.Model.extend({
+define("app/models/geoname",["require"],function(require) {
+	var AppModel = require("app/model");
+	var GeonameModel = AppModel.extend({
 		url: function() {
 			base = "/api/geonames/"
             
@@ -1379,12 +1448,13 @@ define("app/models/geoname",["require","app"],function(require,app) {
 	module.setExports(GeonameModel)
 });
 /*! app/models/group 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Group
 */
-define("app/models/group",["require","app"],function(require,app) {
-	var GroupModel = app.Model.extend({
+define("app/models/group",["require"],function(require) {
+	var AppModel = require("app/model");
+	var GroupModel = AppModel.extend({
 		url: function() {
 			base = "/api/groups/"
             
@@ -1399,12 +1469,13 @@ define("app/models/group",["require","app"],function(require,app) {
 	module.setExports(GroupModel)
 });
 /*! app/models/grouptype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Grouptype
 */
-define("app/models/grouptype",["require","app"],function(require,app) {
-	var GrouptypeModel = app.Model.extend({
+define("app/models/grouptype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var GrouptypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/grouptypes/"
             
@@ -1419,12 +1490,13 @@ define("app/models/grouptype",["require","app"],function(require,app) {
 	module.setExports(GrouptypeModel)
 });
 /*! app/models/history 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.History
 */
-define("app/models/history",["require","app"],function(require,app) {
-	var HistoryModel = app.Model.extend({
+define("app/models/history",["require"],function(require) {
+	var AppModel = require("app/model");
+	var HistoryModel = AppModel.extend({
 		url: function() {
 			base = "/api/histories/"
             
@@ -1439,12 +1511,13 @@ define("app/models/history",["require","app"],function(require,app) {
 	module.setExports(HistoryModel)
 });
 /*! app/models/hub 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Hub
 */
-define("app/models/hub",["require","app"],function(require,app) {
-	var HubModel = app.Model.extend({
+define("app/models/hub",["require"],function(require) {
+	var AppModel = require("app/model");
+	var HubModel = AppModel.extend({
 		url: function() {
 			base = "/api/hubs/"
             
@@ -1459,12 +1532,13 @@ define("app/models/hub",["require","app"],function(require,app) {
 	module.setExports(HubModel)
 });
 /*! app/models/image 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Image
 */
-define("app/models/image",["require","app"],function(require,app) {
-	var ImageModel = app.Model.extend({
+define("app/models/image",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ImageModel = AppModel.extend({
 		url: function() {
 			base = "/api/images/"
             
@@ -1479,12 +1553,13 @@ define("app/models/image",["require","app"],function(require,app) {
 	module.setExports(ImageModel)
 });
 /*! app/models/imagetype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Imagetype
 */
-define("app/models/imagetype",["require","app"],function(require,app) {
-	var ImagetypeModel = app.Model.extend({
+define("app/models/imagetype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ImagetypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/imagetypes/"
             
@@ -1499,12 +1574,13 @@ define("app/models/imagetype",["require","app"],function(require,app) {
 	module.setExports(ImagetypeModel)
 });
 /*! app/models/location 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Location
 */
-define("app/models/location",["require","app"],function(require,app) {
-	var LocationModel = app.Model.extend({
+define("app/models/location",["require"],function(require) {
+	var AppModel = require("app/model");
+	var LocationModel = AppModel.extend({
 		url: function() {
 			base = "/api/locations/"
             
@@ -1519,12 +1595,13 @@ define("app/models/location",["require","app"],function(require,app) {
 	module.setExports(LocationModel)
 });
 /*! app/models/locationtype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Locationtype
 */
-define("app/models/locationtype",["require","app"],function(require,app) {
-	var LocationtypeModel = app.Model.extend({
+define("app/models/locationtype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var LocationtypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/locationtypes/"
             
@@ -1539,12 +1616,13 @@ define("app/models/locationtype",["require","app"],function(require,app) {
 	module.setExports(LocationtypeModel)
 });
 /*! app/models/model 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Model
 */
-define("app/models/model",["require","app"],function(require,app) {
-	var ModelModel = app.Model.extend({
+define("app/models/model",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ModelModel = AppModel.extend({
 		url: function() {
 			base = "/api/models/"
             
@@ -1559,12 +1637,13 @@ define("app/models/model",["require","app"],function(require,app) {
 	module.setExports(ModelModel)
 });
 /*! app/models/object 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Object
 */
-define("app/models/object",["require","app"],function(require,app) {
-	var ObjectModel = app.Model.extend({
+define("app/models/object",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ObjectModel = AppModel.extend({
 		url: function() {
 			base = "/api/objects/"
             
@@ -1579,12 +1658,13 @@ define("app/models/object",["require","app"],function(require,app) {
 	module.setExports(ObjectModel)
 });
 /*! app/models/objectdatum 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Objectdatum
 */
-define("app/models/objectdatum",["require","app"],function(require,app) {
-	var ObjectdatumModel = app.Model.extend({
+define("app/models/objectdatum",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ObjectdatumModel = AppModel.extend({
 		url: function() {
 			base = "/api/objectdatas/"
             
@@ -1599,12 +1679,13 @@ define("app/models/objectdatum",["require","app"],function(require,app) {
 	module.setExports(ObjectdatumModel)
 });
 /*! app/models/objectfield 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Objectfield
 */
-define("app/models/objectfield",["require","app"],function(require,app) {
-	var ObjectfieldModel = app.Model.extend({
+define("app/models/objectfield",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ObjectfieldModel = AppModel.extend({
 		url: function() {
 			base = "/api/objectfields/"
             
@@ -1619,12 +1700,13 @@ define("app/models/objectfield",["require","app"],function(require,app) {
 	module.setExports(ObjectfieldModel)
 });
 /*! app/models/objectfieldtype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Objectfieldtype
 */
-define("app/models/objectfieldtype",["require","app"],function(require,app) {
-	var ObjectfieldtypeModel = app.Model.extend({
+define("app/models/objectfieldtype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ObjectfieldtypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/objectfieldtypes/"
             
@@ -1639,12 +1721,13 @@ define("app/models/objectfieldtype",["require","app"],function(require,app) {
 	module.setExports(ObjectfieldtypeModel)
 });
 /*! app/models/objectform 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Objectform
 */
-define("app/models/objectform",["require","app"],function(require,app) {
-	var ObjectformModel = app.Model.extend({
+define("app/models/objectform",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ObjectformModel = AppModel.extend({
 		url: function() {
 			base = "/api/objectforms/"
             
@@ -1659,12 +1742,13 @@ define("app/models/objectform",["require","app"],function(require,app) {
 	module.setExports(ObjectformModel)
 });
 /*! app/models/objecttype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Objecttype
 */
-define("app/models/objecttype",["require","app"],function(require,app) {
-	var ObjecttypeModel = app.Model.extend({
+define("app/models/objecttype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ObjecttypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/objecttypes/"
             
@@ -1679,12 +1763,13 @@ define("app/models/objecttype",["require","app"],function(require,app) {
 	module.setExports(ObjecttypeModel)
 });
 /*! app/models/occupation 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Occupation
 */
-define("app/models/occupation",["require","app"],function(require,app) {
-	var OccupationModel = app.Model.extend({
+define("app/models/occupation",["require"],function(require) {
+	var AppModel = require("app/model");
+	var OccupationModel = AppModel.extend({
 		url: function() {
 			base = "/api/occupations/"
             
@@ -1699,12 +1784,13 @@ define("app/models/occupation",["require","app"],function(require,app) {
 	module.setExports(OccupationModel)
 });
 /*! app/models/page 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Page
 */
-define("app/models/page",["require","app"],function(require,app) {
-	var PageModel = app.Model.extend({
+define("app/models/page",["require"],function(require) {
+	var AppModel = require("app/model");
+	var PageModel = AppModel.extend({
 		url: function() {
 			base = "/api/pages/"
             
@@ -1719,12 +1805,13 @@ define("app/models/page",["require","app"],function(require,app) {
 	module.setExports(PageModel)
 });
 /*! app/models/page_element 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Page_element
 */
-define("app/models/page_element",["require","app"],function(require,app) {
-	var Page_elementModel = app.Model.extend({
+define("app/models/page_element",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Page_elementModel = AppModel.extend({
 		url: function() {
 			base = "/api/page_elements/"
             
@@ -1739,12 +1826,13 @@ define("app/models/page_element",["require","app"],function(require,app) {
 	module.setExports(Page_elementModel)
 });
 /*! app/models/page_section 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Page_section
 */
-define("app/models/page_section",["require","app"],function(require,app) {
-	var Page_sectionModel = app.Model.extend({
+define("app/models/page_section",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Page_sectionModel = AppModel.extend({
 		url: function() {
 			base = "/api/page_sections/"
             
@@ -1759,12 +1847,13 @@ define("app/models/page_section",["require","app"],function(require,app) {
 	module.setExports(Page_sectionModel)
 });
 /*! app/models/pagelayout 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Pagelayout
 */
-define("app/models/pagelayout",["require","app"],function(require,app) {
-	var PagelayoutModel = app.Model.extend({
+define("app/models/pagelayout",["require"],function(require) {
+	var AppModel = require("app/model");
+	var PagelayoutModel = AppModel.extend({
 		url: function() {
 			base = "/api/pagelayouts/"
             
@@ -1779,12 +1868,13 @@ define("app/models/pagelayout",["require","app"],function(require,app) {
 	module.setExports(PagelayoutModel)
 });
 /*! app/models/pagelayoutmenu 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Pagelayoutmenu
 */
-define("app/models/pagelayoutmenu",["require","app"],function(require,app) {
-	var PagelayoutmenuModel = app.Model.extend({
+define("app/models/pagelayoutmenu",["require"],function(require) {
+	var AppModel = require("app/model");
+	var PagelayoutmenuModel = AppModel.extend({
 		url: function() {
 			base = "/api/pagelayoutmenus/"
             
@@ -1799,12 +1889,13 @@ define("app/models/pagelayoutmenu",["require","app"],function(require,app) {
 	module.setExports(PagelayoutmenuModel)
 });
 /*! app/models/pagelayoutmenu_page 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Pagelayoutmenu_page
 */
-define("app/models/pagelayoutmenu_page",["require","app"],function(require,app) {
-	var Pagelayoutmenu_pageModel = app.Model.extend({
+define("app/models/pagelayoutmenu_page",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Pagelayoutmenu_pageModel = AppModel.extend({
 		url: function() {
 			base = "/api/pagelayoutmenu_pages/"
             
@@ -1819,12 +1910,13 @@ define("app/models/pagelayoutmenu_page",["require","app"],function(require,app) 
 	module.setExports(Pagelayoutmenu_pageModel)
 });
 /*! app/models/person 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Person
 */
-define("app/models/person",["require","app"],function(require,app) {
-	var PersonModel = app.Model.extend({
+define("app/models/person",["require"],function(require) {
+	var AppModel = require("app/model");
+	var PersonModel = AppModel.extend({
 		url: function() {
 			base = "/api/people/"
             
@@ -1839,12 +1931,13 @@ define("app/models/person",["require","app"],function(require,app) {
 	module.setExports(PersonModel)
 });
 /*! app/models/person_address 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Person_address
 */
-define("app/models/person_address",["require","app"],function(require,app) {
-	var Person_addressModel = app.Model.extend({
+define("app/models/person_address",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Person_addressModel = AppModel.extend({
 		url: function() {
 			base = "/api/person_addresses/"
             
@@ -1859,12 +1952,13 @@ define("app/models/person_address",["require","app"],function(require,app) {
 	module.setExports(Person_addressModel)
 });
 /*! app/models/person_client 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Person_client
 */
-define("app/models/person_client",["require","app"],function(require,app) {
-	var Person_clientModel = app.Model.extend({
+define("app/models/person_client",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Person_clientModel = AppModel.extend({
 		url: function() {
 			base = "/api/person_clients/"
             
@@ -1879,12 +1973,13 @@ define("app/models/person_client",["require","app"],function(require,app) {
 	module.setExports(Person_clientModel)
 });
 /*! app/models/person_degree 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Person_degree
 */
-define("app/models/person_degree",["require","app"],function(require,app) {
-	var Person_degreeModel = app.Model.extend({
+define("app/models/person_degree",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Person_degreeModel = AppModel.extend({
 		url: function() {
 			base = "/api/person_degrees/"
             
@@ -1899,12 +1994,13 @@ define("app/models/person_degree",["require","app"],function(require,app) {
 	module.setExports(Person_degreeModel)
 });
 /*! app/models/person_email 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Person_email
 */
-define("app/models/person_email",["require","app"],function(require,app) {
-	var Person_emailModel = app.Model.extend({
+define("app/models/person_email",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Person_emailModel = AppModel.extend({
 		url: function() {
 			base = "/api/person_emails/"
             
@@ -1919,12 +2015,13 @@ define("app/models/person_email",["require","app"],function(require,app) {
 	module.setExports(Person_emailModel)
 });
 /*! app/models/person_file 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Person_file
 */
-define("app/models/person_file",["require","app"],function(require,app) {
-	var Person_fileModel = app.Model.extend({
+define("app/models/person_file",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Person_fileModel = AppModel.extend({
 		url: function() {
 			base = "/api/person_files/"
             
@@ -1939,12 +2036,13 @@ define("app/models/person_file",["require","app"],function(require,app) {
 	module.setExports(Person_fileModel)
 });
 /*! app/models/person_interest_except 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Person_interest_except
 */
-define("app/models/person_interest_except",["require","app"],function(require,app) {
-	var Person_interest_exceptModel = app.Model.extend({
+define("app/models/person_interest_except",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Person_interest_exceptModel = AppModel.extend({
 		url: function() {
 			base = "/api/person_interest_excepts/"
             
@@ -1959,12 +2057,13 @@ define("app/models/person_interest_except",["require","app"],function(require,ap
 	module.setExports(Person_interest_exceptModel)
 });
 /*! app/models/person_note 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Person_note
 */
-define("app/models/person_note",["require","app"],function(require,app) {
-	var Person_noteModel = app.Model.extend({
+define("app/models/person_note",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Person_noteModel = AppModel.extend({
 		url: function() {
 			base = "/api/person_notes/"
             
@@ -1979,12 +2078,13 @@ define("app/models/person_note",["require","app"],function(require,app) {
 	module.setExports(Person_noteModel)
 });
 /*! app/models/person_pref 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Person_pref
 */
-define("app/models/person_pref",["require","app"],function(require,app) {
-	var Person_prefModel = app.Model.extend({
+define("app/models/person_pref",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Person_prefModel = AppModel.extend({
 		url: function() {
 			base = "/api/person_prefs/"
             
@@ -1999,12 +2099,13 @@ define("app/models/person_pref",["require","app"],function(require,app) {
 	module.setExports(Person_prefModel)
 });
 /*! app/models/person_specialtylm 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Person_specialtylm
 */
-define("app/models/person_specialtylm",["require","app"],function(require,app) {
-	var Person_specialtylmModel = app.Model.extend({
+define("app/models/person_specialtylm",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Person_specialtylmModel = AppModel.extend({
 		url: function() {
 			base = "/api/person_specialtylms/"
             
@@ -2019,12 +2120,13 @@ define("app/models/person_specialtylm",["require","app"],function(require,app) {
 	module.setExports(Person_specialtylmModel)
 });
 /*! app/models/person_user 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Person_user
 */
-define("app/models/person_user",["require","app"],function(require,app) {
-	var Person_userModel = app.Model.extend({
+define("app/models/person_user",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Person_userModel = AppModel.extend({
 		url: function() {
 			base = "/api/person_users/"
             
@@ -2039,12 +2141,13 @@ define("app/models/person_user",["require","app"],function(require,app) {
 	module.setExports(Person_userModel)
 });
 /*! app/models/process 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Process
 */
-define("app/models/process",["require","app"],function(require,app) {
-	var ProcessModel = app.Model.extend({
+define("app/models/process",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ProcessModel = AppModel.extend({
 		url: function() {
 			base = "/api/processes/"
             
@@ -2059,12 +2162,13 @@ define("app/models/process",["require","app"],function(require,app) {
 	module.setExports(ProcessModel)
 });
 /*! app/models/process_person 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Process_person
 */
-define("app/models/process_person",["require","app"],function(require,app) {
-	var Process_personModel = app.Model.extend({
+define("app/models/process_person",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Process_personModel = AppModel.extend({
 		url: function() {
 			base = "/api/process_persons/"
             
@@ -2079,12 +2183,13 @@ define("app/models/process_person",["require","app"],function(require,app) {
 	module.setExports(Process_personModel)
 });
 /*! app/models/processmanager 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Processmanager
 */
-define("app/models/processmanager",["require","app"],function(require,app) {
-	var ProcessmanagerModel = app.Model.extend({
+define("app/models/processmanager",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ProcessmanagerModel = AppModel.extend({
 		url: function() {
 			base = "/api/processmanagers/"
             
@@ -2099,12 +2204,13 @@ define("app/models/processmanager",["require","app"],function(require,app) {
 	module.setExports(ProcessmanagerModel)
 });
 /*! app/models/processstep 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Processstep
 */
-define("app/models/processstep",["require","app"],function(require,app) {
-	var ProcessstepModel = app.Model.extend({
+define("app/models/processstep",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ProcessstepModel = AppModel.extend({
 		url: function() {
 			base = "/api/processsteps/"
             
@@ -2119,12 +2225,13 @@ define("app/models/processstep",["require","app"],function(require,app) {
 	module.setExports(ProcessstepModel)
 });
 /*! app/models/processstep_activity 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Processstep_activity
 */
-define("app/models/processstep_activity",["require","app"],function(require,app) {
-	var Processstep_activityModel = app.Model.extend({
+define("app/models/processstep_activity",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Processstep_activityModel = AppModel.extend({
 		url: function() {
 			base = "/api/processstep_activities/"
             
@@ -2139,12 +2246,13 @@ define("app/models/processstep_activity",["require","app"],function(require,app)
 	module.setExports(Processstep_activityModel)
 });
 /*! app/models/professionarea 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Professionarea
 */
-define("app/models/professionarea",["require","app"],function(require,app) {
-	var ProfessionareaModel = app.Model.extend({
+define("app/models/professionarea",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ProfessionareaModel = AppModel.extend({
 		url: function() {
 			base = "/api/professionareas/"
             
@@ -2159,12 +2267,13 @@ define("app/models/professionarea",["require","app"],function(require,app) {
 	module.setExports(ProfessionareaModel)
 });
 /*! app/models/project 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Project
 */
-define("app/models/project",["require","app"],function(require,app) {
-	var ProjectModel = app.Model.extend({
+define("app/models/project",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ProjectModel = AppModel.extend({
 		url: function() {
 			base = "/api/projects/"
             
@@ -2179,12 +2288,13 @@ define("app/models/project",["require","app"],function(require,app) {
 	module.setExports(ProjectModel)
 });
 /*! app/models/relicensure 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Relicensure
 */
-define("app/models/relicensure",["require","app"],function(require,app) {
-	var RelicensureModel = app.Model.extend({
+define("app/models/relicensure",["require"],function(require) {
+	var AppModel = require("app/model");
+	var RelicensureModel = AppModel.extend({
 		url: function() {
 			base = "/api/relicensures/"
             
@@ -2199,12 +2309,13 @@ define("app/models/relicensure",["require","app"],function(require,app) {
 	module.setExports(RelicensureModel)
 });
 /*! app/models/stat_entry 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Stat_entry
 */
-define("app/models/stat_entry",["require","app"],function(require,app) {
-	var Stat_entryModel = app.Model.extend({
+define("app/models/stat_entry",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Stat_entryModel = AppModel.extend({
 		url: function() {
 			base = "/api/stat_entries/"
             
@@ -2219,12 +2330,13 @@ define("app/models/stat_entry",["require","app"],function(require,app) {
 	module.setExports(Stat_entryModel)
 });
 /*! app/models/stat_log 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Stat_log
 */
-define("app/models/stat_log",["require","app"],function(require,app) {
-	var Stat_logModel = app.Model.extend({
+define("app/models/stat_log",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Stat_logModel = AppModel.extend({
 		url: function() {
 			base = "/api/stat_logs/"
             
@@ -2239,12 +2351,13 @@ define("app/models/stat_log",["require","app"],function(require,app) {
 	module.setExports(Stat_logModel)
 });
 /*! app/models/subscription 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Subscription
 */
-define("app/models/subscription",["require","app"],function(require,app) {
-	var SubscriptionModel = app.Model.extend({
+define("app/models/subscription",["require"],function(require) {
+	var AppModel = require("app/model");
+	var SubscriptionModel = AppModel.extend({
 		url: function() {
 			base = "/api/subscriptions/"
             
@@ -2259,12 +2372,13 @@ define("app/models/subscription",["require","app"],function(require,app) {
 	module.setExports(SubscriptionModel)
 });
 /*! app/models/sys_activityrole 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_activityrole
 */
-define("app/models/sys_activityrole",["require","app"],function(require,app) {
-	var Sys_activityroleModel = app.Model.extend({
+define("app/models/sys_activityrole",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_activityroleModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_activityroles/"
             
@@ -2279,12 +2393,13 @@ define("app/models/sys_activityrole",["require","app"],function(require,app) {
 	module.setExports(Sys_activityroleModel)
 });
 /*! app/models/sys_activitysteptype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_activitysteptype
 */
-define("app/models/sys_activitysteptype",["require","app"],function(require,app) {
-	var Sys_activitysteptypeModel = app.Model.extend({
+define("app/models/sys_activitysteptype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_activitysteptypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_activitysteptypes/"
             
@@ -2299,12 +2414,13 @@ define("app/models/sys_activitysteptype",["require","app"],function(require,app)
 	module.setExports(Sys_activitysteptypeModel)
 });
 /*! app/models/sys_activitytype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_activitytype
 */
-define("app/models/sys_activitytype",["require","app"],function(require,app) {
-	var Sys_activitytypeModel = app.Model.extend({
+define("app/models/sys_activitytype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_activitytypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_activitytypes/"
             
@@ -2319,12 +2435,13 @@ define("app/models/sys_activitytype",["require","app"],function(require,app) {
 	module.setExports(Sys_activitytypeModel)
 });
 /*! app/models/sys_addresstype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_addresstype
 */
-define("app/models/sys_addresstype",["require","app"],function(require,app) {
-	var Sys_addresstypeModel = app.Model.extend({
+define("app/models/sys_addresstype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_addresstypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_addresstypes/"
             
@@ -2339,12 +2456,13 @@ define("app/models/sys_addresstype",["require","app"],function(require,app) {
 	module.setExports(Sys_addresstypeModel)
 });
 /*! app/models/sys_apiclient 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_apiclient
 */
-define("app/models/sys_apiclient",["require","app"],function(require,app) {
-	var Sys_apiclientModel = app.Model.extend({
+define("app/models/sys_apiclient",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_apiclientModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_apiclients/"
             
@@ -2359,12 +2477,13 @@ define("app/models/sys_apiclient",["require","app"],function(require,app) {
 	module.setExports(Sys_apiclientModel)
 });
 /*! app/models/sys_assessquestiontype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_assessquestiontype
 */
-define("app/models/sys_assessquestiontype",["require","app"],function(require,app) {
-	var Sys_assessquestiontypeModel = app.Model.extend({
+define("app/models/sys_assessquestiontype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_assessquestiontypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_assessquestiontypes/"
             
@@ -2379,12 +2498,13 @@ define("app/models/sys_assessquestiontype",["require","app"],function(require,ap
 	module.setExports(Sys_assessquestiontypeModel)
 });
 /*! app/models/sys_assessresultstatu 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_assessresultstatu
 */
-define("app/models/sys_assessresultstatu",["require","app"],function(require,app) {
-	var Sys_assessresultstatuModel = app.Model.extend({
+define("app/models/sys_assessresultstatu",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_assessresultstatuModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_assessresultstatuses/"
             
@@ -2399,12 +2519,13 @@ define("app/models/sys_assessresultstatu",["require","app"],function(require,app
 	module.setExports(Sys_assessresultstatuModel)
 });
 /*! app/models/sys_assesstype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_assesstype
 */
-define("app/models/sys_assesstype",["require","app"],function(require,app) {
-	var Sys_assesstypeModel = app.Model.extend({
+define("app/models/sys_assesstype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_assesstypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_assesstypes/"
             
@@ -2419,12 +2540,13 @@ define("app/models/sys_assesstype",["require","app"],function(require,app) {
 	module.setExports(Sys_assesstypeModel)
 });
 /*! app/models/sys_attendeestatu 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_attendeestatu
 */
-define("app/models/sys_attendeestatu",["require","app"],function(require,app) {
-	var Sys_attendeestatuModel = app.Model.extend({
+define("app/models/sys_attendeestatu",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_attendeestatuModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_attendeestatuses/"
             
@@ -2439,12 +2561,13 @@ define("app/models/sys_attendeestatu",["require","app"],function(require,app) {
 	module.setExports(Sys_attendeestatuModel)
 });
 /*! app/models/sys_categorylm 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_categorylm
 */
-define("app/models/sys_categorylm",["require","app"],function(require,app) {
-	var Sys_categorylmModel = app.Model.extend({
+define("app/models/sys_categorylm",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_categorylmModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_categorylms/"
             
@@ -2459,12 +2582,13 @@ define("app/models/sys_categorylm",["require","app"],function(require,app) {
 	module.setExports(Sys_categorylmModel)
 });
 /*! app/models/sys_cbafund 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_cbafund
 */
-define("app/models/sys_cbafund",["require","app"],function(require,app) {
-	var Sys_cbafundModel = app.Model.extend({
+define("app/models/sys_cbafund",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_cbafundModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_cbafunds/"
             
@@ -2479,12 +2603,13 @@ define("app/models/sys_cbafund",["require","app"],function(require,app) {
 	module.setExports(Sys_cbafundModel)
 });
 /*! app/models/sys_cbofund 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_cbofund
 */
-define("app/models/sys_cbofund",["require","app"],function(require,app) {
-	var Sys_cbofundModel = app.Model.extend({
+define("app/models/sys_cbofund",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_cbofundModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_cbofunds/"
             
@@ -2499,12 +2624,13 @@ define("app/models/sys_cbofund",["require","app"],function(require,app) {
 	module.setExports(Sys_cbofundModel)
 });
 /*! app/models/sys_component 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_component
 */
-define("app/models/sys_component",["require","app"],function(require,app) {
-	var Sys_componentModel = app.Model.extend({
+define("app/models/sys_component",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_componentModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_components/"
             
@@ -2519,12 +2645,13 @@ define("app/models/sys_component",["require","app"],function(require,app) {
 	module.setExports(Sys_componentModel)
 });
 /*! app/models/sys_country 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_country
 */
-define("app/models/sys_country",["require","app"],function(require,app) {
-	var Sys_countryModel = app.Model.extend({
+define("app/models/sys_country",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_countryModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_countries/"
             
@@ -2539,12 +2666,13 @@ define("app/models/sys_country",["require","app"],function(require,app) {
 	module.setExports(Sys_countryModel)
 });
 /*! app/models/sys_credit 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_credit
 */
-define("app/models/sys_credit",["require","app"],function(require,app) {
-	var Sys_creditModel = app.Model.extend({
+define("app/models/sys_credit",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_creditModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_credits/"
             
@@ -2559,12 +2687,13 @@ define("app/models/sys_credit",["require","app"],function(require,app) {
 	module.setExports(Sys_creditModel)
 });
 /*! app/models/sys_degree 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_degree
 */
-define("app/models/sys_degree",["require","app"],function(require,app) {
-	var Sys_degreeModel = app.Model.extend({
+define("app/models/sys_degree",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_degreeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_degrees/"
             
@@ -2579,12 +2708,13 @@ define("app/models/sys_degree",["require","app"],function(require,app) {
 	module.setExports(Sys_degreeModel)
 });
 /*! app/models/sys_emailstyle 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_emailstyle
 */
-define("app/models/sys_emailstyle",["require","app"],function(require,app) {
-	var Sys_emailstyleModel = app.Model.extend({
+define("app/models/sys_emailstyle",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_emailstyleModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_emailstyles/"
             
@@ -2599,12 +2729,13 @@ define("app/models/sys_emailstyle",["require","app"],function(require,app) {
 	module.setExports(Sys_emailstyleModel)
 });
 /*! app/models/sys_entrytype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_entrytype
 */
-define("app/models/sys_entrytype",["require","app"],function(require,app) {
-	var Sys_entrytypeModel = app.Model.extend({
+define("app/models/sys_entrytype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_entrytypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_entrytypes/"
             
@@ -2619,12 +2750,13 @@ define("app/models/sys_entrytype",["require","app"],function(require,app) {
 	module.setExports(Sys_entrytypeModel)
 });
 /*! app/models/sys_ethnicity 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_ethnicity
 */
-define("app/models/sys_ethnicity",["require","app"],function(require,app) {
-	var Sys_ethnicityModel = app.Model.extend({
+define("app/models/sys_ethnicity",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_ethnicityModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_ethnicities/"
             
@@ -2639,12 +2771,13 @@ define("app/models/sys_ethnicity",["require","app"],function(require,app) {
 	module.setExports(Sys_ethnicityModel)
 });
 /*! app/models/sys_filetype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_filetype
 */
-define("app/models/sys_filetype",["require","app"],function(require,app) {
-	var Sys_filetypeModel = app.Model.extend({
+define("app/models/sys_filetype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_filetypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_filetypes/"
             
@@ -2659,12 +2792,13 @@ define("app/models/sys_filetype",["require","app"],function(require,app) {
 	module.setExports(Sys_filetypeModel)
 });
 /*! app/models/sys_funrc 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_funrc
 */
-define("app/models/sys_funrc",["require","app"],function(require,app) {
-	var Sys_funrcModel = app.Model.extend({
+define("app/models/sys_funrc",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_funrcModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_funrcs/"
             
@@ -2679,12 +2813,13 @@ define("app/models/sys_funrc",["require","app"],function(require,app) {
 	module.setExports(Sys_funrcModel)
 });
 /*! app/models/sys_funrn 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_funrn
 */
-define("app/models/sys_funrn",["require","app"],function(require,app) {
-	var Sys_funrnModel = app.Model.extend({
+define("app/models/sys_funrn",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_funrnModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_funrns/"
             
@@ -2699,12 +2834,13 @@ define("app/models/sys_funrn",["require","app"],function(require,app) {
 	module.setExports(Sys_funrnModel)
 });
 /*! app/models/sys_grouping 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_grouping
 */
-define("app/models/sys_grouping",["require","app"],function(require,app) {
-	var Sys_groupingModel = app.Model.extend({
+define("app/models/sys_grouping",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_groupingModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_groupings/"
             
@@ -2719,12 +2855,13 @@ define("app/models/sys_grouping",["require","app"],function(require,app) {
 	module.setExports(Sys_groupingModel)
 });
 /*! app/models/sys_grouptype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_grouptype
 */
-define("app/models/sys_grouptype",["require","app"],function(require,app) {
-	var Sys_grouptypeModel = app.Model.extend({
+define("app/models/sys_grouptype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_grouptypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_grouptypes/"
             
@@ -2739,12 +2876,13 @@ define("app/models/sys_grouptype",["require","app"],function(require,app) {
 	module.setExports(Sys_grouptypeModel)
 });
 /*! app/models/sys_historystyle 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_historystyle
 */
-define("app/models/sys_historystyle",["require","app"],function(require,app) {
-	var Sys_historystyleModel = app.Model.extend({
+define("app/models/sys_historystyle",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_historystyleModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_historystyles/"
             
@@ -2759,12 +2897,13 @@ define("app/models/sys_historystyle",["require","app"],function(require,app) {
 	module.setExports(Sys_historystyleModel)
 });
 /*! app/models/sys_historytype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_historytype
 */
-define("app/models/sys_historytype",["require","app"],function(require,app) {
-	var Sys_historytypeModel = app.Model.extend({
+define("app/models/sys_historytype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_historytypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_historytypes/"
             
@@ -2779,12 +2918,13 @@ define("app/models/sys_historytype",["require","app"],function(require,app) {
 	module.setExports(Sys_historytypeModel)
 });
 /*! app/models/sys_market 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_market
 */
-define("app/models/sys_market",["require","app"],function(require,app) {
-	var Sys_marketModel = app.Model.extend({
+define("app/models/sys_market",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_marketModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_markets/"
             
@@ -2799,12 +2939,13 @@ define("app/models/sys_market",["require","app"],function(require,app) {
 	module.setExports(Sys_marketModel)
 });
 /*! app/models/sys_occclass 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_occclass
 */
-define("app/models/sys_occclass",["require","app"],function(require,app) {
-	var Sys_occclassModel = app.Model.extend({
+define("app/models/sys_occclass",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_occclassModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_occclasses/"
             
@@ -2819,12 +2960,13 @@ define("app/models/sys_occclass",["require","app"],function(require,app) {
 	module.setExports(Sys_occclassModel)
 });
 /*! app/models/sys_orgtype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_orgtype
 */
-define("app/models/sys_orgtype",["require","app"],function(require,app) {
-	var Sys_orgtypeModel = app.Model.extend({
+define("app/models/sys_orgtype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_orgtypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_orgtypes/"
             
@@ -2839,12 +2981,13 @@ define("app/models/sys_orgtype",["require","app"],function(require,app) {
 	module.setExports(Sys_orgtypeModel)
 });
 /*! app/models/sys_personstatu 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_personstatu
 */
-define("app/models/sys_personstatu",["require","app"],function(require,app) {
-	var Sys_personstatuModel = app.Model.extend({
+define("app/models/sys_personstatu",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_personstatuModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_personstatuses/"
             
@@ -2859,12 +3002,13 @@ define("app/models/sys_personstatu",["require","app"],function(require,app) {
 	module.setExports(Sys_personstatuModel)
 });
 /*! app/models/sys_prinemp 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_prinemp
 */
-define("app/models/sys_prinemp",["require","app"],function(require,app) {
-	var Sys_prinempModel = app.Model.extend({
+define("app/models/sys_prinemp",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_prinempModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_prinemps/"
             
@@ -2879,12 +3023,13 @@ define("app/models/sys_prinemp",["require","app"],function(require,app) {
 	module.setExports(Sys_prinempModel)
 });
 /*! app/models/sys_profc 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_profc
 */
-define("app/models/sys_profc",["require","app"],function(require,app) {
-	var Sys_profcModel = app.Model.extend({
+define("app/models/sys_profc",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_profcModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_profcs/"
             
@@ -2899,12 +3044,13 @@ define("app/models/sys_profc",["require","app"],function(require,app) {
 	module.setExports(Sys_profcModel)
 });
 /*! app/models/sys_profn 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_profn
 */
-define("app/models/sys_profn",["require","app"],function(require,app) {
-	var Sys_profnModel = app.Model.extend({
+define("app/models/sys_profn",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_profnModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_profns/"
             
@@ -2919,12 +3065,13 @@ define("app/models/sys_profn",["require","app"],function(require,app) {
 	module.setExports(Sys_profnModel)
 });
 /*! app/models/sys_projecttype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_projecttype
 */
-define("app/models/sys_projecttype",["require","app"],function(require,app) {
-	var Sys_projecttypeModel = app.Model.extend({
+define("app/models/sys_projecttype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_projecttypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_projecttypes/"
             
@@ -2939,12 +3086,13 @@ define("app/models/sys_projecttype",["require","app"],function(require,app) {
 	module.setExports(Sys_projecttypeModel)
 });
 /*! app/models/sys_report 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_report
 */
-define("app/models/sys_report",["require","app"],function(require,app) {
-	var Sys_reportModel = app.Model.extend({
+define("app/models/sys_report",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_reportModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_reports/"
             
@@ -2959,12 +3107,13 @@ define("app/models/sys_report",["require","app"],function(require,app) {
 	module.setExports(Sys_reportModel)
 });
 /*! app/models/sys_role 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_role
 */
-define("app/models/sys_role",["require","app"],function(require,app) {
-	var Sys_roleModel = app.Model.extend({
+define("app/models/sys_role",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_roleModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_roles/"
             
@@ -2979,12 +3128,13 @@ define("app/models/sys_role",["require","app"],function(require,app) {
 	module.setExports(Sys_roleModel)
 });
 /*! app/models/sys_sitelm 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_sitelm
 */
-define("app/models/sys_sitelm",["require","app"],function(require,app) {
-	var Sys_sitelmModel = app.Model.extend({
+define("app/models/sys_sitelm",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_sitelmModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_sitelms/"
             
@@ -2999,12 +3149,13 @@ define("app/models/sys_sitelm",["require","app"],function(require,app) {
 	module.setExports(Sys_sitelmModel)
 });
 /*! app/models/sys_specialtylm 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_specialtylm
 */
-define("app/models/sys_specialtylm",["require","app"],function(require,app) {
-	var Sys_specialtylmModel = app.Model.extend({
+define("app/models/sys_specialtylm",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_specialtylmModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_specialtylms/"
             
@@ -3019,12 +3170,13 @@ define("app/models/sys_specialtylm",["require","app"],function(require,app) {
 	module.setExports(Sys_specialtylmModel)
 });
 /*! app/models/sys_stat_log_type 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_stat_log_type
 */
-define("app/models/sys_stat_log_type",["require","app"],function(require,app) {
-	var Sys_stat_log_typeModel = app.Model.extend({
+define("app/models/sys_stat_log_type",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_stat_log_typeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_stat_log_types/"
             
@@ -3039,12 +3191,13 @@ define("app/models/sys_stat_log_type",["require","app"],function(require,app) {
 	module.setExports(Sys_stat_log_typeModel)
 });
 /*! app/models/sys_stat_type 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_stat_type
 */
-define("app/models/sys_stat_type",["require","app"],function(require,app) {
-	var Sys_stat_typeModel = app.Model.extend({
+define("app/models/sys_stat_type",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_stat_typeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_stat_types/"
             
@@ -3059,12 +3212,13 @@ define("app/models/sys_stat_type",["require","app"],function(require,app) {
 	module.setExports(Sys_stat_typeModel)
 });
 /*! app/models/sys_state 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_state
 */
-define("app/models/sys_state",["require","app"],function(require,app) {
-	var Sys_stateModel = app.Model.extend({
+define("app/models/sys_state",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_stateModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_states/"
             
@@ -3079,12 +3233,13 @@ define("app/models/sys_state",["require","app"],function(require,app) {
 	module.setExports(Sys_stateModel)
 });
 /*! app/models/sys_statu 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_statu
 */
-define("app/models/sys_statu",["require","app"],function(require,app) {
-	var Sys_statuModel = app.Model.extend({
+define("app/models/sys_statu",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_statuModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_statuses/"
             
@@ -3099,12 +3254,13 @@ define("app/models/sys_statu",["require","app"],function(require,app) {
 	module.setExports(Sys_statuModel)
 });
 /*! app/models/sys_stepstatu 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_stepstatu
 */
-define("app/models/sys_stepstatu",["require","app"],function(require,app) {
-	var Sys_stepstatuModel = app.Model.extend({
+define("app/models/sys_stepstatu",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_stepstatuModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_stepstatuses/"
             
@@ -3119,12 +3275,13 @@ define("app/models/sys_stepstatu",["require","app"],function(require,app) {
 	module.setExports(Sys_stepstatuModel)
 });
 /*! app/models/sys_subscriptiontype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_subscriptiontype
 */
-define("app/models/sys_subscriptiontype",["require","app"],function(require,app) {
-	var Sys_subscriptiontypeModel = app.Model.extend({
+define("app/models/sys_subscriptiontype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_subscriptiontypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_subscriptiontypes/"
             
@@ -3139,12 +3296,13 @@ define("app/models/sys_subscriptiontype",["require","app"],function(require,app)
 	module.setExports(Sys_subscriptiontypeModel)
 });
 /*! app/models/sys_supporter 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_supporter
 */
-define("app/models/sys_supporter",["require","app"],function(require,app) {
-	var Sys_supporterModel = app.Model.extend({
+define("app/models/sys_supporter",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_supporterModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_supporters/"
             
@@ -3159,12 +3317,13 @@ define("app/models/sys_supporter",["require","app"],function(require,app) {
 	module.setExports(Sys_supporterModel)
 });
 /*! app/models/sys_supporttype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_supporttype
 */
-define("app/models/sys_supporttype",["require","app"],function(require,app) {
-	var Sys_supporttypeModel = app.Model.extend({
+define("app/models/sys_supporttype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_supporttypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_supporttypes/"
             
@@ -3179,12 +3338,13 @@ define("app/models/sys_supporttype",["require","app"],function(require,app) {
 	module.setExports(Sys_supporttypeModel)
 });
 /*! app/models/sys_testtype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_testtype
 */
-define("app/models/sys_testtype",["require","app"],function(require,app) {
-	var Sys_testtypeModel = app.Model.extend({
+define("app/models/sys_testtype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_testtypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_testtypes/"
             
@@ -3199,12 +3359,13 @@ define("app/models/sys_testtype",["require","app"],function(require,app) {
 	module.setExports(Sys_testtypeModel)
 });
 /*! app/models/twilio_log 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Twilio_log
 */
-define("app/models/twilio_log",["require","app"],function(require,app) {
-	var Twilio_logModel = app.Model.extend({
+define("app/models/twilio_log",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Twilio_logModel = AppModel.extend({
 		url: function() {
 			base = "/api/twilio_logs/"
             
@@ -3219,12 +3380,13 @@ define("app/models/twilio_log",["require","app"],function(require,app) {
 	module.setExports(Twilio_logModel)
 });
 /*! app/models/wheel 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Wheel
 */
-define("app/models/wheel",["require","app"],function(require,app) {
-	var WheelModel = app.Model.extend({
+define("app/models/wheel",["require"],function(require) {
+	var AppModel = require("app/model");
+	var WheelModel = AppModel.extend({
 		url: function() {
 			base = "/api/wheels/"
             
@@ -3238,6 +3400,978 @@ define("app/models/wheel",["require","app"],function(require,app) {
 
 	module.setExports(WheelModel)
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

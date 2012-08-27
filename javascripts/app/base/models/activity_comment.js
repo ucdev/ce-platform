@@ -1,10 +1,11 @@
 /*! app/models/activity_comment 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_comment
 */
-define("app/models/activity_comment",["require","app"],function(require,app) {
-	var Activity_commentModel = app.Model.extend({
+define("app/models/activity_comment",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_commentModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_comments/"
             

@@ -1,12 +1,13 @@
 /*! app/collections/geonames
-* 	@requires: app,app/models/geoname
+* 	@requires: app,app/collection,app/models/geoname
 * 	@extends: app.Collection
 * 	@exports: app.collections.Geonames
 */
-define("app/collections/geonames",["require","app","app/models"],function(require,app) {
+define("app/collections/geonames",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var GeonameModel = require("app/models/geoname");
-
-	var Geonames = app.Collection.extend({
+	
+	Geonames = AppCollection.extend({
 		url: '/geonames/',
 		model: GeonameModel
 	});

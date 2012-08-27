@@ -1,10 +1,11 @@
 /*! app/models/activity_publish 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_publish
 */
-define("app/models/activity_publish",["require","app"],function(require,app) {
-	var Activity_publishModel = app.Model.extend({
+define("app/models/activity_publish",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_publishModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_publishes/"
             

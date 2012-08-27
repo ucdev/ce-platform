@@ -1,12 +1,13 @@
 /*! app/collections/activity_pubsteps
-* 	@requires: app,app/models/activity_pubstep
+* 	@requires: app,app/collection,app/models/activity_pubstep
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_pubsteps
 */
-define("app/collections/activity_pubsteps",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_pubsteps",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_pubstepModel = require("app/models/activity_pubstep");
-
-	var Activity_pubsteps = app.Collection.extend({
+	
+	Activity_pubsteps = AppCollection.extend({
 		url: '/activity_pubsteps/',
 		model: Activity_pubstepModel
 	});

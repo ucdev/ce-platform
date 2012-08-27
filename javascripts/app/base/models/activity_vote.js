@@ -1,10 +1,11 @@
 /*! app/models/activity_vote 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_vote
 */
-define("app/models/activity_vote",["require","app"],function(require,app) {
-	var Activity_voteModel = app.Model.extend({
+define("app/models/activity_vote",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_voteModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_votes/"
             

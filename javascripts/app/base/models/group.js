@@ -1,10 +1,11 @@
 /*! app/models/group 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Group
 */
-define("app/models/group",["require","app"],function(require,app) {
-	var GroupModel = app.Model.extend({
+define("app/models/group",["require"],function(require) {
+	var AppModel = require("app/model");
+	var GroupModel = AppModel.extend({
 		url: function() {
 			base = "/api/groups/"
             

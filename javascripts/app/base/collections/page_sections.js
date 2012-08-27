@@ -1,12 +1,13 @@
 /*! app/collections/page_sections
-* 	@requires: app,app/models/page_section
+* 	@requires: app,app/collection,app/models/page_section
 * 	@extends: app.Collection
 * 	@exports: app.collections.Page_sections
 */
-define("app/collections/page_sections",["require","app","app/models"],function(require,app) {
+define("app/collections/page_sections",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Page_sectionModel = require("app/models/page_section");
-
-	var Page_sections = app.Collection.extend({
+	
+	Page_sections = AppCollection.extend({
 		url: '/page_sections/',
 		model: Page_sectionModel
 	});

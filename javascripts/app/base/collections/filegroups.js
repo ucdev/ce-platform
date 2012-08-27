@@ -1,12 +1,13 @@
 /*! app/collections/filegroups
-* 	@requires: app,app/models/filegroup
+* 	@requires: app,app/collection,app/models/filegroup
 * 	@extends: app.Collection
 * 	@exports: app.collections.Filegroups
 */
-define("app/collections/filegroups",["require","app","app/models"],function(require,app) {
+define("app/collections/filegroups",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var FilegroupModel = require("app/models/filegroup");
-
-	var Filegroups = app.Collection.extend({
+	
+	Filegroups = AppCollection.extend({
 		url: '/filegroups/',
 		model: FilegroupModel
 	});

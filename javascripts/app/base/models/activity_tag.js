@@ -1,10 +1,11 @@
 /*! app/models/activity_tag 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_tag
 */
-define("app/models/activity_tag",["require","app"],function(require,app) {
-	var Activity_tagModel = app.Model.extend({
+define("app/models/activity_tag",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_tagModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_tags/"
             

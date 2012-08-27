@@ -1,10 +1,11 @@
 /*! app/models/<%= loc.nameInSingularLowercase =%> 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.<%= loc.nameInSingularUppercase =%>
 */
-define("app/models/<%= loc.nameInSingularLowercase =%>",["require","app"],function(require,app) {
-	var <%= loc.nameInSingularUppercase =%>Model = app.Model.extend({
+define("app/models/<%= loc.nameInSingularLowercase =%>",["require"],function(require) {
+	var AppModel = require("app/model");
+	var <%= loc.nameInSingularUppercase =%>Model = AppModel.extend({
 		url: function() {
 			base = "/api/<%= loc.nameInPluralLowercase =%>/"
             

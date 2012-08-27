@@ -1,10 +1,11 @@
 /*! app/models/attendee_step 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Attendee_step
 */
-define("app/models/attendee_step",["require","app"],function(require,app) {
-	var Attendee_stepModel = app.Model.extend({
+define("app/models/attendee_step",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Attendee_stepModel = AppModel.extend({
 		url: function() {
 			base = "/api/attendee_steps/"
             

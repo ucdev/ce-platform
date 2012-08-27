@@ -1,10 +1,11 @@
 /*! app/models/objecttype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Objecttype
 */
-define("app/models/objecttype",["require","app"],function(require,app) {
-	var ObjecttypeModel = app.Model.extend({
+define("app/models/objecttype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ObjecttypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/objecttypes/"
             

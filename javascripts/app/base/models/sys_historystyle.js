@@ -1,10 +1,11 @@
 /*! app/models/sys_historystyle 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_historystyle
 */
-define("app/models/sys_historystyle",["require","app"],function(require,app) {
-	var Sys_historystyleModel = app.Model.extend({
+define("app/models/sys_historystyle",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_historystyleModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_historystyles/"
             

@@ -1,10 +1,11 @@
 /*! app/models/sys_emailstyle 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_emailstyle
 */
-define("app/models/sys_emailstyle",["require","app"],function(require,app) {
-	var Sys_emailstyleModel = app.Model.extend({
+define("app/models/sys_emailstyle",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_emailstyleModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_emailstyles/"
             

@@ -1,10 +1,11 @@
 /*! app/models/activity_pubcomponent 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_pubcomponent
 */
-define("app/models/activity_pubcomponent",["require","app"],function(require,app) {
-	var Activity_pubcomponentModel = app.Model.extend({
+define("app/models/activity_pubcomponent",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_pubcomponentModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_pubcomponents/"
             

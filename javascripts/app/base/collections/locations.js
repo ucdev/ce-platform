@@ -1,12 +1,13 @@
 /*! app/collections/locations
-* 	@requires: app,app/models/location
+* 	@requires: app,app/collection,app/models/location
 * 	@extends: app.Collection
 * 	@exports: app.collections.Locations
 */
-define("app/collections/locations",["require","app","app/models"],function(require,app) {
+define("app/collections/locations",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var LocationModel = require("app/models/location");
-
-	var Locations = app.Collection.extend({
+	
+	Locations = AppCollection.extend({
 		url: '/locations/',
 		model: LocationModel
 	});

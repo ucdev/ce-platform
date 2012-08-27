@@ -1,10 +1,11 @@
 /*! app/models/sys_attendeestatu 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_attendeestatu
 */
-define("app/models/sys_attendeestatu",["require","app"],function(require,app) {
-	var Sys_attendeestatuModel = app.Model.extend({
+define("app/models/sys_attendeestatu",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_attendeestatuModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_attendeestatuses/"
             

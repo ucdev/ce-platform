@@ -1,10 +1,11 @@
 /*! app/models/wheel 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Wheel
 */
-define("app/models/wheel",["require","app"],function(require,app) {
-	var WheelModel = app.Model.extend({
+define("app/models/wheel",["require"],function(require) {
+	var AppModel = require("app/model");
+	var WheelModel = AppModel.extend({
 		url: function() {
 			base = "/api/wheels/"
             

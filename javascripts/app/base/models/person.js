@@ -1,20 +1,21 @@
 /*! app/models/person 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Person
 */
-define("app/models/person",["require","app"],function(require,app) {
-	// var PersonModel = app.Model.extend({
-	// 	url: function() {
-	// 		base = "/api/people/"
+define("app/models/person",["require"],function(require) {
+	var AppModel = require("app/model");
+	var PersonModel = AppModel.extend({
+		url: function() {
+			base = "/api/people/"
             
- //            if(this.isNew()) {
- //                return base
- //            } else {
- //                return base + this.id
- //            }
-	// 	}
-	// });
+            if(this.isNew()) {
+                return base
+            } else {
+                return base + this.id
+            }
+		}
+	});
 
-	// module.setExports(PersonModel)
+	module.setExports(PersonModel)
 });

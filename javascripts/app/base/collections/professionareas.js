@@ -1,12 +1,13 @@
 /*! app/collections/professionareas
-* 	@requires: app,app/models/professionarea
+* 	@requires: app,app/collection,app/models/professionarea
 * 	@extends: app.Collection
 * 	@exports: app.collections.Professionareas
 */
-define("app/collections/professionareas",["require","app","app/models"],function(require,app) {
+define("app/collections/professionareas",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ProfessionareaModel = require("app/models/professionarea");
-
-	var Professionareas = app.Collection.extend({
+	
+	Professionareas = AppCollection.extend({
 		url: '/professionareas/',
 		model: ProfessionareaModel
 	});

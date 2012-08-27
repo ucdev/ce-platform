@@ -1,12 +1,13 @@
 /*! app/collections/relicensures
-* 	@requires: app,app/models/relicensure
+* 	@requires: app,app/collection,app/models/relicensure
 * 	@extends: app.Collection
 * 	@exports: app.collections.Relicensures
 */
-define("app/collections/relicensures",["require","app","app/models"],function(require,app) {
+define("app/collections/relicensures",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var RelicensureModel = require("app/models/relicensure");
-
-	var Relicensures = app.Collection.extend({
+	
+	Relicensures = AppCollection.extend({
 		url: '/relicensures/',
 		model: RelicensureModel
 	});

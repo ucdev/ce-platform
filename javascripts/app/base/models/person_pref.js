@@ -1,10 +1,11 @@
 /*! app/models/person_pref 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Person_pref
 */
-define("app/models/person_pref",["require","app"],function(require,app) {
-	var Person_prefModel = app.Model.extend({
+define("app/models/person_pref",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Person_prefModel = AppModel.extend({
 		url: function() {
 			base = "/api/person_prefs/"
             

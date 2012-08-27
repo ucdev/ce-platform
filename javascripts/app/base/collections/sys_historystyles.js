@@ -1,12 +1,13 @@
 /*! app/collections/sys_historystyles
-* 	@requires: app,app/models/sys_historystyle
+* 	@requires: app,app/collection,app/models/sys_historystyle
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_historystyles
 */
-define("app/collections/sys_historystyles",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_historystyles",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_historystyleModel = require("app/models/sys_historystyle");
-
-	var Sys_historystyles = app.Collection.extend({
+	
+	Sys_historystyles = AppCollection.extend({
 		url: '/sys_historystyles/',
 		model: Sys_historystyleModel
 	});

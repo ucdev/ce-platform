@@ -1,10 +1,11 @@
 /*! app/models/account 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Account
 */
-define("app/models/account",["require","app"],function(require,app) {
-	var AccountModel = app.Model.extend({
+define("app/models/account",["require"],function(require) {
+	var AppModel = require("app/model");
+	var AccountModel = AppModel.extend({
 		url: function() {
 			base = "/api/accounts/"
             

@@ -1,10 +1,11 @@
 /*! app/models/objectdatum 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Objectdatum
 */
-define("app/models/objectdatum",["require","app"],function(require,app) {
-	var ObjectdatumModel = app.Model.extend({
+define("app/models/objectdatum",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ObjectdatumModel = AppModel.extend({
 		url: function() {
 			base = "/api/objectdatas/"
             

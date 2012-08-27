@@ -1,10 +1,11 @@
 /*! app/models/activity_container 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_container
 */
-define("app/models/activity_container",["require","app"],function(require,app) {
-	var Activity_containerModel = app.Model.extend({
+define("app/models/activity_container",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_containerModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_containers/"
             

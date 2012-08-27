@@ -1,10 +1,11 @@
 /*! app/models/sys_historytype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_historytype
 */
-define("app/models/sys_historytype",["require","app"],function(require,app) {
-	var Sys_historytypeModel = app.Model.extend({
+define("app/models/sys_historytype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_historytypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_historytypes/"
             

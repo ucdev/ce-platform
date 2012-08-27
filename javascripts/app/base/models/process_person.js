@@ -1,10 +1,11 @@
 /*! app/models/process_person 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Process_person
 */
-define("app/models/process_person",["require","app"],function(require,app) {
-	var Process_personModel = app.Model.extend({
+define("app/models/process_person",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Process_personModel = AppModel.extend({
 		url: function() {
 			base = "/api/process_persons/"
             

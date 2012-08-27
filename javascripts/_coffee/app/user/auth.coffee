@@ -1,5 +1,6 @@
 #! ce.user.auth @description: logs when user events 
-ce.module "user", (self, ce, Backbone, Marionette, $, _, log) ->
+define "app/user/auth",["require","backbone","jquery"],(require,Backbone,$) ->
+  self = {}
   
   #LOGIN CHECK
   self.isLoggedIn = ->
@@ -93,5 +94,4 @@ ce.module "user", (self, ce, Backbone, Marionette, $, _, log) ->
     self.trigger "loggedOut"
     return
 
-  return
-,ce.log
+  module.setExports(self)

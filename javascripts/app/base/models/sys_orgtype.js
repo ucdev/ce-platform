@@ -1,10 +1,11 @@
 /*! app/models/sys_orgtype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_orgtype
 */
-define("app/models/sys_orgtype",["require","app"],function(require,app) {
-	var Sys_orgtypeModel = app.Model.extend({
+define("app/models/sys_orgtype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_orgtypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_orgtypes/"
             

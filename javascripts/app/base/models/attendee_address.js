@@ -1,10 +1,11 @@
 /*! app/models/attendee_address 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Attendee_address
 */
-define("app/models/attendee_address",["require","app"],function(require,app) {
-	var Attendee_addressModel = app.Model.extend({
+define("app/models/attendee_address",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Attendee_addressModel = AppModel.extend({
 		url: function() {
 			base = "/api/attendee_addresses/"
             

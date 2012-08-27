@@ -1,12 +1,13 @@
 /*! app/collections/activity_specialtylms
-* 	@requires: app,app/models/activity_specialtylm
+* 	@requires: app,app/collection,app/models/activity_specialtylm
 * 	@extends: app.Collection
 * 	@exports: app.collections.Activity_specialtylms
 */
-define("app/collections/activity_specialtylms",["require","app","app/models"],function(require,app) {
+define("app/collections/activity_specialtylms",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Activity_specialtylmModel = require("app/models/activity_specialtylm");
-
-	var Activity_specialtylms = app.Collection.extend({
+	
+	Activity_specialtylms = AppCollection.extend({
 		url: '/activity_specialtylms/',
 		model: Activity_specialtylmModel
 	});

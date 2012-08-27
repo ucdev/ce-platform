@@ -1,12 +1,13 @@
 /*! app/collections/certs
-* 	@requires: app,app/models/cert
+* 	@requires: app,app/collection,app/models/cert
 * 	@extends: app.Collection
 * 	@exports: app.collections.Certs
 */
-define("app/collections/certs",["require","app","app/models"],function(require,app) {
+define("app/collections/certs",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var CertModel = require("app/models/cert");
-
-	var Certs = app.Collection.extend({
+	
+	Certs = AppCollection.extend({
 		url: '/certs/',
 		model: CertModel
 	});

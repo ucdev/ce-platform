@@ -1,12 +1,13 @@
 /*! app/collections/person_degrees
-* 	@requires: app,app/models/person_degree
+* 	@requires: app,app/collection,app/models/person_degree
 * 	@extends: app.Collection
 * 	@exports: app.collections.Person_degrees
 */
-define("app/collections/person_degrees",["require","app","app/models"],function(require,app) {
+define("app/collections/person_degrees",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Person_degreeModel = require("app/models/person_degree");
-
-	var Person_degrees = app.Collection.extend({
+	
+	Person_degrees = AppCollection.extend({
 		url: '/person_degrees/',
 		model: Person_degreeModel
 	});

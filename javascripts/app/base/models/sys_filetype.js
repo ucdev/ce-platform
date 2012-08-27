@@ -1,10 +1,11 @@
 /*! app/models/sys_filetype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_filetype
 */
-define("app/models/sys_filetype",["require","app"],function(require,app) {
-	var Sys_filetypeModel = app.Model.extend({
+define("app/models/sys_filetype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_filetypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_filetypes/"
             

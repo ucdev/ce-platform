@@ -1,10 +1,11 @@
 /*! app/models/sys_supporter 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_supporter
 */
-define("app/models/sys_supporter",["require","app"],function(require,app) {
-	var Sys_supporterModel = app.Model.extend({
+define("app/models/sys_supporter",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_supporterModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_supporters/"
             

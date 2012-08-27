@@ -1,12 +1,13 @@
 /*! app/collections/attendeecredits
-* 	@requires: app,app/models/attendeecredit
+* 	@requires: app,app/collection,app/models/attendeecredit
 * 	@extends: app.Collection
 * 	@exports: app.collections.Attendeecredits
 */
-define("app/collections/attendeecredits",["require","app","app/models"],function(require,app) {
+define("app/collections/attendeecredits",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AttendeecreditModel = require("app/models/attendeecredit");
-
-	var Attendeecredits = app.Collection.extend({
+	
+	Attendeecredits = AppCollection.extend({
 		url: '/attendeecredits/',
 		model: AttendeecreditModel
 	});

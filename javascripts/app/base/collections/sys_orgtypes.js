@@ -1,12 +1,13 @@
 /*! app/collections/sys_orgtypes
-* 	@requires: app,app/models/sys_orgtype
+* 	@requires: app,app/collection,app/models/sys_orgtype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_orgtypes
 */
-define("app/collections/sys_orgtypes",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_orgtypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_orgtypeModel = require("app/models/sys_orgtype");
-
-	var Sys_orgtypes = app.Collection.extend({
+	
+	Sys_orgtypes = AppCollection.extend({
 		url: '/sys_orgtypes/',
 		model: Sys_orgtypeModel
 	});

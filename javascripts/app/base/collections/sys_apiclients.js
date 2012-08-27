@@ -1,12 +1,13 @@
 /*! app/collections/sys_apiclients
-* 	@requires: app,app/models/sys_apiclient
+* 	@requires: app,app/collection,app/models/sys_apiclient
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_apiclients
 */
-define("app/collections/sys_apiclients",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_apiclients",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_apiclientModel = require("app/models/sys_apiclient");
-
-	var Sys_apiclients = app.Collection.extend({
+	
+	Sys_apiclients = AppCollection.extend({
 		url: '/sys_apiclients/',
 		model: Sys_apiclientModel
 	});

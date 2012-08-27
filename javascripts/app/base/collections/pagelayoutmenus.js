@@ -1,12 +1,13 @@
 /*! app/collections/pagelayoutmenus
-* 	@requires: app,app/models/pagelayoutmenu
+* 	@requires: app,app/collection,app/models/pagelayoutmenu
 * 	@extends: app.Collection
 * 	@exports: app.collections.Pagelayoutmenus
 */
-define("app/collections/pagelayoutmenus",["require","app","app/models"],function(require,app) {
+define("app/collections/pagelayoutmenus",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var PagelayoutmenuModel = require("app/models/pagelayoutmenu");
-
-	var Pagelayoutmenus = app.Collection.extend({
+	
+	Pagelayoutmenus = AppCollection.extend({
 		url: '/pagelayoutmenus/',
 		model: PagelayoutmenuModel
 	});

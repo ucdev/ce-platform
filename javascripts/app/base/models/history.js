@@ -1,10 +1,11 @@
 /*! app/models/history 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.History
 */
-define("app/models/history",["require","app"],function(require,app) {
-	var HistoryModel = app.Model.extend({
+define("app/models/history",["require"],function(require) {
+	var AppModel = require("app/model");
+	var HistoryModel = AppModel.extend({
 		url: function() {
 			base = "/api/histories/"
             

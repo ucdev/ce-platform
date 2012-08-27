@@ -1,8 +1,9 @@
 #! ce.user.events @description: logs when user events 
-ce.module "user", (self, ce, Backbone, Marionette, $, _) ->
+define "app/user/events",["require","backbone","jquery"],(require,Backbone,$) ->
+  self = {}
   self.on "loggedIn", ->
     ce.log.info "user: logged in"
-   	return
+    return
 
   self.on "loggedOut", ->
     ce.log.warn "user: logged out"
@@ -11,4 +12,5 @@ ce.module "user", (self, ce, Backbone, Marionette, $, _) ->
   self.on "loaded", ->
     ce.log.info "user: init"
     return
-  return
+
+  module.setExports(self)

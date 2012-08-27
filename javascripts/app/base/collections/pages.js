@@ -1,12 +1,13 @@
 /*! app/collections/pages
-* 	@requires: app,app/models/page
+* 	@requires: app,app/collection,app/models/page
 * 	@extends: app.Collection
 * 	@exports: app.collections.Pages
 */
-define("app/collections/pages",["require","app","app/models"],function(require,app) {
+define("app/collections/pages",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var PageModel = require("app/models/page");
-
-	var Pages = app.Collection.extend({
+	
+	Pages = AppCollection.extend({
 		url: '/pages/',
 		model: PageModel
 	});

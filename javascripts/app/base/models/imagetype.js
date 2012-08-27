@@ -1,10 +1,11 @@
 /*! app/models/imagetype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Imagetype
 */
-define("app/models/imagetype",["require","app"],function(require,app) {
-	var ImagetypeModel = app.Model.extend({
+define("app/models/imagetype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var ImagetypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/imagetypes/"
             

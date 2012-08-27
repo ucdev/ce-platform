@@ -1,10 +1,11 @@
 /*! app/models/sys_testtype 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_testtype
 */
-define("app/models/sys_testtype",["require","app"],function(require,app) {
-	var Sys_testtypeModel = app.Model.extend({
+define("app/models/sys_testtype",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_testtypeModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_testtypes/"
             

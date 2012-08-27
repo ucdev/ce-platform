@@ -1,10 +1,11 @@
 /*! app/models/person_email 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Person_email
 */
-define("app/models/person_email",["require","app"],function(require,app) {
-	var Person_emailModel = app.Model.extend({
+define("app/models/person_email",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Person_emailModel = AppModel.extend({
 		url: function() {
 			base = "/api/person_emails/"
             

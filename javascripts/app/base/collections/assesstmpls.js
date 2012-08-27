@@ -1,12 +1,13 @@
 /*! app/collections/assesstmpls
-* 	@requires: app,app/models/assesstmpl
+* 	@requires: app,app/collection,app/models/assesstmpl
 * 	@extends: app.Collection
 * 	@exports: app.collections.Assesstmpls
 */
-define("app/collections/assesstmpls",["require","app","app/models"],function(require,app) {
+define("app/collections/assesstmpls",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AssesstmplModel = require("app/models/assesstmpl");
-
-	var Assesstmpls = app.Collection.extend({
+	
+	Assesstmpls = AppCollection.extend({
 		url: '/assesstmpls/',
 		model: AssesstmplModel
 	});

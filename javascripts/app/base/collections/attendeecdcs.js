@@ -1,12 +1,13 @@
 /*! app/collections/attendeecdcs
-* 	@requires: app,app/models/attendeecdc
+* 	@requires: app,app/collection,app/models/attendeecdc
 * 	@extends: app.Collection
 * 	@exports: app.collections.Attendeecdcs
 */
-define("app/collections/attendeecdcs",["require","app","app/models"],function(require,app) {
+define("app/collections/attendeecdcs",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AttendeecdcModel = require("app/models/attendeecdc");
-
-	var Attendeecdcs = app.Collection.extend({
+	
+	Attendeecdcs = AppCollection.extend({
 		url: '/attendeecdcs/',
 		model: AttendeecdcModel
 	});

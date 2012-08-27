@@ -1,10 +1,11 @@
 /*! app/models/sys_apiclient 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_apiclient
 */
-define("app/models/sys_apiclient",["require","app"],function(require,app) {
-	var Sys_apiclientModel = app.Model.extend({
+define("app/models/sys_apiclient",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_apiclientModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_apiclients/"
             

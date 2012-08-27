@@ -1,12 +1,13 @@
 /*! app/collections/categories
-* 	@requires: app,app/models/category
+* 	@requires: app,app/collection,app/models/category
 * 	@extends: app.Collection
 * 	@exports: app.collections.Categories
 */
-define("app/collections/categories",["require","app","app/models"],function(require,app) {
+define("app/collections/categories",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var CategoryModel = require("app/models/category");
-
-	var Categories = app.Collection.extend({
+	
+	Categories = AppCollection.extend({
 		url: '/categories/',
 		model: CategoryModel
 	});

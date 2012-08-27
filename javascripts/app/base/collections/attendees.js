@@ -1,12 +1,13 @@
 /*! app/collections/attendees
-* 	@requires: app,app/models/attendee
+* 	@requires: app,app/collection,app/models/attendee
 * 	@extends: app.Collection
 * 	@exports: app.collections.Attendees
 */
-define("app/collections/attendees",["require","app","app/models"],function(require,app) {
+define("app/collections/attendees",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AttendeeModel = require("app/models/attendee");
-
-	var Attendees = app.Collection.extend({
+	
+	Attendees = AppCollection.extend({
 		url: '/attendees/',
 		model: AttendeeModel
 	});

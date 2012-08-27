@@ -1,12 +1,13 @@
 /*! app/collections/hubs
-* 	@requires: app,app/models/hub
+* 	@requires: app,app/collection,app/models/hub
 * 	@extends: app.Collection
 * 	@exports: app.collections.Hubs
 */
-define("app/collections/hubs",["require","app","app/models"],function(require,app) {
+define("app/collections/hubs",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var HubModel = require("app/models/hub");
-
-	var Hubs = app.Collection.extend({
+	
+	Hubs = AppCollection.extend({
 		url: '/hubs/',
 		model: HubModel
 	});

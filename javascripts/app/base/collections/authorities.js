@@ -1,12 +1,13 @@
 /*! app/collections/authorities
-* 	@requires: app,app/models/authority
+* 	@requires: app,app/collection,app/models/authority
 * 	@extends: app.Collection
 * 	@exports: app.collections.Authorities
 */
-define("app/collections/authorities",["require","app","app/models"],function(require,app) {
+define("app/collections/authorities",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var AuthorityModel = require("app/models/authority");
-
-	var Authorities = app.Collection.extend({
+	
+	Authorities = AppCollection.extend({
 		url: '/authorities/',
 		model: AuthorityModel
 	});

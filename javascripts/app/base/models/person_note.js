@@ -1,10 +1,11 @@
 /*! app/models/person_note 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Person_note
 */
-define("app/models/person_note",["require","app"],function(require,app) {
-	var Person_noteModel = app.Model.extend({
+define("app/models/person_note",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Person_noteModel = AppModel.extend({
 		url: function() {
 			base = "/api/person_notes/"
             

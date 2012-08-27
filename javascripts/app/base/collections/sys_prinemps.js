@@ -1,12 +1,13 @@
 /*! app/collections/sys_prinemps
-* 	@requires: app,app/models/sys_prinemp
+* 	@requires: app,app/collection,app/models/sys_prinemp
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_prinemps
 */
-define("app/collections/sys_prinemps",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_prinemps",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_prinempModel = require("app/models/sys_prinemp");
-
-	var Sys_prinemps = app.Collection.extend({
+	
+	Sys_prinemps = AppCollection.extend({
 		url: '/sys_prinemps/',
 		model: Sys_prinempModel
 	});

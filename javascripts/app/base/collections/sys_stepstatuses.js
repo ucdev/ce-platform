@@ -1,12 +1,13 @@
 /*! app/collections/sys_stepstatuses
-* 	@requires: app,app/models/sys_stepstatu
+* 	@requires: app,app/collection,app/models/sys_stepstatu
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_stepstatuses
 */
-define("app/collections/sys_stepstatuses",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_stepstatuses",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_stepstatuModel = require("app/models/sys_stepstatu");
-
-	var Sys_stepstatuses = app.Collection.extend({
+	
+	Sys_stepstatuses = AppCollection.extend({
 		url: '/sys_stepstatuses/',
 		model: Sys_stepstatuModel
 	});

@@ -1,10 +1,11 @@
 /*! app/models/location 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Location
 */
-define("app/models/location",["require","app"],function(require,app) {
-	var LocationModel = app.Model.extend({
+define("app/models/location",["require"],function(require) {
+	var AppModel = require("app/model");
+	var LocationModel = AppModel.extend({
 		url: function() {
 			base = "/api/locations/"
             

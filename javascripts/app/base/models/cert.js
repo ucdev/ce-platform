@@ -1,10 +1,11 @@
 /*! app/models/cert 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Cert
 */
-define("app/models/cert",["require","app"],function(require,app) {
-	var CertModel = app.Model.extend({
+define("app/models/cert",["require"],function(require) {
+	var AppModel = require("app/model");
+	var CertModel = AppModel.extend({
 		url: function() {
 			base = "/api/certs/"
             

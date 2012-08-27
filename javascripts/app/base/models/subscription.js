@@ -1,10 +1,11 @@
 /*! app/models/subscription 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Subscription
 */
-define("app/models/subscription",["require","app"],function(require,app) {
-	var SubscriptionModel = app.Model.extend({
+define("app/models/subscription",["require"],function(require) {
+	var AppModel = require("app/model");
+	var SubscriptionModel = AppModel.extend({
 		url: function() {
 			base = "/api/subscriptions/"
             

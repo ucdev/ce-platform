@@ -1,10 +1,11 @@
 /*! app/models/agenda 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Agenda
 */
-define("app/models/agenda",["require","app"],function(require,app) {
-	var AgendaModel = app.Model.extend({
+define("app/models/agenda",["require"],function(require) {
+	var AppModel = require("app/model");
+	var AgendaModel = AppModel.extend({
 		url: function() {
 			base = "/api/agendas/"
             

@@ -1,10 +1,11 @@
 /*! app/models/sys_component 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_component
 */
-define("app/models/sys_component",["require","app"],function(require,app) {
-	var Sys_componentModel = app.Model.extend({
+define("app/models/sys_component",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_componentModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_components/"
             

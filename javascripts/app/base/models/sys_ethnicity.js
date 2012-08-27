@@ -1,10 +1,11 @@
 /*! app/models/sys_ethnicity 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_ethnicity
 */
-define("app/models/sys_ethnicity",["require","app"],function(require,app) {
-	var Sys_ethnicityModel = app.Model.extend({
+define("app/models/sys_ethnicity",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_ethnicityModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_ethnicities/"
             

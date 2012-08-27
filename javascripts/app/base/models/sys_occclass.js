@@ -1,10 +1,11 @@
 /*! app/models/sys_occclass 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_occclass
 */
-define("app/models/sys_occclass",["require","app"],function(require,app) {
-	var Sys_occclassModel = app.Model.extend({
+define("app/models/sys_occclass",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_occclassModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_occclasses/"
             

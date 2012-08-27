@@ -1,12 +1,13 @@
 /*! app/collections/sys_projecttypes
-* 	@requires: app,app/models/sys_projecttype
+* 	@requires: app,app/collection,app/models/sys_projecttype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_projecttypes
 */
-define("app/collections/sys_projecttypes",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_projecttypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_projecttypeModel = require("app/models/sys_projecttype");
-
-	var Sys_projecttypes = app.Collection.extend({
+	
+	Sys_projecttypes = AppCollection.extend({
 		url: '/sys_projecttypes/',
 		model: Sys_projecttypeModel
 	});

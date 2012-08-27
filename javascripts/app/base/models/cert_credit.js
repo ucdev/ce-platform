@@ -1,10 +1,11 @@
 /*! app/models/cert_credit 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Cert_credit
 */
-define("app/models/cert_credit",["require","app"],function(require,app) {
-	var Cert_creditModel = app.Model.extend({
+define("app/models/cert_credit",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Cert_creditModel = AppModel.extend({
 		url: function() {
 			base = "/api/cert_credits/"
             

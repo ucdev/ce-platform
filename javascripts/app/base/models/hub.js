@@ -1,10 +1,11 @@
 /*! app/models/hub 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Hub
 */
-define("app/models/hub",["require","app"],function(require,app) {
-	var HubModel = app.Model.extend({
+define("app/models/hub",["require"],function(require) {
+	var AppModel = require("app/model");
+	var HubModel = AppModel.extend({
 		url: function() {
 			base = "/api/hubs/"
             

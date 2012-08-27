@@ -1,12 +1,13 @@
 /*! app/collections/processes
-* 	@requires: app,app/models/process
+* 	@requires: app,app/collection,app/models/process
 * 	@extends: app.Collection
 * 	@exports: app.collections.Processes
 */
-define("app/collections/processes",["require","app","app/models"],function(require,app) {
+define("app/collections/processes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ProcessModel = require("app/models/process");
-
-	var Processes = app.Collection.extend({
+	
+	Processes = AppCollection.extend({
 		url: '/processes/',
 		model: ProcessModel
 	});

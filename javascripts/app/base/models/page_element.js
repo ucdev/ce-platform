@@ -1,10 +1,11 @@
 /*! app/models/page_element 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Page_element
 */
-define("app/models/page_element",["require","app"],function(require,app) {
-	var Page_elementModel = app.Model.extend({
+define("app/models/page_element",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Page_elementModel = AppModel.extend({
 		url: function() {
 			base = "/api/page_elements/"
             

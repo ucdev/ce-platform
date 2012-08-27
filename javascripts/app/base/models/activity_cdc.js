@@ -1,10 +1,11 @@
 /*! app/models/activity_cdc 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Activity_cdc
 */
-define("app/models/activity_cdc",["require","app"],function(require,app) {
-	var Activity_cdcModel = app.Model.extend({
+define("app/models/activity_cdc",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Activity_cdcModel = AppModel.extend({
 		url: function() {
 			base = "/api/activity_cdcs/"
             

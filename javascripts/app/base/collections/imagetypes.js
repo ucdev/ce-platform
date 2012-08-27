@@ -1,12 +1,13 @@
 /*! app/collections/imagetypes
-* 	@requires: app,app/models/imagetype
+* 	@requires: app,app/collection,app/models/imagetype
 * 	@extends: app.Collection
 * 	@exports: app.collections.Imagetypes
 */
-define("app/collections/imagetypes",["require","app","app/models"],function(require,app) {
+define("app/collections/imagetypes",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ImagetypeModel = require("app/models/imagetype");
-
-	var Imagetypes = app.Collection.extend({
+	
+	Imagetypes = AppCollection.extend({
 		url: '/imagetypes/',
 		model: ImagetypeModel
 	});

@@ -1,10 +1,11 @@
 /*! app/models/processstep_activity 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Processstep_activity
 */
-define("app/models/processstep_activity",["require","app"],function(require,app) {
-	var Processstep_activityModel = app.Model.extend({
+define("app/models/processstep_activity",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Processstep_activityModel = AppModel.extend({
 		url: function() {
 			base = "/api/processstep_activities/"
             

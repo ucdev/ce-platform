@@ -1,10 +1,11 @@
 /*! app/models/occupation 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Occupation
 */
-define("app/models/occupation",["require","app"],function(require,app) {
-	var OccupationModel = app.Model.extend({
+define("app/models/occupation",["require"],function(require) {
+	var AppModel = require("app/model");
+	var OccupationModel = AppModel.extend({
 		url: function() {
 			base = "/api/occupations/"
             

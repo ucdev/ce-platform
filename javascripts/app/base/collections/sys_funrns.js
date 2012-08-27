@@ -1,12 +1,13 @@
 /*! app/collections/sys_funrns
-* 	@requires: app,app/models/sys_funrn
+* 	@requires: app,app/collection,app/models/sys_funrn
 * 	@extends: app.Collection
 * 	@exports: app.collections.Sys_funrns
 */
-define("app/collections/sys_funrns",["require","app","app/models"],function(require,app) {
+define("app/collections/sys_funrns",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var Sys_funrnModel = require("app/models/sys_funrn");
-
-	var Sys_funrns = app.Collection.extend({
+	
+	Sys_funrns = AppCollection.extend({
 		url: '/sys_funrns/',
 		model: Sys_funrnModel
 	});

@@ -1,10 +1,11 @@
 /*! app/models/pagelayoutmenu 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Pagelayoutmenu
 */
-define("app/models/pagelayoutmenu",["require","app"],function(require,app) {
-	var PagelayoutmenuModel = app.Model.extend({
+define("app/models/pagelayoutmenu",["require"],function(require) {
+	var AppModel = require("app/model");
+	var PagelayoutmenuModel = AppModel.extend({
 		url: function() {
 			base = "/api/pagelayoutmenus/"
             

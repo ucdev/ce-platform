@@ -1,10 +1,11 @@
 /*! app/models/sys_stepstatu 
-* 	@requires: app
+* 	@requires: app/model
 * 	@extends: app.Model
 * 	@exports: app.models.Sys_stepstatu
 */
-define("app/models/sys_stepstatu",["require","app"],function(require,app) {
-	var Sys_stepstatuModel = app.Model.extend({
+define("app/models/sys_stepstatu",["require"],function(require) {
+	var AppModel = require("app/model");
+	var Sys_stepstatuModel = AppModel.extend({
 		url: function() {
 			base = "/api/sys_stepstatuses/"
             

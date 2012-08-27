@@ -31,12 +31,12 @@
 
 	<script>
 	window.ce = window.ce || {};
-	require.ensure(["app"], function() {
+	require.ensure(["app","app/user"], function() {
       var App = require("app");
       window.ce = new App();
 
       //SETUP USER
-      ce.user = new ce.User(#serializeJson(userInfo)#)
+      <cfoutput>ce.user = new ce.User(#serializeJson(userInfo)#)</cfoutput>
       //console.log(window.ce);
     });
 	</script>

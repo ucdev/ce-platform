@@ -1,12 +1,13 @@
 /*! app/collections/processmanagers
-* 	@requires: app,app/models/processmanager
+* 	@requires: app,app/collection,app/models/processmanager
 * 	@extends: app.Collection
 * 	@exports: app.collections.Processmanagers
 */
-define("app/collections/processmanagers",["require","app","app/models"],function(require,app) {
+define("app/collections/processmanagers",["require"],function(require) {
+	var AppCollection = require("app/collection");
 	var ProcessmanagerModel = require("app/models/processmanager");
-
-	var Processmanagers = app.Collection.extend({
+	
+	Processmanagers = AppCollection.extend({
 		url: '/processmanagers/',
 		model: ProcessmanagerModel
 	});
