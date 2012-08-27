@@ -9,6 +9,8 @@ Inject.addRule(/^jquery$/, {
   pointcuts: {
     after: function() {
       module.setExports(jQuery.noConflict());
+      delete window["$"];
+      delete window["jQuery"];
     }
   }
 });
@@ -19,6 +21,15 @@ Inject.addRule(/^bootstrap$/, {
     before: function() {
       var $;
       return $ = require("jquery");
+    }
+  }
+});
+
+Inject.addRule(/^logger$/, {
+  path: "libs/debug",
+  pointcuts: {
+    after: function() {
+      return module.setExports(window.debug);
     }
   }
 });
@@ -42,3 +53,5 @@ Inject.addRule(/^underscore$/, {
 Inject.addRule(/^backbone$/, {
   path: "libs/backbone"
 });
+
+delete window["Class"];

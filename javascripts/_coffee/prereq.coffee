@@ -14,15 +14,25 @@ Inject.addRule /^jquery$/,
 	path: "libs/jquery",
 	pointcuts:
 		after: ->
-		  module.setExports(jQuery.noConflict())
-		  #delete window["$"]
-		  return
+            module.setExports(jQuery.noConflict())
+            #console.log "jquery loaded"
+
+            delete window["$"]
+            delete window["jQuery"]
+            return
 
 Inject.addRule /^bootstrap$/,
     path: "libs/bootstrap"
     pointcuts:
         before: ->
             $ = require("jquery")
+
+Inject.addRule /^logger$/,
+    path: "libs/debug"
+    pointcuts:
+        after: ->
+            module.setExports(window.debug)
+
 
 Inject.addRule /app\/models\//, 
     path: (module) ->
@@ -38,3 +48,5 @@ Inject.addRule /^underscore$/,
 
 Inject.addRule /^backbone$/,
     path: "libs/backbone"
+
+delete window["Class"]

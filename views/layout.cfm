@@ -30,14 +30,21 @@
 	<![endif]-->
 
 	<script>
+	window.ce = window.ce || {};
 	require.ensure(["app"], function() {
-      ce = require("app");
+      var App = require("app");
+      window.ce = new App();
+
+      //SETUP USER
+      ce.user = new ce.User(#serializeJson(userInfo)#)
+      //console.log(window.ce);
     });
 	</script>
 	</cfoutput>
 </head>
 <cfoutput>
 <body data-version_token="#params.version_token#">
+
 	<div id="app">
 		<div id="error-output" style="display:none; position:fixed;z-index:100" class="alert alert-error"></div>
 		</div>

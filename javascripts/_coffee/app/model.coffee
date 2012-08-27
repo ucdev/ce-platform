@@ -1,4 +1,5 @@
-define "app/collection",["require","backbone"],(require,Backbone) ->
+define "app/model",["require","backbone"],(require,Backbone) ->
+    
     class Model extends Backbone.Model
         constructor:() ->
 

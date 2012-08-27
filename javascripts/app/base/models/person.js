@@ -4,17 +4,17 @@
 * 	@exports: app.models.Person
 */
 define("app/models/person",["require","app"],function(require,app) {
-	var PersonModel = app.Model.extend({
-		url: function() {
-			base = "/api/people/"
+	// var PersonModel = app.Model.extend({
+	// 	url: function() {
+	// 		base = "/api/people/"
             
-            if(this.isNew()) {
-                return base
-            } else {
-                return base + this.id
-            }
-		}
-	});
+ //            if(this.isNew()) {
+ //                return base
+ //            } else {
+ //                return base + this.id
+ //            }
+	// 	}
+	// });
 
-	module.setExports(PersonModel)
+	// module.setExports(PersonModel)
 });
