@@ -1,4 +1,4 @@
-define "app/module",(require) ->
+define "foundry/module",(require) ->
   # When copying properties, skip over the following:
   SKIP_PROPERTIES = [
     "constructor"
@@ -34,7 +34,7 @@ define "app/module",(require) ->
   # Base class for adding mixins, Ruby style, to CoffeeScript
   # classes. There is no support for super. This essentially
   # just copies over properties from objects and classes.
-  class Mixable
+  class Module extends Backbone.View
     # Calls extend method, with `this` as the object.
     @extend: (mixins...) ->
       extend @, mixins...

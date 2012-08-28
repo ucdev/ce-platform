@@ -65,13 +65,20 @@ define("foundry/module", function(require) {
       return Module.__super__.constructor.apply(this, arguments);
     }
 
-    Module.extend = function() {
+    /*
+        * Calls extends method, with `this` as the object.
+        * Not to be confused with "extend" which is the way you extend an Object in Backbone
+        * This is the only instance of misleading functions / symantecs within Foundry
+    */
+
+
+    Module["extends"] = function() {
       var mixins;
       mixins = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
       return extend.apply(null, [this].concat(__slice.call(mixins)));
     };
 
-    Module.include = function() {
+    Module.includes = function() {
       var mixins;
       mixins = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
       return include.apply(null, [this].concat(__slice.call(mixins)));
@@ -80,5 +87,5 @@ define("foundry/module", function(require) {
     return Module;
 
   })(Backbone.View);
-  return module.setExports(Mixable);
+  return module.setExports(Module);
 });

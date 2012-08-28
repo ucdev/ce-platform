@@ -1,3 +1,6 @@
 [submodule "javascripts/inject"]
 	path = javascripts/inject
 	url = https://github.com/linkedin/inject.git
+[submodule "javascripts/_coffee/foundry"]
+	path = javascripts/_coffee/foundry
+	url = https://github.com/JoshuaIRL/foundry.coffee.git
