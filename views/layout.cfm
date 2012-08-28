@@ -30,10 +30,10 @@
 	<![endif]-->
 
 	<script>
-	window.ce = window.ce || {};
+	//window.ce = window.ce || {};
 	require.ensure(["app","app/user"], function() {
       var App = require("app");
-      window.ce = new App();
+      // window.ce = new App();
 
       //SETUP USER
       <cfoutput>ce.user = new ce.User(#serializeJson(userInfo)#)</cfoutput>

@@ -54,4 +54,8 @@ Inject.addRule(/^backbone$/, {
   path: "libs/backbone"
 });
 
+Inject.addRule(/^backbone.paginator$/, {
+  path: "libs/backbone/backbone.paginator"
+});
+
 delete window["Class"];

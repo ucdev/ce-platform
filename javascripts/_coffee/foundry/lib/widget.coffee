@@ -1,1 +1,0 @@
-define "foundry/widget",["backbone"],(require,Backbone) ->

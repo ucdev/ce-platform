@@ -1,5 +1,9 @@
 define "app",["require","backbone","jquery","bootstrap"],(require,Backbone,$,bootstrap) ->
-    class App extends Backbone.View
+    console.info("app: starting")
+    Component = require "foundry/component"
+    Widget = require "foundry/widget"
+
+    class App extends Component
         constructor:->
             @$win = window
             @$doc = @$win.document
@@ -8,17 +12,14 @@ define "app",["require","backbone","jquery","bootstrap"],(require,Backbone,$,boo
             
             @Model = require("app/model")
             @Collection = require("app/collection")
+            @Collection_paged = require("app/collection_paged")
             @User = require("app/user")
             @log = require("logger")
             @log.info("app: started")
 
     #app = new App()
 
-    # Backbone.Paginator.clientPager.prototype.whereExpanded = (attrs) ->
-    #     return _.filter @origModels, (model) ->
-    #         for key of attrs
-    #             return false unless attrs[key] is model.get(key)
-    #         true
+    
 
     #Backbone.emulateJSON = true
 
@@ -26,5 +27,5 @@ define "app",["require","backbone","jquery","bootstrap"],(require,Backbone,$,boo
     # #     ce.log.info("app: started")
     # # )
     # return
-    console.log("test")
+    console.log("Inject should be good...")
     module.setExports(App)

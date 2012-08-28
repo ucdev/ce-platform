@@ -3,7 +3,10 @@ var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 define("app", ["require", "backbone", "jquery", "bootstrap"], function(require, Backbone, $, bootstrap) {
-  var App;
+  var App, Component, Widget;
+  console.info("app: starting");
+  Component = require("foundry/component");
+  Widget = require("foundry/widget");
   App = (function(_super) {
 
     __extends(App, _super);
@@ -15,6 +18,7 @@ define("app", ["require", "backbone", "jquery", "bootstrap"], function(require, 
       this.el = $("#app");
       this.Model = require("app/model");
       this.Collection = require("app/collection");
+      this.Collection_paged = require("app/collection_paged");
       this.User = require("app/user");
       this.log = require("logger");
       this.log.info("app: started");
@@ -22,7 +26,7 @@ define("app", ["require", "backbone", "jquery", "bootstrap"], function(require, 
 
     return App;
 
-  })(Backbone.View);
-  console.log("test");
+  })(Component);
+  console.log("Inject should be good...");
   return module.setExports(App);
 });

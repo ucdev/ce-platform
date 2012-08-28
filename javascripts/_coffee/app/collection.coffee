@@ -1,6 +1,7 @@
-define "app/collection",["require","backbone"],(require,Backbone) ->
-    class Collection extends Backbone.Collection
-        constructor:() ->
-            
-    module.setExports(Collection)
-    return
+Backbone = require "backbone"
+#Backbone.Paginator = require "backbone.paginator"
+
+class Collection extends Backbone.Collection
+    constructor:() ->
+
+module.setExports(Collection)
