@@ -1,2 +1,2 @@
-cd F:\Seagate\Sites\uc-ccpd
-coffee -wbco javascripts/lib javascripts/src
+cd F:\Seagate\Sites\ce-platform
+bundle exec guard start
