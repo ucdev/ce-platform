@@ -1,1 +1,0 @@
-<a href="javascript://" class="js-deselect-all-participants">Uncheck all participants?</a>

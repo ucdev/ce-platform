@@ -1,1 +1,0 @@
-<a href="javascript://" class="js-select-all-participants">Expand selection to all participants</a>

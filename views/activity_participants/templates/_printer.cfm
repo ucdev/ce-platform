@@ -1,1 +1,0 @@
-<a href="javascript://" class="btn js-print-btn"><i class="icon-hdd"></i></a>

@@ -1,1 +1,0 @@
-<div class="loader"><!--- <img src="/images/255.png" /> ---></div>

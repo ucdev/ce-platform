@@ -1,1 +1,0 @@
-<a href="javascript://" class="btn js-add-btn"><i class="icon-plus-sign"></i></a>
