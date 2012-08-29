@@ -1,0 +1,7 @@
+#! ce._core.routers.<%= loc.nameInPluralUppercase =%> extends Backbone.Marionette.AppRouter 
+ce.module "_core.routers", (self, ce, Backbone, Marionette, $, _) ->
+  self.<%= loc.nameInPluralUppercase =%> = Backbone.Marionette.AppRouter.extend(appRoutes:
+    "": "index"
+    "<%= loc.nameInPluralLowercase =%>/:id/show": "show"
+    "<%= loc.nameInPluralLowercase =%>/:id/edit": "edit"
+  )

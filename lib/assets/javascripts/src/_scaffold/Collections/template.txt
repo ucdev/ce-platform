@@ -1,0 +1,6 @@
+#! ce._core.collections.<%= loc.nameInPluralUppercase =%> extends Backbone.Collection */
+ce.module "_core.collections", (self, ce, Backbone, Marionette, $, _, models) ->
+	self.<%= loc.nameInPluralUppercase =%> = Backbone.Collection.extend
+		url: '/<%= loc.nameInPluralLowercase =%>/',
+		model: models.<%= loc.nameInSingularUppercase =%>
+,ce._core.models

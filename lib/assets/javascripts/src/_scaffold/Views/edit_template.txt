@@ -1,0 +1,3 @@
+#! ce._core.views.<%= loc.nameInPluralLowercase =%>.EditView extends Backbone.Marionette.ItemView 
+ce.module "_core.views.<%= loc.nameInPluralLowercase =%>", (self, ce, Backbone, Marionette, $, _) ->
+  self.EditView = Backbone.Marionette.ItemView.extend(template: "<%= loc.nameInPluralLowercase =%>/edit")

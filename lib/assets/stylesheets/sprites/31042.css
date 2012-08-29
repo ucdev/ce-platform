@@ -1,0 +1,17 @@
+[class^="icon16-"],
+[class*=" icon16-"] {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  vertical-align: text-top;
+  background-image: url( "/images/sprites/31042.png" );
+  background-position: 14px 14px;
+  background-repeat: no-repeat;
+
+}
+
+	.icon16-book-open {
+		background-position:	0px 0px;
+
+	}

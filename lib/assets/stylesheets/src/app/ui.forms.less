@@ -1,0 +1,125 @@
+
+
+.responsiveForm {
+	position:relative;
+	margin:auto!important;
+
+	input[type="submit"] {
+		padding:10px 6px;
+		font-size:18px;
+		.input-block-level();
+	}
+	.control-group { position:relative;}
+	.control-group label  { 
+		position:absolute; 
+	}
+	.grouped {
+		@groupedBorderRadius: 10px;
+		.control-group {
+			margin:0;
+			
+			label {
+			    font-size: 15.96px;
+			    left: 10px;
+			    top: 16px;
+			    color:#888;
+			}
+
+			select,
+			textarea,
+			input[type="text"],
+			input[type="password"],
+			input[type="datetime"],
+			input[type="datetime-local"],
+			input[type="date"],
+			input[type="month"],
+			input[type="time"],
+			input[type="week"],
+			input[type="number"],
+			input[type="email"],
+			input[type="url"],
+			input[type="search"],
+			input[type="tel"],
+			input[type="color"],
+			.uneditable-input {
+				margin:0;
+				.border-radius(0);
+				border-top-width:0;
+				font-size:15.96px;
+				padding-left:9px;
+				height:50px;
+				color:#444;
+				.input-block-level();
+				-webkit-appearance: none;
+			}
+
+			&.first {
+				select,
+				textarea,
+				input[type="text"],
+				input[type="password"],
+				input[type="datetime"],
+				input[type="datetime-local"],
+				input[type="date"],
+				input[type="month"],
+				input[type="time"],
+				input[type="week"],
+				input[type="number"],
+				input[type="email"],
+				input[type="url"],
+				input[type="search"],
+				input[type="tel"],
+				input[type="color"],
+				.uneditable-input {
+					margin:0;
+					.border-radius(@groupedBorderRadius @groupedBorderRadius 0 0);
+					border-top-width:1px;
+				}
+			}
+
+			&.last {
+				select,
+				textarea,
+				input[type="text"],
+				input[type="password"],
+				input[type="datetime"],
+				input[type="datetime-local"],
+				input[type="date"],
+				input[type="month"],
+				input[type="time"],
+				input[type="week"],
+				input[type="number"],
+				input[type="email"],
+				input[type="url"],
+				input[type="search"],
+				input[type="tel"],
+				input[type="color"],
+				.uneditable-input {
+					.border-radius(0 0 @groupedBorderRadius @groupedBorderRadius)
+				}
+			}
+
+			@media (max-width: 767px) {
+				select,
+				textarea,
+				input[type="text"],
+				input[type="password"],
+				input[type="datetime"],
+				input[type="datetime-local"],
+				input[type="date"],
+				input[type="month"],
+				input[type="time"],
+				input[type="week"],
+				input[type="number"],
+				input[type="email"],
+				input[type="url"],
+				input[type="search"],
+				input[type="tel"],
+				input[type="color"],
+				.uneditable-input {
+					height:50px;
+				}
+			}
+		}
+	}
+}

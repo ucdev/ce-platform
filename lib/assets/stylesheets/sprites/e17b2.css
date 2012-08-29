@@ -1,0 +1,37 @@
+[class^="icon16-"],
+[class*=" icon16-"] {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  vertical-align: text-top;
+  background-image: url( "/images/sprites/e17b2.png" );
+  background-position: 14px 14px;
+  background-repeat: no-repeat;
+
+}
+
+	.icon16-card-address {
+		background-position:	0px 0px;
+
+	}
+
+	.icon16-marker {
+		background-position:	-16px 0px;
+
+	}
+
+	.icon16-medal {
+		background-position:	-32px 0px;
+
+	}
+
+	.icon16-trophy {
+		background-position:	-48px 0px;
+
+	}
+
+	.icon16-users {
+		background-position:	-64px 0px;
+
+	}
