@@ -1,3 +1,2 @@
 #!/bin/bash
-cd ~/Sites/ccpd-dev/
-coffee -wbco javascripts/lib javascripts/src
+bundle exec guard start
