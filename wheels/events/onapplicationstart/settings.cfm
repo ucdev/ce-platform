@@ -73,7 +73,7 @@
 		application.wheels.assetQueryString = true;
 
 	// paths
-	application.wheels.controllerPath = "controllers";
+	application.wheels.controllerPath = "app/controllers";
 
 	// miscellaneous settings
 	application.wheels.tableNamePrefix = "";

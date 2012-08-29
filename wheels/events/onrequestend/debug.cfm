@@ -20,15 +20,47 @@
 
 <cfoutput>
 
+<style type="text/css">
+##wheels-debug-area
+{
+	clear: both;
+	margin: 100px 0;
+	text-align: left;
+	background: ##ececec;
+	padding: 10px;
+	border-top: 3px solid ##999;
+	border-bottom: 3px solid ##999;
+}
 
+##wheels-debug-area td
+{
+	font: 12px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	line-height: 1.5em;
+	color: ##333;
+}
 
-<div class="container" id="wheels-debug-area">
-	<table class="table table-striped table-bordered table-condensed">
+##wheels-debug-area a
+{
+	color: ##333;
+	text-decoration: underline;
+	padding: 0 1px;
+}
+
+##wheels-debug-area a:hover
+{
+	color: ##fff;
+	background: ##333;
+	text-decoration: none;
+}
+</style>
+
+<div id="wheels-debug-area">
+	<table cellspacing="0" cellpadding="0">
 		<cfif Len(application.wheels.incompatiblePlugins) OR Len(application.wheels.dependantPlugins) OR NOT ArrayIsEmpty(request.wheels.deprecation)>
 			<tr>
 				<td valign="top"><strong><span style="color:red;">Warnings:</span></strong></td>
 				<td>
-					<div class="alert alert-error">
+					<span style="color:red;">
 						<cfif Len(application.wheels.incompatiblePlugins)>
 							<cfloop list="#application.wheels.incompatiblePlugins#" index="loc.i">The #loc.i# plugin may be incompatible with this version of Wheels, please look for a compatible version of the plugin<br /></cfloop>
 						</cfif>
@@ -38,7 +70,7 @@
 						<cfif NOT ArrayIsEmpty(request.wheels.deprecation)>
 							<cfloop array="#request.wheels.deprecation#" index="i">#i.message# (line #i.line# in #i.template#)<br /></cfloop>
 						</cfif>
-					</div>
+					</span>
 				</td>
 			</tr>
 		</cfif>

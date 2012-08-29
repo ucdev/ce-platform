@@ -66,17 +66,19 @@
 		application.wheels.rootPath = "/" & ListChangeDelims(application.wheels.webPath, "/", "/");
 		application.wheels.rootcomponentPath = ListChangeDelims(application.wheels.webPath, ".", "/");
 		application.wheels.wheelsComponentPath = ListAppend(application.wheels.rootcomponentPath, "wheels", ".");
+		application.wheels.wheelsIncludePath = ListAppend(application.wheels.rootcomponentPath, "../../wheels", "/");
+
 		application.wheels.configPath = "config";
 		application.wheels.eventPath = "events";
-		application.wheels.filePath = "files";
-		application.wheels.imagePath = "images";
-		application.wheels.javascriptPath = "javascripts";
-		application.wheels.modelPath = "models";
-		application.wheels.modelComponentPath = "models";
+		application.wheels.filePath = "public/files";
+		application.wheels.imagePath = "public/images";
+		application.wheels.javascriptPath = "public/javascripts";
+		application.wheels.modelPath = "app/models";
+		application.wheels.modelComponentPath = "app/models";
 		application.wheels.pluginPath = "plugins";
 		application.wheels.pluginComponentPath = "plugins";
-		application.wheels.stylesheetPath = "stylesheets";
-		application.wheels.viewPath = "views";
+		application.wheels.stylesheetPath = "public/stylesheets";
+		application.wheels.viewPath = "app/views";
 
 		// set environment either from the url or the developer's environment.cfm file
 		if (StructKeyExists(URL, "reload") && !IsBoolean(URL.reload) && Len(url.reload) && StructKeyExists(application.wheels, "reloadPassword") && (!Len(application.wheels.reloadPassword) || (StructKeyExists(URL, "password") && URL.password == application.wheels.reloadPassword)))
@@ -95,7 +97,7 @@
 		{
 			$objectcache(action="clear");
 		}
-
+		
 		// add all public controller / view methods to a list of methods that you should not be allowed to call as a controller action from the url
 		loc.allowedGlobalMethods = "get,set,addroute,addDefaultRoutes";
 		loc.protectedControllerMethods = StructKeyList($createObjectFromRoot(path=application.wheels.controllerPath, fileName="Wheels", method="$initControllerClass"));
