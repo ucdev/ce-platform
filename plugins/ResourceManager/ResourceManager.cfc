@@ -17,7 +17,7 @@
 		<cfset loc.nameInPluralUppercase = capitalize(params.controller)>
 		<cfset loc.actionName = lcase(params.action)>
 		
-		<cfif structKeyExists(params,'ROUTE') AND params.route NEQ "wildcard">
+		<!--- <cfif structKeyExists(params,'ROUTE') AND params.route NEQ "wildcard">
 			<!--- CONTROLLER JS --->
 			<cfset $renderTemplate(name="controller",templatePath=expandPath("#loc.tmplPath#Controllers/template.txt"),outputPath=expandPath("#loc.srcPath#Controllers"),fileName="#loc.nameInPluralLowercase#.coffee") />
 			
@@ -44,7 +44,7 @@
 			
 			<!--- VIEW ROW JS --->
 			<cfset $renderTemplate(name="view_row",templatePath=expandPath("#loc.tmplPath#Views/row_template.txt"),outputPath=expandPath("#loc.srcPath#Views/#loc.nameInPluralLowercase#"),fileName="row.coffee") />
-		</cfif>
+		</cfif> --->
 	</cffunction>
 	
 	<cffunction name="$renderTemplate">
