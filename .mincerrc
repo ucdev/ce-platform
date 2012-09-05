@@ -1,1 +1,0 @@
---include app/assets/javascripts --include lib/assets/javascripts --include vendor/assets/javascripts --include app/assets/stylesheets --include lib/assets/stylesheets --include vendor/assets/stylesheets --output public/assets application.js application.css
