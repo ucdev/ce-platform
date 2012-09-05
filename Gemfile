@@ -1,6 +1,6 @@
 source :gemcutter
 
-gem 'sprockets'
-gem 'guard-sprockets'
+gem 'rack-livereload'
+gem 'guard-livereload'
 gem 'coffee-script'
 gem 'uglifier'

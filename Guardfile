@@ -1,15 +1,7 @@
-# A sample Guardfile
-# More info at https://github.com/guard/guard#readme
-
-guard 'sprockets', 
-	:destination => 'public/assets/javascripts', 
-	:minify => true,
-	:asset_paths => ['app/assets/javascripts','lib/assets/javascripts'] do
-  		watch 'app/assets/javascripts/application.js'
-end
-
-guard 'sprockets', 
-	:destination => 'public/assets/stylesheets', 
-	:asset_paths => ['app/assets/stylesheets','lib/assets/stylesheets'] do
-  		watch 'app/assets/stylesheets/application.css'
+guard 'livereload' do
+  watch(%r{app/views/.+\.(cfm|haml|slim)})
+  watch(%r{app/helpers/.+\.rb})
+  watch(%r{public/.+\.(css|js|html)})
+  # Rails Assets Pipeline
+  watch(%r{(app|vendor)/assets/\w+/(.+\.(css|js|html)).*})  { |m| "/assets/#{m[2]}" }
 end
