@@ -4,3 +4,7 @@
 	Example: <cfset set(dataSourceName="devDB")>
 --->
 
+<cfset set(assetPaths={
+	http="localhost:3000/app/assets",
+	https="localhost:3000/app/assets"
+}) />

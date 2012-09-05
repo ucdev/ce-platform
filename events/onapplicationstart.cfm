@@ -7,6 +7,10 @@
 <cfset application.version_token = "v3" />
 <cfset application.messages = [] />
 
+<cfthread name="node">
+<cfexecute name="node" arguments="./server" />
+</cfthread>
+<!--- 
 <!--- GENERATE CSS --->
 <cfset generateBundle(type="css", bundle="ce", compress=true, sources="lib/bootstrap,lib/app,lib/app.ui") />
 
@@ -159,7 +163,7 @@ js.addAll([
 ]);
 </cfscript>
 
-<cfset generateBundle(type="js", bundle="ce", compress=true, sources="#arrayToList(js,',')#") />
+<cfset generateBundle(type="js", bundle="ce", compress=true, sources="#arrayToList(js,',')#") /> --->
 
 <cfset application['config'] = {} />
 <cfset application.config['name'] = "CCPD" />

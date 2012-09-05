@@ -8,8 +8,7 @@
 	<meta name="author" content="">
 	
 	<!-- Le styles -->
-	#stylesheetLinkTag(bundle="ce")#
-	
+	<link type="text/css" rel="stylesheet" media="all" href="http://localhost:3000/assets/application.css?body=1">
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -22,7 +21,7 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
 	
-	#javaScriptIncludeTag(sources="application")#
+	<script type="text/javascript" src="http://localhost:3000/app/assets/application.js?body=1"></script>
 	</cfoutput>
 </head>
 <cfoutput>

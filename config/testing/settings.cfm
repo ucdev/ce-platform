@@ -3,3 +3,7 @@
 	A variable set in this file will override the one in "config/settings.cfm".
 	Example: <cfset set(cacheQueries=false)>
 --->
+<cfset set(assetPaths={
+	http="localhost:3000/app/assets",
+	https="localhost:3000/app/assets"
+}) />

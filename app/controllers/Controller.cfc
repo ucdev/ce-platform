@@ -14,7 +14,7 @@
 		<cfset var tmpls = "" />
 		<cfset var tmplContent = {} />
 		<cfif len(trim(params.controller)) GT 0>
-			<cfset tmplDir = expandPath("/views/#params.controller#/templates/") />
+			<cfset tmplDir = expandPath("/app/views/#params.controller#/templates/") />
 			
 			<cfif NOT directoryExists(tmplDir)>
 				<cfdirectory action="create" directory="#tmplDir#">

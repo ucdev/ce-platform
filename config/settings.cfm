@@ -21,6 +21,7 @@
 <cfset set(timeStampOnUpdateProperty="updated")>
 <cfset set(overwritePlugins=false)>
 <cfset set(showDebugInformation=false)>
+
 <!---<cfset set(functionName='selectTag',prependToLabel='',appendToLabel='',prepend='<div class="control-group"><div class="controls">', append='<p class="help-block"></p></div></div>',labelPlacement="before",insertBlank=true)>
 <cfset set(functionName='textFieldTag',prependToLabel='',appendToLabel='',prepend='<div class="control-group"><div class="controls">', append='<p class="help-block"></p></div></div>',labelPlacement="before")>
 <cfset set(functionName='textAreaTag',prependToLabel='',appendToLabel='',prepend='<div class="control-group"><div class="controls">', append='<p class="help-block"></p></div></div>',labelPlacement="before")>

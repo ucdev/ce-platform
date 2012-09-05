@@ -48,7 +48,7 @@ if ('production' === process.env.NODE_ENV) {
 }
 
 
-app.use('/app/assets/', Mincer.createServer(environment));
+app.use('/assets/', Mincer.createServer(environment));
 
 
 //

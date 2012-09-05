@@ -70,14 +70,14 @@
 
 		application.wheels.configPath = "config";
 		application.wheels.eventPath = "events";
-		application.wheels.filePath = "public/files";
-		application.wheels.imagePath = "public/images";
-		application.wheels.javascriptPath = "public/javascripts";
+		application.wheels.filePath = "files";
+		application.wheels.imagePath = "images";
+		application.wheels.javascriptPath = "javascripts";
 		application.wheels.modelPath = "app/models";
 		application.wheels.modelComponentPath = "app/models";
 		application.wheels.pluginPath = "plugins";
 		application.wheels.pluginComponentPath = "plugins";
-		application.wheels.stylesheetPath = "public/stylesheets";
+		application.wheels.stylesheetPath = "stylesheets";
 		application.wheels.viewPath = "app/views";
 
 		// set environment either from the url or the developer's environment.cfm file
