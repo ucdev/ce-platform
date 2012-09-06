@@ -7,9 +7,6 @@
 <cfset application.version_token = "v3" />
 <cfset application.messages = [] />
 
-<cfthread name="node">
-<cfexecute name="node" arguments="./server" />
-</cfthread>
 <!--- 
 <!--- GENERATE CSS --->
 <cfset generateBundle(type="css", bundle="ce", compress=true, sources="lib/bootstrap,lib/app,lib/app.ui") />

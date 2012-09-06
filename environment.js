@@ -53,8 +53,8 @@ environment.registerHelper('asset_path', function (logicalPath) {
   if (!asset) {
     throw new Error("File " + logicalPath + " not found");
   }
-
-  return '/app/assets/' + asset.digestPath;
+  console.log('/assets/' + asset.digestPath);
+  return '/assets/' + asset.digestPath;
 });
 
 

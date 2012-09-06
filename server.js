@@ -10,6 +10,7 @@ var fs      = require('fs');
 var jade    = require('jade');
 var connect = require('connect');
 var Mincer  = require('mincer');
+var path = require('path');
 
 
 //
@@ -40,7 +41,6 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 // Attach assets server
 //
 
-
 if ('production' === process.env.NODE_ENV) {
   // In production we assume that assets are not changed between requests,
   // so we use cached version of environment. See API docs for details.
@@ -50,12 +50,10 @@ if ('production' === process.env.NODE_ENV) {
 
 app.use('/assets/', Mincer.createServer(environment));
 
-
 //
 // Prepare HTML layout for our dummy application
 // See `views/layout.jade` for example of `javascript` and `stylesheet` usage.
 //
-
 
 var view;
 
@@ -84,15 +82,16 @@ function find_asset_paths(logicalPath) {
   if (!asset) {
     return null;
   }
-
   if ('development' === process.env.NODE_ENV && asset.isCompiled) {
     asset.toArray().forEach(function (dep) {
-      paths.push('/app/assets/' + dep.logicalPath + '?body=1');
+      //console.log(path.basename(dep.logicalPath));
+      paths.push('assets/' + path.basename(dep.logicalPath) + '?body=1');
     });
   } else {
-    paths.push('/public/assets/' + asset.digestPath);
+    paths.push('public/assets/' + asset.digestPath);
   }
 
+  //console.log(paths);
   return paths;
 }
 
@@ -168,5 +167,7 @@ app.listen(3000, function (err) {
     process.exit(128);
   }
 
+
+  console.log(environment);
   console.info('Listening on localhost:3000');
 });
