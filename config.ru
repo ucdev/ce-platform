@@ -8,5 +8,6 @@ map '/assets' do
   environment.append_path 'vendor/assets/stylesheets'
   environment.append_path 'lib/assets/javascripts'
   environment.append_path 'lib/assets/stylesheets'
+  puts environment.each_file()
   run environment
 end
