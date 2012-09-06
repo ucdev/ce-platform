@@ -1,7 +1,7 @@
 {
-  "name":"ceplatform",
+  "name":"my-web-app",
   "version":"0.0.1",
-  "description"     : "Web assets processor. Native JavaScript port of Sprockets.",
+  "description"     : "my web app",
   "keywords"        : ["sprockets", "assets", "minify", "uglify", "bundle", "less", "stylus"],
   "homepage"        : "https://github.com/nodeca/mincer",
 
