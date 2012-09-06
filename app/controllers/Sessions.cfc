@@ -3,13 +3,15 @@
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
 
 	<cffunction name="init">
-		<cfset filters(through="loginProhibited", only="new, create")>
-		<cfset super.init() />
+		<!--- <cfset filters(through="loginProhibited", only="new, create")>
+		<cfset super.init() /> --->
 	</cffunction>
 
 	<!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
 
 	<cffunction name="new">
+
+		<cfset renderPage(layout=false,hideDebugInformation=false) />
 	</cffunction>
 	
 	<cffunction name="status">

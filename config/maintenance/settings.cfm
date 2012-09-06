@@ -3,3 +3,5 @@
 	A variable set in this file will override the one in "config/settings.cfm".
 	Example: <cfset set(ipExceptions="an.ip.num.ber")>
 --->
+<cfset set(webPath=left(get('webPath'),len(get('webPath'))-1)) />
+<cfset set(javascriptPath="") />

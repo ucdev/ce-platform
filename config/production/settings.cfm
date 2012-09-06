@@ -4,7 +4,9 @@
 	Example: <cfset set(errorEmailAddress="someone@somewhere.com")>
 --->
 
+<cfset set(webPath=left(get('webPath'),len(get('webPath'))-1)) />
+<cfset set(javascriptPath="/") />
 <cfset set(assetPaths={
-	http="localhost:3000/app/assets",
-	https="localhost:3000/app/assets"
+	http="localhost:3000/assets",
+	https="localhost:3000/assets"
 }) />
