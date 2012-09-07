@@ -1,5 +1,12 @@
 <cfcomponent extends="Controller">
+	<cffunction name="init">
+		<cfset provides("css,js") />
+	</cffunction>
 
+	<cffunction name="sprockets">
+
+	</cffunction>
+	
 	<cffunction name="sprites">
 		<cfparam name="params.images" default="" />
 		<cfset spriteHash = "" />
