@@ -3,7 +3,6 @@
 		<cfset filters(through="autoSetup") />
 		<cfset filters(through="autoLayout",type="after",except="sprites") />
 		<cfset filters(through="pagelet",type="before") />
-		<cfset filters(through="createAssets",type="before") />
 		<cfset filters(through="setUserInfo",type="before") />
 		<cfset filters(through="loadTmpls",type="before") />
 	</cffunction>
@@ -11,7 +10,7 @@
 	<cffunction name="loadTmpls">
 		<cfparam name="params.controller" type="string" default="">
 		
-		<cfset var tmpls = "" />
+		<!--- <cfset var tmpls = "" />
 		<cfset var tmplContent = {} />
 		<cfif len(trim(params.controller)) GT 0>
 			<cfset tmplDir = expandPath("/views/#params.controller#/templates/") />
@@ -28,7 +27,7 @@
 			</cfloop>
 		</cfif>
 		
-		<cfset ejsTemplates = tmplContent />
+		<cfset ejsTemplates = tmplContent /> --->
 	</cffunction>
 	
 	<cffunction name="setUserInfo">
