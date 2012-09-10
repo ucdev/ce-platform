@@ -23,7 +23,7 @@
 <cfset set(showDebugInformation=true)>
 
 <cfset set(assetsHost="localhost") />
-<cfset set(assetsPort="9292") />
+<cfset set(assetsPort="3000") />
 
 <!---<cfset set(functionName='selectTag',prependToLabel='',appendToLabel='',prepend='<div class="control-group"><div class="controls">', append='<p class="help-block"></p></div></div>',labelPlacement="before",insertBlank=true)>
 <cfset set(functionName='textFieldTag',prependToLabel='',appendToLabel='',prepend='<div class="control-group"><div class="controls">', append='<p class="help-block"></p></div></div>',labelPlacement="before")>

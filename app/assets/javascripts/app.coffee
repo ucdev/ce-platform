@@ -1,5 +1,4 @@
 window.ce = window.ce or {}
-
 ce = new Backbone.Marionette.Application()
 
 ce.module "_core"
