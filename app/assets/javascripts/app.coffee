@@ -1,7 +1,7 @@
 window.ce = window.ce or {}
 
 ce = new Backbone.Marionette.Application()
-
+test = true
 ce.module "_core"
 ce.module "activity"
 ce.module "person"
