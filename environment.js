@@ -33,12 +33,12 @@ var environment = module.exports = new Mincer.Environment(__dirname);
 //
 
 
-environment.appendPath('../../app/assets/javascripts');
-environment.appendPath('../../app/assets/stylesheets');
-environment.appendPath('../../app/assets/images');
-environment.appendPath('../../vendor/assets/javascripts');
-environment.appendPath('../../vendor/assets/stylesheets');
-environment.appendPath('../../vendor/assets/images');
+environment.appendPath('javascripts');
+environment.appendPath('stylesheets');
+environment.appendPath('images');
+environment.appendPath('javascripts/vendor');
+environment.appendPath('stylesheets/vendor');
+environment.appendPath('images/vendor');
 
 
 //
