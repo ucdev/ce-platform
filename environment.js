@@ -31,14 +31,13 @@ var environment = module.exports = new Mincer.Environment(__dirname);
 //
 // Configure environment load paths (where to find ssets)
 //
-
-
 environment.appendPath('javascripts');
 environment.appendPath('stylesheets');
 environment.appendPath('images');
 environment.appendPath('javascripts/vendor');
 environment.appendPath('stylesheets/vendor');
 environment.appendPath('images/vendor');
+environment.appendPath('templates');
 
 
 //

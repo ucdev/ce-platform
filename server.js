@@ -8,8 +8,8 @@
 
 var fs      = require('fs');
 var connect = require('connect');
+var hamlc = require('haml-coffee');
 var Mincer  = require('mincer');
-
 
 //
 // Get Mincer environment
@@ -18,7 +18,7 @@ var Mincer  = require('mincer');
 
 var environment = require('./environment');
 
-console.log(environment);
+//console.log(environment);
 //
 // Create connect application
 //
@@ -34,7 +34,7 @@ var app = connect();
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-console.log(process.env.NODE_ENV);
+//console.log(process.env.NODE_ENV);
 //
 // Attach assets server
 //

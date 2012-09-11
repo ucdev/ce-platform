@@ -1,0 +1,2 @@
+// templates/hello.jst.hamlc
+%div= Hello, %span= #{ @name }!
