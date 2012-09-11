@@ -8,7 +8,7 @@
 
 var fs      = require('fs');
 var connect = require('connect');
-var hamlc = require('haml-coffee');
+//var hamlc = require('haml-coffee');
 var Mincer  = require('mincer');
 
 //
