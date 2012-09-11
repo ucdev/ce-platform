@@ -28,8 +28,8 @@
 <cfoutput>
 <body data-version_token="#params.version_token#">
 	<script>
-	ce.start();
-	ce.user.load(#serializeJson(userInfo)#);
+	// ce.start();
+	// ce.user.load(#serializeJson(userInfo)#);
 	</script>
 	<div id="app">
 		#includePartial(partial="/header")#

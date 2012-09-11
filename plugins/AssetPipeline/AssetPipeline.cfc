@@ -35,6 +35,7 @@
 			$args(name="styleSheetLinkTag", args=arguments, combine="sources/source/!", reserved="href,rel");
 			arguments.rel = "stylesheet";
 			loc.returnValue = "";
+			structDelete(arguments,'debug')
 			arguments.sources = $listClean(list=arguments.sources, returnAs="array", delim=arguments.delim);
 			loc.iEnd = ArrayLen(arguments.sources);
 			for (loc.i=1; loc.i <= loc.iEnd; loc.i++)
