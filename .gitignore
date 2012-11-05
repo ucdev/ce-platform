@@ -1,8 +1,7 @@
 
-/WEB-INF
-/WEB-INF
+
+/WEB-INF/railo
+/WEB-INF/flex
 .DS_Store
-
 *.sublime-project
-
 *.sublime-workspace
