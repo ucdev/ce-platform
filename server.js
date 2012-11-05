@@ -10,7 +10,20 @@ var fs      = require('fs');
 var connect = require('connect');
 //var hamlc = require('haml-coffee');
 var Mincer  = require('mincer');
+var spawn = require("child_process").spawn;
+var railo = spawn('railo_init');
 
+railo.stdout.on('data', function (data) {
+  console.log('railo: ' + data);
+});
+
+railo.stderr.on('data', function (data) {
+  console.log('railo: ' + data);
+});
+
+railo.on('exit', function (code) {
+  console.log('child process exited with code ' + code);
+});
 //
 // Get Mincer environment
 //
